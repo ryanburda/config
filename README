@@ -1,7 +1,7 @@
 # Run the following lines to link the versioned files to their destination
 
-ln -sf ~/Developer/configs/.bashrc ~/.bashrc
-ln -sf ~/Developer/configs/.bash_profile ~/.bash_profile
-ln -sf ~/Developer/configs/.zshrc ~/.zshrc
-ln -sf ~/Developer/configs/.direnvrc ~/.direnvrc
-ln -sf ~/Developer/configs/karabiner.json ~/.config/karabiner/karabiner.json
+ln -sf ~/Developer/config/.bashrc ~/.bashrc
+ln -sf ~/Developer/config/.bash_profile ~/.bash_profile
+ln -sf ~/Developer/config/.zshrc ~/.zshrc
+ln -sf ~/Developer/config/.direnvrc ~/.direnvrc
+ln -sf ~/Developer/config/karabiner.json ~/.config/karabiner/karabiner.json
