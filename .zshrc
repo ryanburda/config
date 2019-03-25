@@ -67,8 +67,6 @@ plugins=(
   docker
 )
 
-source $ZSH/oh-my-zsh.sh
-
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -100,18 +98,22 @@ source $ZSH/oh-my-zsh.sh
 
 # POWERLEVEL9K PROMPT SETTINGS
 POWERLEVEL9K_MODE='nerdfont-complete'
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir virtualenv vcs)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(virtualenv vcs dir)
+POWERLEVEL9K_VIRTUALENV_BACKGROUND='red'
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status history time)
-POWERLEVEL9K_PROMPT_ON_NEWLINE=false
-POWERLEVEL9K_RPROMPT_ON_NEWLINE=false
+POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+POWERLEVEL9K_RPROMPT_ON_NEWLINE=true
 
 # ZSH Syntax highlighting
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+source $ZSH/oh-my-zsh.sh
 
 ########
 # Direnv
 ########
 eval "$(direnv hook zsh)"
+
 
 #####################
 # Source bash profile
