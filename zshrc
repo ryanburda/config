@@ -119,3 +119,8 @@ eval "$(direnv hook zsh)"
 # Source bash profile
 #####################
 source ~/.bash_profile
+
+########################################
+# Fix python arrows when running in venv
+########################################
+export PYTHONSTARTUP=$HOME/.pythonrc.py
