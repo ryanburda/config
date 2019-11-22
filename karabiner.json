@@ -618,7 +618,7 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "equal_sign"
+                                        "key_code": "keypad_asterisk"
                                     }
                                 ],
                                 "type": "basic"
