@@ -543,6 +543,196 @@
                             }
                         ]
                     },
+                    {
+                        "manipulators": [
+                            {
+                                "description": "Hyper2+Slash to period.",
+                                "from": {
+                                    "key_code": "slash",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_shift",
+                                            "right_command",
+                                            "right_control",
+                                            "right_option"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "keypad_period"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+
+                    {
+                        "manipulators": [
+                            {
+                                "description": "Hyper2+SemiColon to +.",
+                                "from": {
+                                    "key_code": "semicolon",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_shift",
+                                            "right_command",
+                                            "right_control",
+                                            "right_option"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "keypad_plus"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "manipulators": [
+                            {
+                                "description": "Hyper2+Quote to *.",
+                                "from": {
+                                    "key_code": "quote",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_shift",
+                                            "right_command",
+                                            "right_control",
+                                            "right_option"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "equal_sign"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "manipulators": [
+                            {
+                                "description": "Hyper2+p to -.",
+                                "from": {
+                                    "key_code": "p",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_shift",
+                                            "right_command",
+                                            "right_control",
+                                            "right_option"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "hyphen"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "manipulators": [
+                            {
+                                "description": "Hyper2+Open Bracket to /.",
+                                "from": {
+                                    "key_code": "open_bracket",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_shift",
+                                            "right_command",
+                                            "right_control",
+                                            "right_option"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "slash"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "manipulators": [
+                            {
+                                "description": "Hyper2+Delete to Delete.",
+                                "from": {
+                                    "key_code": "delete_or_backspace",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_shift",
+                                            "right_command",
+                                            "right_control",
+                                            "right_option"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "delete_or_backspace"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "manipulators": [
+                            {
+                                "description": "Hyper2+Return to Return.",
+                                "from": {
+                                    "key_code": "return_or_enter",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_shift",
+                                            "right_command",
+                                            "right_control",
+                                            "right_option"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "return_or_enter"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
 
                     {
                         "manipulators": [
