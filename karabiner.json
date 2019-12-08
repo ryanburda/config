@@ -214,9 +214,9 @@
                     {
                         "manipulators": [
                             {
-                                "description": "Hyper+'>' to control+tab.",
+                                "description": "Hyper+']' to control+tab.",
                                 "from": {
-                                    "key_code": "period",
+                                    "key_code": "close_bracket",
                                     "modifiers": {
                                         "mandatory": [
                                             "left_shift",
@@ -244,9 +244,9 @@
                     {
                         "manipulators": [
                             {
-                                "description": "Hyper+'<' to control+shift+tab.",
+                                "description": "Hyper+'[' to control+shift+tab.",
                                 "from": {
-                                    "key_code": "comma",
+                                    "key_code": "open_bracket",
                                     "modifiers": {
                                         "mandatory": [
                                             "left_shift",
