@@ -16,8 +16,3 @@ set nowrap
 set whichwrap+=>,l
 set whichwrap+=<,h
 set whichwrap+=[,]
-
-set mouse=a
-set hlsearch
-
-set clipboard=unnamedplus
