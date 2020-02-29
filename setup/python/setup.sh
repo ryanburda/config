@@ -12,3 +12,5 @@ brew install pyenv-virtualenv
 
 # Create a virtual environment for python 3.8
 pyenv virtualenv 3.8.1 python_3.8.1
+# pyenv activate python_3.8.1
+# pyenv deactivate
