@@ -6,9 +6,10 @@ SETUP_DIRS=(
   "applications"
   "cli"
   "files"
-  "python"
-  "postgres"
   "karabiner_elements"
+  "mac_os"
+  "postgres"
+  "python"
 )
 
 for dir in "${SETUP_DIRS[@]}"; do

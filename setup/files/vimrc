@@ -20,4 +20,4 @@ set whichwrap+=[,]
 set mouse=a
 set hlsearch
 
-set clipboard=unnamed
+set clipboard=unnamedplus
