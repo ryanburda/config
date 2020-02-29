@@ -11,3 +11,4 @@ brew cask install pycharm
 brew cask install pycharm-ce
 brew cask install datagrip
 brew cask install thingsmacsandboxhelper
+brew cask install nordvpn
