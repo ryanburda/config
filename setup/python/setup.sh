@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # https://ipython.readthedocs.io/en/stable/
 brew install ipython
 
