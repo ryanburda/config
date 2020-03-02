@@ -16,3 +16,5 @@ set nowrap
 set whichwrap+=>,l
 set whichwrap+=<,h
 set whichwrap+=[,]
+
+autocmd FileType make set noexpandtab shiftwidth=4 softtabstop=0

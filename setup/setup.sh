@@ -7,6 +7,7 @@ SETUP_DIRS=(
   "cli"
   "files"
   "karabiner_elements"
+  "rectangle"
   "mac_os"
   "postgres"
   "python"
