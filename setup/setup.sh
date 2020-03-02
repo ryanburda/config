@@ -8,6 +8,7 @@ SETUP_DIRS=(
   "files"
   "karabiner_elements"
   "rectangle"
+  "alfred"
   "mac_os"
   "postgres"
   "python"
