@@ -5,7 +5,6 @@ ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 SETUP_DIRS=(
   "applications"
   "cli"
-  "files"
   "karabiner_elements"
   "rectangle"
   "alfred"
