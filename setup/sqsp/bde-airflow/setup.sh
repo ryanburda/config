@@ -11,3 +11,6 @@ pyenv install $PYENV_PYTHON_VERSION
 pyenv virtualenv $PYENV_PYTHON_VERSION $VENV_NAME
 
 echo $VENV_NAME > "${DIR}/.python-version"
+
+# Run the make command in a subshell
+(cd $DIR; make pip-install)
