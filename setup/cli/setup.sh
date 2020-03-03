@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+mkdir "${HOME}/Developer"
+mkdir "${HOME}/Developer/projects"
+
 xcode-select --install
 
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
