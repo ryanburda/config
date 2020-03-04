@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 DIR="${HOME}/Developer/projects/revrec_605"
 PYENV_PYTHON_VERSION="3.6.9"
 VENV_NAME="revrec_605"
