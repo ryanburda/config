@@ -13,7 +13,6 @@ highlight LineNr ctermfg=grey
 set colorcolumn=120
 highlight ColorColumn ctermbg=DarkGrey
 
-
 set whichwrap+=>,l
 set whichwrap+=<,h
 set whichwrap+=[,]
