@@ -1,0 +1,15 @@
+----------------------------
+billing_provider_payment_hub
+----------------------------
+We need to find billing events that came from ripley that have stripe charges. This will enable us
+to ignore payments that stripe emits as candidates for payments were stripe is both the billing_provider
+and the payment_processor.
+
+merchant transaction id = stripe payment id
+
+The ripley billing_provider_payment_hub will be run first.
+In the *_attributes column of that hub we should write down the associated merchant_transaction_id that
+came from stripe for the ripley created payment event so that we can exclude that id when figuring out what 
+payments stripe is both the payment processor and the billing_provider.
+
+Ask Tim if merchant_transaction_id is filled in at the time of ripley_payment_created
