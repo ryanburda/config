@@ -1,0 +1,7 @@
+finance-dw-primary.squarespace.net
+datawarehouse-finance001.eqx.dal.corp.squarespace.net
+datawarehouse-finance001.eqx.dal.corpstage.squarespace.net
+quack.ducks.svc.eqx.dal.corp.kubernetes
+datawarehouse001.eqx.dal.corp.squarespace.net
+airflow-metadb.pipes-airflow.svc.eqx.dal.corp.kubernetes
+billing-postgres001.eqx.dal.prod.squarespace.net
