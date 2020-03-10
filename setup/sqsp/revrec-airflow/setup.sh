@@ -8,7 +8,7 @@ git clone ssh://git@code.squarespace.net:7999/data/revrec-airflow.git $DIR
 
 brew install pyenv
 brew install pyenv-virtualenv
-brew install 1password-cli
+brew cask install 1password-cli
 
 pyenv install $PYENV_PYTHON_VERSION
 pyenv virtualenv $PYENV_PYTHON_VERSION $VENV_NAME
