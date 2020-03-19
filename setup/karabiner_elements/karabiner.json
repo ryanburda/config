@@ -17,7 +17,7 @@
                     {
                         "manipulators": [
                             {
-                                "description": "Change caps_lock to Hyper.",
+                                "description": "Change caps_lock to Hyper",
                                 "from": {
                                     "key_code": "caps_lock",
                                     "modifiers": {
@@ -48,7 +48,7 @@
                     {
                         "manipulators": [
                             {
-                                "description": "Hyper+h to Left Arrow.",
+                                "description": "Hyper+h to Left Arrow",
                                 "from": {
                                     "key_code": "h",
                                     "modifiers": {
@@ -75,7 +75,7 @@
                     {
                         "manipulators": [
                             {
-                                "description": "Hyper+j to Down Arrow.",
+                                "description": "Hyper+j to Down Arrow",
                                 "from": {
                                     "key_code": "j",
                                     "modifiers": {
@@ -102,7 +102,7 @@
                     {
                         "manipulators": [
                             {
-                                "description": "Hyper+k to Up Arrow.",
+                                "description": "Hyper+k to Up Arrow",
                                 "from": {
                                     "key_code": "k",
                                     "modifiers": {
@@ -129,7 +129,7 @@
                     {
                         "manipulators": [
                             {
-                                "description": "Hyper+l to Right Arrow.",
+                                "description": "Hyper+l to Right Arrow",
                                 "from": {
                                     "key_code": "l",
                                     "modifiers": {
@@ -156,7 +156,7 @@
                     {
                         "manipulators": [
                             {
-                                "description": "Hyper+Backspace to Delete.",
+                                "description": "Hyper+Backspace to Delete",
                                 "from": {
                                     "key_code": "delete_or_backspace",
                                     "modifiers": {
@@ -183,7 +183,7 @@
                     {
                         "manipulators": [
                             {
-                                "description": "Hyper+']' to control+tab.",
+                                "description": "Hyper+']' to control+tab",
                                 "from": {
                                     "key_code": "close_bracket",
                                     "modifiers": {
@@ -213,7 +213,7 @@
                     {
                         "manipulators": [
                             {
-                                "description": "Hyper+'[' to control+shift+tab.",
+                                "description": "Hyper+'[' to control+shift+tab",
                                 "from": {
                                     "key_code": "open_bracket",
                                     "modifiers": {
@@ -244,6 +244,7 @@
                     {
                         "manipulators": [
                             {
+                                "description": "Double Shift to Caps Lock",
                                 "type": "basic",
                                 "from": {
                                     "key_code": "left_shift",
@@ -271,6 +272,7 @@
                     {
                         "manipulators": [
                             {
+                                "description": "Double Shift to Caps Lock2",
                                 "type": "basic",
                                 "from": {
                                     "key_code": "left_shift",
