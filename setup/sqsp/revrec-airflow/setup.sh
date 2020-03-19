@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 DIR="${HOME}/Developer/projects/revrec-airflow"
-PYENV_PYTHON_VERSION="3.6.9"
+PYENV_PYTHON_VERSION="3.6.4"
 VENV_NAME="revrec-airflow"
 
 git clone ssh://git@code.squarespace.net:7999/data/revrec-airflow.git $DIR
