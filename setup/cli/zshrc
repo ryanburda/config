@@ -143,3 +143,8 @@ fi
 # AIRFLOW
 #########
 export AIRFLOW_HOME=/Users/loaner9567/Developer/projects/bde-airflow
+
+################################
+# Postgresql installed from brew
+################################
+export PATH="/usr/local/opt/postgresql@11/bin:$PATH"
