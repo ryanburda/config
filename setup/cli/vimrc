@@ -18,3 +18,5 @@ set whichwrap+=<,h
 set whichwrap+=[,]
 
 autocmd FileType make set noexpandtab shiftwidth=4 softtabstop=0
+
+set clipboard=unnamed

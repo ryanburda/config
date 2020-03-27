@@ -19,7 +19,7 @@ ln -sfv $DIR/vimrc ~/.vimrc
 ln -sfv $DIR/zshrc ~/.zshrc
 
 brew install git
-brew install vim
+brew cask install macvim
 brew install tig
 brew install s3cmd
 brew install watch

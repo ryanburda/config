@@ -125,6 +125,11 @@ POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%{%B%F{black}%K{yellow}%} $user_symbo
 #########################
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+#############################################
+# MacVim as default Vim for clipboard support
+#############################################
+alias vim='mvim -v'
+
 #######
 # PYENV
 #######
