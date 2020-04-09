@@ -14,5 +14,6 @@ pyenv virtualenv $PYENV_PYTHON_VERSION $VENV_NAME
 
 echo $VENV_NAME > "${DIR}/.python-version"
 
-# Run the make command in a subshell
-(cd $DIR; make pip-install)
+# Automatically switch AIRFLOW_HOME with direnv
+brew install direnv
+echo "export AIRFLOW_HOME=${DIR}" > "${DIR}/.envrc"

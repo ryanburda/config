@@ -8,16 +8,11 @@ git clone ssh://git@code.squarespace.net:7999/data/revrec-airflow.git $DIR
 
 brew install pyenv
 brew install pyenv-virtualenv
-brew cask install 1password-cli
 
 pyenv install $PYENV_PYTHON_VERSION
 pyenv virtualenv $PYENV_PYTHON_VERSION $VENV_NAME
 echo $VENV_NAME > "${DIR}/.python-version"
 
-# Get password information
-# TODO
-
-# Run the make command in a subshell
-# TODO: fix this
-# (cd $DIR; pyenv activate $VENV_NAME; make pip-install)
-
+# Automatically switch AIRFLOW_HOME with direnv
+brew install direnv
+echo "export AIRFLOW_HOME=${DIR}" > "${DIR}/.envrc"

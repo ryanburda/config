@@ -144,10 +144,10 @@ if which pyenv-virtualenv-init > /dev/null; then
   eval "$(pyenv virtualenv-init -)";
 fi
 
-#########
-# AIRFLOW
-#########
-export AIRFLOW_HOME=/Users/loaner9567/Developer/projects/bde-airflow
+########
+# DIRENV
+########
+eval "$(direnv hook zsh)"
 
 ################################
 # Postgresql installed from brew
