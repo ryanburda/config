@@ -26,5 +26,7 @@ brew install watch
 brew install fswatch
 brew install telnet
 brew install kubectl
+brew install vault
+vault -autocomplete-install
 
 echo "Follow this article to finish setting up iterm https://medium.com/@Clovis_app/configuration-of-a-beautiful-efficient-terminal-and-prompt-on-osx-in-7-minutes-827c29391961"

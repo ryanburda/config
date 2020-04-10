@@ -153,3 +153,6 @@ eval "$(direnv hook zsh)"
 # Postgresql installed from brew
 ################################
 export PATH="/usr/local/opt/postgresql@11/bin:$PATH"
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/local/bin/vault vault
