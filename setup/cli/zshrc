@@ -157,8 +157,7 @@ export PATH="/usr/local/opt/postgresql@11/bin:$PATH"
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/vault vault
 
-######
-# jEnv
-######
-export PATH="$HOME/.jenv/bin:$PATH"
-eval "$(jenv init -)"
+############
+# Kubernetes
+############
+[[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)

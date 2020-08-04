@@ -1,5 +1,7 @@
 finance-dw-primary.squarespace.net
     revrec
+finance-dw-primary-stage.squarespace.net
+    revrec
 datawarehouse-finance001.eqx.dal.corp.squarespace.net
     revrec
 datawarehouse-finance001.eqx.dal.corpstage.squarespace.net
