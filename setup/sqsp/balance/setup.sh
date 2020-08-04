@@ -14,5 +14,5 @@ pyenv virtualenv $PYENV_PYTHON_VERSION $VENV_NAME
 
 echo $VENV_NAME > "${DIR}/.python-version"
 
-(cd $DIR; cp .env.example .env)
-echo "TODO: update .env with valid credentials"
+brew install direnv
+echo "kubectl -n balance-corp get pods" > "${DIR}/.envrc"
