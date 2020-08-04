@@ -17,3 +17,4 @@ echo $VENV_NAME > "${DIR}/.python-version"
 # Automatically switch AIRFLOW_HOME with direnv
 brew install direnv
 echo "export AIRFLOW_HOME=${DIR}" > "${DIR}/.envrc"
+echo "kubectl -n bde-airflow get pods" > "${DIR}/.envrc"
