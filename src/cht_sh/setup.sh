@@ -4,7 +4,7 @@
 brew install rlwrap
 
 # Install cht.sh
-CHTSH_PATH="$HOME/bin/cht.sh"
+CHTSH_PATH="$HOME/.local/bin/cht.sh"
 
 if ! [ -f $CHTSH_PATH ]; then
     curl -fLo $CHTSH_PATH --create-dirs https://cht.sh/:cht.sh
