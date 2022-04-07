@@ -1,0 +1,22 @@
+
+# Iterm
+* Set font
+* Set color
+* Set Appearance -> Theme -> Minimal
+
+# MacOS
+* Set key repeat time
+* Set key repeat speed
+* Set os specific keyboard shortcuts
+    * space left
+    * space right
+    * notification center
+    * turn off spotlight (conflicts with alfred)
+
+# Rectangle
+* Set snap left <hyper-e>
+* Set snap right <hyper-r>
+* Set snap wide <hyper-w>
+
+# Other
+* nvimpager (use vim as a pager instead of less)
