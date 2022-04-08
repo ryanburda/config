@@ -149,5 +149,4 @@ source $ZSH/oh-my-zsh.sh
 alias ls="ls --color=always -lah"
 alias vim="nvim"
 alias h="cht.sh"
-
-
+alias top="htop"

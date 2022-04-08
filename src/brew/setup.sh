@@ -13,6 +13,8 @@ fi
 brew tap homebrew/cask-fonts
 brew install font-hack
 brew install tig
+brew install ripgrep  # Needed for Telescope in nvim
+brew install htop
 
 # Applications
 read -qs "tf?Install applications? ('y' to install, any other key to skip)"

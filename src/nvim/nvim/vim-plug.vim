@@ -28,4 +28,16 @@ call plug#begin()
     Plug 'christoomey/vim-tmux-navigator'
     Plug 'christoomey/vim-tmux-runner'
 
+    " ---
+    " Git
+    " ---
+    Plug 'tpope/vim-fugitive'
+    Plug 'vim-airline/vim-airline'
+    Plug 'ruifm/gitlinker.nvim'
+
+    " -------
+    " Buffers
+    " -------
+    Plug 'bling/vim-bufferline'
+
 call plug#end()
