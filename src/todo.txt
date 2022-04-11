@@ -35,3 +35,8 @@
     - This means there will be one generic tmux script and one script per project.
     - Optional per project setup work can be done in the project specific script after the tmux script has been called.
 * have the tmux server automatically create all of these sessions as well as an empty session.
+
+# Coc.nvim
+* These should be added to a Coc config
+* CocInstall coc-sumneko-lua
+* CocInstall coc-python

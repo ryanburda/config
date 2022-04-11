@@ -15,6 +15,7 @@ brew install font-hack
 brew install tig
 brew install ripgrep  # Needed for Telescope in nvim
 brew install htop
+brew install lua
 
 # Applications
 read -qs "tf?Install applications? ('y' to install, any other key to skip)"

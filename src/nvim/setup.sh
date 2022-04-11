@@ -1,13 +1,13 @@
 #!/bin/zsh
 
 SCRIPT_DIR=${0:a:h}
-NVIM_CONFIG_DIR="${SCRIPT_DIR}/nvim"
-NVIM_CONFIG_DIR_LNK="${HOME}/.config"
+INIT_VIM_PATH="${SCRIPT_DIR}/init.vim"
+INIT_VIM_LNK_PATH="${HOME}/.config/nvim/init.vim"
 
 # Install NeoVim and symlink the config directory
 brew install neovim
-mkdir -pv $NVIM_CONFIG_DIR_LNK
-ln -svfF $NVIM_CONFIG_DIR $NVIM_CONFIG_DIR_LNK
+mkdir -pv $(dirname "$INIT_VIM_LNK_PATH")
+ln -svfF $INIT_VIM_PATH $INIT_VIM_LNK_PATH
 
 # Install Vim-Plug
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
