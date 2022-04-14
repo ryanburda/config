@@ -6,6 +6,7 @@ if [ "$TMUX" = "" ]; then tmux; fi
 
 # Add to PATH
 path+=$HOME/.local/bin
+path+=$HOME/.local/bin/neovim/bin
 
 # Add compdef directory to FPATH and turn on completion
 # NOTE: oh_my_zsh does not recreate the .zcompdump file when plugins change. This can cause new tab completions to not

@@ -3,19 +3,18 @@
 # Install Homebrew
 which -s brew
 if [[ $? != 0 ]] ; then
-    # Install Homebrew
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 else
     brew update
 fi
 
-# Other useful installs
 brew tap homebrew/cask-fonts
 brew install font-hack
 brew install tig
-brew install ripgrep  # Needed for Telescope in nvim
 brew install htop
+brew install node
 brew install lua
+brew install ripgrep
 
 # Applications
 read -qs "tf?Install applications? ('y' to install, any other key to skip)"

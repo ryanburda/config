@@ -2,7 +2,7 @@
 
 # Create bin directory
 # All custom scripts should be put here
-mkdir -p "$HOME/bin"
+mkdir -p "$HOME/.local/bin"
 
 # Create the compdef directory
 # All custom compdef files should be put here
