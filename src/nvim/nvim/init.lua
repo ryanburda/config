@@ -1,4 +1,6 @@
 require('plugins')
+require('treesitter')
+require('alpha-nvim')
 require('options')
 require('mappings')
 require('lsp')

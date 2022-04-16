@@ -2,12 +2,16 @@ vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function()
 
-    -- Packer can manage itself
+    -- neovim package manager
     use 'wbthomason/packer.nvim'
 
     -- Colors
+    use 'nvim-treesitter/nvim-treesitter'
     use 'sainnhe/everforest'
-    use 'sheerun/vim-polyglot'
+    use '4513ECHO/vim-colors-hatsunemiku'
+
+    -- Greeter
+    use 'goolord/alpha-nvim'
 
     -- Code completion
     use 'neovim/nvim-lspconfig'
@@ -34,6 +38,7 @@ return require('packer').startup(function()
 
     -- Git
     use 'tpope/vim-fugitive'
+    use 'airblade/vim-gitgutter'
     use 'ruifm/gitlinker.nvim'
 
     -- Status line
@@ -43,6 +48,9 @@ return require('packer').startup(function()
     -- Notes
     use 'xolox/vim-misc'
     use 'xolox/vim-notes'
+
+    -- Search
+    use 'voldikss/vim-browser-search'
 
     -- Local Development
     use '~/Developer/nvim/plugins/chtsh'

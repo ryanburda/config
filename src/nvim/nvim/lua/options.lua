@@ -1,4 +1,5 @@
 vim.cmd([[
+
 filetype plugin on
 
 set nowrap
@@ -21,6 +22,7 @@ set clipboard=unnamedplus
 set whichwrap+=<,>,h,l,[,]
 set timeoutlen=2000
 set formatoptions-=cro  " Don't continue comments on new line
+" set list listchars=tab:>\ ,trail:-,eol:$
 
 let g:tmux_navigator_no_mappings = 1
 
@@ -61,7 +63,8 @@ set background=dark
 " Installed via vim-plug.
 " This configuration option should be placed before `colorscheme everforest`.
 " Available values: 'hard', 'medium'(default), 'soft'
-let g:everforest_background = 'hard'
-let g:everforest_better_performance = 1
-colorscheme everforest
+" let g:everforest_background = 'hard'
+" let g:everforest_better_performance = 1
+" colorscheme everforest
+colorscheme hatsunemiku
 ]])

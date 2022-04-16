@@ -71,5 +71,8 @@ vim.api.nvim_set_keymap("n", "<leader>gj", ":diffget //3<cr>", { noremap = true 
 vim.api.nvim_set_keymap("n", "<leader>gl", "<cmd>lua require\"gitlinker\".get_buf_range_url(\"n\")<cr>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>gw", "<cmd>lua require\"gitlinker\".get_buf_range_url(\"n\", {action_callback = require\"gitlinker.actions\".open_in_browser})<cr>", { noremap = true })
 
+vim.api.nvim_set_keymap("n", "<leader>s", ":BrowserSearch<cr>", { noremap = true })
+vim.api.nvim_set_keymap("v", "<leader>s", ":'<,'>BrowserSearch<cr>", { noremap = true })
+
 -- Local plugin development
 vim.api.nvim_set_keymap("n", "<leader>cs", "<cmd>lua require\"chtsh\"<cr>", { noremap = true })
