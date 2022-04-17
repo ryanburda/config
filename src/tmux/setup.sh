@@ -1,6 +1,8 @@
 #!/bin/zsh
 
 brew install tmux
+brew install tmate
 
-CONF_PATH="${0:a:h}/tmux.conf"
-ln -svfF $CONF_PATH "${HOME}/.tmux.conf"
+SCRIPT_DIR_PATH=${0:a:h}
+ln -svfF "$SCRIPT_DIR_PATH/tmux.conf" "${HOME}/.tmux.conf"
+ln -svfF "$SCRIPT_DIR_PATH/tmate.conf" "${HOME}/.tmate.conf"

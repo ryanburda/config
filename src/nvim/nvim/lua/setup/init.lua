@@ -1,0 +1,6 @@
+require('setup.treesitter')
+require('setup.telescope')
+require('setup.alpha')
+require('setup.focus')
+require('setup.cmd')
+require('setup.lsp')

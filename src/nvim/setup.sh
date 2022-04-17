@@ -51,5 +51,13 @@ else
 fi
 
 # Install LSPs
+#
 # python
 npm i -g pyright
+brew install pyenv
+brew install pyenv-virtualenv
+# set pyright config file to the current active venv by running the following:
+# ```
+# pyenv pyright
+# ```
+git clone https://github.com/alefpereira/pyenv-pyright.git $(pyenv root)/plugins/pyenv-pyright

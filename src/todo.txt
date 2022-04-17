@@ -1,3 +1,27 @@
+# Nvim
+* Add more LSPs
+* Cleanup lua folder structure
+    - learn about modules in Lua
+* Lua Snips
+* Autocmd
+    - call Alpha when last buffer is closed
+* make gitlinker work for visual selection of lines
+    - or see if vim-fugitive provides that functionality
+* look into better ways of performing diffs and conflict resolution
+* look into better note taking using vim
+
+# Tmux Scripts
+* script up what your ideal set of windows and panes is per session for Data Engineering work.
+    - This will result in one project per session
+    - The script should accept a path to where the project lives
+    - This means there will be one generic tmux script and one script per project.
+    - Optional per project setup work can be done in the project specific script after the tmux script has been called.
+    - have the tmux server automatically create all of these sessions as well as an empty session.
+* copy mode select and copy text to clipboard
+
+# Other
+* nvimpager (use vim as a pager instead of less)
+
 # Plist things
     # Iterm
     * Set font
@@ -17,26 +41,3 @@
     * Set snap left <hyper-e>
     * Set snap right <hyper-r>
     * Set snap wide <hyper-w>
-
-# Other
-* nvimpager (use vim as a pager instead of less)
-* make gitlinker work for visual selection of lines
-    - or see if vim-fugitive provides that functionality
-* look into better ways of performing diffs and conflict resolution
-* look into better note taking using vim
-* telescope find files starting from home directory
-* telescope fuzzy fine from home directory
-* fix resizing of vim splits
-
-# Scripts
-* script up what your ideal set of windows and panes is per session for Data Engineering work.
-    - This will result in one project per session
-    - The script should accept a path to where the project lives
-    - This means there will be one generic tmux script and one script per project.
-    - Optional per project setup work can be done in the project specific script after the tmux script has been called.
-* have the tmux server automatically create all of these sessions as well as an empty session.
-
-# Coc.nvim
-* These should be added to a Coc config
-* CocInstall coc-sumneko-lua
-* CocInstall coc-python

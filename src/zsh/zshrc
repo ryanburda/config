@@ -151,3 +151,8 @@ alias ls="ls --color=always -lah"
 alias vim="nvim"
 alias h="cht.sh"
 alias top="htop"
+
+# I hate python
+path+=$HOME/.pyenv/bin
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"

@@ -50,7 +50,7 @@ let g:bufferline_show_bufnr = 0
 let g:bufferline_echo = 0
 
 " vim-notes
-:let g:notes_directories = ['~/Developer/notes']
+:let g:notes_directories = ['~/Developer/scratch/notes']
 
 " colors
 if has('termguicolors')
@@ -63,8 +63,8 @@ set background=dark
 " Installed via vim-plug.
 " This configuration option should be placed before `colorscheme everforest`.
 " Available values: 'hard', 'medium'(default), 'soft'
-" let g:everforest_background = 'hard'
-" let g:everforest_better_performance = 1
-" colorscheme everforest
-colorscheme hatsunemiku
+let g:everforest_background = 'hard'
+let g:everforest_better_performance = 1
+colorscheme everforest
+" colorscheme hatsunemiku
 ]])

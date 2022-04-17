@@ -10,6 +10,9 @@ return require('packer').startup(function()
     use 'sainnhe/everforest'
     use '4513ECHO/vim-colors-hatsunemiku'
 
+    -- Splits
+    use 'beauwilliams/focus.nvim'
+
     -- Greeter
     use 'goolord/alpha-nvim'
 

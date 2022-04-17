@@ -15,6 +15,8 @@ brew install htop
 brew install node
 brew install lua
 brew install ripgrep
+brew install pyenv
+brew install pyenv-virtualenv
 
 # Applications
 read -qs "tf?Install applications? ('y' to install, any other key to skip)"
