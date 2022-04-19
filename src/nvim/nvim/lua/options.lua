@@ -49,8 +49,11 @@ let g:bufferline_solo_highlight = 1
 let g:bufferline_show_bufnr = 0
 let g:bufferline_echo = 0
 
+" gitgutter
+let g:gitgutter_map_keys = 0  " don't use default key mappings
+
 " vim-notes
-:let g:notes_directories = ['~/Developer/scratch/notes']
+let g:notes_directories = ['~/Developer/scratch/notes']
 
 " colors
 if has('termguicolors')

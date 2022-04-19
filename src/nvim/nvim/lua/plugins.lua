@@ -18,6 +18,7 @@ return require('packer').startup(function()
 
     -- Code completion
     use 'neovim/nvim-lspconfig'
+    use 'williamboman/nvim-lsp-installer'
     use 'hrsh7th/nvim-cmp'
     use 'hrsh7th/cmp-path'
     use 'hrsh7th/cmp-buffer'
@@ -54,6 +55,9 @@ return require('packer').startup(function()
 
     -- Search
     use 'voldikss/vim-browser-search'
+
+    -- commands on top of the sqls lsp
+    use 'nanotee/sqls.nvim'
 
     -- Local Development
     use '~/Developer/nvim/plugins/chtsh'

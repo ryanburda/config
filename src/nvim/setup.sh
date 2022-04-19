@@ -22,6 +22,16 @@ brew install cmake
 brew install pkg-config
 brew install gettext
 brew install curl
+brew install fzf
+brew install go
+brew install pyenv
+brew install pyenv-virtualenv
+
+# set pyright config file to the current active venv by running the following:
+# ```
+# pyenv pyright
+# ```
+git clone https://github.com/alefpereira/pyenv-pyright.git $(pyenv root)/plugins/pyenv-pyright
 
 # Install NeoVim from source
 if [ ! -d $NVIM_REPO_PATH ]; then
@@ -49,15 +59,3 @@ if [ ! -f $PACKER_PATH ]; then
 else
     echo 'Packer already installed.'
 fi
-
-# Install LSPs
-#
-# python
-npm i -g pyright
-brew install pyenv
-brew install pyenv-virtualenv
-# set pyright config file to the current active venv by running the following:
-# ```
-# pyenv pyright
-# ```
-git clone https://github.com/alefpereira/pyenv-pyright.git $(pyenv root)/plugins/pyenv-pyright
