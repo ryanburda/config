@@ -9,14 +9,16 @@ else
 fi
 
 brew tap homebrew/cask-fonts
-brew install font-hack
+brew install --cask font-hack-nerd-font 
 brew install tig
 brew install htop
 brew install node
 brew install lua
 brew install ripgrep
+brew install jq
 brew install pyenv
 brew install pyenv-virtualenv
+brew install ttyrec
 
 # Applications
 read -qs "tf?Install applications? ('y' to install, any other key to skip)"

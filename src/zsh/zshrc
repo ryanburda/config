@@ -152,7 +152,15 @@ alias vim="nvim"
 alias h="cht.sh"
 alias top="htop"
 
-# I hate python
+# C-k usually does delete all after cursor but this has been remapped to
+# move between tmux panes. Bind this to ctrl-backspace instead.
+bindkey '^]' kill-line
+bindkey '^[' backward-kill-line
+
+# fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# python
 path+=$HOME/.pyenv/bin
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"

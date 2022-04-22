@@ -1,11 +1,13 @@
 vim.cmd [[packadd packer.nvim]]
 
-return require('packer').startup(function()
+local packer = require("packer")
+
+packer.startup(function(use)
 
     -- neovim package manager
     use 'wbthomason/packer.nvim'
 
-    -- Colors
+    -- Highlighting & Colors
     use 'nvim-treesitter/nvim-treesitter'
     use 'sainnhe/everforest'
     use '4513ECHO/vim-colors-hatsunemiku'
@@ -15,6 +17,9 @@ return require('packer').startup(function()
 
     -- Greeter
     use 'goolord/alpha-nvim'
+
+    -- Luasnip
+    use 'L3MON4D3/LuaSnip'
 
     -- Code completion
     use 'neovim/nvim-lspconfig'
@@ -26,15 +31,13 @@ return require('packer').startup(function()
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-cmdline'
     use 'saadparwaiz1/cmp_luasnip'
+    use 'ray-x/lsp_signature.nvim'
 
-    -- File Navigation
     -- Telescope
     use 'nvim-lua/popup.nvim'
     use 'nvim-lua/plenary.nvim'
     use 'nvim-telescope/telescope.nvim'
     use 'nvim-telescope/telescope-fzy-native.nvim'
-    -- Harpoon
-    use 'ThePrimeagen/harpoon'
 
     -- Tmux
     use 'christoomey/vim-tmux-navigator'
@@ -46,7 +49,7 @@ return require('packer').startup(function()
     use 'ruifm/gitlinker.nvim'
 
     -- Status line
-    use 'bling/vim-bufferline'
+    use {'akinsho/bufferline.nvim', tag = "*", requires = 'kyazdani42/nvim-web-devicons'}
     use 'vim-airline/vim-airline'
 
     -- Notes
@@ -63,3 +66,18 @@ return require('packer').startup(function()
     use '~/Developer/nvim/plugins/chtsh'
 
 end)
+
+require('plugins.configs.alpha')
+require('plugins.configs.bufferline')
+require('plugins.configs.chtsh')
+require('plugins.configs.cmd')
+require('plugins.configs.focus')
+require('plugins.configs.gitgutter')
+require('plugins.configs.gitlinker')
+require('plugins.configs.telescope')
+require('plugins.configs.treesitter')
+require('plugins.configs.vim-browser-search')
+require('plugins.configs.vim-fugitive')
+require('plugins.configs.vim-notes')
+require('plugins.configs.vim-tmux-navigator')
+require('plugins.configs.vim-tmux-runner')
