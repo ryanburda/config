@@ -20,6 +20,7 @@ vim.opt.mouse = "a"
 vim.opt.clipboard = 'unnamedplus'
 vim.opt.whichwrap = '<,>,h,l,[,]'
 vim.opt.timeoutlen = 2000
+vim.opt.updatetime = 500
 
 -- command! BufOnly execute '%bdelete|edit #|normal `"'
 vim.api.nvim_create_user_command(
@@ -69,3 +70,5 @@ vim.api.nvim_set_keymap('n', '<leader> l', ':clast<CR>' , opts)
 -- OTHER
 require('plugins')
 require('lsp')
+-- quick notes
+vim.api.nvim_set_keymap('n', '<leader>n' , ':edit ~/Developer/scratch/notes/main.txt<cr>G$', opts)

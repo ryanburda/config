@@ -47,16 +47,13 @@ packer.startup(function(use)
     use 'tpope/vim-fugitive'
     use 'airblade/vim-gitgutter'
     use 'ruifm/gitlinker.nvim'
+    use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
 
     -- Status line
-    use {'akinsho/bufferline.nvim', tag = "*", requires = 'kyazdani42/nvim-web-devicons'}
+    use { 'akinsho/bufferline.nvim', tag = "*", requires = 'kyazdani42/nvim-web-devicons' }
     use 'vim-airline/vim-airline'
 
-    -- Notes
-    use 'xolox/vim-misc'
-    use 'xolox/vim-notes'
-
-    -- Search
+    -- Web Search
     use 'voldikss/vim-browser-search'
 
     -- commands on top of the sqls lsp
@@ -72,12 +69,9 @@ require('plugins.configs.bufferline')
 require('plugins.configs.chtsh')
 require('plugins.configs.cmd')
 require('plugins.configs.focus')
-require('plugins.configs.gitgutter')
-require('plugins.configs.gitlinker')
+require('plugins.configs.git')
 require('plugins.configs.telescope')
 require('plugins.configs.treesitter')
 require('plugins.configs.vim-browser-search')
-require('plugins.configs.vim-fugitive')
-require('plugins.configs.vim-notes')
 require('plugins.configs.vim-tmux-navigator')
 require('plugins.configs.vim-tmux-runner')

@@ -13,14 +13,16 @@ vim.api.nvim_set_keymap("n", "<leader>fb" , "<cmd>lua require('telescope.builtin
 vim.api.nvim_set_keymap("n", "<leader>fr" , "<cmd>lua require('telescope.builtin').registers()<cr>"  , opts)
 vim.api.nvim_set_keymap("n", "<leader>fm" , "<cmd>lua require('telescope.builtin').man_pages()<cr>"  , opts)
 vim.api.nvim_set_keymap("n", "<leader>fq" , "<cmd>lua require('telescope.builtin').quickfix()<cr>"   , opts)
-vim.api.nvim_set_keymap("n", "<leader>faf", "<cmd>lua require('setup.telescope').ff_home()<cr>"      , opts)
-vim.api.nvim_set_keymap("n", "<leader>fag", "<cmd>lua require('setup.telescope').lg_home()<cr>"      , opts)
-vim.api.nvim_set_keymap("n", "<leader>fsf", "<cmd>lua require('setup.telescope').ff_scratch()<cr>"   , opts)
-vim.api.nvim_set_keymap("n", "<leader>fsg", "<cmd>lua require('setup.telescope').lg_scratch()<cr>"   , opts)
-vim.api.nvim_set_keymap("n", "<leader>fdf", "<cmd>lua require('setup.telescope').ff_developer()<cr>" , opts)
-vim.api.nvim_set_keymap("n", "<leader>fdg", "<cmd>lua require('setup.telescope').lg_developer()<cr>" , opts)
-vim.api.nvim_set_keymap("n", "<leader>fcf", "<cmd>lua require('setup.telescope').ff_config()<cr>"    , opts)
-vim.api.nvim_set_keymap("n", "<leader>fcg", "<cmd>lua require('setup.telescope').lg_config()<cr>"    , opts)
+vim.api.nvim_set_keymap("n", "<leader>faf", "<cmd>lua require('plugins.configs.telescope').ff_home()<cr>"     , opts)
+vim.api.nvim_set_keymap("n", "<leader>fag", "<cmd>lua require('plugins.configs.telescope').lg_home()<cr>"     , opts)
+vim.api.nvim_set_keymap("n", "<leader>fsf", "<cmd>lua require('plugins.configs.telescope').ff_scratch()<cr>"  , opts)
+vim.api.nvim_set_keymap("n", "<leader>fsg", "<cmd>lua require('plugins.configs.telescope').lg_scratch()<cr>"  , opts)
+vim.api.nvim_set_keymap("n", "<leader>fdf", "<cmd>lua require('plugins.configs.telescope').ff_developer()<cr>", opts)
+vim.api.nvim_set_keymap("n", "<leader>fdg", "<cmd>lua require('plugins.configs.telescope').lg_developer()<cr>", opts)
+vim.api.nvim_set_keymap("n", "<leader>fcf", "<cmd>lua require('plugins.configs.telescope').ff_config()<cr>"   , opts)
+vim.api.nvim_set_keymap("n", "<leader>fcg", "<cmd>lua require('plugins.configs.telescope').lg_config()<cr>"   , opts)
+vim.api.nvim_set_keymap("n", "<leader>fnf", "<cmd>lua require('plugins.configs.telescope').ff_notes()<cr>"    , opts)
+vim.api.nvim_set_keymap("n", "<leader>fng", "<cmd>lua require('plugins.configs.telescope').lg_notes()<cr>"    , opts)
 
 -- setup
 local previewers = require("telescope.previewers")
@@ -123,6 +125,24 @@ M.lg_config = function()
     require("telescope.builtin").live_grep({
         prompt_title = "~/Developer/config grep",
         cwd = "~/Developer/config",
+        hidden = true,
+        file_ignore_patterns = { ".git/" },
+    })
+end
+
+M.ff_notes = function()
+    require("telescope.builtin").find_files({
+        prompt_title = "~/Developer/scratch/notes find files",
+        cwd = "~/Developer/scratch/notes",
+        hidden = true,
+        file_ignore_patterns = { ".git/" },
+    })
+end
+
+M.lg_notes = function()
+    require("telescope.builtin").live_grep({
+        prompt_title = "~/Developer/scratch/notes grep",
+        cwd = "~/Developer/scratch/notes",
         hidden = true,
         file_ignore_patterns = { ".git/" },
     })
