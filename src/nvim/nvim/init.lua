@@ -1,7 +1,7 @@
 -- OPTIONS
 vim.cmd('colorscheme everforest')
 
-vim.wo.wrap = true
+vim.wo.wrap = false
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.cursorline = true
@@ -33,7 +33,7 @@ vim.api.nvim_create_user_command(
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-local opts = { noremap=true, silent=true }
+local opts = { noremap=true, silent=false }
 
 vim.api.nvim_set_keymap('n', 'Y'         , 'yy'                  , opts)
 vim.api.nvim_set_keymap('n', '<leader>w' , ':w<cr>'              , opts)

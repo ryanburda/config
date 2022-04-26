@@ -1,14 +1,14 @@
 -- Returns a config for the sqls language server.
-local opts = require("lsp.server_default").opts
+local opts = { noremap=true, silent=false }
 
 local on_attach = function(client, bufnr)
-    require("lsp.server_default").on_attach(client, bufnr)
-
-    require('sqls').on_attach(client, bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>s ', ":SqlsExecuteQuery<cr>"    , opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'v', '<leader>s ', ":SqlsExecuteQuery<cr>"    , opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>sc', ":SqlsSwitchConnection<cr>", opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>sd', ":SqlsSwitchDatabase<cr>"  , opts)
+
+    require("lsp.server_default").on_attach(client, bufnr)
+    require('sqls').on_attach(client, bufnr)
 end
 
 local function get_psql_connections(pgpass_path)
