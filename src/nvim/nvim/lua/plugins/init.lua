@@ -15,6 +15,9 @@ packer.startup(function(use)
     -- Splits
     use 'beauwilliams/focus.nvim'
 
+    -- File explorer
+    use { 'kyazdani42/nvim-tree.lua', requires = { 'kyazdani42/nvim-web-devicons' } }
+
     -- Greeter
     use 'goolord/alpha-nvim'
 
@@ -70,6 +73,7 @@ require('plugins.configs.chtsh')
 require('plugins.configs.cmd')
 require('plugins.configs.focus')
 require('plugins.configs.git')
+require('plugins.configs.nvim-tree')
 require('plugins.configs.telescope')
 require('plugins.configs.treesitter')
 require('plugins.configs.vim-browser-search')
