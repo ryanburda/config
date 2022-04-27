@@ -1,17 +1,34 @@
 -- Returns a config for the sqls language server.
-local opts = { noremap=true, silent=false }
 
-local on_attach = function(client, bufnr)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>s ', ":SqlsExecuteQuery<cr>"    , opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'v', '<leader>s ', ":SqlsExecuteQuery<cr>"    , opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>sc', ":SqlsSwitchConnection<cr>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>sd', ":SqlsSwitchDatabase<cr>"  , opts)
+local conn_string_to_tbl = function(str)
+    local values = {}
+    for value in string.gmatch(str, '%S+') do
+        table.insert(values, value)
+    end
 
-    require("lsp.server_default").on_attach(client, bufnr)
-    require('sqls').on_attach(client, bufnr)
+    local order = { 'number', 'driver', 'host', 'port', 'db', 'user', 'password' }
+    local tbl = {}
+
+    for i = 1, #order do
+        tbl[order[i]] = values[i]
+    end
+
+    return tbl
 end
 
-local function get_psql_connections(pgpass_path)
+local set_lsp_extra = function()
+    -- Reads the sqls specific buffer variables and sets the `lsp_extra` buffer field.
+    -- NOTE: Should be called after any of the `sqls` buffer variables are updated.
+    local host = vim.api.nvim_buf_get_var(0, 'sqls_conn_host')
+    local db = vim.api.nvim_buf_get_var(0, 'sqls_conn_db')
+    local user = vim.api.nvim_buf_get_var(0, 'sqls_conn_user')
+
+    local str = 'host=' .. host .. ' db=' .. db .. ' user:' ..user
+
+    vim.api.nvim_buf_set_var(0, 'lsp_extra', str)
+end
+
+local function get_pgpass_connections(pgpass_path)
     -- Reads in a pgpass file and returns a connections table that the sqls language server expects.
     --
     -- The output of this function works for nvim-lspconfig.
@@ -61,11 +78,36 @@ local function get_psql_connections(pgpass_path)
     return connections
 end
 
+local on_attach = function(client, bufnr)
+    require("lsp.server_default").on_attach(client, bufnr)
+
+    require('sqls').on_attach(client, bufnr)
+
+    require('sqls.events').add_subscriber('connection_choice', function(event)
+        local tbl = conn_string_to_tbl(event.choice)
+        vim.api.nvim_buf_set_var(0, 'sqls_conn_host', tbl['host'])
+        vim.api.nvim_buf_set_var(0, 'sqls_conn_db', tbl['db'])
+        vim.api.nvim_buf_set_var(0, 'sqls_conn_user', tbl['user'])
+        set_lsp_extra()
+    end)
+
+    require('sqls.events').add_subscriber('database_choice', function(event)
+        vim.api.nvim_buf_set_var(0, 'sqls_conn_db', event.choice)
+        set_lsp_extra()
+    end)
+
+    local opts = { noremap=true, silent=false }
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>s ', ":SqlsExecuteQuery<cr>"    , opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'v', '<leader>s ', ":SqlsExecuteQuery<cr>"    , opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>sc', ":SqlsSwitchConnection<cr>", opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>sd', ":SqlsSwitchDatabase<cr>"  , opts)
+end
+
 local config = {
     on_attach = on_attach,
     settings = {
         sqls = {
-            connections = get_psql_connections()
+            connections = get_pgpass_connections()
         },
     }
 }

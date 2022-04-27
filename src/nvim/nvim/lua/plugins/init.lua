@@ -13,7 +13,8 @@ packer.startup(function(use)
     use '4513ECHO/vim-colors-hatsunemiku'
 
     -- Splits
-    use 'beauwilliams/focus.nvim'
+    -- use 'beauwilliams/focus.nvim'  # TODO: get this to work with diffview
+    use 'famiu/bufdelete.nvim'
 
     -- File explorer
     use { 'kyazdani42/nvim-tree.lua', requires = { 'kyazdani42/nvim-web-devicons' } }
@@ -54,7 +55,8 @@ packer.startup(function(use)
 
     -- Status line
     use { 'akinsho/bufferline.nvim', tag = "*", requires = 'kyazdani42/nvim-web-devicons' }
-    use 'vim-airline/vim-airline'
+    use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } }
+    use 'nvim-lua/lsp-status.nvim'
 
     -- Web Search
     use 'voldikss/vim-browser-search'
@@ -70,9 +72,10 @@ end)
 require('plugins.configs.alpha')
 require('plugins.configs.bufferline')
 require('plugins.configs.chtsh')
-require('plugins.configs.cmd')
-require('plugins.configs.focus')
+require('plugins.configs.cmp')
+-- require('plugins.configs.focus')
 require('plugins.configs.git')
+require('plugins.configs.lualine')
 require('plugins.configs.nvim-tree')
 require('plugins.configs.telescope')
 require('plugins.configs.treesitter')

@@ -20,7 +20,7 @@ vim.opt.mouse = "a"
 vim.opt.clipboard = 'unnamedplus'
 vim.opt.whichwrap = '<,>,h,l,[,]'
 vim.opt.timeoutlen = 2000
-vim.opt.updatetime = 500
+vim.opt.updatetime = 100
 
 -- command! BufOnly execute '%bdelete|edit #|normal `"'
 vim.api.nvim_create_user_command(
@@ -37,8 +37,8 @@ local opts = { noremap=true, silent=false }
 
 vim.api.nvim_set_keymap('n', 'Y'         , 'yy'                  , opts)
 vim.api.nvim_set_keymap('n', '<leader>w' , ':w<cr>'              , opts)
-vim.api.nvim_set_keymap('n', '<leader>q' , ':bd<cr>'             , opts)
-vim.api.nvim_set_keymap('n', '<leader>Q' , ':bd!<cr>'            , opts)
+vim.api.nvim_set_keymap('n', '<leader>q' , ':Bdelete<cr>'        , opts)
+vim.api.nvim_set_keymap('n', '<leader>Q' , ':Bdelete!<cr>'       , opts)
 vim.api.nvim_set_keymap('n', '<leader>0' , ':BufOnly<cr>'        , opts)
 vim.api.nvim_set_keymap('n', '<leader>x' , ':q<cr>'              , opts)
 vim.api.nvim_set_keymap('n', '<leader>X' , ':q!<cr>'             , opts)
@@ -52,6 +52,7 @@ vim.api.nvim_set_keymap('n', '<leader>V' , '{v}'                 , opts)
 vim.api.nvim_set_keymap('n', '<leader>/' , ':source $MYVIMRC<cr>', opts)
 vim.api.nvim_set_keymap('n', '<leader>;' , ':split<cr><C-w>j'    , opts)
 vim.api.nvim_set_keymap('n', '<leader>\'', ':vsplit<cr><C-w>l'   , opts)
+vim.api.nvim_set_keymap('n', '<leader>p' , '<C-w>p'              , opts)  -- previous split
 
 -- :help vim.diagnostic.*
 vim.api.nvim_set_keymap('n', '<leader>df', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)

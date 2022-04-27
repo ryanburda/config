@@ -6,7 +6,7 @@ local lsp_installer = require('nvim-lsp-installer')
 -- Individual server config files are stored in `lsp/servers/<<server_name>>.lua`. The default config will be used if a
 -- lua file does not exist for the lsp server being setup.
 lsp_installer.on_server_ready(function(server)
-    local status, config = pcall(require, 'lsp/configs/' .. server.name)
+    local status, config = pcall(require, 'lsp.configs.' .. server.name)
 
     if status == false then
         config = require('lsp.server_default')
