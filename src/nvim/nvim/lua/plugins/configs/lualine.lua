@@ -1,5 +1,3 @@
-BUF_VAR_KEY_LSP_EXTRA = 'lsp_extra'
-
 local lsp_status = function()
     local str = ''
     if vim.lsp.buf_get_clients(0) then
@@ -11,7 +9,7 @@ end
 local lsp_extra = function()
     local str = ''
     if vim.lsp.buf_get_clients(0) then
-        str = vim.api.nvim_buf_get_var(0, BUF_VAR_KEY_LSP_EXTRA)
+        str = vim.api.nvim_buf_get_var(0, 'lsp_extra')
     end
     return str
 end

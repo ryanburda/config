@@ -1,6 +1,10 @@
 -- Returns a config for the sqls language server.
+local config = require('lsp.server_default')
+local default_on_attach = config.on_attach
+
 local BUF_VAR_KEY_HOST = 'sqls_conn_host'
 local BUF_VAR_KEY_DB   = 'sqls_conn_db'
+local BUF_VAR_KEY_PORT = 'sqls_conn_port'
 local BUF_VAR_KEY_USER = 'sqls_conn_user'
 local BUF_VAR_KEY_LSP_EXTRA = 'lsp_extra'
 
@@ -30,9 +34,10 @@ local set_lsp_extra = function()
     -- NOTE: Should be called after any of the `sqls` buffer variables are updated.
     local host = vim.api.nvim_buf_get_var(0, BUF_VAR_KEY_HOST) or ''
     local db = vim.api.nvim_buf_get_var(0, BUF_VAR_KEY_DB) or ''
+    local port = vim.api.nvim_buf_get_var(0, BUF_VAR_KEY_PORT) or ''
     local user = vim.api.nvim_buf_get_var(0, BUF_VAR_KEY_USER) or ''
 
-    local str = 'host=' .. host .. ' db=' .. db .. ' user=' .. user
+    local str = host .. ' ' .. db .. ' ' .. port .. ' ' .. user
 
     vim.api.nvim_buf_set_var(0, BUF_VAR_KEY_LSP_EXTRA, str)
 end
@@ -88,7 +93,7 @@ local function get_pgpass_connections(pgpass_path)
 end
 
 local on_attach = function(client, bufnr)
-    require("lsp.server_default").on_attach(client, bufnr)
+    default_on_attach(client, bufnr)
 
     require('sqls').on_attach(client, bufnr)
 
@@ -96,12 +101,13 @@ local on_attach = function(client, bufnr)
         local tbl = conn_string_to_tbl(event.choice)
         vim.api.nvim_buf_set_var(0, BUF_VAR_KEY_HOST, tbl['host'])
         vim.api.nvim_buf_set_var(0, BUF_VAR_KEY_DB, tbl['db'])
+        vim.api.nvim_buf_set_var(0, BUF_VAR_KEY_PORT, tbl['port'])
         vim.api.nvim_buf_set_var(0, BUF_VAR_KEY_USER, tbl['user'])
         set_lsp_extra()
     end)
 
     require('sqls.events').add_subscriber('database_choice', function(event)
-        vim.api.nvim_buf_set_var(0, BUF_VAR_KEY_DB, event.choice)
+        vim.api.nvim_buf_set_var(0, BUF_VAR_KEY_DB, 'dbname=' .. event.choice)
         set_lsp_extra()
     end)
 
@@ -116,13 +122,13 @@ local on_attach = function(client, bufnr)
 
 end
 
-local config = {
-    on_attach = on_attach,
-    settings = {
-        sqls = {
-            connections = get_pgpass_connections()
-        },
-    }
+
+-- return the config
+config.on_attach = on_attach
+config.settings = {
+    sqls = {
+        connections = get_pgpass_connections()
+    },
 }
 
 return config

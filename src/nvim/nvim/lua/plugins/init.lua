@@ -8,16 +8,26 @@ packer.startup(function(use)
     use 'wbthomason/packer.nvim'
 
     -- Highlighting & Colors
-    use 'nvim-treesitter/nvim-treesitter'
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        config = require('plugins.configs.treesitter')
+    }
     use 'sainnhe/everforest'
     use '4513ECHO/vim-colors-hatsunemiku'
 
 
     -- File explorer
-    use { 'kyazdani42/nvim-tree.lua', requires = { 'kyazdani42/nvim-web-devicons' } }
+    use {
+        'kyazdani42/nvim-tree.lua',
+        requires = { 'kyazdani42/nvim-web-devicons' },
+        config = require('plugins.configs.nvim-tree')
+    }
 
     -- Greeter
-    use 'goolord/alpha-nvim'
+    use {
+        'goolord/alpha-nvim',
+        config = require("plugins.configs.alpha")
+    }
 
     -- Luasnip
     use 'L3MON4D3/LuaSnip'
@@ -35,49 +45,76 @@ packer.startup(function(use)
     use 'ray-x/lsp_signature.nvim'
 
     -- Telescope
-    use 'nvim-lua/popup.nvim'
-    use 'nvim-lua/plenary.nvim'
-    use 'nvim-telescope/telescope.nvim'
-    use 'nvim-telescope/telescope-fzy-native.nvim'
+    use {
+        'nvim-telescope/telescope.nvim',
+        requires = {
+            'nvim-lua/plenary.nvim',
+            'nvim-telescope/telescope-fzy-native.nvim'
+        },
+        config = require('plugins.configs.telescope')
+    }
 
     -- Tmux
-    use 'christoomey/vim-tmux-navigator'
-    use 'christoomey/vim-tmux-runner'
+    use {
+        'christoomey/vim-tmux-navigator',
+        config = require('plugins.configs.vim-tmux-navigator')
+    }
+    use {
+        'christoomey/vim-tmux-runner',
+        config = require('plugins.configs.vim-tmux-runner')
+    }
 
     -- Git
-    use 'tpope/vim-fugitive'
-    use 'airblade/vim-gitgutter'
-    use 'ruifm/gitlinker.nvim'
-    use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
+    use {
+        'tpope/vim-fugitive',
+        config = require('plugins.configs.vim-fugitive')
+    }
+    use {
+        'airblade/vim-gitgutter',
+        config = require('plugins.configs.gitgutter')
+    }
+    use {
+        'ruifm/gitlinker.nvim',
+        config = require('plugins.configs.gitlinker')
+    }
+    use {
+        'sindrets/diffview.nvim',
+        requires = 'nvim-lua/plenary.nvim',
+        config = require('plugins.configs.diffview')
+    }
 
     -- Status line
-    use { 'akinsho/bufferline.nvim', tag = "*", requires = 'kyazdani42/nvim-web-devicons' }
-    use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } }
+    use {
+        'akinsho/bufferline.nvim',
+        tag = "*",
+        requires = 'kyazdani42/nvim-web-devicons',
+        config = require('plugins.configs.bufferline')
+    }
+    use {
+        'nvim-lualine/lualine.nvim',
+        requires = { 'kyazdani42/nvim-web-devicons'},
+        config = require('plugins.configs.lualine')
+    }
     use 'nvim-lua/lsp-status.nvim'
 
     -- Web Search
-    use 'voldikss/vim-browser-search'
+    use {
+        'voldikss/vim-browser-search',
+        config = require('plugins.configs.vim-browser-search')
+    }
 
     -- buffer deletion
     use 'famiu/bufdelete.nvim'
 
     -- commands on top of the sqls lsp
-    use '~/Developer/nvim/plugins/sqls.nvim'
+    use 'nanotee/sqls.nvim'
 
     -- Local Development
-    use '~/Developer/nvim/plugins/chtsh'
+    use {
+        '~/Developer/nvim/plugins/chtsh',
+        config = require('plugins.configs.chtsh')
+    }
 
 end)
 
-require('plugins.configs.alpha')
-require('plugins.configs.bufferline')
-require('plugins.configs.chtsh')
 require('plugins.configs.cmp')
-require('plugins.configs.git')
-require('plugins.configs.lualine')
-require('plugins.configs.nvim-tree')
-require('plugins.configs.telescope')
-require('plugins.configs.treesitter')
-require('plugins.configs.vim-browser-search')
-require('plugins.configs.vim-tmux-navigator')
-require('plugins.configs.vim-tmux-runner')

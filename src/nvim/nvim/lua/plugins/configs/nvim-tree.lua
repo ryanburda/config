@@ -1,3 +1,8 @@
+-- mappings
+local opts = { noremap=true, silent=true }
+vim.api.nvim_set_keymap('n', '<leader>aa', ':NvimTreeFocus<CR>', opts)
+vim.api.nvim_set_keymap('n', '<leader>ah', ':NvimTreeClose<CR>', opts)
+
 -- setup
 require('nvim-tree').setup({
     update_cwd = false,
@@ -7,8 +12,3 @@ require('nvim-tree').setup({
         update_cwd = true,
     }
 })
-
--- mappings
-local opts = { noremap=true, silent=true }
-vim.api.nvim_set_keymap('n', '<leader>aa', ':NvimTreeFocus<CR>', opts)
-vim.api.nvim_set_keymap('n', '<leader>ah', ':NvimTreeClose<CR>', opts)

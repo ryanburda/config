@@ -1,0 +1,26 @@
+name: dv
+root: ~/Developer/sqsp/bde-airflow
+
+windows:
+  - main:
+      layout: even-vertical
+      panes:
+        - vim
+        - terminal:
+          - tmux resize-pane -t main.1 -y 10
+          - clear
+  - scratch:
+      root: ~/Developer/scratch/src/bde-airflow
+      layout: even-vertical
+      panes:
+        - vim
+        - #empty
+  - cmds:
+      layout: even-vertical
+      panes:
+        - local_postgres:
+          - docker container start datavault_db || docker container run -d --name datavault_db -p 15432:5432 -v postgres-dv-volume:/var/lib/postgres/data -e POSTGRES_PASSWORD=postgres postgres:10.3
+          - sleep 2
+          - clear
+          - psql -h localhost -p 15432 -d datavault -U postgres
+        - cloud_sql_proxy -instances=datavault-stage-001:us-central1:datavault-db-059edc2e6560=tcp:127.0.0.1:15433

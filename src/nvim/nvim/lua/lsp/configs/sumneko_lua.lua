@@ -9,7 +9,7 @@ config.settings = {
         },
         diagnostics = {
             -- Get the language server to recognize the `vim` global
-            globals = { 'vim' },
+            globals = { 'require', 'vim' },
         },
     },
 }
