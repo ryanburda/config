@@ -12,9 +12,6 @@ packer.startup(function(use)
     use 'sainnhe/everforest'
     use '4513ECHO/vim-colors-hatsunemiku'
 
-    -- Splits
-    -- use 'beauwilliams/focus.nvim'  # TODO: get this to work with diffview
-    use 'famiu/bufdelete.nvim'
 
     -- File explorer
     use { 'kyazdani42/nvim-tree.lua', requires = { 'kyazdani42/nvim-web-devicons' } }
@@ -61,8 +58,11 @@ packer.startup(function(use)
     -- Web Search
     use 'voldikss/vim-browser-search'
 
+    -- buffer deletion
+    use 'famiu/bufdelete.nvim'
+
     -- commands on top of the sqls lsp
-    use 'nanotee/sqls.nvim'
+    use '~/Developer/nvim/plugins/sqls.nvim'
 
     -- Local Development
     use '~/Developer/nvim/plugins/chtsh'
@@ -73,7 +73,6 @@ require('plugins.configs.alpha')
 require('plugins.configs.bufferline')
 require('plugins.configs.chtsh')
 require('plugins.configs.cmp')
--- require('plugins.configs.focus')
 require('plugins.configs.git')
 require('plugins.configs.lualine')
 require('plugins.configs.nvim-tree')
