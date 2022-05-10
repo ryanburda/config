@@ -1,6 +1,3 @@
--- OPTIONS
-vim.cmd('colorscheme everforest')
-
 vim.wo.wrap = false
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -22,6 +19,8 @@ vim.opt.whichwrap = '<,>,h,l,[,]'
 vim.opt.timeoutlen = 1000
 vim.opt.updatetime = 100
 
+vim.cmd('colorscheme everforest')
+
 -- command! BufOnly execute '%bdelete|edit #|normal `"'
 vim.api.nvim_create_user_command(
     'BufOnly',
@@ -29,7 +28,7 @@ vim.api.nvim_create_user_command(
     {}
 )
 
--- KEYMAP
+-- keymap
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
@@ -112,15 +111,25 @@ packer.startup(function(use)
     -- Luasnip
     use 'L3MON4D3/LuaSnip'
 
+    -- lsp
+    use {
+        'williamboman/nvim-lsp-installer',
+        {
+            "neovim/nvim-lspconfig",
+            config = require('lsp')
+        }
+    }
+
     -- Code completion
-    use 'neovim/nvim-lspconfig'
-    use 'williamboman/nvim-lsp-installer'
-    use 'hrsh7th/nvim-cmp'
-    use 'hrsh7th/cmp-path'
-    use 'hrsh7th/cmp-buffer'
-    use 'hrsh7th/cmp-nvim-lua'
     use 'hrsh7th/cmp-nvim-lsp'
+    use 'hrsh7th/cmp-buffer'
+    use 'hrsh7th/cmp-path'
     use 'hrsh7th/cmp-cmdline'
+    use 'hrsh7th/cmp-nvim-lua'
+    use {
+        'hrsh7th/nvim-cmp',
+        config = require('plugins.cmp')
+    }
     use 'saadparwaiz1/cmp_luasnip'
     use 'ray-x/lsp_signature.nvim'
 
@@ -196,6 +205,3 @@ packer.startup(function(use)
     }
 
 end)
-
-require('plugins.cmp')
-require('lsp')
