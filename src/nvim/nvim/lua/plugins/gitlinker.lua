@@ -4,13 +4,13 @@ local opts = { noremap=true, silent=false }
 -- the visual block.
 vim.api.nvim_set_keymap(
     "n",
-    "<leader>gi",
+    "<leader>gl",
     "<cmd>lua require('gitlinker').get_buf_range_url('n')<cr>",
     opts
 )
 vim.api.nvim_set_keymap(
     "v",
-    "<leader>gi",
+    "<leader>gl",
     "<cmd>lua require('gitlinker').get_buf_range_url('v')<cr>v`<",
     opts
 )
