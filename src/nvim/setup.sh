@@ -28,12 +28,6 @@ brew install go
 brew install pyenv
 brew install pyenv-virtualenv
 
-# set pyright config file to the current active venv by running the following:
-# ```
-# pyenv pyright
-# ```
-git clone https://github.com/alefpereira/pyenv-pyright.git $(pyenv root)/plugins/pyenv-pyright
-
 # Install NeoVim from source
 if [ ! -d $NVIM_REPO_PATH ]; then
     echo 'Cloning neovim'
@@ -55,8 +49,21 @@ ln -svfF $NVIM_CONFIG_DIR_PATH_SRC $NVIM_CONFIG_DIR_PATH_DST
 
 # Install Packer
 PACKER_PATH=$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim
-if [ ! -f $PACKER_PATH ]; then
+if [ ! -d $PACKER_PATH ]; then
     git clone --depth 1 https://github.com/wbthomason/packer.nvim $PACKER_PATH
 else
     echo 'Packer already installed.'
+    git -C $PACKER_PATH pull
+fi
+
+# set pyright config file to the current active venv by running the following:
+# ```
+# pyenv pyright
+# ```
+PYENV_PYRIGHT_PATH=$(pyenv root)/plugins/pyenv-pyright
+if [ ! -d $PYENV_PYRIGHT_PATH ]; then
+    git clone https://github.com/alefpereira/pyenv-pyright.git $PYENV_PYRIGHT_PATH
+else
+    echo 'Packer already installed.'
+    git -C $PYENV_PYRIGHT_PATH pull
 fi
