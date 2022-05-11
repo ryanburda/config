@@ -116,7 +116,7 @@ packer.startup(function(use)
         "williamboman/nvim-lsp-installer",
         {
             "neovim/nvim-lspconfig",
-            config = require("lsp").setup()
+            config = require("plugins.lsp").setup()
         }
     }
 
