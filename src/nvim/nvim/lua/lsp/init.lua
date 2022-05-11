@@ -1,19 +1,39 @@
-local lsp_installer = require('nvim-lsp-installer')
+local lsp = {}
 
--- Register a handler that will be called for each installed server when it's ready (i.e. when installation is finished
--- or if the server is already installed).
---
--- Individual server config files are stored in `lsp/servers/<<server_name>>.lua`. The default config will be used if a
--- lua file does not exist for the lsp server being setup.
-lsp_installer.on_server_ready(function(server)
-    local status, config = pcall(require, 'lsp.configs.' .. server.name)
+function lsp.setup()
+    require("nvim-lsp-installer").setup {
+        ensure_installed = {
+            "awk_ls",
+            "bashls",
+            "clangd",
+            "dockerls",
+            "jdtls",
+            "jsonls",
+            "pyright",
+            "sumneko_lua",
+            "sqls",
+            "yamlls"
+        },
+        automatic_installation = true,
+    }
+    local lspconfig = require("lspconfig")
+    local server_default = require("lsp.server_default")
 
-    if status == false then
-        config = require('lsp.server_default')
-    end
+    lspconfig.clangd.setup(server_default)
 
-    -- This setup() function will take the provided server configuration and decorate it with the necessary properties
-    -- before passing it onwards to lspconfig.
-    -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-    server:setup(config)
-end)
+    lspconfig.dockerls.setup(server_default)
+
+    lspconfig.jdtls.setup(server_default)
+
+    lspconfig.jsonls.setup(server_default)
+
+    lspconfig.pyright.setup(server_default)
+
+    lspconfig.sumneko_lua.setup(require("lsp.configs.sumneko_lua"))
+
+    lspconfig.sqls.setup(require("lsp.configs.sqls"))
+
+    lspconfig.yamlls.setup(require("lsp.configs.yamlls"))
+end
+
+return lsp

@@ -113,10 +113,10 @@ packer.startup(function(use)
 
     -- lsp
     use {
-        'williamboman/nvim-lsp-installer',
+        "williamboman/nvim-lsp-installer",
         {
             "neovim/nvim-lspconfig",
-            config = require('lsp')
+            config = require("lsp").setup()
         }
     }
 

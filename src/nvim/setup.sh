@@ -24,6 +24,7 @@ brew install gettext
 brew install curl
 brew install fzf
 brew install llvm  # Needed for ccls lsp
+brew install wget
 brew install go
 brew install pyenv
 brew install pyenv-virtualenv
