@@ -19,8 +19,6 @@ vim.opt.whichwrap = '<,>,h,l,[,]'
 vim.opt.timeoutlen = 1000
 vim.opt.updatetime = 100
 
-vim.cmd('colorscheme everforest')
-
 -- command! BufOnly execute '%bdelete|edit #|normal `"'
 vim.api.nvim_create_user_command(
     'BufOnly',
@@ -77,35 +75,44 @@ vim.api.nvim_set_keymap('n', '<leader>vk', ':lprev<CR>' , opts)
 vim.api.nvim_set_keymap('n', '<leader>vf', ':lfirst<CR>', opts)
 vim.api.nvim_set_keymap('n', '<leader>vl', ':llast<CR>' , opts)
 
--- plugins
+-- Packer
+local install_path = vim.fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+local packer_bootstrap
+
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+    packer_bootstrap = vim.fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+end
+
 vim.cmd [[packadd packer.nvim]]
 
-local packer = require("packer")
+require("packer").startup(function(use)
 
-packer.startup(function(use)
-
-    -- neovim package manager
+    -- Packer can manage itself
     use 'wbthomason/packer.nvim'
 
     -- Highlighting & Colors
     use {
         'nvim-treesitter/nvim-treesitter',
-        config = require('plugins.treesitter')
+        config = function() require('plugins.treesitter').setup() end
     }
-    use 'sainnhe/everforest'
+    use {
+        'sainnhe/everforest',
+        config = function() require('plugins.everforest').setup() end
+    }
+
     use '4513ECHO/vim-colors-hatsunemiku'
 
     -- File explorer
     use {
         'kyazdani42/nvim-tree.lua',
         requires = { 'kyazdani42/nvim-web-devicons' },
-        config = require('plugins.nvim-tree')
+        config = function() require('plugins.nvim-tree').setup() end
     }
 
     -- Greeter
     use {
         'goolord/alpha-nvim',
-        config = require("plugins.alpha")
+        config = function() require("plugins.alpha").setup() end
     }
 
     -- Luasnip
@@ -116,20 +123,23 @@ packer.startup(function(use)
         "williamboman/nvim-lsp-installer",
         {
             "neovim/nvim-lspconfig",
-            config = require("plugins.lsp").setup()
+            config = function() require("plugins.lsp").setup() end
         }
     }
 
     -- Code completion
-    use 'hrsh7th/cmp-nvim-lsp'
+    use {
+        'hrsh7th/nvim-cmp',
+        config = function() require('plugins.cmp').setup() end
+    }
+    use {
+        'hrsh7th/cmp-nvim-lsp',
+        requires = 'hrsh7th/nvim-cmp'
+    }
     use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/cmp-path'
     use 'hrsh7th/cmp-cmdline'
     use 'hrsh7th/cmp-nvim-lua'
-    use {
-        'hrsh7th/nvim-cmp',
-        config = require('plugins.cmp')
-    }
     use 'saadparwaiz1/cmp_luasnip'
     use 'ray-x/lsp_signature.nvim'
 
@@ -140,36 +150,36 @@ packer.startup(function(use)
             'nvim-lua/plenary.nvim',
             'nvim-telescope/telescope-fzy-native.nvim'
         },
-        config = require('plugins.telescope')
+        config = function() require('plugins.telescope').setup() end
     }
 
     -- Tmux
     use {
         'christoomey/vim-tmux-navigator',
-        config = require('plugins.vim-tmux-navigator')
+        config = function() require('plugins.vim-tmux-navigator').setup() end
     }
     use {
         'christoomey/vim-tmux-runner',
-        config = require('plugins.vim-tmux-runner')
+        config = function() require('plugins.vim-tmux-runner').setup() end
     }
 
     -- Git
     use {
         'tpope/vim-fugitive',
-        config = require('plugins.vim-fugitive')
+        config = function() require('plugins.vim-fugitive').setup() end
     }
     use {
         'airblade/vim-gitgutter',
-        config = require('plugins.gitgutter')
+        config = function() require('plugins.gitgutter').setup() end
     }
     use {
         'ruifm/gitlinker.nvim',
-        config = require('plugins.gitlinker')
+        config = function() require('plugins.gitlinker').setup() end
     }
     use {
         'sindrets/diffview.nvim',
         requires = 'nvim-lua/plenary.nvim',
-        config = require('plugins.diffview')
+        config = function() require('plugins.diffview').setup() end
     }
 
     -- Status line
@@ -177,19 +187,19 @@ packer.startup(function(use)
         'akinsho/bufferline.nvim',
         tag = "*",
         requires = 'kyazdani42/nvim-web-devicons',
-        config = require('plugins.bufferline')
+        config = function() require('plugins.bufferline').setup() end
     }
     use {
         'nvim-lualine/lualine.nvim',
         requires = { 'kyazdani42/nvim-web-devicons'},
-        config = require('plugins.lualine')
+        config = function() require('plugins.lualine').setup() end
     }
     use 'nvim-lua/lsp-status.nvim'
 
     -- Web Search
     use {
         'voldikss/vim-browser-search',
-        config = require('plugins.vim-browser-search')
+        config = function() require('plugins.vim-browser-search').setup() end
     }
 
     -- buffer deletion
@@ -201,7 +211,13 @@ packer.startup(function(use)
     -- Local Development
     use {
         '~/Developer/nvim/plugins/chtsh',
-        config = require('plugins.chtsh')
+        config = function() require('plugins.chtsh').setup() end
     }
+
+    -- Automatically set up your configuration after cloning packer.nvim
+    -- Put this at the end after all plugins
+    if packer_bootstrap then
+        require('packer').sync()
+    end
 
 end)

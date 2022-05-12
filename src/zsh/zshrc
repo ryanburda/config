@@ -154,6 +154,10 @@ alias h="cht.sh"
 alias top="htop"
 alias s="tmuxinator start"
 
+# Raise max files and max procs
+ulimit -n 200000
+ulimit -u 2048
+
 # C-k usually does delete all after cursor but this has been remapped to
 # move between tmux panes. Bind this to ctrl-backspace instead.
 bindkey '^]' kill-line

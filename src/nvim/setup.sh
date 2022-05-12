@@ -6,12 +6,15 @@ NVIM_CONFIG_DIR_PATH_DST="$HOME/.config"
 
 NVIM_DIR_PATH="$HOME/Developer/nvim"
 NVIM_REPO_PATH="$NVIM_DIR_PATH/neovim"
-NVIM_PLUGINS_DIR_PATH="$NVIM_DIR_PATH/plugins"
+NVIM_PLUGINS_DIR_PATH="$NVIM_DIR_PATH/plugins"  # this is for local plugin development
 NVIM_INSTALL_DIR_PATH="$HOME/.local/bin/neovim"
+
+PYENV_PYRIGHT_PATH=$(pyenv root)/plugins/pyenv-pyright
 
 mkdir -p $NVIM_DIR_PATH
 mkdir -p $NVIM_PLUGINS_DIR_PATH
 mkdir -p $NVIM_INSTALL_DIR_PATH
+
 
 # Build prereqs
 xcode-select --install
@@ -28,6 +31,7 @@ brew install wget
 brew install go
 brew install pyenv
 brew install pyenv-virtualenv
+
 
 # Install NeoVim from source
 if [ ! -d $NVIM_REPO_PATH ]; then
@@ -48,23 +52,21 @@ cd $SCRIPT_DIR
 mkdir -pv $(dirname $NVIM_CONFIG_DIR_PATH_DST)
 ln -svfF $NVIM_CONFIG_DIR_PATH_SRC $NVIM_CONFIG_DIR_PATH_DST
 
-# Install Packer
-PACKER_PATH=$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim
-if [ ! -d $PACKER_PATH ]; then
-    git clone --depth 1 https://github.com/wbthomason/packer.nvim $PACKER_PATH
-else
-    echo 'Packer already installed.'
-    git -C $PACKER_PATH pull
-fi
 
+# NOTE: needed for pyright lsp.
 # set pyright config file to the current active venv by running the following:
 # ```
 # pyenv pyright
 # ```
-PYENV_PYRIGHT_PATH=$(pyenv root)/plugins/pyenv-pyright
 if [ ! -d $PYENV_PYRIGHT_PATH ]; then
     git clone https://github.com/alefpereira/pyenv-pyright.git $PYENV_PYRIGHT_PATH
 else
-    echo 'Packer already installed.'
+    echo 'Pyenv pyright already installed.'
     git -C $PYENV_PYRIGHT_PATH pull
 fi
+
+
+# Automatically install plugings before running nvim for the first time.
+# sudo launchctl limit maxfiles 65536 200000  # MacOS sets this value too low by default.
+nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+nvim --headless  # NOTE: This will hang. Quit after nothing has happened for a while and find a better way to do this.
