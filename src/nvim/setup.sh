@@ -29,6 +29,9 @@ brew install fzf
 brew install llvm  # Needed for ccls lsp
 brew install wget
 brew install go
+brew install rust
+brew install php
+brew install composer
 brew install pyenv
 brew install pyenv-virtualenv
 
@@ -67,6 +70,5 @@ fi
 
 
 # Automatically install plugings before running nvim for the first time.
-# sudo launchctl limit maxfiles 65536 200000  # MacOS sets this value too low by default.
 nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 nvim --headless  # NOTE: This will hang. Quit after nothing has happened for a while and find a better way to do this.

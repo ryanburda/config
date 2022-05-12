@@ -93,7 +93,8 @@ require("packer").startup(function(use)
     -- Highlighting & Colors
     use {
         'nvim-treesitter/nvim-treesitter',
-        config = function() require('plugins.treesitter').setup() end
+        config = function() require('plugins.treesitter').setup() end,
+        run = ':TSUpdate'
     }
     use {
         'sainnhe/everforest',
