@@ -44,6 +44,7 @@ vim.api.nvim_set_keymap('n', '<leader>h'      , ':bprevious<cr>'      , opts)
 vim.api.nvim_set_keymap('n', '<leader><S-Tab>', ':tabprevious<cr>'    , opts)
 vim.api.nvim_set_keymap('n', '<leader><Tab>'  , ':tabnext<cr>'        , opts)
 vim.api.nvim_set_keymap('n', '<leader>t'      , ':tab split<cr>'      , opts)
+vim.api.nvim_set_keymap('n', '<leader>v'      , 'V'                   , opts)
 vim.api.nvim_set_keymap('n', '<leader>b'      , '{v}'                 , opts)
 vim.api.nvim_set_keymap('n', '<leader>/'      , ':source $MYVIMRC<cr>', opts)
 vim.api.nvim_set_keymap('n', '<leader>;'      , ':split<cr><C-w>j'    , opts)
@@ -68,12 +69,12 @@ vim.api.nvim_set_keymap('n', '<leader>cf', ':cfirst<CR>', opts)
 vim.api.nvim_set_keymap('n', '<leader>cl', ':clast<CR>' , opts)
 
 -- :help location-list
-vim.api.nvim_set_keymap('n', '<leader>vo', ':lopen<CR>' , opts)
-vim.api.nvim_set_keymap('n', '<leader>vx', ':lclose<CR>', opts)
-vim.api.nvim_set_keymap('n', '<leader>vj', ':lnext<CR>' , opts)
-vim.api.nvim_set_keymap('n', '<leader>vk', ':lprev<CR>' , opts)
-vim.api.nvim_set_keymap('n', '<leader>vf', ':lfirst<CR>', opts)
-vim.api.nvim_set_keymap('n', '<leader>vl', ':llast<CR>' , opts)
+vim.api.nvim_set_keymap('n', '<leader>Co', ':lopen<CR>' , opts)
+vim.api.nvim_set_keymap('n', '<leader>Cx', ':lclose<CR>', opts)
+vim.api.nvim_set_keymap('n', '<leader>Cj', ':lnext<CR>' , opts)
+vim.api.nvim_set_keymap('n', '<leader>Ck', ':lprev<CR>' , opts)
+vim.api.nvim_set_keymap('n', '<leader>Cf', ':lfirst<CR>', opts)
+vim.api.nvim_set_keymap('n', '<leader>Cl', ':llast<CR>' , opts)
 
 -- Packer
 local install_path = vim.fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
