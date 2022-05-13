@@ -119,15 +119,6 @@ require("packer").startup(function(use)
     -- Luasnip
     use 'L3MON4D3/LuaSnip'
 
-    -- lsp
-    use {
-        "williamboman/nvim-lsp-installer",
-        {
-            "neovim/nvim-lspconfig",
-            config = function() require("plugins.lsp").setup() end
-        }
-    }
-
     -- Code completion
     use {
         'hrsh7th/nvim-cmp',
@@ -143,6 +134,16 @@ require("packer").startup(function(use)
     use 'hrsh7th/cmp-nvim-lua'
     use 'saadparwaiz1/cmp_luasnip'
     use 'ray-x/lsp_signature.nvim'
+
+    -- lsp
+    use {
+        "williamboman/nvim-lsp-installer",
+        {
+            "neovim/nvim-lspconfig",
+            requires = { "hrsh7th/cmp-nvim-lsp" },
+            config = function() require("plugins.lsp").setup() end
+        }
+    }
 
     -- Telescope
     use {

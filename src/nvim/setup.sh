@@ -71,4 +71,6 @@ fi
 
 # Automatically install plugings before running nvim for the first time.
 nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
-nvim --headless  # NOTE: This will hang. Quit after nothing has happened for a while and find a better way to do this.
+# This finishes installing treesitter/lsp related things that would otherwise happen the first time nvim is opened.
+# NOTE: This will hang! Quit after nothing has happened for a while and find a better way to do this.
+nvim --headless
