@@ -21,6 +21,8 @@ PYENV_PYTHON_VERSION="3.6.9"
 VENV_NAME="bde-airflow"
 pyenv install $PYENV_PYTHON_VERSION
 pyenv virtualenv $PYENV_PYTHON_VERSION $VENV_NAME
+
+# Activate the virtualenv when entering the following directories.
 echo $VENV_NAME > $REPO_DIR/.python-version
 echo $VENV_NAME > $SCRATCH_DIR/.python-version
 
