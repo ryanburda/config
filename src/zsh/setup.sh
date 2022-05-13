@@ -73,6 +73,7 @@ brew install pyenv-virtualenv
 brew install ttyrec
 brew install rlwrap
 brew install --cask google-cloud-sdk
+brew install lf
 
 
 # cloud-sql-proxy
