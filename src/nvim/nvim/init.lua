@@ -55,29 +55,29 @@ vim.api.nvim_set_keymap('n', '<leader>p'      , '<C-w>p'              , opts)  -
 vim.api.nvim_set_keymap('n', '<leader>n' , ':edit ~/Developer/scratch/notes/main.txt<cr>G$', opts)
 
 -- :help vim.diagnostic.*
-vim.api.nvim_set_keymap('n', '<leader>.f', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-vim.api.nvim_set_keymap('n', '<leader>.k', '<cmd>lua vim.diagnostic.goto_prev()<CR>' , opts)
-vim.api.nvim_set_keymap('n', '<leader>.j', '<cmd>lua vim.diagnostic.goto_next()<CR>' , opts)
-vim.api.nvim_set_keymap('n', '<leader>.l', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+vim.api.nvim_set_keymap('n', '<leader>Df', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+vim.api.nvim_set_keymap('n', '<leader>Dk', '<cmd>lua vim.diagnostic.goto_prev()<CR>' , opts)
+vim.api.nvim_set_keymap('n', '<leader>Dj', '<cmd>lua vim.diagnostic.goto_next()<CR>' , opts)
+vim.api.nvim_set_keymap('n', '<leader>Dl', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
 
 -- :help quickfix
-vim.api.nvim_set_keymap('n', '<leader>co', ':copen<CR>' , opts)
-vim.api.nvim_set_keymap('n', '<leader>cx', ':cclose<CR>', opts)
-vim.api.nvim_set_keymap('n', '<leader>cj', ':cnext<CR>' , opts)
-vim.api.nvim_set_keymap('n', '<leader>ck', ':cprev<CR>' , opts)
-vim.api.nvim_set_keymap('n', '<leader>cf', ':cfirst<CR>', opts)
-vim.api.nvim_set_keymap('n', '<leader>cl', ':clast<CR>' , opts)
+vim.api.nvim_set_keymap('n', '<leader>Ko', ':copen<CR>' , opts)
+vim.api.nvim_set_keymap('n', '<leader>Kx', ':cclose<CR>', opts)
+vim.api.nvim_set_keymap('n', '<leader>Kj', ':cnext<CR>' , opts)
+vim.api.nvim_set_keymap('n', '<leader>Kk', ':cprev<CR>' , opts)
+vim.api.nvim_set_keymap('n', '<leader>Kf', ':cfirst<CR>', opts)
+vim.api.nvim_set_keymap('n', '<leader>Kl', ':clast<CR>' , opts)
 
 -- :help location-list
-vim.api.nvim_set_keymap('n', '<leader>Co', ':lopen<CR>' , opts)
-vim.api.nvim_set_keymap('n', '<leader>Cx', ':lclose<CR>', opts)
-vim.api.nvim_set_keymap('n', '<leader>Cj', ':lnext<CR>' , opts)
-vim.api.nvim_set_keymap('n', '<leader>Ck', ':lprev<CR>' , opts)
-vim.api.nvim_set_keymap('n', '<leader>Cf', ':lfirst<CR>', opts)
-vim.api.nvim_set_keymap('n', '<leader>Cl', ':llast<CR>' , opts)
+vim.api.nvim_set_keymap('n', '<leader>Lo', ':lopen<CR>' , opts)
+vim.api.nvim_set_keymap('n', '<leader>Lx', ':lclose<CR>', opts)
+vim.api.nvim_set_keymap('n', '<leader>Lj', ':lnext<CR>' , opts)
+vim.api.nvim_set_keymap('n', '<leader>Lk', ':lprev<CR>' , opts)
+vim.api.nvim_set_keymap('n', '<leader>Lf', ':lfirst<CR>', opts)
+vim.api.nvim_set_keymap('n', '<leader>Ll', ':llast<CR>' , opts)
 
 -- Packer
-local install_path = vim.fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 local packer_bootstrap
 
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
