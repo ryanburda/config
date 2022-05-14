@@ -1,5 +1,5 @@
 #!/bin/zsh
-source src/zsh/setup.sh
-source src/dotfiles/setup.sh
-source src/tmux/setup.sh
-source src/nvim/setup.sh
+source zsh/setup.sh
+source tmux/setup.sh
+source nvim/setup.sh
+source dotfiles/setup.sh
