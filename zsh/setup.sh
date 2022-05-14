@@ -13,6 +13,8 @@ mkdir -p $HOME/Developer
 mkdir -p $HOME/Developer/scratch/notes
 mkdir -p $HOME/Developer/scratch/src
 
+# Set the default git pull strategy
+git config --global pull.ff only
 
 # Install oh my zsh
 if ! [ -d ~/.oh-my-zsh ]; then
