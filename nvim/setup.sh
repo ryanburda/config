@@ -4,15 +4,13 @@ SCRIPT_DIR=${0:a:h}
 NVIM_CONFIG_DIR_PATH_SRC="$SCRIPT_DIR/nvim"
 NVIM_CONFIG_DIR_PATH_DST="$HOME/.config"
 
-NVIM_DIR_PATH="$HOME/Developer/nvim"
-NVIM_REPO_PATH="$NVIM_DIR_PATH/neovim"
-NVIM_PLUGINS_DIR_PATH="$NVIM_DIR_PATH/plugins"  # this is for local plugin development
+SRC_DIR_PATH="$HOME/Developer/src"
+NVIM_REPO_PATH="$SRC_DIR_PATH/neovim"
 NVIM_INSTALL_DIR_PATH="$HOME/.local/bin/neovim"
 
 PYENV_PYRIGHT_PATH=$(pyenv root)/plugins/pyenv-pyright
 
-mkdir -p $NVIM_DIR_PATH
-mkdir -p $NVIM_PLUGINS_DIR_PATH
+mkdir -p $SRC_DIR_PATH
 mkdir -p $NVIM_INSTALL_DIR_PATH
 
 
