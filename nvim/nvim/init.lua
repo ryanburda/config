@@ -52,7 +52,7 @@ vim.api.nvim_set_keymap('n', '<leader>\''     , ':vsplit<cr><C-w>l'   , opts)
 vim.api.nvim_set_keymap('n', '<leader>p'      , '<C-w>p'              , opts)  -- previous split
 
 -- quick notes
-vim.api.nvim_set_keymap('n', '<leader>n' , ':edit ~/Developer/scratch/notes/main.txt<cr>G$', opts)
+vim.api.nvim_set_keymap('n', '<leader>n' , ':edit ~/Documents/main.txt<cr>G$', opts)
 
 -- :help vim.diagnostic.*
 vim.api.nvim_set_keymap('n', '<leader>Df', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
