@@ -21,7 +21,7 @@ T.setup = function()
         options = {
             icons_enabled = true,
             theme = 'auto',
-            component_separators = { left = '', right = ''},
+            component_separators = { left = '|', right = '|'},
             section_separators = { left = '', right = ''},
             disabled_filetypes = {},
             always_divide_middle = true,
@@ -30,7 +30,13 @@ T.setup = function()
         sections = {
             lualine_a = {'mode'},
             lualine_b = {'branch', 'diff', 'diagnostics'},
-            lualine_c = {'filename'},
+            lualine_c = {
+                {
+                    'filename',
+                    file_status = true,
+                    path = 1
+                }
+            },
             lualine_x = {lsp_status, lsp_extra},
             lualine_y = {'filetype'},
             lualine_z = {'progress', 'location'}
