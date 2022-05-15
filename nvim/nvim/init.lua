@@ -19,6 +19,9 @@ vim.opt.whichwrap = '<,>,h,l,[,]'
 vim.opt.timeoutlen = 1000
 vim.opt.updatetime = 100
 
+vim.cmd('set laststatus=3')
+vim.cmd('set noswapfile')
+
 -- command! BufOnly execute '%bdelete|edit #|normal `"'
 vim.api.nvim_create_user_command(
     'BufOnly',
