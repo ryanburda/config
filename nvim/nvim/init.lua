@@ -33,8 +33,8 @@ vim.g.maplocalleader = " "
 local opts = { noremap=true, silent=false }
 
 vim.api.nvim_set_keymap('n', 'Y'              , 'yy'                  , opts)
-vim.api.nvim_set_keymap('n', 'L'              , 'zLg$'                , opts)
-vim.api.nvim_set_keymap('n', 'H'              , 'zHg0'                , opts)
+vim.api.nvim_set_keymap('n', 'L'              , 'zLgm'                , opts)
+vim.api.nvim_set_keymap('n', 'H'              , 'zHgm'                , opts)
 vim.api.nvim_set_keymap('n', '<leader>w'      , ':w<cr>'              , opts)
 vim.api.nvim_set_keymap('n', '<leader>q'      , ':Bdelete<cr>'        , opts)
 vim.api.nvim_set_keymap('n', '<leader>Q'      , ':Bdelete!<cr>'       , opts)
