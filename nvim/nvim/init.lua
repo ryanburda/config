@@ -61,25 +61,25 @@ vim.api.nvim_set_keymap('n', '<leader>p'      , '<C-w>p'              , opts)  -
 vim.api.nvim_set_keymap('n', '<leader>n' , ':edit ~/Documents/main.txt<cr>G$', opts)
 
 -- :help vim.diagnostic.*
-vim.api.nvim_set_keymap('n', '<leader> df', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-vim.api.nvim_set_keymap('n', '<leader> dk', '<cmd>lua vim.diagnostic.goto_prev()<CR>' , opts)
-vim.api.nvim_set_keymap('n', '<leader> dj', '<cmd>lua vim.diagnostic.goto_next()<CR>' , opts)
-vim.api.nvim_set_keymap('n', '<leader> dl', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+vim.api.nvim_set_keymap('n', '<leader>if', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+vim.api.nvim_set_keymap('n', '<leader>ik', '<cmd>lua vim.diagnostic.goto_prev()<CR>' , opts)
+vim.api.nvim_set_keymap('n', '<leader>ij', '<cmd>lua vim.diagnostic.goto_next()<CR>' , opts)
+vim.api.nvim_set_keymap('n', '<leader>il', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
 
 -- :help quickfix
-vim.api.nvim_set_keymap('n', '<leader> ko', ':copen<CR>' , opts)
-vim.api.nvim_set_keymap('n', '<leader> kx', ':cclose<CR>', opts)
-vim.api.nvim_set_keymap('n', '<leader> kj', ':cnext<CR>' , opts)
-vim.api.nvim_set_keymap('n', '<leader> kk', ':cprev<CR>' , opts)
-vim.api.nvim_set_keymap('n', '<leader> kf', ':cfirst<CR>', opts)
-vim.api.nvim_set_keymap('n', '<leader> kl', ':clast<CR>' , opts)
+vim.api.nvim_set_keymap('n', '<leader>ko', ':copen<CR>' , opts)
+vim.api.nvim_set_keymap('n', '<leader>kx', ':cclose<CR>', opts)
+vim.api.nvim_set_keymap('n', '<leader>kj', ':cnext<CR>' , opts)
+vim.api.nvim_set_keymap('n', '<leader>kk', ':cprev<CR>' , opts)
+vim.api.nvim_set_keymap('n', '<leader>kf', ':cfirst<CR>', opts)
+vim.api.nvim_set_keymap('n', '<leader>kl', ':clast<CR>' , opts)
 
 -- :help location-list
-vim.api.nvim_set_keymap('n', '<leader> lo', ':lopen<CR>' , opts)
-vim.api.nvim_set_keymap('n', '<leader> lx', ':lclose<CR>', opts)
-vim.api.nvim_set_keymap('n', '<leader> lj', ':lnext<CR>' , opts)
-vim.api.nvim_set_keymap('n', '<leader> lk', ':lprev<CR>' , opts)
-vim.api.nvim_set_keymap('n', '<leader> lf', ':lfirst<CR>', opts)
-vim.api.nvim_set_keymap('n', '<leader> ll', ':llast<CR>' , opts)
+vim.api.nvim_set_keymap('n', '<leader>Ko', ':lopen<CR>' , opts)
+vim.api.nvim_set_keymap('n', '<leader>Kx', ':lclose<CR>', opts)
+vim.api.nvim_set_keymap('n', '<leader>Kj', ':lnext<CR>' , opts)
+vim.api.nvim_set_keymap('n', '<leader>Kk', ':lprev<CR>' , opts)
+vim.api.nvim_set_keymap('n', '<leader>Kf', ':lfirst<CR>', opts)
+vim.api.nvim_set_keymap('n', '<leader>Kl', ':llast<CR>' , opts)
 
 require('plugins')

@@ -1,12 +1,11 @@
 local on_attach = function(client, bufnr)
     -- mappings. See `:help vim.lsp.*` for documentation on any of the below functions.
     local opts = { noremap=true, silent=false}
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>j', '<cmd>lua vim.lsp.buf.definition()<CR>'     , opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>J', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>k', '<cmd>lua vim.lsp.buf.hover()<CR>'          , opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>K', '<cmd>lua vim.lsp.buf.signature_help()<CR>' , opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>r', '<cmd>lua vim.lsp.buf.rename()<CR>'         , opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'i', '<C-k>'    , '<cmd>lua vim.lsp.buf.signature_help()<CR>' , opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>jd', '<cmd>lua vim.lsp.buf.definition()<CR>'     , opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>jt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>jj', '<cmd>lua vim.lsp.buf.hover()<CR>'          , opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>jr', '<cmd>lua vim.lsp.buf.references()<CR>'     , opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rr', '<cmd>lua vim.lsp.buf.rename()<CR>'         , opts)
 
     -- show signature help using the ray-x/lsp_signature.nvim plugin
     require('lsp_signature').on_attach()
