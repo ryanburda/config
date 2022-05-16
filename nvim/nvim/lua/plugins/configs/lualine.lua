@@ -9,6 +9,7 @@ local lsp_status = function()
 end
 
 local lsp_extra = function()
+    -- This buffer variable exists for other LSPs to populate with relevant information.
     local str = ''
     if vim.lsp.buf_get_clients(0) then
         str = vim.api.nvim_buf_get_var(0, 'lsp_extra')
@@ -22,7 +23,7 @@ T.setup = function()
             icons_enabled = true,
             theme = 'auto',
             component_separators = { left = '|', right = '|'},
-            section_separators = { left = '', right = ''},
+            section_separators = { left = '', right = ''},
             disabled_filetypes = {},
             always_divide_middle = true,
             globalstatus = false,
