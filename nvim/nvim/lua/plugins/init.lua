@@ -132,6 +132,9 @@ require("packer").startup(function(use)
     -- commands on top of the sqls lsp
     use 'nanotee/sqls.nvim'
 
+    -- motion
+    use 'justinmk/vim-sneak'
+
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
     if packer_bootstrap then
