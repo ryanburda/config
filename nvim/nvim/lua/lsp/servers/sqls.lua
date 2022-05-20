@@ -99,7 +99,7 @@ T.on_attach = function(client, bufnr)
 
     T.sqls.on_attach(client, bufnr)
 
-    T.sqls.events.add_subscriber('connection_choice', function(event)
+    require('sqls.events').add_subscriber('connection_choice', function(event)
         local tbl = T.conn_string_to_tbl(event.choice)
         vim.api.nvim_buf_set_var(0, T.BUF_VAR_KEY_HOST, tbl['host'])
         vim.api.nvim_buf_set_var(0, T.BUF_VAR_KEY_DB, tbl['db'])
@@ -108,13 +108,13 @@ T.on_attach = function(client, bufnr)
         T.set_lsp_extra()
     end)
 
-    T.sqls.events.add_subscriber('database_choice', function(event)
+    require('sqls.events').add_subscriber('database_choice', function(event)
         vim.api.nvim_buf_set_var(0, T.BUF_VAR_KEY_DB, 'dbname=' .. event.choice)
         T.set_lsp_extra()
     end)
 
     -- Switch the connection to force a 'connection_choice' event which sets the lsp_extra buffer variable.
-    T.sqls.commands.switch_connection(1)
+    require('sqls.commands').switch_connection(1)
 
     local opts = { noremap=true, silent=false }
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>s ', ":SqlsExecuteQuery<cr>"    , opts)
