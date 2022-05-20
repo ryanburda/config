@@ -1,3 +1,10 @@
+vim.cmd([[
+    augroup packer_user_config
+        autocmd!
+        autocmd BufWritePost plugins/init.lua source <sfile> | PackerCompile
+    augroup end
+]])
+
 local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 local packer_bootstrap
 
@@ -38,33 +45,32 @@ require("packer").startup(function(use)
         config = function() require("plugins.configs.alpha").setup() end
     }
 
-    -- Luasnip
-    use 'L3MON4D3/LuaSnip'
-
-    -- Code completion
-    use {
-        'hrsh7th/nvim-cmp',
-        config = function() require('plugins.configs.cmp').setup() end
-    }
-    use {
-        'hrsh7th/cmp-nvim-lsp',
-        requires = 'hrsh7th/nvim-cmp'
-    }
-    use 'hrsh7th/cmp-buffer'
-    use 'hrsh7th/cmp-path'
-    use 'hrsh7th/cmp-cmdline'
-    use 'hrsh7th/cmp-nvim-lua'
-    use 'saadparwaiz1/cmp_luasnip'
-    use 'ray-x/lsp_signature.nvim'
-
     -- lsp
     use {
         "williamboman/nvim-lsp-installer",
         {
             "neovim/nvim-lspconfig",
-            requires = { "hrsh7th/cmp-nvim-lsp" },
+            requires = {
+                "hrsh7th/nvim-cmp"
+            },
             config = function() require("plugins.configs.lsp").setup() end
         }
+    }
+    use {
+        'hrsh7th/nvim-cmp',
+        requires = {
+            'hrsh7th/cmp-nvim-lsp',
+            'hrsh7th/cmp-buffer',
+            'hrsh7th/cmp-path',
+            'hrsh7th/cmp-cmdline',
+            'hrsh7th/cmp-nvim-lua',
+            'L3MON4D3/LuaSnip',
+            'saadparwaiz1/cmp_luasnip',
+            'ray-x/lsp_signature.nvim',
+            '~/Developer/src/nvim/plugins/lsp-status.nvim',
+            'nanotee/sqls.nvim',
+        },
+        config = function() require('plugins.configs.cmp').setup() end
     }
 
     -- Telescope
@@ -118,7 +124,6 @@ require("packer").startup(function(use)
         requires = { 'kyazdani42/nvim-web-devicons'},
         config = function() require('plugins.configs.lualine').setup() end
     }
-    use 'nvim-lua/lsp-status.nvim'
 
     -- Web Search
     use {
@@ -128,9 +133,6 @@ require("packer").startup(function(use)
 
     -- buffer deletion
     use 'famiu/bufdelete.nvim'
-
-    -- commands on top of the sqls lsp
-    use 'nanotee/sqls.nvim'
 
     -- motion
     use 'justinmk/vim-sneak'
@@ -142,10 +144,3 @@ require("packer").startup(function(use)
     end
 
 end)
-
-vim.cmd([[
-    augroup packer_user_config
-        autocmd!
-        autocmd BufWritePost plugins/init.lua source <sfile> | PackerCompile
-    augroup end
-]])

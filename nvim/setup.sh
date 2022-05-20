@@ -5,14 +5,15 @@ NVIM_CONFIG_DIR_PATH_SRC="$SCRIPT_DIR/nvim"
 NVIM_CONFIG_DIR_PATH_DST="$HOME/.config"
 
 SRC_DIR_PATH="$HOME/Developer/src"
-NVIM_REPO_PATH="$SRC_DIR_PATH/neovim"
+NVIM_REPO_PATH="$SRC_DIR_PATH/nvim/neovim"
+NVIM_PLUGINS_PATH="$SRC_DIR_PATH/nvim/plugins"  # empty directory where plugins can be installed and tested locally.
 NVIM_INSTALL_DIR_PATH="$HOME/.local/bin/neovim"
 
 PYENV_PYRIGHT_PATH=$(pyenv root)/plugins/pyenv-pyright
 
 mkdir -p $SRC_DIR_PATH
+mkdir -p $NVIM_PLUGINS_PATH
 mkdir -p $NVIM_INSTALL_DIR_PATH
-
 
 # Build prereqs
 xcode-select --install
@@ -24,7 +25,6 @@ brew install pkg-config
 brew install gettext
 brew install curl
 brew install fzf
-brew install llvm  # Needed for ccls lsp
 brew install wget
 brew install go
 brew install rust

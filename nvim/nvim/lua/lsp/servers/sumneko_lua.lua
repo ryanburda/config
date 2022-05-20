@@ -1,7 +1,9 @@
--- Returns a config for the sqls language server.
-local config = require('lsp.server_default')
+local T = {}
+T.default = require('lsp.server_default')
 
-config.settings = {
+-- Setup the config
+T.config = T.default.config
+T.config.settings = {
     Lua = {
         runtime = {
             -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
@@ -14,4 +16,4 @@ config.settings = {
     },
 }
 
-return config
+return T

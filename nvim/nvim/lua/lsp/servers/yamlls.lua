@@ -1,6 +1,9 @@
-local config = require('lsp.server_default')
+local T = {}
+T.default = require('lsp.server_default')
 
-config.settings = {
+-- Setup the config
+T.config = T.default.config
+T.config.settings = {
     yaml = {
         schemas = {
             ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "docker-compose.y*ml",
@@ -9,4 +12,4 @@ config.settings = {
     }
 }
 
-return config
+return T

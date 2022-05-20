@@ -20,10 +20,13 @@ T.setup = function()
     local lspconfig = require("lspconfig")
 
     for _, server in ipairs(servers) do
-        local status, config = pcall(require, "lsp/servers/" .. server)
+        local config
+        local status, r = pcall(require, "lsp/servers/" .. server)
 
-        if status == false then
-            config = require("lsp.server_default")
+        if status == true then
+            config = r.config
+        else
+            config = require("lsp.server_default").config
         end
 
         lspconfig[server].setup(config)
