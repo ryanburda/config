@@ -71,4 +71,4 @@ fi
 nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 # This finishes installing treesitter/lsp related things that would otherwise happen the first time nvim is opened.
 # NOTE: This will hang! Quit after nothing has happened for a while and find a better way to do this.
-nvim --headless
+# nvim --headless
