@@ -145,7 +145,7 @@ require("packer").startup(function(use)
     use {
         'ptzz/lf.vim',
         requires = 'voldikss/vim-floaterm',
-        config = function() require('lua.plugins.configs.lf').setup() end
+        config = function() require('plugins.configs.lf').setup() end
     }
 
     -- Automatically set up your configuration after cloning packer.nvim
