@@ -22,13 +22,6 @@ vim.opt.updatetime = 100
 vim.cmd('set laststatus=3')
 vim.cmd('set noswapfile')
 
--- command! BufOnly execute '%bdelete|edit #|normal `"'
-vim.api.nvim_create_user_command(
-    'BufOnly',
-    'execute \'%bdelete|edit#|normal`"\'',
-    {}
-)
-
 -- keymap
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
@@ -41,7 +34,7 @@ vim.api.nvim_set_keymap('n', 'H'              , 'zHgm'                , opts)
 vim.api.nvim_set_keymap('n', '<leader>w'      , ':w<cr>'              , opts)
 vim.api.nvim_set_keymap('n', '<leader>q'      , ':Bdelete<cr>'        , opts)
 vim.api.nvim_set_keymap('n', '<leader>Q'      , ':Bdelete!<cr>'       , opts)
-vim.api.nvim_set_keymap('n', '<leader>0'      , ':BufOnly<cr>'        , opts)
+vim.api.nvim_set_keymap('n', '<leader>0'      , ':%bd|e#|bd#<cr>'     , opts)  -- Delete all buffers but current
 vim.api.nvim_set_keymap('n', '<leader>z'      , ':noh<cr>'            , opts)
 vim.api.nvim_set_keymap('n', '<leader>x'      , ':q<cr>'              , opts)
 vim.api.nvim_set_keymap('n', '<leader>X'      , ':q!<cr>'             , opts)
