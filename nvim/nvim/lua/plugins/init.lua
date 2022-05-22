@@ -141,6 +141,13 @@ require("packer").startup(function(use)
     -- motion
     use 'justinmk/vim-sneak'
 
+    -- file explorer
+    use {
+        'ptzz/lf.vim',
+        requires = 'voldikss/vim-floaterm',
+        config = function() require('lua.plugins.configs.lf').setup() end
+    }
+
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
     if packer_bootstrap then
