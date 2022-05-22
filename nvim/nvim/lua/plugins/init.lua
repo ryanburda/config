@@ -95,6 +95,10 @@ require("packer").startup(function(use)
 
     -- Git
     use {
+        'kdheepak/lazygit.nvim',
+        config = function() require('plugins.configs.lazygit').setup() end
+    }
+    use {
         'tpope/vim-fugitive',
         config = function() require('plugins.configs.vim-fugitive').setup() end
     }

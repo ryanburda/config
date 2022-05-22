@@ -32,6 +32,7 @@ brew install php
 brew install composer
 brew install pyenv
 brew install pyenv-virtualenv
+brew install lazygit
 
 
 # Install NeoVim from source
