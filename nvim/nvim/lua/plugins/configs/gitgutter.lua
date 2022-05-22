@@ -1,6 +1,6 @@
 local T = {}
 
-T.setup = function()
+function T.setup()
     local opts = { noremap=true, silent=false }
 
     vim.g.gitgutter_map_keys = 0  -- don't use default key mappings

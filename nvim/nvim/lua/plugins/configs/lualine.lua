@@ -1,6 +1,6 @@
 local T = {}
 
-local lsp_status = function()
+local function lsp_status()
     local str = ''
     if vim.lsp.buf_get_clients(0) then
         str = require('lsp-status').status()
@@ -8,7 +8,7 @@ local lsp_status = function()
     return str
 end
 
-local lsp_extra = function()
+local function lsp_extra()
     -- This buffer variable exists for other LSPs to populate with relevant information.
     local str = ''
     if vim.lsp.buf_get_clients(0) then
@@ -17,7 +17,7 @@ local lsp_extra = function()
     return str
 end
 
-T.setup = function()
+function T.setup()
     require('lualine').setup {
         options = {
             icons_enabled = true,

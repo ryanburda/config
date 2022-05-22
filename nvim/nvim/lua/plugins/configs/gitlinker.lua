@@ -1,6 +1,6 @@
 local T = {}
 
-T.setup = function()
+function T.setup()
     local opts = { noremap=true, silent=false }
     -- NOTE: the extra 'v`<' at the end of the visual commands is used to exit visual mode and return to the top off
     -- the visual block.

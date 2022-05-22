@@ -1,6 +1,6 @@
 local T = {}
 
-T.setup = function()
+function T.setup()
     vim.g.tmux_navigator_no_mappings = 1
 
     -- navigation is handled by <C-hjkl> no matter if it is a tmux pane or a vim split.

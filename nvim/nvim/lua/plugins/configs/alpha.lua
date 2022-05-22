@@ -1,6 +1,6 @@
 local T = {}
 
-T.setup = function()
+function T.setup()
     local alpha = require('alpha')
     local dashboard = require('alpha.themes.dashboard')
 

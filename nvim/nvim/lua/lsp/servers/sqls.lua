@@ -11,7 +11,7 @@ T.BUF_VAR_KEY_USER = 'sqls_conn_user'
 T.BUF_VAR_KEY_LSP_EXTRA = 'lsp_extra'
 
 
-T.conn_string_to_tbl = function(str)
+function T.conn_string_to_tbl(str)
     -- converts the connection string returned from a sqls.nvim 'connection_choice' event into a table.
     -- NOTE: the connection string changes based on what was passed to dataSourceName when the sqls connection
     --       was created. This function is only guaranteed to work with connections that were created with the
@@ -31,7 +31,7 @@ T.conn_string_to_tbl = function(str)
     return tbl
 end
 
-T.set_lsp_extra = function()
+function T.set_lsp_extra()
     -- Reads the sqls specific buffer variables and sets the `lsp_extra` buffer variable.
     -- NOTE: Should be called after any of the `sqls` buffer variables are updated.
     local host = vim.api.nvim_buf_get_var(0, T.BUF_VAR_KEY_HOST) or ''
@@ -44,7 +44,7 @@ T.set_lsp_extra = function()
     vim.api.nvim_buf_set_var(0, T.BUF_VAR_KEY_LSP_EXTRA, str)
 end
 
-T.get_pgpass_connections = function(pgpass_path)
+function T.get_pgpass_connections(pgpass_path)
     -- Reads in a pgpass file and returns a connections table that the sqls language server expects.
     --
     -- The output of this function works for nvim-lspconfig.
@@ -94,7 +94,7 @@ T.get_pgpass_connections = function(pgpass_path)
     return connections
 end
 
-T.on_attach = function(client, bufnr)
+function T.on_attach(client, bufnr)
     T.default.on_attach(client, bufnr)
 
     T.sqls.on_attach(client, bufnr)

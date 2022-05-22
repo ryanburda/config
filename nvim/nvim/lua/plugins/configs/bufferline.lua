@@ -1,6 +1,6 @@
 local T = {}
 
-T.setup = function()
+function T.setup()
     vim.opt.termguicolors = true
     require('bufferline').setup{}
 end

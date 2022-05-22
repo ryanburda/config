@@ -1,6 +1,6 @@
 local T = {}
 
-T.setup = function()
+function T.setup()
     vim.cmd('colorscheme everforest')
 end
 

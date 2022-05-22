@@ -1,6 +1,6 @@
 local T = {}
 
-T.setup = function()
+function T.setup()
     vim.g.VtrStripLeadingWhitespace = 0
     vim.g.VtrClearEmptyLines = 0
     vim.g.VtrAppendNewline = 1
