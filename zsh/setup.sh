@@ -50,6 +50,10 @@ fi
 # open "$HOME/Downloads/Snazzy.itermcolors"
 curl -fLo "$HOME/Downloads/Everforest.itermcolors" https://raw.githubusercontent.com/icewind/everforest.iterm2/main/Everforest_hard_dark.itermcolors
 open "$HOME/Downloads/Everforest.itermcolors"
+curl -fLo "$HOME/Downloads/GruvboxDark.itermcolors" https://raw.githubusercontent.com/mbadolato/iTerm2-Color-Schemes/master/schemes/Gruvbox%20Dark.itermcolors
+open "$HOME/Downloads/GruvboxDark.itermcolors"
+curl -fLo "$HOME/Downloads/GruvboxLight.itermcolors" https://raw.githubusercontent.com/mbadolato/iTerm2-Color-Schemes/master/schemes/Gruvbox%20Light.itermcolors
+open "$HOME/Downloads/GruvboxLight.itermcolors"
 
 
 # Install Homebrew

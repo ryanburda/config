@@ -19,18 +19,16 @@ require("packer").startup(function(use)
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
 
-    -- Highlighting & Colors
+    -- Treesitter
     use {
         'nvim-treesitter/nvim-treesitter',
         config = require('plugins.configs.treesitter').setup,
         run = ':TSUpdate'
     }
-    use {
-        'sainnhe/everforest',
-        config = require('plugins.configs.everforest').setup
-    }
 
-    use '4513ECHO/vim-colors-hatsunemiku'
+    -- Color Schemes
+    use 'sainnhe/everforest'
+    use 'lifepillar/vim-gruvbox8'
 
     -- File explorer
     use {
