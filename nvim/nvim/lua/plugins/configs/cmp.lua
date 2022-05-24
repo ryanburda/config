@@ -31,9 +31,6 @@ function T.setup()
             { name = 'nvim_lua' },
             { name = 'cmdline' }
         }),
-        --completion = {
-        --    completeopt = 'menu,menuone,noinsert'
-        --},
     })
 
     -- Set configuration for specific filetype.
