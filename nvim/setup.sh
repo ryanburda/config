@@ -44,10 +44,9 @@ fi
 cd $NVIM_REPO_PATH
 echo 'Pulling neovim'
 git pull
-rm -r build/  # clear the CMake cache
 make CMAKE_BUILD_TYPE=RelWithDebInfo
 make CMAKE_INSTALL_PREFIX=$NVIM_INSTALL_DIR_PATH
-make install
+sudo make install
 export PATH="$NVIM_INSTALL_DIR_PATH/bin:$PATH"
 cd $SCRIPT_DIR
 
