@@ -85,4 +85,3 @@ vim.api.nvim_set_keymap('n', '<leader>cd', ':set background=dark<CR>'   , opts)
 vim.api.nvim_set_keymap('n', '<leader>cl', ':set background=light<CR>'  , opts)
 
 vim.cmd('colorscheme gruvbox8')
-vim.cmd('colorscheme everforest')

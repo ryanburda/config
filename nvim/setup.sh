@@ -33,7 +33,7 @@ brew install composer
 brew install pyenv
 brew install pyenv-virtualenv
 brew install lazygit
-
+brew install fd
 
 # Install NeoVim from source
 if [ ! -d $NVIM_REPO_PATH ]; then
@@ -45,7 +45,8 @@ cd $NVIM_REPO_PATH
 echo 'Pulling neovim'
 git pull
 rm -r build/  # clear the CMake cache
-make CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=$NVIM_INSTALL_DIR_PATH"
+make CMAKE_BUILD_TYPE=RelWithDebInfo
+make CMAKE_INSTALL_PREFIX=$NVIM_INSTALL_DIR_PATH
 make install
 export PATH="$NVIM_INSTALL_DIR_PATH/bin:$PATH"
 cd $SCRIPT_DIR
