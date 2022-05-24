@@ -28,14 +28,10 @@ vim.g.maplocalleader = " "
 
 local opts = { noremap=true, silent=false }
 
-vim.api.nvim_set_keymap('n', 'Y'              , 'yy'                  , opts)
-vim.api.nvim_set_keymap('n', 'L'              , 'zLgm'                , opts)
-vim.api.nvim_set_keymap('n', 'H'              , 'zHgm'                , opts)
 vim.api.nvim_set_keymap('n', '<leader>w'      , ':w<cr>'              , opts)
 vim.api.nvim_set_keymap('n', '<leader>q'      , ':Bdelete<cr>'        , opts)
 vim.api.nvim_set_keymap('n', '<leader>Q'      , ':Bdelete!<cr>'       , opts)
 vim.api.nvim_set_keymap('n', '<leader>0'      , ':%bd|e#|bd#<cr>'     , opts)  -- Delete all buffers but current
-vim.api.nvim_set_keymap('n', '<leader>z'      , ':noh<cr>'            , opts)
 vim.api.nvim_set_keymap('n', '<leader>x'      , ':q<cr>'              , opts)
 vim.api.nvim_set_keymap('n', '<leader>X'      , ':q!<cr>'             , opts)
 vim.api.nvim_set_keymap('n', '<leader>i'      , ':bprevious<cr>'      , opts)
@@ -46,9 +42,12 @@ vim.api.nvim_set_keymap('n', '<leader>t'      , ':tab split<cr>'      , opts)
 vim.api.nvim_set_keymap('n', '<leader>v'      , 'V'                   , opts)
 vim.api.nvim_set_keymap('n', '<leader>b'      , '{v}'                 , opts)
 vim.api.nvim_set_keymap('n', '<leader>/'      , ':source $MYVIMRC<cr>', opts)
-vim.api.nvim_set_keymap('n', '<leader>;'      , ':split<cr><C-w>j'    , opts)
-vim.api.nvim_set_keymap('n', '<leader>\''     , ':vsplit<cr><C-w>l'   , opts)
+vim.api.nvim_set_keymap('n', '<leader>J'      , ':split<cr><C-w>j'    , opts)
+vim.api.nvim_set_keymap('n', '<leader>L'      , ':vsplit<cr><C-w>l'   , opts)
 vim.api.nvim_set_keymap('n', '<leader>p'      , '<C-w>p'              , opts)  -- previous split
+vim.api.nvim_set_keymap('n', 'Y'              , 'yy'                  , opts)
+vim.api.nvim_set_keymap('n', 'L'              , 'zLgm'                , opts)
+vim.api.nvim_set_keymap('n', 'H'              , 'zHgm'                , opts)
 
 -- quick notes
 vim.api.nvim_set_keymap('n', '<leader>n' , ':edit ~/Documents/main.txt<cr>G$', opts)
@@ -79,9 +78,9 @@ require('plugins')
 
 -- Set colorscheme here
 vim.cmd('let g:everforest_background = "hard"')
-vim.api.nvim_set_keymap('n', '<leader>c1', ':colorscheme everforest<CR>', opts)
-vim.api.nvim_set_keymap('n', '<leader>c2', ':colorscheme gruvbox8<CR>'  , opts)
-vim.api.nvim_set_keymap('n', '<leader>cd', ':set background=dark<CR>'   , opts)
+vim.api.nvim_set_keymap('n', '<leader>ch', ':set background=dark<CR>'   , opts)
+vim.api.nvim_set_keymap('n', '<leader>cj', ':colorscheme everforest<CR>', opts)
+vim.api.nvim_set_keymap('n', '<leader>ck', ':colorscheme gruvbox8<CR>'  , opts)
 vim.api.nvim_set_keymap('n', '<leader>cl', ':set background=light<CR>'  , opts)
 
 vim.cmd('colorscheme gruvbox8')
