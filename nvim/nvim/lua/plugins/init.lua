@@ -22,12 +22,12 @@ require("packer").startup(function(use)
     -- Highlighting & Colors
     use {
         'nvim-treesitter/nvim-treesitter',
-        config = function() require('plugins.configs.treesitter').setup() end,
+        config = require('plugins.configs.treesitter').setup,
         run = ':TSUpdate'
     }
     use {
         'sainnhe/everforest',
-        config = function() require('plugins.configs.everforest').setup() end
+        config = require('plugins.configs.everforest').setup
     }
 
     use '4513ECHO/vim-colors-hatsunemiku'
@@ -36,13 +36,13 @@ require("packer").startup(function(use)
     use {
         'kyazdani42/nvim-tree.lua',
         requires = { 'kyazdani42/nvim-web-devicons' },
-        config = function() require('plugins.configs.nvim-tree').setup() end
+        config = require('plugins.configs.nvim-tree').setup
     }
 
     -- Greeter
     use {
         'goolord/alpha-nvim',
-        config = function() require("plugins.configs.alpha").setup() end
+        config = require("plugins.configs.alpha").setup
     }
 
     -- lsp
@@ -53,7 +53,7 @@ require("packer").startup(function(use)
             requires = {
                 "hrsh7th/nvim-cmp"
             },
-            config = function() require("plugins.configs.lsp").setup() end
+            config = require("plugins.configs.lsp").setup
         }
     }
     use {
@@ -70,7 +70,7 @@ require("packer").startup(function(use)
             '~/Developer/src/nvim/plugins/lsp-status.nvim',
             'nanotee/sqls.nvim',
         },
-        config = function() require('plugins.configs.cmp').setup() end
+        config = require('plugins.configs.cmp').setup
     }
 
     -- Telescope
@@ -80,40 +80,40 @@ require("packer").startup(function(use)
             'nvim-lua/plenary.nvim',
             {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
         },
-        config = function() require('plugins.configs.telescope').setup() end
+        config = require('plugins.configs.telescope').setup
     }
 
     -- Tmux
     use {
         'christoomey/vim-tmux-navigator',
-        config = function() require('plugins.configs.vim-tmux-navigator').setup() end
+        config = require('plugins.configs.vim-tmux-navigator').setup
     }
     use {
         'christoomey/vim-tmux-runner',
-        config = function() require('plugins.configs.vim-tmux-runner').setup() end
+        config = require('plugins.configs.vim-tmux-runner').setup
     }
 
     -- Git
     use {
         'kdheepak/lazygit.nvim',
-        config = function() require('plugins.configs.lazygit').setup() end
+        config = require('plugins.configs.lazygit').setup
     }
     use {
         'tpope/vim-fugitive',
-        config = function() require('plugins.configs.vim-fugitive').setup() end
+        config = require('plugins.configs.vim-fugitive').setup
     }
     use {
         'airblade/vim-gitgutter',
-        config = function() require('plugins.configs.gitgutter').setup() end
+        config = require('plugins.configs.gitgutter').setup
     }
     use {
         'ruifm/gitlinker.nvim',
-        config = function() require('plugins.configs.gitlinker').setup() end
+        config = require('plugins.configs.gitlinker').setup
     }
     use {
         'sindrets/diffview.nvim',
         requires = 'nvim-lua/plenary.nvim',
-        config = function() require('plugins.configs.diffview').setup() end
+        config = require('plugins.configs.diffview').setup
     }
 
     -- Status line
@@ -121,18 +121,18 @@ require("packer").startup(function(use)
         'akinsho/bufferline.nvim',
         tag = "*",
         requires = 'kyazdani42/nvim-web-devicons',
-        config = function() require('plugins.configs.bufferline').setup() end
+        config = require('plugins.configs.bufferline').setup
     }
     use {
         'nvim-lualine/lualine.nvim',
         requires = { 'kyazdani42/nvim-web-devicons'},
-        config = function() require('plugins.configs.lualine').setup() end
+        config = require('plugins.configs.lualine').setup
     }
 
     -- Web Search
     use {
         'voldikss/vim-browser-search',
-        config = function() require('plugins.configs.vim-browser-search').setup() end
+        config = require('plugins.configs.vim-browser-search').setup
     }
 
     -- buffer deletion
@@ -145,7 +145,7 @@ require("packer").startup(function(use)
     use {
         'ptzz/lf.vim',
         requires = 'voldikss/vim-floaterm',
-        config = function() require('plugins.configs.lf').setup() end
+        config = require('plugins.configs.lf').setup
     }
 
     -- Automatically set up your configuration after cloning packer.nvim
