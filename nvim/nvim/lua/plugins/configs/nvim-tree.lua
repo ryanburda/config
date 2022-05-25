@@ -1,12 +1,13 @@
 local T = {}
 
 function T.setup()
-    -- mappings
+
     local opts = { noremap=true, silent=true }
     vim.api.nvim_set_keymap('n', '<leader>at', ':NvimTreeFocus<CR>', opts)
     vim.api.nvim_set_keymap('n', '<leader>ax', ':NvimTreeClose<CR>', opts)
 
-    -- setup
+    vim.cmd("let g:nvim_tree_show_icons = {'git': 0, 'folders': 1, 'files': 1, 'folder_arrows': 1 }")
+
     require('nvim-tree').setup({
         update_cwd = false,
         hijack_cursor = true,
@@ -14,8 +15,8 @@ function T.setup()
             enable = true,
             update_cwd = true,
         },
-        git = { enable = false }
     })
+
 end
 
 return T
