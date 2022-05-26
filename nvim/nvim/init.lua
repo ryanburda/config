@@ -79,9 +79,9 @@ require('plugins')
 
 -- Set colorscheme here
 vim.cmd('let g:everforest_background = "hard"')
-vim.api.nvim_set_keymap('n', '<leader>ch', ':set background=dark<CR>'   , opts)
-vim.api.nvim_set_keymap('n', '<leader>cj', ':colorscheme everforest<CR>', opts)
-vim.api.nvim_set_keymap('n', '<leader>ck', ':colorscheme gruvbox8<CR>'  , opts)
-vim.api.nvim_set_keymap('n', '<leader>cl', ':set background=light<CR>'  , opts)
+vim.api.nvim_set_keymap('n', '<leader>ch', ':set background=dark<CR>'      , opts)
+vim.api.nvim_set_keymap('n', '<leader>cj', ':colorscheme gruvbox8_hard<CR>', opts)
+vim.api.nvim_set_keymap('n', '<leader>ck', ':colorscheme everforest<CR>'   , opts)
+vim.api.nvim_set_keymap('n', '<leader>cl', ':set background=light<CR>'     , opts)
 
-vim.cmd('colorscheme gruvbox8')
+vim.cmd('colorscheme gruvbox8_hard')
