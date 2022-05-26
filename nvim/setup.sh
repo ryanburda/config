@@ -15,26 +15,6 @@ mkdir -p $SRC_DIR_PATH
 mkdir -p $NVIM_PLUGINS_PATH
 mkdir -p $NVIM_INSTALL_DIR_PATH
 
-# Build prereqs
-xcode-select --install
-brew install ninja
-brew install libtool
-brew install automake
-brew install cmake
-brew install pkg-config
-brew install gettext
-brew install curl
-brew install fzf
-brew install wget
-brew install go
-brew install rust
-brew install php
-brew install composer
-brew install pyenv
-brew install pyenv-virtualenv
-brew install lazygit
-brew install fd
-
 # Install NeoVim from source
 if [ ! -d $NVIM_REPO_PATH ]; then
     echo 'Cloning neovim'
@@ -67,9 +47,5 @@ else
     git -C $PYENV_PYRIGHT_PATH pull
 fi
 
-
 # Automatically install plugings before running nvim for the first time.
 nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
-# This finishes installing treesitter/lsp related things that would otherwise happen the first time nvim is opened.
-# NOTE: This will hang! Quit after nothing has happened for a while and find a better way to do this.
-# nvim --headless

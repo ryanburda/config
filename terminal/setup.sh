@@ -22,18 +22,35 @@ then
 fi
 
 # Install common dependencies
+xcode-select --install
+
 brew install tmux
 brew install tmate
 brew install tmuxinator
 
+brew install ninja
+brew install libtool
+brew install automake
+brew install cmake
+brew install pkg-config
+brew install gettext
+brew install curl
+brew install fzf
+brew install wget
+brew install go
+brew install rust
+brew install php
+brew install composer
+brew install pyenv
+brew install pyenv-virtualenv
+brew install lazygit
+brew install fd
 brew install tig
 brew install htop
 brew install node
 brew install lua
 brew install ripgrep
 brew install jq
-brew install pyenv
-brew install pyenv-virtualenv
 brew install ttyrec
 brew install rlwrap
 brew install lf
