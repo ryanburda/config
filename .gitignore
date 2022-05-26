@@ -1,2 +1,3 @@
 .DS_Store
 nvim/nvim/plugin/*
+terminal/dotfiles/kitty.conf.bak
