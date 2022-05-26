@@ -43,7 +43,7 @@ require("packer").startup(function(use)
         config = require("plugins.configs.alpha").setup
     }
 
-    -- lsp
+    -- LSP
     use {
         "williamboman/nvim-lsp-installer",
         {
@@ -133,11 +133,21 @@ require("packer").startup(function(use)
         config = require('plugins.configs.vim-browser-search').setup
     }
 
-    -- buffer deletion
+    -- Highlight all occurrences of word under cursor
+    use 'RRethy/vim-illuminate'
+
+    -- Buffer deletion
     use 'famiu/bufdelete.nvim'
 
-    -- motion
+    -- Motion
     use 'justinmk/vim-sneak'
+
+    -- Scrolling
+    use 'dstein64/nvim-scrollview'
+    use {
+        'karb94/neoscroll.nvim',
+        config = function() require('neoscroll').setup() end
+    }
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins

@@ -41,7 +41,7 @@ function T.setup()
             },
             lualine_x = {lsp_status, lsp_extra},
             lualine_y = {'filetype'},
-            lualine_z = {'progress', 'location'}
+            lualine_z = {'location'}
         },
         tabline = {},
         extensions = {},
