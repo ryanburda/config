@@ -1,3 +1,7 @@
+# zsh profiling
+# Uncomment the next line and the line at the bottom of this file to profile zsh startup
+# zmodload zsh/zprof
+
 # Automatically start a tmux session
 # if [ "$TMUX" = "" ]; then tmux; fi
 
@@ -171,3 +175,7 @@ source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/compl
 path+=$HOME/.pyenv/bin
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
+
+# zsh profiling
+# Uncomment the next line and the line at the top of this file to profile zsh startup
+# zprof
