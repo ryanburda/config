@@ -29,6 +29,7 @@ function T.setup()
             always_divide_middle = true,
             globalstatus = false,
         },
+        extensions = {},
         sections = {
             lualine_a = {'mode'},
             lualine_b = {'branch', 'diff'},
@@ -37,14 +38,13 @@ function T.setup()
                     'filename',
                     file_status = true,
                     path = 1
-                }
+                },
             },
-            lualine_x = {lsp_status, lsp_extra},
-            lualine_y = {'filetype'},
-            lualine_z = {'location'}
+            lualine_x = {lsp_extra},
+            lualine_y = {lsp_status},
+            lualine_z = {'location'},
         },
         tabline = {},
-        extensions = {},
     }
 end
 

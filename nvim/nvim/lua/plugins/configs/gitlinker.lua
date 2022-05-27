@@ -18,13 +18,13 @@ function T.setup()
     )
     vim.api.nvim_set_keymap(
         "n",
-        "<leader>go",
+        "<leader>gh",
         "<cmd>lua require('gitlinker').get_buf_range_url('n', {action_callback = require('gitlinker.actions').open_in_browser})<cr>",
         opts
     )
     vim.api.nvim_set_keymap(
         "v",
-        "<leader>go",
+        "<leader>gh",
         "<cmd>lua require('gitlinker').get_buf_range_url('v', {action_callback = require('gitlinker.actions').open_in_browser})<cr>v`<",
         opts
     )

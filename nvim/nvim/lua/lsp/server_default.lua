@@ -12,9 +12,9 @@ function T.setup_keymaps(bufnr)
     local opts = { noremap=true, silent=false}
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>jj', '<cmd>lua vim.lsp.buf.definition()<CR>'     , opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>jt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>jk', '<cmd>lua vim.lsp.buf.hover()<CR>'          , opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>jo', '<cmd>lua vim.lsp.buf.references()<CR>'     , opts)  -- 'jo' - jump to occurrences
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ha', '<cmd>lua vim.lsp.buf.code_action()<CR>'    , opts)  -- 'h' is diagnostics 'a' for action
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>jh', '<cmd>lua vim.lsp.buf.hover()<CR>'          , opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>jk', '<cmd>lua vim.lsp.buf.references()<CR>'     , opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ha', '<cmd>lua vim.lsp.buf.code_action()<CR>'    , opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rr', '<cmd>lua vim.lsp.buf.rename()<CR>'         , opts)
 end
 
