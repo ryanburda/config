@@ -29,7 +29,6 @@ function T.setup()
     require("telescope").setup({
         defaults = {
             file_sorter = sorters.get_fzy_sorter,
-            prompt_prefix = " >",
             color_devicons = true,
 
             file_previewer = previewers.vim_buffer_cat.new,

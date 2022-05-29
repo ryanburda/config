@@ -59,6 +59,7 @@ vim.api.nvim_set_keymap('n', '<leader>hj', '<cmd>lua vim.diagnostic.goto_next()<
 vim.api.nvim_set_keymap('n', '<leader>hk', '<cmd>lua vim.diagnostic.goto_prev()<CR>' , opts)
 vim.api.nvim_set_keymap('n', '<leader>hl', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
 
+-- :help quickfix
 vim.cmd([[
 function!   QuickFixOpenAll()
     if empty(getqflist())
@@ -75,15 +76,14 @@ function!   QuickFixOpenAll()
 endfunction
 ]])
 
--- :help quickfix
-vim.api.nvim_set_keymap('n', '<leader>ko', ':copen<CR>'   , opts)
-vim.api.nvim_set_keymap('n', '<leader>kx', ':cclose<CR>'  , opts)
-vim.api.nvim_set_keymap('n', '<leader>kh', ':cfirst<CR>'  , opts)
-vim.api.nvim_set_keymap('n', '<leader>kj', ':cnext<CR>'   , opts)
-vim.api.nvim_set_keymap('n', '<leader>kk', ':cprev<CR>'   , opts)
-vim.api.nvim_set_keymap('n', '<leader>kl', ':clast<CR>'   , opts)
-vim.api.nvim_set_keymap('n', '<leader>kc', ':cexpr []<CR>', opts)  -- clear quickfix list
-vim.api.nvim_set_keymap('n', '<leader>ka', ':call QuickFixOpenAll()<CR>', opts)  -- clear quickfix list
+vim.api.nvim_set_keymap('n', '<leader>ko', ':copen<CR>'                 , opts)
+vim.api.nvim_set_keymap('n', '<leader>kx', ':cclose<CR>'                , opts)
+vim.api.nvim_set_keymap('n', '<leader>kh', ':cfirst<CR>'                , opts)
+vim.api.nvim_set_keymap('n', '<leader>kj', ':cnext<CR>'                 , opts)
+vim.api.nvim_set_keymap('n', '<leader>kk', ':cprev<CR>'                 , opts)
+vim.api.nvim_set_keymap('n', '<leader>kl', ':clast<CR>'                 , opts)
+vim.api.nvim_set_keymap('n', '<leader>ka', ':call QuickFixOpenAll()<CR>', opts)  -- open all files in quickfix list
+vim.api.nvim_set_keymap('n', '<leader>kc', ':cexpr []<CR>'              , opts)  -- clear quickfix list
 
 -- :help location-list
 vim.api.nvim_set_keymap('n', '<leader>lo', ':lopen<CR>'   , opts)
