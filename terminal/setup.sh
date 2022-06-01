@@ -57,6 +57,7 @@ brew install lf
 
 brew tap homebrew/cask-fonts
 brew install --cask font-hack-nerd-font 
+brew install --cask font-jetbrains-mono
 
 
 # Create bin directory
