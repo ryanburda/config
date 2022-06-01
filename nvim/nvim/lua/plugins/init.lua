@@ -46,13 +46,14 @@ require("packer").startup(function(use)
     -- LSP
     use {
         "williamboman/nvim-lsp-installer",
-        {
-            "neovim/nvim-lspconfig",
-            requires = {
-                "hrsh7th/nvim-cmp"
-            },
-            config = require("plugins.configs.lsp").setup
-        }
+        requires = { "neovim/nvim-lspconfig" }
+    }
+    use {
+        "neovim/nvim-lspconfig",
+        requires = {
+            "hrsh7th/nvim-cmp",
+        },
+        config = require("plugins.configs.lsp").setup
     }
     use {
         'hrsh7th/nvim-cmp',
@@ -71,6 +72,18 @@ require("packer").startup(function(use)
         config = require('plugins.configs.cmp').setup
     }
 
+    -- Debugger
+    use {
+        'mfussenegger/nvim-dap',
+        requires = {
+            'nvim-treesitter/nvim-treesitter',
+            'theHamsta/nvim-dap-virtual-text',
+            'rcarriga/nvim-dap-ui',
+            'mfussenegger/nvim-dap-python',
+        },
+        config = require('plugins.configs.nvim-dap').setup
+    }
+
     -- Telescope
     use {
         'nvim-telescope/telescope.nvim',
@@ -79,6 +92,19 @@ require("packer").startup(function(use)
             {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
         },
         config = require('plugins.configs.telescope').setup
+    }
+
+    -- Not sure if I'm gonna use this one.
+    use {
+      "folke/trouble.nvim",
+      requires = "kyazdani42/nvim-web-devicons",
+      config = function()
+        require("trouble").setup {
+          -- your configuration comes here
+          -- or leave it empty to use the default settings
+          -- refer to the configuration section below
+        }
+      end
     }
 
     -- Tmux
