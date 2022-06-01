@@ -77,8 +77,14 @@ require("packer").startup(function(use)
         'mfussenegger/nvim-dap',
         requires = {
             'nvim-treesitter/nvim-treesitter',
-            'theHamsta/nvim-dap-virtual-text',
-            'rcarriga/nvim-dap-ui',
+            {
+                'rcarriga/nvim-dap-ui',
+                config = function() require("dapui").setup() end
+            },
+            {
+                'theHamsta/nvim-dap-virtual-text',
+                config = function() require("nvim-dap-virtual-text").setup() end
+            },
             'mfussenegger/nvim-dap-python',
         },
         config = require('plugins.configs.nvim-dap').setup
@@ -89,7 +95,9 @@ require("packer").startup(function(use)
         'nvim-telescope/telescope.nvim',
         requires = {
             'nvim-lua/plenary.nvim',
-            {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+            {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
+            'mfussenegger/nvim-dap',
+            'nvim-telescope/telescope-dap.nvim',
         },
         config = require('plugins.configs.telescope').setup
     }

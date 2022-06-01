@@ -21,6 +21,15 @@ function T.setup()
     vim.api.nvim_set_keymap("n", "<leader>fa", "<cmd>lua require('plugins.configs.telescope').ff_home()<cr>", opts)
     vim.api.nvim_set_keymap("n", "<leader>fs", "<cmd>lua require('plugins.configs.telescope').lg_home()<cr>", opts)
 
+    -- debugger
+    require("telescope").load_extension("dap")
+    vim.api.nvim_set_keymap("n", "<leader>fub", "<cmd>lua require('telescope').extensions.dap.list_breakpoints()<cr>", opts)
+    vim.api.nvim_set_keymap("n", "<leader>fuv", "<cmd>lua require('telescope').extensions.dap.variables()<cr>"       , opts)
+    vim.api.nvim_set_keymap("n", "<leader>fuf", "<cmd>lua require('telescope').extensions.dap.frames()<cr>"          , opts)
+    vim.api.nvim_set_keymap("n", "<leader>fu?", "<cmd>lua require('telescope').extensions.dap.commands()<cr>"        , opts)
+
+    require("telescope").load_extension("fzf")
+
     -- setup
     local previewers = require("telescope.previewers")
     local actions = require("telescope.actions")
@@ -49,8 +58,6 @@ function T.setup()
             },
         },
     })
-
-    require("telescope").load_extension("fzf")
 
     local M = {}
 
