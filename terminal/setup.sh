@@ -19,6 +19,7 @@ then
     brew install --cask alfred
     brew install --cask rectangle
     brew install --cask spotify
+    brew install --cask utm
 fi
 
 # Install common dependencies
