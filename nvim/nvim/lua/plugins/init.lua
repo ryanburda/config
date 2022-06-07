@@ -29,6 +29,7 @@ require("packer").startup(function(use)
     -- Color Schemes
     use 'sainnhe/everforest'
     use 'lifepillar/vim-gruvbox8'
+    use 'JaySandhu/xcode-vim'
 
     -- File explorer
     use {
