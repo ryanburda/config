@@ -100,7 +100,7 @@ require('plugins')
 vim.cmd('let g:everforest_background = "hard"')
 vim.api.nvim_set_keymap('n', '<leader>c1', ':colorscheme gruvbox8_hard<CR>', opts)
 vim.api.nvim_set_keymap('n', '<leader>c2', ':colorscheme everforest<CR>'   , opts)
-vim.api.nvim_set_keymap('n', '<leader>c3', ':colorscheme xcode<CR>'        , opts)
+vim.api.nvim_set_keymap('n', '<leader>c3', ':colorscheme xcodelighthc<CR>' , opts)
 vim.api.nvim_set_keymap('n', '<leader>cl', ':set background=light<CR>'     , opts)
 vim.api.nvim_set_keymap('n', '<leader>cd', ':set background=dark<CR>'      , opts)
 
