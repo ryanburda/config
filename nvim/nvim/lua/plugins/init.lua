@@ -26,6 +26,8 @@ require("packer").startup(function(use)
         run = ':TSUpdate'
     }
 
+    use 'nvim-treesitter/nvim-treesitter-context'
+
     -- Color Schemes
     use 'sainnhe/everforest'
     use 'lifepillar/vim-gruvbox8'
@@ -99,6 +101,7 @@ require("packer").startup(function(use)
             {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
             'mfussenegger/nvim-dap',
             'nvim-telescope/telescope-dap.nvim',
+            {'Zane-/howdoi.nvim', config = require('plugins.configs.nvim-dap').setup},
         },
         config = require('plugins.configs.telescope').setup
     }

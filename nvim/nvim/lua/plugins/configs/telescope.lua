@@ -28,6 +28,9 @@ function T.setup()
     vim.api.nvim_set_keymap("n", "<leader>fuf", "<cmd>lua require('telescope').extensions.dap.frames()<cr>"          , opts)
     vim.api.nvim_set_keymap("n", "<leader>fu?", "<cmd>lua require('telescope').extensions.dap.commands()<cr>"        , opts)
 
+    require('telescope').load_extension('howdoi')
+    vim.api.nvim_set_keymap("n", "<leader>f;", ":Telescope howdoi<cr>", opts)
+
     require("telescope").load_extension("fzf")
 
     -- setup

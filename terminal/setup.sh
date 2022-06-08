@@ -55,6 +55,7 @@ brew install jq
 brew install ttyrec
 brew install rlwrap
 brew install lf
+brew install howdoi
 
 brew tap homebrew/cask-fonts
 brew install --cask font-hack-nerd-font 
