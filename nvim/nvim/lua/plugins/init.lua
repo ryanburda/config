@@ -31,7 +31,7 @@ require("packer").startup(function(use)
     -- Color Schemes
     use 'sainnhe/everforest'
     use 'lifepillar/vim-gruvbox8'
-    use 'arzg/vim-colors-xcode'
+    use 'folke/tokyonight.nvim'
 
     -- File explorer
     use {
@@ -163,6 +163,12 @@ require("packer").startup(function(use)
         'nvim-lualine/lualine.nvim',
         requires = { 'kyazdani42/nvim-web-devicons'},
         config = require('plugins.configs.lualine').setup
+    }
+
+    -- term
+    use {
+        'voldikss/vim-floaterm',
+        config = require('plugins.configs.vim-floaterm').setup
     }
 
     -- Web Search

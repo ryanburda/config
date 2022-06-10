@@ -117,10 +117,12 @@ function T.on_attach(client, bufnr)
     require('sqls.commands').switch_connection(1)
 
     local opts = { noremap=true, silent=false }
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>s ', ":SqlsExecuteQueryVertical<cr>"    , opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'v', '<leader>s ', ":SqlsExecuteQueryVertical<cr>"    , opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>sc', ":SqlsSwitchConnection<cr>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>sd', ":SqlsSwitchDatabase<cr>"  , opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>s ', ":SqlsExecuteQuery<cr>"        , opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'v', '<leader>s ', ":SqlsExecuteQuery<cr>"        , opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>sj', ":SqlsExecuteQueryVertical<cr>", opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'v', '<leader>sj', ":SqlsExecuteQueryVertical<cr>", opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>sc', ":SqlsSwitchConnection<cr>"    , opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>sd', ":SqlsSwitchDatabase<cr>"      , opts)
 
 end
 
