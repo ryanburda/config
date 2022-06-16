@@ -12,7 +12,7 @@ function T.setup()
         hijack_cursor = true,
         update_focused_file = {
             enable = true,
-            update_cwd = true,
+            update_cwd = false,
         },
         renderer = {
             icons = {

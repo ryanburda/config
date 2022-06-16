@@ -56,6 +56,8 @@ brew install ttyrec
 brew install rlwrap
 brew install lf
 brew install howdoi
+brew install kubectl
+brew install kubectx
 
 brew tap homebrew/cask-fonts
 brew install --cask font-hack-nerd-font 
