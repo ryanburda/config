@@ -16,14 +16,11 @@ mkdir -p $NVIM_PLUGINS_PATH
 mkdir -p $NVIM_INSTALL_DIR_PATH
 
 # Install NeoVim from source
-if [ ! -d $NVIM_REPO_PATH ]; then
-    echo 'Cloning neovim'
-    git clone git@github.com:neovim/neovim.git $NVIM_REPO_PATH
-fi
+sudo rm -rf $NVIM_REPO_PATH
+echo 'Cloning neovim'
+git clone git@github.com:neovim/neovim.git $NVIM_REPO_PATH
 
 cd $NVIM_REPO_PATH
-echo 'Pulling neovim'
-git pull
 make CMAKE_BUILD_TYPE=RelWithDebInfo
 make CMAKE_INSTALL_PREFIX=$NVIM_INSTALL_DIR_PATH
 sudo make install
