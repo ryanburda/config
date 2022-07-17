@@ -104,5 +104,5 @@ vim.api.nvim_set_keymap('n', '<leader>c3', ':colorscheme tokyonight<CR>'   , opt
 vim.api.nvim_set_keymap('n', '<leader>cl', ':set background=light<CR>'     , opts)
 vim.api.nvim_set_keymap('n', '<leader>cd', ':set background=dark<CR>'      , opts)
 
-vim.cmd('colorscheme tokyonight')
-vim.cmd('set background=light')
+vim.cmd('colorscheme gruvbox8_hard')
+vim.cmd('set background=dark')
