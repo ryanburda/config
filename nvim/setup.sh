@@ -1,5 +1,4 @@
 #!/bin/zsh
-
 SCRIPT_DIR=${0:a:h}
 NVIM_CONFIG_DIR_PATH_SRC="$SCRIPT_DIR/nvim"
 NVIM_CONFIG_DIR_PATH_DST="$HOME/.config"
@@ -8,8 +7,6 @@ SRC_DIR_PATH="$HOME/Developer/src"
 NVIM_REPO_PATH="$SRC_DIR_PATH/nvim/neovim"
 NVIM_PLUGINS_PATH="$SRC_DIR_PATH/nvim/plugins"  # empty directory where plugins can be installed and tested locally.
 NVIM_INSTALL_DIR_PATH="$HOME/.local/bin/neovim"
-
-PYENV_PYRIGHT_PATH=$(pyenv root)/plugins/pyenv-pyright
 
 mkdir -p $SRC_DIR_PATH
 mkdir -p $NVIM_PLUGINS_PATH
@@ -31,12 +28,12 @@ cd $SCRIPT_DIR
 mkdir -pv $(dirname $NVIM_CONFIG_DIR_PATH_DST)
 ln -svfF $NVIM_CONFIG_DIR_PATH_SRC $NVIM_CONFIG_DIR_PATH_DST
 
-
 # NOTE: needed for pyright lsp.
 # set pyright config file to the current active venv by running the following:
 # ```
 # pyenv pyright
 # ```
+PYENV_PYRIGHT_PATH=$(pyenv root)/plugins/pyenv-pyright
 if [ ! -d $PYENV_PYRIGHT_PATH ]; then
     git clone https://github.com/alefpereira/pyenv-pyright.git $PYENV_PYRIGHT_PATH
 else
