@@ -76,22 +76,22 @@ require("packer").startup(function(use)
     }
 
     -- Debugger
-    use {
-        'mfussenegger/nvim-dap',
-        requires = {
-            'nvim-treesitter/nvim-treesitter',
-            {
-                'rcarriga/nvim-dap-ui',
-                config = function() require("dapui").setup() end
-            },
-            {
-                'theHamsta/nvim-dap-virtual-text',
-                config = function() require("nvim-dap-virtual-text").setup() end
-            },
-            'mfussenegger/nvim-dap-python',
-        },
-        config = require('plugins.configs.nvim-dap').setup
-    }
+    --use {
+    --    'mfussenegger/nvim-dap',
+    --    requires = {
+    --        'nvim-treesitter/nvim-treesitter',
+    --        {
+    --            'rcarriga/nvim-dap-ui',
+    --            config = function() require("dapui").setup() end
+    --        },
+    --        {
+    --            'theHamsta/nvim-dap-virtual-text',
+    --            config = function() require("nvim-dap-virtual-text").setup() end
+    --        },
+    --        'mfussenegger/nvim-dap-python',
+    --    },
+    --    config = require('plugins.configs.nvim-dap').setup
+    --}
 
     -- Telescope
     use {
@@ -99,9 +99,9 @@ require("packer").startup(function(use)
         requires = {
             'nvim-lua/plenary.nvim',
             {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
-            'mfussenegger/nvim-dap',
-            'nvim-telescope/telescope-dap.nvim',
-            {'Zane-/howdoi.nvim', config = require('plugins.configs.nvim-dap').setup},
+            --'mfussenegger/nvim-dap',
+            --'nvim-telescope/telescope-dap.nvim',
+            --{'Zane-/howdoi.nvim', config = require('plugins.configs.nvim-dap').setup},
         },
         config = require('plugins.configs.telescope').setup
     }
