@@ -106,7 +106,7 @@ require("packer").startup(function(use)
         config = require('plugins.configs.telescope').setup
     }
 
-    -- Not sure if I'm gonna use this one.
+    -- pretty list of diagnostics, lsp, quickfix list, location list, telescope results
     use {
       "folke/trouble.nvim",
       requires = "kyazdani42/nvim-web-devicons",
@@ -139,8 +139,8 @@ require("packer").startup(function(use)
         config = require('plugins.configs.vim-fugitive').setup
     }
     use {
-        'airblade/vim-gitgutter',
-        config = require('plugins.configs.gitgutter').setup
+        'lewis6991/gitsigns.nvim',
+        config = require('plugins.configs.gitsigns').setup
     }
     use {
         'ruifm/gitlinker.nvim',
