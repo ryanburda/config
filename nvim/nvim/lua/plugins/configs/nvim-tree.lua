@@ -20,16 +20,11 @@ function T.setup()
                     git = false,
                     folder = true,
                     file = true,
-                    folder_arrow = false
+                    folder_arrow = false,
                 }
             },
             indent_markers = {
                 enable = true,
-                icons = {
-                    corner = "└ ",
-                    edge = "│ ",
-                    none = "  ",
-                },
             },
         },
     })
