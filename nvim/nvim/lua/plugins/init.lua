@@ -25,8 +25,12 @@ require("packer").startup(function(use)
         config = require('plugins.configs.treesitter').setup,
         run = ':TSUpdate'
     }
-
     use 'nvim-treesitter/nvim-treesitter-context'
+    use {
+        'lewis6991/spellsitter.nvim',
+        requires = { 'nvim-treesitter/nvim-treesitter' },
+        config = require('plugins.configs.spellsitter').setup,
+    }
 
     -- Color Schemes
     use 'sainnhe/everforest'
@@ -193,7 +197,10 @@ require("packer").startup(function(use)
         config = function() require('neoscroll').setup() end
     }
 
-    use 'lukas-reineke/indent-blankline.nvim'
+    use {
+        'lukas-reineke/indent-blankline.nvim',
+        config = function() require('plugins.configs.indent-blankline').setup() end
+    }
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
