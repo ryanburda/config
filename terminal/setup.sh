@@ -52,6 +52,7 @@ brew install node
 brew install lua
 brew install ripgrep
 brew install jq
+brew install code-minimap
 brew install ttyrec
 brew install rlwrap
 brew install lf
