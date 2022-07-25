@@ -109,3 +109,4 @@ vim.api.nvim_set_keymap('n', '<leader>cd', ':set background=dark<CR>'      , opt
 
 vim.cmd('colorscheme gruvbox8_hard')
 vim.cmd('set background=dark')
+vim.cmd('hi SpellBad ctermfg=000 guifg=#000')
