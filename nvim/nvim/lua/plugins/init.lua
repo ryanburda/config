@@ -33,9 +33,10 @@ require("packer").startup(function(use)
     }
 
     -- Color Schemes
-    use 'sainnhe/everforest'
-    use 'lifepillar/vim-gruvbox8'
-    use 'folke/tokyonight.nvim'
+    use 'Mofiqul/vscode.nvim'
+    -- use 'ellisonleao/gruvbox.nvim'
+    -- use 'sainnhe/everforest'
+    -- use 'folke/tokyonight.nvim'
 
     -- File Tree
     use {
