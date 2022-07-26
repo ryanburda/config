@@ -37,7 +37,7 @@ require("packer").startup(function(use)
     use 'lifepillar/vim-gruvbox8'
     use 'folke/tokyonight.nvim'
 
-    -- File explorer
+    -- File Tree
     use {
         'kyazdani42/nvim-tree.lua',
         requires = { 'kyazdani42/nvim-web-devicons' },
@@ -110,19 +110,6 @@ require("packer").startup(function(use)
         config = require('plugins.configs.telescope').setup
     }
 
-    -- pretty list of diagnostics, lsp, quickfix list, location list, telescope results
-    use {
-        "folke/trouble.nvim",
-        requires = "kyazdani42/nvim-web-devicons",
-        config = function()
-            require("trouble").setup {
-                -- your configuration comes here
-                -- or leave it empty to use the default settings
-                -- refer to the configuration section below
-            }
-        end
-    }
-
     -- Tmux
     use {
         'christoomey/vim-tmux-navigator',
@@ -156,23 +143,19 @@ require("packer").startup(function(use)
         config = require('plugins.configs.diffview').setup
     }
 
-    -- Status line
+    -- Buffer tabs
     use {
         'akinsho/bufferline.nvim',
         tag = "*",
         requires = 'kyazdani42/nvim-web-devicons',
         config = require('plugins.configs.bufferline').setup
     }
+
+    -- Status line
     use {
         'nvim-lualine/lualine.nvim',
         requires = { 'kyazdani42/nvim-web-devicons'},
         config = require('plugins.configs.lualine').setup
-    }
-
-    -- term
-    use {
-        'voldikss/vim-floaterm',
-        config = require('plugins.configs.vim-floaterm').setup
     }
 
     -- Web Search
@@ -184,28 +167,36 @@ require("packer").startup(function(use)
     -- Highlight all occurrences of word under cursor
     use 'RRethy/vim-illuminate'
 
-    -- Buffer deletion
-    use 'famiu/bufdelete.nvim'
-
     -- Motion
     use 'justinmk/vim-sneak'
 
-    -- Scrolling
-    use 'dstein64/nvim-scrollview'
-    use {
-        'karb94/neoscroll.nvim',
-        config = function() require('neoscroll').setup() end
-    }
-
+    -- Indentation lines
     use {
         'lukas-reineke/indent-blankline.nvim',
-        config = function() require('plugins.configs.indent-blankline').setup() end
+        config = require('plugins.configs.indent-blankline').setup
     }
 
+    -- Lists contents of file in right side gutter
     use {
         'simrat39/symbols-outline.nvim',
-        config = function() require('plugins.configs.symbols-outline').setup() end
+        config = require('plugins.configs.symbols-outline').setup
     }
+
+    -- Close buffers
+    use {
+        'kazhala/close-buffers.nvim',
+        config = require('plugins.configs.close-buffers').setup
+    }
+
+    -- Buffer deletion without changing layout
+    use {
+        'famiu/bufdelete.nvim',
+        config = require('plugins.configs.bufdelete').setup
+    }
+
+    -- Scrolling
+    use 'dstein64/nvim-scrollview'  -- Scrollbar
+    use 'karb94/neoscroll.nvim'     -- Smooth scrolling
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins

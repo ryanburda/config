@@ -8,6 +8,7 @@ function T.setup()
 
     vim.g.symbols_outline = {
         auto_preview = false,
+        width = 10,
         keymaps = { -- These keymaps can be a string or a table for multiple keys
             close = {},
             goto_location = "<Cr>",
@@ -18,6 +19,7 @@ function T.setup()
             code_actions = "a",
         }
     }
+
 end
 
 return T
