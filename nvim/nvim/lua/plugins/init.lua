@@ -203,8 +203,8 @@ require("packer").startup(function(use)
     }
 
     use {
-        'wfxr/minimap.vim',
-        config = function() require('plugins.configs.minimap').setup() end
+        'simrat39/symbols-outline.nvim',
+        config = function() require('plugins.configs.symbols-outline').setup() end
     }
 
     -- Automatically set up your configuration after cloning packer.nvim
