@@ -39,7 +39,6 @@ brew install curl
 brew install fzf
 brew install wget
 brew install go
-brew install rust
 brew install php
 brew install composer
 brew install pyenv
@@ -64,6 +63,13 @@ brew tap homebrew/cask-fonts
 brew install --cask font-hack-nerd-font 
 brew install --cask font-jetbrains-mono
 brew install --cask font-sf-mono
+
+# Rust
+curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
+# Check version
+# rustc --version
+# Read Docs
+# rustup doc
 
 
 # Create bin directory
