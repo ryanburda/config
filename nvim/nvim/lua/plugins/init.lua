@@ -53,15 +53,19 @@ require("packer").startup(function(use)
 
     -- LSP
     use {
-        "williamboman/nvim-lsp-installer",
-        requires = { "neovim/nvim-lspconfig" }
+        "williamboman/mason.nvim",
+        config = require("plugins.configs.mason").setup
+    }
+    use {
+        "williamboman/mason-lspconfig.nvim",
+        requires = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
+        config = require("plugins.configs.mason-lspconfig").setup
     }
     use {
         "neovim/nvim-lspconfig",
         requires = {
             "hrsh7th/nvim-cmp",
         },
-        config = require("plugins.configs.lsp").setup
     }
     use {
         'hrsh7th/nvim-cmp',
