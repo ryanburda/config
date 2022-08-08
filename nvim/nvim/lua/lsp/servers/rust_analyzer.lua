@@ -4,8 +4,7 @@ T.config = T.default.config
 
 function T.on_attach(client, bufnr)
     T.default.on_attach(client, bufnr)
-
-    -- TODO: add debugger.
+    require('debug.adapters.codelldb')
 end
 
 T.config = {}
