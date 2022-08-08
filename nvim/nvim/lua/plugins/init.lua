@@ -19,6 +19,12 @@ require("packer").startup(function(use)
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
 
+    -- Color Schemes
+    use 'Mofiqul/vscode.nvim'
+    -- use 'ellisonleao/gruvbox.nvim'
+    -- use 'sainnhe/everforest'
+    -- use 'folke/tokyonight.nvim'
+
     -- Treesitter
     use {
         'nvim-treesitter/nvim-treesitter',
@@ -32,108 +38,14 @@ require("packer").startup(function(use)
         config = require('plugins.configs.spellsitter').setup,
     }
 
-    -- Color Schemes
-    use 'Mofiqul/vscode.nvim'
-    -- use 'ellisonleao/gruvbox.nvim'
-    -- use 'sainnhe/everforest'
-    -- use 'folke/tokyonight.nvim'
-
-    -- File Tree
-    use {
-        'kyazdani42/nvim-tree.lua',
-        requires = { 'kyazdani42/nvim-web-devicons' },
-        config = require('plugins.configs.nvim-tree').setup
-    }
-
-    -- Greeter
-    use {
-        'goolord/alpha-nvim',
-        config = require("plugins.configs.alpha").setup
-    }
-
-    -- LSP
-    use {
-        "williamboman/mason.nvim",
-        config = require("plugins.configs.mason").setup
-    }
-    use {
-        "williamboman/mason-lspconfig.nvim",
-        requires = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
-        config = require("plugins.configs.mason-lspconfig").setup
-    }
-    use {
-        "neovim/nvim-lspconfig",
-        requires = {
-            "hrsh7th/nvim-cmp",
-        },
-    }
-    use {
-        'hrsh7th/nvim-cmp',
-        requires = {
-            'hrsh7th/cmp-nvim-lsp',
-            'hrsh7th/cmp-buffer',
-            'hrsh7th/cmp-path',
-            'hrsh7th/cmp-cmdline',
-            'hrsh7th/cmp-nvim-lua',
-            'L3MON4D3/LuaSnip',
-            'saadparwaiz1/cmp_luasnip',
-            'ray-x/lsp_signature.nvim',
-            '~/Developer/src/nvim/plugins/lsp-status.nvim',
-            'nanotee/sqls.nvim',
-        },
-        config = require('plugins.configs.cmp').setup
-    }
-
-    -- Debugger
-    use {
-        'mfussenegger/nvim-dap',
-        requires = {
-            'nvim-treesitter/nvim-treesitter',
-        },
-        config = require('plugins.configs.nvim-dap').setup
-    }
-    use {
-        'rcarriga/nvim-dap-ui',
-        requries = {
-            'mfussenegger/nvim-dap',
-        },
-        config = require("plugins.configs.nvim-dap-ui").setup
-    }
-    use {
-        'theHamsta/nvim-dap-virtual-text',
-        requries = {
-            'mfussenegger/nvim-dap',
-        },
-        config = function() require("nvim-dap-virtual-text").setup() end
-    }
-    use {
-        'mfussenegger/nvim-dap-python',
-        requires = {
-            'mfussenegger/nvim-dap',
-        },
-    }
-
     -- Telescope
     use {
         'nvim-telescope/telescope.nvim',
         requires = {
             'nvim-lua/plenary.nvim',
             {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
-            'mfussenegger/nvim-dap',
-            'nvim-telescope/telescope-dap.nvim',
-            {'Zane-/howdoi.nvim', config = require('plugins.configs.nvim-dap').setup},
         },
         config = require('plugins.configs.telescope').setup
-    }
-
-    -- Tmux
-    use {
-        'christoomey/vim-tmux-navigator',
-        config = require('plugins.configs.vim-tmux-navigator').setup
-    }
-    use {
-        'christoomey/vim-tmux-runner',
-        config = require('plugins.configs.vim-tmux-runner').setup
     }
 
     -- Git
@@ -157,6 +69,29 @@ require("packer").startup(function(use)
         'sindrets/diffview.nvim',
         requires = 'nvim-lua/plenary.nvim',
         config = require('plugins.configs.diffview').setup
+    }
+
+    -- Greeter
+    use {
+        'goolord/alpha-nvim',
+        config = require("plugins.configs.alpha").setup
+    }
+
+    -- File Tree
+    use {
+        'kyazdani42/nvim-tree.lua',
+        requires = { 'kyazdani42/nvim-web-devicons' },
+        config = require('plugins.configs.nvim-tree').setup
+    }
+
+    -- Tmux
+    use {
+        'christoomey/vim-tmux-navigator',
+        config = require('plugins.configs.vim-tmux-navigator').setup
+    }
+    use {
+        'christoomey/vim-tmux-runner',
+        config = require('plugins.configs.vim-tmux-runner').setup
     }
 
     -- Buffer tabs
@@ -213,6 +148,73 @@ require("packer").startup(function(use)
     -- Scrolling
     use 'dstein64/nvim-scrollview'  -- Scrollbar
     use 'karb94/neoscroll.nvim'     -- Smooth scrolling
+
+
+    ----------------------------
+    -- Package Manager: Mason --
+    ----------------------------
+    use {
+        "williamboman/mason.nvim",
+        config = require("plugins.configs.mason").setup
+    }
+    -- LSP
+    use {
+        "neovim/nvim-lspconfig",
+        requires = {
+            "hrsh7th/nvim-cmp",
+        },
+    }
+    use {
+        'hrsh7th/nvim-cmp',
+        requires = {
+            'hrsh7th/cmp-nvim-lsp',
+            'hrsh7th/cmp-buffer',
+            'hrsh7th/cmp-path',
+            'hrsh7th/cmp-cmdline',
+            'hrsh7th/cmp-nvim-lua',
+            'L3MON4D3/LuaSnip',
+            'saadparwaiz1/cmp_luasnip',
+            'ray-x/lsp_signature.nvim',
+            '~/Developer/src/nvim/plugins/lsp-status.nvim',
+            'nanotee/sqls.nvim',
+        },
+        config = require('plugins.configs.nvim-cmp').setup
+    }
+    use {
+        "williamboman/mason-lspconfig.nvim",
+        requires = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
+        config = require("plugins.configs.mason-lspconfig").setup
+    }
+    -- TODO: Use Mason to manage this
+    -- Debug
+    use {
+        'mfussenegger/nvim-dap',
+        requires = {
+            'nvim-treesitter/nvim-treesitter',
+        },
+        config = require('plugins.configs.nvim-dap').setup
+    }
+    use {
+        'rcarriga/nvim-dap-ui',
+        requries = {
+            'mfussenegger/nvim-dap',
+        },
+        config = require("plugins.configs.nvim-dap-ui").setup
+    }
+    use {
+        'theHamsta/nvim-dap-virtual-text',
+        requries = {
+            'mfussenegger/nvim-dap',
+        },
+        config = function() require("nvim-dap-virtual-text").setup() end
+    }
+    use {
+        'mfussenegger/nvim-dap-python',
+        requires = {
+            'mfussenegger/nvim-dap',
+        },
+    }
+
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins

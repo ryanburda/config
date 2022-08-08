@@ -55,7 +55,6 @@ brew install code-minimap
 brew install ttyrec
 brew install rlwrap
 brew install lf
-brew install howdoi
 brew install kubectl
 brew install kubectx
 

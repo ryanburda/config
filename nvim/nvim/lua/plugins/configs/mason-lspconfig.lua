@@ -14,6 +14,11 @@ function T.setup()
         "yamlls"
     }
 
+    require("mason-lspconfig").setup({
+        ensure_installed = servers,
+        automatic_installation = true,
+    })
+
     local lspconfig = require("lspconfig")
 
     for _, server in ipairs(servers) do
@@ -28,11 +33,6 @@ function T.setup()
 
         lspconfig[server].setup(config)
     end
-
-    require("mason-lspconfig").setup({
-        ensure_installed = servers,
-        automatic_installation = true,
-    })
 
 end
 

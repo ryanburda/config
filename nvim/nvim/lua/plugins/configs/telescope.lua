@@ -3,7 +3,6 @@ local T = {}
 function T.setup()
     -- mappings
     local opts = { noremap=true, silent=true }
-
     vim.api.nvim_set_keymap("n", "<leader>f ", "<cmd>lua require('telescope.builtin').resume()<cr>"         , opts)
     vim.api.nvim_set_keymap("n", "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<cr>"     , opts)
     vim.api.nvim_set_keymap("n", "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<cr>"      , opts)
@@ -13,23 +12,13 @@ function T.setup()
     vim.api.nvim_set_keymap("n", "<leader>fl", "<cmd>lua require('telescope.builtin').loclist()<cr>"        , opts)
     vim.api.nvim_set_keymap("n", "<leader>fo", "<cmd>lua require('telescope.builtin').jumplist()<cr>"       , opts)  -- 'fo' since <C-o> navigates jumplist
     vim.api.nvim_set_keymap("n", "<leader>fe", "<cmd>lua require('telescope.builtin').oldfiles()<cr>"       , opts)  -- 'fe' for file explore recent
-    vim.api.nvim_set_keymap("n", "<leader>f?", "<cmd>lua require('telescope.builtin').keymaps()<cr>"        , opts)  -- ? is used for keymaps in tmux.conf too
+    vim.api.nvim_set_keymap("n", "<leader>f?", "<cmd>lua require('telescope.builtin').keymaps()<cr>"        , opts)
     vim.api.nvim_set_keymap("n", "<leader>fr", "<cmd>lua require('telescope.builtin').registers()<cr>"      , opts)
     vim.api.nvim_set_keymap("n", "<leader>fb", "<cmd>lua require('telescope.builtin').buffers()<cr>"        , opts)
-    vim.api.nvim_set_keymap("n", "<leader>fv", "<cmd>lua require('telescope.builtin').help_tags()<cr>"      , opts)  -- 'fv' for vim help_tags
+    vim.api.nvim_set_keymap("n", "<leader>fv", "<cmd>lua require('telescope.builtin').help_tags()<cr>"      , opts)
     vim.api.nvim_set_keymap("n", "<leader>fm", "<cmd>lua require('telescope.builtin').man_pages()<cr>"      , opts)
     vim.api.nvim_set_keymap("n", "<leader>fa", "<cmd>lua require('plugins.configs.telescope').ff_home()<cr>", opts)
     vim.api.nvim_set_keymap("n", "<leader>fs", "<cmd>lua require('plugins.configs.telescope').lg_home()<cr>", opts)
-
-    -- debugger
-    --require("telescope").load_extension("dap")
-    --vim.api.nvim_set_keymap("n", "<leader>fub", "<cmd>lua require('telescope').extensions.dap.list_breakpoints()<cr>", opts)
-    --vim.api.nvim_set_keymap("n", "<leader>fuv", "<cmd>lua require('telescope').extensions.dap.variables()<cr>"       , opts)
-    --vim.api.nvim_set_keymap("n", "<leader>fuf", "<cmd>lua require('telescope').extensions.dap.frames()<cr>"          , opts)
-    --vim.api.nvim_set_keymap("n", "<leader>fu?", "<cmd>lua require('telescope').extensions.dap.commands()<cr>"        , opts)
-
-    --require('telescope').load_extension('howdoi')
-    --vim.api.nvim_set_keymap("n", "<leader>f;", ":Telescope howdoi<cr>", opts)
 
     require("telescope").load_extension("fzf")
 
