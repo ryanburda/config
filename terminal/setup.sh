@@ -93,9 +93,9 @@ ln -svfF "${SCRIPT_DIR}/dotfiles/tmate.conf" "${HOME}/.tmate.conf"
 ln -svfF "${SCRIPT_DIR}/dotfiles/kitty.conf" "${HOME}/.config/kitty/kitty.conf"
 ln -svfF "${SCRIPT_DIR}/dotfiles/karabiner.json" "${HOME}/.config/karabiner/karabiner.json"
 
-# Set the default git pull strategy
+# Set git defaults
 git config --global pull.ff only
-
+git config --global init.defaultBranch main
 
 # cloud-sql-proxy
 brew install --cask google-cloud-sdk
