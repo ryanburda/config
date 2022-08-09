@@ -155,7 +155,8 @@ require("packer").startup(function(use)
     ----------------------------
     use {
         "williamboman/mason.nvim",
-        config = require("plugins.configs.mason").setup
+        config = require("plugins.configs.mason").setup,
+        run = require("plugins.configs.mason").install_daps
     }
     -- LSP
     use {
