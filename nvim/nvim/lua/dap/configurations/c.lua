@@ -10,6 +10,7 @@ T.launch_configuration = {
         end,
         cwd = '${workspaceFolder}',
         stopOnEntry = false,
+        args = {"run", },
     },
 }
 
