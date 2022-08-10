@@ -1,6 +1,6 @@
 local T = {}
 
-T.launch_file_configuration = {
+T.launch_configuration = {
     {
         name = "Launch file",
         type = "codelldb",
@@ -10,7 +10,6 @@ T.launch_file_configuration = {
         end,
         cwd = '${workspaceFolder}',
         stopOnEntry = false,
-        args = {"run", },
     },
 }
 
