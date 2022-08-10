@@ -22,7 +22,7 @@ path+=$HOME/.local/bin/neovim/bin
 #       rm ~/.zcompdump*
 #       ```
 #
-#       Running this everytime a new session is created would slow down zsh startup so a manual approach here works
+#       Running this every time a new session is created would slow down zsh startup so a manual approach here works
 #       until the following issue is resolved.
 #       https://github.com/ohmyzsh/ohmyzsh/issues/7642#issuecomment-520167445
 #
