@@ -14,8 +14,8 @@ function T.setup_keymaps(bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>jt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>jh', '<cmd>lua vim.lsp.buf.hover()<CR>'          , opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>jk', '<cmd>lua vim.lsp.buf.references()<CR>'     , opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ha', '<cmd>lua vim.lsp.buf.code_action()<CR>'    , opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rr', '<cmd>lua vim.lsp.buf.rename()<CR>'         , opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ja', '<cmd>lua vim.lsp.buf.code_action()<CR>'    , opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>jr', '<cmd>lua vim.lsp.buf.rename()<CR>'         , opts)
 end
 
 function T.on_attach(client, bufnr)
