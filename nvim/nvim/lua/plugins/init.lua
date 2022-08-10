@@ -147,7 +147,10 @@ require("packer").startup(function(use)
 
     -- Scrolling
     use 'dstein64/nvim-scrollview'  -- Scrollbar
-    use 'karb94/neoscroll.nvim'     -- Smooth scrolling
+    use {
+        'karb94/neoscroll.nvim',    -- Smooth scrolling
+        config = function() require('neoscroll').setup() end
+    }
 
 
     ----------------------------
