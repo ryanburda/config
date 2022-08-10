@@ -11,6 +11,7 @@ function T.setup()
         "rust_analyzer",
         "sumneko_lua",
         "sqls",
+        "terraform-ls",
         "yamlls"
     }
 
