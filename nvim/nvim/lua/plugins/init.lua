@@ -152,6 +152,11 @@ require("packer").startup(function(use)
         config = function() require('neoscroll').setup() end
     }
 
+    -- Floating Terminal
+    use {
+        'akinsho/toggleterm.nvim',
+        config = require("plugins.configs.toggleterm").setup
+    }
 
     ----------------------------
     -- Package Manager: Mason --

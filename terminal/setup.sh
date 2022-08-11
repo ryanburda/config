@@ -44,6 +44,7 @@ brew install composer
 brew install pyenv
 brew install pyenv-virtualenv
 brew install lazygit
+brew install lazydocker
 brew install fd
 brew install tig
 brew install htop
