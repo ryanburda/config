@@ -32,8 +32,10 @@ function T.setup()
     dap.listeners.before.event_exited['dapui_config'] = function () dapui.close() end
 
     local opts = { noremap=true, silent=true }
-    vim.api.nvim_set_keymap('n', '<leader>ua', "<cmd>lua require'dapui'.open()<cr>" , opts)
-    vim.api.nvim_set_keymap('n', '<leader>ux', "<cmd>lua require'dapui'.close()<cr>", opts)
+    vim.api.nvim_set_keymap('n', '<M-o>', "<cmd>lua require'dapui'.open()<cr>"  , opts)
+    vim.api.nvim_set_keymap('n', '<M-x>', "<cmd>lua require'dapui'.close()<cr>" , opts)
+    vim.api.nvim_set_keymap('n', '<M-h>', "<cmd>lua require('dapui').eval()<cr>", opts)
+
 
 end
 
