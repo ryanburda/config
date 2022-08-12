@@ -21,9 +21,9 @@ require("packer").startup(function(use)
 
     -- Color Schemes
     use 'Mofiqul/vscode.nvim'
-    -- use 'ellisonleao/gruvbox.nvim'
-    -- use 'sainnhe/everforest'
-    -- use 'folke/tokyonight.nvim'
+    use 'ellisonleao/gruvbox.nvim'
+    use 'sainnhe/everforest'
+    use 'folke/tokyonight.nvim'
 
     -- Treesitter
     use {

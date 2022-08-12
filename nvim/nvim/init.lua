@@ -96,15 +96,9 @@ vim.api.nvim_set_keymap('n', '<leader>lc', ':lexpr []<CR>', opts)  -- clear loca
 require('plugins')
 
 -- Set colorscheme here
--- vim.cmd('let g:everforest_background = "hard"')
--- vim.api.nvim_set_keymap('n', '<leader>c1', ':colorscheme vscode<CR>'                , opts)
--- vim.api.nvim_set_keymap('n', '<leader>c2', ':colorscheme gruvbox<CR>'               , opts)
--- vim.api.nvim_set_keymap('n', '<leader>c3', ':colorscheme everforest<CR>'            , opts)
--- vim.api.nvim_set_keymap('n', '<leader>c4', ':colorscheme tokyonight<CR>'            , opts)
--- vim.api.nvim_set_keymap('n', '<leader>cl', ':set background=light<CR>'              , opts)
--- vim.api.nvim_set_keymap('n', '<leader>cd', ':set background=dark<CR>'               , opts)
--- vim.api.nvim_set_keymap('n', '<leader>cs', ':hi SpellBad ctermfg=000 guifg=#000<CR>', opts)  -- Use this until you can figure out how to stop highlighting misspelled words.
-
 vim.cmd('colorscheme vscode')
 vim.cmd('set background=dark')
 vim.cmd('hi SpellBad ctermfg=000 guifg=#000')
+vim.api.nvim_set_keymap('n', '<leader>cl', ':set background=light<CR>', opts)
+vim.api.nvim_set_keymap('n', '<leader>cd', ':set background=dark<CR>' , opts)
+
