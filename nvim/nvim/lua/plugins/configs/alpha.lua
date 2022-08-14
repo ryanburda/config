@@ -13,17 +13,15 @@ function T.setup()
       '  ██║╚██╗██║╚██╗ ██╔╝██║██║╚██╔╝██║ ',
       '  ██║ ╚████║ ╚████╔╝ ██║██║ ╚═╝ ██║ ',
       '  ╚═╝  ╚═══╝  ╚═══╝  ╚═╝╚═╝     ╚═╝ ',
-      '                                    ',
-      '  > ' .. os.getenv('PWD'),
     }
 
     -- Set menu
     dashboard.section.buttons.val = {
+      dashboard.button( '<leader>aa', 'File Tree'             , ':NvimTreeFocus<CR>'),
       dashboard.button( '<leader>ff', 'Find File'             , ':Telescope find_files<CR>'),
       dashboard.button( '<leader>fg', 'GREP'                  , ':Telescope live_grep<CR>'),
       dashboard.button( '<leader>fe', 'File Explorer (Recent)', ':Telescope oldfiles<CR>'),
       dashboard.button( '<leader>f?', 'Key Map'               , ':Telescope keymaps<CR>'),
-      dashboard.button( 'n'         , 'New File'              , ':ene <BAR> startinsert <CR>'),
       dashboard.button( 'q'         , 'Quit'                  , ':qa<CR>'),
     }
 
