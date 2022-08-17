@@ -2,10 +2,10 @@ local T = {}
 
 function T.setup()
     local cmp = require('cmp')
+    local lspkind = require('lspkind')
 
     cmp.setup({
         snippet = {
-            -- REQUIRED - you must specify a snippet engine
             expand = function(args)
                 require('luasnip').lsp_expand(args.body)
             end,
@@ -14,6 +14,9 @@ function T.setup()
             completion = cmp.config.window.bordered(),
             documentation = cmp.config.window.bordered(),
         },
+        view = {
+            entries = { name = 'custom', selection_order = 'bottom_up' }
+        },
         mapping = cmp.mapping.preset.insert({
             ['<C-n>'] = cmp.mapping.select_next_item(),
             ['<C-p>'] = cmp.mapping.select_prev_item(),
@@ -21,16 +24,43 @@ function T.setup()
             ['<C-f>'] = cmp.mapping.scroll_docs(4),
             ['<C-Space>'] = cmp.mapping.complete(),
             ['<C-e>'] = cmp.mapping.abort(),
-            ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+            ['<CR>'] = cmp.mapping.confirm(),
         }),
         sources = cmp.config.sources({
-            { name = 'nvim_lsp' },
-            { name = 'luasnip' },
-            { name = 'buffer', keyword_length = 4 },
-            { name = 'path' },
-            { name = 'nvim_lua' },
-            { name = 'cmdline' }
+            { name = 'nvim_lsp', max_item_count = 8, },
+            { name = 'luasnip', max_item_count = 3, },
+            { name = 'buffer', keyword_length = 3, },
+            { name = 'path', max_item_count = 3, },
+            { name = 'nvim_lua', max_item_count = 3, },
+            { name = 'cmdline', max_item_count = 3, },
+            { name = "copilot", keyword_length = 1, group_index = 2, max_item_count = 3, },
         }),
+        formatting = {
+            format = lspkind.cmp_format({
+                mode = "symbol_text",
+                max_width = 75,
+                symbol_map = { Copilot = "" }
+            })
+        },
+        sorting = {
+            priority_weight = 2,
+            comparators = {
+                require("copilot_cmp.comparators").prioritize,
+                require("copilot_cmp.comparators").score,
+
+                -- Below is the default comparitor list and order for nvim-cmp
+                cmp.config.compare.offset,
+                -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
+                cmp.config.compare.exact,
+                cmp.config.compare.score,
+                cmp.config.compare.recently_used,
+                cmp.config.compare.locality,
+                cmp.config.compare.kind,
+                cmp.config.compare.sort_text,
+                cmp.config.compare.length,
+                cmp.config.compare.order,
+            },
+        },
     })
 
     -- Set configuration for specific filetype.
@@ -63,3 +93,6 @@ function T.setup()
 end
 
 return T
+
+-- Function that accepts and integer argument, adds 1, and returns the new number
+

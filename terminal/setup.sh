@@ -49,6 +49,7 @@ brew install fd
 brew install tig
 brew install htop
 brew install node
+brew install node@16
 brew install lua
 brew install ripgrep
 brew install jq

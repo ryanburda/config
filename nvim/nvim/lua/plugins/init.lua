@@ -186,6 +186,7 @@ require("packer").startup(function(use)
             'ray-x/lsp_signature.nvim',
             '~/Developer/src/nvim/plugins/lsp-status.nvim',
             'nanotee/sqls.nvim',
+            'onsails/lspkind.nvim',
         },
         config = require('plugins.configs.nvim-cmp').setup
     }
@@ -224,6 +225,22 @@ require("packer").startup(function(use)
         },
     }
 
+    -- Github Copilot
+    -- use {
+    --     'github/copilot.vim',
+    --     config = require('plugins.configs.copilot').setup,
+    -- }
+    use {
+        'zbirenbaum/copilot.lua',
+        event = "FocusGained",
+        config = require('plugins.configs.copilot').setup,
+        requires = {
+            {
+                'zbirenbaum/copilot-cmp',
+                module = 'copilot_cmp',
+            },
+        }
+    }
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
