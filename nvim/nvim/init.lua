@@ -75,30 +75,22 @@ function!   QuickFixOpenAll()
 endfunction
 ]])
 
-vim.api.nvim_set_keymap('n', '<leader>ko', ':copen<CR>'                 , opts)
-vim.api.nvim_set_keymap('n', '<leader>kx', ':cclose<CR>'                , opts)
-vim.api.nvim_set_keymap('n', '<leader>kh', ':cfirst<CR>'                , opts)
-vim.api.nvim_set_keymap('n', '<leader>kj', ':cnext<CR>'                 , opts)
-vim.api.nvim_set_keymap('n', '<leader>kk', ':cprev<CR>'                 , opts)
-vim.api.nvim_set_keymap('n', '<leader>kl', ':clast<CR>'                 , opts)
-vim.api.nvim_set_keymap('n', '<leader>ka', ':call QuickFixOpenAll()<CR>', opts)  -- open all files in quickfix list
-vim.api.nvim_set_keymap('n', '<leader>kc', ':cexpr []<CR>'              , opts)  -- clear quickfix list
+vim.api.nvim_set_keymap('n', '<leader>ko' , ':copen<CR>'                 , opts)
+vim.api.nvim_set_keymap('n', '<leader>kx' , ':cclose<CR>'                , opts)
+vim.api.nvim_set_keymap('n', '<leader>kj' , ':cnext<CR>'                 , opts)
+vim.api.nvim_set_keymap('n', '<leader>kk' , ':cprev<CR>'                 , opts)
+vim.api.nvim_set_keymap('n', '<leader>kgg', ':cfirst<CR>'                , opts)
+vim.api.nvim_set_keymap('n', '<leader>kG' , ':clast<CR>'                 , opts)
+vim.api.nvim_set_keymap('n', '<leader>ka' , ':call QuickFixOpenAll()<CR>', opts)  -- open all files in quickfix list
+vim.api.nvim_set_keymap('n', '<leader>kc' , ':cexpr []<CR>'              , opts)  -- clear quickfix list
 
 -- :help location-list
-vim.api.nvim_set_keymap('n', '<leader>lo', ':lopen<CR>'   , opts)
-vim.api.nvim_set_keymap('n', '<leader>lx', ':lclose<CR>'  , opts)
-vim.api.nvim_set_keymap('n', '<leader>lh', ':lfirst<CR>'  , opts)
-vim.api.nvim_set_keymap('n', '<leader>lj', ':lnext<CR>'   , opts)
-vim.api.nvim_set_keymap('n', '<leader>lk', ':lprev<CR>'   , opts)
-vim.api.nvim_set_keymap('n', '<leader>ll', ':llast<CR>'   , opts)
-vim.api.nvim_set_keymap('n', '<leader>lc', ':lexpr []<CR>', opts)  -- clear location-list
+vim.api.nvim_set_keymap('n', '<leader>lo' , ':lopen<CR>'   , opts)
+vim.api.nvim_set_keymap('n', '<leader>lx' , ':lclose<CR>'  , opts)
+vim.api.nvim_set_keymap('n', '<leader>lj' , ':lnext<CR>'   , opts)
+vim.api.nvim_set_keymap('n', '<leader>lk' , ':lprev<CR>'   , opts)
+vim.api.nvim_set_keymap('n', '<leader>lgg', ':lfirst<CR>'  , opts)
+vim.api.nvim_set_keymap('n', '<leader>lG' , ':llast<CR>'   , opts)
+vim.api.nvim_set_keymap('n', '<leader>lc' , ':lexpr []<CR>', opts)  -- clear location-list
 
 require('plugins')
-
--- Set colorscheme here
-vim.cmd('colorscheme vscode')
-vim.cmd('set background=dark')
-vim.cmd('hi SpellBad ctermfg=000 guifg=#000')
-vim.api.nvim_set_keymap('n', '<leader>cl', ':set background=light<CR>', opts)
-vim.api.nvim_set_keymap('n', '<leader>cd', ':set background=dark<CR>' , opts)
-

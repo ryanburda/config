@@ -24,6 +24,14 @@ require("packer").startup(function(use)
     use 'ellisonleao/gruvbox.nvim'
     use 'sainnhe/everforest'
     use 'folke/tokyonight.nvim'
+    use 'Everblush/everblush.vim'
+    vim.cmd('colorscheme everblush')
+    vim.cmd('set background=dark')
+    vim.cmd('hi SpellBad ctermfg=000 guifg=#000')
+
+    local opts = { noremap=true, silent=false }
+    vim.api.nvim_set_keymap('n', '<leader>cl', ':set background=light<CR>', opts)
+    vim.api.nvim_set_keymap('n', '<leader>cd', ':set background=dark<CR>' , opts)
 
     -- Treesitter
     use {
