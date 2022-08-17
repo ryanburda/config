@@ -8,3 +8,7 @@ Treesitter
 config
 cmp
 configs
+arg
+pgpass
+dbname
+lsp_extra

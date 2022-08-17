@@ -226,6 +226,8 @@ require("packer").startup(function(use)
     }
 
     -- Github Copilot
+    --
+    -- NOTE: the actual github plugin is only needed for the first time installation.
     -- use {
     --     'github/copilot.vim',
     --     config = require('plugins.configs.copilot').setup,
