@@ -234,7 +234,7 @@ require("packer").startup(function(use)
     -- }
     use {
         'zbirenbaum/copilot.lua',
-        event = "FocusGained",
+        event = 'FocusGained',
         config = require('plugins.configs.copilot').setup,
         requires = {
             {
