@@ -51,7 +51,12 @@ function T.setup()
     end
 
     local opts = { noremap=true, silent=true }
-    vim.api.nvim_set_keymap('n', '<leader>ai', ':lua print("Copilot on: " .. tostring(require("plugins.configs.copilot").toggle()))<cr>', opts)
+    vim.api.nvim_set_keymap(
+        'n',
+        '<leader>ai',
+        ':lua print("Copilot on: " .. tostring(require("plugins.configs.copilot").toggle()))<cr>',
+        opts
+    )
 
 end
 
