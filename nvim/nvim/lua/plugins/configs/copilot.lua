@@ -1,28 +1,28 @@
 local T = {}
 
-T.COPILOT_STATE_VAR = 'is_copilot_on'
+T.STATE_VAR = vim.g.is_copilot_on
 
 
 function T.get_state()
     -- Gets the state of copilot that is stored in a global variable.
-    return vim.g[T.COPILOT_STATE_VAR]
+    return T.STATE_VAR
 end
 
 function T.enable()
     -- Turns on copilot and writes the state to a global variable.
     if pcall(function() require('copilot').setup() end) then
-        vim.g[T.COPILOT_STATE_VAR] = true
+        T.STATE_VAR = true
     else
-        vim.g[T.COPILOT_STATE_VAR] = false
+        T.STATE_VAR = false
     end
 end
 
 function T.disable()
     -- Turns off copilot and writes the state to a global variable.
     if pcall(function() vim.cmd('CopilotStop') end) then
-        vim.g[T.COPILOT_STATE_VAR] = false
+        T.STATE_VAR = false
     else
-        vim.g[T.COPILOT_STATE_VAR] = true
+        T.STATE_VAR = true
     end
 end
 
