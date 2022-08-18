@@ -10,7 +10,7 @@ end
 
 function T.enable()
     -- Turns on copilot and writes the state to a global variable.
-    if pcall(function() require('copilot').setup() end) then
+    if pcall(T.setup) then
         vim.g[T.STATUS_VAR] = true
     else
         vim.g[T.STATUS_VAR] = false
@@ -50,14 +50,18 @@ function T.setup()
         vim.g.copilot_node_command = node16_executable_path
     end
 
-    local opts = { noremap=true, silent=true }
+    require('copilot').setup()
+
+end
+
+function T.keymap()
+    -- Define keymaps for this plugin.
     vim.api.nvim_set_keymap(
         'n',
         '<leader>ai',
         ':lua print("Copilot on: " .. tostring(require("plugins.configs.copilot").toggle()))<cr>',
-        opts
+        { noremap=true, silent=true }
     )
-
 end
 
 return T
