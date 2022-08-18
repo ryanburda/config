@@ -20,10 +20,10 @@ vim.opt.whichwrap = '<,>,h,l,[,]'
 vim.opt.timeoutlen = 1000
 vim.opt.updatetime = 100
 vim.opt.spell = true
+vim.opt.laststatus = 3
 -- vim.opt.list = true
 -- vim.opt.listchars = { space = '⋅', tab = '›~', eol = '↵' }
 
-vim.cmd('set laststatus=3')
 vim.cmd('set noswapfile')
 
 -- keymap
