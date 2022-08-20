@@ -236,7 +236,7 @@ require("packer").startup(function(use)
     -- }
     use {
         'zbirenbaum/copilot.lua',
-        event = 'FocusGained',
+        opt = true,  -- only turn it on when you need it.
         config = require('plugins.configs.copilot').setup,
         requires = {
             {

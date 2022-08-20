@@ -50,6 +50,8 @@ function T.setup()
         vim.g.copilot_node_command = node16_executable_path
     end
 
+    vim.cmd('PackerLoad copilot.lua')
+
     require('copilot').setup()
 
 end
