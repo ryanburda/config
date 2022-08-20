@@ -13,6 +13,7 @@ mkdir -p $NVIM_PLUGINS_PATH
 mkdir -p $NVIM_INSTALL_DIR_PATH
 
 # Install NeoVim from source
+sudo rm -rf "$HOME/.local/share/nvim"
 sudo rm -rf $NVIM_REPO_PATH
 echo 'Cloning neovim'
 git clone git@github.com:neovim/neovim.git $NVIM_REPO_PATH
@@ -40,6 +41,3 @@ else
     echo 'Pyenv pyright already installed.'
     git -C $PYENV_PYRIGHT_PATH pull
 fi
-
-# Automatically install plugings before running nvim for the first time.
-nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'

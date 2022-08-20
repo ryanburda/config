@@ -22,6 +22,7 @@ function T.setup()
     local lspconfig = require("lspconfig")
 
     for _, server in ipairs(servers) do
+
         local config
         local status, s = pcall(require, "lsp/servers/" .. server)
 
@@ -32,6 +33,7 @@ function T.setup()
         end
 
         lspconfig[server].setup(config)
+
     end
 
 end

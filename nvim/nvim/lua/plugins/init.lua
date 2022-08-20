@@ -1,37 +1,25 @@
-vim.cmd([[
-    augroup packer_user_config
-        autocmd!
-        autocmd BufWritePost plugins/init.lua source <sfile> | PackerCompile
-    augroup end
-]])
-
+-- Bootstrap packer
 local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-local packer_bootstrap
-
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-    packer_bootstrap = vim.fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    vim.fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
 end
-
-vim.cmd [[packadd packer.nvim]]
 
 require("packer").startup(function(use)
 
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
 
+    local opts = { noremap=true, silent=false }
+    vim.api.nvim_set_keymap('n', '<leader>pc', ':lua require("packer").compile()<cr>', opts)
+    vim.api.nvim_set_keymap('n', '<leader>pu', ':lua require("packer").update()<cr>', opts)
+    vim.api.nvim_set_keymap('n', '<leader>ps', ':lua require("packer").sync()<cr>', opts)
+
     -- Color Schemes
-    use 'Mofiqul/vscode.nvim'
+    use 'martinsione/darkplus.nvim'
     use 'ellisonleao/gruvbox.nvim'
     use 'sainnhe/everforest'
     use 'folke/tokyonight.nvim'
     use 'Everblush/everblush.vim'
-    vim.cmd('colorscheme everblush')
-    vim.cmd('set background=dark')
-    vim.cmd('hi SpellBad ctermfg=000 guifg=#000')
-
-    local opts = { noremap=true, silent=false }
-    vim.api.nvim_set_keymap('n', '<leader>cl', ':set background=light<CR>', opts)
-    vim.api.nvim_set_keymap('n', '<leader>cd', ':set background=dark<CR>' , opts)
 
     -- Treesitter
     use {
@@ -124,7 +112,10 @@ require("packer").startup(function(use)
     }
 
     -- Highlight all occurrences of word under cursor
-    use 'RRethy/vim-illuminate'
+    use {
+        'RRethy/vim-illuminate',
+        config = require('plugins.configs.vim-illuminate').setup
+    }
 
     -- Motion
     use 'justinmk/vim-sneak'
@@ -203,7 +194,6 @@ require("packer").startup(function(use)
         requires = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
         config = require("plugins.configs.mason-lspconfig").setup
     }
-    -- TODO: Use Mason to manage this
     -- Debug
     use {
         'mfussenegger/nvim-dap',
@@ -252,11 +242,5 @@ require("packer").startup(function(use)
         }
     }
     require('plugins.configs.copilot').keymap()
-
-    -- Automatically set up your configuration after cloning packer.nvim
-    -- Put this at the end after all plugins
-    if packer_bootstrap then
-        require('packer').sync()
-    end
 
 end)

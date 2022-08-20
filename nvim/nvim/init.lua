@@ -94,3 +94,9 @@ vim.api.nvim_set_keymap('n', '<leader>lG' , ':llast<CR>'   , opts)
 vim.api.nvim_set_keymap('n', '<leader>lc' , ':lexpr []<CR>', opts)  -- clear location-list
 
 require('plugins')
+
+vim.cmd('colorscheme darkplus')
+vim.cmd('set background=dark')
+vim.cmd('hi SpellBad ctermfg=000 guifg=#000')
+vim.api.nvim_set_keymap('n', '<leader>cl', ':set background=light<CR>', opts)
+vim.api.nvim_set_keymap('n', '<leader>cd', ':set background=dark<CR>' , opts)
