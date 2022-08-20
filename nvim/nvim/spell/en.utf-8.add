@@ -25,3 +25,5 @@ GCS
 uri
 BQ
 keymaps
+keymap
+quickfix
