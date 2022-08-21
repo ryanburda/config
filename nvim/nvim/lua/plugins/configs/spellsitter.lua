@@ -12,7 +12,7 @@ function T.setup()
     })
 
     vim.api.nvim_create_autocmd("FileType", {
-        pattern = { "Outline", "NvimTree", }, -- disable spellchecking for these filetypes
+        pattern = { "Outline", "NvimTree", }, -- disable spellchecking for these filetypes. Run `:echo &ft` to get the type of a file
         command = "setlocal nospell",
         group = augroup,
     })
