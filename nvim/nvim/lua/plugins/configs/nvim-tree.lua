@@ -3,8 +3,7 @@ local T = {}
 function T.setup()
 
     local opts = { noremap=true, silent=true }
-    vim.api.nvim_set_keymap('n', '<leader>aa', ':NvimTreeFocus<CR>', opts)
-    vim.api.nvim_set_keymap('n', '<leader>ax', ':NvimTreeClose<CR>', opts)
+    vim.api.nvim_set_keymap('n', '<leader>aa', ':NvimTreeToggle<CR>', opts)
 
     require('nvim-tree').setup({
         hijack_unnamed_buffer_when_opening = true,
