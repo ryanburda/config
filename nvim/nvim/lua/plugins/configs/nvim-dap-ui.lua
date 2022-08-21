@@ -17,7 +17,7 @@ function T.setup()
                     { id = "repl", size = 0.20 },
                     { id = "console", size = 0.30 },
                 },
-                size = 75, -- # of columns
+                size = 65, -- # of columns
                 position = "right",
             },
         },

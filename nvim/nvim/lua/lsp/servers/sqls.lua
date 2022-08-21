@@ -15,7 +15,7 @@ function T.conn_string_to_tbl(str)
     -- converts the connection string returned from a sqls.nvim 'connection_choice' event into a table.
     -- NOTE: the connection string changes based on what was passed to dataSourceName when the sqls connection
     --       was created. This function is only guaranteed to work with connections that were created with the
-    --       `get_pgpass_connections` funciton below since the order of the keys here matches that function.
+    --       `get_pgpass_connections` function below since the order of the keys here matches that function.
     local values = {}
     for value in string.gmatch(str, '%S+') do
         table.insert(values, value)
