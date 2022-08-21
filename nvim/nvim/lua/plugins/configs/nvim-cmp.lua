@@ -76,7 +76,7 @@ function T.setup()
     cmp.setup.cmdline('/', {
         mapping = cmp.mapping.preset.cmdline(),
         sources = {
-            { name = 'buffer' }
+            { name = 'buffer', max_item_count = 8 }
         }
     })
 
@@ -84,15 +84,12 @@ function T.setup()
     cmp.setup.cmdline(':', {
         mapping = cmp.mapping.preset.cmdline(),
         sources = cmp.config.sources({
-            { name = 'path' }
+            { name = 'path', max_item_count = 8, keyword_length = 1 }
         }, {
-            { name = 'cmdline' }
+            { name = 'cmdline', max_item_count = 8, keyword_length = 2 }
         })
     })
 
 end
 
 return T
-
--- Function that accepts and integer argument, adds 1, and returns the new number
-
