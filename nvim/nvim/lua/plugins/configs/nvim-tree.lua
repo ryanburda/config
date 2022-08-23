@@ -1,9 +1,12 @@
 local T = {}
 
+T.TREE_WIDTH = 36
+
 function T.setup()
 
     local opts = { noremap=true, silent=true }
-    vim.api.nvim_set_keymap('n', '<leader>aa', ':NvimTreeToggle<CR>', opts)
+    vim.api.nvim_set_keymap('n', '<leader>aa', ':NvimTreeOpen<CR>', opts)
+    vim.api.nvim_set_keymap('n', '<leader>ax', ':NvimTreeClose<CR>', opts)
 
     require('nvim-tree').setup({
         hijack_unnamed_buffer_when_opening = true,
@@ -25,6 +28,9 @@ function T.setup()
             indent_markers = {
                 enable = true,
             },
+        },
+        view = {
+            width = 36,
         },
     })
 

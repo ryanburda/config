@@ -160,6 +160,12 @@ require("packer").startup(function(use)
         config = require("plugins.configs.toggleterm").setup
     }
 
+    -- Golden Ratio splits
+     use {
+        'beauwilliams/focus.nvim',
+        config = require("plugins.configs.focus").setup
+    }
+
     ----------------------------
     -- Package Manager: Mason --
     ----------------------------
