@@ -31,9 +31,9 @@ require("packer").startup(function(use)
         run = ':TSUpdate'
     }
     use 'nvim-treesitter/nvim-treesitter-context'
+    use 'nvim-treesitter/playground'
     use {
         'lewis6991/spellsitter.nvim',
-        requires = { 'nvim-treesitter/nvim-treesitter' },
         config = require('plugins.configs.spellsitter').setup,
     }
 
