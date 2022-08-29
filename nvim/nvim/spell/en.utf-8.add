@@ -31,3 +31,5 @@ filetypes
 cmdline
 filetype
 LSP
+cmd
+colorscheme
