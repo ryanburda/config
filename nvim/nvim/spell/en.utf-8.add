@@ -33,3 +33,5 @@ filetype
 LSP
 cmd
 colorscheme
+fzf
+sdk
