@@ -1,6 +1,7 @@
 local T = {}
 
 function T.setup()
+
     -- mappings
     local opts = { noremap=true, silent=true }
     vim.api.nvim_set_keymap("n", "<leader>f ", "<cmd>lua require('telescope.builtin').resume()<cr>"         , opts)
@@ -18,9 +19,7 @@ function T.setup()
     vim.api.nvim_set_keymap("n", "<leader>fv", "<cmd>lua require('telescope.builtin').help_tags()<cr>"      , opts)
     vim.api.nvim_set_keymap("n", "<leader>fm", "<cmd>lua require('telescope.builtin').man_pages()<cr>"      , opts)
     vim.api.nvim_set_keymap("n", "<leader>fd", "<cmd>lua require('telescope.builtin').git_status()<cr>"     , opts)
-    vim.api.nvim_set_keymap("n", "<leader>fD", ":Telescope git_branches<cr>"                                 , opts)
-    vim.api.nvim_set_keymap("n", "<leader>fa", "<cmd>lua require('plugins.configs.telescope').ff_home()<cr>", opts)
-    vim.api.nvim_set_keymap("n", "<leader>fs", "<cmd>lua require('plugins.configs.telescope').lg_home()<cr>", opts)
+    vim.api.nvim_set_keymap("n", "<leader>fs", "<cmd>lua require('telescope.builtin').git_branches()<cr>"   , opts)
     vim.api.nvim_set_keymap("n", "<leader>fc", "<cmd>lua require('telescope.builtin').colorscheme({enable_preview = true})<cr>", opts)
 
     -- setup
@@ -65,28 +64,6 @@ function T.setup()
     require("telescope").load_extension("fzf")
     require("telescope").load_extension("changed_files")
 
-
-    local M = {}
-
-    function M.ff_home()
-        require("telescope.builtin").find_files({
-            prompt_title = "~/ find files",
-            cwd = "~/",
-            hidden = true,
-            file_ignore_patterns = { ".git/" },
-        })
-    end
-
-    function M.lg_home()
-        require("telescope.builtin").live_grep({
-            prompt_title = "~/ grep",
-            cwd = "~/",
-            hidden = true,
-            file_ignore_patterns = { ".git/" },
-        })
-    end
-
-    return M
 end
 
 return T
