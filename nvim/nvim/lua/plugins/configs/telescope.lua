@@ -17,17 +17,17 @@ function T.setup()
     vim.api.nvim_set_keymap("n", "<leader>fb", "<cmd>lua require('telescope.builtin').buffers()<cr>"        , opts)
     vim.api.nvim_set_keymap("n", "<leader>fv", "<cmd>lua require('telescope.builtin').help_tags()<cr>"      , opts)
     vim.api.nvim_set_keymap("n", "<leader>fm", "<cmd>lua require('telescope.builtin').man_pages()<cr>"      , opts)
-    vim.api.nvim_set_keymap("n", "<leader>fd", "<cmd>lua require('telescope.builtin').git_status()<cr>"      , opts)
+    vim.api.nvim_set_keymap("n", "<leader>fd", "<cmd>lua require('telescope.builtin').git_status()<cr>"     , opts)
+    vim.api.nvim_set_keymap("n", "<leader>fD", ":Telescope git_branches<cr>"                                 , opts)
     vim.api.nvim_set_keymap("n", "<leader>fa", "<cmd>lua require('plugins.configs.telescope').ff_home()<cr>", opts)
     vim.api.nvim_set_keymap("n", "<leader>fs", "<cmd>lua require('plugins.configs.telescope').lg_home()<cr>", opts)
     vim.api.nvim_set_keymap("n", "<leader>fc", "<cmd>lua require('telescope.builtin').colorscheme({enable_preview = true})<cr>", opts)
-
-    require("telescope").load_extension("fzf")
 
     -- setup
     local previewers = require("telescope.previewers")
     local actions = require("telescope.actions")
     local sorters = require("telescope.sorters")
+    local cf_actions = require('telescope').extensions.changed_files.actions
 
     require("telescope").setup({
         defaults = {
@@ -51,7 +51,20 @@ function T.setup()
                 override_file_sorter = true,
             },
         },
+        pickers = {
+            git_branches = {
+              mappings = {
+                  i = {
+                      ["<cr>"] = cf_actions.find_changed_files
+                  }
+              }
+            }
+        }
     })
+
+    require("telescope").load_extension("fzf")
+    require("telescope").load_extension("changed_files")
+
 
     local M = {}
 

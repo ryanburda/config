@@ -1,4 +1,3 @@
--- Bootstrap packer
 local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
     vim.fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
@@ -51,6 +50,7 @@ require("packer").startup(function(use)
         requires = {
             'nvim-lua/plenary.nvim',
             {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
+            'freestingo/telescope-changed-files',
         },
         config = require('plugins.configs.telescope').setup
     }
