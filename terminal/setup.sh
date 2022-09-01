@@ -59,6 +59,7 @@ brew install rlwrap
 brew install lf
 brew install kubectl
 brew install kubectx
+brew install showkey
 
 brew tap homebrew/cask-fonts
 brew install --cask font-hack-nerd-font 
@@ -115,6 +116,7 @@ else
 fi
 
 # zsh plugins
+brew install zsh-vi-mode
 brew install pure
 brew install zsh-completions
 brew install zsh-autosuggestions

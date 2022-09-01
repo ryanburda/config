@@ -1,3 +1,7 @@
+# Uncomment to profile zsh startup.
+# NOTE: must also uncomment last line.
+# zmodload zsh/zprof
+
 # Automatically start a tmux session
 if [ "$TMUX" = "" ]; then tmux; fi
 
@@ -24,6 +28,7 @@ if type brew &>/dev/null; then
 fi
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
 # Alias
 alias ls="ls --color=always -lah"
@@ -31,11 +36,6 @@ alias vim="nvim"
 alias h="cht.sh"
 alias top="htop"
 alias s="tmuxinator start"
-
-# C-k usually does delete all after cursor but this has been remapped to
-# move between tmux panes. Bind this to ctrl-backspace instead.
-bindkey '^]' kill-line
-bindkey '^[' backward-kill-line
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -51,3 +51,7 @@ eval "$(pyenv virtualenv-init -)"
 # Raise max files and max procs
 ulimit -n 200000
 ulimit -u 2048
+
+# Uncomment to profile zsh startup.
+# NOTE: must also uncomment first line.
+# zprof
