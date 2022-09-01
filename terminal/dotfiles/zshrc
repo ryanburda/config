@@ -3,7 +3,7 @@
 # zmodload zsh/zprof
 
 # Automatically start a tmux session
-if [ "$TMUX" = "" ]; then tmux; fi
+# if [ "$TMUX" = "" ]; then tmux; fi
 
 # Set default editor
 export EDITOR=nvim
