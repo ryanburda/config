@@ -35,3 +35,4 @@ cmd
 colorscheme
 fzf
 sdk
+psql
