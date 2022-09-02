@@ -1,3 +1,6 @@
+\set PROMPT1 '%M:%> %n@%/\n%# '
+\set PROMPT2 '%# '
+\timing
 \setenv PAGER pspg
 \pset pager always
 \pset border 2
