@@ -60,6 +60,7 @@ brew install lf
 brew install kubectl
 brew install kubectx
 brew install showkey
+brew install pspg
 
 brew tap homebrew/cask-fonts
 brew install --cask font-hack-nerd-font 
@@ -90,6 +91,8 @@ mkdir -p $HOME/Developer/scratch/src
 # Symlink config files
 SCRIPT_DIR=${0:a:h}
 ln -svfF "${SCRIPT_DIR}/dotfiles/zshrc" "${HOME}/.zshrc"
+ln -svfF "${SCRIPT_DIR}/dotfiles/psqlrc" "${HOME}/.psqlrc"
+ln -svfF "${SCRIPT_DIR}/dotfiles/pspgconf" "${HOME}/.pspgconf"
 ln -svfF "${SCRIPT_DIR}/dotfiles/tmux.conf" "${HOME}/.tmux.conf"
 ln -svfF "${SCRIPT_DIR}/dotfiles/tmate.conf" "${HOME}/.tmate.conf"
 ln -svfF "${SCRIPT_DIR}/dotfiles/kitty.conf" "${HOME}/.config/kitty/kitty.conf"

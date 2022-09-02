@@ -1,0 +1,4 @@
+\setenv PAGER pspg
+\pset pager always
+\pset border 2
+\pset linestyle unicode
