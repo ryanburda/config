@@ -13,6 +13,7 @@ read -qs "tf?Install applications? ('y' to install, any other key to skip)"
 if [[ "$tf" =~ ^[Yy]$ ]]
 then
     brew install --cask kitty
+    brew install --cask docker
     brew install --cask google-chrome
     brew install --cask firefox
     brew install --cask karabiner-elements
