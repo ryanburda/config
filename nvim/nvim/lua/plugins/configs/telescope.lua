@@ -3,7 +3,7 @@ local T = {}
 function T.setup()
 
     -- mappings
-    local opts = { noremap=true, silent=true }
+    local opts = { noremap=true, silent=true }    
     vim.api.nvim_set_keymap("n", "<leader>f ", "<cmd>lua require('telescope.builtin').resume()<cr>"                            , opts)
     vim.api.nvim_set_keymap("n", "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<cr>"                        , opts)
     vim.api.nvim_set_keymap("n", "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<cr>"                         , opts)
