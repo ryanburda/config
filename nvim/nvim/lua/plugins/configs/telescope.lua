@@ -43,6 +43,11 @@ function T.setup()
                     ["<C-q>"] = actions.send_to_qflist,
                 },
             },
+
+            layout_strategy = 'vertical',
+            layout_config = {
+                vertical = { width = 0.5 }
+            },
         },
         extensions = {
             fzy_native = {

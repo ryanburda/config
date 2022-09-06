@@ -1,8 +1,10 @@
 local T = {}
+
 T.default = require('lsp.server_default')
 
 -- Setup the config
 T.config = T.default.config
+
 T.config.settings = {
     yaml = {
         schemas = {
