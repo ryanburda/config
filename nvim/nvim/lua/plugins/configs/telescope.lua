@@ -42,6 +42,7 @@ function T.setup()
                 i = {
                     ["<C-x>"] = false,
                     ["<C-q>"] = actions.send_to_qflist,
+                    ["<C-o>"] = function(prompt_bufnr) require("telescope.actions").select_default(prompt_bufnr) require("telescope.builtin").resume() end,
                 },
             },
 
