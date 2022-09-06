@@ -1,0 +1,9 @@
+[user]
+	email = rburda@squarespace.com
+	name = Ryan Burda
+[pull]
+	ff = only
+[core]
+	editor = nvim
+[init]
+	defaultBranch = main
