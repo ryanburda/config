@@ -43,6 +43,7 @@ function T.setup()
                     ["<C-x>"] = false,
                     ["<C-q>"] = actions.send_to_qflist,
                     ["<C-o>"] = function(prompt_bufnr) require("telescope.actions").select_default(prompt_bufnr) require("telescope.builtin").resume() end,
+                    ["<C-u>"] = function() require("telescope.builtin").find_files({cwd=vim.api.nvim_call_function('fnamemodify', {vim.fn.getcwd(), ':h;'})}) end,
                 },
             },
 
