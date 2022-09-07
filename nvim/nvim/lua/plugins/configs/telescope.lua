@@ -42,8 +42,16 @@ function T.setup()
                 i = {
                     ["<C-x>"] = false,
                     ["<C-q>"] = actions.send_to_qflist,
-                    ["<C-o>"] = function(prompt_bufnr) require("telescope.actions").select_default(prompt_bufnr) require("telescope.builtin").resume() end,
-                    ["<C-u>"] = function() require("telescope.builtin").find_files({cwd=vim.api.nvim_call_function('fnamemodify', {vim.fn.getcwd(), ':h;'})}) end,
+                    -- Open buffer and resume prompt
+                    ["<C-o>"] = function(prompt_bufnr)
+                        require("telescope.actions").select_default(prompt_bufnr)
+                        require("telescope.builtin").resume()
+                    end,
+                    -- Move cwd up one directory
+                    ["<C-u>"] = function()
+                        local cwd = vim.api.nvim_call_function('fnamemodify', {vim.fn.getcwd(), ':h'})
+                        require("telescope.builtin").find_files({cwd=cwd})
+                    end,
                 },
             },
 
@@ -59,13 +67,16 @@ function T.setup()
             },
         },
         pickers = {
+            find_files = {
+                find_command = { "rg", "--ignore", "-L", "--files" }
+            },
             git_branches = {
-              mappings = {
-                  i = {
-                      ["<cr>"] = cf_actions.find_changed_files
-                  }
-              }
-            }
+                mappings = {
+                    i = {
+                        ["<cr>"] = cf_actions.find_changed_files
+                    }
+                }
+            },
         }
     })
 

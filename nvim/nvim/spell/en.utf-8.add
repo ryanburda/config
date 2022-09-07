@@ -36,3 +36,7 @@ colorscheme
 fzf
 sdk
 psql
+cr
+rg
+cwd
+lua

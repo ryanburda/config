@@ -36,6 +36,7 @@ alias vim="nvim"
 alias h="cht.sh"
 alias top="htop"
 alias s="tmuxinator start"
+alias rg="rg -L"
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
