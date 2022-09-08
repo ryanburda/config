@@ -136,9 +136,6 @@ function T.setup()
                         actions.select_default(prompt_bufnr)
                         builtin.resume()
                     end,
-                    ["<C-z>"] = function(prompt_bufnr)
-                        print(actions_state.get_current_picker(prompt_bufnr).cwd)
-                    end,
                 },
             },
         },
