@@ -104,9 +104,9 @@ require("packer").startup(function(use)
     -- Buffer tabs
     use {
         'akinsho/bufferline.nvim',
-        tag = "*",
+        tag = "v2.*",
         requires = 'kyazdani42/nvim-web-devicons',
-        config = require('plugins.configs.bufferline').setup
+        config = require('plugins.configs.bufferline').setup,
     }
 
     -- Status line
@@ -155,8 +155,11 @@ require("packer").startup(function(use)
         config = require('plugins.configs.bufdelete').setup
     }
 
-    -- Scrolling
-    use 'dstein64/nvim-scrollview'  -- Scrollbar
+    --- Scrolling
+    use {
+        'dstein64/nvim-scrollview',  -- Scrollbar
+        commit = '14ce355d357c4b10e7dbf4ecc9c6b3533fa69f9f'  -- https://github.com/dstein64/nvim-scrollview/issues/77
+    }
     use {
         'karb94/neoscroll.nvim',    -- Smooth scrolling
         config = function() require('neoscroll').setup() end
@@ -169,7 +172,7 @@ require("packer").startup(function(use)
     }
 
     -- Golden Ratio splits
-     use {
+    use {
         'beauwilliams/focus.nvim',
         config = require("plugins.configs.focus").setup
     }

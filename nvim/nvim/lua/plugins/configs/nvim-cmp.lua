@@ -12,7 +12,7 @@ function T.setup()
         },
         window = {
             completion = cmp.config.window.bordered({
-                col_offset = 2,
+                --col_offset = 2,
             }),
             documentation = cmp.config.window.bordered(),
         },
@@ -86,9 +86,9 @@ function T.setup()
     cmp.setup.cmdline(':', {
         mapping = cmp.mapping.preset.cmdline(),
         sources = cmp.config.sources({
-            { name = 'path', max_item_count = 8, keyword_length = 1 }
+            { name = 'path', keyword_length = 1 }
         }, {
-            { name = 'cmdline', max_item_count = 8, keyword_length = 2 }
+            { name = 'cmdline', keyword_length = 2 }
         })
     })
 
