@@ -1,5 +1,18 @@
 local T = {}
 
+
+function T.getqflist_files()
+    local qfl = vim.fn.getqflist()
+    local files = {}
+
+    for k,v in pairs(qfl) do
+        table.insert(files, v.text)
+    end
+
+    return files
+end
+
+
 function T.setup()
 
     -- mappings
@@ -38,6 +51,12 @@ function T.setup()
     vim.api.nvim_set_keymap(
         "n",
         "<leader>fk",
+        "<cmd>lua require('telescope.builtin').live_grep({search_dirs = require('plugins.configs.telescope').getqflist_files()})<cr>" ,
+        opts
+    )
+    vim.api.nvim_set_keymap(
+        "n",
+        "<leader>fK",
         "<cmd>lua require('telescope.builtin').quickfix()<cr>",
         opts
     )
