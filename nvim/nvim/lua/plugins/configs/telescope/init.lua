@@ -116,11 +116,6 @@ function T.setup()
     local previewers = require("telescope.previewers")
     local cf_actions = require('telescope').extensions.changed_files.actions
 
-    local getcwd = function(prompt_bufnr)
-        local picker = actions_state.get_current_picker(prompt_bufnr)
-        return (picker.cwd and picker.cwd ~= '') and picker.cwd or vim.fn.getcwd()
-    end
-
     require("telescope").setup({
         defaults = {
             file_sorter = sorters.get_fzy_sorter,
@@ -141,6 +136,9 @@ function T.setup()
                         actions.select_default(prompt_bufnr)
                         builtin.resume()
                     end,
+                    ["<C-z>"] = function(prompt_bufnr)
+                        print(actions_state.get_current_picker(prompt_bufnr).cwd)
+                    end,
                 },
             },
         },
@@ -157,13 +155,13 @@ function T.setup()
                     i = {
                         ["<C-h>"] = function(prompt_bufnr)
                             -- Move cwd up one directory
-                            local cwd = getcwd(prompt_bufnr)
+                            local cwd = actions_state.get_current_picker(prompt_bufnr).cwd
                             local parent_dir = vim.fn.fnamemodify(cwd, ":h")
                             builtin.find_files({cwd = parent_dir, results_title = parent_dir })
                         end,
                         ["<C-g>"] = function(prompt_bufnr)
                             -- Toggle between find_files and live_grep
-                            local cwd = getcwd(prompt_bufnr)
+                            local cwd = actions_state.get_current_picker(prompt_bufnr).cwd
                             builtin.live_grep({cwd = cwd, results_title = cwd})
                         end,
                         ["<C-f>"] = function()
@@ -178,13 +176,13 @@ function T.setup()
                     i = {
                         ["<C-h>"] = function(prompt_bufnr)
                             -- Move cwd up one directory
-                            local cwd = getcwd(prompt_bufnr)
+                            local cwd = actions_state.get_current_picker(prompt_bufnr).cwd
                             local parent_dir = vim.fn.fnamemodify(cwd, ":h")
                             builtin.live_grep({cwd = parent_dir, results_title = parent_dir })
                         end,
                         ["<C-f>"] = function(prompt_bufnr)
                             -- Toggle between find_files and live_grep
-                            local cwd = getcwd(prompt_bufnr)
+                            local cwd = actions_state.get_current_picker(prompt_bufnr).cwd
                             builtin.find_files({cwd = cwd, results_title = cwd})
                         end,
                         ["<C-g>"] = function()
