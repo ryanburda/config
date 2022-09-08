@@ -20,10 +20,10 @@ function T.setup()
     })
 
     local opts = { noremap=true, silent=false }
-    vim.api.nvim_set_keymap('n', '<leader>i'      , ':BufferLineCyclePrev<cr>', opts)
-    vim.api.nvim_set_keymap('n', '<leader>o'      , ':BufferLineCycleNext<cr>', opts)
-    vim.api.nvim_set_keymap('n', '<leader>I'      , ':BufferLineMovePrev<cr>' , opts)
-    vim.api.nvim_set_keymap('n', '<leader>O'      , ':BufferLineMoveNext<cr>' , opts)
+    vim.api.nvim_set_keymap('n', '<leader>i', ':BufferLineCyclePrev<cr>', opts)
+    vim.api.nvim_set_keymap('n', '<leader>o', ':BufferLineCycleNext<cr>', opts)
+    vim.api.nvim_set_keymap('n', '<leader>I', ':BufferLineMovePrev<cr>' , opts)
+    vim.api.nvim_set_keymap('n', '<leader>O', ':BufferLineMoveNext<cr>' , opts)
 
 end
 
