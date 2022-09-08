@@ -123,6 +123,12 @@ function T.setup()
     vim.api.nvim_set_keymap(
         "n",
         "<leader>fc",
+        "<cmd>lua require('telescope.builtin').git_commits()<cr>",
+        opts
+    )
+    vim.api.nvim_set_keymap(
+        "n",
+        "<leader>ft",  -- `ft` for theme.
         "<cmd>lua require('telescope.builtin').colorscheme({enable_preview = true})<cr>",
         opts
     )
@@ -212,6 +218,13 @@ function T.setup()
                 },
             },
             git_branches = {
+                mappings = {
+                    i = {
+                        ["<cr>"] = cf_actions.find_changed_files
+                    }
+                }
+            },
+            git_commits = {
                 mappings = {
                     i = {
                         ["<cr>"] = cf_actions.find_changed_files
