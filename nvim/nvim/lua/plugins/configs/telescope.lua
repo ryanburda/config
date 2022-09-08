@@ -25,12 +25,6 @@ function T.setup()
     )
     vim.api.nvim_set_keymap(
         "n",
-        "<leader>fG",
-        "<cmd>lua require('telescope.builtin').live_grep({grep_open_files=true})<cr>",
-        opts
-    )
-    vim.api.nvim_set_keymap(
-        "n",
         "<leader>fh",
         "<cmd>lua require('telescope.builtin').diagnostics()<cr>",
         opts
@@ -120,6 +114,11 @@ function T.setup()
     local sorters = require("telescope.sorters")
     local cf_actions = require('telescope').extensions.changed_files.actions
 
+    local getcwd = function(prompt_bufnr)
+        local picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
+        return (picker.cwd and picker.cwd ~= '') and picker.cwd or vim.fn.getcwd()
+    end
+
     require("telescope").setup({
         defaults = {
             file_sorter = sorters.get_fzy_sorter,
@@ -156,11 +155,16 @@ function T.setup()
                     i = {
                         -- Move cwd up one directory
                         ["<C-h>"] = function(prompt_bufnr)
-                            local picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
-                            local cwd = (picker.cwd and picker.cwd ~= '') and picker.cwd or vim.fn.getcwd()
+                            local cwd = getcwd(prompt_bufnr)
                             local parent_dir = vim.fn.fnamemodify(cwd, ":h")
                             require("telescope.builtin").find_files({cwd = parent_dir, results_title = parent_dir })
                         end,
+                        -- Toggle between find_files and live_grep
+                        ["<C-g>"] = function(prompt_bufnr)
+                            local cwd = getcwd(prompt_bufnr)
+                            require("telescope.builtin").live_grep({cwd = cwd, results_title = cwd})
+                        end,
+                        ["<C-f>"] = function() end,
                     },
                 },
             },
@@ -170,11 +174,16 @@ function T.setup()
                     i = {
                         -- Move cwd up one directory
                         ["<C-h>"] = function(prompt_bufnr)
-                            local picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
-                            local cwd = (picker.cwd and picker.cwd ~= '') and picker.cwd or vim.fn.getcwd()
+                            local cwd = getcwd(prompt_bufnr)
                             local parent_dir = vim.fn.fnamemodify(cwd, ":h")
                             require("telescope.builtin").live_grep({cwd = parent_dir, results_title = parent_dir })
                         end,
+                        -- Toggle between find_files and live_grep
+                        ["<C-f>"] = function(prompt_bufnr)
+                            local cwd = getcwd(prompt_bufnr)
+                            require("telescope.builtin").find_files({cwd = cwd, results_title = cwd})
+                        end,
+                        ["<C-g>"] = function() end,
                     },
                 },
             },
