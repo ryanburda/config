@@ -4,24 +4,115 @@ function T.setup()
 
     -- mappings
     local opts = { noremap=true, silent=true }
-    vim.api.nvim_set_keymap("n", "<leader>f ", "<cmd>lua require('telescope.builtin').resume()<cr>"                            , opts)
-    vim.api.nvim_set_keymap("n", "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<cr>"                        , opts)
-    vim.api.nvim_set_keymap("n", "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<cr>"                         , opts)
-    vim.api.nvim_set_keymap("n", "<leader>fG", "<cmd>lua require('telescope.builtin').live_grep({grep_open_files=true})<cr>"   , opts)
-    vim.api.nvim_set_keymap("n", "<leader>fh", "<cmd>lua require('telescope.builtin').diagnostics()<cr>"                       , opts)
-    vim.api.nvim_set_keymap("n", "<leader>fj", "<cmd>lua require('telescope.builtin').grep_string()<cr>"                       , opts)
-    vim.api.nvim_set_keymap("n", "<leader>fk", "<cmd>lua require('telescope.builtin').quickfix()<cr>"                          , opts)
-    vim.api.nvim_set_keymap("n", "<leader>fl", "<cmd>lua require('telescope.builtin').loclist()<cr>"                           , opts)
-    vim.api.nvim_set_keymap("n", "<leader>fo", "<cmd>lua require('telescope.builtin').jumplist()<cr>"                          , opts)  -- 'fo' since <C-o> navigates jumplist
-    vim.api.nvim_set_keymap("n", "<leader>fe", "<cmd>lua require('telescope.builtin').oldfiles()<cr>"                          , opts)  -- 'fe' for file explore recent
-    vim.api.nvim_set_keymap("n", "<leader>f?", "<cmd>lua require('telescope.builtin').keymaps()<cr>"                           , opts)
-    vim.api.nvim_set_keymap("n", "<leader>fr", "<cmd>lua require('telescope.builtin').registers()<cr>"                         , opts)
-    vim.api.nvim_set_keymap("n", "<leader>fb", "<cmd>lua require('telescope.builtin').buffers()<cr>"                           , opts)
-    vim.api.nvim_set_keymap("n", "<leader>fv", "<cmd>lua require('telescope.builtin').help_tags()<cr>"                         , opts)
-    vim.api.nvim_set_keymap("n", "<leader>fm", "<cmd>lua require('telescope.builtin').man_pages()<cr>"                         , opts)
-    vim.api.nvim_set_keymap("n", "<leader>fd", "<cmd>lua require('telescope.builtin').git_status()<cr>"                        , opts)
-    vim.api.nvim_set_keymap("n", "<leader>fs", "<cmd>lua require('telescope.builtin').git_branches()<cr>"                      , opts)
-    vim.api.nvim_set_keymap("n", "<leader>fc", "<cmd>lua require('telescope.builtin').colorscheme({enable_preview = true})<cr>", opts)
+
+    vim.api.nvim_set_keymap(
+        "n",
+        "<leader>f ",
+        "<cmd>lua require('telescope.builtin').resume()<cr>",
+        opts
+    )
+    vim.api.nvim_set_keymap(
+        "n",
+        "<leader>ff",
+        "<cmd>lua require('telescope.builtin').find_files({cwd=vim.fn.getcwd(),results_title=vim.fn.getcwd()})<cr>",
+        opts
+    )
+    vim.api.nvim_set_keymap(
+        "n",
+        "<leader>fg",
+        "<cmd>lua require('telescope.builtin').live_grep({cwd=vim.fn.getcwd(),results_title=vim.fn.getcwd()})<cr>" ,
+        opts
+    )
+    vim.api.nvim_set_keymap(
+        "n",
+        "<leader>fG",
+        "<cmd>lua require('telescope.builtin').live_grep({grep_open_files=true})<cr>",
+        opts
+    )
+    vim.api.nvim_set_keymap(
+        "n",
+        "<leader>fh",
+        "<cmd>lua require('telescope.builtin').diagnostics()<cr>",
+        opts
+    )
+    vim.api.nvim_set_keymap(
+        "n",
+        "<leader>fj",
+        "<cmd>lua require('telescope.builtin').grep_string()<cr>",
+        opts
+    )
+    vim.api.nvim_set_keymap(
+        "n",
+        "<leader>fk",
+        "<cmd>lua require('telescope.builtin').quickfix()<cr>",
+        opts
+    )
+    vim.api.nvim_set_keymap(
+        "n",
+        "<leader>fl",
+        "<cmd>lua require('telescope.builtin').loclist()<cr>",
+        opts
+    )
+    vim.api.nvim_set_keymap(
+        "n",
+        "<leader>fo",  -- 'fo' since <C-o> navigates jumplist
+        "<cmd>lua require('telescope.builtin').jumplist()<cr>",
+        opts
+    )
+    vim.api.nvim_set_keymap(
+        "n",
+        "<leader>fe",  -- 'fe' for file explore recent
+        "<cmd>lua require('telescope.builtin').oldfiles()<cr>",
+        opts
+    )
+    vim.api.nvim_set_keymap(
+        "n",
+        "<leader>f?",
+        "<cmd>lua require('telescope.builtin').keymaps()<cr>",
+        opts
+    )
+    vim.api.nvim_set_keymap(
+        "n",
+        "<leader>fr",
+        "<cmd>lua require('telescope.builtin').registers()<cr>",
+        opts
+    )
+    vim.api.nvim_set_keymap(
+        "n",
+        "<leader>fb",
+        "<cmd>lua require('telescope.builtin').buffers()<cr>",
+        opts
+    )
+    vim.api.nvim_set_keymap(
+        "n",
+        "<leader>fv",
+        "<cmd>lua require('telescope.builtin').help_tags()<cr>",
+        opts
+    )
+    vim.api.nvim_set_keymap(
+        "n",
+        "<leader>fm",
+        "<cmd>lua require('telescope.builtin').man_pages()<cr>",
+        opts
+    )
+    vim.api.nvim_set_keymap(
+        "n",
+        "<leader>fd",
+        "<cmd>lua require('telescope.builtin').git_status()<cr>",
+        opts
+    )
+    vim.api.nvim_set_keymap(
+        "n",
+        "<leader>fs",
+        "<cmd>lua require('telescope.builtin').git_branches()<cr>",
+        opts
+    )
+    vim.api.nvim_set_keymap(
+        "n",
+        "<leader>fc",
+        "<cmd>lua require('telescope.builtin').colorscheme({enable_preview = true})<cr>",
+        opts
+    )
 
     -- setup
     local previewers = require("telescope.previewers")
@@ -33,31 +124,23 @@ function T.setup()
         defaults = {
             file_sorter = sorters.get_fzy_sorter,
             color_devicons = true,
-
             file_previewer = previewers.vim_buffer_cat.new,
             grep_previewer = previewers.vim_buffer_vimgrep.new,
             qflist_previewer = previewers.vim_buffer_qflist.new,
-
+            layout_strategy = 'vertical',
+            layout_config = {
+                vertical = { width = 0.6 }
+            },
             mappings = {
                 i = {
                     ["<C-x>"] = false,
-                    ["<C-q>"] = actions.send_to_qflist,
+                    ["<C-k>"] = actions.send_to_qflist,
                     -- Open buffer and resume prompt
                     ["<C-o>"] = function(prompt_bufnr)
                         require("telescope.actions").select_default(prompt_bufnr)
                         require("telescope.builtin").resume()
                     end,
-                    -- Move cwd up one directory
-                    ["<C-u>"] = function()
-                        local cwd = vim.api.nvim_call_function('fnamemodify', {vim.fn.getcwd(), ':h'})
-                        require("telescope.builtin").find_files({cwd=cwd})
-                    end,
                 },
-            },
-
-            layout_strategy = 'vertical',
-            layout_config = {
-                vertical = { width = 0.5 }
             },
         },
         extensions = {
@@ -68,7 +151,32 @@ function T.setup()
         },
         pickers = {
             find_files = {
-                find_command = { "rg", "--ignore", "-L", "--files" }
+                find_command = { "rg", "--ignore", "-L", "--files" },
+                mappings = {
+                    i = {
+                        -- Move cwd up one directory
+                        ["<C-h>"] = function(prompt_bufnr)
+                            local picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
+                            local cwd = (picker.cwd and picker.cwd ~= '') and picker.cwd or vim.fn.getcwd()
+                            local parent_dir = vim.fn.fnamemodify(cwd, ":h")
+                            require("telescope.builtin").find_files({cwd = parent_dir, results_title = parent_dir })
+                        end,
+                    },
+                },
+            },
+            live_grep = {
+                find_command = { "rg", "--ignore", "-L", "--files" },
+                mappings = {
+                    i = {
+                        -- Move cwd up one directory
+                        ["<C-h>"] = function(prompt_bufnr)
+                            local picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
+                            local cwd = (picker.cwd and picker.cwd ~= '') and picker.cwd or vim.fn.getcwd()
+                            local parent_dir = vim.fn.fnamemodify(cwd, ":h")
+                            require("telescope.builtin").live_grep({cwd = parent_dir, results_title = parent_dir })
+                        end,
+                    },
+                },
             },
             git_branches = {
                 mappings = {

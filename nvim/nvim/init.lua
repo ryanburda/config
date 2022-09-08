@@ -25,6 +25,7 @@ vim.opt.laststatus = 3
 -- vim.opt.list = true
 -- vim.opt.listchars = { space = '⋅', tab = '›~', eol = '↵' }
 
+vim.cmd('set noshowmode')
 vim.cmd('set noswapfile')
 
 -- keymap
