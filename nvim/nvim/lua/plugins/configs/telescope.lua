@@ -51,7 +51,7 @@ function T.setup()
     vim.api.nvim_set_keymap(
         "n",
         "<leader>fk",
-        "<cmd>lua require('telescope.builtin').live_grep({search_dirs = require('plugins.configs.telescope').getqflist_files()})<cr>" ,
+        "<cmd>lua require('telescope.builtin').live_grep({search_dirs = require('plugins.configs.telescope').getqflist_files(), results_title = 'Quickfix Files'})<cr>" ,
         opts
     )
     vim.api.nvim_set_keymap(
