@@ -11,7 +11,9 @@ function T.setup()
             end,
         },
         window = {
-            completion = cmp.config.window.bordered(),
+            completion = cmp.config.window.bordered({
+                col_offset = 2,
+            }),
             documentation = cmp.config.window.bordered(),
         },
         view = {
@@ -20,20 +22,20 @@ function T.setup()
         mapping = cmp.mapping.preset.insert({
             ['<C-n>'] = cmp.mapping.select_next_item(),
             ['<C-p>'] = cmp.mapping.select_prev_item(),
-            ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-            ['<C-f>'] = cmp.mapping.scroll_docs(4),
+            ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+            ['<C-d>'] = cmp.mapping.scroll_docs(4),
             ['<C-Space>'] = cmp.mapping.complete(),
             ['<C-e>'] = cmp.mapping.abort(),
             ['<CR>'] = cmp.mapping.confirm(),
         }),
         sources = cmp.config.sources({
-            { name = 'nvim_lsp', max_item_count = 8, },
-            { name = 'luasnip', max_item_count = 3, },
-            { name = 'buffer', keyword_length = 3, },
-            { name = 'path', max_item_count = 3, },
-            { name = 'nvim_lua', max_item_count = 3, },
-            { name = 'cmdline', max_item_count = 3, },
-            { name = "copilot", keyword_length = 1, group_index = 2, max_item_count = 3, },
+            { name = 'nvim_lsp', },
+            { name = 'luasnip', },
+            { name = 'buffer', },
+            { name = 'path', },
+            { name = 'nvim_lua', },
+            { name = 'cmdline', },
+            { name = "copilot", keyword_length = 1, group_index = 2, },
         }),
         formatting = {
             format = lspkind.cmp_format({

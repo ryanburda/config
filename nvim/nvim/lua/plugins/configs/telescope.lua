@@ -14,13 +14,13 @@ function T.setup()
     vim.api.nvim_set_keymap(
         "n",
         "<leader>ff",
-        "<cmd>lua require('telescope.builtin').find_files({cwd=vim.fn.getcwd(),results_title=vim.fn.getcwd()})<cr>",
+        "<cmd>lua require('telescope.builtin').find_files({ cwd = vim.fn.getcwd(), results_title = vim.fn.getcwd(), })<cr>",
         opts
     )
     vim.api.nvim_set_keymap(
         "n",
         "<leader>fg",
-        "<cmd>lua require('telescope.builtin').live_grep({cwd=vim.fn.getcwd(),results_title=vim.fn.getcwd()})<cr>" ,
+        "<cmd>lua require('telescope.builtin').live_grep({ cwd = vim.fn.getcwd(), results_title = vim.fn.getcwd(), })<cr>" ,
         opts
     )
     vim.api.nvim_set_keymap(
@@ -109,13 +109,15 @@ function T.setup()
     )
 
     -- setup
-    local previewers = require("telescope.previewers")
-    local actions = require("telescope.actions")
+    local builtin = require("telescope.builtin")
     local sorters = require("telescope.sorters")
+    local actions = require("telescope.actions")
+    local actions_state = require("telescope.actions.state")
+    local previewers = require("telescope.previewers")
     local cf_actions = require('telescope').extensions.changed_files.actions
 
     local getcwd = function(prompt_bufnr)
-        local picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
+        local picker = actions_state.get_current_picker(prompt_bufnr)
         return (picker.cwd and picker.cwd ~= '') and picker.cwd or vim.fn.getcwd()
     end
 
@@ -134,10 +136,10 @@ function T.setup()
                 i = {
                     ["<C-x>"] = false,
                     ["<C-k>"] = actions.send_to_qflist,
-                    -- Open buffer and resume prompt
                     ["<C-o>"] = function(prompt_bufnr)
-                        require("telescope.actions").select_default(prompt_bufnr)
-                        require("telescope.builtin").resume()
+                        -- Open buffer and resume prompt
+                        actions.select_default(prompt_bufnr)
+                        builtin.resume()
                     end,
                 },
             },
@@ -153,18 +155,20 @@ function T.setup()
                 find_command = { "rg", "--ignore", "-L", "--files" },
                 mappings = {
                     i = {
-                        -- Move cwd up one directory
                         ["<C-h>"] = function(prompt_bufnr)
+                            -- Move cwd up one directory
                             local cwd = getcwd(prompt_bufnr)
                             local parent_dir = vim.fn.fnamemodify(cwd, ":h")
-                            require("telescope.builtin").find_files({cwd = parent_dir, results_title = parent_dir })
+                            builtin.find_files({cwd = parent_dir, results_title = parent_dir })
                         end,
-                        -- Toggle between find_files and live_grep
                         ["<C-g>"] = function(prompt_bufnr)
+                            -- Toggle between find_files and live_grep
                             local cwd = getcwd(prompt_bufnr)
-                            require("telescope.builtin").live_grep({cwd = cwd, results_title = cwd})
+                            builtin.live_grep({cwd = cwd, results_title = cwd})
                         end,
-                        ["<C-f>"] = function() end,
+                        ["<C-f>"] = function()
+                            -- noop
+                        end,
                     },
                 },
             },
@@ -172,18 +176,20 @@ function T.setup()
                 find_command = { "rg", "--ignore", "-L", "--files" },
                 mappings = {
                     i = {
-                        -- Move cwd up one directory
                         ["<C-h>"] = function(prompt_bufnr)
+                            -- Move cwd up one directory
                             local cwd = getcwd(prompt_bufnr)
                             local parent_dir = vim.fn.fnamemodify(cwd, ":h")
-                            require("telescope.builtin").live_grep({cwd = parent_dir, results_title = parent_dir })
+                            builtin.live_grep({cwd = parent_dir, results_title = parent_dir })
                         end,
-                        -- Toggle between find_files and live_grep
                         ["<C-f>"] = function(prompt_bufnr)
+                            -- Toggle between find_files and live_grep
                             local cwd = getcwd(prompt_bufnr)
-                            require("telescope.builtin").find_files({cwd = cwd, results_title = cwd})
+                            builtin.find_files({cwd = cwd, results_title = cwd})
                         end,
-                        ["<C-g>"] = function() end,
+                        ["<C-g>"] = function()
+                            -- noop
+                        end,
                     },
                 },
             },
