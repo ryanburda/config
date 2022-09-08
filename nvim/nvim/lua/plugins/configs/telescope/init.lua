@@ -14,13 +14,13 @@ function T.setup()
     vim.api.nvim_set_keymap(
         "n",
         "<leader>ff",
-        "<cmd>lua require('telescope.builtin').find_files({ cwd = vim.fn.getcwd(), results_title = vim.fn.getcwd(), })<cr>",
+        "<cmd>lua require('telescope.builtin').find_files()<cr>",
         opts
     )
     vim.api.nvim_set_keymap(
         "n",
         "<leader>fg",
-        "<cmd>lua require('telescope.builtin').live_grep({ cwd = vim.fn.getcwd(), results_title = vim.fn.getcwd(), })<cr>" ,
+        "<cmd>lua require('telescope.builtin').live_grep()<cr>" ,
         opts
     )
     vim.api.nvim_set_keymap(
@@ -150,6 +150,8 @@ function T.setup()
         },
         pickers = {
             find_files = {
+                cwd = vim.fn.getcwd(),
+                results_title = vim.fn.getcwd(),
                 find_command = { "rg", "--ignore", "-L", "--files" },
                 mappings = {
                     i = {
@@ -171,6 +173,8 @@ function T.setup()
                 },
             },
             live_grep = {
+                cwd = vim.fn.getcwd(),
+                results_title = vim.fn.getcwd(),
                 find_command = { "rg", "--ignore", "-L", "--files" },
                 mappings = {
                     i = {
