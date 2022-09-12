@@ -46,14 +46,15 @@ function T.setup()
 
     local function move_cwd_up(prompt_bufnr, fn)
         -- Move cwd up one directory
-        local cwd = actions_state.get_current_picker(prompt_bufnr).cwd
-        local parent_dir = vim.fn.fnamemodify(cwd, ":h")
+        local picker = actions_state.get_current_picker(prompt_bufnr)
+        local parent_dir = vim.fn.fnamemodify(picker.cwd, ":h")
         fn({cwd = parent_dir, results_title = parent_dir })
     end
 
     local function switch_picker(prompt_bufnr, fn)
         -- Toggle between find_files and live_grep
-        local cwd = actions_state.get_current_picker(prompt_bufnr).cwd
+        local picker = actions_state.get_current_picker(prompt_bufnr)
+        local cwd = picker.cwd
         fn({cwd = cwd, results_title = cwd})
     end
 
