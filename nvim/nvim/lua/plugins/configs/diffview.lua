@@ -18,8 +18,8 @@ function T.setup()
                 folder_statuses = "only_folded",
             },
             win_config = {
-                position = "left",
-                width = 40,
+                position = "bottom",
+                height = 20
             },
         },
     })
