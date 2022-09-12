@@ -1,6 +1,8 @@
 local T = {}
 
+
 function T.setup()
+
 
     local opts = { noremap=true, silent=false }
     vim.api.nvim_set_keymap('n', '<leader>dd', ':DiffviewOpen<cr>'       , opts)
@@ -8,6 +10,8 @@ function T.setup()
     vim.api.nvim_set_keymap('n', '<leader>dO', ':DiffviewOpen '          , opts)
     vim.api.nvim_set_keymap('n', '<leader>dD', ':DiffviewFileHistory<cr>', opts)
     vim.api.nvim_set_keymap('n', '<leader>dx', ':DiffviewClose<cr>'      , opts)
+
+    local actions = require("diffview.actions")
 
     require("diffview").setup({
         enhanced_diff_hl = true,
@@ -20,6 +24,12 @@ function T.setup()
             win_config = {
                 position = "bottom",
                 height = 20
+            },
+        },
+        keymaps = {
+            view = {
+                ["<leader>dh"] = actions.conflict_choose("ours"),
+                ["<leader>dl"] = actions.conflict_choose("theirs"),
             },
         },
     })

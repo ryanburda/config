@@ -61,10 +61,6 @@ require("packer").startup(function(use)
         config = require('plugins.configs.lazygit').setup
     }
     use {
-        'tpope/vim-fugitive',
-        config = require('plugins.configs.vim-fugitive').setup
-    }
-    use {
         'lewis6991/gitsigns.nvim',
         config = require('plugins.configs.gitsigns').setup
     }
