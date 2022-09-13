@@ -2,7 +2,6 @@ vim.wo.wrap = false
 vim.opt.termguicolors = true
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.cursorline = true
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
@@ -19,8 +18,8 @@ vim.opt.clipboard = 'unnamedplus'
 vim.opt.whichwrap = '<,>,h,l,[,]'
 vim.opt.timeoutlen = 1000
 vim.opt.updatetime = 100
-vim.opt.spell = true
 vim.opt.laststatus = 3
+-- vim.opt.cursorline = true
 -- vim.opt.iskeyword:append("-")
 -- vim.opt.list = true
 -- vim.opt.listchars = { space = '⋅', tab = '›~', eol = '↵' }

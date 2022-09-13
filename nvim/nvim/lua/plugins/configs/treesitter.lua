@@ -1,9 +1,8 @@
 local T = {}
 
 function T.setup()
-    local configs = require('nvim-treesitter.configs')
 
-    configs.setup {
+    require('nvim-treesitter.configs').setup({
         ensure_installed = 'all',
         ignore_install = { 'phpdoc' },
         highlight = {
@@ -19,9 +18,10 @@ function T.setup()
                 scope_incremental = '<CR>',
                 node_incremental = '<TAB>',
                 node_decremental = '<S-TAB>',
-            }
-        }
-    }
+            },
+        },
+    })
+
 end
 
 return T
