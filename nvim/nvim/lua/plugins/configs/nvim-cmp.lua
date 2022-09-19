@@ -10,6 +10,9 @@ function T.setup()
                 require('luasnip').lsp_expand(args.body)
             end,
         },
+        experimental = {
+            ghost_text = true,
+        },
         window = {
             completion = cmp.config.window.bordered({
                 --col_offset = 2,

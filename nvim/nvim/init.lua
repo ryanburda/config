@@ -49,6 +49,9 @@ vim.api.nvim_set_keymap('n', 'H'              , 'zHgm'                , opts)  -
 -- quick notes
 vim.api.nvim_set_keymap('n', '<leader>n' , ':edit ~/Documents/main.txt<cr>G$', opts)
 
+-- open last closed buffer
+vim.api.nvim_set_keymap('n', '<leader>T', ':e #<cr>', opts)
+
 -- :help vim.diagnostic.*
 vim.api.nvim_set_keymap('n', '<leader>hh', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 vim.api.nvim_set_keymap('n', '<leader>hj', '<cmd>lua vim.diagnostic.goto_next()<CR>' , opts)
