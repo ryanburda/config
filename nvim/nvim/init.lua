@@ -19,6 +19,7 @@ vim.opt.whichwrap = '<,>,h,l,[,]'
 vim.opt.timeoutlen = 1000
 vim.opt.updatetime = 100
 vim.opt.laststatus = 3
+vim.opt.signcolumn = "yes"
 -- vim.opt.cursorline = true
 -- vim.opt.iskeyword:append("-")
 -- vim.opt.list = true
