@@ -32,7 +32,7 @@ function T.setup()
     vim.api.nvim_set_keymap("n", "<leader>fm", "<cmd>lua require('telescope.builtin').man_pages()<cr>"   , opts)
     vim.api.nvim_set_keymap("n", "<leader>fK", "<cmd>lua require('telescope.builtin').quickfix()<cr>"    , opts)
     vim.api.nvim_set_keymap("n", "<leader>fk", "<cmd>lua require('telescope.builtin').live_grep({search_dirs = require('plugins.configs.telescope').getqflist_files(), results_title = 'Quickfix Files'})<cr>" , opts)
-    vim.api.nvim_set_keymap("n", "<leader>ft", "<cmd>lua require('telescope.builtin').colorscheme({enable_preview = true})<cr>", opts)  -- `ft` for theme
+    vim.api.nvim_set_keymap("n", "<leader>fc", "<cmd>lua require('telescope.builtin').colorscheme({enable_preview = true})<cr>", opts)  -- `ft` for theme
     vim.api.nvim_set_keymap("n", "<leader>df", "<cmd>lua require('telescope.builtin').git_status()<cr>"  , opts)
     vim.api.nvim_set_keymap("n", "<leader>db", "<cmd>lua require('telescope.builtin').git_branches()<cr>", opts)
     vim.api.nvim_set_keymap("n", "<leader>dc", "<cmd>lua require('telescope.builtin').git_commits()<cr>" , opts)
@@ -82,9 +82,11 @@ function T.setup()
             },
         },
         extensions = {
-            fzy_native = {
-                override_generic_sorter = false,
+            fzf = {
+                fuzzy = true,
+                override_generic_sorter = true,
                 override_file_sorter = true,
+                case_mode = "smart_case",
             },
         },
         pickers = {
@@ -145,7 +147,7 @@ function T.setup()
         }
     })
 
-    require("telescope").load_extension("fzf")
+    require('telescope').load_extension('fzf')
     require("telescope").load_extension("changed_files")
 
 end
