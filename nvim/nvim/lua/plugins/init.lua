@@ -154,11 +154,14 @@ require("packer").startup(function(use)
     --- Scrolling
     use {
         'dstein64/nvim-scrollview',  -- Scrollbar
-        commit = '14ce355d357c4b10e7dbf4ecc9c6b3533fa69f9f'  -- https://github.com/dstein64/nvim-scrollview/issues/77
+    }
+    use {
+        'gen740/SmoothCursor.nvim',
+        config = function() require('smoothcursor').setup() end,
     }
     use {
         'karb94/neoscroll.nvim',    -- Smooth scrolling
-        config = function() require('neoscroll').setup() end
+        config = require('plugins.configs.neoscroll').setup
     }
 
     -- Floating Terminal
