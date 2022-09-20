@@ -6,10 +6,8 @@ function T.setup()
 
     local opts = { noremap=true, silent=false }
     vim.api.nvim_set_keymap('n', '<leader>dd', ':DiffviewOpen<cr>'         , opts)
-    vim.api.nvim_set_keymap('n', '<leader>do', ':DiffviewOpen origin/'     , opts)
-    vim.api.nvim_set_keymap('n', '<leader>dl', ':DiffviewOpen '            , opts)
-    vim.api.nvim_set_keymap('n', '<leader>df', ':DiffviewFileHistory %<cr>', opts)
-    vim.api.nvim_set_keymap('n', '<leader>dh', ':DiffviewFileHistory<cr>'  , opts)
+    vim.api.nvim_set_keymap('n', '<leader>dh', ':DiffviewFileHistory %<cr>', opts)
+    vim.api.nvim_set_keymap('n', '<leader>dH', ':DiffviewFileHistory<cr>'  , opts)
     vim.api.nvim_set_keymap('n', '<leader>dx', ':DiffviewClose<cr>'        , opts)
 
     local actions = require("diffview.actions")

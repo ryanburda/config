@@ -7,7 +7,7 @@ function T.setup()
         vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>dj', ':Gitsigns next_hunk<CR>'                , opts)
         vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>dk', ':Gitsigns prev_hunk<CR>'                , opts)
         vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>di', ':Gitsigns preview_hunk<CR>'             , opts)  -- `di` for diff inspect
-        vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>db', ':Gitsigns toggle_current_line_blame<CR>', opts)
+        vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>gb', ':Gitsigns toggle_current_line_blame<CR>', opts)
         vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>dr', ':Gitsigns reset_hunk<CR>'               , opts)
         vim.api.nvim_buf_set_keymap(bufnr, 'v', '<leader>dr', ':Gitsigns reset_hunk<CR>'               , opts)
     end

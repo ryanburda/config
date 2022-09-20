@@ -30,12 +30,12 @@ function T.setup()
     vim.api.nvim_set_keymap("n", "<leader>fb", "<cmd>lua require('telescope.builtin').buffers()<cr>"     , opts)
     vim.api.nvim_set_keymap("n", "<leader>fv", "<cmd>lua require('telescope.builtin').help_tags()<cr>"   , opts)
     vim.api.nvim_set_keymap("n", "<leader>fm", "<cmd>lua require('telescope.builtin').man_pages()<cr>"   , opts)
-    vim.api.nvim_set_keymap("n", "<leader>fd", "<cmd>lua require('telescope.builtin').git_status()<cr>"  , opts)
-    vim.api.nvim_set_keymap("n", "<leader>fs", "<cmd>lua require('telescope.builtin').git_branches()<cr>", opts)
-    vim.api.nvim_set_keymap("n", "<leader>fc", "<cmd>lua require('telescope.builtin').git_commits()<cr>" , opts)
     vim.api.nvim_set_keymap("n", "<leader>fK", "<cmd>lua require('telescope.builtin').quickfix()<cr>"    , opts)
     vim.api.nvim_set_keymap("n", "<leader>fk", "<cmd>lua require('telescope.builtin').live_grep({search_dirs = require('plugins.configs.telescope').getqflist_files(), results_title = 'Quickfix Files'})<cr>" , opts)
     vim.api.nvim_set_keymap("n", "<leader>ft", "<cmd>lua require('telescope.builtin').colorscheme({enable_preview = true})<cr>", opts)  -- `ft` for theme
+    vim.api.nvim_set_keymap("n", "<leader>df", "<cmd>lua require('telescope.builtin').git_status()<cr>"  , opts)
+    vim.api.nvim_set_keymap("n", "<leader>db", "<cmd>lua require('telescope.builtin').git_branches()<cr>", opts)
+    vim.api.nvim_set_keymap("n", "<leader>dc", "<cmd>lua require('telescope.builtin').git_commits()<cr>" , opts)
 
     local builtin = require("telescope.builtin")
     local sorters = require("telescope.sorters")
@@ -115,7 +115,15 @@ function T.setup()
             git_branches = {
                 mappings = {
                     i = {
-                        ["<cr>"] = cf_actions.find_changed_files
+                        ["<cr>"] = cf_actions.find_changed_files,
+                        ["<c-d>"] = function(prompt_bufnr)
+                            -- get the selected file name
+                            local entry = require("telescope.actions.state").get_selected_entry()
+                            -- close telescope
+                            require("telescope.actions").close(prompt_bufnr)
+                            -- open diffview
+                            vim.cmd('DiffviewOpen ' .. entry.name)
+                        end,
                     }
                 }
             },
