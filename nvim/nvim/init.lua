@@ -45,6 +45,8 @@ vim.api.nvim_set_keymap('n', '<leader>L'      , ':vsplit<cr><C-w>l'   , opts)
 vim.api.nvim_set_keymap('n', 'Y'              , 'yy'                  , opts)
 vim.api.nvim_set_keymap('n', 'L'              , 'zLgm'                , opts)  -- horizontal scroll right
 vim.api.nvim_set_keymap('n', 'H'              , 'zHgm'                , opts)  -- horizontal scroll left
+vim.api.nvim_set_keymap('n', '<leader>cl'     , ':set background=light<CR>', opts)
+vim.api.nvim_set_keymap('n', '<leader>cd'     , ':set background=dark<CR>' , opts)
 
 -- quick notes
 vim.api.nvim_set_keymap('n', '<leader>n' , ':edit ~/Documents/main.txt<cr>G$', opts)
@@ -94,3 +96,13 @@ vim.api.nvim_set_keymap('n', '<leader>lG' , ':llast<CR>'   , opts)
 vim.api.nvim_set_keymap('n', '<leader>lc' , ':lexpr []<CR>', opts)  -- clear location-list
 
 require('plugins')
+
+-- Set Background
+-- Light
+-- vim.cmd('colorscheme dawnfox')
+-- vim.cmd('set background=light')
+
+-- Dark
+vim.cmd('colorscheme terafox')
+vim.cmd('set background=dark')
+

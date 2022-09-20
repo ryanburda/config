@@ -19,18 +19,6 @@ require("packer").startup(function(use)
     use 'ellisonleao/gruvbox.nvim'
     use 'Everblush/everblush.vim'
 
-    -- Light
-    -- vim.cmd('colorscheme dawnfox')
-    -- vim.cmd('set background=light')
-
-    -- Dark
-    vim.cmd('colorscheme nightfox')
-    vim.cmd('set background=dark')
-
-
-    vim.api.nvim_set_keymap('n', '<leader>cl', ':set background=light<CR>', opts)
-    vim.api.nvim_set_keymap('n', '<leader>cd', ':set background=dark<CR>' , opts)
-
     -- Treesitter
     use {
         'nvim-treesitter/nvim-treesitter',
