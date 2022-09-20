@@ -4,7 +4,7 @@ function T.setup()
 
     require('neoscroll').setup({
         easing_function = "cubic",
-        time = 125
+        time = 100
     })
 
 end
