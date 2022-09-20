@@ -130,7 +130,15 @@ function T.setup()
             git_commits = {
                 mappings = {
                     i = {
-                        ["<cr>"] = cf_actions.find_changed_files
+                        ["<cr>"] = cf_actions.find_changed_files,
+                        ["<c-d>"] = function(prompt_bufnr)
+                            -- get the selected file name
+                            local entry = require("telescope.actions.state").get_selected_entry()
+                            -- close telescope
+                            require("telescope.actions").close(prompt_bufnr)
+                            -- open diffview
+                            vim.cmd('DiffviewOpen ' .. entry.value)
+                        end,
                     }
                 }
             },
