@@ -100,10 +100,10 @@ require('plugins')
 
 -- Set Background
 -- Light
--- vim.cmd('colorscheme dawnfox')
--- vim.cmd('set background=light')
+vim.cmd('colorscheme dawnfox')
+vim.cmd('set background=light')
 
 -- Dark
-vim.cmd('colorscheme terafox')
-vim.cmd('set background=dark')
+-- vim.cmd('colorscheme nightfox')
+-- vim.cmd('set background=dark')
 
