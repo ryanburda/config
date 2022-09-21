@@ -18,6 +18,7 @@ require("packer").startup(function(use)
     use 'martinsione/darkplus.nvim'
     use 'ellisonleao/gruvbox.nvim'
     use 'Everblush/everblush.vim'
+    use 'folke/tokyonight.nvim'
 
     -- Treesitter
     use {
