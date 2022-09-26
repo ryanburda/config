@@ -15,10 +15,6 @@ require("packer").startup(function(use)
 
     -- Color Schemes
     use "EdenEast/nightfox.nvim"
-    use 'martinsione/darkplus.nvim'
-    use 'ellisonleao/gruvbox.nvim'
-    use 'Everblush/everblush.vim'
-    use 'folke/tokyonight.nvim'
 
     -- Treesitter
     use {
@@ -45,10 +41,6 @@ require("packer").startup(function(use)
     }
 
     -- Git
-    use {
-        'kdheepak/lazygit.nvim',
-        config = require('plugins.configs.lazygit').setup
-    }
     use {
         'lewis6991/gitsigns.nvim',
         config = require('plugins.configs.gitsigns').setup
