@@ -107,3 +107,5 @@ vim.cmd('set background=light')
 -- vim.cmd('colorscheme nightfox')
 -- vim.cmd('set background=dark')
 
+-- Project specific setup scripts
+require('projects.bde-airflow').setup()

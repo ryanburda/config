@@ -28,6 +28,11 @@ require("packer").startup(function(use)
         'lewis6991/spellsitter.nvim',
         config = require('plugins.configs.spellsitter').setup,
     }
+    use {
+        'https://codeberg.org/esensar/nvim-dev-container',
+        config = require('devcontainer').setup({}),
+    }
+    use 'jamestthompson3/nvim-remote-containers'
 
     -- Telescope
     use {
