@@ -30,7 +30,7 @@ require("packer").startup(function(use)
     }
     use {
         'https://codeberg.org/esensar/nvim-dev-container',
-        config = require('devcontainer').setup({}),
+        config = require('plugins.configs.nvim-dev-container').setup,
     }
     use 'jamestthompson3/nvim-remote-containers'
 
