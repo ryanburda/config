@@ -124,4 +124,5 @@ brew install pure
 brew install zsh-completions
 brew install zsh-autosuggestions
 brew install zsh-syntax-highlighting
+brew install zsh-history-substring-search
 chmod -R go-w $(brew --prefix)/share/zsh
