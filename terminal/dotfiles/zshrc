@@ -5,6 +5,12 @@
 # Automatically start a tmux session
 # if [ "$TMUX" = "" ]; then tmux; fi
 
+# Set the command history to a very high value and add to the history immediately.
+export HISTFILESIZE=1000000000
+export HISTSIZE=1000000000
+setopt INC_APPEND_HISTORY
+export HISTTIMEFORMAT="[%F %T] "
+
 # Set default editor
 export EDITOR=nvim
 
@@ -27,9 +33,11 @@ if type brew &>/dev/null; then
     zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 fi
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $(brew --prefix)/opt/zsh-history-substring-search/share/zsh-history-substring-search/zsh-history-substring-search.zsh
-source $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
 
 # Alias
 alias ls="ls --color=always -lah"
