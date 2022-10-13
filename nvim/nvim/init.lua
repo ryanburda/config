@@ -100,12 +100,12 @@ require('plugins')
 
 -- Set Background
 -- Light
-vim.cmd('colorscheme dayfox')
-vim.cmd('set background=light')
+--vim.cmd('colorscheme dayfox')
+--vim.cmd('set background=light')
 
 -- Dark
--- vim.cmd('colorscheme nightfox')
--- vim.cmd('set background=dark')
+vim.cmd('colorscheme nightfox')
+vim.cmd('set background=dark')
 
 -- Project specific setup scripts
 require('projects.bde-airflow').setup()
