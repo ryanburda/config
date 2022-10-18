@@ -4,7 +4,7 @@ T.lsp_status = require('lsp-status')
 T.lsp_signature = require('lsp_signature')
 
 T.capabilities = vim.lsp.protocol.make_client_capabilities()
-T.capabilities = require('cmp_nvim_lsp').update_capabilities(T.capabilities)
+T.capabilities = require('cmp_nvim_lsp').default_capabilities(T.capabilities)
 T.capabilities = vim.tbl_extend('keep', T.capabilities or {}, T.lsp_status.capabilities)
 
 function T.setup_keymaps(bufnr)
