@@ -64,6 +64,7 @@ brew install kubectx
 brew install showkey
 brew install pspg
 brew install diff-so-fancy
+brew install deno
 
 brew tap homebrew/cask-fonts
 brew install --cask font-hack-nerd-font 

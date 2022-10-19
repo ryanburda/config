@@ -158,6 +158,13 @@ require("packer").startup(function(use)
         config = require("plugins.configs.focus").setup
     }
 
+    use {
+        'toppair/peek.nvim',
+        run = 'deno task --quiet build:fast',
+        branch = 'separate-process',
+        config = require("plugins.configs.peek").setup
+    }
+
     ----------------------------
     -- Package Manager: Mason --
     ----------------------------
