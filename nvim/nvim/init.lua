@@ -97,15 +97,3 @@ vim.api.nvim_set_keymap('n', '<leader>lG' , ':llast<CR>'   , opts)
 vim.api.nvim_set_keymap('n', '<leader>lc' , ':lexpr []<CR>', opts)  -- clear location-list
 
 require('plugins')
-
--- Set Background
--- Light
---vim.cmd('colorscheme dayfox')
---vim.cmd('set background=light')
-
--- Dark
-vim.cmd('colorscheme nightfox')
-vim.cmd('set background=dark')
-
--- Project specific setup scripts
-require('projects.bde-airflow').setup()

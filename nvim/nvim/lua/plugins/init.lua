@@ -15,6 +15,12 @@ require("packer").startup(function(use)
 
     -- Color Schemes
     use "EdenEast/nightfox.nvim"
+    -- Light
+    -- vim.cmd('colorscheme dayfox')
+    -- vim.cmd('set background=light')
+    -- Dark
+    vim.cmd('colorscheme nightfox')
+    vim.cmd('set background=dark')
 
     -- Treesitter
     use {
@@ -250,5 +256,8 @@ require("packer").startup(function(use)
         }
     }
     require('plugins.configs.copilot').keymap()
+
+    -- Project specific setup scripts
+    require('projects.bde-airflow').setup()
 
 end)
