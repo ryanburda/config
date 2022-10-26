@@ -249,7 +249,7 @@ require("packer").startup(function(use)
             },
         }
     }
-    require('plugins.configs.copilot').keymap()
+    require('plugins.configs.copilot').keymap()  -- Needs to outside of setup since plugin is optional.
 
     -- Project specific setup scripts
     require('projects.bde-airflow').setup()
