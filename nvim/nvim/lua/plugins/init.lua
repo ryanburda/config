@@ -66,12 +66,6 @@ require("packer").startup(function(use)
         config = require('plugins.configs.diffview').setup
     }
 
-    -- Greeter
-    use {
-        'goolord/alpha-nvim',
-        config = require("plugins.configs.alpha").setup
-    }
-
     -- File Tree
     use {
         'kyazdani42/nvim-tree.lua',
@@ -167,7 +161,6 @@ require("packer").startup(function(use)
     use {
         'toppair/peek.nvim',
         run = 'deno task --quiet build:fast',
-        branch = 'separate-process',
         config = require("plugins.configs.peek").setup
     }
 
