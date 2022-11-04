@@ -26,12 +26,20 @@ function T.setup()
     end
     vim.api.nvim_set_keymap("n", "<leader>cc", "<cmd>lua _LAZYDOCKER_TOGGLE()<CR>", opts)
 
-    -- Lazykube
-    local lazykube = Terminal:new({ cmd = "lazykube", hidden = true, direction = "float", })
-    function _LAZYKUBE_TOGGLE()
-        lazykube:toggle()
+    -- -- Lazykube
+    -- local lazykube = Terminal:new({ cmd = "lazykube", hidden = true, direction = "float", })
+    -- function _LAZYKUBE_TOGGLE()
+    --     lazykube:toggle()
+    -- end
+    -- vim.api.nvim_set_keymap("n", "<leader>k8", "<cmd>lua _LAZYKUBE_TOGGLE()<CR>", opts)
+
+    -- K9
+    local k9 = Terminal:new({ cmd = "k9s", hidden = true, direction = "float", })
+    function _K9_TOGGLE()
+        k9:toggle()
     end
-    vim.api.nvim_set_keymap("n", "<leader>k8", "<cmd>lua _LAZYKUBE_TOGGLE()<CR>", opts)
+    vim.api.nvim_set_keymap("n", "<leader>k8", "<cmd>lua _K9_TOGGLE()<CR>", opts)
+
 
 end
 
