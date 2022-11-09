@@ -7,7 +7,7 @@ function T.setup()
     vim.api.nvim_set_keymap(
         'n',
         '<leader>0',
-        [[<CMD>lua require('close_buffers').delete({type = 'hidden'})<CR>]],
+        '<CMD>lua require("close_buffers").delete({type = "hidden"})<CR>',
         opts
     )
 

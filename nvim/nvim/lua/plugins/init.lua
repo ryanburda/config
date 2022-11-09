@@ -34,11 +34,6 @@ require("packer").startup(function(use)
         'lewis6991/spellsitter.nvim',
         config = require('plugins.configs.spellsitter').setup,
     }
-    use {
-        'https://codeberg.org/esensar/nvim-dev-container',
-        config = require('plugins.configs.nvim-dev-container').setup,
-    }
-    use 'jamestthompson3/nvim-remote-containers'
 
     -- Telescope
     use {
@@ -110,9 +105,6 @@ require("packer").startup(function(use)
         config = require('plugins.configs.vim-illuminate').setup
     }
 
-    -- Motion
-    use 'justinmk/vim-sneak'
-
     -- Indentation lines
     use {
         'lukas-reineke/indent-blankline.nvim',
@@ -138,11 +130,11 @@ require("packer").startup(function(use)
     }
 
     --- Scrolling
-    use {
-        'dstein64/nvim-scrollview',  -- Scrollbar
+    use {  -- Scrollbar
+        'dstein64/nvim-scrollview',
     }
-    use {
-        'karb94/neoscroll.nvim',    -- Smooth scrolling
+    use {  -- Smooth scrolling
+        'karb94/neoscroll.nvim',
         config = require('plugins.configs.neoscroll').setup
     }
 
@@ -152,12 +144,7 @@ require("packer").startup(function(use)
         config = require("plugins.configs.toggleterm").setup
     }
 
-    -- Golden Ratio splits
-    use {
-        'beauwilliams/focus.nvim',
-        config = require("plugins.configs.focus").setup
-    }
-
+    -- Markdown preview
     use {
         'toppair/peek.nvim',
         run = 'deno task --quiet build:fast',
