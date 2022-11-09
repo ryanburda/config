@@ -7,6 +7,8 @@ function T.setup()
             icons_enabled = true,
             theme = 'auto',
             globalstatus = true,
+            section_separators = '',
+            component_separators = '',
         },
         extensions = {},
         sections = {

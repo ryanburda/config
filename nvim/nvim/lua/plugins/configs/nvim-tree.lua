@@ -32,7 +32,6 @@ function T.setup()
         view = {
             width = 36,
         },
-        open_on_setup = true,
     })
 
 end
