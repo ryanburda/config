@@ -30,10 +30,6 @@ require("packer").startup(function(use)
     }
     use 'nvim-treesitter/nvim-treesitter-context'
     use 'nvim-treesitter/playground'
-    use {
-        'lewis6991/spellsitter.nvim',
-        config = require('plugins.configs.spellsitter').setup,
-    }
 
     -- Telescope
     use {
