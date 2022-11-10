@@ -34,9 +34,9 @@ vim.g.maplocalleader = " "
 
 local opts = { noremap=true, silent=false }
 
-vim.api.nvim_set_keymap('n', '<leader>w'      , ':w<cr>'              , opts)
-vim.api.nvim_set_keymap('n', '<leader>x'      , ':q<cr>'              , opts)
-vim.api.nvim_set_keymap('n', '<leader>X'      , ':q!<cr>'             , opts)
+--vim.api.nvim_set_keymap('n', '<leader>w'      , ':w<cr>'              , opts)
+--vim.api.nvim_set_keymap('n', '<leader>x'      , ':q<cr>'              , opts)
+--vim.api.nvim_set_keymap('n', '<leader>X'      , ':q!<cr>'             , opts)
 vim.api.nvim_set_keymap('n', '<leader><S-Tab>', ':tabprevious<cr>'    , opts)
 vim.api.nvim_set_keymap('n', '<leader><Tab>'  , ':tabnext<cr>'        , opts)
 vim.api.nvim_set_keymap('n', '<leader>T'      , ':tab split<cr>'      , opts)

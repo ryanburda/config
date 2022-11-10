@@ -107,12 +107,6 @@ require("packer").startup(function(use)
         config = require('plugins.configs.indent-blankline').setup
     }
 
-    -- Close buffers
-    use {
-        'kazhala/close-buffers.nvim',
-        config = require('plugins.configs.close-buffers').setup
-    }
-
     -- Buffer deletion without changing layout
     use {
         'famiu/bufdelete.nvim',
