@@ -173,7 +173,6 @@ require("packer").startup(function(use)
             'L3MON4D3/LuaSnip',
             'saadparwaiz1/cmp_luasnip',
             'ray-x/lsp_signature.nvim',
-            '~/Developer/src/nvim/plugins/lsp-status.nvim',
             'nanotee/sqls.nvim',
             'onsails/lspkind.nvim',
         },

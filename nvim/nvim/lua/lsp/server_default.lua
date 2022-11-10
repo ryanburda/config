@@ -1,11 +1,9 @@
 local T = {}
 
-T.lsp_status = require('lsp-status')
 T.lsp_signature = require('lsp_signature')
 
 T.capabilities = vim.lsp.protocol.make_client_capabilities()
 T.capabilities = require('cmp_nvim_lsp').default_capabilities(T.capabilities)
-T.capabilities = vim.tbl_extend('keep', T.capabilities or {}, T.lsp_status.capabilities)
 
 function T.setup_keymaps(bufnr)
     -- mappings. See `:help vim.lsp.*` for documentation on any of the below functions.
@@ -23,9 +21,6 @@ function T.on_attach(client, bufnr)
 
     -- show signature help using the ray-x/lsp_signature.nvim plugin
     T.lsp_signature.on_attach()
-
-    -- lsp info in status line
-    T.lsp_status.on_attach(client)
 end
 
 -- Setup the config
