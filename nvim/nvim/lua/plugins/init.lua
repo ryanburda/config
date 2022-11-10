@@ -107,12 +107,6 @@ require("packer").startup(function(use)
         config = require('plugins.configs.indent-blankline').setup
     }
 
-    -- Lists contents of file in right side gutter
-    use {
-        'simrat39/symbols-outline.nvim',
-        config = require('plugins.configs.symbols-outline').setup
-    }
-
     -- Close buffers
     use {
         'kazhala/close-buffers.nvim',
