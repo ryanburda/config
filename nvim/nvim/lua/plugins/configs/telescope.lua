@@ -65,10 +65,6 @@ function T.setup()
             file_previewer = previewers.vim_buffer_cat.new,
             grep_previewer = previewers.vim_buffer_vimgrep.new,
             qflist_previewer = previewers.vim_buffer_qflist.new,
-            layout_strategy = 'vertical',
-            layout_config = {
-                vertical = { width = 0.6 }
-            },
             mappings = {
                 i = {
                     ["<C-x>"] = false,
