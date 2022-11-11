@@ -1,6 +1,7 @@
 local T = {}
 
 function T.setup()
+
     local servers = {
         "bashls",
         "clangd",

@@ -1,6 +1,7 @@
 local T = {}
 
 function T.setup()
+
     require('bufferline').setup({
         options = {
             offsets = {

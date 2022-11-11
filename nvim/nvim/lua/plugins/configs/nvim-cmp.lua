@@ -1,6 +1,7 @@
 local T = {}
 
 function T.setup()
+
     local cmp = require('cmp')
     local lspkind = require('lspkind')
 

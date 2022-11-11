@@ -20,10 +20,8 @@ vim.opt.timeoutlen = 1000
 vim.opt.updatetime = 100
 vim.opt.laststatus = 3
 vim.opt.signcolumn = "yes"
--- vim.opt.cursorline = true
--- vim.opt.iskeyword:append("-")
--- vim.opt.list = true
--- vim.opt.listchars = { space = '⋅', tab = '›~', eol = '↵' }
+vim.opt.list = false
+vim.opt.listchars = { space = '⋅', tab = '›~', eol = '↵' }
 
 vim.cmd('set noshowmode')
 vim.cmd('set noswapfile')
@@ -34,18 +32,14 @@ vim.g.maplocalleader = " "
 
 local opts = { noremap=true, silent=false }
 
---vim.api.nvim_set_keymap('n', '<leader>w'      , ':w<cr>'              , opts)
---vim.api.nvim_set_keymap('n', '<leader>x'      , ':q<cr>'              , opts)
---vim.api.nvim_set_keymap('n', '<leader>X'      , ':q!<cr>'             , opts)
-vim.api.nvim_set_keymap('n', '<leader><S-Tab>', ':tabprevious<cr>'    , opts)
-vim.api.nvim_set_keymap('n', '<leader><Tab>'  , ':tabnext<cr>'        , opts)
-vim.api.nvim_set_keymap('n', '<leader>T'      , ':tab split<cr>'      , opts)
-vim.api.nvim_set_keymap('n', '<leader>/'      , ':source $MYVIMRC<cr>', opts)
-vim.api.nvim_set_keymap('n', '<leader>J'      , ':split<cr><C-w>j'    , opts)
-vim.api.nvim_set_keymap('n', '<leader>L'      , ':vsplit<cr><C-w>l'   , opts)
-vim.api.nvim_set_keymap('n', 'Y'              , 'yy'                  , opts)
-vim.api.nvim_set_keymap('n', 'L'              , 'zLgm'                , opts)  -- horizontal scroll right
-vim.api.nvim_set_keymap('n', 'H'              , 'zHgm'                , opts)  -- horizontal scroll left
+vim.api.nvim_set_keymap('n', '<leader><S-Tab>', ':tabprevious<cr>'         , opts)
+vim.api.nvim_set_keymap('n', '<leader><Tab>'  , ':tabnext<cr>'             , opts)
+vim.api.nvim_set_keymap('n', '<leader>T'      , ':tab split<cr>'           , opts)
+vim.api.nvim_set_keymap('n', '<leader>/'      , ':source $MYVIMRC<cr>'     , opts)
+vim.api.nvim_set_keymap('n', '<leader>J'      , ':split<cr><C-w>j'         , opts)
+vim.api.nvim_set_keymap('n', '<leader>L'      , ':vsplit<cr><C-w>l'        , opts)
+vim.api.nvim_set_keymap('n', 'L'              , 'zLgm'                     , opts)  -- horizontal scroll right
+vim.api.nvim_set_keymap('n', 'H'              , 'zHgm'                     , opts)  -- horizontal scroll left
 vim.api.nvim_set_keymap('n', '<leader>cl'     , ':set background=light<CR>', opts)
 vim.api.nvim_set_keymap('n', '<leader>cd'     , ':set background=dark<CR>' , opts)
 

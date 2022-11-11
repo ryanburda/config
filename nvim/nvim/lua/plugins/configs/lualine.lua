@@ -27,6 +27,7 @@ function T.setup()
         },
         tabline = {},
     }
+
 end
 
 return T
