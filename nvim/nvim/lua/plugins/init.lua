@@ -89,12 +89,6 @@ require("packer").startup(function(use)
         config = require('plugins.configs.lualine').setup
     }
 
-    -- Dim inactive windows
-    use {
-        'sunjon/shade.nvim',
-        config = require('plugins.configs.shade').setup
-    }
-
     -- Web Search
     use {
         'voldikss/vim-browser-search',
