@@ -21,6 +21,7 @@ then
     brew install --cask rectangle
     brew install --cask spotify
     brew install --cask utm
+    brew install --cask shifty
 fi
 
 # Install common dependencies
