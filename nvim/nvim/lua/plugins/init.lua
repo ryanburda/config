@@ -27,6 +27,11 @@ return require('packer').startup(function(use)
         config = require('plugins.configs.colorscheme').setup,
     }
 
+    use {
+        'folke/styler.nvim',
+        config = require('plugins.configs.styler').setup,
+    }
+
     -- Treesitter
     use {
         'nvim-treesitter/nvim-treesitter',

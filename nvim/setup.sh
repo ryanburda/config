@@ -27,7 +27,7 @@ else
     brew update
 fi
 
-brew install ninja libtool automake cmake pkg-config gettext curl
+brew install --quiet ninja libtool automake cmake pkg-config gettext curl
 
 ##############################
 # Install NeoVim from source #

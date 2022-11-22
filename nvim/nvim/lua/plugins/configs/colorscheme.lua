@@ -2,9 +2,9 @@ local T = {}
 
 function T.setup()
 
-    local dark = true
+    local dark_mode = true
 
-    if dark then
+    if dark_mode then
         vim.cmd('colorscheme nightfox')
         vim.cmd('set background=dark')
     else
