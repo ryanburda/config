@@ -149,10 +149,11 @@ return require('packer').startup(function(use)
     ----------------------------
     -- Package Manager: Mason --
     ----------------------------
+    local mason = require("plugins.configs.mason")
     use {
         "williamboman/mason.nvim",
-        config = require("plugins.configs.mason").setup,
-        run = require("plugins.configs.mason").install_daps
+        config = mason.setup,
+        run = mason.install_daps
     }
     -- LSP
     use {
@@ -228,7 +229,6 @@ return require('packer').startup(function(use)
 
     -- Project specific setup scripts
     require('projects.bde-airflow').setup()
-
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins

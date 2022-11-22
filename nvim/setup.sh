@@ -35,7 +35,7 @@ brew install --quiet ninja libtool automake cmake pkg-config gettext curl
 # Clone or pull the neovim repo
 git clone git@github.com:neovim/neovim.git $NVIM_REPO_PATH 2> /dev/null || git -C $NVIM_REPO_PATH pull
 
-# Symlink your neovim config 
+# Symlink your neovim config to the expected location
 mkdir -pv $(dirname $NVIM_CONFIG_DIR_PATH_DST)
 ln -svfF $NVIM_CONFIG_DIR_PATH_SRC $NVIM_CONFIG_DIR_PATH_DST
 
@@ -50,4 +50,4 @@ sudo make install
 # Post Install #
 ################
 # Install plugins
-nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync' >&/dev/null
