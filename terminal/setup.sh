@@ -19,8 +19,6 @@ then
     brew install --cask karabiner-elements
     brew install --cask alfred
     brew install --cask rectangle
-    brew install --cask spotify
-    brew install --cask utm
     brew install --cask shifty
 fi
 

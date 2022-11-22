@@ -1,4 +1,5 @@
 #!/bin/zsh
+
 SCRIPT_DIR=${0:a:h}
 NVIM_CONFIG_DIR_PATH_SRC="$SCRIPT_DIR/nvim"
 NVIM_CONFIG_DIR_PATH_DST="$HOME/.config"
@@ -12,32 +13,41 @@ mkdir -p $SRC_DIR_PATH
 mkdir -p $NVIM_PLUGINS_PATH
 mkdir -p $NVIM_INSTALL_DIR_PATH
 
-# Install NeoVim from source
-sudo rm -rf "$HOME/.local/share/nvim"
-sudo rm -rf $NVIM_REPO_PATH
-echo 'Cloning neovim'
-git clone git@github.com:neovim/neovim.git $NVIM_REPO_PATH
+#######################
+# Build Prerequisites #
+#######################
+# Xcode
+xcode-select --install
 
-cd $NVIM_REPO_PATH
-make CMAKE_BUILD_TYPE=RelWithDebInfo
-make CMAKE_INSTALL_PREFIX=$NVIM_INSTALL_DIR_PATH
-sudo make install
-export PATH="$NVIM_INSTALL_DIR_PATH/bin:$PATH"
-cd $SCRIPT_DIR
+# Homebrew
+which -s brew
+if [[ $? != 0 ]] ; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+else
+    brew update
+fi
 
-# Symlink the config directory
+brew install ninja libtool automake cmake pkg-config gettext curl
+
+##############################
+# Install NeoVim from source #
+##############################
+# Clone or pull the neovim repo
+git clone git@github.com:neovim/neovim.git $NVIM_REPO_PATH 2> /dev/null || git -C $NVIM_REPO_PATH pull
+
+# Symlink your neovim config 
 mkdir -pv $(dirname $NVIM_CONFIG_DIR_PATH_DST)
 ln -svfF $NVIM_CONFIG_DIR_PATH_SRC $NVIM_CONFIG_DIR_PATH_DST
 
-# NOTE: needed for pyright lsp.
-# set pyright config file to the current active venv by running the following:
-# ```
-# pyenv pyright
-# ```
-PYENV_PYRIGHT_PATH=$(pyenv root)/plugins/pyenv-pyright
-if [ ! -d $PYENV_PYRIGHT_PATH ]; then
-    git clone https://github.com/alefpereira/pyenv-pyright.git $PYENV_PYRIGHT_PATH
-else
-    echo 'Pyenv pyright already installed.'
-    git -C $PYENV_PYRIGHT_PATH pull
-fi
+# Remove any files that neovim may have created previously
+sudo rm -rf "$HOME/.local/share/nvim"
+
+# Install neovim
+cd $NVIM_REPO_PATH && make CMAKE_BUILD_TYPE=RelWithDebInfo
+sudo make install
+
+################
+# Post Install #
+################
+# Install plugins
+nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'

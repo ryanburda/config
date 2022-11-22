@@ -1,9 +1,17 @@
-local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-    vim.fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+local ensure_packer = function()
+    local fn = vim.fn
+    local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+    if fn.empty(fn.glob(install_path)) > 0 then
+        fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+        vim.cmd [[packadd packer.nvim]]
+        return true
+    end
+    return false
 end
 
-require("packer").startup(function(use)
+local packer_bootstrap = ensure_packer()
+
+return require('packer').startup(function(use)
 
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
@@ -14,13 +22,10 @@ require("packer").startup(function(use)
     vim.api.nvim_set_keymap('n', '<leader>ps', ':lua require("packer").sync()<cr>', opts)
 
     -- Color Schemes
-    use "EdenEast/nightfox.nvim"
-    -- Light
-    -- vim.cmd('colorscheme dayfox')
-    -- vim.cmd('set background=light')
-    -- Dark
-    vim.cmd('colorscheme nightfox')
-    vim.cmd('set background=dark')
+    use {
+        'EdenEast/nightfox.nvim',
+        config = require('plugins.configs.colorscheme').setup,
+    }
 
     -- Treesitter
     use {
@@ -42,9 +47,20 @@ require("packer").startup(function(use)
         config = require('plugins.configs.telescope').setup
     }
 
+    -- Scrolling
+    use {  -- Scrollbar
+        'petertriho/nvim-scrollbar',
+        config = function() require("scrollbar").setup() end
+    }
+    use {  -- Smooth scrolling
+        'karb94/neoscroll.nvim',
+        config = require('plugins.configs.neoscroll').setup
+    }
+
     -- Git
     use {
         'lewis6991/gitsigns.nvim',
+        requires = { 'petertriho/nvim-scrollbar', },
         config = require('plugins.configs.gitsigns').setup
     }
     use {
@@ -111,16 +127,6 @@ require("packer").startup(function(use)
     use {
         'famiu/bufdelete.nvim',
         config = require('plugins.configs.bufdelete').setup
-    }
-
-    --- Scrolling
-    use {  -- Scrollbar
-        'petertriho/nvim-scrollbar',
-        config = function() require("scrollbar").setup() end
-    }
-    use {  -- Smooth scrolling
-        'karb94/neoscroll.nvim',
-        config = require('plugins.configs.neoscroll').setup
     }
 
     -- Floating Terminal
@@ -217,5 +223,12 @@ require("packer").startup(function(use)
 
     -- Project specific setup scripts
     require('projects.bde-airflow').setup()
+
+
+    -- Automatically set up your configuration after cloning packer.nvim
+    -- Put this at the end after all plugins
+    if packer_bootstrap then
+        require('packer').sync()
+    end
 
 end)
