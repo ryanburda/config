@@ -5,7 +5,7 @@ function T.getqflist_files()
     local qfl = vim.fn.getqflist()
     local files = {}
 
-    for k,v in pairs(qfl) do
+    for _,v in pairs(qfl) do
         table.insert(files, v.text)
     end
 
