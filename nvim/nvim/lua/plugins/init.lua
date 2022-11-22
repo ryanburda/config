@@ -225,6 +225,13 @@ return require('packer').startup(function(use)
     }
     require('plugins.configs.copilot').keymap()  -- Needs to outside of setup since plugin is optional.
 
+    -- Cheat.sh
+    use {
+        'RishabhRD/nvim-cheat.sh',
+        requires = { 'RishabhRD/popfix', },
+        config = require('plugins.configs.cheatsh').setup,
+    }
+
     -- Project specific setup scripts
     require('projects.bde-airflow').setup()
 
