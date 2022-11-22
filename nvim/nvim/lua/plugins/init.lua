@@ -14,12 +14,10 @@ local packer_bootstrap = ensure_packer()
 return require('packer').startup(function(use)
 
     -- Packer can manage itself
-    use 'wbthomason/packer.nvim'
-
-    local opts = { noremap=true, silent=false }
-    vim.api.nvim_set_keymap('n', '<leader>pc', ':lua require("packer").compile()<cr>', opts)
-    vim.api.nvim_set_keymap('n', '<leader>pu', ':lua require("packer").update()<cr>', opts)
-    vim.api.nvim_set_keymap('n', '<leader>ps', ':lua require("packer").sync()<cr>', opts)
+    use {
+        'wbthomason/packer.nvim',
+        config = require('plugins.configs.packer-nvim').setup,
+    }
 
     -- Color Schemes
     use {
