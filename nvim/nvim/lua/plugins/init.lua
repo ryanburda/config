@@ -31,7 +31,6 @@ return require('packer').startup(function(use)
     use {
         'nvim-treesitter/nvim-treesitter',
         config = require('plugins.configs.treesitter').setup,
-        run = ':TSUpdate'
     }
     use 'nvim-treesitter/nvim-treesitter-context'
     use 'nvim-treesitter/playground'
@@ -76,7 +75,7 @@ return require('packer').startup(function(use)
     -- File Tree
     use {
         'kyazdani42/nvim-tree.lua',
-        requires = { 'kyazdani42/nvim-web-devicons' },
+        requires = { 'kyazdani42/nvim-web-devicons', },
         config = require('plugins.configs.nvim-tree').setup
     }
 
@@ -152,9 +151,15 @@ return require('packer').startup(function(use)
     }
     -- LSP
     use {
+        "williamboman/mason-lspconfig.nvim",
+        requires = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
+        config = require("plugins.configs.mason-lspconfig").setup
+    }
+    use {
         "neovim/nvim-lspconfig",
         requires = {
             "hrsh7th/nvim-cmp",
+            "williamboman/mason.nvim",
         },
     }
     use {
@@ -172,11 +177,6 @@ return require('packer').startup(function(use)
             'onsails/lspkind.nvim',
         },
         config = require('plugins.configs.nvim-cmp').setup
-    }
-    use {
-        "williamboman/mason-lspconfig.nvim",
-        requires = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
-        config = require("plugins.configs.mason-lspconfig").setup
     }
     -- Debug
     use {
