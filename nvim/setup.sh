@@ -17,7 +17,11 @@ mkdir -p $NVIM_INSTALL_DIR_PATH
 # Build Prerequisites #
 #######################
 # Xcode
-xcode-select --install
+if [[ $(xcode-select -p 1>/dev/null;echo $?) != 0 ]] ; then
+    xcode-select --install
+else
+    echo "Command Line Tools already installed"
+fi
 
 # Homebrew
 which -s brew
