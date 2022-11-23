@@ -17,7 +17,7 @@ mkdir -p $NVIM_INSTALL_DIR_PATH
 # Build Prerequisites #
 #######################
 # Xcode
-xcode-select -p 1>/dev/null
+which -s xcode-select
 if [[ $? != 0 ]] ; then
     xcode-select --install
 else

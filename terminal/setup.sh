@@ -69,14 +69,10 @@ brew tap homebrew/cask-fonts
 brew install --cask font-hack-nerd-font 
 brew install --cask font-jetbrains-mono
 brew install --cask font-sf-mono
+brew install --cask font-fira-code
 
 # Rust
 curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
-# Check version
-# rustc --version
-# Read Docs
-# rustup doc
-
 
 # Create bin directory
 # All custom scripts should be put here
@@ -96,6 +92,7 @@ SCRIPT_DIR=${0:a:h}
 ln -svfF "${SCRIPT_DIR}/dotfiles/zshrc" "${HOME}/.zshrc"
 ln -svfF "${SCRIPT_DIR}/dotfiles/tmux.conf" "${HOME}/.tmux.conf"
 ln -svfF "${SCRIPT_DIR}/dotfiles/tmate.conf" "${HOME}/.tmate.conf"
+ln -svfF "${SCRIPT_DIR}/dotfiles/alacritty.yml" "${HOME}/.config/alacritty/alacritty.yml"
 ln -svfF "${SCRIPT_DIR}/dotfiles/kitty.conf" "${HOME}/.config/kitty/kitty.conf"
 ln -svfF "${SCRIPT_DIR}/dotfiles/karabiner.json" "${HOME}/.config/karabiner/karabiner.json"
 ln -svfF "${SCRIPT_DIR}/dotfiles/gitconfig" "${HOME}/.gitconfig"
