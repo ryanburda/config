@@ -17,7 +17,8 @@ mkdir -p $NVIM_INSTALL_DIR_PATH
 # Build Prerequisites #
 #######################
 # Xcode
-if [[ $(xcode-select -p 1>/dev/null;echo $?) != 0 ]] ; then
+xcode-select -p 1>/dev/null
+if [[ $? != 0 ]] ; then
     xcode-select --install
 else
     echo "Command Line Tools already installed"
