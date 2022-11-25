@@ -45,7 +45,6 @@ brew install pyenv
 brew install pyenv-virtualenv
 brew install lazygit
 brew install lazydocker
-# brew install tnk-studio/tools/lazykube
 brew install k9s
 brew install fd
 brew install tig
@@ -66,10 +65,10 @@ brew install diff-so-fancy
 brew install deno
 
 brew tap homebrew/cask-fonts
+brew install --cask font-fira-code-nerd-font
 brew install --cask font-hack-nerd-font 
 brew install --cask font-jetbrains-mono
 brew install --cask font-sf-mono
-brew install --cask font-fira-code
 
 # Rust
 curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
