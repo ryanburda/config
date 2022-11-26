@@ -65,10 +65,9 @@ brew install diff-so-fancy
 brew install deno
 
 brew tap homebrew/cask-fonts
-brew install --cask font-fira-code-nerd-font
 brew install --cask font-hack-nerd-font 
-brew install --cask font-jetbrains-mono
-brew install --cask font-sf-mono
+brew install --cask font-fira-code-nerd-font
+brew install --cask font-jetbrains-mono-nerd-font
 
 # Rust
 curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
