@@ -1,5 +1,13 @@
 #!/bin/zsh
 
+# Command Line Tools
+which -s xcode-select
+if [[ $? != 0 ]] ; then
+    xcode-select --install
+else
+    echo "Command Line Tools already installed"
+fi
+
 # Install Homebrew
 which -s brew
 if [[ $? != 0 ]] ; then
@@ -8,27 +16,9 @@ else
     brew update
 fi
 
-# Applications
-read -qs "tf?Install applications? ('y' to install, any other key to skip)"
-if [[ "$tf" =~ ^[Yy]$ ]]
-then
-    brew install --cask kitty
-    brew install --cask docker
-    brew install --cask google-chrome
-    brew install --cask firefox
-    brew install --cask karabiner-elements
-    brew install --cask alfred
-    brew install --cask rectangle
-    brew install --cask shifty
-fi
-
-# Install common dependencies
-xcode-select --install
-
 brew install tmux
 brew install tmate
 brew install tmuxinator
-
 brew install ninja
 brew install libtool
 brew install automake
@@ -64,6 +54,7 @@ brew install pspg
 brew install diff-so-fancy
 brew install deno
 
+# Fonts
 brew tap homebrew/cask-fonts
 brew install --cask font-hack-nerd-font 
 brew install --cask font-fira-code-nerd-font
@@ -87,11 +78,10 @@ mkdir -p $HOME/Developer/scratch/src
 
 # Symlink config files
 SCRIPT_DIR=${0:a:h}
+ln -vfF "${SCRIPT_DIR}/dotfiles/alacritty.yml" "${HOME}/.config/alacritty/alacritty.yml"
 ln -svfF "${SCRIPT_DIR}/dotfiles/zshrc" "${HOME}/.zshrc"
 ln -svfF "${SCRIPT_DIR}/dotfiles/tmux.conf" "${HOME}/.tmux.conf"
 ln -svfF "${SCRIPT_DIR}/dotfiles/tmate.conf" "${HOME}/.tmate.conf"
-ln -vfF "${SCRIPT_DIR}/dotfiles/alacritty.yml" "${HOME}/.config/alacritty/alacritty.yml"
-ln -vfF "${SCRIPT_DIR}/dotfiles/kitty.conf" "${HOME}/.config/kitty/kitty.conf"
 ln -svfF "${SCRIPT_DIR}/dotfiles/karabiner.json" "${HOME}/.config/karabiner/karabiner.json"
 ln -svfF "${SCRIPT_DIR}/dotfiles/gitconfig" "${HOME}/.gitconfig"
 ln -svfF "${SCRIPT_DIR}/dotfiles/lazygit.yml" "${HOME}/Library/Application Support/lazygit/config.yml"
@@ -122,3 +112,16 @@ brew install zsh-autosuggestions
 brew install zsh-syntax-highlighting
 brew install zsh-history-substring-search
 chmod -R go-w $(brew --prefix)/share/zsh
+
+# Applications
+read -qs "tf?Install applications? ('y' to install, any other key to skip)"
+if [[ "$tf" =~ ^[Yy]$ ]]
+then
+    brew install --cask docker
+    brew install --cask google-chrome
+    brew install --cask firefox
+    brew install --cask karabiner-elements
+    brew install --cask alfred
+    brew install --cask rectangle
+    brew install --cask shifty
+fi
