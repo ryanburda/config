@@ -16,6 +16,20 @@ else
     brew update
 fi
 
+# Applications
+read -qs "tf?Install applications? ('y' to install, any other key to skip)"
+if [[ "$tf" =~ ^[Yy]$ ]]
+then
+    brew install --cask alacritty
+    brew install --cask docker
+    brew install --cask google-chrome
+    brew install --cask firefox
+    brew install --cask karabiner-elements
+    brew install --cask alfred
+    brew install --cask rectangle
+    brew install --cask shifty
+fi
+
 brew install tmux
 brew install tmate
 brew install tmuxinator
@@ -78,7 +92,6 @@ mkdir -p $HOME/Developer/scratch/src
 
 # Symlink config files
 SCRIPT_DIR=${0:a:h}
-ln -vfF "${SCRIPT_DIR}/dotfiles/alacritty.yml" "${HOME}/.config/alacritty/alacritty.yml"
 ln -svfF "${SCRIPT_DIR}/dotfiles/zshrc" "${HOME}/.zshrc"
 ln -svfF "${SCRIPT_DIR}/dotfiles/tmux.conf" "${HOME}/.tmux.conf"
 ln -svfF "${SCRIPT_DIR}/dotfiles/tmate.conf" "${HOME}/.tmate.conf"
@@ -87,6 +100,9 @@ ln -svfF "${SCRIPT_DIR}/dotfiles/gitconfig" "${HOME}/.gitconfig"
 ln -svfF "${SCRIPT_DIR}/dotfiles/lazygit.yml" "${HOME}/Library/Application Support/lazygit/config.yml"
 ln -svfF "${SCRIPT_DIR}/dotfiles/psqlrc" "${HOME}/.psqlrc"
 ln -svfF "${SCRIPT_DIR}/dotfiles/pspgconf" "${HOME}/.pspgconf"
+
+mkdir -p ~/.config/alacritty
+ln -vfF "${SCRIPT_DIR}/dotfiles/alacritty.yml" "${HOME}/.config/alacritty/alacritty.yml"
 
 # cloud-sql-proxy
 brew install --cask google-cloud-sdk
@@ -112,16 +128,3 @@ brew install zsh-autosuggestions
 brew install zsh-syntax-highlighting
 brew install zsh-history-substring-search
 chmod -R go-w $(brew --prefix)/share/zsh
-
-# Applications
-read -qs "tf?Install applications? ('y' to install, any other key to skip)"
-if [[ "$tf" =~ ^[Yy]$ ]]
-then
-    brew install --cask docker
-    brew install --cask google-chrome
-    brew install --cask firefox
-    brew install --cask karabiner-elements
-    brew install --cask alfred
-    brew install --cask rectangle
-    brew install --cask shifty
-fi
