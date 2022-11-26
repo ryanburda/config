@@ -1,4 +1,5 @@
 #!/bin/zsh
-source terminal/setup.sh
-source nvim/setup.sh
-source macos/setup.sh
+
+./terminal/setup.sh
+./nvim/setup.sh
+./macos/setup.sh
