@@ -84,12 +84,8 @@ return require('packer').startup(function(use)
 
     -- Tmux
     use {
-        'christoomey/vim-tmux-navigator',
-        config = require('plugins.configs.vim-tmux-navigator').setup
-    }
-    use {
-        'christoomey/vim-tmux-runner',
-        config = require('plugins.configs.vim-tmux-runner').setup
+        'alexghergh/nvim-tmux-navigation',
+        config = require('plugins.configs.nvim-tmux-navigation').setup,
     }
 
     -- Buffer tabs
