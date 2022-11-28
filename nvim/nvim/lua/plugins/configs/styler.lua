@@ -4,7 +4,8 @@ function T.setup()
 
     require("styler").setup({
         themes = {
-            help = { colorscheme = "nordfox" },
+            help = { colorscheme = "terafox" },
+            markdown = { colorscheme = "nordfox" },
         },
     })
 
