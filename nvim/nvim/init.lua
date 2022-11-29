@@ -34,7 +34,6 @@ local opts = { noremap=true, silent=false }
 
 vim.api.nvim_set_keymap('n', '<leader><S-Tab>', ':tabprevious<cr>'         , opts)
 vim.api.nvim_set_keymap('n', '<leader><Tab>'  , ':tabnext<cr>'             , opts)
-vim.api.nvim_set_keymap('n', '<leader>T'      , ':tab split<cr>'           , opts)
 vim.api.nvim_set_keymap('n', '<leader>/'      , ':source $MYVIMRC<cr>'     , opts)
 vim.api.nvim_set_keymap('n', '<leader>J'      , ':split<cr><C-w>j'         , opts)
 vim.api.nvim_set_keymap('n', '<leader>L'      , ':vsplit<cr><C-w>l'        , opts)
@@ -43,11 +42,11 @@ vim.api.nvim_set_keymap('n', 'H'              , 'zHgm'                     , opt
 vim.api.nvim_set_keymap('n', '<leader>cl'     , ':set background=light<CR>', opts)
 vim.api.nvim_set_keymap('n', '<leader>cd'     , ':set background=dark<CR>' , opts)
 
+vim.api.nvim_set_keymap('n', '<leader>u', ':e #<cr>'       , opts)  -- open last closed buffer
+vim.api.nvim_set_keymap('n', '<leader>0', ':%bd|e#|bd#<cr>', opts)  -- close all buffers except current
+
 -- quick notes
 vim.api.nvim_set_keymap('n', '<leader>n' , ':edit ~/Documents/main.txt<cr>G$', opts)
-
--- open last closed buffer
-vim.api.nvim_set_keymap('n', '<leader>T', ':e #<cr>', opts)
 
 -- :help vim.diagnostic.*
 vim.api.nvim_set_keymap('n', '<leader>hh', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
