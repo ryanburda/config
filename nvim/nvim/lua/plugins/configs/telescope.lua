@@ -89,7 +89,7 @@ function T.setup()
             find_files = {
                 cwd = vim.fn.getcwd(),
                 results_title = vim.fn.getcwd(),
-                find_command = { "rg", "--ignore", "-L", "--files" },
+                find_command = { "rg", "--ignore", "--follow", "--files", "--hidden", "-g", "!.git/" },
                 mappings = {
                     i = {
                         ["<C-h>"] = function(prompt_bufnr) move_cwd_up(prompt_bufnr, builtin.find_files) end,
@@ -101,7 +101,7 @@ function T.setup()
             live_grep = {
                 cwd = vim.fn.getcwd(),
                 results_title = vim.fn.getcwd(),
-                find_command = { "rg", "--ignore", "-L", "--files" },
+                find_command = { "rg", "--ignore", "-L", "--files", "--hidden", "-g", "!.git/" },
                 mappings = {
                     i = {
                         ["<C-h>"] = function(prompt_bufnr) move_cwd_up(prompt_bufnr, builtin.live_grep) end,
