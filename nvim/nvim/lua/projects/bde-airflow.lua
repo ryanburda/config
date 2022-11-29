@@ -11,7 +11,7 @@ function T.setup()
             0,
             'n',
             '<leader> l',
-            ':cexpr system("docker compose exec -it af_scheduler /bin/bash -c \'flake8\' | sed s#\\./#code/#")<cr>',
+            ':cexpr system("docker compose -f docker/docker-compose.yaml exec -it af_scheduler /bin/bash -c \'flake8\' | sed s#\\./#docker/code/#")<cr>',
             { noremap=true, silent=false }
         )
 
