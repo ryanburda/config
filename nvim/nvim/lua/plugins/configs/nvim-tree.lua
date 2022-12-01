@@ -32,6 +32,11 @@ function T.setup()
         view = {
             width = 36,
         },
+        actions = {
+            remove_file = {
+                close_window = false,
+            },
+        },
     })
 
 end
