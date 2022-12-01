@@ -14,6 +14,7 @@ vim.opt.showmatch = true
 vim.opt.incsearch = true
 vim.opt.hlsearch = true
 vim.opt.mouse = "a"
+vim.opt.mousemoveevent = true
 vim.opt.clipboard = 'unnamedplus'
 vim.opt.whichwrap = '<,>,h,l,[,]'
 vim.opt.timeoutlen = 1000
