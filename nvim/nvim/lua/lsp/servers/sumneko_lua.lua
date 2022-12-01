@@ -12,6 +12,9 @@ T.config.settings = {
         diagnostics = {
             -- Get the language server to recognize the `vim` global
             globals = { 'require', 'vim', },
+            telemetry = {
+                enable = false
+            },
         },
     },
 }
