@@ -228,6 +228,11 @@ return require('packer').startup(function(use)
         config = require('plugins.configs.cheatsh').setup,
     }
 
+    use {
+        'eandrju/cellular-automaton.nvim',
+        config = require('plugins.configs.cellular-automaton').setup,
+    }
+
     -- Project specific setup scripts
     require('projects.bde-airflow').setup()
 
