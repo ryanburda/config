@@ -33,18 +33,15 @@ vim.g.maplocalleader = " "
 
 local opts = { noremap=true, silent=false }
 
-vim.api.nvim_set_keymap('n', '<leader><S-Tab>', ':tabprevious<cr>'         , opts)
-vim.api.nvim_set_keymap('n', '<leader><Tab>'  , ':tabnext<cr>'             , opts)
-vim.api.nvim_set_keymap('n', '<leader>/'      , ':source $MYVIMRC<cr>'     , opts)
-vim.api.nvim_set_keymap('n', '<leader>J'      , ':split<cr><C-w>j'         , opts)
-vim.api.nvim_set_keymap('n', '<leader>L'      , ':vsplit<cr><C-w>l'        , opts)
-vim.api.nvim_set_keymap('n', 'L'              , 'zLgm'                     , opts)  -- horizontal scroll right
-vim.api.nvim_set_keymap('n', 'H'              , 'zHgm'                     , opts)  -- horizontal scroll left
-vim.api.nvim_set_keymap('n', '<leader>cl'     , ':set background=light<CR>', opts)
-vim.api.nvim_set_keymap('n', '<leader>cd'     , ':set background=dark<CR>' , opts)
-
-vim.api.nvim_set_keymap('n', '<leader>u', ':e #<cr>'       , opts)  -- open last closed buffer
-vim.api.nvim_set_keymap('n', '<leader>0', ':%bd|e#|bd#<cr>', opts)  -- close all buffers except current
+vim.api.nvim_set_keymap('n', '<leader><S-Tab>', ':tabprevious<cr>'    , opts)
+vim.api.nvim_set_keymap('n', '<leader><Tab>'  , ':tabnext<cr>'        , opts)
+vim.api.nvim_set_keymap('n', '<leader>/'      , ':source $MYVIMRC<cr>', opts)
+vim.api.nvim_set_keymap('n', '<leader>J'      , ':split<cr><C-w>j'    , opts)
+vim.api.nvim_set_keymap('n', '<leader>L'      , ':vsplit<cr><C-w>l'   , opts)
+vim.api.nvim_set_keymap('n', '<leader>u'      , ':e #<cr>'            , opts)  -- open last closed buffer
+vim.api.nvim_set_keymap('n', '<leader>0'      , ':%bd|e#|bd#<cr>'     , opts)  -- close all buffers except current
+vim.api.nvim_set_keymap('n', 'L'              , 'zLgm'                , opts)  -- horizontal scroll right
+vim.api.nvim_set_keymap('n', 'H'              , 'zHgm'                , opts)  -- horizontal scroll left
 
 -- quick notes
 vim.api.nvim_set_keymap('n', '<leader>n' , ':edit ~/Documents/main.txt<cr>G$', opts)
