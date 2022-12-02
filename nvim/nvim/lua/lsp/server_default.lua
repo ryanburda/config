@@ -16,7 +16,7 @@ function T.setup_keymaps(bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>jr', '<cmd>lua vim.lsp.buf.rename()<CR>'         , opts)
 end
 
-function T.on_attach(client, bufnr)
+function T.on_attach(_, bufnr)
     T.setup_keymaps(bufnr)
 
     -- show signature help using the ray-x/lsp_signature.nvim plugin

@@ -92,7 +92,7 @@ function T.setup()
         sources = cmp.config.sources({
             { name = 'path', keyword_length = 1 }
         }, {
-            { name = 'cmdline', keyword_length = 2 }
+            { name = 'cmdline', keyword_length = 1 }
         })
     })
 

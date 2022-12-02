@@ -74,6 +74,10 @@ return require('packer').startup(function(use)
         requires = 'nvim-lua/plenary.nvim',
         config = require('plugins.configs.diffview').setup
     }
+    use {
+        'tpope/vim-fugitive',
+        config = require('plugins.configs.vim-fugitive').setup,
+    }
 
     -- File Tree
     use {
