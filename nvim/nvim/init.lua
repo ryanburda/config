@@ -42,6 +42,8 @@ vim.api.nvim_set_keymap('n', '<leader>u'      , ':e #<cr>'            , opts)  -
 vim.api.nvim_set_keymap('n', '<leader>0'      , ':%bd|e#|bd#<cr>'     , opts)  -- close all buffers except current
 vim.api.nvim_set_keymap('n', 'L'              , 'zLgm'                , opts)  -- horizontal scroll right
 vim.api.nvim_set_keymap('n', 'H'              , 'zHgm'                , opts)  -- horizontal scroll left
+vim.api.nvim_set_keymap('n', 'n'              , 'nzz'                 , opts)  -- next occurrence of search and center
+vim.api.nvim_set_keymap('n', 'N'              , 'Nzz'                 , opts)  -- previous occurrence of search and center
 
 -- quick notes
 vim.api.nvim_set_keymap('n', '<leader>n' , ':edit ~/Documents/main.txt<cr>G$', opts)
