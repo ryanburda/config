@@ -27,6 +27,7 @@ then
     brew install --cask karabiner-elements
     brew install --cask alfred
     brew install --cask rectangle
+    brew install --cask shifty
 fi
 
 brew install tmux
