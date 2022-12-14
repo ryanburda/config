@@ -19,6 +19,15 @@ return require('packer').startup(function(use)
         config = require('plugins.configs.packer-nvim').setup,
     }
 
+    -- Greeter
+    use {
+        'goolord/alpha-nvim',
+        requires = { 'nvim-tree/nvim-web-devicons' },
+        config = function ()
+            require'alpha'.setup(require'alpha.themes.startify'.config)
+        end
+    }
+
     -- Color Schemes
     use {
         'EdenEast/nightfox.nvim',
