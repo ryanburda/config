@@ -59,6 +59,8 @@ return require('packer').startup(function(use)
         config = require('plugins.configs.neoscroll').setup
     }
 
+    use 'justinmk/vim-sneak'
+
     -- Git
     use {
         'lewis6991/gitsigns.nvim',
