@@ -7,6 +7,7 @@ vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.scrolloff = 8
+vim.opt.sidescrolloff = 30
 vim.opt.cc = '120'
 vim.opt.encoding = 'UTF-8'
 vim.opt.expandtab = true

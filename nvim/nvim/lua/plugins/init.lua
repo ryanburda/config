@@ -167,7 +167,7 @@ return require('packer').startup(function(use)
     -- LSP
     use {
         "williamboman/mason-lspconfig.nvim",
-        requires = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
+        requires = { "williamboman/mason.nvim", "neovim/nvim-lspconfig", "folke/neodev.nvim", },
         config = require("plugins.configs.mason-lspconfig").setup
     }
     use {
@@ -184,7 +184,7 @@ return require('packer').startup(function(use)
             'hrsh7th/cmp-buffer',
             'hrsh7th/cmp-path',
             'hrsh7th/cmp-cmdline',
-            'hrsh7th/cmp-nvim-lua',
+            --'hrsh7th/cmp-nvim-lua',
             'L3MON4D3/LuaSnip',
             'saadparwaiz1/cmp_luasnip',
             'ray-x/lsp_signature.nvim',
@@ -235,6 +235,16 @@ return require('packer').startup(function(use)
         }
     }
     require('plugins.configs.copilot').keymap()  -- Needs to outside of setup since plugin is optional.
+
+    use({
+        "jackMort/ChatGPT.nvim",
+        config = require('plugins.configs.chatgpt').setup,
+        requires = {
+          "MunifTanjim/nui.nvim",
+          "nvim-lua/plenary.nvim",
+          "nvim-telescope/telescope.nvim"
+        }
+    })
 
     -- Cheat.sh
     use {

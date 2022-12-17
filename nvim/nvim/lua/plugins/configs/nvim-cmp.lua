@@ -16,7 +16,8 @@ function T.setup()
         },
         window = {
             completion = cmp.config.window.bordered({
-                --col_offset = 2,
+                scrolloff = 4,
+                --col_offset = 1000,
             }),
             documentation = cmp.config.window.bordered(),
         },
@@ -39,7 +40,8 @@ function T.setup()
             { name = 'path', },
             { name = 'nvim_lua', },
             { name = 'cmdline', },
-            { name = "copilot", keyword_length = 1, group_index = 2, },
+            { name = 'nvim_lua', },
+            { name = "copilot", group_index = 2, },
         }),
         formatting = {
             format = lspkind.cmp_format({
@@ -90,9 +92,9 @@ function T.setup()
     cmp.setup.cmdline(':', {
         mapping = cmp.mapping.preset.cmdline(),
         sources = cmp.config.sources({
-            { name = 'path', keyword_length = 1 }
+            { name = 'path' }
         }, {
-            { name = 'cmdline', keyword_length = 1 }
+            { name = 'cmdline' }
         })
     })
 
