@@ -17,23 +17,25 @@ function T.setup()
         window = {
             completion = cmp.config.window.bordered({
                 scrolloff = 4,
-                --col_offset = 1000,
             }),
             documentation = cmp.config.window.bordered(),
         },
         view = {
             entries = { name = 'custom', selection_order = 'bottom_up' }
         },
+        completion = {
+            completeopt = 'menu,menuone,noinsert',
+        },
         mapping = cmp.mapping.preset.insert({
             ['<C-n>'] = cmp.mapping.select_next_item(),
             ['<C-p>'] = cmp.mapping.select_prev_item(),
             ['<C-u>'] = cmp.mapping.scroll_docs(-4),
             ['<C-d>'] = cmp.mapping.scroll_docs(4),
-            ['<C-Space>'] = cmp.mapping.complete(),
             ['<C-e>'] = cmp.mapping.abort(),
-            ['<CR>'] = cmp.mapping.confirm(),
+            ['<Tab>'] = cmp.mapping.confirm({ select = true }),
         }),
         sources = cmp.config.sources({
+            { name = 'nvim_lsp_signature_help' },
             { name = 'nvim_lsp', },
             { name = 'luasnip', },
             { name = 'buffer', },
