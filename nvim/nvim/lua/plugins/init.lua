@@ -175,6 +175,7 @@ return require('packer').startup(function(use)
         requires = {
             "hrsh7th/nvim-cmp",
             "williamboman/mason.nvim",
+            "j-hui/fidget.nvim",
         },
     }
     use {
