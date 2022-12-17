@@ -18,7 +18,7 @@ function T.setup()
             completion = cmp.config.window.bordered({
                 scrolloff = 4,
             }),
-            documentation = cmp.config.window.bordered(),
+            documentation = cmp.config.window.bordered({max_width = 100}),
         },
         view = {
             entries = { name = 'custom', selection_order = 'bottom_up' }
