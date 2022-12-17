@@ -2,6 +2,14 @@ local T = {}
 
 function T.setup()
 
+    local function copilot_on()
+        if vim.g['is_copilot_on'] then
+            return ""
+        else
+            return ""
+        end
+    end
+
     require('lualine').setup {
         options = {
             icons_enabled = true,
@@ -21,7 +29,7 @@ function T.setup()
                     path = 1
                 },
             },
-            lualine_x = { 'filetype', },
+            lualine_x = { copilot_on, 'filetype', },
             lualine_y = { 'progress', },
             lualine_z = { 'location' },
         },

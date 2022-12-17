@@ -226,15 +226,17 @@ return require('packer').startup(function(use)
         'zbirenbaum/copilot.lua',
         opt = true,  -- only turn it on when you need it.
         config = require('plugins.configs.copilot').setup,
-        requires = {
-            {
-                'zbirenbaum/copilot-cmp',
-                module = 'copilot_cmp',
-            },
-        }
+    }
+    use {
+        "zbirenbaum/copilot-cmp",
+        after = { "copilot.lua" },
+        config = function ()
+            require("copilot_cmp").setup()
+        end
     }
     require('plugins.configs.copilot').keymap()  -- Needs to outside of setup since plugin is optional.
 
+    -- ChatGPT
     use({
         "jackMort/ChatGPT.nvim",
         config = require('plugins.configs.chatgpt').setup,

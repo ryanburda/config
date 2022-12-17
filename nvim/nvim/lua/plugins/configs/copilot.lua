@@ -58,12 +58,7 @@ end
 
 function T.keymap()
     -- Define keymaps for this plugin.
-    vim.api.nvim_set_keymap(
-        'n',
-        '<leader>ai',
-        ':lua print("Copilot on: " .. tostring(require("plugins.configs.copilot").toggle()))<cr>',
-        { noremap=true, silent=true }
-    )
+    vim.keymap.set('n', '<leader>ai', ':lua require("plugins.configs.copilot").toggle()<cr>', { silent = true, })
 end
 
 return T
