@@ -62,6 +62,14 @@ eval "$(pyenv virtualenv-init -)"
 ulimit -n 200000
 ulimit -u 2048
 
+# ChatGPT
+OPENAI_API_KEY_FILE=$HOME/.openai_api_key
+if [ -f $OPENAI_API_KEY_FILE ]; then
+    export OPENAI_API_KEY=$(cat $OPENAI_API_KEY_FILE)
+else
+    export OPENAI_API_KEY=""
+fi
+
 # Uncomment to profile zsh startup.
 # NOTE: must also uncomment first line.
 # zprof
