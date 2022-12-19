@@ -44,8 +44,8 @@ vim.keymap.set('n', '<leader>J'      , ':split<cr><C-w>j'    , opts)
 vim.keymap.set('n', '<leader>L'      , ':vsplit<cr><C-w>l'   , opts)
 vim.keymap.set('n', '<leader>u'      , ':e #<cr>'            , opts)  -- open last closed buffer
 vim.keymap.set('n', '<leader>0'      , ':%bd|e#|bd#<cr>'     , opts)  -- close all buffers except current
-vim.keymap.set('n', 'L'              , 'zLgm'                , opts)  -- horizontal scroll right
-vim.keymap.set('n', 'H'              , 'zHgm'                , opts)  -- horizontal scroll left
+vim.keymap.set('n', '<C-f>'          , 'zLgm'                , opts)  -- horizontal scroll right
+vim.keymap.set('n', '<C-b>'          , 'zHgm'                , opts)  -- horizontal scroll left
 vim.keymap.set('n', 'n'              , 'nzz'                 , opts)  -- next occurrence of search and center
 vim.keymap.set('n', 'N'              , 'Nzz'                 , opts)  -- previous occurrence of search and center
 
