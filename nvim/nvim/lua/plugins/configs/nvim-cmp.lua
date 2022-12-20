@@ -6,6 +6,14 @@ function T.setup()
     local lspkind = require('lspkind')
 
     cmp.setup({
+        enabled = function()
+            -- Don't show completion in comments
+            if require"cmp.config.context".in_treesitter_capture("comment")==true or require"cmp.config.context".in_syntax_group("Comment") then
+                return false
+            else
+                return true
+            end
+        end,
         snippet = {
             expand = function(args)
                 require('luasnip').lsp_expand(args.body)
@@ -24,6 +32,7 @@ function T.setup()
             entries = { name = 'custom', selection_order = 'bottom_up' }
         },
         completion = {
+            keyword_length = 1,
             completeopt = 'menu,menuone,noinsert',
         },
         mapping = cmp.mapping.preset.insert({
@@ -31,7 +40,7 @@ function T.setup()
             ['<C-p>'] = cmp.mapping.select_prev_item(),
             ['<C-u>'] = cmp.mapping.scroll_docs(-4),
             ['<C-d>'] = cmp.mapping.scroll_docs(4),
-            ['<C-e>'] = cmp.mapping.abort(),
+            ['<esc>'] = cmp.mapping.abort(),
             ['<CR>'] = cmp.mapping.confirm({ select = true }),
         }),
         sources = cmp.config.sources({
