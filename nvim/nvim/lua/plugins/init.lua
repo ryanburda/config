@@ -213,7 +213,7 @@ return require('packer').startup(function(use)
         requries = {
             'mfussenegger/nvim-dap',
         },
-        config = function() require("nvim-dap-virtual-text").setup() end
+        config = function() require("nvim-dap-virtual-text").setup({}) end
     }
     use {
         'mfussenegger/nvim-dap-python',
