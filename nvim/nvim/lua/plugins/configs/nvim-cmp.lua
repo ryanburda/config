@@ -32,7 +32,7 @@ function T.setup()
             ['<C-u>'] = cmp.mapping.scroll_docs(-4),
             ['<C-d>'] = cmp.mapping.scroll_docs(4),
             ['<C-e>'] = cmp.mapping.abort(),
-            ['<Tab>'] = cmp.mapping.confirm({ select = true }),
+            ['<CR>'] = cmp.mapping.confirm({ select = true }),
         }),
         sources = cmp.config.sources({
             { name = 'nvim_lsp_signature_help' },
