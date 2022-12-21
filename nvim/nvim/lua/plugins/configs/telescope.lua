@@ -12,6 +12,24 @@ function T.getqflist_files()
     return files
 end
 
+function T.ff_playground()
+    require("telescope.builtin").find_files({
+        prompt_title = "~/Developer/playgrounds/ find files",
+        cwd = "~/Developer/playgrounds/",
+        hidden = true,
+        file_ignore_patterns = { ".git/" },
+    })
+end
+
+function T.lg_playground()
+    require("telescope.builtin").live_grep({
+        prompt_title = "~/Developer/playgrounds grep",
+        cwd = "~/Developer/playgrounds/",
+        hidden = true,
+        file_ignore_patterns = { ".git/" },
+    })
+end
+
 function T.setup()
 
     -- mappings
@@ -36,6 +54,9 @@ function T.setup()
     vim.keymap.set("n", "<leader>fd", "<cmd>lua require('telescope.builtin').git_status()<cr>"  , opts)
     vim.keymap.set("n", "<leader>db", "<cmd>lua require('telescope.builtin').git_branches()<cr>", opts)
     vim.keymap.set("n", "<leader>dc", "<cmd>lua require('telescope.builtin').git_commits()<cr>" , opts)
+    vim.keymap.set("n", "<leader>fa", "<cmd>lua require('plugins.configs.telescope').ff_playground()<cr>", opts)
+    vim.keymap.set("n", "<leader>fs", "<cmd>lua require('plugins.configs.telescope').lg_playground()<cr>", opts)
+
 
     local builtin = require("telescope.builtin")
     local sorters = require("telescope.sorters")
@@ -57,6 +78,8 @@ function T.setup()
         local cwd = picker.cwd
         fn({cwd = cwd, results_title = cwd})
     end
+
+
 
     require("telescope").setup({
         defaults = {
