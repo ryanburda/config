@@ -54,8 +54,7 @@ function T.setup()
     vim.keymap.set("n", "<leader>fd", "<cmd>lua require('telescope.builtin').git_status()<cr>"  , opts)
     vim.keymap.set("n", "<leader>db", "<cmd>lua require('telescope.builtin').git_branches()<cr>", opts)
     vim.keymap.set("n", "<leader>dc", "<cmd>lua require('telescope.builtin').git_commits()<cr>" , opts)
-    vim.keymap.set("n", "<leader>fa", "<cmd>lua require('plugins.configs.telescope').ff_playground()<cr>", opts)
-    vim.keymap.set("n", "<leader>fs", "<cmd>lua require('plugins.configs.telescope').lg_playground()<cr>", opts)
+    vim.keymap.set("n", "<leader>fa", "<cmd>lua require('plugins.configs.telescope').lg_playground()<cr>", opts)
 
 
     local builtin = require("telescope.builtin")
