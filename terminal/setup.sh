@@ -67,6 +67,8 @@ brew install showkey
 brew install pspg
 brew install diff-so-fancy
 brew install deno
+brew install libpq
+brew link --force libpq
 
 # Fonts
 brew tap homebrew/cask-fonts
