@@ -267,6 +267,7 @@ return require('packer').startup(function(use)
 
     -- Project specific setup scripts
     require('projects.bde-airflow').setup()
+    require('projects.zsh').setup()
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
