@@ -54,6 +54,7 @@ return require('packer').startup(function(use)
             'nvim-lua/plenary.nvim',
             {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
             'freestingo/telescope-changed-files',
+            'danielpieper/telescope-tmuxinator.nvim',
         },
         config = require('plugins.configs.telescope').setup
     }

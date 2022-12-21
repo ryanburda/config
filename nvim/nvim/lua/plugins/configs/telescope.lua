@@ -55,7 +55,7 @@ function T.setup()
     vim.keymap.set("n", "<leader>db", "<cmd>lua require('telescope.builtin').git_branches()<cr>", opts)
     vim.keymap.set("n", "<leader>dc", "<cmd>lua require('telescope.builtin').git_commits()<cr>" , opts)
     vim.keymap.set("n", "<leader>fa", "<cmd>lua require('plugins.configs.telescope').lg_playground()<cr>", opts)
-
+    vim.keymap.set("n", "<leader>fs", "<cmd>lua require('telescope').extensions.tmuxinator.projects(require('telescope.themes').get_dropdown({}))<cr>", opts)
 
     local builtin = require("telescope.builtin")
     local sorters = require("telescope.sorters")
@@ -167,6 +167,7 @@ function T.setup()
 
     require('telescope').load_extension('fzf')
     require("telescope").load_extension("changed_files")
+    require('telescope').load_extension('tmuxinator')
 
 end
 
