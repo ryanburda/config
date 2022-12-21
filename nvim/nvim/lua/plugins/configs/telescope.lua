@@ -129,7 +129,7 @@ function T.setup()
                 mappings = {
                     i = {
                         ["<C-f>"] = cf_actions.find_changed_files,
-                        ["<cr"] = function(prompt_bufnr)
+                        ["<cr>"] = function(prompt_bufnr)
                             -- get the selected file name
                             local entry = require("telescope.actions.state").get_selected_entry()
                             -- close telescope

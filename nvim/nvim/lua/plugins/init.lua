@@ -102,6 +102,11 @@ return require('packer').startup(function(use)
         'alexghergh/nvim-tmux-navigation',
         config = require('plugins.configs.nvim-tmux-navigation').setup,
     }
+    use {
+        'christoomey/vim-tmux-runner',
+        config = require('plugins.configs.vim-tmux-runner').setup,
+    }
+
 
     -- Buffer tabs
     use {
