@@ -4,7 +4,7 @@ function T.setup()
 
     vim.g.VtrStripLeadingWhitespace = 0
     vim.g.VtrClearEmptyLines = 0
-    vim.g.VtrAppendNewline = 1
+    vim.g.VtrAppendNewline = 0
 
     vim.cmd([[
     function! VtrSendLinesToRunnerWrapper() range
