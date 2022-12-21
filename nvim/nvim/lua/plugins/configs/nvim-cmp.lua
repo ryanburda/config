@@ -92,7 +92,7 @@ function T.setup()
     cmp.setup.cmdline('/', {
         mapping = cmp.mapping.preset.cmdline(),
         sources = {
-            { name = 'buffer', max_item_count = 8 }
+            { name = 'buffer' }
         }
     })
 
