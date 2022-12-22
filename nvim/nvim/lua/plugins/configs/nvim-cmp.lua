@@ -33,15 +33,15 @@ function T.setup()
         },
         completion = {
             keyword_length = 1,
-            completeopt = 'menu,menuone,noinsert',
+            --completeopt = 'menu,menuone,noinsert',
         },
         mapping = cmp.mapping.preset.insert({
             ['<C-n>'] = cmp.mapping.select_next_item(),
             ['<C-p>'] = cmp.mapping.select_prev_item(),
             ['<C-u>'] = cmp.mapping.scroll_docs(-4),
             ['<C-d>'] = cmp.mapping.scroll_docs(4),
-            ['<esc>'] = cmp.mapping.abort(),
-            ['<CR>'] = cmp.mapping.confirm({ select = true }),
+            ['<C-e>'] = cmp.mapping.abort(),
+            ['<CR>'] = cmp.mapping.confirm({ select = false }),
         }),
         sources = cmp.config.sources({
             { name = 'nvim_lsp_signature_help' },
