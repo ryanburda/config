@@ -7,10 +7,8 @@ function T.setup()
         incremental_selection = {
             enable = true,
             keymaps =  {
-                init_selection = '<leader>v',
-                scope_incremental = '<CR>',
-                node_incremental = '<TAB>',
-                node_decremental = '<S-TAB>',
+                node_incremental = '<C-n>',
+                node_decremental = '<C-p>',
             },
         },
     })

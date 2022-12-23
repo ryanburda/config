@@ -44,8 +44,11 @@ return require('packer').startup(function(use)
         'nvim-treesitter/nvim-treesitter',
         config = require('plugins.configs.treesitter').setup,
     }
+    use {
+        'nvim-treesitter/playground',
+        config = require('plugins.configs.treesitter_playground').setup,
+    }
     use 'nvim-treesitter/nvim-treesitter-context'
-    use 'nvim-treesitter/playground'
 
     -- Telescope
     use {
