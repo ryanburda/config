@@ -69,10 +69,10 @@ return {
         'ruifm/gitlinker.nvim',
         lazy = true,
         keys = {
-            { "<leader>gl", "<cmd>lua require('gitlinker').get_buf_range_url('n')<cr>", desc = "Link to Github" },
-            { "<leader>gl", "<cmd>lua require('gitlinker').get_buf_range_url('v')<cr>v`<", desc = "Link to Github (Visual)", mode = {"v"} },
-            { "<leader>gh", "<cmd>lua require('gitlinker').get_buf_range_url('n', {action_callback = require('gitlinker.actions').open_in_browser})<cr>", desc = "Open Github in browser" },
-            { "<leader>gh", "<cmd>lua require('gitlinker').get_buf_range_url('v', {action_callback = require('gitlinker.actions').open_in_browser})<cr>v`<", desc = "Open Github in brower (Visual)", mode = {"v"} },
+            { "<leader>gl", "<cmd>lua require('gitlinker').get_buf_range_url('n')<cr>", desc = "Github link of current location in buffer" },
+            { "<leader>gl", "<cmd>lua require('gitlinker').get_buf_range_url('v')<cr>v`<", desc = "Github link of current visual selection", mode = {"v"} },
+            { "<leader>gh", "<cmd>lua require('gitlinker').get_buf_range_url('n', {action_callback = require('gitlinker.actions').open_in_browser})<cr>", desc = "Open Github in browser to current location in buffer" },
+            { "<leader>gh", "<cmd>lua require('gitlinker').get_buf_range_url('v', {action_callback = require('gitlinker.actions').open_in_browser})<cr>v`<", desc = "Open Github in brower to current visual selection", mode = {"v"} },
         },
     },
     {
@@ -127,10 +127,14 @@ return {
         config = require('plugins.configs.lualine').setup
     },
 
-    -- Web Search  TODO: lazy load
+    -- Web Search
     {
         'voldikss/vim-browser-search',
-        config = require('plugins.configs.vim-browser-search').setup
+        lazy = true,
+        keys = {
+            { "<leader>ji", ":BrowserSearch<cr>", desc = "Search for word under cursor in browser" },
+            { "<leader>ji", ":'<,'>BrowserSearch<cr>", desc = "Search for visual selection in brower" },
+        },
     },
 
     -- Highlight all occurrences of word under cursor
