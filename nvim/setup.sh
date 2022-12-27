@@ -49,6 +49,7 @@ sudo rm -rf "$HOME/.local/share/nvim"
 
 # Install neovim
 cd $NVIM_REPO_PATH && make CMAKE_BUILD_TYPE=RelWithDebInfo
+sudo make distclean
 sudo make install
 
 ################
