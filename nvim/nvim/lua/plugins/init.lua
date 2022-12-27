@@ -76,13 +76,23 @@ return {
         },
     },
     {
-        'sindrets/diffview.nvim',  -- TODO: lazy load
+        'sindrets/diffview.nvim',
         dependencies= { 'nvim-lua/plenary.nvim', },
+        lazy = true,
+        keys = {
+            { '<leader>dd', ':DiffviewOpen<cr>', desc = "Diff View" },
+            { '<leader>df', ':DiffviewFileHistory %<cr>', desc = "Diff View with current buffer commit history" },
+            { '<leader>dF', ':DiffviewFileHistory<cr>', desc = "Diff View with full repo commit history" },
+            { '<leader>dx', ':DiffviewClose<cr>', desc = "Diff View close" }
+        },
         config = require('plugins.configs.diffview').setup
     },
     {
         'tpope/vim-fugitive',
-        config = require('plugins.configs.vim-fugitive').setup,
+        lazy = true,
+        keys = {
+            { '<leader>gB', ':Git blame<cr>', desc = "Git Blame in separate split" }
+        },
     },
 
     -- File Tree  TODO: lazy load
