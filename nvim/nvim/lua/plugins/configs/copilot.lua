@@ -50,15 +50,10 @@ function T.setup()
         vim.g.copilot_node_command = node16_executable_path
     end
 
-    vim.cmd('PackerLoad copilot.lua')
+    vim.cmd('Lazy load copilot.lua')
 
     require('copilot').setup()
 
-end
-
-function T.keymap()
-    -- Define keymaps for this plugin.
-    vim.keymap.set('n', '<leader>ai', ':lua require("plugins.configs.copilot").toggle()<cr>', { silent = true, })
 end
 
 return T

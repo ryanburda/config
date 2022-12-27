@@ -3,3 +3,4 @@ nvim/nvim/plugin/*
 terminal/dotfiles/kitty.conf.bak
 *en.utf-8.add.spl
 .luarc.json
+lazy-lock.json
