@@ -66,8 +66,14 @@ return {
         config = require('plugins.configs.gitsigns').setup
     },
     {
-        'ruifm/gitlinker.nvim',  -- TODO: lazy load
-        config = require('plugins.configs.gitlinker').setup
+        'ruifm/gitlinker.nvim',
+        lazy = true,
+        keys = {
+            { "<leader>gl", "<cmd>lua require('gitlinker').get_buf_range_url('n')<cr>", desc = "Link to Github" },
+            { "<leader>gl", "<cmd>lua require('gitlinker').get_buf_range_url('v')<cr>v`<", desc = "Link to Github (Visual)", mode = {"v"} },
+            { "<leader>gh", "<cmd>lua require('gitlinker').get_buf_range_url('n', {action_callback = require('gitlinker.actions').open_in_browser})<cr>", desc = "Open Github in browser" },
+            { "<leader>gh", "<cmd>lua require('gitlinker').get_buf_range_url('v', {action_callback = require('gitlinker.actions').open_in_browser})<cr>v`<", desc = "Open Github in brower (Visual)", mode = {"v"} },
+        },
     },
     {
         'sindrets/diffview.nvim',  -- TODO: lazy load
