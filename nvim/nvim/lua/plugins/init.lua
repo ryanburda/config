@@ -155,17 +155,24 @@ return {
         config = require('plugins.configs.bufdelete').setup
     },
 
-    -- Floating Terminal  TODO: lazy load
+    -- Floating Terminal
     {
         'akinsho/toggleterm.nvim',
         config = require("plugins.configs.toggleterm").setup
     },
 
-    -- Markdown preview  TODO: lazy load
+    -- Markdown preview
     {
         'toppair/peek.nvim',
         run = 'deno task --quiet build:fast',
-        config = require("plugins.configs.peek").setup
+        lazy = true,
+        keys = {
+            { "<leader>mo", "<cmd> lua require('peek').open()<cr>", desc = "Markdown preview open" },
+            { "<leader>mx", "<cmd> lua require('peek').close()<cr>", desc = "Markdown preview close" }
+        },
+        config = function()
+            require("peek").setup()
+        end
     },
 
     ----------------------------
@@ -250,15 +257,23 @@ return {
         end
     },
 
-    -- ChatGPT  TODO: lazyload
+    -- ChatGPT
     {
         "jackMort/ChatGPT.nvim",
-        config = require('plugins.configs.chatgpt').setup,
         dependencies= {
           "MunifTanjim/nui.nvim",
           "nvim-lua/plenary.nvim",
           "nvim-telescope/telescope.nvim"
-        }
+        },
+        lazy = true,
+        keys = {
+            { "<leader>cb", ':ChatGPT<CR>', desc = "ChatGPT prompt" }
+        },
+        config = function ()
+            require("chatgpt").setup({
+                welcome_message = ""
+            })
+        end
     },
 
     -- Cheat.sh  TODO: lazyload
