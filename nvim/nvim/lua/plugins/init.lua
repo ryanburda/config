@@ -8,7 +8,6 @@ return {
             require'alpha'.setup(require'alpha.themes.startify'.config)
         end
     },
-    'kyazdani42/nvim-web-devicons',
 
     -- Color Schemes
     {
@@ -101,7 +100,6 @@ return {
     -- Buffer tabs
     {
         'akinsho/bufferline.nvim',
-        tag = "v2.*",
         dependencies= {'kyazdani42/nvim-web-devicons', },
         config = require('plugins.configs.bufferline').setup,
     },
