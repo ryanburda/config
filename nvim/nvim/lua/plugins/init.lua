@@ -244,6 +244,7 @@ return {
     -- Github Copilot
     {
         'zbirenbaum/copilot.lua',
+        dependencies = { "zbirenbaum/copilot-cmp", },
         lazy = true,
         keys = {
             { "<leader>ai", ":lua require('plugins.configs.copilot').toggle()<cr>", desc = "Github Copilot Toggle" },
@@ -252,6 +253,7 @@ return {
     },
     {
         "zbirenbaum/copilot-cmp",
+        lazy = true,
         config = function ()
             require("copilot_cmp").setup()
         end
@@ -274,18 +276,6 @@ return {
                 welcome_message = ""
             })
         end
-    },
-
-    -- Cheat.sh  TODO: lazyload
-    {
-        'RishabhRD/nvim-cheat.sh',
-        dependencies= { 'RishabhRD/popfix', },
-        config = require('plugins.configs.cheatsh').setup,
-    },
-
-    {
-        'eandrju/cellular-automaton.nvim',
-        config = require('plugins.configs.cellular-automaton').setup,
     },
 
     -- TODO: set this up again.

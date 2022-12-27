@@ -109,6 +109,4 @@ vim.opt.runtimepath:prepend(lazypath)
 
 require("lazy").setup(require("plugins"))
 
-vim.keymap.set('n', '<leader>ph' , ':Lazy<CR>', {desc = 'Plugin Home'})
-vim.keymap.set('n', '<leader>pp' , ':Lazy profile<CR>', {desc = 'Plugin Profile'})
-vim.keymap.set('n', '<leader>pu' , ':Lazy update<CR>', {desc = 'Plugin Update'})
+vim.keymap.set('n', '<leader>pp' , ':Lazy profile<CR>', {desc = 'Plugin Manager'})
