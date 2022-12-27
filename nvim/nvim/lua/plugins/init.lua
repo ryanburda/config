@@ -66,11 +66,11 @@ return {
         config = require('plugins.configs.gitsigns').setup
     },
     {
-        'ruifm/gitlinker.nvim',
+        'ruifm/gitlinker.nvim',  -- TODO: lazy load
         config = require('plugins.configs.gitlinker').setup
     },
     {
-        'sindrets/diffview.nvim',
+        'sindrets/diffview.nvim',  -- TODO: lazy load
         dependencies= { 'nvim-lua/plenary.nvim', },
         config = require('plugins.configs.diffview').setup
     },
@@ -79,7 +79,7 @@ return {
         config = require('plugins.configs.vim-fugitive').setup,
     },
 
-    -- File Tree
+    -- File Tree  TODO: lazy load
     {
         'kyazdani42/nvim-tree.lua',
         dependencies= { 'kyazdani42/nvim-web-devicons', },
@@ -111,7 +111,7 @@ return {
         config = require('plugins.configs.lualine').setup
     },
 
-    -- Web Search
+    -- Web Search  TODO: lazy load
     {
         'voldikss/vim-browser-search',
         config = require('plugins.configs.vim-browser-search').setup
@@ -135,13 +135,13 @@ return {
         config = require('plugins.configs.bufdelete').setup
     },
 
-    -- Floating Terminal
+    -- Floating Terminal  TODO: lazy load
     {
         'akinsho/toggleterm.nvim',
         config = require("plugins.configs.toggleterm").setup
     },
 
-    -- Markdown preview
+    -- Markdown preview  TODO: lazy load
     {
         'toppair/peek.nvim',
         run = 'deno task --quiet build:fast',
@@ -185,7 +185,7 @@ return {
         },
         config = require('plugins.configs.nvim-cmp').setup
     },
-    -- Debug
+    -- Debug  TODO: lazy load
     {
         'mfussenegger/nvim-dap',
         dependencies= {
@@ -230,7 +230,7 @@ return {
         end
     },
 
-    -- ChatGPT
+    -- ChatGPT  TODO: lazyload
     {
         "jackMort/ChatGPT.nvim",
         config = require('plugins.configs.chatgpt').setup,
@@ -241,7 +241,7 @@ return {
         }
     },
 
-    -- Cheat.sh
+    -- Cheat.sh  TODO: lazyload
     {
         'RishabhRD/nvim-cheat.sh',
         dependencies= { 'RishabhRD/popfix', },
@@ -253,6 +253,7 @@ return {
         config = require('plugins.configs.cellular-automaton').setup,
     },
 
+    -- TODO: set this up again.
     -- Project specific setup scripts
     --require('projects.bde-airflow').setup()
 
