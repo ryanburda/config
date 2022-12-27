@@ -108,3 +108,5 @@ end
 vim.opt.runtimepath:prepend(lazypath)
 
 require("lazy").setup(require("plugins"))
+
+vim.keymap.set('n', '<leader>pp' , ':Lazy<CR>')  -- clear location-list
