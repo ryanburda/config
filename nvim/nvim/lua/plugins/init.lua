@@ -99,6 +99,18 @@ return {
     {
         'kyazdani42/nvim-tree.lua',
         dependencies= { 'kyazdani42/nvim-web-devicons', },
+        lazy = true,
+        keys = {
+            {
+                '<leader>aa',
+                function()
+                    vim.cmd('NvimTreeFindFile')  -- Open tree to current buffer.
+                    vim.cmd('NvimTreeOpen')  -- Call open again incase there was no current buffer.
+                end,
+                desc = "File Tree Open"
+            },
+            { '<leader>ax', ':NvimTreeClose<CR>', desc = "File Tree Close" },
+        },
         config = require('plugins.configs.nvim-tree').setup
     },
 

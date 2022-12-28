@@ -4,15 +4,6 @@ T.TREE_WIDTH = 36
 
 function T.setup()
 
-    local function open()
-        vim.cmd('NvimTreeFindFile')  -- Open tree to current buffer.
-        vim.cmd('NvimTreeOpen')  -- Call open again incase there was no current buffer.
-    end
-
-    local opts = { noremap=true, silent=true }
-    vim.keymap.set('n', '<leader>aa', open, opts)
-    vim.keymap.set('n', '<leader>ax', ':NvimTreeClose<CR>', opts)
-
     require('nvim-tree').setup({
         hijack_unnamed_buffer_when_opening = true,
         update_cwd = false,
