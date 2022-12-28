@@ -27,7 +27,10 @@ return {
     },
     {
         'nvim-treesitter/playground',
-        config = require('plugins.configs.treesitter_playground').setup,
+        lazy = true,
+        keys = {
+            { "<leader>ts", ":TSPlaygroundToggle<CR>" },
+        },
     },
     'nvim-treesitter/nvim-treesitter-context',
 
@@ -189,7 +192,11 @@ return {
     -- Buffer deletion without changing layout
     {
         'famiu/bufdelete.nvim',
-        config = require('plugins.configs.bufdelete').setup
+        lazy = true,
+        keys = {
+            { '<leader>q', ':Bdelete<cr>' },
+            { '<leader>Q', ':Bdelete!<cr>' }
+        },
     },
 
     -- Floating Terminal
