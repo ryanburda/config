@@ -32,32 +32,6 @@ end
 
 function T.setup()
 
-    -- mappings
-    local opts = { noremap=true, silent=true }
-
-    vim.keymap.set("n", "<leader>f ", "<cmd>lua require('telescope.builtin').resume()<cr>"      , opts)
-    vim.keymap.set("n", "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<cr>"  , opts)
-    vim.keymap.set("n", "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<cr>"   , opts)
-    vim.keymap.set("n", "<leader>fj", "<cmd>lua require('telescope.builtin').grep_string()<cr>" , opts)
-    vim.keymap.set("n", "<leader>fe", "<cmd>lua require('telescope.builtin').oldfiles()<cr>"    , opts)  -- 'fe' for file explore recent 
-    vim.keymap.set("n", "<leader>fo", "<cmd>lua require('telescope.builtin').jumplist()<cr>"    , opts)  -- 'fo' since <C-o> navigates jumplist
-    vim.keymap.set("n", "<leader>fh", "<cmd>lua require('telescope.builtin').diagnostics()<cr>" , opts)
-    vim.keymap.set("n", "<leader>fl", "<cmd>lua require('telescope.builtin').loclist()<cr>"     , opts)
-    vim.keymap.set("n", "<leader>f?", "<cmd>lua require('telescope.builtin').keymaps()<cr>"     , opts)
-    vim.keymap.set("n", "<leader>fr", "<cmd>lua require('telescope.builtin').registers()<cr>"   , opts)
-    vim.keymap.set("n", "<leader>fB", "<cmd>lua require('telescope.builtin').buffers()<cr>"     , opts)
-    vim.keymap.set("n", "<leader>fv", "<cmd>lua require('telescope.builtin').help_tags()<cr>"   , opts)
-    vim.keymap.set("n", "<leader>fm", "<cmd>lua require('telescope.builtin').man_pages()<cr>"   , opts)
-    vim.keymap.set("n", "<leader>fk", "<cmd>lua require('telescope.builtin').live_grep({search_dirs = require('plugins.configs.telescope').getqflist_files(), results_title = 'Quickfix Files'})<cr>" , opts)
-    vim.keymap.set("n", "<leader>fK", "<cmd>lua require('telescope.builtin').quickfix()<cr>"    , opts)
-    vim.keymap.set("n", "<leader>fc", "<cmd>lua require('telescope.builtin').colorscheme({enable_preview = true})<cr>", opts)  -- `ft` for theme
-    vim.keymap.set("n", "<leader>fd", "<cmd>lua require('telescope.builtin').git_status()<cr>"  , opts)
-    vim.keymap.set("n", "<leader>db", "<cmd>lua require('telescope.builtin').git_branches()<cr>", opts)
-    vim.keymap.set("n", "<leader>dc", "<cmd>lua require('telescope.builtin').git_commits()<cr>" , opts)
-    vim.keymap.set("n", "<leader>fa", "<cmd>lua require('plugins.configs.telescope').ff_playground()<cr>", opts)
-    vim.keymap.set("n", "<leader>fs", "<cmd>lua require('plugins.configs.telescope').lg_playground()<cr>", opts)
-    vim.keymap.set("n", "<leader>s", "<cmd>lua require('telescope').extensions.tmuxinator.projects(require('telescope.themes').get_dropdown({}))<cr>", opts)
-
     local builtin = require("telescope.builtin")
     local sorters = require("telescope.sorters")
     local actions = require("telescope.actions")
@@ -78,8 +52,6 @@ function T.setup()
         local cwd = picker.cwd
         fn({cwd = cwd, results_title = cwd})
     end
-
-
 
     require("telescope").setup({
         defaults = {

@@ -39,12 +39,37 @@ return {
             'nvim-telescope/telescope-fzf-native.nvim',
             'freestingo/telescope-changed-files',
             'danielpieper/telescope-tmuxinator.nvim',
+            {
+                'nvim-telescope/telescope-fzf-native.nvim',
+                build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+            },
+        },
+        lazy = true,
+        keys = {
+            { "<leader>f ", "<cmd>lua require('telescope.builtin').resume()<cr>" },
+            { "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<cr>" },
+            { "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<cr>" },
+            { "<leader>fj", "<cmd>lua require('telescope.builtin').grep_string()<cr>" },
+            { "<leader>fe", "<cmd>lua require('telescope.builtin').oldfiles()<cr>" },
+            { "<leader>fo", "<cmd>lua require('telescope.builtin').jumplist()<cr>" },
+            { "<leader>fh", "<cmd>lua require('telescope.builtin').diagnostics()<cr>" },
+            { "<leader>fl", "<cmd>lua require('telescope.builtin').loclist()<cr>" },
+            { "<leader>f?", "<cmd>lua require('telescope.builtin').keymaps()<cr>" },
+            { "<leader>fr", "<cmd>lua require('telescope.builtin').registers()<cr>" },
+            { "<leader>fB", "<cmd>lua require('telescope.builtin').buffers()<cr>" },
+            { "<leader>fv", "<cmd>lua require('telescope.builtin').help_tags()<cr>" },
+            { "<leader>fm", "<cmd>lua require('telescope.builtin').man_pages()<cr>" },
+            { "<leader>fk", "<cmd>lua require('telescope.builtin').live_grep({search_dirs = require('plugins.configs.telescope').getqflist_files(), results_title = 'Quickfix Files'})<cr>" },
+            { "<leader>fK", "<cmd>lua require('telescope.builtin').quickfix()<cr>" },
+            { "<leader>fc", "<cmd>lua require('telescope.builtin').colorscheme({enable_preview = true})<cr>" },
+            { "<leader>fd", "<cmd>lua require('telescope.builtin').git_status()<cr>" },
+            { "<leader>db", "<cmd>lua require('telescope.builtin').git_branches()<cr>" },
+            { "<leader>dc", "<cmd>lua require('telescope.builtin').git_commits()<cr>" },
+            { "<leader>fa", "<cmd>lua require('plugins.configs.telescope').ff_playground()<cr>" },
+            { "<leader>fs", "<cmd>lua require('plugins.configs.telescope').lg_playground()<cr>" },
+            { "<leader>s", "<cmd>lua require('telescope').extensions.tmuxinator.projects(require('telescope.themes').get_dropdown({}))<cr>" },
         },
         config = require('plugins.configs.telescope').setup
-    },
-    {
-        'nvim-telescope/telescope-fzf-native.nvim',
-        build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
     },
 
     -- Scrolling
