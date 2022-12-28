@@ -30,6 +30,7 @@ then
     brew install --cask shifty
 fi
 
+brew install coreutils
 brew install tmux
 brew install tmate
 brew install tmuxinator
