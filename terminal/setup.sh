@@ -104,8 +104,9 @@ ln -svfF "${SCRIPT_DIR}/dotfiles/lazygit.yml" "${HOME}/Library/Application Suppo
 ln -svfF "${SCRIPT_DIR}/dotfiles/psqlrc" "${HOME}/.psqlrc"
 ln -svfF "${SCRIPT_DIR}/dotfiles/pspgconf" "${HOME}/.pspgconf"
 
+# Alacritty doesn't like symlinks for some reason.
 mkdir -p ~/.config/alacritty
-ln -vfF "${SCRIPT_DIR}/dotfiles/alacritty.yml" "${HOME}/.config/alacritty/alacritty.yml"
+ln -vf "${SCRIPT_DIR}/dotfiles/alacritty.yml" "${HOME}/.config/alacritty/alacritty.yml"
 
 # cloud-sql-proxy
 brew install --cask google-cloud-sdk
