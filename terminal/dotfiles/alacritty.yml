@@ -858,3 +858,6 @@ font:
 
   # Highlight window damage information.
   #highlight_damage: false
+  #
+import:
+  - ~/.alacritty-colorscheme/themes/horizon-dark.yaml

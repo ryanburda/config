@@ -131,3 +131,6 @@ brew install zsh-autosuggestions
 brew install zsh-syntax-highlighting
 brew install zsh-history-substring-search
 chmod -R go-w $(brew --prefix)/share/zsh
+
+# alacritty color schemes
+git clone https://github.com/eendroroy/alacritty-theme.git ~/.alacritty-colorscheme
