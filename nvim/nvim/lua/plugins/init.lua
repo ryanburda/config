@@ -206,7 +206,6 @@ return {
         dependencies= {
             "hrsh7th/nvim-cmp",
             "williamboman/mason.nvim",
-            "j-hui/fidget.nvim",
         },
     },
     {
