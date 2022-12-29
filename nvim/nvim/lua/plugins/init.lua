@@ -123,7 +123,7 @@ return {
         },
     },
 
-    -- File Tree  TODO: lazy load
+    -- File Tree
     {
         'kyazdani42/nvim-tree.lua',
         dependencies= { 'kyazdani42/nvim-web-devicons', },
@@ -145,7 +145,13 @@ return {
     -- Tmux
     {
         'alexghergh/nvim-tmux-navigation',
-        config = require('plugins.configs.nvim-tmux-navigation').setup,
+        lazy = true,
+        keys = {
+            { "<C-h>", '<cmd> lua require("nvim-tmux-navigation").NvimTmuxNavigateLeft()<CR>', mode = { "n", "v", "i", "x" } },
+            { "<C-j>", '<cmd> lua require("nvim-tmux-navigation").NvimTmuxNavigateDown()<CR>', mode = { "n", "v", "i", "x" } },
+            { "<C-k>", '<cmd> lua require("nvim-tmux-navigation").NvimTmuxNavigateUp()<CR>', mode = { "n", "v", "i", "x" } },
+            { "<C-l>", '<cmd> lua require("nvim-tmux-navigation").NvimTmuxNavigateRight()<CR>', mode = { "n", "v", "i", "x" } },
+        },
     },
     {
         'christoomey/vim-tmux-runner',
