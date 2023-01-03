@@ -23,25 +23,21 @@ path+=$HOME/.local/bin
 path+=$HOME/.local/bin/neovim/bin
 fpath+=$HOME/.zsh/compdef/
 
-# Pure theme
-fpath+=/opt/homebrew/share/zsh/site-functions
-autoload -U promptinit; promptinit
-zstyle :prompt:pure:git:stash show yes
-prompt pure
+source /Users/ryanburda/.docker/init-zsh.sh || true # Added by Docker Desktop
 
-# Source zsh plugins
-if type brew &>/dev/null; then
-    FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-    autoload -Uz compinit
-    compinit -i
-    zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-fi
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $(brew --prefix)/opt/zsh-history-substring-search/share/zsh-history-substring-search/zsh-history-substring-search.zsh
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
+# Download Znap, if it's not there yet.
+[[ -f ~/Git/zsh-snap/znap.zsh ]] ||
+    git clone --depth 1 -- https://github.com/marlonrichert/zsh-snap.git ~/Git/zsh-snap
+
+source ~/Git/zsh-snap/znap.zsh  # Start Znap
+
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle :prompt:pure:git:stash show yes
+znap prompt sindresorhus/pure
+znap source marlonrichert/zsh-autocomplete
+znap source zsh-users/zsh-autosuggestions
+znap source zsh-users/zsh-syntax-highlighting
+
 
 # Alias
 alias ls="ls --color=always -lah"

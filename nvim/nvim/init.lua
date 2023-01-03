@@ -39,7 +39,6 @@ vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 vim.keymap.set('n', '<leader><S-Tab>', ':tabprevious<cr>'    , opts)
 vim.keymap.set('n', '<leader><Tab>'  , ':tabnext<cr>'        , opts)
-vim.keymap.set('n', '<leader>/'      , ':source $MYVIMRC<cr>', opts)
 vim.keymap.set('n', '<leader>J'      , ':split<cr><C-w>j'    , opts)
 vim.keymap.set('n', '<leader>L'      , ':vsplit<cr><C-w>l'   , opts)
 vim.keymap.set('n', '<leader>u'      , ':e #<cr>'            , opts)  -- open last closed buffer

@@ -106,7 +106,7 @@ return {
     {
         'sindrets/diffview.nvim',
         dependencies= { 'nvim-lua/plenary.nvim', },
-        lazy = true,
+        lazy = false,
         keys = {
             { '<leader>dd', ':DiffviewOpen<cr>', desc = "Diff View" },
             { '<leader>df', ':DiffviewFileHistory %<cr>', desc = "Diff View with current buffer commit history" },
@@ -243,7 +243,7 @@ return {
     -- Buffer deletion without changing layout
     {
         'famiu/bufdelete.nvim',
-        lazy = true,
+        lazy = false,
         keys = {
             { '<leader>q', ':Bdelete<cr>' },
             { '<leader>Q', ':Bdelete!<cr>' }
