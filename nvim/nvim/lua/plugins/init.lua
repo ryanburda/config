@@ -315,6 +315,7 @@ return {
                 sources = {
                     null_ls.builtins.formatting.stylua,
                     null_ls.builtins.completion.spell,
+                    null_ls.builtins.diagnostics.flake8,
                 },
             })
         end,
