@@ -306,6 +306,19 @@ return {
         },
         config = require('plugins.configs.nvim-cmp').setup
     },
+    {
+        'jose-elias-alvarez/null-ls.nvim',
+        config = function()
+            local null_ls = require("null-ls")
+
+            null_ls.setup({
+                sources = {
+                    null_ls.builtins.formatting.stylua,
+                    null_ls.builtins.completion.spell,
+                },
+            })
+        end,
+    },
     -- Debug  TODO: lazy load
     {
         'mfussenegger/nvim-dap',
