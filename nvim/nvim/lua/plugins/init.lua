@@ -70,7 +70,7 @@ return {
             { "<leader>dc", "<cmd>lua require('telescope.builtin').git_commits()<cr>" },
             { "<leader>fa", "<cmd>lua require('plugins.configs.telescope').ff_playground()<cr>" },
             { "<leader>fs", "<cmd>lua require('plugins.configs.telescope').lg_playground()<cr>" },
-            { "<leader>s", "<cmd>lua require('telescope').extensions.tmuxinator.projects(require('telescope.themes').get_dropdown({}))<cr>" },
+            { "<leader>.", "<cmd>lua require('telescope').extensions.tmuxinator.projects(require('telescope.themes').get_dropdown({}))<cr>" },
         },
         config = require('plugins.configs.telescope').setup
     },
@@ -140,6 +140,20 @@ return {
             { '<leader>ax', ':NvimTreeClose<CR>', desc = "File Tree Close" },
         },
         config = require('plugins.configs.nvim-tree').setup
+    },
+
+    -- Symbol Outline
+    {
+        'simrat39/symbols-outline.nvim',
+        lazy = true,
+        keys = {
+            { "<leader>ss", ":SymbolsOutlineOpen<CR>", desc = "Symbols Outline Open" },
+            { "<leader>sx", ":SymbolsOutlineClose<CR>", desc = "Symbols Outline Close" },
+        },
+        config = function ()
+            require("symbols-outline").setup({
+                width = 20,
+            }) end,
     },
 
     -- Tmux

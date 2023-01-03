@@ -13,11 +13,11 @@ function T.setup()
                     highlight = "Directory",
                     separator = true -- use a "true" to enable the default, or set your own character
                 },
-                {
-                    filetype = "Outline",
-                    highlight = "Directory",
-                    separator = true -- use a "true" to enable the default, or set your own character
-                }
+                --{
+                --    filetype = "Outline",
+                --    highlight = "Directory",
+                --    separator = true -- use a "true" to enable the default, or set your own character
+                --}
             },
             hover = {
                 enabled = true,

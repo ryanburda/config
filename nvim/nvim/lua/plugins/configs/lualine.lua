@@ -29,7 +29,7 @@ function T.setup()
                     path = 1
                 },
             },
-            lualine_x = { copilot_on, 'filetype', },
+            lualine_x = { copilot_on, 'diagnostics', },
             lualine_y = { 'progress', },
             lualine_z = { 'location' },
         },
