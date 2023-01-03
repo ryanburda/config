@@ -23,8 +23,6 @@ path+=$HOME/.local/bin
 path+=$HOME/.local/bin/neovim/bin
 fpath+=$HOME/.zsh/compdef/
 
-source /Users/ryanburda/.docker/init-zsh.sh || true # Added by Docker Desktop
-
 # Download Znap, if it's not there yet.
 [[ -f ~/Git/zsh-snap/znap.zsh ]] ||
     git clone --depth 1 -- https://github.com/marlonrichert/zsh-snap.git ~/Git/zsh-snap
