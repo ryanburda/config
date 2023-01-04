@@ -31,6 +31,8 @@ source ~/Git/zsh-snap/znap.zsh  # Start Znap
 
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle :prompt:pure:git:stash show yes
+zstyle ':autocomplete:*' list-lines 8
+zstyle ':autocomplete:history-search:*' list-lines 8
 znap prompt sindresorhus/pure
 znap source marlonrichert/zsh-autocomplete
 znap source zsh-users/zsh-autosuggestions

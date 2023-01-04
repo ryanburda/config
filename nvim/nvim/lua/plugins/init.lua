@@ -224,7 +224,7 @@ return {
         lazy = true,
         keys = {
             { "<leader>ji", ":BrowserSearch<cr>", desc = "Search for word under cursor in browser" },
-            { "<leader>ji", ":'<,'>BrowserSearch<cr>", desc = "Search for visual selection in brower" },
+            { "<leader>ji", ":'<,'>BrowserSearch<cr>", desc = "Search for visual selection in brower", mode = {"v"} },
         },
     },
 
@@ -315,7 +315,7 @@ return {
                 sources = {
                     null_ls.builtins.formatting.stylua,
                     null_ls.builtins.completion.spell,
-                    null_ls.builtins.diagnostics.flake8,
+                    --null_ls.builtins.diagnostics.flake8,
                 },
             })
         end,
