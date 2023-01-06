@@ -51,9 +51,3 @@ sudo rm -rf "$HOME/.local/share/nvim"
 cd $NVIM_REPO_PATH && make CMAKE_BUILD_TYPE=RelWithDebInfo
 sudo make distclean
 sudo make install
-
-################
-# Post Install #
-################
-# Install plugins
-nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync' >&/dev/null
