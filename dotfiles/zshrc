@@ -1,3 +1,4 @@
+#!/bin/zsh
 # Uncomment to profile zsh startup.
 # NOTE: must also uncomment last line.
 # zmodload zsh/zprof

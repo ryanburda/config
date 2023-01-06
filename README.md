@@ -1,6 +1,6 @@
-## Config
+# config
 
-scripts and dotfiles
+Terminal configuration and dotfiles.
 
 ```
 mkdir ~/Developer
