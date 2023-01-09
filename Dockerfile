@@ -76,4 +76,5 @@ RUN ln -svfF "${CONFIG_DIR}/dotfiles/nvim" "${HOME}/.config/nvim"
 RUN mkdir -p "${HOME}/.config/lazygit"
 RUN ln -svfF "${CONFIG_DIR}/dotfiles/lazygit.yml" "${HOME}/.config/lazygit/config.yml"
 
-CMD ["zsh"]
+ENTRYPOINT ["/bin/zsh"]
+CMD ["sleep", "infinity"]
