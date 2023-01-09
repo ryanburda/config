@@ -1,6 +1,5 @@
 #!/bin/zsh
 
-SRC_DIR_PATH="$HOME/.nvimDeveloper/src"
 NVIM_REPO_PATH="$HOME/.nvim/neovim"
 NVIM_PLUGINS_PATH="$HOME/.nvim/plugins"  # empty directory where plugins can be installed and tested locally.
 NVIM_INSTALL_DIR_PATH="$HOME/.local/bin/neovim"
