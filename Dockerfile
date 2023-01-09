@@ -77,4 +77,3 @@ RUN mkdir -p "${HOME}/.config/lazygit"
 RUN ln -svfF "${CONFIG_DIR}/dotfiles/lazygit.yml" "${HOME}/.config/lazygit/config.yml"
 
 ENTRYPOINT ["/bin/zsh"]
-CMD ["sleep", "infinity"]
