@@ -1,6 +1,7 @@
 FROM ubuntu:23.04
 
-WORKDIR /root
+ENV HOME=/root
+WORKDIR $HOME
 
 RUN apt-get update && apt-get install -y \
     sudo \
@@ -42,7 +43,7 @@ RUN chsh -s /bin/zsh
 # RUN ./nvim-linux64/bin/nvim
 RUN ln -svfF ./dotfiles/nvim $XDG_CONFIG_HOME/nvim
 
-ENV CONFIG_DIR = /opt/config
+ENV CONFIG_DIR=$HOME/Developer/config
 COPY . $CONFIG_DIR
 
 # Symlink config files
