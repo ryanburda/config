@@ -73,7 +73,7 @@ brew link --force libpq
 
 # Fonts
 brew tap homebrew/cask-fonts
-brew install --cask font-hack-nerd-font 
+brew install --cask font-hack-nerd-font
 brew install --cask font-fira-code-nerd-font
 brew install --cask font-jetbrains-mono-nerd-font
 
@@ -152,6 +152,9 @@ sudo rm -rf "$HOME/.local/share/nvim"
 cd $NVIM_REPO_PATH && make CMAKE_BUILD_TYPE=RelWithDebInfo
 sudo make distclean
 sudo make install
+
+# link nvim config
+ln -svfF $SCRIPT_DIR/dotfiles/nvim $HOME/.config/nvim
 
 ###############
 # Setup Repos #
