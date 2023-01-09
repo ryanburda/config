@@ -4,4 +4,4 @@ build: ## Build the image
 	docker build -t container_env .
 
 run: build ## Start the environment
-	docker run -it container_env
+	docker container start container_env --attach || docker container run -it --name container_env --volume container_env_volume:/ container_env

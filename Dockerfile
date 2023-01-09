@@ -50,10 +50,15 @@ RUN sudo tar xf lazygit.tar.gz -C /usr/local/bin lazygit
 RUN curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash
 RUN chsh -s /bin/zsh
 
-# Neovim
+# neovim
 ENV NEOVIM_REPO_DIR="${HOME}/.neovim"
 RUN git clone https://github.com/neovim/neovim.git $NEOVIM_REPO_DIR
 RUN cd $NEOVIM_REPO_DIR && make CMAKE_BUILD_TYPE=RelWithDebInfo && sudo make distclean && sudo make install
+
+# pyenv
+ENV PYENV_REPO_DIR="${HOME}/.pyenv"
+RUN git clone https://github.com/pyenv/pyenv.git $PYENV_REPO_DIR
+RUN cd $PYENV_REPO_DIR && src/configure && make -C src
 
 # Copy in config repo
 ENV CONFIG_DIR=$HOME/Developer/config
