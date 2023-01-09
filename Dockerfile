@@ -5,9 +5,12 @@ WORKDIR $HOME
 
 RUN apt-get update && apt-get install -y \
     sudo \
+    make \
+    man \
     zsh \
     tar \
     curl \
+    openssl \
     git \
     coreutils \
     tmux \
@@ -21,8 +24,19 @@ RUN apt-get update && apt-get install -y \
     ripgrep \
     jq \
     rlwrap \
-    pspg \
-    neovim
+    ninja-build \
+    gettext \
+    libtool \
+    libtool-bin \
+    autoconf \
+    automake \
+    cmake \
+    g++ \
+    pkg-config \
+    unzip \
+    curl \
+    doxygen
+    # pspg
     # diff-so-fancy \
     # deno \
     # node \
@@ -34,15 +48,14 @@ RUN sudo tar xf lazygit.tar.gz -C /usr/local/bin lazygit
 
 # lazydocker
 RUN curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash
-
 RUN chsh -s /bin/zsh
 
 # Neovim
-# RUN curl -Lo nvim-linux64.tar.gz https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz
-# RUN tar xzvf nvim-linux64.tar.gz
-# RUN ./nvim-linux64/bin/nvim
-RUN ln -svfF ./dotfiles/nvim $XDG_CONFIG_HOME/nvim
+ENV NEOVIM_REPO_DIR="${HOME}/.neovim"
+RUN git clone https://github.com/neovim/neovim.git $NEOVIM_REPO_DIR
+RUN cd $NEOVIM_REPO_DIR && make CMAKE_BUILD_TYPE=RelWithDebInfo && sudo make distclean && sudo make install
 
+# Copy in config repo
 ENV CONFIG_DIR=$HOME/Developer/config
 COPY . $CONFIG_DIR
 
@@ -51,8 +64,11 @@ RUN ln -svfF "${CONFIG_DIR}/dotfiles/zshrc" "${HOME}/.zshrc"
 RUN ln -svfF "${CONFIG_DIR}/dotfiles/tmux.conf" "${HOME}/.tmux.conf"
 RUN ln -svfF "${CONFIG_DIR}/dotfiles/tmate.conf" "${HOME}/.tmate.conf"
 RUN ln -svfF "${CONFIG_DIR}/dotfiles/gitconfig" "${HOME}/.gitconfig"
-# RUN ln -svfF "${CONFIG_DIR}/dotfiles/lazygit.yml" "${HOME}/Library/Application Support/lazygit/config.yml"
 RUN ln -svfF "${CONFIG_DIR}/dotfiles/psqlrc" "${HOME}/.psqlrc"
 RUN ln -svfF "${CONFIG_DIR}/dotfiles/pspgconf" "${HOME}/.pspgconf"
+RUN mkdir -p "${HOME}/.config"
+RUN ln -svfF "${CONFIG_DIR}/dotfiles/nvim" "${HOME}/.config/nvim"
+RUN mkdir -p "${HOME}/.config/lazygit"
+RUN ln -svfF "${CONFIG_DIR}/dotfiles/lazygit.yml" "${HOME}/.config/lazygit/config.yml"
 
 CMD ["zsh"]
