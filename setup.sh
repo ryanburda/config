@@ -129,10 +129,33 @@ git clone https://github.com/eendroroy/alacritty-theme.git ~/.alacritty-colorsch
 defaults write com.apple.Dock appswitcher-all-displays -bool true
 killall Dock
 
-# Setup Neovim
-./nvim_install.sh
+################
+# Setup Neovim #
+################
+NVIM_REPO_PATH="$HOME/.nvim/neovim"
+NVIM_PLUGINS_PATH="$HOME/.nvim/plugins"  # empty directory where plugins can be installed and tested locally.
+NVIM_INSTALL_DIR_PATH="$HOME/.local/bin/neovim"
 
-# Setup Repos
+mkdir -p $NVIM_PLUGINS_PATH
+mkdir -p $NVIM_INSTALL_DIR_PATH
+
+# Build Prerequisites
+brew install --quiet ninja libtool automake cmake pkg-config gettext curl
+
+# Clone or pull the neovim repo
+git clone git@github.com:neovim/neovim.git $NVIM_REPO_PATH 2> /dev/null || git -C $NVIM_REPO_PATH pull
+
+# Remove any files that neovim may have created previously
+sudo rm -rf "$HOME/.local/share/nvim"
+
+# Install neovim
+cd $NVIM_REPO_PATH && make CMAKE_BUILD_TYPE=RelWithDebInfo
+sudo make distclean
+sudo make install
+
+###############
+# Setup Repos #
+###############
 REPOS_PROJECT_DIR=$HOME/Developer/repos
 mkdir -p $REPOS_PROJECT_DIR
 
