@@ -5,6 +5,7 @@ WORKDIR $HOME
 
 RUN apt-get update && apt-get install -y \
     sudo \
+    coreutils \
     make \
     man \
     zsh \
@@ -12,7 +13,6 @@ RUN apt-get update && apt-get install -y \
     curl \
     openssl \
     git \
-    coreutils \
     tmux \
     tmate \
     tmuxinator \
@@ -60,6 +60,7 @@ RUN chsh -s /bin/zsh
 # pyenv
 ENV PYENV_REPO_DIR="${HOME}/.pyenv"
 RUN git clone https://github.com/pyenv/pyenv.git $PYENV_REPO_DIR
+RUN git clone https://github.com/pyenv/pyenv-virtualenv.git "${PYENV_REPO_DIR}/plugins/pyenv-virtualenv"
 RUN cd $PYENV_REPO_DIR && src/configure && make -C src
 
 # Copy in config repo
