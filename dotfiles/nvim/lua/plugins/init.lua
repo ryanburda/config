@@ -267,20 +267,6 @@ return {
         config = require("plugins.configs.toggleterm").setup
     },
 
-    -- Markdown preview
-    {
-        'toppair/peek.nvim',
-        run = 'deno task --quiet build:fast',
-        lazy = true,
-        keys = {
-            { "<leader>mo", "<cmd> lua require('peek').open()<cr>", desc = "Markdown preview open" },
-            { "<leader>mx", "<cmd> lua require('peek').close()<cr>", desc = "Markdown preview close" }
-        },
-        config = function()
-            require("peek").setup()
-        end
-    },
-
     ----------------------------
     -- Package Manager: Mason --
     ----------------------------

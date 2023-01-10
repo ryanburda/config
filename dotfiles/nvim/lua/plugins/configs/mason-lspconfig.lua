@@ -4,7 +4,7 @@ function T.setup()
 
     local servers = {
         "bashls",
-        "clangd",
+        --"clangd",
         "dockerls",
         "jdtls",
         "jsonls",

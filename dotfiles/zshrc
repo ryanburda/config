@@ -56,6 +56,9 @@ path+=$HOME/.pyenv/bin
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
+# rust
+export PATH="$HOME/.cargo/bin:$PATH"
+
 # Raise max files and max procs
 ulimit -n 200000
 ulimit -u 2048
