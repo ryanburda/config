@@ -11,7 +11,7 @@ function T.setup()
         "pyright",
         "rust_analyzer",
         "sumneko_lua",
-        "sqls",
+        "sqlls",
         "yamlls"
     }
 
