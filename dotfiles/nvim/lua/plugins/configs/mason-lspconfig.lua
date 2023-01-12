@@ -4,9 +4,7 @@ function T.setup()
 
     local servers = {
         "bashls",
-        --"clangd",
         "dockerls",
-        "jdtls",
         "jsonls",
         "pyright",
         "rust_analyzer",
