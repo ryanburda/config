@@ -73,6 +73,7 @@ brew link --force libpq
 
 # Fonts
 brew tap homebrew/cask-fonts
+brew install --cask font-sauce-code-pro-nerd-font
 brew install --cask font-hack-nerd-font
 brew install --cask font-fira-code-nerd-font
 brew install --cask font-jetbrains-mono-nerd-font
