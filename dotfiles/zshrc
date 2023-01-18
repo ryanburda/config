@@ -29,13 +29,13 @@ source ~/Git/zsh-snap/znap.zsh  # Start Znap
 
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle :prompt:pure:git:stash show yes
-zstyle ':autocomplete:*' list-lines 8
-zstyle ':autocomplete:history-search:*' list-lines 8
 znap prompt sindresorhus/pure
-znap source marlonrichert/zsh-autocomplete
-znap source zsh-users/zsh-autosuggestions
 znap source zsh-users/zsh-syntax-highlighting
+znap source zsh-users/zsh-autosuggestions
 
+# autocompletion using arrow keys (based on history)
+bindkey '^n' history-search-backward
+bindkey '^p' history-search-forward
 
 # Alias
 alias ls="ls --color=always -lah"
