@@ -47,6 +47,9 @@ vim.keymap.set('n', '<C-f>'          , 'zLgm'                , opts)  -- horizon
 vim.keymap.set('n', '<C-b>'          , 'zHgm'                , opts)  -- horizontal scroll left
 vim.keymap.set('n', 'n'              , 'nzz'                 , opts)  -- next occurrence of search and center
 vim.keymap.set('n', 'N'              , 'Nzz'                 , opts)  -- previous occurrence of search and center
+vim.keymap.set('n', '<leader>p'      , '"0p'                 , opts)  -- paste from yank register
+vim.keymap.set('n', '<leader>P'      , '"0P'                 , opts)  -- paste from yank register
+
 
 -- quick notes
 vim.keymap.set('n', '<leader>n' , ':edit ~/Documents/main.txt<cr>G$', opts)
@@ -108,4 +111,4 @@ vim.opt.runtimepath:prepend(lazypath)
 
 require("lazy").setup(require("plugins"))
 
-vim.keymap.set('n', '<leader>pp' , ':Lazy profile<CR>', {desc = 'Plugin Manager'})
+vim.keymap.set('n', '<leader>`' , ':Lazy profile<CR>', {desc = 'Plugin Manager'})
