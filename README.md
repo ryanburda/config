@@ -11,7 +11,12 @@ cd config
 ./setup.sh
 ```
 
-Containerized environment: (can be cloned anywhere)
+Optional repo setup:
+```
+./setup_repos.sh
+```
+
+Containerized environment: (Work in progress)
 ```
 make build
 make run
