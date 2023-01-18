@@ -103,6 +103,9 @@ ln -svfF "${SCRIPT_DIR}/dotfiles/lazygit.yml" "${HOME}/Library/Application Suppo
 ln -svfF "${SCRIPT_DIR}/dotfiles/psqlrc" "${HOME}/.psqlrc"
 ln -svfF "${SCRIPT_DIR}/dotfiles/pspgconf" "${HOME}/.pspgconf"
 
+# Source zshrc so plugins are installed automatically.
+source ${HOME}/.zshrc
+
 # Alacritty doesn't like symlinks for some reason.
 mkdir -p ~/.config/alacritty
 ln -vf "${SCRIPT_DIR}/dotfiles/alacritty.yml" "${HOME}/.config/alacritty/alacritty.yml"
@@ -156,3 +159,6 @@ sudo make install
 
 # link nvim config
 ln -svfF $SCRIPT_DIR/dotfiles/nvim $HOME/.config/nvim
+
+# Let nvim set itself up now that the config has been linked
+RUN nvim --headless "+Lazy! sync" +qa

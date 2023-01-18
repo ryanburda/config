@@ -85,4 +85,8 @@ RUN ln -svfF "${CONFIG_DIR}/dotfiles/nvim" "${HOME}/.config/nvim"
 RUN mkdir -p "${HOME}/.config/lazygit"
 RUN ln -svfF "${CONFIG_DIR}/dotfiles/lazygit.yml" "${HOME}/.config/lazygit/config.yml"
 
+# Let zsh and nvim set themselves up now that the configs have been linked
+RUN ${HOME}/.zshrc
+RUN nvim --headless "+Lazy! sync" +qa
+
 ENTRYPOINT ["/bin/zsh"]
