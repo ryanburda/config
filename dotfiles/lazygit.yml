@@ -1,3 +1,9 @@
+gui:
+  theme:
+    selectedLineBgColor:
+      - default
+    selectedRangeBgColor:
+      - default
 git:
   paging:
     colorArg: always
