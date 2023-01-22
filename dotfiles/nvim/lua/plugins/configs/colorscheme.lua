@@ -6,7 +6,7 @@ function T.setup()
 
     if dark_mode then
         --vim.cmd('colorscheme nightfox')
-        vim.cmd('colorscheme melange')
+        vim.cmd('colorscheme tender')
         vim.cmd('set background=dark')
     else
         vim.cmd('colorscheme dayfox')
