@@ -10,6 +10,8 @@ return {
     },
 
     -- Color Schemes
+    'ellisonleao/gruvbox.nvim',
+    'savq/melange-nvim',
     {
         'EdenEast/nightfox.nvim',
         config = require('plugins.configs.colorscheme').setup,

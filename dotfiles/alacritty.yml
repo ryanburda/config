@@ -860,4 +860,5 @@ font:
   #highlight_damage: false
   #
 import:
-  - ~/.alacritty-colorscheme/themes/horizon-dark.yaml
+  #- ~/.alacritty-colorscheme/themes/horizon-dark.yaml
+  - ~/.alacritty-colorscheme/themes/tender.yaml
