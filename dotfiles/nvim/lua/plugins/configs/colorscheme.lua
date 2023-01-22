@@ -1,5 +1,10 @@
 local T = {}
 
+T.COLORS_MAP = {}
+T.COLORS_MAP['tender'] = 'tender'
+T.COLORS_MAP['dayfox'] = 'Tomorrow.light'
+T.COLORS_MAP['dawnfox'] = 'Embers.light'
+
 function T.setup()
 
     local dark_mode = true
