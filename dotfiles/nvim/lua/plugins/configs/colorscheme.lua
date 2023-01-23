@@ -26,17 +26,30 @@ T.COLORS_MAP['duskfox'] = {
     ['background'] = 'dark',
 }
 T.COLORS_MAP['dayfox'] = {
-    ['alacritty'] = 'Tomorrow.light',
+    ['alacritty'] = 'Twilight.light',
     ['background'] = 'light',
 }
 T.COLORS_MAP['dawnfox'] = {
-    ['alacritty'] = 'Embers.light',
+    ['alacritty'] = 'Embers.light',  -- Mocha.light
     ['background'] = 'light',
 }
 T.COLORS_MAP['tender'] = {
     ['alacritty'] = 'tender',
     ['background'] = 'dark',
 }
+T.COLORS_MAP['gruvbox'] = {
+    ['alacritty'] = 'Gruvbox-Dark',
+    ['background'] = 'dark',
+}
+T.COLORS_MAP['gruvbox'] = {
+    ['alacritty'] = 'Gruvbox-Dark',
+    ['background'] = 'dark',
+}
+T.COLORS_MAP['PaperColor'] = {
+    ['alacritty'] = 'Iceberg-Light',
+    ['background'] = 'light',
+}
+
 
 function T.setup()
 
