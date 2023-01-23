@@ -10,9 +10,9 @@ return {
     },
 
     -- Color Schemes
-    'jacoborus/tender.vim',
     {
         'EdenEast/nightfox.nvim',
+        dependencies = { 'jacoborus/tender.vim', },
         config = require('plugins.configs.colorscheme').setup,
     },
 

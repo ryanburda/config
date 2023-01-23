@@ -109,7 +109,7 @@ function T.setup()
                 mappings = {
                     i = {
                         ["<C-f>"] = cf_actions.find_changed_files,
-                        ["<cr>"] = function(prompt_bufnr)
+                        ["<CR>"] = function(prompt_bufnr)
                             -- get the selected file name
                             local entry = require("telescope.actions.state").get_selected_entry()
                             -- close telescope
@@ -124,7 +124,7 @@ function T.setup()
                 mappings = {
                     i = {
                         ["<C-f>"] = cf_actions.find_changed_files,
-                        ["<cr>"] = function(prompt_bufnr)
+                        ["<CR>"] = function(prompt_bufnr)
                             -- get the selected file name
                             local entry = require("telescope.actions.state").get_selected_entry()
                             -- close telescope
@@ -135,6 +135,21 @@ function T.setup()
                     }
                 }
             },
+            colorscheme = {
+                mappings = {
+                    i = {
+                        ["<CR>"] = function(prompt_bufnr)
+                            -- get the selected file name
+                            local selection = require("telescope.actions.state").get_selected_entry()
+                            -- close telescope
+                            require("telescope.actions").close(prompt_bufnr)
+                            -- write the colorscheme selection to the colorscheme file and rerun setup
+                            require("plugins.configs.colorscheme").change_colorscheme(selection.value)
+                            require("plugins.configs.colorscheme").setup()
+                        end,
+                    }
+                }
+            }
         }
     })
 
