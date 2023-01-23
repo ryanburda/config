@@ -5,12 +5,24 @@ T.COLORSCHEME_FILE = vim.fn.stdpath('config') .. '/.colorscheme'
 
 -- Maps a neovim colorscheme to other attributes
 T.COLORS_MAP = {}
-T.COLORS_MAP['nightfox'] = {
-    ['alacritty'] = 'Ayu-Mirage',
+T.COLORS_MAP['carbonfox'] = {
+    ['alacritty'] = 'default.dark',
     ['background'] = 'dark',
 }
-T.COLORS_MAP['tender'] = {
-    ['alacritty'] = 'tender',
+T.COLORS_MAP['nightfox'] = {
+    ['alacritty'] = 'Iceberg-Dark',
+    ['background'] = 'dark',
+}
+T.COLORS_MAP['nordfox'] = {
+    ['alacritty'] = 'nord',
+    ['background'] = 'dark',
+}
+T.COLORS_MAP['terafox'] = {
+    ['alacritty'] = 'Gotham',
+    ['background'] = 'dark',
+}
+T.COLORS_MAP['duskfox'] = {
+    ['alacritty'] = 'Catppuccin',
     ['background'] = 'dark',
 }
 T.COLORS_MAP['dayfox'] = {
@@ -20,6 +32,10 @@ T.COLORS_MAP['dayfox'] = {
 T.COLORS_MAP['dawnfox'] = {
     ['alacritty'] = 'Embers.light',
     ['background'] = 'light',
+}
+T.COLORS_MAP['tender'] = {
+    ['alacritty'] = 'tender',
+    ['background'] = 'dark',
 }
 
 function T.setup()
