@@ -95,6 +95,8 @@ mkdir -p $HOME/Developer
 
 # Symlink config files
 SCRIPT_DIR=${0:a:h}
+mkdir -p ~/.config/alacritty
+ln -svfF "${SCRIPT_DIR}/dotfiles/alacritty.yml" "${HOME}/.config/alacritty/alacritty.yml"
 ln -svfF "${SCRIPT_DIR}/dotfiles/zshrc" "${HOME}/.zshrc"
 ln -svfF "${SCRIPT_DIR}/dotfiles/tmux.conf" "${HOME}/.tmux.conf"
 ln -svfF "${SCRIPT_DIR}/dotfiles/tmate.conf" "${HOME}/.tmate.conf"
@@ -107,10 +109,6 @@ ln -svfF "${SCRIPT_DIR}/dotfiles/pspgconf" "${HOME}/.pspgconf"
 
 # Source zshrc so plugins are installed automatically.
 source ${HOME}/.zshrc
-
-# Alacritty doesn't like symlinks for some reason.
-mkdir -p ~/.config/alacritty
-ln -vf "${SCRIPT_DIR}/dotfiles/alacritty.yml" "${HOME}/.config/alacritty/alacritty.yml"
 
 # cloud-sql-proxy
 brew install --cask google-cloud-sdk
