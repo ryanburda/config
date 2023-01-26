@@ -384,10 +384,7 @@ return {
         end
     },
 
-    {
-        "jamestthompson3/nvim-remote-containers",
-        dir = "~/.nvim/plugins/nvim-remote-containers"
-    },
+    "jamestthompson3/nvim-remote-containers",
 
     -- TODO: set this up again.
     -- Project specific setup scripts
