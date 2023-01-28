@@ -125,7 +125,7 @@ function T.setup()
                     i = {
                         ["<C-f>"] = cf_actions.find_changed_files,
                         ["<CR>"] = function(prompt_bufnr)
-                            -- get the selected file name
+                            -- get the selected commit hash
                             local entry = require("telescope.actions.state").get_selected_entry()
                             -- close telescope
                             require("telescope.actions").close(prompt_bufnr)
