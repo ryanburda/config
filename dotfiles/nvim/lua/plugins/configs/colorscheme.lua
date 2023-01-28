@@ -73,7 +73,7 @@ function T.setup()
     -- set the colorscheme, background color, and alacritty theme
     vim.cmd('colorscheme ' .. colorscheme)
     vim.cmd('set background=' .. T.COLORS_MAP[colorscheme]['background'])
-    os.execute("alacritty-themes " .. T.COLORS_MAP[colorscheme]['alacritty'])
+    os.execute("alacritty-themes " .. T.COLORS_MAP[colorscheme]['alacritty'] .. " 1> /dev/null")
 
 end
 
