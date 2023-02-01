@@ -13,11 +13,6 @@ function T.setup()
                     highlight = "Directory",
                     separator = true -- use a "true" to enable the default, or set your own character
                 },
-                --{
-                --    filetype = "Outline",
-                --    highlight = "Directory",
-                --    separator = true -- use a "true" to enable the default, or set your own character
-                --}
             },
             hover = {
                 enabled = true,
@@ -28,11 +23,10 @@ function T.setup()
         }
     })
 
-    local opts = { noremap=true, silent=false }
-    vim.api.nvim_set_keymap('n', '<leader>i', ':BufferLineCyclePrev<cr>', opts)
-    vim.api.nvim_set_keymap('n', '<leader>o', ':BufferLineCycleNext<cr>', opts)
-    vim.api.nvim_set_keymap('n', '<leader>I', ':BufferLineMovePrev<cr>' , opts)
-    vim.api.nvim_set_keymap('n', '<leader>O', ':BufferLineMoveNext<cr>' , opts)
+    vim.keymap.set('n', '<leader>i', ':BufferLineCyclePrev<cr>', {desc = 'Cycle through buffers left. (Mnemonic: overlaps with jumplist navigation <C-i>)'})
+    vim.keymap.set('n', '<leader>o', ':BufferLineCycleNext<cr>', {desc = 'Cycle through buffers right. (Mnemonic: overlaps with jumplist navigation <C-o>)'})
+    vim.keymap.set('n', '<leader>I', ':BufferLineMovePrev<cr>' , {desc = 'Move current buffer to the left in the bufferline'})
+    vim.keymap.set('n', '<leader>O', ':BufferLineMoveNext<cr>' , {desc = 'Move current buffer to the right in the bufferline'})
 
 end
 

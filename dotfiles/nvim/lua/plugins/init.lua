@@ -208,8 +208,15 @@ return {
     -- Buffer tabs
     {
         'akinsho/bufferline.nvim',
-        dependencies = {'kyazdani42/nvim-web-devicons', },
+        dependencies = { 'kyazdani42/nvim-web-devicons', },
         config = require('plugins.configs.bufferline').setup,
+    },
+
+    -- Buffer deletion without changing layout
+    {
+        'famiu/bufdelete.nvim',
+        dependencies = { 'akinsho/bufferline.nvim', },
+        config = require("plugins.configs.bufdelete").setup
     },
 
     -- Status line
@@ -250,16 +257,6 @@ return {
     {
         'lukas-reineke/indent-blankline.nvim',
         config = require('plugins.configs.indent-blankline').setup
-    },
-
-    -- Buffer deletion without changing layout
-    {
-        'famiu/bufdelete.nvim',
-        lazy = false,
-        keys = {
-            { '<leader>q', ':Bdelete<cr>' },
-            { '<leader>Q', ':Bdelete!<cr>' }
-        },
     },
 
     -- Floating Terminal
