@@ -386,8 +386,4 @@ return {
 
     "jamestthompson3/nvim-remote-containers",
 
-    -- TODO: set this up again.
-    -- Project specific setup scripts
-    --require('projects.bde-airflow').setup()
-
 }
