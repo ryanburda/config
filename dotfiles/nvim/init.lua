@@ -11,6 +11,7 @@ vim.opt.scrolloff = 12
 vim.opt.sidescrolloff = 16
 vim.opt.cc = '120'
 vim.opt.encoding = 'UTF-8'
+vim.opt.expandtab = true
 vim.opt.ignorecase = true
 vim.opt.showmatch = true
 vim.opt.incsearch = true
@@ -23,8 +24,8 @@ vim.opt.timeoutlen = 1000
 vim.opt.updatetime = 100
 vim.opt.laststatus = 3
 vim.opt.signcolumn = "yes"
-vim.opt.list = false
-vim.opt.listchars = { space = '⋅', tab = '›~', eol = '↵' }
+vim.opt.list = true
+vim.opt.listchars = { tab = '›~'}
 
 vim.cmd('set noshowmode')
 vim.cmd('set noswapfile')

@@ -23,7 +23,6 @@ function T.setup()
             ghost_text = true,
         },
         window = {
-			pumheight = 8,
             completion = cmp.config.window.bordered({
                 scrolloff = 4,
             }),
@@ -77,21 +76,15 @@ function T.setup()
         },
     })
 
-    -- Set configuration for specific filetype.
-    cmp.setup.filetype('gitcommit', {
-        sources = cmp.config.sources({
-            { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
-        }, {
-            { name = 'buffer' },
-        })
-    })
-
     -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
     cmp.setup.cmdline({ '/', '?' }, {
         mapping = cmp.mapping.preset.cmdline(),
         sources = {
             { name = 'buffer' }
-        }
+        },
+        view = {
+            entries = { name = 'custom', selection_order = 'bottom_up' }
+        },
     })
 
     -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
@@ -101,7 +94,10 @@ function T.setup()
             { name = 'path' }
         }, {
             { name = 'cmdline' }
-        })
+        }),
+        view = {
+            entries = { name = 'custom', selection_order = 'bottom_up' }
+        },
     })
 
 end
