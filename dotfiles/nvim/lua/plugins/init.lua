@@ -21,6 +21,11 @@ return {
         config = require('plugins.configs.styler').setup,
     },
 
+    {
+        'Aasim-A/scrollEOF.nvim',
+        config = function() require('scrollEOF').setup() end,
+    },
+
     -- Treesitter
     {
         'nvim-treesitter/nvim-treesitter',
