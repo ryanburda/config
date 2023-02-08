@@ -23,17 +23,15 @@ function T.setup()
             ghost_text = true,
         },
         window = {
+			pumheight = 8,
             completion = cmp.config.window.bordered({
                 scrolloff = 4,
             }),
             documentation = cmp.config.window.bordered({max_width = 100}),
         },
-        view = {
-            entries = { name = 'custom', selection_order = 'bottom_up' }
-        },
         completion = {
             keyword_length = 1,
-            --completeopt = 'menu,menuone,noinsert',
+            completeopt = 'menu,menuone,noinsert,noselect',
         },
         mapping = cmp.mapping.preset.insert({
             ['<C-n>'] = cmp.mapping.select_next_item(),
@@ -89,7 +87,7 @@ function T.setup()
     })
 
     -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-    cmp.setup.cmdline('/', {
+    cmp.setup.cmdline({ '/', '?' }, {
         mapping = cmp.mapping.preset.cmdline(),
         sources = {
             { name = 'buffer' }
