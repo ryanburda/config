@@ -374,7 +374,7 @@ return {
           "nvim-lua/plenary.nvim",
           "nvim-telescope/telescope.nvim"
         },
-        lazy = true,
+        lazy = false,
         keys = {
             { "<leader>cb", ':ChatGPT<CR>', desc = "ChatGPT prompt" }
         },
@@ -384,7 +384,5 @@ return {
             })
         end
     },
-
-    "jamestthompson3/nvim-remote-containers",
 
 }
