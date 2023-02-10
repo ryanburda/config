@@ -1,8 +1,10 @@
 FROM ubuntu:23.04
 
-ENV HOME=/root
-WORKDIR $HOME
+WORKDIR /usr/src
 
+######################
+# Install everything #
+######################
 RUN apt-get update && apt-get install -y \
     sudo \
     coreutils \
@@ -21,7 +23,6 @@ RUN apt-get update && apt-get install -y \
     wget \
     golang \
     htop \
-    lua5.4 \
     ripgrep \
     jq \
     rlwrap \
@@ -40,17 +41,17 @@ RUN apt-get update && apt-get install -y \
     pspg
 
 # neovim
-ENV NEOVIM_REPO_DIR="${HOME}/.neovim"
-RUN git clone https://github.com/neovim/neovim.git $NEOVIM_REPO_DIR
-RUN cd $NEOVIM_REPO_DIR && make CMAKE_BUILD_TYPE=RelWithDebInfo && sudo make distclean && sudo make install
+RUN git clone https://github.com/neovim/neovim.git
+RUN cd neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo && sudo make distclean && sudo make install
 
 # node
 RUN curl -fsSL https://deb.nodesource.com/deb/setup_16.x | sudo -E bash -
 RUN apt-get update && apt-get install -y nodejs
 RUN apt-get install -y npm
 
-# rust
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash -s -- -y
+# diff-so-fancy
+RUN git clone https://github.com/so-fancy/diff-so-fancy.git /usr/local/bin/diff-so-fancy
+ENV PATH="$PATH:/usr/local/bin/diff-so-fancy"
 
 # lazygit
 RUN curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep '"tag_name":' |  sed -E 's/.*"v*([^"]+)".*/\1/')_Linux_x86_64.tar.gz"
@@ -60,30 +61,26 @@ RUN sudo tar xf lazygit.tar.gz -C /usr/local/bin lazygit
 RUN curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash
 RUN chsh -s /bin/zsh
 
-# diff-so-fancy
-RUN npm install diff-so-fancy
+#########################################
+# Copy in code and symlink config files #
+#########################################
+ENV PROJECT_DIR=/usr/local/config
+ENV HOME=/root
 
-# pyenv
-ENV PYENV_REPO_DIR="${HOME}/.pyenv"
-RUN git clone https://github.com/pyenv/pyenv.git $PYENV_REPO_DIR
-RUN git clone https://github.com/pyenv/pyenv-virtualenv.git "${PYENV_REPO_DIR}/plugins/pyenv-virtualenv"
-RUN cd $PYENV_REPO_DIR && src/configure && make -C src
+WORKDIR ${PROJECT_DIR}
 
-# Copy in config repo
-ENV CONFIG_DIR=$HOME/Developer/config
-COPY . $CONFIG_DIR
+COPY . .
 
-# Symlink config files
-RUN ln -svfF "${CONFIG_DIR}/dotfiles/zshrc" "${HOME}/.zshrc"
-RUN ln -svfF "${CONFIG_DIR}/dotfiles/tmux.conf" "${HOME}/.tmux.conf"
-RUN ln -svfF "${CONFIG_DIR}/dotfiles/tmate.conf" "${HOME}/.tmate.conf"
-RUN ln -svfF "${CONFIG_DIR}/dotfiles/gitconfig" "${HOME}/.gitconfig"
-RUN ln -svfF "${CONFIG_DIR}/dotfiles/psqlrc" "${HOME}/.psqlrc"
-RUN ln -svfF "${CONFIG_DIR}/dotfiles/pspgconf" "${HOME}/.pspgconf"
+RUN ln -svfF "${PROJECT_DIR}/dotfiles/zshrc" "${HOME}/.zshrc"
+RUN ln -svfF "${PROJECT_DIR}/dotfiles/tmux.conf" "${HOME}/.tmux.conf"
+RUN ln -svfF "${PROJECT_DIR}/dotfiles/tmate.conf" "${HOME}/.tmate.conf"
+RUN ln -svfF "${PROJECT_DIR}/dotfiles/gitconfig" "${HOME}/.gitconfig"
+RUN ln -svfF "${PROJECT_DIR}/dotfiles/psqlrc" "${HOME}/.psqlrc"
+RUN ln -svfF "${PROJECT_DIR}/dotfiles/pspgconf" "${HOME}/.pspgconf"
 RUN mkdir -p "${HOME}/.config"
-RUN ln -svfF "${CONFIG_DIR}/dotfiles/nvim" "${HOME}/.config/nvim"
+RUN ln -svfF "${PROJECT_DIR}/dotfiles/nvim" "${HOME}/.config/nvim"
 RUN mkdir -p "${HOME}/.config/lazygit"
-RUN ln -svfF "${CONFIG_DIR}/dotfiles/lazygit.yml" "${HOME}/.config/lazygit/config.yml"
+RUN ln -svfF "${PROJECT_DIR}/dotfiles/lazygit.yml" "${HOME}/.config/lazygit/config.yml"
 
 # Let zsh and nvim set themselves up now that the configs have been linked
 RUN ${HOME}/.zshrc
