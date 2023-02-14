@@ -17,7 +17,7 @@
           {
             "manipulators": [
               {
-                "description": "Change caps_lock to control",
+                "description": "Change caps_lock to control on hold",
                 "from": {
                   "key_code": "caps_lock",
                   "modifiers": {
@@ -43,19 +43,9 @@
           {
             "manipulators": [
               {
-                "description": "Change simultaneous 'd+f' to Hyper",
+                "description": "Change tab to Hyper on hold",
                 "from": {
-                  "simultaneous": [
-                    {
-                      "key_code": "d"
-                    },
-                    {
-                      "key_code": "f"
-                    }
-                  ],
-                  "modifiers": {
-                      "optional": ["any"]
-                  }
+                  "key_code": "tab"
                 },
                 "to": [
                   {
@@ -65,6 +55,11 @@
                       "left_control",
                       "left_option"
                     ]
+                  }
+                ],
+                "to_if_alone": [
+                  {
+                    "key_code": "tab"
                   }
                 ],
                 "type": "basic"
