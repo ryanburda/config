@@ -98,24 +98,24 @@ scrolling:
 # Font configuration
 font:
   normal:
-    family: SauceCodePro Nerd Font Mono
+    family: JetBrainsMono Nerd Font Mono
     style: Regular
   bold:
-    family: SauceCodePro Nerd Font Mono
+    family: JetBrainsMono Nerd Font Mono
     style: Bold
   italic:
-    family: SauceCodePro Nerd Font Mono
+    family: JetBrainsMono Nerd Font Mono
     style: Italic
   bold_italic:
-    family: SauceCodePro Nerd Font Mono
+    family: JetBrainsMono Nerd Font Mono
     style: Bold Italic
   size: 12.0
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter
   # spacing.
-  #offset:
-  #  x: 0
-  #  y: 0
+  offset:
+    x: 0
+    y: 0
   # Glyph offset determines the locations of the glyphs within their cells with
   # the default being at the bottom. Increasing `x` moves the glyph to the
   # right, increasing `y` moves the glyph upward.
@@ -793,32 +793,30 @@ font:
   #highlight_damage: false
   #
 colors:
-  # Default colors
+  name: Default (dark)
+  author: Chris Kempson
   primary:
-    # hard contrast: background = '#1d2021'
-    background: '#282828'
-    # soft contrast: background = '#32302f'
-    foreground: '#ebdbb2'
-
-  # Normal colors
+    background: "#151515"
+    foreground: "#d0d0d0"
+  cursor:
+    text: "#151515"
+    cursor: "#d0d0d0"
   normal:
-    black: '#282828'
-    red: '#cc241d'
-    green: '#98971a'
-    yellow: '#d79921'
-    blue: '#458588'
-    magenta: '#b16286'
-    cyan: '#689d6a'
-    white: '#a89984'
-
-  # Bright colors
+    black: "#151515"
+    red: "#ac4142"
+    green: "#90a959"
+    yellow: "#f4bf75"
+    blue: "#6a9fb5"
+    magenta: "#aa759f"
+    cyan: "#75b5aa"
+    white: "#d0d0d0"
   bright:
-    black: '#928374'
-    red: '#fb4934'
-    green: '#b8bb26'
-    yellow: '#fabd2f'
-    blue: '#83a598'
-    magenta: '#d3869b'
-    cyan: '#8ec07c'
-    white: '#ebdbb2'
-theme: Gruvbox-Dark
+    black: "#505050"
+    red: "#ac4142"
+    green: "#90a959"
+    yellow: "#f4bf75"
+    blue: "#6a9fb5"
+    magenta: "#aa759f"
+    cyan: "#75b5aa"
+    white: "#f5f5f5"
+theme: default.dark
