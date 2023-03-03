@@ -55,10 +55,8 @@ vim.keymap.set('n', '<leader>P'      , '"0P'                 , opts)  -- paste f
 vim.keymap.set('n', '<leader>n' , ':edit ~/Documents/main.txt<cr>G$', opts)
 
 -- :help vim.diagnostic.*
-vim.keymap.set('n', '<leader>hh', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 vim.keymap.set('n', '<leader>hj', '<cmd>lua vim.diagnostic.goto_next()<CR>' , opts)
 vim.keymap.set('n', '<leader>hk', '<cmd>lua vim.diagnostic.goto_prev()<CR>' , opts)
-vim.keymap.set('n', '<leader>hl', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
 
 -- :help quickfix
 vim.cmd([[
