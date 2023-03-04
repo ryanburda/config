@@ -2,7 +2,7 @@
 
 Terminal configuration and dotfiles.
 
-Local installation on macOS: (intended to be cloned into `~/Developer/config`
+Local installation on macOS: (intended to be cloned into `~/Developer/config`)
 ```
 mkdir ~/Developer
 cd ~/Developer
@@ -19,5 +19,5 @@ Optional repo setup:
 Containerized environment: (Work in progress)
 ```
 make build
-make run
+make start
 ```

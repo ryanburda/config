@@ -46,13 +46,10 @@ brew install wget
 brew install go
 brew install php
 brew install composer
-brew install pyenv
-brew install pyenv-virtualenv
 brew install lazygit
 brew install lazydocker
 brew install k9s
 brew install fd
-brew install tig
 brew install htop
 brew install node
 brew install node@16
@@ -65,7 +62,6 @@ brew install rlwrap
 brew install lf
 brew install kubectl
 brew install kubectx
-brew install showkey
 brew install pspg
 brew install diff-so-fancy
 brew install deno
@@ -78,9 +74,6 @@ brew install --cask font-sauce-code-pro-nerd-font
 brew install --cask font-hack-nerd-font
 brew install --cask font-fira-code-nerd-font
 brew install --cask font-jetbrains-mono-nerd-font
-
-# Rust
-curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
 
 # Create bin directory
 # All custom scripts should be put here
@@ -161,4 +154,4 @@ sudo make install
 ln -svfF $SCRIPT_DIR/dotfiles/nvim $HOME/.config/nvim
 
 # Let nvim set itself up now that the config has been linked
-RUN nvim --headless "+Lazy! sync" +qa
+nvim --headless "+Lazy! sync" +qa

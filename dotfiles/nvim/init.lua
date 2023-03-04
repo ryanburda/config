@@ -41,14 +41,15 @@ vim.keymap.set('n', '<leader><S-Tab>', ':tabprevious<cr>'    , opts)
 vim.keymap.set('n', '<leader><Tab>'  , ':tabnext<cr>'        , opts)
 vim.keymap.set('n', '<leader>J'      , ':split<cr><C-w>j'    , opts)
 vim.keymap.set('n', '<leader>L'      , ':vsplit<cr><C-w>l'   , opts)
-vim.keymap.set('n', '<leader>u'      , ':e #<cr>'            , opts)  -- open last closed buffer
-vim.keymap.set('n', '<leader>0'      , ':%bd|e#|bd#<cr>'     , {desc = 'Close all buffers except current'})
 vim.keymap.set('n', '<C-f>'          , 'zLgm'                , opts)  -- horizontal scroll right
 vim.keymap.set('n', '<C-b>'          , 'zHgm'                , opts)  -- horizontal scroll left
 vim.keymap.set('n', 'n'              , 'nzz'                 , opts)  -- next occurrence of search and center
 vim.keymap.set('n', 'N'              , 'Nzz'                 , opts)  -- previous occurrence of search and center
 vim.keymap.set('n', '<leader>p'      , '"0p'                 , opts)  -- paste from yank register
 vim.keymap.set('n', '<leader>P'      , '"0P'                 , opts)  -- paste from yank register
+vim.keymap.set('n', '<leader>u'      , ':e #<cr>'            , opts)  -- open last closed buffer
+vim.keymap.set('n', '<leader>0'      , ':%bd|e#|bd#<cr>'     , {desc = 'Close all buffers except current'})
+vim.keymap.set('n', '<leader>b'      , ':!open -a "Google Chrome" %:p<cr><cr>', {desc = 'Open current file in browser'})
 
 
 -- quick notes

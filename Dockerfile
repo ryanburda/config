@@ -2,9 +2,6 @@ FROM ubuntu:23.04
 
 WORKDIR /usr/src
 
-######################
-# Install everything #
-######################
 RUN apt-get update && apt-get install -y \
     sudo \
     coreutils \
@@ -61,9 +58,7 @@ RUN sudo tar xf lazygit.tar.gz -C /usr/local/bin lazygit
 RUN curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash
 RUN chsh -s /bin/zsh
 
-#########################################
-# Copy in code and symlink config files #
-#########################################
+# Copy in code and symlink config files
 ENV PROJECT_DIR=/usr/local/config
 ENV HOME=/root
 

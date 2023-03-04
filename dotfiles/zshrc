@@ -51,14 +51,6 @@ alias rg="rg -L"
 # google-cloud-sdk completions
 # source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
 
-# python
-path+=$HOME/.pyenv/bin
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-
-# rust
-export PATH="$HOME/.cargo/bin:$PATH"
-
 # Raise max files and max procs
 ulimit -n 200000
 ulimit -u 2048
