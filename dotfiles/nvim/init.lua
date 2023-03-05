@@ -6,9 +6,9 @@ vim.opt.cursorline = true
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
-vim.opt.pumheight = 10  -- pumheight should be less than scrolloff
-vim.opt.scrolloff = 10
-vim.opt.sidescrolloff = 16
+vim.opt.pumheight = 8  -- pumheight should be less than scrolloff
+vim.opt.scrolloff = 8
+vim.opt.sidescrolloff = 12
 vim.opt.cc = '120'
 vim.opt.encoding = 'UTF-8'
 vim.opt.expandtab = true
@@ -49,7 +49,7 @@ vim.keymap.set('n', '<leader>p'      , '"0p'                 , opts)  -- paste f
 vim.keymap.set('n', '<leader>P'      , '"0P'                 , opts)  -- paste from yank register
 vim.keymap.set('n', '<leader>u'      , ':e #<cr>'            , opts)  -- open last closed buffer
 vim.keymap.set('n', '<leader>0'      , ':%bd|e#|bd#<cr>'     , {desc = 'Close all buffers except current'})
-vim.keymap.set('n', '<leader>b'      , ':!open -a "Google Chrome" %:p<cr><cr>', {desc = 'Open current file in browser'})
+vim.keymap.set('n', '<leader>b'      , ':!open -a "Google Chrome" %<cr><cr>', {desc = 'Open current file in browser'})
 
 
 -- quick notes
