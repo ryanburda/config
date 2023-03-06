@@ -2,13 +2,12 @@ local T = {}
 
 function T.setup()
 
-    local opts = { noremap=true, silent=true }
     -- NOTE: Set System Preferences -> Keyboard -> Input Sources -> Unicode Hex Input to allow Alt key remaps.
-    vim.api.nvim_set_keymap('n', '<M-;>', "<cmd>lua require'dap'.toggle_breakpoint()<cr>", opts)
-    vim.api.nvim_set_keymap('n', '<M-j>', "<cmd>lua require'dap'.step_into()<cr>"        , opts)
-    vim.api.nvim_set_keymap('n', '<M-k>', "<cmd>lua require'dap'.step_over()<cr>"        , opts)
-    vim.api.nvim_set_keymap('n', '<M-l>', "<cmd>lua require'dap'.continue()<cr>"         , opts)
-    vim.api.nvim_set_keymap('n', '<M-0>', "<cmd>lua require'dap'.clear_breakpoints()<cr>", opts)
+    vim.keymap.set('n', '<M-b>', "<cmd>lua require'dap'.toggle_breakpoint()<cr>", {desc = "Debug: Set breakpoint"})
+    vim.keymap.set('n', '<M-0>', "<cmd>lua require'dap'.clear_breakpoints()<cr>", {desc = "Debug: Clear breakpoints"})
+    vim.keymap.set('n', '<M-i>', "<cmd>lua require'dap'.step_into()<cr>"        , {desc = "Debug: Step into"})
+    vim.keymap.set('n', '<M-o>', "<cmd>lua require'dap'.step_over()<cr>"        , {desc = "Debug: Step over"})
+    vim.keymap.set('n', '<M-p>', "<cmd>lua require'dap'.continue()<cr>"         , {desc = "Debug: Continue to next breakpoint (Proceed)"})
 
     local dap = require('dap')
 

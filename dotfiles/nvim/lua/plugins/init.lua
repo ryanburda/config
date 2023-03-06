@@ -128,14 +128,8 @@ return {
 
     -- Tmux
     {
-        'alexghergh/nvim-tmux-navigation',
-        lazy = true,
-        keys = {
-            { "<C-h>", '<cmd> lua require("nvim-tmux-navigation").NvimTmuxNavigateLeft()<CR>', mode = { "n", "v", "i", "x" } },
-            { "<C-j>", '<cmd> lua require("nvim-tmux-navigation").NvimTmuxNavigateDown()<CR>', mode = { "n", "v", "i", "x" } },
-            { "<C-k>", '<cmd> lua require("nvim-tmux-navigation").NvimTmuxNavigateUp()<CR>', mode = { "n", "v", "i", "x" } },
-            { "<C-l>", '<cmd> lua require("nvim-tmux-navigation").NvimTmuxNavigateRight()<CR>', mode = { "n", "v", "i", "x" } },
-        },
+        'mrjones2014/smart-splits.nvim',
+        config = require('plugins.configs.smart-splits').setup,
     },
     {
         'christoomey/vim-tmux-runner',

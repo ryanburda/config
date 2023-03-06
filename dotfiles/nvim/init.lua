@@ -49,7 +49,7 @@ vim.keymap.set('n', '<leader>p'      , '"0p'                 , opts)  -- paste f
 vim.keymap.set('n', '<leader>P'      , '"0P'                 , opts)  -- paste from yank register
 vim.keymap.set('n', '<leader>u'      , ':e #<cr>'            , opts)  -- open last closed buffer
 vim.keymap.set('n', '<leader>0'      , ':%bd|e#|bd#<cr>'     , {desc = 'Close all buffers except current'})
-vim.keymap.set('n', '<leader>b'      , ':!open -a "Google Chrome" %<cr><cr>', {desc = 'Open current file in browser'})
+vim.keymap.set('n', '<leader>z'      , ':!open -a "Google Chrome" %<cr><cr>', {desc = 'Open current file in browser'})
 
 
 -- quick notes
