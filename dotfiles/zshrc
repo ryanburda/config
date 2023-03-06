@@ -67,5 +67,3 @@ fi
 # NOTE: must also uncomment first line.
 # zprof
 export PATH="/usr/local/sbin:$PATH"
-
-source /Users/ryanburda/.docker/init-zsh.sh || true # Added by Docker Desktop
