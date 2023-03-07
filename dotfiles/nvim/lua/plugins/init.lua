@@ -84,9 +84,7 @@ return {
     },
     {
         'tpope/vim-fugitive',
-        keys = {
-            { '<leader>gB', ':Git blame<cr>', desc = "Git Blame in separate split" }
-        },
+        config = require('plugins.configs.vim-fugitive').setup
     },
 
     -- File Tree
@@ -111,7 +109,6 @@ return {
         'christoomey/vim-tmux-runner',
         config = require('plugins.configs.vim-tmux-runner').setup,
     },
-
 
     -- Buffer tabs
     {
