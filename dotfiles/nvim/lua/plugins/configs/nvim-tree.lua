@@ -35,6 +35,8 @@ function T.setup()
         },
     })
 
+    vim.keymap.set('n', '<M-a>', ':NvimTreeToggle<cr>', {desc = "File Tree Toggle"})
+
 end
 
 return T
