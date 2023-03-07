@@ -65,6 +65,8 @@ brew install kubectx
 brew install pspg
 brew install diff-so-fancy
 brew install deno
+brew install pyenv
+brew install pyenv-virtualenv
 brew install libpq
 brew link --force libpq
 
