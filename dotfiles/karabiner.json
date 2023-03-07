@@ -177,6 +177,22 @@
           {
             "manipulators": [
               {
+                "description": "Right Command to Left Option (Alt)",
+                "from": {
+                  "key_code": "right_command"
+                },
+                "to": [
+                  {
+                    "key_code": "left_option"
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "manipulators": [
+              {
                 "description": "Hyper+Backspace to Delete",
                 "from": {
                   "key_code": "delete_or_backspace",
