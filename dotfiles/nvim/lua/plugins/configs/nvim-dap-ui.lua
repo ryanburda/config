@@ -6,19 +6,25 @@ function T.setup()
     local dapui = require('dapui')
 
     dapui.setup({
-        expand_lines = vim.fn.has("nvim-0.7"),
+        expand_lines = true,
         layouts = {
             {
                 elements = {
-                    { id = "watches", size = 0.10 },
-                    { id = "breakpoints", size = 0.10 },
-                    { id = "scopes", size = 0.10 },
-                    { id = "stacks", size = 0.20 },
-                    { id = "repl", size = 0.20 },
-                    { id = "console", size = 0.30 },
+                    { id = "watches", size = 0.25 },
+                    { id = "breakpoints", size = 0.25 },
+                    { id = "scopes", size = 0.25 },
+                    { id = "stacks", size = 0.25 },
                 },
                 size = 65, -- # of columns
                 position = "right",
+            },
+            {
+                elements = {
+                    { id = "console", size = 0.50 },
+                    { id = "repl", size = 0.50 },
+                },
+                size = 12, -- # of rows
+                position = "bottom",
             },
         },
     })
@@ -30,7 +36,6 @@ function T.setup()
 
     local opts = { noremap=true, silent=true }
     vim.api.nvim_set_keymap('n', '<M-d>', "<cmd>lua require'dapui'.toggle()<cr>", opts)
-    vim.api.nvim_set_keymap('n', '<M-x>', "<cmd>lua require'dapui'.close()<cr>" , opts)
     vim.api.nvim_set_keymap('n', '<M-e>', "<cmd>lua require('dapui').eval()<cr>", opts)
 
 end
