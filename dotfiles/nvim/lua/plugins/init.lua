@@ -101,17 +101,7 @@ return {
     -- Symbol Outline
     {
         'simrat39/symbols-outline.nvim',
-        lazy = true,
-        keys = {
-            { "<leader>;;", ":SymbolsOutlineOpen<CR>", desc = "Symbols Outline Open" },
-            { "<leader>;x", ":SymbolsOutlineClose<CR>", desc = "Symbols Outline Close" },
-        },
-        config = function ()
-            require("symbols-outline").setup({
-                width = 20,
-                autofold_depth = 1,
-            })
-        end,
+        config = require('plugins.configs.symbols-outline').setup
     },
 
     -- Tmux
