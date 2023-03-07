@@ -51,7 +51,6 @@ vim.keymap.set('n', '<leader>u'      , ':e #<cr>'            , opts)  -- open la
 vim.keymap.set('n', '<leader>0'      , ':%bd|e#|bd#<cr>'     , {desc = 'Close all buffers except current'})
 vim.keymap.set('n', '<leader>z'      , ':!open -a "Google Chrome" %<cr><cr>', {desc = 'Open current file in browser'})
 
-
 -- quick notes
 vim.keymap.set('n', '<leader>n' , ':edit ~/Documents/main.txt<cr>G$', opts)
 
@@ -59,40 +58,7 @@ vim.keymap.set('n', '<leader>n' , ':edit ~/Documents/main.txt<cr>G$', opts)
 vim.keymap.set('n', '<leader>hj', '<cmd>lua vim.diagnostic.goto_next()<CR>' , opts)
 vim.keymap.set('n', '<leader>hk', '<cmd>lua vim.diagnostic.goto_prev()<CR>' , opts)
 
--- :help quickfix
-vim.cmd([[
-function!   QuickFixOpenAll()
-    if empty(getqflist())
-        return
-    endif
-    let s:prev_val = ""
-    for d in getqflist()
-        let s:curr_val = bufname(d.bufnr)
-        if (s:curr_val != s:prev_val)
-            exec "edit " . s:curr_val
-        endif
-        let s:prev_val = s:curr_val
-    endfor
-endfunction
-]])
-
-vim.keymap.set('n', '<leader>ko' , ':copen<CR>'                 , opts)
-vim.keymap.set('n', '<leader>kx' , ':cclose<CR>'                , opts)
-vim.keymap.set('n', '<leader>kj' , ':cnext<CR>'                 , opts)
-vim.keymap.set('n', '<leader>kk' , ':cprev<CR>'                 , opts)
-vim.keymap.set('n', '<leader>kgg', ':cfirst<CR>'                , opts)
-vim.keymap.set('n', '<leader>kG' , ':clast<CR>'                 , opts)
-vim.keymap.set('n', '<leader>ka' , ':call QuickFixOpenAll()<CR>', opts)  -- open all files in quickfix list
-vim.keymap.set('n', '<leader>kc' , ':cexpr []<CR>'              , opts)  -- clear quickfix list
-
--- :help location-list
-vim.keymap.set('n', '<leader>lo' , ':lopen<CR>'   , opts)
-vim.keymap.set('n', '<leader>lx' , ':lclose<CR>'  , opts)
-vim.keymap.set('n', '<leader>lj' , ':lnext<CR>'   , opts)
-vim.keymap.set('n', '<leader>lk' , ':lprev<CR>'   , opts)
-vim.keymap.set('n', '<leader>lgg', ':lfirst<CR>'  , opts)
-vim.keymap.set('n', '<leader>lG' , ':llast<CR>'   , opts)
-vim.keymap.set('n', '<leader>lc' , ':lexpr []<CR>', opts)  -- clear location-list
+require('quickfix').keymaps()
 
 -- Plugins
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"

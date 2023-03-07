@@ -28,7 +28,6 @@ return {
     },
     {
         'nvim-treesitter/playground',
-        lazy = true,
         keys = {
             { "<leader>ts", ":TSPlaygroundToggle<CR>" },
         },
@@ -71,7 +70,6 @@ return {
     },
     {
         'ruifm/gitlinker.nvim',
-        lazy = true,
         keys = {
             { "<leader>gl", "<cmd>lua require('gitlinker').get_buf_range_url('n')<cr>", desc = "Github link of current location in buffer" },
             { "<leader>gl", "<cmd>lua require('gitlinker').get_buf_range_url('v')<cr>v`<", desc = "Github link of current visual selection", mode = {"v"} },
@@ -139,10 +137,8 @@ return {
     {
         'folke/trouble.nvim',
         dependencies = { "kyazdani42/nvim-web-devicons", },
-        lazy = true,
         keys = {
-            { "<leader>hh", ":Trouble<cr>", desc = "Trouble diagnostics open" },
-            { "<leader>hx", ":TroubleClose<cr>", desc = "Trouble diagnostics close" },
+            { "<M-f>", ":TroubleToggle<cr>", desc = "Project Diagnostics Toggle" },
         },
         config = function() require("trouble").setup() end
     },
@@ -150,7 +146,6 @@ return {
     -- Web Search
     {
         'voldikss/vim-browser-search',
-        lazy = true,
         keys = {
             { "<leader>ji", ":BrowserSearch<cr>", desc = "Search for word under cursor in browser" },
             { "<leader>ji", ":'<,'>BrowserSearch<cr>", desc = "Search for visual selection in brower", mode = {"v"} },

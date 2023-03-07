@@ -1,7 +1,10 @@
 local T = {}
 
 function T.setup()
-    require('smart-splits').setup({default_amount = 1})
+    require('smart-splits').setup({
+        default_amount = 1,
+        ignored_buftypes = { 'NvimTree', 'Outline' },
+    })
     vim.keymap.set({"n", "v", "i", "x"}, '<C-h>', require('smart-splits').move_cursor_left)
     vim.keymap.set({"n", "v", "i", "x"}, '<C-j>', require('smart-splits').move_cursor_down)
     vim.keymap.set({"n", "v", "i", "x"}, '<C-k>', require('smart-splits').move_cursor_up)
