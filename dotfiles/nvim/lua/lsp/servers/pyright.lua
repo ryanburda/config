@@ -16,8 +16,8 @@ function T.on_attach(client, bufnr)
 
     local opts = { noremap=true, silent=false }
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<M-m>', ":lua require('dap-python').test_method()<cr>"    , opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<M-c>', ":lua require('dap-python').test_class()<cr>"     , opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<M-s>', ":lua require('dap-python').debug_selection()<cr>", opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<M-,>', ":lua require('dap-python').test_class()<cr>"     , opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<M-.>', ":lua require('dap-python').debug_selection()<cr>", opts)
 
 end
 
