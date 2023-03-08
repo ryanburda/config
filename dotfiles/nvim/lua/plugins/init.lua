@@ -82,10 +82,6 @@ return {
         dependencies = { 'nvim-lua/plenary.nvim', },
         config = require('plugins.configs.diffview').setup
     },
-    {
-        'tpope/vim-fugitive',
-        config = require('plugins.configs.vim-fugitive').setup
-    },
 
     -- File Tree
     {
