@@ -77,6 +77,12 @@ brew install --cask font-hack-nerd-font
 brew install --cask font-fira-code-nerd-font
 brew install --cask font-jetbrains-mono-nerd-font
 
+# rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+# zellij
+cargo install --locked zellij
+
 # Create bin directory
 # All custom scripts should be put here
 mkdir -p "$HOME/.local/bin"
