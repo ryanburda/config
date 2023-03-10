@@ -232,7 +232,15 @@ return {
         dependencies = {
             'mfussenegger/nvim-dap',
         },
-        config = function() require("nvim-dap-virtual-text").setup({}) end
+        config = function() require("nvim-dap-virtual-text").setup() end
+    },
+    {
+        'simrat39/rust-tools.nvim',
+        dependencies = {
+            'mfussenegger/nvim-dap',
+        },
+        -- requires VSCode and codelldb-vscode to be installed
+        config = require("plugins.configs.rust-tools").setup
     },
     {
         'mfussenegger/nvim-dap-python',

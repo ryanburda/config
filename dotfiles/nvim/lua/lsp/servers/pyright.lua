@@ -1,6 +1,11 @@
 local T = {}
+
+-- Make a copy of the default config
+T.config = {}
 T.default = require('lsp.server_default')
-T.config = T.default.config
+for k,v in pairs(T.default) do
+    T.config[k] = v
+end
 
 -- set up the python debugger
 local handle = assert(io.popen("which python"))
@@ -25,4 +30,3 @@ T.config = {}
 T.config.on_attach = T.on_attach
 
 return T
-

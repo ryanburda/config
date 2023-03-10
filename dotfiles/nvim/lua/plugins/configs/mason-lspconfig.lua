@@ -6,10 +6,9 @@ function T.setup()
         "bashls",
         "dockerls",
         "jsonls",
+        "lua_ls",
         "pyright",
         "rust_analyzer",
-        "lua_ls",
-        "sqlls",
         "yamlls"
     }
 
@@ -31,7 +30,10 @@ function T.setup()
             config = require("lsp.server_default").config
         end
 
-        lspconfig[server].setup(config)
+        -- Rust is handled by rust-tools
+        if server ~= "rust_analyzer" then
+            lspconfig[server].setup(config)
+        end
 
     end
 
