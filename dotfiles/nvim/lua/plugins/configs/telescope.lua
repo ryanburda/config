@@ -164,7 +164,6 @@ function T.setup()
     vim.keymap.set('n', "<leader>fo", "<cmd>lua require('telescope.builtin').jumplist()<cr>")
     vim.keymap.set('n', "<leader>fh", "<cmd>lua require('telescope.builtin').diagnostics()<cr>")
     vim.keymap.set('n', "<leader>fl", "<cmd>lua require('telescope.builtin').loclist()<cr>")
-    vim.keymap.set('n', "<leader>f?", "<cmd>lua require('telescope.builtin').keymaps()<cr>")
     vim.keymap.set('n', "<leader>fr", "<cmd>lua require('telescope.builtin').registers()<cr>")
     vim.keymap.set('n', "<leader>fB", "<cmd>lua require('telescope.builtin').buffers()<cr>")
     vim.keymap.set('n', "<leader>fv", "<cmd>lua require('telescope.builtin').help_tags()<cr>")
@@ -177,6 +176,7 @@ function T.setup()
     vim.keymap.set('n', "<leader>dc", "<cmd>lua require('telescope.builtin').git_commits()<cr>")
     vim.keymap.set('n', "<leader>fa", "<cmd>lua require('plugins.configs.telescope').ff_playground()<cr>")
     vim.keymap.set('n', "<leader>fs", "<cmd>lua require('plugins.configs.telescope').lg_playground()<cr>")
+    vim.keymap.set('n', "<leader>?", "<cmd>lua require('telescope.builtin').keymaps()<cr>")
 
 end
 
