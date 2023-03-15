@@ -5,7 +5,6 @@ function T.setup()
     local actions = require("diffview.actions")
 
     require("diffview").setup({
-        enhanced_diff_hl = true,
         keymaps = {
             view = {
                 ["<leader>dh"] = actions.conflict_choose("ours"),
