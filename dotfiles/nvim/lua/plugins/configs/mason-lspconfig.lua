@@ -2,18 +2,16 @@ local T = {}
 
 function T.setup()
 
-    local servers = {
-        "bashls",
-        "dockerls",
-        "jsonls",
-        "lua_ls",
-        "pyright",
-        "rust_analyzer",
-        "yamlls"
-    }
-
     require("mason-lspconfig").setup({
-        ensure_installed = servers,
+        ensure_installed = {
+            "bashls",
+            "dockerls",
+            "jsonls",
+            "lua_ls",
+            "pyright",
+            "rust_analyzer",
+            "yamlls"
+        },
         automatic_installation = true,
     })
 
