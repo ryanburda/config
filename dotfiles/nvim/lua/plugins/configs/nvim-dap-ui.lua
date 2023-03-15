@@ -10,18 +10,17 @@ function T.setup()
         layouts = {
             {
                 elements = {
-                    { id = "watches", size = 0.25 },
-                    { id = "breakpoints", size = 0.25 },
-                    { id = "scopes", size = 0.25 },
                     { id = "stacks", size = 0.25 },
+                    { id = "watches", size = 0.25 },
+                    { id = "scopes", size = 0.25 },
+                    { id = "repl", size = 0.25 },
                 },
                 size = 65, -- # of columns
                 position = "right",
             },
             {
                 elements = {
-                    { id = "console", size = 0.50 },
-                    { id = "repl", size = 0.50 },
+                    { id = "console", size = 1 },
                 },
                 size = 12, -- # of rows
                 position = "bottom",
