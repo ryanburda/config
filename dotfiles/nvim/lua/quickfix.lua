@@ -29,14 +29,13 @@ T.open_all = function ()
 end
 
 T.keymaps = function ()
-    local opts = { noremap=true, silent=false }
-    vim.keymap.set('n', '<M-q>' , T.toggle, opts)
-    vim.keymap.set('n', '<leader>kj' , ':cnext<CR>'                 , opts)
-    vim.keymap.set('n', '<leader>kk' , ':cprev<CR>'                 , opts)
-    vim.keymap.set('n', '<leader>kgg', ':cfirst<CR>'                , opts)
-    vim.keymap.set('n', '<leader>kG' , ':clast<CR>'                 , opts)
-    vim.keymap.set('n', '<leader>ka' , T.open_all, opts)  -- open all files in quickfix list
-    vim.keymap.set('n', '<leader>kc' , ':cexpr []<CR>'              , opts)  -- clear quickfix list
+    vim.keymap.set('n', '<leader>kx' , T.toggle)
+    vim.keymap.set('n', '<leader>kj' , ':cnext<CR>')
+    vim.keymap.set('n', '<leader>kk' , ':cprev<CR>')
+    vim.keymap.set('n', '<leader>kgg', ':cfirst<CR>')
+    vim.keymap.set('n', '<leader>kG' , ':clast<CR>')
+    vim.keymap.set('n', '<leader>ka' , T.open_all)  -- open all files in quickfix list
+    vim.keymap.set('n', '<leader>kc' , ':cexpr []<CR>')  -- clear quickfix list
 end
 
 return T

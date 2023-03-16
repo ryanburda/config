@@ -796,28 +796,28 @@ font:
 colors:
   # Default colors
   primary:
-    background: '0xe8e9ec'
-    foreground: '0x33374c'
+    background: '#282828'
+    foreground: '#eeeeee'
 
   # Normal colors
   normal:
-    black: '0xdcdfe7'
-    red: '0xcc517a'
-    green: '0x668e3d'
-    yellow: '0xc57339'
-    blue: '0x2d539e'
-    magenta: '0x7759b4'
-    cyan: '0x3f83a6'
-    white: '0x33374c'
+    black: '#282828'
+    red: '#f43753'
+    green: '#c9d05c'
+    yellow: '#ffc24b'
+    blue: '#b3deef'
+    magenta: '#d3b987'
+    cyan: '#73cef4'
+    white: '#eeeeee'
 
   # Bright colors
   bright:
-    black: '0x8389a3'
-    red: '0xcc3768'
-    green: '0x598030'
-    yellow: '0xb6662d'
-    blue: '0x22478e'
-    magenta: '0x6845ad'
-    cyan: '0x327698'
-    white: '0x262a3f'
-theme: Iceberg-Light
+    black: '#4c4c4c'
+    red: '#f43753'
+    green: '#c9d05c'
+    yellow: '#ffc24b'
+    blue: '#b3deef'
+    magenta: '#d3b987'
+    cyan: '#73cef4'
+    white: '#feffff'
+theme: tender

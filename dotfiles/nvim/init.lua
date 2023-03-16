@@ -60,6 +60,10 @@ vim.keymap.set('n', '<leader>hk', '<cmd>lua vim.diagnostic.goto_prev()<CR>' , op
 
 require('quickfix').keymaps()
 
+-- open lf file manager in tmux popup
+vim.keymap.set({'n', 'v', 'i', 'x'}, '<M-8>', ":silent !tmux popup -h 85\\% -w 85\\% -E 'lf %:p'<cr>")
+vim.keymap.set({'n', 'v', 'i', 'x'}, '<M-9>', ":silent !tmux popup -h 85\\% -w 85\\% -E 'lf'<cr>")
+
 -- Plugins
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
