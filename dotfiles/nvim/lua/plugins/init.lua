@@ -83,13 +83,6 @@ return {
         config = require('plugins.configs.diffview').setup
     },
 
-    -- File Tree
-    {
-        'kyazdani42/nvim-tree.lua',
-        dependencies = { 'kyazdani42/nvim-web-devicons', },
-        config = require('plugins.configs.nvim-tree').setup
-    },
-
     -- Symbol Outline
     {
         'simrat39/symbols-outline.nvim',
@@ -265,7 +258,6 @@ return {
           "nvim-lua/plenary.nvim",
           "nvim-telescope/telescope.nvim"
         },
-        lazy = false,
         keys = {
             { "<leader>cb", ':ChatGPT<CR>', desc = "ChatGPT prompt" }
         },

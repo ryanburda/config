@@ -12,46 +12,13 @@ function T.getqflist_files()
     return files
 end
 
-function T.ff_playground()
-    require("telescope.builtin").find_files({
-        prompt_title = "~/Developer/playgrounds/ find files",
-        cwd = "~/Developer/playgrounds/",
-        hidden = true,
-        file_ignore_patterns = { ".git/" },
-    })
-end
-
-function T.lg_playground()
-    require("telescope.builtin").live_grep({
-        prompt_title = "~/Developer/playgrounds grep",
-        cwd = "~/Developer/playgrounds/",
-        hidden = true,
-        file_ignore_patterns = { ".git/" },
-    })
-end
-
 function T.setup()
 
     local builtin = require("telescope.builtin")
     local sorters = require("telescope.sorters")
     local actions = require("telescope.actions")
-    local actions_state = require("telescope.actions.state")
     local previewers = require("telescope.previewers")
     local cf_actions = require('telescope').extensions.changed_files.actions
-
-    local function move_cwd_up(prompt_bufnr, fn)
-        -- Move cwd up one directory
-        local picker = actions_state.get_current_picker(prompt_bufnr)
-        local parent_dir = vim.fn.fnamemodify(picker.cwd, ":h")
-        fn({cwd = parent_dir, results_title = parent_dir })
-    end
-
-    local function switch_picker(prompt_bufnr, fn)
-        -- Toggle between find_files and live_grep
-        local picker = actions_state.get_current_picker(prompt_bufnr)
-        local cwd = picker.cwd
-        fn({cwd = cwd, results_title = cwd})
-    end
 
     require("telescope").setup({
         defaults = {
@@ -85,25 +52,11 @@ function T.setup()
                 cwd = vim.fn.getcwd(),
                 results_title = vim.fn.getcwd(),
                 find_command = { "rg", "--ignore", "--follow", "--files", "--hidden", "-g", "!.git/" },
-                mappings = {
-                    i = {
-                        ["<C-h>"] = function(prompt_bufnr) move_cwd_up(prompt_bufnr, builtin.find_files) end,
-                        ["<C-g>"] = function(prompt_bufnr) switch_picker(prompt_bufnr, builtin.live_grep) end,
-                        ["<C-f>"] = function() end,  -- noop
-                    },
-                },
             },
             live_grep = {
                 cwd = vim.fn.getcwd(),
                 results_title = vim.fn.getcwd(),
                 find_command = { "rg", "--ignore", "-L", "--files", "--hidden", "-g", "!.git/" },
-                mappings = {
-                    i = {
-                        ["<C-h>"] = function(prompt_bufnr) move_cwd_up(prompt_bufnr, builtin.live_grep) end,
-                        ["<C-f>"] = function(prompt_bufnr) switch_picker(prompt_bufnr, builtin.find_files) end,
-                        ["<C-g>"] = function() end,  -- noop
-                    },
-                },
             },
             git_branches = {
                 mappings = {
@@ -174,8 +127,6 @@ function T.setup()
     vim.keymap.set('n', "<leader>fd", "<cmd>lua require('telescope.builtin').git_status()<cr>")
     vim.keymap.set('n', "<leader>db", "<cmd>lua require('telescope.builtin').git_branches()<cr>")
     vim.keymap.set('n', "<leader>dc", "<cmd>lua require('telescope.builtin').git_commits()<cr>")
-    vim.keymap.set('n', "<leader>fa", "<cmd>lua require('plugins.configs.telescope').ff_playground()<cr>")
-    vim.keymap.set('n', "<leader>fs", "<cmd>lua require('plugins.configs.telescope').lg_playground()<cr>")
     vim.keymap.set('n', "<leader>?", "<cmd>lua require('telescope.builtin').keymaps()<cr>")
 
 end
