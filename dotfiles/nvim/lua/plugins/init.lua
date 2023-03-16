@@ -157,12 +157,6 @@ return {
         config = require('plugins.configs.indent-blankline').setup
     },
 
-    -- Floating Terminal
-    {
-        'akinsho/toggleterm.nvim',
-        config = require("plugins.configs.toggleterm").setup
-    },
-
     ----------------------------
     -- Package Manager: Mason --
     ----------------------------
