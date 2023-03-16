@@ -187,7 +187,6 @@ return {
             'L3MON4D3/LuaSnip',
             'saadparwaiz1/cmp_luasnip',
             'hrsh7th/cmp-nvim-lsp-signature-help',
-            'nanotee/sqls.nvim',
             'onsails/lspkind.nvim',
         },
         config = require('plugins.configs.nvim-cmp').setup
