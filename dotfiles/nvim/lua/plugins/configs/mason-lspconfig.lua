@@ -88,6 +88,50 @@ function T.setup()
                     vim.keymap.set('n', '<M-.>', ":lua require('dap-python').debug_selection()<cr>", { buffer = bufnr })
                 end,
                 capabilities = capabilities
+                --on_new_config = function(new_config, new_root_dir)
+                --    -- open devcontainer file if it exists
+                --    local dev_container_file_path = new_root_dir .. "/.devcontainer/devcontainer.json"
+                --    local dev_container_file = io.open(dev_container_file_path, "r")
+
+                --    if dev_container_file ~= nil then
+
+                --        local json_data = dev_container_file:read("*a")
+                --        dev_container_file:close()
+
+                --        local dev_container_dict = vim.json.decode(json_data)
+                --        vim.notify('hello')
+
+                --        if dev_container_dict["dockerComposeFile"] ~= nil then
+                --            new_config["cmd"] = {"docker", "compose", "--project-directory", new_root_dir, "run",
+                --                                 "--name", "pyright-langserver",  -- TODO: remove potential for name collisions
+                --                                 "--interactive",
+                --                                 "--rm",
+                --                                 "--volume", (new_root_dir .. ":" .. new_root_dir),
+                --                                 "--entrypoint", cmd,
+                --                                 dev_container_dict["service"],
+                --                                 table.unpack(cmd_args),
+                --                                 "||",
+                --                                 table.unpack(T.config.cmd)}
+                --            new_config["before_init"] = function(params)
+                --                params.processId = vim.NIL  -- set the processId to nil so it doesn't short circuit
+                --            end
+                --        elseif dev_container_dict["image"] ~= nil then
+                --            new_config["cmd"] = {"docker", "run",
+                --                                 "--name", "pyright-langserver",  -- TODO: remove potential for name collisions
+                --                                 "--interactive",
+                --                                 "--rm",
+                --                                 "--volume", (new_root_dir .. ":" .. new_root_dir),
+                --                                 "--entrypoint", cmd,
+                --                                 dev_container_dict["image"],
+                --                                 table.unpack(cmd_args),
+                --                                 "||",
+                --                                 table.unpack(T.config.cmd)}
+                --            new_config["before_init"] = function(params)
+                --                params.processId = vim.NIL  -- set the processId to nil so it doesn't short circuit
+                --            end
+                --        end
+                --    end
+                --end
             })
         end,
 
