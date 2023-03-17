@@ -26,6 +26,7 @@ vim.opt.laststatus = 3
 vim.opt.signcolumn = "yes"
 vim.opt.list = true
 vim.opt.listchars = { tab = '›~'}
+vim.opt.autoread = true
 
 vim.cmd('set noshowmode')
 vim.cmd('set noswapfile')
