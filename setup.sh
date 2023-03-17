@@ -80,8 +80,8 @@ brew install --cask font-jetbrains-mono-nerd-font
 # rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
-# zellij
-cargo install --locked zellij
+# chatgpt cli
+cargo install --force aichat
 
 # Create bin directory
 # All custom scripts should be put here
