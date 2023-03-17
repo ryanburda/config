@@ -16,15 +16,22 @@ return {
         config = require('plugins.configs.colorscheme').setup,
     },
 
-    {
-        'Aasim-A/scrollEOF.nvim',
-        config = function() require('scrollEOF').setup() end,
-    },
-
     -- Treesitter
     {
         'nvim-treesitter/nvim-treesitter',
-        config = require('plugins.configs.treesitter').setup,
+        config = function ()
+            require('nvim-treesitter.configs').setup({
+                auto_install = true,
+                indent = { enable = true },
+                incremental_selection = {
+                    enable = true,
+                    keymaps =  {
+                        node_incremental = '<C-n>',
+                        node_decremental = '<C-p>',
+                    },
+                },
+            })
+        end
     },
     {
         'nvim-treesitter/playground',
@@ -58,6 +65,10 @@ return {
         'karb94/neoscroll.nvim',
         config = require('plugins.configs.neoscroll').setup
     },
+    {
+        'Aasim-A/scrollEOF.nvim',
+        config = function() require('scrollEOF').setup() end,
+    },
 
     -- Motion
     'justinmk/vim-sneak',
@@ -90,7 +101,20 @@ return {
     -- Tmux
     {
         'mrjones2014/smart-splits.nvim',
-        config = require('plugins.configs.smart-splits').setup,
+        config = function ()
+            require('smart-splits').setup({
+                default_amount = 1,
+                ignored_buftypes = { 'NvimTree', 'Outline' },
+            })
+            vim.keymap.set({"n", "v", "i", "x"}, '<C-h>', require('smart-splits').move_cursor_left)
+            vim.keymap.set({"n", "v", "i", "x"}, '<C-j>', require('smart-splits').move_cursor_down)
+            vim.keymap.set({"n", "v", "i", "x"}, '<C-k>', require('smart-splits').move_cursor_up)
+            vim.keymap.set({"n", "v", "i", "x"}, '<C-l>', require('smart-splits').move_cursor_right)
+            vim.keymap.set({"n", "v", "i", "x"}, '<M-h>', require('smart-splits').resize_left)
+            vim.keymap.set({"n", "v", "i", "x"}, '<M-j>', require('smart-splits').resize_down)
+            vim.keymap.set({"n", "v", "i", "x"}, '<M-k>', require('smart-splits').resize_up)
+            vim.keymap.set({"n", "v", "i", "x"}, '<M-l>', require('smart-splits').resize_right)
+        end
     },
     {
         'christoomey/vim-tmux-runner',
@@ -108,7 +132,10 @@ return {
     {
         'famiu/bufdelete.nvim',
         dependencies = { 'akinsho/bufferline.nvim', },
-        config = require("plugins.configs.bufdelete").setup
+        config = function ()
+            vim.keymap.set('n', '<leader>q', ':Bdelete<cr>', {desc = 'Delete buffer without changing window layout'})
+            vim.keymap.set('n', '<leader>Q', ':Bdelete!<cr>' , {desc = 'Force delete buffer without changing window layout'})
+        end
     },
 
     -- Status line
@@ -145,7 +172,12 @@ return {
     -- Indentation lines
     {
         'lukas-reineke/indent-blankline.nvim',
-        config = require('plugins.configs.indent-blankline').setup
+        config = function ()
+            require("indent_blankline").setup {
+                space_char_blankline = " ",
+                show_current_context = true,
+            }
+        end
     },
 
     ----------------------------
@@ -153,7 +185,10 @@ return {
     ----------------------------
     {
         "williamboman/mason.nvim",
-        config = require("plugins.configs.mason").setup,
+        config = function ()
+            require("mason").setup()
+            vim.keymap.set('n', '<leader>~', ':Mason<cr>')
+        end
     },
     -- LSP
     {
@@ -201,7 +236,13 @@ return {
         dependencies = {
             'nvim-treesitter/nvim-treesitter',
         },
-        config = require('plugins.configs.nvim-dap').setup
+        config = function ()
+            vim.keymap.set('n', '<M-b>', "<cmd>lua require'dap'.toggle_breakpoint()<cr>", {desc = "Debug: Set breakpoint"})
+            vim.keymap.set('n', '<M-c>', "<cmd>lua require'dap'.clear_breakpoints()<cr>", {desc = "Debug: Clear breakpoints"})
+            vim.keymap.set('n', '<M-i>', "<cmd>lua require'dap'.step_into()<cr>"        , {desc = "Debug: Step into"})
+            vim.keymap.set('n', '<M-o>', "<cmd>lua require'dap'.step_over()<cr>"        , {desc = "Debug: Step over"})
+            vim.keymap.set('n', '<M-p>', "<cmd>lua require'dap'.continue()<cr>"         , {desc = "Debug: Continue to next breakpoint (Proceed)"})
+        end
     },
     {
         'rcarriga/nvim-dap-ui',
