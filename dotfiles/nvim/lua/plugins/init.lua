@@ -166,7 +166,14 @@ return {
     -- Highlight all occurrences of word under cursor
     {
         'RRethy/vim-illuminate',
-        config = require('plugins.configs.vim-illuminate').setup
+        config = function ()
+            local augroup = vim.api.nvim_create_augroup("VimIlluminate", { clear = true })
+            vim.api.nvim_create_autocmd("VimEnter", { command = "highlight! link IlluminatedWordText CursorLine", group = augroup })
+            vim.api.nvim_create_autocmd("VimEnter", { command = "highlight! link IlluminatedWordRead CursorLine", group = augroup })
+            vim.api.nvim_create_autocmd("VimEnter", { command = "highlight! link IlluminatedWordWrite CursorLine", group = augroup })
+
+            require('illuminate').configure()
+        end
     },
 
     -- Indentation lines
