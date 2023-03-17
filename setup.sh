@@ -104,6 +104,7 @@ ln -svfF "${SCRIPT_DIR}/dotfiles/tmate.conf" "${HOME}/.tmate.conf"
 ln -svfF "${SCRIPT_DIR}/dotfiles/karabiner.json" "${HOME}/.config/karabiner/karabiner.json"
 ln -svfF "${SCRIPT_DIR}/dotfiles/gitconfig" "${HOME}/.gitconfig"
 ln -svfF "${SCRIPT_DIR}/dotfiles/lazygit.yml" "${HOME}/.config/lazygit/config.yml"
+ln -svfF "${SCRIPT_DIR}/dotfiles/lfrc" "${HOME}/.config/lf/lfrc"
 ln -svfF "${SCRIPT_DIR}/dotfiles/psqlrc" "${HOME}/.psqlrc"
 ln -svfF "${SCRIPT_DIR}/dotfiles/pspgconf" "${HOME}/.pspgconf"
 
