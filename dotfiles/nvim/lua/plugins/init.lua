@@ -250,22 +250,4 @@ return {
         end
     },
 
-    -- ChatGPT
-    {
-        "jackMort/ChatGPT.nvim",
-        dependencies = {
-          "MunifTanjim/nui.nvim",
-          "nvim-lua/plenary.nvim",
-          "nvim-telescope/telescope.nvim"
-        },
-        keys = {
-            { "<leader>cb", ':ChatGPT<CR>', desc = "ChatGPT prompt" }
-        },
-        config = function ()
-            require("chatgpt").setup({
-                welcome_message = ""
-            })
-        end
-    },
-
 }
