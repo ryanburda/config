@@ -28,9 +28,9 @@ return {
     },
     {
         'nvim-treesitter/playground',
-        keys = {
-            { "<leader>ts", ":TSPlaygroundToggle<CR>" },
-        },
+        config = function ()
+            vim.keymap.set('n', "<leader>ts", ":TSPlaygroundToggle<CR>")
+        end
     },
     'nvim-treesitter/nvim-treesitter-context',
 
@@ -70,12 +70,10 @@ return {
     },
     {
         'ruifm/gitlinker.nvim',
-        keys = {
-            { "<leader>gl", "<cmd>lua require('gitlinker').get_buf_range_url('n')<cr>", desc = "Github link of current location in buffer" },
-            { "<leader>gl", "<cmd>lua require('gitlinker').get_buf_range_url('v')<cr>v`<", desc = "Github link of current visual selection", mode = {"v"} },
-            { "<leader>gh", "<cmd>lua require('gitlinker').get_buf_range_url('n', {action_callback = require('gitlinker.actions').open_in_browser})<cr>", desc = "Open Github in browser to current location in buffer" },
-            { "<leader>gh", "<cmd>lua require('gitlinker').get_buf_range_url('v', {action_callback = require('gitlinker.actions').open_in_browser})<cr>v`<", desc = "Open Github in brower to current visual selection", mode = {"v"} },
-        },
+        config = function ()
+            vim.keymap.set({'n', 'v'}, "<leader>gl", "<cmd>lua require('gitlinker').get_buf_range_url('n')<cr>", {desc = "Github link of current location in buffer"})
+            vim.keymap.set({'n', 'v'}, "<leader>gh", "<cmd>lua require('gitlinker').get_buf_range_url('n', {action_callback = require('gitlinker.actions').open_in_browser})<cr>", {desc = "Open Github in browser to current location in buffer"})
+        end
     },
     {
         'sindrets/diffview.nvim',
@@ -123,19 +121,19 @@ return {
     {
         'folke/trouble.nvim',
         dependencies = { "kyazdani42/nvim-web-devicons", },
-        keys = {
-            { "<M-f>", ":TroubleToggle<cr>", desc = "Project Diagnostics Toggle" },
-        },
-        config = function() require("trouble").setup() end
+        config = function ()
+            require("trouble").setup()
+            vim.keymap.set('n', "<M-f>", ":TroubleToggle<cr>", {desc = "Project Diagnostics Toggle" })
+        end,
     },
 
     -- Web Search
     {
         'voldikss/vim-browser-search',
-        keys = {
-            { "<leader>ji", ":BrowserSearch<cr>", desc = "Search for word under cursor in browser" },
-            { "<leader>ji", ":'<,'>BrowserSearch<cr>", desc = "Search for visual selection in brower", mode = {"v"} },
-        },
+        config = function ()
+            vim.keymap.set('n', "<leader>ji", ":BrowserSearch<cr>", {desc = "Search for word under cursor in browser"})
+            vim.keymap.set('v', "<leader>ji", ":'<,'>BrowserSearch<cr>", {desc = "Search for visual selection in brower"})
+        end
     },
 
     -- Highlight all occurrences of word under cursor
