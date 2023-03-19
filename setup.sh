@@ -60,6 +60,7 @@ brew install jq
 brew install ttyrec
 brew install rlwrap
 brew install lf
+curl https://raw.githubusercontent.com/gokcehan/lf/master/etc/icons.example -o ~/.config/lf/icons
 brew install kubectl
 brew install kubectx
 brew install pspg

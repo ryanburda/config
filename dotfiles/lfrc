@@ -56,9 +56,7 @@ cmd zip ${{
 }}
 
 # Trash bindings
-# TODO: combine these into one command that works on both files and directories
 cmd trash %set -f; mv $fx ~/.trash
-cmd trash_dir $IFS=':'; rm -rf $fx
 
 # Bindings
 # Remove some defaults
