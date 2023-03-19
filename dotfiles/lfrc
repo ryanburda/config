@@ -16,17 +16,9 @@ cmd open &{{
     esac
 }}
 
-cmd mkdir ${{
-  printf "Directory Name: "
-  read ans
-  mkdir $ans
-}}
+cmd mkdir %printf "Directory Name: "; read ans; mkdir $ans
 
-cmd mkfile ${{
-  printf "File Name: "
-  read ans
-  touch $ans
-}}
+cmd mkfile %printf "File Name: "; read ans; touch $ans
 
 # extract the current file with the right command
 # (xkcd link: https://xkcd.com/1168/)
