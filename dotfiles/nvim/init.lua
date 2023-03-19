@@ -59,6 +59,7 @@ vim.keymap.set('n', '<leader>n' , ':edit ~/Documents/main.txt<cr>G$', opts)
 vim.keymap.set('n', '<leader>hj', '<cmd>lua vim.diagnostic.goto_next()<CR>' , opts)
 vim.keymap.set('n', '<leader>hk', '<cmd>lua vim.diagnostic.goto_prev()<CR>' , opts)
 
+require('listen').setup()
 require('quickfix').keymaps()
 require('lf').keymaps()
 

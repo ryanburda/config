@@ -17,7 +17,7 @@ cmd open &{{
 }}
 
 # TODO: change /tmp/nvim.pipe to be based on a variable. (create nvim plugin for starting server)
-cmd open_nvim %nvim --server /tmp/nvim.pipe --remote $f
+cmd open_nvim %nvim --server /tmp/nvim_abc123.pipe --remote $f
 
 cmd mkdir %printf "Directory Name: "; read ans; mkdir $ans
 
