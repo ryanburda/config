@@ -8,3 +8,9 @@ git:
   paging:
     colorArg: always
     useConfig: true
+
+customCommands:
+  - key: 'o'
+    command: "nvim --server $NVIM_PIPE --remote {{.SelectedFile.Name}}"
+    context: 'files'
+    description: 'Open file in Neovim'

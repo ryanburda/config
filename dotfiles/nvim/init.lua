@@ -62,6 +62,7 @@ vim.keymap.set('n', '<leader>hk', '<cmd>lua vim.diagnostic.goto_prev()<CR>' , op
 require('listen').setup()
 require('quickfix').keymaps()
 require('lf').keymaps()
+require('lazygit').keymaps()
 
 -- Plugins
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
