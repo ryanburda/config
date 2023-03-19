@@ -56,8 +56,9 @@ cmd zip ${{
 }}
 
 # Trash bindings
-# TODO: make this work for directories
+# TODO: combine these into one command that works on both files and directories
 cmd trash %set -f; mv $fx ~/.trash
+cmd trash_dir $IFS=':'; rm -rf $fx
 
 # Bindings
 # Remove some defaults
@@ -71,6 +72,7 @@ map d
 # Basic Functions
 map . set hidden!
 map dd trash
+map dD trash_dir
 map p paste
 map x cut
 map y copy
