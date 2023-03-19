@@ -16,12 +16,12 @@ cmd open &{{
     esac
 }}
 
-# TODO: change /tmp/nvim.pipe to be based on a variable. (create nvim plugin for starting server)
 cmd open_nvim %set -f; nvim --server $NVIM_PIPE --remote $f
+
+cmd mkfile %printf "File Name: "; read ans; touch $ans; nvim --server $NVIM_PIPE --remote $ans
 
 cmd mkdir %printf "Directory Name: "; read ans; mkdir $ans
 
-cmd mkfile %printf "File Name: "; read ans; touch $ans
 
 # extract the current file with the right command
 # (xkcd link: https://xkcd.com/1168/)
