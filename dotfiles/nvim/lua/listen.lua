@@ -5,6 +5,7 @@ T.init = function ()
         math.randomseed(os.clock()^5)
         T.pipe = '/tmp/nvim_' .. math.random(1,10000000) .. '.pipe'
         vim.fn.serverstart(T.pipe)
+        vim.cmd("let $NVIM_PIPE = '" .. T.pipe .. "'")
     else
         print("Pipe already initialized")
     end
@@ -20,6 +21,10 @@ T.setup = function ()
 
     vim.api.nvim_create_autocmd("VimEnter", { callback = T.init, group = augroup })
     vim.api.nvim_create_autocmd("VimLeave", { callback = T.teardown, group = augroup })
+end
+
+T.get_pipe = function ()
+    print(T.pipe)
 end
 
 return T

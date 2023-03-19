@@ -17,7 +17,7 @@ cmd open &{{
 }}
 
 # TODO: change /tmp/nvim.pipe to be based on a variable. (create nvim plugin for starting server)
-cmd open_nvim %nvim --server /tmp/nvim_abc123.pipe --remote $f
+cmd open_nvim %set -f; nvim --server $NVIM_PIPE --remote $f
 
 cmd mkdir %printf "Directory Name: "; read ans; mkdir $ans
 
@@ -87,6 +87,6 @@ map ct tar
 map cz zip
 
 # Movement
-map oa cd ~/
-map os cd ~/Downloads
-map od cd ~/Desktop
+map ga cd ~/
+map gs cd ~/Downloads
+map gd cd ~/Desktop
