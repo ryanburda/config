@@ -16,10 +16,16 @@ cmd open &{{
     esac
 }}
 
-cmd open_nvim %set -f; nvim --server $NVIM_PIPE --remote $f
+cmd open_nvim &{{
+    %set -f
+    if [[ ! -z "$NVIM_PIPE" ]]; then
+        nvim --server $NVIM_PIPE --remote $f
+    fi
+}}
 
+# TODO: get rid of duplication with open_nvim command
 cmd mkfile %printf "File Name: "; read ans; touch $ans; nvim --server $NVIM_PIPE --remote $ans
-
+# TODO: make mkfile and mkdir one command (mapped to 'a') where functionality depends on whether there is a trailing '/'
 cmd mkdir %printf "Directory Name: "; read ans; mkdir $ans
 
 # define a custom 'rename' command without prompt for overwrite

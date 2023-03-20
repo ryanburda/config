@@ -13,6 +13,7 @@ end
 
 T.teardown = function ()
     vim.fn.serverstop(T.pipe)
+    vim.cmd("unset NVIM_PIPE")
     T.pipe = nil
 end
 
