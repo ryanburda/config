@@ -60,7 +60,6 @@ brew install jq
 brew install ttyrec
 brew install rlwrap
 brew install lf
-curl https://raw.githubusercontent.com/gokcehan/lf/master/etc/icons.example -o ~/.config/lf/icons
 brew install kubectl
 brew install kubectx
 brew install pspg
@@ -97,16 +96,28 @@ mkdir -p $HOME/Developer
 
 # Symlink config files
 SCRIPT_DIR=${0:a:h}
+
 mkdir -p ~/.config/alacritty
 ln -svfF "${SCRIPT_DIR}/dotfiles/alacritty.yml" "${HOME}/.config/alacritty/alacritty.yml"
+
 ln -svfF "${SCRIPT_DIR}/dotfiles/zshrc" "${HOME}/.zshrc"
+
 ln -svfF "${SCRIPT_DIR}/dotfiles/tmux.conf" "${HOME}/.tmux.conf"
+
 ln -svfF "${SCRIPT_DIR}/dotfiles/tmate.conf" "${HOME}/.tmate.conf"
+
 ln -svfF "${SCRIPT_DIR}/dotfiles/karabiner.json" "${HOME}/.config/karabiner/karabiner.json"
+
 ln -svfF "${SCRIPT_DIR}/dotfiles/gitconfig" "${HOME}/.gitconfig"
+
 ln -svfF "${SCRIPT_DIR}/dotfiles/lazygit.yml" "${HOME}/.config/lazygit/config.yml"
+
+mkdir -p ~/.config/lf
+curl https://raw.githubusercontent.com/gokcehan/lf/master/etc/icons.example -o ~/.config/lf/icons
 ln -svfF "${SCRIPT_DIR}/dotfiles/lfrc" "${HOME}/.config/lf/lfrc"
+
 ln -svfF "${SCRIPT_DIR}/dotfiles/psqlrc" "${HOME}/.psqlrc"
+
 ln -svfF "${SCRIPT_DIR}/dotfiles/pspgconf" "${HOME}/.pspgconf"
 
 # Source zshrc so plugins are installed automatically.
