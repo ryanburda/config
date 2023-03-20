@@ -34,8 +34,8 @@ znap source zsh-users/zsh-syntax-highlighting
 znap source zsh-users/zsh-autosuggestions
 
 # autocompletion using arrow keys (based on history)
-bindkey '^n' history-search-backward
-bindkey '^p' history-search-forward
+bindkey '^[[A' history-search-backward
+bindkey '^[[B' history-search-forward
 
 # Alias
 alias ls="ls --color=always -lah"
