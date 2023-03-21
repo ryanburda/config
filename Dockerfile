@@ -66,16 +66,23 @@ WORKDIR ${PROJECT_DIR}
 
 COPY . .
 
-RUN ln -svfF "${PROJECT_DIR}/dotfiles/zshrc" "${HOME}/.zshrc"
-RUN ln -svfF "${PROJECT_DIR}/dotfiles/tmux.conf" "${HOME}/.tmux.conf"
-RUN ln -svfF "${PROJECT_DIR}/dotfiles/tmate.conf" "${HOME}/.tmate.conf"
-RUN ln -svfF "${PROJECT_DIR}/dotfiles/gitconfig" "${HOME}/.gitconfig"
-RUN ln -svfF "${PROJECT_DIR}/dotfiles/psqlrc" "${HOME}/.psqlrc"
-RUN ln -svfF "${PROJECT_DIR}/dotfiles/pspgconf" "${HOME}/.pspgconf"
-RUN mkdir -p "${HOME}/.config"
-RUN ln -svfF "${PROJECT_DIR}/dotfiles/nvim" "${HOME}/.config/nvim"
-RUN mkdir -p "${HOME}/.config/lazygit"
-RUN ln -svfF "${PROJECT_DIR}/dotfiles/lazygit.yml" "${HOME}/.config/lazygit/config.yml"
+RUN ln -svfF "${SCRIPT_DIR}/dotfiles/zshrc" "${HOME}/.zshrc"
+
+RUN ln -svfF "${SCRIPT_DIR}/dotfiles/tmux.conf" "${HOME}/.tmux.conf"
+
+RUN ln -svfF "${SCRIPT_DIR}/dotfiles/tmate.conf" "${HOME}/.tmate.conf"
+
+RUN ln -svfF "${SCRIPT_DIR}/dotfiles/gitconfig" "${HOME}/.gitconfig"
+
+RUN ln -svfF "${SCRIPT_DIR}/dotfiles/lazygit.yml" "${HOME}/.config/lazygit/config.yml"
+
+RUN mkdir -p ~/.config/lf
+RUN curl https://raw.githubusercontent.com/gokcehan/lf/master/etc/icons.example -o ~/.config/lf/icons
+RUN ln -svfF "${SCRIPT_DIR}/dotfiles/lfrc" "${HOME}/.config/lf/lfrc"
+
+RUN ln -svfF "${SCRIPT_DIR}/dotfiles/psqlrc" "${HOME}/.psqlrc"
+
+RUN ln -svfF "${SCRIPT_DIR}/dotfiles/pspgconf" "${HOME}/.pspgconf"
 
 # Let zsh and nvim set themselves up now that the configs have been linked
 RUN ${HOME}/.zshrc
