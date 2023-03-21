@@ -24,9 +24,7 @@ cmd open_nvim &{{
 }}
 
 # TODO: get rid of duplication with open_nvim command
-cmd mkfile %printf "File Name: "; read ans; touch $ans; nvim --server $NVIM_PIPE --remote $ans
-# TODO: make mkfile and mkdir one command (mapped to 'a') where functionality depends on whether there is a trailing '/'
-cmd mkdir %printf "Directory Name: "; read ans; mkdir $ans
+cmd create %printf "Create File/Dirctory: "; read ans; mkdir $(dirname $ans); touch $ans; nvim --server $NVIM_PIPE --remote $(realpath $ans)
 
 # define a custom 'rename' command without prompt for overwrite
 cmd rename %[ -e $1 ] && printf "file exists" || mv $f $1
@@ -89,8 +87,7 @@ map r push :rename<space>
 map <enter> open
 map o open_nvim
 map R reload
-map mf mkfile
-map md mkdir
+map a create
 map C clear
 map ce extract
 map ct tar
