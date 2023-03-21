@@ -27,9 +27,11 @@ vim.opt.signcolumn = "yes"
 vim.opt.list = true
 vim.opt.listchars = { tab = '›~'}
 vim.opt.autoread = true
+vim.opt.winbar = "%=%f"
 
 vim.cmd('set noshowmode')
 vim.cmd('set noswapfile')
+
 
 -- keymap
 vim.g.mapleader = " "
