@@ -91,6 +91,7 @@ map ct tar
 map cz zip
 
 # Movement
+map g/ cd /
 map ga cd ~/
 map gs cd ~/Downloads
 map gd cd ~/Desktop
