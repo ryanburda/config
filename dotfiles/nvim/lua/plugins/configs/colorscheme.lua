@@ -30,7 +30,7 @@ T.COLORS_MAP['dayfox'] = {
     ['background'] = 'light',
 }
 T.COLORS_MAP['dawnfox'] = {
-    ['alacritty'] = 'Embers.light',  -- Mocha.light
+    ['alacritty'] = 'Embers.light',
     ['background'] = 'light',
 }
 T.COLORS_MAP['tender'] = {
