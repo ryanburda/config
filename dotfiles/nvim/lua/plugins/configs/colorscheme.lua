@@ -5,6 +5,7 @@ T.COLORSCHEME_FILE = vim.fn.stdpath('config') .. '/.colorscheme'
 
 -- Maps a neovim colorscheme to other attributes
 T.COLORS_MAP = {}
+-- dark
 T.COLORS_MAP['carbonfox'] = {
     ['alacritty'] = 'default.dark',
     ['background'] = 'dark',
@@ -25,14 +26,6 @@ T.COLORS_MAP['duskfox'] = {
     ['alacritty'] = 'Catppuccin',
     ['background'] = 'dark',
 }
-T.COLORS_MAP['dayfox'] = {
-    ['alacritty'] = 'Twilight.light',
-    ['background'] = 'light',
-}
-T.COLORS_MAP['dawnfox'] = {
-    ['alacritty'] = 'Embers.light',
-    ['background'] = 'light',
-}
 T.COLORS_MAP['tender'] = {
     ['alacritty'] = 'tender',
     ['background'] = 'dark',
@@ -41,12 +34,17 @@ T.COLORS_MAP['gruvbox'] = {
     ['alacritty'] = 'Gruvbox-Dark',
     ['background'] = 'dark',
 }
-T.COLORS_MAP['gruvbox'] = {
-    ['alacritty'] = 'Gruvbox-Dark',
-    ['background'] = 'dark',
-}
+-- light
 T.COLORS_MAP['PaperColor'] = {
     ['alacritty'] = 'Iceberg-Light',
+    ['background'] = 'light',
+}
+T.COLORS_MAP['dayfox'] = {
+    ['alacritty'] = 'Twilight.light',
+    ['background'] = 'light',
+}
+T.COLORS_MAP['dawnfox'] = {
+    ['alacritty'] = 'Embers.light',
     ['background'] = 'light',
 }
 

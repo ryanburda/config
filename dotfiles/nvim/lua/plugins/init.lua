@@ -11,9 +11,13 @@ return {
 
     -- Color Schemes
     {
-        'EdenEast/nightfox.nvim',
-        dependencies = { 'jacoborus/tender.vim', 'ellisonleao/gruvbox.nvim', 'NLKNguyen/papercolor-theme' },
-        config = require('plugins.configs.colorscheme').setup,
+        "EdenEast/nightfox.nvim",
+        dependencies = {
+            "jacoborus/tender.vim",
+            "ellisonleao/gruvbox.nvim",
+            "NLKNguyen/papercolor-theme",
+        },
+        config = require("plugins.configs.colorscheme").setup,
     },
 
     -- Treesitter
