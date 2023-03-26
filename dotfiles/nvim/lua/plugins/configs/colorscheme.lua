@@ -72,6 +72,9 @@ function T.setup()
     vim.cmd('colorscheme ' .. colorscheme)
     vim.cmd('set background=' .. T.COLORS_MAP[colorscheme]['background'])
     vim.cmd('hi WinSeparator guifg=#B2BEB5')
+    vim.cmd('highlight! link Winbar StatusLine')
+    vim.cmd('highlight! link WinbarNC StatusLineNC')
+    vim.cmd('highlight! link LineNr StatusLine')
     os.execute("alacritty-themes " .. T.COLORS_MAP[colorscheme]['alacritty'] .. " 1> /dev/null")
 
 end
