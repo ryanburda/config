@@ -71,10 +71,12 @@ function T.setup()
     -- set the colorscheme, background color, and alacritty theme
     vim.cmd('colorscheme ' .. colorscheme)
     vim.cmd('set background=' .. T.COLORS_MAP[colorscheme]['background'])
-    vim.cmd('hi WinSeparator guifg=#B2BEB5')
-    vim.cmd('highlight! link Winbar StatusLine')
-    vim.cmd('highlight! link WinbarNC StatusLineNC')
-    vim.cmd('highlight! link LineNr StatusLine')
+
+    --vim.cmd('hi WinSeparator guifg=#B2BEB5')
+    vim.cmd('highlight! Winbar guibg=' .. vim.api.nvim_eval('synIDattr(hlID("StatusLine"), "bg")'))
+    vim.cmd('highlight! WinbarNC guibg=' .. vim.api.nvim_eval('synIDattr(hlID("StatusLineNC"), "bg")'))
+    vim.cmd('highlight! LineNr guibg=' .. vim.api.nvim_eval('synIDattr(hlID("StatusLine"), "bg")'))
+    vim.cmd('highlight! SignColumn guibg=' .. vim.api.nvim_eval('synIDattr(hlID("StatusLine"), "bg")'))
     os.execute("alacritty-themes " .. T.COLORS_MAP[colorscheme]['alacritty'] .. " 1> /dev/null")
 
 end
