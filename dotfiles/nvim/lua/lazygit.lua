@@ -1,3 +1,4 @@
+-- TODO: see if you can get rid of this and rely only on setup in tmux.conf while still being able to open files in neovim
 local T = {}
 
 -- open lf file manager in tmux popup
