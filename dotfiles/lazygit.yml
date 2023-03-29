@@ -11,18 +11,22 @@ git:
 
 customCommands:
   - key: 'o'
-    command: "nvim --server $NVIM_PIPE --remote {{.SelectedFile.Name}}"
+    command: "if [[ ! -z ${NVIM_PIPE} ]]; then nvim --server $NVIM_PIPE --remote {{.SelectedFile.Name}}; else nvim {{.SelectedFile.Name}}; fi"
     context: 'files'
+    subprocess: true
     description: 'Open file in Neovim'
   - key: 'D'
-    command: "nvim --server $NVIM_PIPE --remote-send ':DiffviewOpen {{.SelectedLocalBranch.Name}}<CR>'"
+    command: "if [[ ! -z ${NVIM_PIPE} ]]; then nvim --server $NVIM_PIPE --remote-send ':DiffviewOpen {{.SelectedLocalBranch.Name}}<CR>'; else nvim -c 'DiffviewOpen {{.SelectedLocalBranch.Name}}'; fi"
     context: 'localBranches'
+    subprocess: true
     description: 'Open diff of current branch to selected branch'
   - key: 'D'
-    command: "nvim --server $NVIM_PIPE --remote-send ':DiffviewOpen {{.SelectedRemoteBranch.Name}}<CR>'"
+    command: "if [[ ! -z ${NVIM_PIPE} ]]; then nvim --server $NVIM_PIPE --remote-send ':DiffviewOpen {{.SelectedRemoteBranch.Name}}<CR>'; else nvim -c 'DiffviewOpen {{.SelectedRemoteBranch.Name}}'; fi"
     context: 'remoteBranches'
+    subprocess: true
     description: 'Open diff of current branch to selected branch'
   - key: 'D'
-    command: "nvim --server $NVIM_PIPE --remote-send ':DiffviewOpen {{.SelectedLocalCommit.Sha}}<CR>'"
+    command: "if [[ ! -z ${NVIM_PIPE} ]]; then nvim --server $NVIM_PIPE --remote-send ':DiffviewOpen {{.SelectedLocalCommit.Sha}}<CR>'; else nvim -c 'DiffviewOpen {{.SelectedLocalCommit.Sha}}'; fi"
     context: 'commits'
+    subprocess: true
     description: 'Open diff of current branch to selected commit'
