@@ -5,6 +5,7 @@ gui:
     selectedRangeBgColor:
       - default
   showIcons: true
+  scrollPastBottom: false
   showCommandLog: true
   branchColors:
     'main': '#1b7532'
@@ -12,10 +13,14 @@ gui:
     'develop': '#1b7275'
     'ryanburda': '#349beb'
     'rburda': '#349beb'
+  authorColors:
+    'Ryan Burda': '#349beb'
 git:
   paging:
     colorArg: always
     useConfig: true
+
+promptToReturnFromSubprocess: false
 
 customCommands:
   - key: 'o'
