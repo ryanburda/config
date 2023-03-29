@@ -9,6 +9,17 @@ export HISTSIZE=1000000000
 setopt INC_APPEND_HISTORY
 export HISTTIMEFORMAT="[%F %T] "
 
+_update_nvim_pipe() {
+    local var
+    var=$(tmux show-environment |grep '^NVIM_PIPE=')
+    if [ "$?" -eq 0 ]; then
+        eval "$var"
+    fi
+}
+if [[ -n "$TMUX" ]]; then
+    add-zsh-hook precmd _update_nvim_pipe
+fi
+
 # Set default editor and pager
 if [[ "$(command -v nvim)" ]]; then
     export EDITOR='nvim'
