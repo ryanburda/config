@@ -1,3 +1,5 @@
+require('pipe').setup()
+
 vim.wo.wrap = false
 vim.opt.termguicolors = true
 vim.opt.number = true
@@ -61,7 +63,6 @@ vim.keymap.set('n', '<leader>n' , ':edit ~/Documents/main.txt<cr>G$', opts)
 vim.keymap.set('n', '<leader>hj', '<cmd>lua vim.diagnostic.goto_next()<CR>' , opts)
 vim.keymap.set('n', '<leader>hk', '<cmd>lua vim.diagnostic.goto_prev()<CR>' , opts)
 
-require('pipe').setup()
 require('quickfix').keymaps()
 require('lf').keymaps()
 

@@ -30,7 +30,7 @@ T.setup = function ()
 end
 
 T.get_pipe = function ()
-    print(T.pipe)
+    return T.pipe
 end
 
 return T
