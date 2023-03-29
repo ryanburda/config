@@ -93,6 +93,7 @@ return {
     {
         'sindrets/diffview.nvim',
         dependencies = { 'nvim-lua/plenary.nvim', },
+        commit = '6420a73b340fdb1f842479cd7640dcca9ec6f5d1',  -- delete this line once this PR is merged https://github.com/sindrets/diffview.nvim/pull/326
         config = require('plugins.configs.diffview').setup
     },
 

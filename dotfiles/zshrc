@@ -9,15 +9,20 @@ export HISTSIZE=1000000000
 setopt INC_APPEND_HISTORY
 export HISTTIMEFORMAT="[%F %T] "
 
-_update_nvim_pipe() {
+# Automatically update the NVIM_PIPE env var in all panes of a tmux session if it is changed.
+# NOTE: Comment this block out and `source ~/.zshrc` if this behavior needs to be temporarily turned off.
+autoload -U add-zsh-hook
+update_nvim_pipe() {
     local var
-    var=$(tmux show-environment |grep '^NVIM_PIPE=')
+    var=$(tmux show-environment | grep '^NVIM_PIPE=')
     if [ "$?" -eq 0 ]; then
         eval "$var"
+    else
+        unset NVIM_PIPE
     fi
 }
 if [[ -n "$TMUX" ]]; then
-    add-zsh-hook precmd _update_nvim_pipe
+    add-zsh-hook preexec update_nvim_pipe
 fi
 
 # Set default editor and pager

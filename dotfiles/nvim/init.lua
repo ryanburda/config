@@ -1,4 +1,4 @@
-require('pipe').setup()
+require('server').setup()
 
 vim.wo.wrap = false
 vim.opt.termguicolors = true
