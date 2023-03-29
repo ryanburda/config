@@ -14,3 +14,15 @@ customCommands:
     command: "nvim --server $NVIM_PIPE --remote {{.SelectedFile.Name}}"
     context: 'files'
     description: 'Open file in Neovim'
+  - key: 'D'
+    command: "nvim --server $NVIM_PIPE --remote-send ':DiffviewOpen {{.SelectedLocalBranch.Name}}<CR>'"
+    context: 'localBranches'
+    description: 'Open diff of current branch to selected branch'
+  - key: 'D'
+    command: "nvim --server $NVIM_PIPE --remote-send ':DiffviewOpen {{.SelectedRemoteBranch.Name}}<CR>'"
+    context: 'remoteBranches'
+    description: 'Open diff of current branch to selected branch'
+  - key: 'D'
+    command: "nvim --server $NVIM_PIPE --remote-send ':DiffviewOpen {{.SelectedLocalCommit.Sha}}<CR>'"
+    context: 'commits'
+    description: 'Open diff of current branch to selected commit'
