@@ -4,6 +4,14 @@ gui:
       - default
     selectedRangeBgColor:
       - default
+  showIcons: true
+  showCommandLog: true
+  branchColors:
+    'main': '#1b7532'
+    'master': '#1b7532'
+    'develop': '#1b7275'
+    'ryanburda': '#349beb'
+    'rburda': '#349beb'
 git:
   paging:
     colorArg: always
