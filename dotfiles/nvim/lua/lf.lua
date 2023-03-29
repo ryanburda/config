@@ -1,3 +1,5 @@
+-- NOTE: This is needed because it isn't possible to get the current file name from `nvim --server pipe --remote-expr`
+--       Ideally this will eventually go away leaving only the portion that is in tmux.conf
 local T = {}
 
 -- open lf file manager in tmux popup

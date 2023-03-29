@@ -5,7 +5,11 @@ T.init = function ()
         math.randomseed(os.clock()^5)
         T.pipe = '/tmp/nvim_' .. math.random(1,10000000) .. '.pipe'
         vim.fn.serverstart(T.pipe)
-        vim.cmd("let $NVIM_PIPE = '" .. T.pipe .. "'")
+
+        -- Set the NVIM_PIPE env var for the current shell
+        io.popen("export $NVIM_PIPE='" .. T.pipe .. "'")
+        -- Set the NVIM_PIPE env var for any Tmux panes/popups that are created in this session
+        io.popen("tmux setenv NVIM_PIPE '".. T.pipe .. "'")
     else
         print("Pipe already initialized")
     end
@@ -13,12 +17,13 @@ end
 
 T.teardown = function ()
     vim.fn.serverstop(T.pipe)
-    vim.cmd("unset NVIM_PIPE")
+    io.popen("unset NVIM_PIPE")
+    io.popen("tmux setenv NVIM_PIPE '".. T.pipe .. "'")
     T.pipe = nil
 end
 
 T.setup = function ()
-    local augroup = vim.api.nvim_create_augroup("listen_rpc", { clear = true })
+    local augroup = vim.api.nvim_create_augroup("pipe_rpc", { clear = true })
 
     vim.api.nvim_create_autocmd("VimEnter", { callback = T.init, group = augroup })
     vim.api.nvim_create_autocmd("VimLeave", { callback = T.teardown, group = augroup })
