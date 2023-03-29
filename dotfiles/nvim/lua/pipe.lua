@@ -1,8 +1,13 @@
 local T = {}
 
 T.init = function ()
-    if T.pipe == nil then
+    -- Only allow 1 nvim server to spawn per tmux session.
+    if os.getenv("NVIM_PIPE") == nil then
         math.randomseed(os.clock()^5)
+
+        -- Save the pipe path to a variable in this neovim instance.
+        -- This variable will only be set in the neovim instance that started the server.
+        -- This will be used ensure that the server can only be stopped by the neovim instance that started it.
         T.pipe = '/tmp/nvim_' .. math.random(1,10000000) .. '.pipe'
         vim.fn.serverstart(T.pipe)
 
@@ -16,10 +21,12 @@ T.init = function ()
 end
 
 T.teardown = function ()
-    vim.fn.serverstop(T.pipe)
-    io.popen("unset NVIM_PIPE")
-    io.popen("tmux setenv -r NVIM_PIPE")
-    T.pipe = nil
+    if T.pipe == os.getenv("NVIM_PIPE") then
+        vim.fn.serverstop(T.pipe)
+        io.popen("unset NVIM_PIPE")
+        io.popen("tmux setenv -r NVIM_PIPE")
+        T.pipe = nil
+    end
 end
 
 T.setup = function ()
