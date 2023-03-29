@@ -18,7 +18,7 @@ end
 T.teardown = function ()
     vim.fn.serverstop(T.pipe)
     io.popen("unset NVIM_PIPE")
-    io.popen("tmux setenv NVIM_PIPE '".. T.pipe .. "'")
+    io.popen("tmux setenv -r NVIM_PIPE")
     T.pipe = nil
 end
 
