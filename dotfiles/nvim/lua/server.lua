@@ -36,6 +36,8 @@ T.start = function()
 
         T.pipe = '/tmp/nvim_' .. math.random(1,10000000) .. '.pipe'
         vim.fn.serverstart(T.pipe)
+
+        print("Server initialized: " .. T.pipe)
     else
         print("Server already initialized: " .. T.pipe)
     end
@@ -77,7 +79,7 @@ end
 
 T.setup = function()
     -- Let autocommands handle the setup and teardown of the server.
-    local augroup = vim.api.nvim_create_augroup("pipe_rpc", { clear = true })
+    local augroup = vim.api.nvim_create_augroup("server_rpc", { clear = true })
     vim.api.nvim_create_autocmd("VimEnter", { callback = T.tmux_start, group = augroup })
     vim.api.nvim_create_autocmd("VimLeave", { callback = T.stop, group = augroup })
 
