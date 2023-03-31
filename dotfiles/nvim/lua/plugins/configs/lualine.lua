@@ -2,9 +2,17 @@ local T = {}
 
 function T.setup()
 
-    local function copilot_on()
+    local is_copilot_on = function()
         if vim.g['is_copilot_on'] then
-            return ""
+            return ""
+        else
+            return ""
+        end
+    end
+
+    local has_server_pipe = function()
+        if require('server').get_pipe() ~= nil then
+            return ""
         else
             return ""
         end
@@ -29,7 +37,7 @@ function T.setup()
                     path = 1
                 },
             },
-            lualine_x = { copilot_on, require('server').get_pipe, 'diagnostics', },
+            lualine_x = { 'diagnostics', is_copilot_on, has_server_pipe, },
             lualine_y = { 'progress', },
             lualine_z = { 'location' },
         },

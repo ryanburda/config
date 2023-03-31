@@ -19,7 +19,7 @@ end
 
 function T.disable()
     -- Turns off copilot and writes the state to a global variable.
-    if pcall(function() vim.cmd('CopilotStop') end) then
+    if pcall(function() vim.cmd('Copilot disable') end) then
         vim.g[T.STATUS_VAR] = false
     else
         vim.g[T.STATUS_VAR] = true
