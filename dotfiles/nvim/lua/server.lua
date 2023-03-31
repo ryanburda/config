@@ -65,7 +65,7 @@ T.start = function()
 end
 
 T.tmux_start = function()
-    -- Only allow 1 nvim server to be associated with the NVIM_PIPE environment variable per session. The
+    -- Only allow 1 nvim server to be associated with the NVIM_PIPE environment variable per tmux session. The
     -- NVIM_PIPE variable acts as a poor person's semaphore which is more than good enough for this use case.
     if vim.fn.getenv("TMUX") ~= nil and T.tmux_getenv("NVIM_PIPE") == nil then
         local pipe = T.start()
@@ -90,10 +90,10 @@ T.stop = function()
     -- Unset the environment variable.
     if T.pipe == vim.fn.getenv("NVIM_PIPE") then
         io.popen("unset NVIM_PIPE")
-        T.pipe = nil
-    else
-        vim.fn.serverstop(T.pipe)
     end
+
+    vim.fn.serverstop(T.pipe)
+    T.pipe = nil
 end
 
 T.setup = function()
