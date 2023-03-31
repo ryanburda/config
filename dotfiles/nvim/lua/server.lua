@@ -35,28 +35,30 @@ T.get_pipe = function ()
 end
 
 T.getenv = function(var)
-    -- wrapper around `vim.fn.getenv` to ensure nil is returned whent he value is an empty string
-    var = vim.fn.getenv(var)
-    if var == '' then
+    -- wrapper around `vim.fn.getenv` to ensure `nil` is returned in certain situations.
+    local v = vim.fn.getenv(var)
+
+    if v == '' then
         return nil
-    elseif var == vim.NIL then
+    elseif v == vim.NIL then
         return nil
     else
-        return var
+        return v
     end
 end
 
 T.tmux_getenv = function(var)
-    -- tmux equivalent of `getenv` wrapper. This function ensures that `nil` is returned
-    -- instead of '' in the case where a variable was unset wth `tmux setenv -r`.
+    -- tmux equivalent of `getenv` wrapper above.
     local handle = io.popen("tmux show-environment " .. var .. " | awk -F '=' '{print $2}'")
-    local tmux_var = handle:read('*l')
+    local v = handle:read('*l')
     handle:close()
 
-    if tmux_var == '' then
+    if v == '' then
+        return nil
+    elseif v == vim.NIL then
         return nil
     else
-        return tmux_var
+        return v
     end
 end
 
@@ -116,6 +118,7 @@ T.setup = function()
 
     -- Create vim wrappers around lua functions.
     vim.api.nvim_create_user_command("ServerStart", T.start, {})
+    vim.api.nvim_create_user_command("ServerTmuxStart", T.tmux_start, {})
     vim.api.nvim_create_user_command("ServerStop", T.stop, {})
     vim.api.nvim_create_user_command("ServerPipe", function() print(T.get_pipe()) end, {})
 end
