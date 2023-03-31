@@ -34,8 +34,20 @@ T.get_pipe = function ()
     return T.pipe
 end
 
+T.getenv = function(var)
+    -- wrapper around `vim.fn.getenv` to ensure nil is returned whent he value is an empty string
+    var = vim.fn.getenv(var)
+    if var == '' then
+        return nil
+    elseif var == vim.NIL then
+        return nil
+    else
+        return var
+    end
+end
+
 T.tmux_getenv = function(var)
-    -- tmux equivalent of `vim.fn.getenv`. This function ensures that `nil` is returned
+    -- tmux equivalent of `getenv` wrapper. This function ensures that `nil` is returned
     -- instead of '' in the case where a variable was unset wth `tmux setenv -r`.
     local handle = io.popen("tmux show-environment " .. var .. " | awk -F '=' '{print $2}'")
     local tmux_var = handle:read('*l')
@@ -67,7 +79,7 @@ end
 T.tmux_start = function()
     -- Only allow 1 nvim server to be associated with the NVIM_PIPE environment variable per tmux session. The
     -- NVIM_PIPE variable acts as a poor person's semaphore which is more than good enough for this use case.
-    if vim.fn.getenv("TMUX") ~= nil and T.tmux_getenv("NVIM_PIPE") == nil then
+    if T.getenv("TMUX") ~= nil and T.tmux_getenv("NVIM_PIPE") == nil then
         local pipe = T.start()
 
         -- Set the NVIM_PIPE env var for the current shell.
@@ -83,12 +95,12 @@ T.stop = function()
     -- Stop the nvim server.
 
     -- Unset the tmux session variable.
-    if vim.fn.getenv("TMUX") ~= nil and T.get_pipe() == T.tmux_getenv("NVIM_PIPE") then
+    if T.getenv("TMUX") ~= nil and T.get_pipe() == T.tmux_getenv("NVIM_PIPE") then
         io.popen("tmux setenv -r NVIM_PIPE")
     end
 
     -- Unset the environment variable.
-    if T.pipe == vim.fn.getenv("NVIM_PIPE") then
+    if T.pipe == T.getenv("NVIM_PIPE") then
         io.popen("unset NVIM_PIPE")
     end
 
