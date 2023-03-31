@@ -1,0 +1,7 @@
+#!/bin/zsh
+
+# switch to the tmux widow and pane that has neovim running.
+if [[ ! -z ${NVIM_PIPE} ]]; then
+    nvim --server $NVIM_PIPE --remote-send ':silent !tmux select-window -T<CR>'
+    nvim --server $NVIM_PIPE --remote-send ':silent !tmux select-pane<CR>'
+fi

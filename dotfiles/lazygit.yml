@@ -24,7 +24,7 @@ promptToReturnFromSubprocess: false
 
 customCommands:
   - key: 'o'
-    command: "if [[ ! -z ${NVIM_PIPE} ]]; then nvim --server $NVIM_PIPE --remote {{.SelectedFile.Name}}; else nvim {{.SelectedFile.Name}}; fi"
+    command: "~/.zsh/funcs/nvim/nvim_open {{.SelectedFile.Name}}; ~/.zsh/funcs/nvim/nvim_toggle"
     context: 'files'
     subprocess: true
     description: 'Open file in Neovim'

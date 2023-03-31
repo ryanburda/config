@@ -1,0 +1,9 @@
+#!/bin/zsh
+
+# open the file in the current tmux session's nvim instance if one exists, else open it in a new nvim instance.
+file=$1
+if [[ ! -z ${NVIM_PIPE} ]]; then
+    nvim --server $NVIM_PIPE --remote $file
+else
+    nvim $file
+fi

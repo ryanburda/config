@@ -20,6 +20,9 @@ fi
 path+=$HOME/.local/bin
 path+=$HOME/.local/bin/neovim/bin
 fpath+=$HOME/.zsh/compdef/
+fpath+=$HOME/.zsh/funcs/nvim/
+autoload -U ~/.zsh/funcs/nvim/nvim_open
+autoload -U ~/.zsh/funcs/nvim/nvim_toggle
 
 # Download Znap, if it's not there yet.
 [[ -f ~/Git/zsh-snap/znap.zsh ]] ||
