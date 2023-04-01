@@ -24,7 +24,7 @@ promptToReturnFromSubprocess: false
 
 customCommands:
   - key: 'o'
-    command: "nvim_open {{.SelectedFile.Name}}; nvim_toggle"
+    command: "~/.zsh/funcs/nvim_open {{.SelectedFile.Name}}"
     context: 'files'
     subprocess: true
     description: 'Open file in Neovim'
