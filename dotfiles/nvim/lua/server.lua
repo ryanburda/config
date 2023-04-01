@@ -4,30 +4,12 @@
 --   * keeping track of the pipe name
 --   * only allowing a single server to spawn per neovim instance
 --
--- When combined with tmux it allows an environment variable to be shared between shells in the same session so that
--- there is always a single server where commands are sent. Other tools or scripts can then rely on this variable
--- to script up solutions to common workflows.
---
--- The following code needs to be added to `~/.zshrc` in order for the environment variable to be managed correctly.
--- ```
--- # Automatically update the NVIM_PIPE env var in all panes of a tmux session if it is changed.
--- # NOTE: Comment this block out and `source ~/.zshrc` if this behavior needs to be temporarily turned off.
--- autoload -U add-zsh-hook
--- update_nvim_pipe() {
---     local var
---     var=$(tmux show-environment | grep '^NVIM_PIPE=')
---     if [ "$?" -eq 0 ]; then
---         eval "$var"
---     else
---         unset NVIM_PIPE
---     fi
--- }
--- if [[ -n "$TMUX" ]]; then
---     add-zsh-hook preexec update_nvim_pipe
--- fi
--- ```
+-- When combined with tmux it manages a tmux environment variable that can be referenced by other shells in the same
+-- session so that there is always a single server where commands are sent. Other tools or scripts can then rely on
+-- this variable to script up solutions to common workflows.
 
 local T = {}
+T.NVIM_PIPE_VAR = "NVIM_PIPE"
 
 T.get_pipe = function ()
     -- Return the pipe of the server.
@@ -81,29 +63,15 @@ end
 T.tmux_start = function()
     -- Only allow 1 nvim server to be associated with the NVIM_PIPE environment variable per tmux session. The
     -- NVIM_PIPE variable acts as a poor person's semaphore which is more than good enough for this use case.
-    if T.getenv("TMUX") ~= nil and T.tmux_getenv("NVIM_PIPE") == nil then
-        local pipe = T.start()
-
-        -- Set the NVIM_PIPE env var for the current shell.
-        vim.fn.setenv("NVIM_PIPE", pipe)
-        -- Set the NVIM_PIPE env var in tmux so new shells obtain the correct value automatically.
-        -- This value is also kept up to date using a `preexec` zsh hook in `~/.zshrc`. This ensures
-        -- that existing tmux panes in the same session do not end up holding on to a stale value.
-        io.popen("tmux setenv NVIM_PIPE '".. pipe .. "'")
+    if T.getenv("TMUX") ~= nil and T.tmux_getenv(T.NVIM_PIPE_VAR) == nil then
+        io.popen("tmux setenv " .. T.NVIM_PIPE_VAR .. " " .. T.start())
     end
 end
 
 T.stop = function()
     -- Stop the nvim server.
-
-    -- Unset the tmux session variable.
-    if T.getenv("TMUX") ~= nil and T.get_pipe() == T.tmux_getenv("NVIM_PIPE") then
-        io.popen("tmux setenv -r NVIM_PIPE")
-    end
-
-    -- Unset the environment variable.
-    if T.pipe == T.getenv("NVIM_PIPE") then
-        io.popen("unset NVIM_PIPE")
+    if T.getenv("TMUX") ~= nil and T.get_pipe() == T.tmux_getenv(T.NVIM_PIPE_VAR) then
+        io.popen("tmux setenv -r " .. T.NVIM_PIPE_VAR)
     end
 
     vim.fn.serverstop(T.pipe)
