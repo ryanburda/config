@@ -18,8 +18,13 @@ cmd open &{{
 
 cmd open_nvim &{{
     %set -f
-    if [[ ! -z "$NVIM_PIPE" ]]; then
-        nvim --server $NVIM_PIPE --remote $f
+    if [[ -n $TMUX ]]; then
+        NVIM_PIPE=$(tmux show-environment NVIM_PIPE 2> /dev/null | awk -F '=' '{print $2}');
+        if [[ $? == 0 ]]; then
+            nvim --server $NVIM_PIPE --remote $f
+        fi
+    else
+        nvim $f
     fi
 }}
 
