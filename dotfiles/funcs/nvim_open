@@ -3,12 +3,14 @@
 # TODO: add -p arg to specify a port other than the tmux env var.
 
 # open the file in the current tmux session's nvim instance if one exists, else open it in a new nvim instance.
+file=$1
 if [[ -n "$TMUX" ]]; then
-    file=$1
     NVIM_PIPE=$(tgv NVIM_PIPE)
     if [[ ! -z "${NVIM_PIPE}" ]]; then
         nvim --server $NVIM_PIPE --remote $file
     else
         nvim $file
     fi
+else
+    nvim $file
 fi
