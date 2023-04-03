@@ -35,7 +35,7 @@ cmd create %{{
 
     if echo "$ans" | grep -q '/'; then
         if [ "${ans: -1}" != "/" ]; then
-            mkdir $(dirname $ans)
+            mkdir -p $(dirname $ans)
             touch $ans
         else
             mkdir $ans
