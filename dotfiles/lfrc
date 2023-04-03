@@ -16,19 +16,34 @@ cmd open &{{
     esac
 }}
 
-cmd open_nvim &{{
+cmd open_nvim %{{
     %set -f
     if [[ -n $TMUX ]]; then
         NVIM_PIPE=$(tmux show-environment NVIM_PIPE 2> /dev/null | awk -F '=' '{print $2}');
         if [[ $? == 0 ]]; then
             nvim --server $NVIM_PIPE --remote $f
+            printf "File opened in NVIM: ${NVIM_PIPE}"
         fi
     else
         nvim $f
     fi
 }}
 
-cmd create %printf "Create File/Dirctory: "; read ans; mkdir $(dirname $ans); touch $ans
+cmd create %{{
+    printf "Create File/Directory: "
+    read ans
+
+    if echo "$ans" | grep -q '/'; then
+        if [ "${ans: -1}" != "/" ]; then
+            mkdir $(dirname $ans)
+            touch $ans
+        else
+            mkdir $ans
+        fi
+    else
+        touch $ans
+    fi
+}}
 
 # define a custom 'rename' command without prompt for overwrite
 cmd rename %[ -e $1 ] && printf "file exists" || mv $f $1
