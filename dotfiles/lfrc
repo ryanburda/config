@@ -28,8 +28,7 @@ cmd open_nvim &{{
     fi
 }}
 
-# TODO: get rid of duplication with open_nvim command
-cmd create %printf "Create File/Dirctory: "; read ans; mkdir $(dirname $ans); touch $ans; nvim --server $NVIM_PIPE --remote $(realpath $ans)
+cmd create %printf "Create File/Dirctory: "; read ans; mkdir $(dirname $ans); touch $ans
 
 # define a custom 'rename' command without prompt for overwrite
 cmd rename %[ -e $1 ] && printf "file exists" || mv $f $1
