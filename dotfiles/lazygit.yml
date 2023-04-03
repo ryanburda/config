@@ -29,17 +29,17 @@ customCommands:
     subprocess: true
     description: 'Open file in Neovim'
   - key: 'D'
-    command: "if [[ ! -z ${NVIM_PIPE} ]]; then nvim --server $NVIM_PIPE --remote-send ':DiffviewOpen {{.SelectedLocalBranch.Name}}<CR>'; else nvim -c 'DiffviewOpen {{.SelectedLocalBranch.Name}}'; fi"
+    command: "nvim -c 'DiffviewOpen {{.SelectedLocalBranch.Name}}'"
     context: 'localBranches'
     subprocess: true
     description: 'Open diff of current branch to selected branch'
   - key: 'D'
-    command: "if [[ ! -z ${NVIM_PIPE} ]]; then nvim --server $NVIM_PIPE --remote-send ':DiffviewOpen {{.SelectedRemoteBranch.Name}}<CR>'; else nvim -c 'DiffviewOpen {{.SelectedRemoteBranch.Name}}'; fi"
+    command: "nvim -c 'DiffviewOpen {{.SelectedRemoteBranch.Name}}'"
     context: 'remoteBranches'
     subprocess: true
     description: 'Open diff of current branch to selected branch'
   - key: 'D'
-    command: "if [[ ! -z ${NVIM_PIPE} ]]; then nvim --server $NVIM_PIPE --remote-send ':DiffviewOpen {{.SelectedLocalCommit.Sha}}<CR>'; else nvim -c 'DiffviewOpen {{.SelectedLocalCommit.Sha}}'; fi"
+    command: "nvim -c 'DiffviewOpen {{.SelectedLocalCommit.Sha}}'"
     context: 'commits'
     subprocess: true
     description: 'Open diff of current branch to selected commit'
