@@ -84,6 +84,13 @@ cmd zip ${{
 $mkdir -p ~/.trash
 cmd trash %set -f; mv $fx ~/.trash
 
+# make file executable
+cmd executable %{{
+    set -f
+    chmod +x $f
+    printf "Marking file as executable: ${f}"
+}}
+
 # Bindings
 # Remove some defaults
 map m
@@ -108,6 +115,7 @@ map C clear
 map ce extract
 map ct tar
 map cz zip
+map X executable
 
 # Movement
 map g/ cd /
