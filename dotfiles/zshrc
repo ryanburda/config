@@ -21,8 +21,9 @@ path+=$HOME/.local/bin
 path+=$HOME/.local/bin/neovim/bin
 fpath+=$HOME/.zsh/compdef/
 fpath+=$HOME/.zsh/funcs/
-autoload -U ~/.zsh/funcs/nvim_open
 autoload -U ~/.zsh/funcs/tse
+autoload -U ~/.zsh/funcs/nvim_open
+autoload -U ~/.zsh/funcs/select_session
 
 # Download Znap, if it's not there yet.
 [[ -f ~/Git/zsh-snap/znap.zsh ]] ||
@@ -45,7 +46,7 @@ alias ls="ls --color=always -lah"
 alias vim="nvim"
 alias h="cht.sh"
 alias top="htop"
-alias s="tmuxinator start"
+alias s='select_session'
 alias rg="rg -L"
 
 # fzf

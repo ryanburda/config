@@ -102,7 +102,9 @@ mkdir -p ~/.config/alacritty
 ln -svfF "${SCRIPT_DIR}/dotfiles/alacritty.yml" "${HOME}/.config/alacritty/alacritty.yml"
 
 ln -svfF "${SCRIPT_DIR}/dotfiles/zshrc" "${HOME}/.zshrc"
-ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/*" "${HOME}/.zsh/funcs/"
+
+mkdir -p "${HOME}/.zsh/funcs"
+ln -s "${SCRIPT_DIR}/dotfiles/funcs/*" "${HOME}/.zsh/funcs/"
 
 ln -svfF "${SCRIPT_DIR}/dotfiles/tmux.conf" "${HOME}/.tmux.conf"
 
