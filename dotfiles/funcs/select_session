@@ -1,7 +1,17 @@
 #!/bin/zsh
 
 # The '\' before ls makes sure it avoids any aliases.
-SESSION=$(\ls ~/.config/tmuxinator/ | awk -F '.' '{print $1}' | fzf)
+SESSIONS=$(\ls ~/.config/tmuxinator/ | awk -F '.' '{print $1}')
+SESSIONS+=("\nNEW")
+
+SESSION=$(print $SESSIONS | fzf)
 if [[ ! -z "${SESSION}" ]]; then
-    tmuxinator start $SESSION
+    if [[ "${SESSION}" == "NEW" ]]; then
+        DIR=$(find ~ -type d -maxdepth 4 -print 2> /dev/null | fzf)
+        if [[ ! -z "${DIR}" ]]; then
+            tmux new-session -d -c $DIR nvim
+        fi
+    else
+        tmuxinator start $SESSION
+    fi
 fi
