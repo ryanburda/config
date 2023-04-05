@@ -61,7 +61,7 @@ function T.setup()
             git_branches = {
                 mappings = {
                     i = {
-                        ["<C-f>"] = cf_actions.find_changed_files,
+                        ["<C-l>"] = cf_actions.find_changed_files,
                         ["<CR>"] = function(prompt_bufnr)
                             -- get the selected file name
                             local entry = require("telescope.actions.state").get_selected_entry()
@@ -76,7 +76,7 @@ function T.setup()
             git_commits = {
                 mappings = {
                     i = {
-                        ["<C-f>"] = cf_actions.find_changed_files,
+                        ["<C-l>"] = cf_actions.find_changed_files,
                         ["<CR>"] = function(prompt_bufnr)
                             -- get the selected commit hash
                             local entry = require("telescope.actions.state").get_selected_entry()
@@ -118,13 +118,13 @@ function T.setup()
     vim.keymap.set('n', "<leader>fh", "<cmd>lua require('telescope.builtin').diagnostics()<cr>")
     vim.keymap.set('n', "<leader>fl", "<cmd>lua require('telescope.builtin').loclist()<cr>")
     vim.keymap.set('n', "<leader>fr", "<cmd>lua require('telescope.builtin').registers()<cr>")
-    vim.keymap.set('n', "<leader>fB", "<cmd>lua require('telescope.builtin').buffers()<cr>")
+    vim.keymap.set('n', "<leader>fb", "<cmd>lua require('telescope.builtin').buffers()<cr>")
     vim.keymap.set('n', "<leader>fv", "<cmd>lua require('telescope.builtin').help_tags()<cr>")
     vim.keymap.set('n', "<leader>fm", "<cmd>lua require('telescope.builtin').man_pages()<cr>")
     vim.keymap.set('n', "<leader>fk", "<cmd>lua require('telescope.builtin').live_grep({search_dirs = require('plugins.configs.telescope').getqflist_files(), results_title = 'Quickfix Files'})<cr>")
     vim.keymap.set('n', "<leader>fK", "<cmd>lua require('telescope.builtin').quickfix()<cr>")
     vim.keymap.set('n', "<leader>fc", "<cmd>lua require('telescope.builtin').colorscheme({enable_preview = true})<cr>")
-    vim.keymap.set('n', "<leader>fd", "<cmd>lua require('telescope.builtin').git_status()<cr>")
+    vim.keymap.set('n', "<leader>dl", "<cmd>lua require('telescope.builtin').git_status()<cr>")
     vim.keymap.set('n', "<leader>db", "<cmd>lua require('telescope.builtin').git_branches()<cr>")
     vim.keymap.set('n', "<leader>dc", "<cmd>lua require('telescope.builtin').git_commits()<cr>")
     vim.keymap.set('n', "<leader>?", "<cmd>lua require('telescope.builtin').keymaps()<cr>")
