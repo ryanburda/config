@@ -5,6 +5,12 @@ function T.setup()
     local actions = require("diffview.actions")
 
     require("diffview").setup({
+        file_panel = {
+            win_config = {
+                position = "bottom",
+                height = 16,
+            },
+        },
         keymaps = {
             view = {
                 ["<leader>dh"] = actions.conflict_choose("ours"),
