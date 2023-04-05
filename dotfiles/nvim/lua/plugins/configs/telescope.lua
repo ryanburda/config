@@ -61,6 +61,11 @@ function T.setup()
             git_branches = {
                 mappings = {
                     i = {
+                        ["<C-o>"] = function()
+                            local entry = require("telescope.actions.state").get_selected_entry()
+                            actions.git_track_branch(entry)
+                            actions.git_checkout(entry)
+                        end,
                         ["<C-l>"] = cf_actions.find_changed_files,
                         ["<CR>"] = function(prompt_bufnr)
                             -- get the selected file name
@@ -113,11 +118,7 @@ function T.setup()
     vim.keymap.set('n', "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<cr>")
     vim.keymap.set('n', "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<cr>")
     vim.keymap.set('n', "<leader>fj", "<cmd>lua require('telescope.builtin').grep_string()<cr>")
-    vim.keymap.set('n', "<leader>fe", "<cmd>lua require('telescope.builtin').oldfiles()<cr>")
-    vim.keymap.set('n', "<leader>fo", "<cmd>lua require('telescope.builtin').jumplist()<cr>")
-    vim.keymap.set('n', "<leader>fh", "<cmd>lua require('telescope.builtin').diagnostics()<cr>")
-    vim.keymap.set('n', "<leader>fl", "<cmd>lua require('telescope.builtin').loclist()<cr>")
-    vim.keymap.set('n', "<leader>fr", "<cmd>lua require('telescope.builtin').registers()<cr>")
+    vim.keymap.set('n', "<leader>fl", "<cmd>lua require('telescope.builtin').oldfiles()<cr>")
     vim.keymap.set('n', "<leader>fb", "<cmd>lua require('telescope.builtin').buffers()<cr>")
     vim.keymap.set('n', "<leader>fv", "<cmd>lua require('telescope.builtin').help_tags()<cr>")
     vim.keymap.set('n', "<leader>fm", "<cmd>lua require('telescope.builtin').man_pages()<cr>")
