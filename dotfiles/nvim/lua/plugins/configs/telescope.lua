@@ -61,11 +61,7 @@ function T.setup()
             git_branches = {
                 mappings = {
                     i = {
-                        ["<C-o>"] = function()
-                            local entry = require("telescope.actions.state").get_selected_entry()
-                            actions.git_track_branch(entry)
-                            actions.git_checkout(entry)
-                        end,
+                        ["<C-o>"] = actions.git_switch_branch,
                         ["<C-l>"] = cf_actions.find_changed_files,
                         ["<CR>"] = function(prompt_bufnr)
                             -- get the selected file name
