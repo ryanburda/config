@@ -1,21 +1,43 @@
 #!/bin/zsh
+#
+# NAME
+#   select_session - a simple way to start tmuxinator sessions.
+#
+# SYNOPSIS
+#   select_session [session_name]
+#
+# DESCRIPTION
+#   Starts a tmuxinator session if given a session name.
+#   Opens up fzf if an argument is not provided.
+#
+#   A special session name called `NEW` exists. When `NEW` is
+#   passed as an argument or selected in fzf an additional fzf
+#   interactive prompt will show up in order to set the current
+#   working directory for the new session.
 
-# The '\' before ls makes sure it avoids any aliases.
-SESSIONS=$(\ls ~/.config/tmuxinator/ | awk -F '.' '{print $1}')
-SESSIONS+=("\nNEW")
-
+# Get the session name if it wasn't passed in as a parameter.
 if [[ ! -z $1 ]]; then
-    tmuxinator start $1
+    SESSION=$1
 else
-    SESSION=$(print $SESSIONS | fzf)
-    if [[ ! -z "${SESSION}" ]]; then
-        if [[ "${SESSION}" == "NEW" ]]; then
-            DIR=$(find ~ -type d -maxdepth 4 -print 2> /dev/null | fzf)
-            if [[ ! -z "${DIR}" ]]; then
-                tmux new-session -d -c $DIR nvim
-            fi
-        else
-            tmuxinator start $SESSION
-        fi
+    # Use fzf to get a tmuxinator session.
+    # The '\' before ls makes sure it avoids any aliases.
+    SESSIONS=$(\ls ~/.config/tmuxinator/ | awk -F '.' '{print $1}')
+    SESSIONS+=("\nNEW")
+    SESSION=$(print "${SESSIONS}" | fzf)
+    if [[ -z "${SESSION}" ]]; then
+        return -1
     fi
+fi
+
+# Start the session.
+if [[ $SESSION = "NEW" ]]; then
+    # Use fzf to get a directory path.
+    DIR=$(find ~ -type d -maxdepth 4 -print 2> /dev/null | fzf)
+    if [[ ! -z "${DIR}" ]]; then
+        tmux new-session -d -c $DIR nvim
+    else
+        return -1
+    fi
+else
+    tmuxinator start $SESSION
 fi
