@@ -77,6 +77,7 @@ function T.setup()
             git_commits = {
                 mappings = {
                     i = {
+                        ["<C-o>"] = actions.git_checkout,
                         ["<C-l>"] = cf_actions.find_changed_files,
                         ["<CR>"] = function(prompt_bufnr)
                             -- get the selected commit hash
