@@ -25,6 +25,7 @@ autoload -U ~/.zsh/funcs/tse
 autoload -U ~/.zsh/funcs/nvim_open
 autoload -U ~/.zsh/funcs/select_session
 autoload -U ~/.zsh/funcs/theme_picker
+autoload -U ~/.zsh/funcs/pg_picker
 
 # Download Znap, if it's not there yet.
 [[ -f ~/Git/zsh-snap/znap.zsh ]] ||
