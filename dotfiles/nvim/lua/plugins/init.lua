@@ -17,6 +17,7 @@ return {
             "catppuccin/nvim",
             "ellisonleao/gruvbox.nvim",
             "rose-pine/neovim",
+            "folke/tokyonight.nvim",
             "jacoborus/tender.vim",
             "rktjmp/fwatch.nvim",
         },
