@@ -17,6 +17,7 @@ return {
             "ellisonleao/gruvbox.nvim",
             "NLKNguyen/papercolor-theme",
             "rebelot/kanagawa.nvim",
+            "rktjmp/fwatch.nvim",
         },
         config = require("plugins.configs.colorscheme").setup,
     },
