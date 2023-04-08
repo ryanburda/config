@@ -17,20 +17,20 @@
 #   in that order separated by spaces.
 
 typeset -A themes=(
-    ['kanagawa-wave']="Kanagawa kanagawa-wave dark"
-    ['kanagawa-dragon']="Kanagawa kanagawa-dragon dark"
-    ['nightfox']="Iceberg-Dark nightfox dark"
-    ['gruvboxDark']="Gruvbox-Dark gruvbox dark"
-    ['gruvboxLight']="Gruvbox-Light gruvbox light"
-    ['carbonfox']="default.dark carbonfox dark"
-    ['tender']="tender tender dark"
-    ['papercolor-light']="Iceberg-Light PaperColor light"
-    ['papercolor-dark']="Monokai-Soda PaperColor dark"
-    ['dayfox']="Twilight.light dayfox light"
-    ['dawnfox']="Embers.light dawnfox light"
+    ['Kanagawa-wave   (Default)']="Kanagawa kanagawa-wave dark"
+    ['Kanagawa-dragon']="Kanagawa kanagawa-dragon dark"
+    ['Nightfox']="Iceberg-Dark nightfox dark"
+    ['Gruvbox-dark']="Gruvbox-Dark gruvbox dark"
+    ['Gruvbox-light']="Gruvbox-Light gruvbox light"
+    ['Carbonfox']="default.dark carbonfox dark"
+    ['Tender']="tender tender dark"
+    ['Papercolor-light']="Iceberg-Light PaperColor light"
+    ['Papercolor-dark']="Monokai-Soda PaperColor dark"
+    ['Dayfox']="Twilight.light dayfox light"
+    ['Dawnfox']="Embers.light dawnfox light"
 )
 
-theme_key=$(printf "%s\n" "${(k)themes[@]}" | fzf)
+theme_key=$(printf "%s\n" "${(k)themes[@]}" | sort | fzf)
 theme=${themes[$theme_key]}
 
 if [[ ! -z $theme ]]; then

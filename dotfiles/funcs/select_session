@@ -23,7 +23,7 @@ else
     # The '\' before ls makes sure it avoids any aliases.
     SESSIONS=$(\ls ~/.config/tmuxinator/ | awk -F '.' '{print $1}')
     SESSIONS+=("\nNEW")
-    SESSION=$(print "${SESSIONS}" | fzf)
+    SESSION=$(print "${SESSIONS}" | sort | fzf)
     if [[ -z "${SESSION}" ]]; then
         return -1
     fi
