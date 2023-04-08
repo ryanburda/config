@@ -1,0 +1,46 @@
+#!/bin/zsh
+#
+# NAME
+#   theme_picker - synchonizes alacritty and neovim themes.
+#
+# SYNOPSIS
+#   theme_picker
+#
+# DESCRIPTION
+#   Use fzf to select a theme. A theme is applied to both the terminal and neovim.
+#   This script utilizes a hard coded associative list (dictionary) where the keys
+#   are unique theme names that will show up in fzf and the values are strings each
+#   containing:
+#       * the alacritty theme
+#       * the neovim colorscheme
+#       * and neovim background
+#   in that order separated by spaces.
+
+typeset -A themes=(
+    ['gruvboxDark']="Gruvbox-Dark gruvbox dark"
+    ['gruvboxLight']="Gruvbox-Light gruvbox light"
+    ['carbonfox']="default.dark carbonfox dark"
+    ['nightfox']="Iceberg-Dark nightfox dark"
+    ['nordfox']="nord nordfox dark"
+    ['terafox']="Gotham terafox dark"
+    ['duskfox']="Catppuccin duskfox dark"
+    ['tender']="tender tender dark"
+    ['papercolor-light']="Iceberg-Light PaperColor light"
+    ['papercolor-dark']="Monokai-Soda PaperColor dark"
+    ['dayfox']="Twilight.light dayfox light"
+    ['dawnfox']="Embers.light dawnfox light"
+)
+
+theme_key=$(printf "%s\n" "${(k)themes[@]}" | fzf)
+theme=${themes[$theme_key]}
+
+if [[ ! -z $theme ]]; then
+    a=$(print $theme | awk '{print $1}')
+    b=$(print $theme | awk '{print $2}')
+    c=$(print $theme | awk '{print $3}')
+
+    alacritty-themes $a
+
+    echo "$b" > $XDG_CONFIG_HOME/nvim/.colorscheme
+    echo "$c" > $XDG_CONFIG_HOME/nvim/.background
+fi

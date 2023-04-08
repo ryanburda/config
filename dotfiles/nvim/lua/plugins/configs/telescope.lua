@@ -90,22 +90,7 @@ function T.setup()
                     }
                 }
             },
-            colorscheme = {
-                mappings = {
-                    i = {
-                        ["<CR>"] = function(prompt_bufnr)
-                            -- get the selected file name
-                            local selection = require("telescope.actions.state").get_selected_entry()
-                            -- close telescope
-                            require("telescope.actions").close(prompt_bufnr)
-                            -- write the colorscheme selection to the colorscheme file and rerun setup
-                            require("plugins.configs.colorscheme").change_colorscheme(selection.value)
-                            require("plugins.configs.colorscheme").setup()
-                        end,
-                    }
-                }
-            }
-        }
+        },
     })
 
     require('telescope').load_extension('fzf')

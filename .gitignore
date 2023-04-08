@@ -7,3 +7,4 @@ nvim/plugin/*
 .luarc.json
 lazy-lock.json
 .colorscheme
+.background

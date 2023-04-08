@@ -24,6 +24,7 @@ fpath+=$HOME/.zsh/funcs/
 autoload -U ~/.zsh/funcs/tse
 autoload -U ~/.zsh/funcs/nvim_open
 autoload -U ~/.zsh/funcs/select_session
+autoload -U ~/.zsh/funcs/theme_picker
 
 # Download Znap, if it's not there yet.
 [[ -f ~/Git/zsh-snap/znap.zsh ]] ||
@@ -43,7 +44,6 @@ bindkey '^[[B' history-search-forward
 
 # Alias
 alias ls="ls --color=always -lah"
-alias vim="nvim"
 alias h="cht.sh"
 alias top="htop"
 alias s='select_session'

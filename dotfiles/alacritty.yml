@@ -793,30 +793,30 @@ font:
   #highlight_damage: false
   #
 colors:
-  name: Twilight (light)
-  author: Chris Kempson
+  # Default colors
   primary:
-    background: "#ffffff"
-    foreground: "#464b50"
-  cursor:
-    text: "#ffffff"
-    cursor: "#464b50"
+    background: '#161821'
+    foreground: '#d2d4de'
+
+  # Normal colors
   normal:
-    black: "#1e1e1e"
-    red: "#cf6a4c"
-    green: "#8f9d6a"
-    yellow: "#f9ee98"
-    blue: "#7587a6"
-    magenta: "#9b859d"
-    cyan: "#afc4db"
-    white: "#a7a7a7"
+    black: '#161821'
+    red: '#e27878'
+    green: '#b4be82'
+    yellow: '#e2a478'
+    blue: '#84a0c6'
+    magenta: '#a093c7'
+    cyan: '#89b8c2'
+    white: '#c6c8d1'
+
+  # Bright colors
   bright:
-    black: "#5f5a60"
-    red: "#cf6a4c"
-    green: "#8f9d6a"
-    yellow: "#f9ee98"
-    blue: "#7587a6"
-    magenta: "#9b859d"
-    cyan: "#afc4db"
-    white: "#ffffff"
-theme: Twilight.light
+    black: '#6b7089'
+    red: '#e98989'
+    green: '#c0ca8e'
+    yellow: '#e9b189'
+    blue: '#91acd1'
+    magenta: '#ada0d3'
+    cyan: '#95c4ce'
+    white: '#d2d4de'
+theme: Iceberg-Dark

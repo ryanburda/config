@@ -37,12 +37,7 @@ return {
             })
         end
     },
-    {
-        'nvim-treesitter/playground',
-        config = function ()
-            vim.keymap.set('n', "<leader>ts", ":TSPlaygroundToggle<CR>")
-        end
-    },
+    'nvim-treesitter/playground',
     'nvim-treesitter/nvim-treesitter-context',
 
     -- Telescope

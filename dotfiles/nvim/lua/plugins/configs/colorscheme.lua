@@ -2,58 +2,24 @@ local T = {}
 
 T.COLORSCHEME_DEFAULT = 'nightfox'
 T.COLORSCHEME_FILE = vim.fn.stdpath('config') .. '/.colorscheme'
-
--- Maps a neovim colorscheme to other attributes
-T.COLORS_MAP = {}
--- dark
-T.COLORS_MAP['carbonfox'] = {
-    ['alacritty'] = 'default.dark',
-    ['background'] = 'dark',
-}
-T.COLORS_MAP['nightfox'] = {
-    ['alacritty'] = 'Iceberg-Dark',
-    ['background'] = 'dark',
-}
-T.COLORS_MAP['nordfox'] = {
-    ['alacritty'] = 'nord',
-    ['background'] = 'dark',
-}
-T.COLORS_MAP['terafox'] = {
-    ['alacritty'] = 'Gotham',
-    ['background'] = 'dark',
-}
-T.COLORS_MAP['duskfox'] = {
-    ['alacritty'] = 'Catppuccin',
-    ['background'] = 'dark',
-}
-T.COLORS_MAP['tender'] = {
-    ['alacritty'] = 'tender',
-    ['background'] = 'dark',
-}
-T.COLORS_MAP['gruvbox'] = {
-    ['alacritty'] = 'Gruvbox-Dark',
-    ['background'] = 'dark',
-}
--- light
-T.COLORS_MAP['PaperColor'] = {
-    ['alacritty'] = 'Iceberg-Light',
-    ['background'] = 'light',
-}
-T.COLORS_MAP['dayfox'] = {
-    ['alacritty'] = 'Twilight.light',
-    ['background'] = 'light',
-}
-T.COLORS_MAP['dawnfox'] = {
-    ['alacritty'] = 'Embers.light',
-    ['background'] = 'light',
-}
+T.BACKGROUND_DEFAULT = 'dark'
+T.BACKGROUND_FILE = vim.fn.stdpath('config') .. '/.background'
 
 
-function T.setup()
+function T.set_colorscheme()
 
     -- create the colorscheme file if it doesn't already exist
     if io.open(T.COLORSCHEME_FILE, "r") == nil then
-        T.change_colorscheme(T.COLORSCHEME_DEFAULT)
+        local colorscheme_file = io.open(T.COLORSCHEME_FILE, "w+")
+        colorscheme_file:write(T.COLORSCHEME_DEFAULT)
+        colorscheme_file:close()
+    end
+
+    -- create the background file if it doesn't already exist
+    if io.open(T.BACKGROUND_FILE, "r") == nil then
+        local background_file = io.open(T.BACKGROUND_FILE, "w+")
+        background_file:write(T.BACKGROUND_DEFAULT)
+        background_file:close()
     end
 
     -- read the colorscheme from the colorscheme file
@@ -61,25 +27,27 @@ function T.setup()
     local colorscheme = colorscheme_file:read("*a")
     colorscheme_file:close()
 
-    -- check if the colorscheme file has a bad value
-    if T.COLORS_MAP[colorscheme] == nil then
-        print('colorscheme ' .. colorscheme .. ' does not exist. Setting default colorscheme: ' .. T.COLORSCHEME_DEFAULT)
-        T.change_colorscheme(T.COLORSCHEME_DEFAULT)
-        colorscheme = T.COLORSCHEME_DEFAULT
-    end
+    -- read the background from the background file
+    local background_file = io.open(T.BACKGROUND_FILE, "r")
+    local background = background_file:read("*a")
+    background_file:close()
 
-    -- set the colorscheme, background color, and alacritty theme
     vim.cmd('colorscheme ' .. colorscheme)
-    vim.cmd('set background=' .. T.COLORS_MAP[colorscheme]['background'])
-
-    os.execute("alacritty-themes " .. T.COLORS_MAP[colorscheme]['alacritty'] .. " 1> /dev/null")
+    vim.cmd('set background=' .. background)
 
 end
 
-function T.change_colorscheme(colorscheme)
-    local colorscheme_file = io.open(T.COLORSCHEME_FILE, "w+")
-    colorscheme_file:write(colorscheme)
-    colorscheme_file:close()
+
+function T.setup()
+
+    T.set_colorscheme()
+
+    vim.keymap.set('n', '<leader>t', T.set_colorscheme, {desc = "Change colorscheme" })
+
+    -- TODO: make this work somehow so you don't need to manually change the colorscheme
+    -- local augroup = vim.api.nvim_create_augroup("colorscheme", { clear = true })
+    -- vim.api.nvim_create_autocmd({"ModeChanged"}, { callback = T.set_colorscheme, group = augroup })
+
 end
 
 return T
