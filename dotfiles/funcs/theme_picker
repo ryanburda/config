@@ -17,13 +17,12 @@
 #   in that order separated by spaces.
 
 typeset -A themes=(
+    ['kanagawa-wave']="Kanagawa kanagawa-wave dark"
+    ['kanagawa-dragon']="Kanagawa kanagawa-dragon dark"
+    ['nightfox']="Iceberg-Dark nightfox dark"
     ['gruvboxDark']="Gruvbox-Dark gruvbox dark"
     ['gruvboxLight']="Gruvbox-Light gruvbox light"
     ['carbonfox']="default.dark carbonfox dark"
-    ['nightfox']="Iceberg-Dark nightfox dark"
-    ['nordfox']="nord nordfox dark"
-    ['terafox']="Gotham terafox dark"
-    ['duskfox']="Catppuccin duskfox dark"
     ['tender']="tender tender dark"
     ['papercolor-light']="Iceberg-Light PaperColor light"
     ['papercolor-dark']="Monokai-Soda PaperColor dark"

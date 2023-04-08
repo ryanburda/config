@@ -16,6 +16,7 @@ return {
             "jacoborus/tender.vim",
             "ellisonleao/gruvbox.nvim",
             "NLKNguyen/papercolor-theme",
+            "rebelot/kanagawa.nvim",
         },
         config = require("plugins.configs.colorscheme").setup,
     },

@@ -1,6 +1,6 @@
 local T = {}
 
-T.COLORSCHEME_DEFAULT = 'nightfox'
+T.COLORSCHEME_DEFAULT = 'kanagawa-wave'
 T.COLORSCHEME_FILE = vim.fn.stdpath('config') .. '/.colorscheme'
 T.BACKGROUND_DEFAULT = 'dark'
 T.BACKGROUND_FILE = vim.fn.stdpath('config') .. '/.background'
