@@ -31,8 +31,10 @@ function T.set_colorscheme()
     local background = background_file:read("*a")
     background_file:close()
 
+    vim.cmd('set background=' .. background)
     vim.cmd('colorscheme ' .. colorscheme)
     vim.cmd('set background=' .. background)
+    vim.cmd('colorscheme ' .. colorscheme)
 
 end
 

@@ -18,25 +18,27 @@
 
 typeset -A themes=(
     ['Kanagawa-wave   (Default)']="Kanagawa kanagawa-wave dark"
-    ['Kanagawa-dragon']="Kanagawa kanagawa-dragon dark"
-    ['Nightfox']="Iceberg-Dark nightfox dark"
+    ['Kanagawa-dragon']="Base16-Default-Dark kanagawa-dragon dark"
+    ['Catppuccin-macchiato']="Catppuccin catppuccin-macchiato dark"
+    ['Catppuccin-mocha']="Catppuccin catppuccin-mocha dark"
     ['Gruvbox-dark']="Gruvbox-Dark gruvbox dark"
     ['Gruvbox-light']="Gruvbox-Light gruvbox light"
+    ['Rose-pine-light']="Mocha.light rose-pine light"
+    ['Rose-pine-dark']="Kanagawa rose-pine dark"
     ['Carbonfox']="default.dark carbonfox dark"
+    ['Nightfox']="Iceberg-Dark nightfox dark"
+    ['Dayfox']="Mocha.light dayfox light"
+    ['Dawnfox']="Mocha.light dawnfox light"
     ['Tender']="tender tender dark"
-    ['Papercolor-light']="Iceberg-Light PaperColor light"
-    ['Papercolor-dark']="Monokai-Soda PaperColor dark"
-    ['Dayfox']="Twilight.light dayfox light"
-    ['Dawnfox']="Embers.light dawnfox light"
 )
 
 theme_key=$(printf "%s\n" "${(k)themes[@]}" | sort | fzf)
 theme=${themes[$theme_key]}
 
 if [[ ! -z $theme ]]; then
-    a=$(print $theme | awk '{print $1}')
-    b=$(print $theme | awk '{print $2}')
-    c=$(print $theme | awk '{print $3}')
+    a=$(print $theme | awk -F ' ' '{print $1}')
+    b=$(print $theme | awk -F ' ' '{print $2}')
+    c=$(print $theme | awk -F ' ' '{print $3}')
 
     alacritty-themes $a
 

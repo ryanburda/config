@@ -13,10 +13,11 @@ return {
     {
         "EdenEast/nightfox.nvim",
         dependencies = {
-            "jacoborus/tender.vim",
-            "ellisonleao/gruvbox.nvim",
-            "NLKNguyen/papercolor-theme",
             "rebelot/kanagawa.nvim",
+            "catppuccin/nvim",
+            "ellisonleao/gruvbox.nvim",
+            "rose-pine/neovim",
+            "jacoborus/tender.vim",
             "rktjmp/fwatch.nvim",
         },
         config = require("plugins.configs.colorscheme").setup,
