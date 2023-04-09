@@ -11,15 +11,15 @@ return {
 
     -- Color Schemes
     {
-        "EdenEast/nightfox.nvim",
+        "rktjmp/fwatch.nvim",
         dependencies = {
-            "rebelot/kanagawa.nvim",
             "catppuccin/nvim",
+            "sainnhe/everforest",
             "ellisonleao/gruvbox.nvim",
+            "rebelot/kanagawa.nvim",
+            "EdenEast/nightfox.nvim",
             "rose-pine/neovim",
             "folke/tokyonight.nvim",
-            "jacoborus/tender.vim",
-            "rktjmp/fwatch.nvim",
         },
         config = require("plugins.configs.colorscheme").setup,
     },
