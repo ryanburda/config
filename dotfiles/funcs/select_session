@@ -8,10 +8,10 @@
 #
 # DESCRIPTION
 #   Starts a tmuxinator session if given a session name.
-#   Opens up fzf if an argument is not provided.
+#   Opens up fzy if an argument is not provided.
 #
 #   A special session name called `NEW` exists. When `NEW` is
-#   passed as an argument or selected in fzf an additional fzf
+#   passed as an argument or selected in fzy an additional fzy
 #   interactive prompt will show up in order to set the current
 #   working directory for the new session.
 
@@ -19,11 +19,11 @@
 if [[ ! -z $1 ]]; then
     SESSION=$1
 else
-    # Use fzf to get a tmuxinator session.
+    # Use fzy to get a tmuxinator session.
     # The '\' before ls makes sure it avoids any aliases.
     SESSIONS=$(\ls ~/.config/tmuxinator/ | awk -F '.' '{print $1}')
     SESSIONS+=("\nNEW")
-    SESSION=$(print "${SESSIONS}" | sort | fzf)
+    SESSION=$(print "${SESSIONS}" | sort | fzy -l 20)
     if [[ -z "${SESSION}" ]]; then
         return -1
     fi
@@ -31,8 +31,10 @@ fi
 
 # Start the session.
 if [[ $SESSION = "NEW" ]]; then
-    # Use fzf to get a directory path.
-    DIR=$(find ~ -type d -maxdepth 4 -print 2> /dev/null | fzf)
+    # Use fzy to get a directory path.
+    DIRS=$(find ~/Developer -type d -not -path '*/\.*' -maxdepth 5 -print 2> /dev/null)
+    DIRS+="\n${HOME}/"
+    DIR=$(print $DIRS | sort -n | fzy -l 20)
     if [[ ! -z "${DIR}" ]]; then
         tmux new-session -d -c $DIR nvim
     else

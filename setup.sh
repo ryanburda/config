@@ -42,6 +42,8 @@ brew install pkg-config
 brew install gettext
 brew install curl
 brew install fzf
+brew install sk
+brew install fzy
 brew install wget
 brew install go
 brew install php
