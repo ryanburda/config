@@ -3,6 +3,7 @@ set drawbox true
 set icons true
 set ignorecase true
 set scrolloff 4
+set hidden false
 
 # Custom Functions
 # define a custom 'open' command
