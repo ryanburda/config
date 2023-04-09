@@ -34,16 +34,25 @@ typeset -A themes=(
     ['Tender']="tender tender dark"
 )
 
+function set_theme(){
+    # accepts a single parameter that is a valid key into the themes dictionary above.
+    theme_key=$1
+    theme=${themes[$theme_key]}
+
+    if [[ ! -z $theme ]]; then
+        a=$(print $theme | awk -F ' ' '{print $1}')
+        b=$(print $theme | awk -F ' ' '{print $2}')
+        c=$(print $theme | awk -F ' ' '{print $3}')
+
+        alacritty-themes $a
+
+        echo "$b" > $XDG_CONFIG_HOME/nvim/.colorscheme
+        echo "$c" > $XDG_CONFIG_HOME/nvim/.background
+    fi
+}
+
 theme_key=$(printf "%s\n" "${(k)themes[@]}" | sort | fzy -l 20)
-theme=${themes[$theme_key]}
 
-if [[ ! -z $theme ]]; then
-    a=$(print $theme | awk -F ' ' '{print $1}')
-    b=$(print $theme | awk -F ' ' '{print $2}')
-    c=$(print $theme | awk -F ' ' '{print $3}')
-
-    alacritty-themes $a
-
-    echo "$b" > $XDG_CONFIG_HOME/nvim/.colorscheme
-    echo "$c" > $XDG_CONFIG_HOME/nvim/.background
+if [[ ! -z $theme_key ]]; then
+    set_theme $theme_key
 fi
