@@ -22,7 +22,7 @@ else
     # Use fzy to get a tmuxinator session.
     # The '\' before ls makes sure it avoids any aliases.
     SESSIONS=$(\ls ~/.config/tmuxinator/ | awk -F '.' '{print $1}')
-    SESSIONS+=("\nNEW")
+    SESSIONS+="\nNEW"
     SESSION=$(print "${SESSIONS}" | sort | fzy -l 20)
     if [[ -z "${SESSION}" ]]; then
         return -1
