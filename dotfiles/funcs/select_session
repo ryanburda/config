@@ -36,7 +36,8 @@ if [[ $SESSION = "NEW" ]]; then
     DIRS+="\n${HOME}/"
     DIR=$(print $DIRS | sort -n | fzy -l 20)
     if [[ ! -z "${DIR}" ]]; then
-        tmux new-session -d -c $DIR nvim
+        tmux new-session -d -c $DIR
+        tmux switch-client
     else
         return -1
     fi
