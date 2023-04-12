@@ -25,6 +25,9 @@ function T.setup()
         vim.keymap.set('n', '<leader>jk', '<cmd>lua vim.lsp.buf.references()<CR>', {desc = 'LSP references kwickfix', buffer = bufnr})
         vim.keymap.set('n', '<leader>ja', '<cmd>lua vim.lsp.buf.code_action()<CR>', {desc = 'LSP code action', buffer = bufnr})
         vim.keymap.set('n', '<leader>jr', '<cmd>lua vim.lsp.buf.rename()<CR>', {desc = 'LSP rename', buffer = bufnr})
+
+        local nvim_command = vim.api.nvim_command
+        nvim_command('autocmd CursorHold <buffer> lua vim.diagnostic.open_float()')
     end
 
     require("mason-lspconfig").setup_handlers({

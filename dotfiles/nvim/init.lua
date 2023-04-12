@@ -23,7 +23,7 @@ vim.opt.mousemoveevent = true
 vim.opt.clipboard = 'unnamedplus'
 vim.opt.whichwrap = '<,>,h,l,[,]'
 vim.opt.timeoutlen = 1000
-vim.opt.updatetime = 100
+vim.opt.updatetime = 500
 vim.opt.laststatus = 3
 vim.opt.signcolumn = "yes"
 vim.opt.list = true
@@ -64,6 +64,10 @@ vim.keymap.set('n', '<leader>n' , ':edit ~/Documents/main.txt<cr>G$', opts)
 -- :help vim.diagnostic.*
 vim.keymap.set('n', '<leader>hj', '<cmd>lua vim.diagnostic.goto_next()<CR>' , opts)
 vim.keymap.set('n', '<leader>hk', '<cmd>lua vim.diagnostic.goto_prev()<CR>' , opts)
+
+vim.diagnostic.config({
+    virtual_text = false,
+})
 
 require('quickfix').keymaps()
 require('lf').keymaps()
