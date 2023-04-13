@@ -31,7 +31,7 @@ typeset -A themes=(
     ['Nightfox-day']="Mocha.light dayfox light"
     ['Nightfox-dawn']="Mocha.light dawnfox light"
     ['Rose-pine-light']="Mocha.light rose-pine light"
-    ['Rose-pine-dark']="Visiblue rose-pine dark"
+    ['Rose-pine-dark']="Argonaut rose-pine dark"
     ['Tokyonight-storm']="Tokyonight_Storm tokyonight-storm dark"
     ['Tokyonight-night']="Tokyonight_Night tokyonight-night dark"
     ['Tokyonight-day']="Tokyonight_Day tokyonight-day light"
@@ -47,7 +47,7 @@ function set_theme(){
         b=$(print $theme | awk -F ' ' '{print $2}')
         c=$(print $theme | awk -F ' ' '{print $3}')
 
-        alacritty-themes $a
+        alacritty-themes $a > /dev/null
 
         echo "$b" > $XDG_CONFIG_HOME/nvim/.colorscheme
         echo "$c" > $XDG_CONFIG_HOME/nvim/.background
