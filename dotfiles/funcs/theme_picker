@@ -51,6 +51,12 @@ function set_theme(){
 
         echo "$b" > $XDG_CONFIG_HOME/nvim/.colorscheme
         echo "$c" > $XDG_CONFIG_HOME/nvim/.background
+
+        if [[ $c == 'light' ]]; then
+            osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to false'
+        else
+            osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to true'
+        fi
     fi
 }
 
