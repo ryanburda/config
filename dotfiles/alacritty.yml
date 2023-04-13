@@ -793,30 +793,36 @@ font:
   #highlight_damage: false
   #
 colors:
+  name: TokyoNight Night
+  author: Folke
   # Default colors
   primary:
-    background: '#27292c'
-    foreground: '#d0d2d1'
+    background: '0x1a1b26'
+    foreground: '0xc0caf5'
 
   # Normal colors
   normal:
-    black: '#35383b'
-    red: '#b05655'
-    green: '#769972'
-    yellow: '#e1a574'
-    blue: '#7693ac'
-    magenta: '#977ba0'
-    cyan: '#749e99'
-    white: '#848b92'
+    black: '0x15161E'
+    red: '0xf7768e'
+    green: '0x9ece6a'
+    yellow: '0xe0af68'
+    blue: '0x7aa2f7'
+    magenta: '0xbb9af7'
+    cyan: '0x7dcfff'
+    white: '0xa9b1d6'
 
   # Bright colors
   bright:
-    black: '#484c52'
-    red: '#d27c7b'
-    green: '#dffebe'
-    yellow: '#f0d189'
-    blue: '#96b1c9'
-    magenta: '#bfa5c7'
-    cyan: '#9fc9c3'
-    white: '#fcf7e2'
-theme: Hybrid
+    black: '0x414868'
+    red: '0xf7768e'
+    green: '0x9ece6a'
+    yellow: '0xe0af68'
+    blue: '0x7aa2f7'
+    magenta: '0xbb9af7'
+    cyan: '0x7dcfff'
+    white: '0xc0caf5'
+
+  indexed_colors:
+    - { index: 16, color: '0xff9e64' }
+    - { index: 17, color: '0xdb4b4b' }
+theme: Tokyonight_Night
