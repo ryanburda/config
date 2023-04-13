@@ -795,36 +795,28 @@ font:
 colors:
   # Default colors
   primary:
-    background: '0x1E1D2F'
-    foreground: '0xD9E0EE'
-
-  cursor:
-    text: '0x1E1D2F'
-    cursor: '0xF5E0DC'
+    background: '#27292c'
+    foreground: '#d0d2d1'
 
   # Normal colors
   normal:
-    black: '0x6E6C7E'
-    red: '0xF28FAD'
-    green: '0xABE9B3'
-    yellow: '0xFAE3B0'
-    blue: '0x96CDFB'
-    magenta: '0xF5C2E7'
-    cyan: '0x89DCEB'
-    white: '0xD9E0EE'
+    black: '#35383b'
+    red: '#b05655'
+    green: '#769972'
+    yellow: '#e1a574'
+    blue: '#7693ac'
+    magenta: '#977ba0'
+    cyan: '#749e99'
+    white: '#848b92'
 
   # Bright colors
   bright:
-    black: '0x988BA2'
-    red: '0xF28FAD'
-    green: '0xABE9B3'
-    yellow: '0xFAE3B0'
-    blue: '0x96CDFB'
-    magenta: '0xF5C2E7'
-    cyan: '0x89DCEB'
-    white: '0xD9E0EE'
-
-  indexed_colors:
-    - { index: 16, color: '0xF8BD96' }
-    - { index: 17, color: '0xF5E0DC' }
-theme: Catppuccin
+    black: '#484c52'
+    red: '#d27c7b'
+    green: '#dffebe'
+    yellow: '#f0d189'
+    blue: '#96b1c9'
+    magenta: '#bfa5c7'
+    cyan: '#9fc9c3'
+    white: '#fcf7e2'
+theme: Hybrid

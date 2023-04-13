@@ -41,6 +41,9 @@ brew install cmake
 brew install pkg-config
 brew install gettext
 brew install curl
+brew install lsd
+brew install bottom
+brew install bat
 brew install fzf
 brew install sk
 brew install fzy
@@ -84,8 +87,6 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 # chatgpt cli
 cargo install --force aichat
-cargo install bat
-cargo install lsd
 
 # Create bin directory
 # All custom scripts should be put here
