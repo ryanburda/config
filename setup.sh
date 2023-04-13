@@ -84,6 +84,8 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 # chatgpt cli
 cargo install --force aichat
+cargo install bat
+cargo install lsd
 
 # Create bin directory
 # All custom scripts should be put here
