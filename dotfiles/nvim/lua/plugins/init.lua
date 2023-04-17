@@ -137,6 +137,8 @@ return {
         config = function ()
             vim.keymap.set('n', '<leader>q', ':Bdelete<cr>', {desc = 'Delete buffer without changing window layout'})
             vim.keymap.set('n', '<leader>Q', ':Bdelete!<cr>' , {desc = 'Force delete buffer without changing window layout'})
+
+            require('auto_close_buf').setup()
         end
     },
 
