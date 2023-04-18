@@ -7,7 +7,8 @@ function T.setup()
     vim.keymap.set('n', '<M-s>', ":SymbolsOutline<CR>", {desc = "Symbols Outline Toggle", })
 
     require("symbols-outline").setup({
-        width = 20,
+        position = 'left',
+        width = 16,
         autofold_depth = 1,
     })
 
