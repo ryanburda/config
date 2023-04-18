@@ -8,7 +8,8 @@ function T.setup()
 
     require("symbols-outline").setup({
         position = 'left',
-        width = 16,
+        relative_width = false,
+        width = 40,
         autofold_depth = 1,
     })
 
