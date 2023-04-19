@@ -6,7 +6,7 @@ function T.setup()
     vim.api.nvim_create_autocmd(
         "BufAdd",
         {
-            callback = function(t)
+            callback = function()
                 T.watch(vim.fn.expand("<afile>:p"))
             end,
             group = T.augroup
