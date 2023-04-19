@@ -65,8 +65,24 @@ vim.keymap.set('n', '<leader>n' , ':edit ~/Documents/main.txt<cr>G$', opts)
 vim.keymap.set('n', '<leader>hj', '<cmd>lua vim.diagnostic.goto_next()<CR>' , opts)
 vim.keymap.set('n', '<leader>hk', '<cmd>lua vim.diagnostic.goto_prev()<CR>' , opts)
 
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+  vim.lsp.handlers.hover, {
+    border = "rounded"
+  }
+)
+
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+  vim.lsp.handlers.signature_help, {
+    border = "rounded"
+  }
+)
+
 vim.diagnostic.config({
     virtual_text = false,
+    float = {
+        border = "rounded",
+        focusable = false,
+    },
 })
 
 require('quickfix').keymaps()
