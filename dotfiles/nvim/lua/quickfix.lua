@@ -1,17 +1,17 @@
 local T = {}
 
 T.toggle = function()
-  local qf_exists = false
-  for _, win in pairs(vim.fn.getwininfo()) do
-    if win["quickfix"] == 1 then
-      qf_exists = true
+    local qf_exists = false
+    for _, win in pairs(vim.fn.getwininfo()) do
+        if win["quickfix"] == 1 then
+            qf_exists = true
+        end
     end
-  end
-  if qf_exists == true then
-    vim.cmd "cclose"
-    return
-  end
-  vim.cmd "copen"
+    if qf_exists == true then
+        vim.cmd "cclose"
+        return
+    end
+    vim.cmd "copen"
 end
 
 T.open_all = function ()
@@ -29,13 +29,13 @@ T.open_all = function ()
 end
 
 T.keymaps = function ()
-    vim.keymap.set('n', '<leader>kx' , T.toggle)
-    vim.keymap.set('n', '<leader>kj' , ':cnext<CR>')
-    vim.keymap.set('n', '<leader>kk' , ':cprev<CR>')
-    vim.keymap.set('n', '<leader>kgg', ':cfirst<CR>')
-    vim.keymap.set('n', '<leader>kG' , ':clast<CR>')
-    vim.keymap.set('n', '<leader>ka' , T.open_all)  -- open all files in quickfix list
-    vim.keymap.set('n', '<leader>kc' , ':cexpr []<CR>')  -- clear quickfix list
+    vim.keymap.set('n', '<leader>kk' , T.toggle, {desc = "Quickfix toggle"})
+    vim.keymap.set('n', '<leader>ka' , T.open_all, {desc = "Quickfix open all files"})
+    vim.keymap.set('n', '<leader>kn' , ':cnext<CR>', {desc = "Quickfix next"})
+    vim.keymap.set('n', '<leader>kp' , ':cprev<CR>', {desc = "Quickfix previous"})
+    vim.keymap.set('n', '<leader>kgg', ':cfirst<CR>', {desc = "Quickfix first"})
+    vim.keymap.set('n', '<leader>kG' , ':clast<CR>', {desc = "Quickfix last"})
+    vim.keymap.set('n', '<leader>kc' , ':cexpr []<CR>', {desc = "Quickfix clear"})
 end
 
 return T
