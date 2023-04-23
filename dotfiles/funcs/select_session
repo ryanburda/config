@@ -10,31 +10,31 @@
 #   Starts a tmuxinator session if given a session name.
 #   Opens up fzy if an argument is not provided.
 #
-#   A special session name called `NEW` exists. When `NEW` is
-#   passed as an argument or selected in fzy an additional fzy
-#   interactive prompt will show up in order to set the current
-#   working directory for the new session.
+#   A special session name called `CREATE_NEW_SESSION` exists.
+#   When `CREATE_NEW_SESSION` is passed as an argument or selected
+#   in fzy an additional fzy interactive prompt will show up in
+#   order to set the current working directory for the new session.
 
 NEW_SESSION_NAME="CREATE_NEW_SESSION"
 
 # Get the session name if it wasn't passed in as a parameter.
 if [[ ! -z $1 ]]; then
     SESSION=$1
-else
-    # current sessions
-    CURRENT_SESSIONS=("${(@f)$(tmux list-sessions | awk -F ':' '{print $1}')}")
-    # tmuxinator sessions
-    TMUXINATOR_SESSIONS=("${(@f)$(\ls ~/.config/tmuxinator/ | awk -F '.' '{print $1}')}")
-    # sort the sessions before passing to fzy
-    SESSIONS=("${(@f)$(echo $TMUXINATOR_SESSIONS $CURRENT_SESSIONS | xargs -n1 | sort -u)}")
-    # add the reserved session name to the top of the list
-    ALL_SESSIONS=("${NEW_SESSION_NAME}" "${SESSIONS[@]}")
+fi
 
-    # Use fzy to select a tmuxinator session
-    SESSION=$(echo $ALL_SESSIONS | tr " " "\n" | fzy -l 20)
-    if [[ -z "${SESSION}" ]]; then
-        return -1
-    fi
+# current sessions
+CURRENT_SESSIONS=("${(@f)$(tmux list-sessions | awk -F ':' '{print $1}')}")
+# tmuxinator sessions
+TMUXINATOR_SESSIONS=("${(@f)$(\ls ~/.config/tmuxinator/ | awk -F '.' '{print $1}')}")
+# sort the sessions before passing to fzy
+SESSIONS=("${(@f)$(echo $TMUXINATOR_SESSIONS $CURRENT_SESSIONS | xargs -n1 | sort -u)}")
+# add the reserved session name to the top of the list
+ALL_SESSIONS=("${NEW_SESSION_NAME}" "${SESSIONS[@]}")
+
+# Use fzy to select a tmuxinator session
+SESSION=$(echo $ALL_SESSIONS | tr " " "\n" | fzy -l 20)
+if [[ -z "${SESSION}" ]]; then
+    return -1
 fi
 
 # Start the session.
