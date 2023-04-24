@@ -66,15 +66,15 @@ vim.keymap.set('n', '<leader>hj', '<cmd>lua vim.diagnostic.goto_next()<CR>' , op
 vim.keymap.set('n', '<leader>hk', '<cmd>lua vim.diagnostic.goto_prev()<CR>' , opts)
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-  vim.lsp.handlers.hover, {
-    border = "rounded"
-  }
+    vim.lsp.handlers.hover, {
+        border = "rounded"
+    }
 )
 
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-  vim.lsp.handlers.signature_help, {
-    border = "rounded"
-  }
+    vim.lsp.handlers.signature_help, {
+        border = "rounded"
+    }
 )
 
 vim.diagnostic.config({
@@ -82,8 +82,11 @@ vim.diagnostic.config({
     float = {
         border = "rounded",
         focusable = false,
+        scope = "line",
     },
 })
+
+vim.keymap.set('n', '<leader>jo', '<cmd>lua vim.diagnostic.open_float()<CR>', {desc = 'Diagnostics: open float'})
 
 require('quickfix').keymaps()
 require('lf').keymaps()

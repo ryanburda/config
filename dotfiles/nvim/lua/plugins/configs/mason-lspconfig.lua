@@ -19,15 +19,12 @@ function T.setup()
     capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
     local function on_attach(_, bufnr)
-        vim.keymap.set('n', '<leader>jh', '<cmd>lua vim.lsp.buf.hover()<CR>', {desc = 'LSP Hover', buffer = bufnr})
-        vim.keymap.set('n', '<leader>jj', '<cmd>lua vim.lsp.buf.definition()<CR>', {desc = 'LSP jump to definition', buffer = bufnr})
-        vim.keymap.set('n', '<leader>jt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', {desc = 'LSP jump to type', buffer = bufnr})
-        vim.keymap.set('n', '<leader>jk', '<cmd>lua vim.lsp.buf.references()<CR>', {desc = 'LSP references kwickfix', buffer = bufnr})
-        vim.keymap.set('n', '<leader>ja', '<cmd>lua vim.lsp.buf.code_action()<CR>', {desc = 'LSP code action', buffer = bufnr})
-        vim.keymap.set('n', '<leader>jr', '<cmd>lua vim.lsp.buf.rename()<CR>', {desc = 'LSP rename', buffer = bufnr})
-
-        local nvim_command = vim.api.nvim_command
-        nvim_command('autocmd CursorHold <buffer> lua vim.diagnostic.open_float()')
+        vim.keymap.set('n', '<leader>jh', '<cmd>lua vim.lsp.buf.hover()<CR>', {desc = 'LSP: Hover', buffer = bufnr})
+        vim.keymap.set('n', '<leader>jj', '<cmd>lua vim.lsp.buf.definition()<CR>', {desc = 'LSP: jump to definition', buffer = bufnr})
+        vim.keymap.set('n', '<leader>jt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', {desc = 'LSP: jump to type', buffer = bufnr})
+        vim.keymap.set('n', '<leader>jk', '<cmd>lua vim.lsp.buf.references()<CR>', {desc = 'LSP: references kwickfix', buffer = bufnr})
+        vim.keymap.set('n', '<leader>ja', '<cmd>lua vim.lsp.buf.code_action()<CR>', {desc = 'LSP: code action', buffer = bufnr})
+        vim.keymap.set('n', '<leader>jr', '<cmd>lua vim.lsp.buf.rename()<CR>', {desc = 'LSP: rename', buffer = bufnr})
     end
 
     require("mason-lspconfig").setup_handlers({
