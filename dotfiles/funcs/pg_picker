@@ -3,7 +3,7 @@
 # bring up all entries in the pgpass file.
 # open the selected entry in psql
 db_connections=$(awk '!/^#|^$/' ~/.pgpass)
-selection=$(echo $db_connections | awk -F: '{ $3=""; print }' | fzf)
+selection=$(echo $db_connections | awk -F':' '{ $5=""; print }' | fzf)
 
 h=$(echo $selection | awk '{print $1}')
 p=$(echo $selection | awk '{print $2}')
