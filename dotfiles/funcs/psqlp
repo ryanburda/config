@@ -5,7 +5,7 @@
 # bring up all entries in the pgpass file.
 # open the selected entry in psql
 db_connections=$(awk '!/^#|^$/' ~/.pgpass)
-selection=$(echo $db_connections | awk -F':' '{ $5=""; print }' | fzf)
+selection=$(echo $db_connections | awk -F':' '{ $5=""; print }' | sort | fzf)
 
 if [[ -z "${selection}" ]]; then
     return 0
