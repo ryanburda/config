@@ -104,30 +104,27 @@ mkdir -p $HOME/Developer
 SCRIPT_DIR=${0:a:h}
 
 mkdir -p ~/.config/alacritty
-ln -svfF "${SCRIPT_DIR}/dotfiles/alacritty.yml" "${HOME}/.config/alacritty/alacritty.yml"
 
 ln -svfF "${SCRIPT_DIR}/dotfiles/zshrc" "${HOME}/.zshrc"
-
 mkdir -p "${HOME}/.zsh/funcs"
 ln -s "${SCRIPT_DIR}/dotfiles/funcs" "${HOME}/.zsh/funcs"
 
-ln -svfF "${SCRIPT_DIR}/dotfiles/tmux.conf" "${HOME}/.tmux.conf"
+mkdir -p "${XDG_CONFIG_HOME}/lf"
+curl https://raw.githubusercontent.com/gokcehan/lf/master/etc/icons.example -o "${XDG_CONFIG_HOME}/lf/icons
+ln -svfF "${SCRIPT_DIR}/dotfiles/lfrc" "${XDG_CONFIG_HOME}/lf/lfrc"
 
-ln -svfF "${SCRIPT_DIR}/dotfiles/tmate.conf" "${HOME}/.tmate.conf"
-
-ln -svfF "${SCRIPT_DIR}/dotfiles/karabiner.json" "${HOME}/.config/karabiner/karabiner.json"
+mkdir -p "${XDG_CONFIG_HOME}/tmux"
+ln -svfF "${SCRIPT_DIR}/dotfiles/tmux.conf" "${XDG_CONFIG_HOME}/tmux/.tmux.conf"
+ln -svfF "${SCRIPT_DIR}/dotfiles/alacritty.yml" "${XDG_CONFIG_HOME}/alacritty/alacritty.yml"
+ln -svfF "${SCRIPT_DIR}/dotfiles/karabiner.json" "${XDG_CONFIG_HOME}/karabiner/karabiner.json"
+ln -svfF "${SCRIPT_DIR}/dotfiles/lazygit.yml" "${XDG_CONFIG_HOME}/lazygit/config.yml"
 
 ln -svfF "${SCRIPT_DIR}/dotfiles/gitconfig" "${HOME}/.gitconfig"
-
-ln -svfF "${SCRIPT_DIR}/dotfiles/lazygit.yml" "${HOME}/.config/lazygit/config.yml"
-
-mkdir -p ~/.config/lf
-curl https://raw.githubusercontent.com/gokcehan/lf/master/etc/icons.example -o ~/.config/lf/icons
-ln -svfF "${SCRIPT_DIR}/dotfiles/lfrc" "${HOME}/.config/lf/lfrc"
-
 ln -svfF "${SCRIPT_DIR}/dotfiles/psqlrc" "${HOME}/.psqlrc"
-
 ln -svfF "${SCRIPT_DIR}/dotfiles/pspgconf" "${HOME}/.pspgconf"
+
+# Tmux Plugin Manager
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 # Source zshrc so plugins are installed automatically.
 source ${HOME}/.zshrc
