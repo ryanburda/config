@@ -18,7 +18,7 @@
 NEW_SESSION_NAME="CREATE_NEW_SESSION"
 
 # Get the session name if it wasn't passed in as a parameter.
-if [[ ! -z $1 ]]; then
+if [[ -n $1 ]]; then
     SESSION=$1
 fi
 

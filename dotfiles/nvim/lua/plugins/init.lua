@@ -20,6 +20,7 @@ return {
             "EdenEast/nightfox.nvim",
             "rose-pine/neovim",
             "folke/tokyonight.nvim",
+            "habamax/vim-gruvbit",
         },
         config = require("plugins.configs.colorscheme").setup,
     },

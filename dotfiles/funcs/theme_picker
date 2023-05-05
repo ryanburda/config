@@ -25,6 +25,7 @@ typeset -A themes=(
     ['Catppuccin-mocha']="Catppuccin catppuccin-mocha dark"
     ['Everforest-light']="Solarized-Light everforest light"
     ['Everforest-dark']="Hybrid everforest dark"
+    ['Gruvbit']="Mikado gruvbit dark"
     ['Gruvbox-dark']="Gruvbox-Dark gruvbox dark"
     ['Gruvbox-light']="Gruvbox-Light gruvbox light"
     ['Nightfox-night']="Iceberg-Dark nightfox dark"
