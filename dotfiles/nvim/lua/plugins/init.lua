@@ -21,6 +21,8 @@ return {
             "rose-pine/neovim",
             "folke/tokyonight.nvim",
             "habamax/vim-gruvbit",
+            "maxmx03/fluoromachine.nvim",
+            "pineapplegiant/spaceduck",
         },
         config = require("plugins.configs.colorscheme").setup,
     },
