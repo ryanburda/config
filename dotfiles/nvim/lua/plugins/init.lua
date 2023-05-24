@@ -129,12 +129,6 @@ return {
         config = require('plugins.configs.diffview').setup
     },
 
-    -- Symbol Outline
-    {
-        'simrat39/symbols-outline.nvim',
-        config = require('plugins.configs.symbols-outline').setup
-    },
-
     -- Tmux
     {
         'mrjones2014/smart-splits.nvim',
