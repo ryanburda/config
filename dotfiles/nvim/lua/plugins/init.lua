@@ -61,6 +61,53 @@ return {
         config = require('plugins.configs.telescope').setup
     },
 
+    {
+        "nvim-neo-tree/neo-tree.nvim",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "kyazdani42/nvim-web-devicons",
+            "MunifTanjim/nui.nvim",
+        },
+        config = function()
+            require("neo-tree").setup({
+                filesystem = {
+                    follow_current_file = true,
+                },
+                document_symbols = {
+                    kinds = {
+                        File = { icon = "󰈙", hl = "Tag" },
+                        Namespace = { icon = "󰌗", hl = "Include" },
+                        Package = { icon = "󰏖", hl = "Label" },
+                        Class = { icon = "󰌗", hl = "Include" },
+                        Property = { icon = "󰆧", hl = "@property" },
+                        Enum = { icon = "󰒻", hl = "@number" },
+                        Function = { icon = "󰊕", hl = "Function" },
+                        String = { icon = "󰀬", hl = "String" },
+                        Number = { icon = "󰎠", hl = "Number" },
+                        Array = { icon = "󰅪", hl = "Type" },
+                        Object = { icon = "󰅩", hl = "Type" },
+                        Key = { icon = "󰌋", hl = "" },
+                        Struct = { icon = "󰌗", hl = "Type" },
+                        Operator = { icon = "󰆕", hl = "Operator" },
+                        TypeParameter = { icon = "󰊄", hl = "Type" },
+                        StaticMethod = { icon = '󰠄 ', hl = 'Function' },
+                    }
+                },
+                source_selector = {
+                    winbar = true,
+                    sources = {
+                        { source = "filesystem", display_name = " 󰉓  Files " },
+                        { source = "buffers", display_name = "   Buffers" },
+                        { source = "document_symbols", display_name = "   Symbols " },
+                    },
+                },
+            })
+
+
+            vim.keymap.set('n', "<leader>aa", ":Neotree toggle<CR>")
+        end
+    },
+
     -- Scrolling
     {  -- Scrollbar
         'petertriho/nvim-scrollbar',

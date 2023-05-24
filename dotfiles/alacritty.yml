@@ -793,30 +793,30 @@ font:
   #highlight_damage: false
   #
 colors:
-  name: VisiBlue
+  name: Mikado
   author: ""
   primary:
     background: "#000000"
-    foreground: "#666699"
+    foreground: "#ffffff"
   cursor:
     text: "#000000"
-    cursor: "#666699"
+    cursor: "#ffffff"
   normal:
-    black: "#333366"
-    red: "#6666cc"
-    green: "#0099cc"
-    yellow: "#3366cc"
-    blue: "#006699"
-    magenta: "#0066ff"
-    cyan: "#669999"
-    white: "#99cccc"
+    black: "#322a2c"
+    red: "#a04363"
+    green: "#9b9329"
+    yellow: "#bf7a29"
+    blue: "#6a8c8c"
+    magenta: "#856774"
+    cyan: "#757978"
+    white: "#bcbcaf"
   bright:
-    black: "#333399"
-    red: "#9999ff"
-    green: "#00ccff"
-    yellow: "#6699ff"
-    blue: "#0099cc"
-    magenta: "#0099ff"
-    cyan: "#66cccc"
-    white: "#ccffff"
-theme: Visiblue
+    black: "#46423b"
+    red: "#ae837a"
+    green: "#b4aa30"
+    yellow: "#c7a551"
+    blue: "#74999e"
+    magenta: "#9c818e"
+    cyan: "#9fa590"
+    white: "#c1c4bc"
+theme: Mikado

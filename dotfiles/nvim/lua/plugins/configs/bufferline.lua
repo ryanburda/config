@@ -9,7 +9,7 @@ function T.setup()
             show_buffer_close_icons = true,
             offsets = {
                 {
-                    filetype = "NvimTree",
+                    filetype = "neo-tree",
                     highlight = "Directory",
                     separator = true -- use a "true" to enable the default, or set your own character
                 },
@@ -19,7 +19,7 @@ function T.setup()
                 delay = 10,
                 reveal = {'close'}
             },
-            separator_style = "thick",
+            separator_style = "slant",
         }
     })
 
