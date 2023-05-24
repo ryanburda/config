@@ -793,30 +793,36 @@ font:
   #highlight_damage: false
   #
 colors:
-  name: Mikado
-  author: ""
+  name: TokyoNight Night
+  author: Folke
+  # Default colors
   primary:
-    background: "#000000"
-    foreground: "#ffffff"
-  cursor:
-    text: "#000000"
-    cursor: "#ffffff"
+    background: '0x1a1b26'
+    foreground: '0xc0caf5'
+
+  # Normal colors
   normal:
-    black: "#322a2c"
-    red: "#a04363"
-    green: "#9b9329"
-    yellow: "#bf7a29"
-    blue: "#6a8c8c"
-    magenta: "#856774"
-    cyan: "#757978"
-    white: "#bcbcaf"
+    black: '0x15161E'
+    red: '0xf7768e'
+    green: '0x9ece6a'
+    yellow: '0xe0af68'
+    blue: '0x7aa2f7'
+    magenta: '0xbb9af7'
+    cyan: '0x7dcfff'
+    white: '0xa9b1d6'
+
+  # Bright colors
   bright:
-    black: "#46423b"
-    red: "#ae837a"
-    green: "#b4aa30"
-    yellow: "#c7a551"
-    blue: "#74999e"
-    magenta: "#9c818e"
-    cyan: "#9fa590"
-    white: "#c1c4bc"
-theme: Mikado
+    black: '0x414868'
+    red: '0xf7768e'
+    green: '0x9ece6a'
+    yellow: '0xe0af68'
+    blue: '0x7aa2f7'
+    magenta: '0xbb9af7'
+    cyan: '0x7dcfff'
+    white: '0xc0caf5'
+
+  indexed_colors:
+    - { index: 16, color: '0xff9e64' }
+    - { index: 17, color: '0xdb4b4b' }
+theme: Tokyonight_Night
