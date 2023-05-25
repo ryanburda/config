@@ -38,7 +38,7 @@ function T.setup()
                 },
             },
             lualine_x = { 'diagnostics', is_copilot_on, has_server_pipe, },
-            lualine_y = { 'progress', },
+            lualine_y = { 'filetype', },
             lualine_z = { 'location' },
         },
         tabline = {},
