@@ -33,6 +33,7 @@ vim.opt.autoread = true
 
 vim.cmd('set noshowmode')
 vim.cmd('set noswapfile')
+vim.keymap.set('', '<Space>', '<NOP>', { noremap = true, silent = true })
 
 
 -- keymap
