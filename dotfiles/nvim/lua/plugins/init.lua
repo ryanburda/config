@@ -329,4 +329,34 @@ return {
         end
     },
 
+    -- Query Databases
+    {
+        "kndndrj/nvim-dbee",
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+        },
+        lazy = true,
+        build = function()
+            -- Install tries to automatically detect the install method.
+            -- if it fails, try calling it with one of these parameters:
+            --    "curl", "wget", "bitsadmin", "go"
+            require("dbee").install()
+        end,
+        config = function()
+            require("dbee").setup({
+                sources = {
+                    require("dbee.sources").MemorySource:new({
+                        {
+                            name = "playground_postgres",
+                            type = "postgres",
+                            url = "postgres://postgres:postgres@localhost:2345/postgres?sslmode=disable",
+                        },
+                    }),
+                    require("dbee.sources").EnvSource:new("DBEE_CONNECTIONS"),
+                    require("dbee.sources").FileSource:new(vim.fn.stdpath("cache") .. "/dbee/persistence.json"),
+                },
+            })
+        end,
+    },
+
 }
