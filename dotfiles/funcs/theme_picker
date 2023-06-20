@@ -60,10 +60,13 @@ function set_theme(){
         else
             osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to true'
         fi
+
+        echo "$theme_key" > .theme
     fi
 }
 
-theme_key=$(printf "%s\n" "${(k)themes[@]}" | sort | fzy -l 20)
+current_theme_key=$(<.theme)
+theme_key=$(printf "%s\n" "${(k)themes[@]}" | sort | awk -F '\n' -v cur="$current_theme_key" '{if($0==cur) print $0 "   <----"; else print $0}' | fzy -l 20)
 
 if [[ ! -z $theme_key ]]; then
     set_theme $theme_key
