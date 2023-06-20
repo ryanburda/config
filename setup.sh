@@ -81,6 +81,8 @@ brew install --cask font-sauce-code-pro-nerd-font
 brew install --cask font-hack-nerd-font
 brew install --cask font-fira-code-nerd-font
 brew install --cask font-jetbrains-mono-nerd-font
+brew tap shaunsingh/SFMono-Nerd-Font-Ligaturized
+brew install --cask font-sf-mono-nerd-font-ligaturized
 
 # rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
