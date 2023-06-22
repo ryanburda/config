@@ -140,6 +140,7 @@ return {
             vim.keymap.set({'n', 'v'}, "<leader>gh", "<cmd>lua require('gitlinker').get_buf_range_url('n', {action_callback = require('gitlinker.actions').open_in_browser})<cr>", {desc = "Open Github in browser to current location in buffer"})
         end
     },
+    'tpope/vim-fugitive',
     {
         'sindrets/diffview.nvim',
         dependencies = { 'nvim-lua/plenary.nvim', },
