@@ -32,12 +32,14 @@ typeset -A themes=(
     ['Nightfox-night']="Iceberg-Dark nightfox dark"
     ['Nightfox-day']="Mocha.light dayfox light"
     ['Nightfox-dawn']="Mocha.light dawnfox light"
+    ['OneLight']="Google.light onelight light"
     ['Rose-pine-light']="Mocha.light rose-pine light"
     ['Rose-pine-dark']="Tokyonight_Night rose-pine dark"
     ['Spaceduck']="Visiblue spaceduck dark"
     ['Tokyonight-storm']="Tokyonight_Storm tokyonight-storm dark"
     ['Tokyonight-night']="Tokyonight_Night tokyonight-night dark"
     ['Tokyonight-day']="Tokyonight_Day tokyonight-day light"
+    ['VSCode']="Google.light vscode light"
 )
 
 function set_theme(){
@@ -61,11 +63,11 @@ function set_theme(){
             osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to true'
         fi
 
-        echo "$theme_key" > .theme
+        echo "$theme_key" > $XDG_CONFIG_HOME/nvim/.theme
     fi
 }
 
-current_theme_key=$(<.theme)
+current_theme_key=$(<$XDG_CONFIG_HOME/nvim/.theme)
 theme_key=$(printf "%s\n" "${(k)themes[@]}" | sort | awk -F '\n' -v cur="$current_theme_key" '{if($0==cur) print $0 "   <----"; else print $0}' | fzy -l 20)
 
 if [[ ! -z $theme_key ]]; then

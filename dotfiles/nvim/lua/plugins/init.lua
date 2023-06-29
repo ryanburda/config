@@ -23,6 +23,8 @@ return {
             "habamax/vim-gruvbit",
             "maxmx03/fluoromachine.nvim",
             "pineapplegiant/spaceduck",
+            "olimorris/onedarkpro.nvim",
+            "Mofiqul/vscode.nvim",
         },
         config = require("plugins.configs.colorscheme").setup,
     },

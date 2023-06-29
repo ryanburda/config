@@ -98,24 +98,24 @@ scrolling:
 # Font configuration
 font:
   normal:
-    family: Liga SFMono Nerd Font
+    family: JetBrainsMono Nerd Font
     style: Regular
   bold:
-    family: Liga SFMono Nerd Font
+    family: JetBrainsMono Nerd Font
     style: Bold
   italic:
-    family: Liga SFMono Nerd Font
+    family: JetBrainsMono Nerd Font
     style: Italic
   bold_italic:
-    family: Liga SFMono Nerd Font
+    family: JetBrainsMono Nerd Font
     style: Bold Italic
-  size: 12.0
+  size: 12.5
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter
   # spacing.
   offset:
     x: 1
-    y: 1
+    y: 0
   # Glyph offset determines the locations of the glyphs within their cells with
   # the default being at the bottom. Increasing `x` moves the glyph to the
   # right, increasing `y` moves the glyph upward.
@@ -793,36 +793,30 @@ font:
   #highlight_damage: false
   #
 colors:
-  name: TokyoNight Night
-  author: Folke
-  # Default colors
+  name: Google (light)
+  author: Chris Kempson
   primary:
-    background: '0x1a1b26'
-    foreground: '0xc0caf5'
-
-  # Normal colors
+    background: "#ffffff"
+    foreground: "#373b41"
+  cursor:
+    text: "#ffffff"
+    cursor: "#373b41"
   normal:
-    black: '0x15161E'
-    red: '0xf7768e'
-    green: '0x9ece6a'
-    yellow: '0xe0af68'
-    blue: '0x7aa2f7'
-    magenta: '0xbb9af7'
-    cyan: '0x7dcfff'
-    white: '0xa9b1d6'
-
-  # Bright colors
+    black: "#1d1f21"
+    red: "#cc342b"
+    green: "#198844"
+    yellow: "#fba922"
+    blue: "#3971ed"
+    magenta: "#a36ac7"
+    cyan: "#3971ed"
+    white: "#c5c8c6"
   bright:
-    black: '0x414868'
-    red: '0xf7768e'
-    green: '0x9ece6a'
-    yellow: '0xe0af68'
-    blue: '0x7aa2f7'
-    magenta: '0xbb9af7'
-    cyan: '0x7dcfff'
-    white: '0xc0caf5'
-
-  indexed_colors:
-    - { index: 16, color: '0xff9e64' }
-    - { index: 17, color: '0xdb4b4b' }
-theme: Tokyonight_Night
+    black: "#969896"
+    red: "#cc342b"
+    green: "#198844"
+    yellow: "#fba922"
+    blue: "#3971ed"
+    magenta: "#a36ac7"
+    cyan: "#3971ed"
+    white: "#ffffff"
+theme: Google.light
