@@ -68,7 +68,7 @@ function set_theme(){
 }
 
 current_theme_key=$(<$XDG_CONFIG_HOME/nvim/.theme)
-theme_key=$(printf "%s\n" "${(k)themes[@]}" | sort | awk -F '\n' -v cur="$current_theme_key" '{if($0==cur) print $0 "   <----"; else print $0}' | fzy -l 20)
+theme_key=$(printf "%s\n" "${(k)themes[@]}" | sort | awk -F '\n' -v cur="$current_theme_key" '{if($0==cur) print $0 "   <----"; else print $0}' | fzy -l 30)
 
 if [[ ! -z $theme_key ]]; then
     set_theme $theme_key
