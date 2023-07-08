@@ -74,6 +74,7 @@ brew install pyenv
 brew install pyenv-virtualenv
 brew install libpq
 brew link --force libpq
+brew install octave
 
 # Fonts
 brew tap homebrew/cask-fonts
@@ -124,6 +125,7 @@ ln -svfF "${SCRIPT_DIR}/dotfiles/lazygit.yml" "${XDG_CONFIG_HOME}/lazygit/config
 ln -svfF "${SCRIPT_DIR}/dotfiles/gitconfig" "${HOME}/.gitconfig"
 ln -svfF "${SCRIPT_DIR}/dotfiles/psqlrc" "${HOME}/.psqlrc"
 ln -svfF "${SCRIPT_DIR}/dotfiles/pspgconf" "${HOME}/.pspgconf"
+ln -svfF "${SCRIPT_DIR}/dotfiles/octaverc" "${HOME}/.octaverc"
 
 # Tmux Plugin Manager
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
