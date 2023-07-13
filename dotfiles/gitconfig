@@ -16,4 +16,7 @@
 	newNormal = green bold
 	newHighlight = green bold 22
 [interactive]
-	diffFilter = diff-so-fancy --patch
+    diffFilter = diff-so-fancy --patch
+
+[includeIf "gitdir:~/Developer/sqsp/**/"]
+	path = ~/Developer/sqsp/.gitconfig_include
