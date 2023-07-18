@@ -795,28 +795,35 @@ font:
 colors:
   # Default colors
   primary:
-    background: '#27292c'
-    foreground: '#d0d2d1'
+    background: '0x1f1f28'
+    foreground: '0xdcd7ba'
 
   # Normal colors
   normal:
-    black: '#35383b'
-    red: '#b05655'
-    green: '#769972'
-    yellow: '#e1a574'
-    blue: '#7693ac'
-    magenta: '#977ba0'
-    cyan: '#749e99'
-    white: '#848b92'
+    black: '0x090618'
+    red: '0xc34043'
+    green: '0x76946a'
+    yellow: '0xc0a36e'
+    blue: '0x7e9cd8'
+    magenta: '0x957fb8'
+    cyan: '0x6a9589'
+    white: '0xc8c093'
 
   # Bright colors
   bright:
-    black: '#484c52'
-    red: '#d27c7b'
-    green: '#dffebe'
-    yellow: '#f0d189'
-    blue: '#96b1c9'
-    magenta: '#bfa5c7'
-    cyan: '#9fc9c3'
-    white: '#fcf7e2'
-theme: Hybrid
+    black: '0x727169'
+    red: '0xe82424'
+    green: '0x98bb6c'
+    yellow: '0xe6c384'
+    blue: '0x7fb4ca'
+    magenta: '0x938aa9'
+    cyan: '0x7aa89f'
+    white: '0xdcd7ba'
+  selection:
+    background: '0x2d4f67'
+    foreground: '0xc8c093'
+
+  indexed_colors:
+    - { index: 16, color: '0xffa066' }
+    - { index: 17, color: '0xff5d62' }
+theme: Kanagawa
