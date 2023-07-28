@@ -82,3 +82,4 @@ fi
 # NOTE: must also uncomment first line.
 # zprof
 export PATH="/usr/local/sbin:$PATH"
+export PATH=$PATH:~/kubectl-plugins
