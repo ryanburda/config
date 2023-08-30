@@ -21,7 +21,6 @@ return {
             "rose-pine/neovim",
             "folke/tokyonight.nvim",
             "habamax/vim-gruvbit",
-            "talha-akram/noctis.nvim",
         },
         config = require("plugins.configs.colorscheme").setup,
     },

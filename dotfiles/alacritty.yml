@@ -793,30 +793,30 @@ font:
   #highlight_damage: false
   #
 colors:
-  name: Neon
-  author: ""
+  # Default colors
   primary:
-    background: "#171717"
-    foreground: "#f8f8f8"
-  cursor:
-    text: "#171717"
-    cursor: "#f8f8f8"
+    background: '0x1b182c'
+    foreground: '0xcbe3e7'
+
+  # Normal colors
   normal:
-    black: "#171717"
-    red: "#d81765"
-    green: "#97d01a"
-    yellow: "#ffa800"
-    blue: "#16b1fb"
-    magenta: "#ff2491"
-    cyan: "#0fdcb6"
-    white: "#ebebeb"
+    black: '0x100e23'
+    red: '0xff8080'
+    green: '0x95ffa4'
+    yellow: '0xffe9aa'
+    blue: '0x91ddff'
+    magenta: '0xc991e1'
+    cyan: '0xaaffe4'
+    white: '0xcbe3e7'
+
+  # Bright colors
   bright:
-    black: "#38252c"
-    red: "#ff0000"
-    green: "#76b639"
-    yellow: "#e1a126"
-    blue: "#289cd5"
-    magenta: "#ff2491"
-    cyan: "#0a9b81"
-    white: "#f8f8f8"
-theme: Neon
+    black: '0x565575'
+    red: '0xff5458'
+    green: '0x62d196'
+    yellow: '0xffb378'
+    blue: '0x65b2ff'
+    magenta: '0x906cff'
+    cyan: '0x63f2f1'
+    white: '0xa6b3cc'
+theme: Challenger-Deep
