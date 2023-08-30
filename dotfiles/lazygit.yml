@@ -1,9 +1,9 @@
 gui:
   theme:
     selectedLineBgColor:
-      - default
+      - black
     selectedRangeBgColor:
-      - default
+      - black
   showIcons: true
   scrollPastBottom: false
   showCommandLog: true
