@@ -19,6 +19,7 @@ function T.setup()
     local actions = require("telescope.actions")
     local previewers = require("telescope.previewers")
     local cf_actions = require('telescope').extensions.changed_files.actions
+    local lga_actions = require("telescope-live-grep-args.actions")
 
     require("telescope").setup({
         defaults = {
@@ -45,6 +46,16 @@ function T.setup()
                 override_generic_sorter = true,
                 override_file_sorter = true,
                 case_mode = "smart_case",
+            },
+            live_grep_args = {
+                auto_quoting = true, -- enable/disable auto-quoting
+                -- define mappings, e.g.
+                mappings = { -- extend mappings
+                    i = {
+                        ["<C-k>"] = lga_actions.quote_prompt(),
+                        ["<C-f>"] = lga_actions.quote_prompt({ postfix = " --iglob **/" }),
+                    },
+                },
             },
         },
         pickers = {
@@ -98,7 +109,7 @@ function T.setup()
 
     vim.keymap.set('n', "<leader>f ", "<cmd>lua require('telescope.builtin').resume()<cr>")
     vim.keymap.set('n', "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<cr>")
-    vim.keymap.set('n', "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<cr>")
+    vim.keymap.set("n", "<leader>fg", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
     vim.keymap.set('n', "<leader>f/", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>")
     vim.keymap.set('n', "<leader>fj", "<cmd>lua require('telescope.builtin').grep_string()<cr>")
     vim.keymap.set('n', "<leader>fl", "<cmd>lua require('telescope.builtin').oldfiles()<cr>")
