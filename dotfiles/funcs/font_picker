@@ -18,6 +18,7 @@ fonts=(
     "SpaceMono Nerd Font Mono"
     "GohuFont 14 Nerd Font Mono"
     "ProggyClean Nerd Font Mono"
+    "Monofur Nerd Font Mono"
 )
 
 selection=$(printf "%s\n" "${fonts[@]}" | sort -r | fzf)
