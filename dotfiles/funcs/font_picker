@@ -1,0 +1,26 @@
+#!/bin/zsh
+#
+# NAME
+#   font_picker - changes font in alacritty.
+#
+# SYNOPSIS
+#   font_picker
+#
+# DESCRIPTION
+#   Use fzy to select a font. The font is then substituted into alacritty.yml
+
+fonts=(
+    "FiraCode Nerd Font Mono"
+    "Hack Nerd Font Mono"
+    "JetBrainsMono Nerd Font Mono"
+    "Liga SFMono Nerd Font"
+    "SauceCodePro Nerd Font Mono"
+)
+
+selection=$(printf "%s\n" "${fonts[@]}" | sort | fzf)
+if [[ -z "${selection}" ]]; then
+    return 0
+fi
+
+export ALACRITTY_FONT=$selection
+envsubst < "${XDG_CONFIG_HOME}/alacritty/alacritty.yml.template" > "${XDG_CONFIG_HOME}/alacritty/alacritty.yml"

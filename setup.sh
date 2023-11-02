@@ -119,6 +119,7 @@ ln -svfF "${SCRIPT_DIR}/dotfiles/lfrc" "${XDG_CONFIG_HOME}/lf/lfrc"
 mkdir -p "${XDG_CONFIG_HOME}/tmux"
 ln -svfF "${SCRIPT_DIR}/dotfiles/tmux.conf" "${XDG_CONFIG_HOME}/tmux/tmux.conf"
 ln -svfF "${SCRIPT_DIR}/dotfiles/alacritty.yml" "${XDG_CONFIG_HOME}/alacritty/alacritty.yml"
+ln -svfF "${SCRIPT_DIR}/dotfiles/alacritty.yml.template" "${XDG_CONFIG_HOME}/alacritty/alacritty.yml.template"
 ln -svfF "${SCRIPT_DIR}/dotfiles/karabiner.json" "${XDG_CONFIG_HOME}/karabiner/karabiner.json"
 ln -svfF "${SCRIPT_DIR}/dotfiles/lazygit.yml" "${XDG_CONFIG_HOME}/lazygit/config.yml"
 

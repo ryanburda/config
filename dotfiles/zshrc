@@ -24,6 +24,7 @@ fpath+=$HOME/.zsh/funcs/
 autoload -U ~/.zsh/funcs/tse
 autoload -U ~/.zsh/funcs/nvim_open
 autoload -U ~/.zsh/funcs/select_session
+autoload -U ~/.zsh/funcs/font_picker
 autoload -U ~/.zsh/funcs/theme_picker
 autoload -U ~/.zsh/funcs/psqlp
 
@@ -48,9 +49,9 @@ alias l="lsd -lah --group-dirs first"
 alias a="aichat"
 alias s="select_session"
 alias d="lazydocker"
-alias f="lf"
 alias g="lazygit"
 alias t="btm"
+alias f="font_picker"
 alias c="theme_picker"
 alias m="cal -A 1 -B 1"
 alias db="nvim -c \"lua require('dbee').open()\""
