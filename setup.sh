@@ -110,7 +110,13 @@ mkdir -p ~/.config/alacritty
 
 ln -svfF "${SCRIPT_DIR}/dotfiles/zshrc" "${HOME}/.zshrc"
 mkdir -p "${HOME}/.zsh/funcs"
-ln -s "${SCRIPT_DIR}/dotfiles/funcs" "${HOME}/.zsh/funcs"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/font_picker" "${HOME}/.zsh/funcs/font_picker"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/font_picker" "${HOME}/.zsh/funcs/font_picker"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/nvim_open" "${HOME}/.zsh/funcs/nvim_open"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/psqlp" "${HOME}/.zsh/funcs/psqlp"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/select_session" "${HOME}/.zsh/funcs/select_session"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/theme_picker" "${HOME}/.zsh/funcs/theme_picker"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/tse" "${HOME}/.zsh/funcs/tse"
 
 mkdir -p "${XDG_CONFIG_HOME}/lf"
 curl https://raw.githubusercontent.com/gokcehan/lf/master/etc/icons.example -o "${XDG_CONFIG_HOME}/lf/icons
