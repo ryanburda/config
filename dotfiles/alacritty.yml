@@ -98,24 +98,46 @@ scrolling:
 # Font configuration
 font:
   normal:
-    family: JetBrainsMono Nerd Font
+    family: Hack Nerd Font
     style: Regular
   bold:
-    family: JetBrainsMono Nerd Font
+    family: Hack Nerd Font
     style: Bold
   italic:
-    family: JetBrainsMono Nerd Font
+    family: Hack Nerd Font
     style: Italic
   bold_italic:
-    family: JetBrainsMono Nerd Font
+    family: Hack Nerd Font
     style: Bold Italic
-  size: 12.5
+  size: 12
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter
   # spacing.
   offset:
-    x: 1
+    x: 0
     y: 0
+
+# font:
+#   normal:
+#     family: JetBrainsMono Nerd Font
+#     style: Regular
+#   bold:
+#     family: JetBrainsMono Nerd Font
+#     style: Bold
+#   italic:
+#     family: JetBrainsMono Nerd Font
+#     style: Italic
+#   bold_italic:
+#     family: JetBrainsMono Nerd Font
+#     style: Bold Italic
+#   size: 12.5
+# # Offset is the extra space around each character. `offset.y` can be thought
+# # of as modifying the line spacing, and `offset.x` as modifying the letter
+# # spacing.
+# offset:
+#   x: 1
+#   y: 0
+
   # Glyph offset determines the locations of the glyphs within their cells with
   # the default being at the bottom. Increasing `x` moves the glyph to the
   # right, increasing `y` moves the glyph upward.
@@ -793,30 +815,30 @@ font:
   #highlight_damage: false
   #
 colors:
-  name: Mikado
+  name: Neon
   author: ""
   primary:
-    background: "#000000"
-    foreground: "#ffffff"
+    background: "#171717"
+    foreground: "#f8f8f8"
   cursor:
-    text: "#000000"
-    cursor: "#ffffff"
+    text: "#171717"
+    cursor: "#f8f8f8"
   normal:
-    black: "#322a2c"
-    red: "#a04363"
-    green: "#9b9329"
-    yellow: "#bf7a29"
-    blue: "#6a8c8c"
-    magenta: "#856774"
-    cyan: "#757978"
-    white: "#bcbcaf"
+    black: "#171717"
+    red: "#d81765"
+    green: "#97d01a"
+    yellow: "#ffa800"
+    blue: "#16b1fb"
+    magenta: "#ff2491"
+    cyan: "#0fdcb6"
+    white: "#ebebeb"
   bright:
-    black: "#46423b"
-    red: "#ae837a"
-    green: "#b4aa30"
-    yellow: "#c7a551"
-    blue: "#74999e"
-    magenta: "#9c818e"
-    cyan: "#9fa590"
-    white: "#c1c4bc"
-theme: Mikado
+    black: "#38252c"
+    red: "#ff0000"
+    green: "#76b639"
+    yellow: "#e1a126"
+    blue: "#289cd5"
+    magenta: "#ff2491"
+    cyan: "#0a9b81"
+    white: "#f8f8f8"
+theme: Neon
