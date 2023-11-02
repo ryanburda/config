@@ -7,15 +7,14 @@
 #   theme_picker
 #
 # DESCRIPTION
-#   Use fzy to select a theme. A theme is applied to both the terminal and neovim.
+#   Use fzf to select a theme. A theme is applied to both the terminal and neovim.
 #   This script utilizes a hard coded associative list (dictionary) where the keys
-#   are unique theme names that will show up in fzy and the values are strings each
+#   are unique theme names that will show up in fzf and the values are strings each
 #   containing:
 #       * the alacritty theme
 #       * the neovim colorscheme
 #       * and neovim background
 #   in that order separated by spaces.
-
 typeset -A themes=(
     ['Catppuccin-latte']="Iceberg-Light catppuccin-latte light"
     ['Catppuccin-macchiato']="Catppuccin catppuccin-macchiato dark"

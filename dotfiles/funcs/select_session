@@ -8,13 +8,12 @@
 #
 # DESCRIPTION
 #   Starts a tmuxinator session if given a session name.
-#   Opens up fzy if an argument is not provided.
-
+#   Opens up fzf if an argument is not provided.
 if [[ -n $1 ]]; then
     tmuxinator start $1
 else
     TMUXINATOR_SESSIONS=("${(@f)$(\ls ~/.config/tmuxinator/ | awk -F '.' '{print $1}' | sort -u)}")
-    SESSION=$(echo $TMUXINATOR_SESSIONS | tr " " "\n" | fzy -l 20)
+    SESSION=$(echo $TMUXINATOR_SESSIONS | tr " " "\n" | fzf)
     if [[ -z "${SESSION}" ]]; then
         return -1
     fi
