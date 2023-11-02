@@ -8,4 +8,5 @@ nvim/plugin/*
 lazy-lock.json
 .colorscheme
 .background
+.theme
 alacritty.yml
