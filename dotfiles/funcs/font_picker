@@ -26,5 +26,13 @@ if [[ -z "${selection}" ]]; then
     return 0
 fi
 
+# Before updating the alacritty.yml we first need to get the current theme.
+# The template does not contain any information about themes so we will use
+# the following variable to reapply the current theme.
+theme=$(alacritty-themes --current | head -n 1)
+
+# Fill in the font name in the template to create a new alacritty.yml file.
 export ALACRITTY_FONT=$selection
 envsubst < "${XDG_CONFIG_HOME}/alacritty/alacritty.yml.template" > "${XDG_CONFIG_HOME}/alacritty/alacritty.yml"
+
+alacritty-themes $theme
