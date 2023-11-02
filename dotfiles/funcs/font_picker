@@ -15,6 +15,10 @@ fonts=(
     "JetBrainsMono Nerd Font Mono"
     "Liga SFMono Nerd Font"
     "SauceCodePro Nerd Font Mono"
+    "OpenDyslexicM Nerd Font Mono"
+    "SpaceMono Nerd Font Mono"
+    "GohuFont 14 Nerd Font Mono"
+    "ProggyClean Nerd Font Mono"
 )
 
 selection=$(printf "%s\n" "${fonts[@]}" | sort | fzf)

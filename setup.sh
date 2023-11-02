@@ -82,6 +82,11 @@ brew install --cask font-sauce-code-pro-nerd-font
 brew install --cask font-hack-nerd-font
 brew install --cask font-fira-code-nerd-font
 brew install --cask font-jetbrains-mono-nerd-font
+brew install --cask font-openjetbrains-mono-nerd-font
+brew install --cask font-space-mono-nerd-font
+brew install --cask font-open-dyslexic-nerd-font
+brew install --cask font-gohufont-nerd-font
+brew install --cask font-proggy-clean-tt-nerd-font
 brew tap shaunsingh/SFMono-Nerd-Font-Ligaturized
 brew install --cask font-sf-mono-nerd-font-ligaturized
 
