@@ -75,6 +75,7 @@ brew install pyenv-virtualenv
 brew install libpq
 brew link --force libpq
 brew install octave
+brew install aichat
 
 # Fonts
 brew tap homebrew/cask-fonts
@@ -92,9 +93,6 @@ brew install --cask font-sf-mono-nerd-font-ligaturized
 
 # rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-
-# chatgpt cli
-cargo install --force aichat
 
 # Create bin directory
 # All custom scripts should be put here
