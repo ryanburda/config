@@ -43,7 +43,8 @@ function set_font(){
 
     # Reapply the color theme.
     alacritty-themes $theme
-    # TODO: remove the annoying backup files created by alacritty-themes
+    # remove the annoying backup files created by alacritty-themes
+    rm $XDG_CONFIG_HOME/alacritty/alacritty.yml.*.bak
 }
 
 selection=$(printf "%s\n" "${fonts[@]}" | sort -r | fzf)  # TODO --preview="set_font {}")
