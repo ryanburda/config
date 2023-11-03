@@ -25,7 +25,7 @@ current_font=$(<$XDG_CONFIG_HOME/alacritty/.font)
 
 function set_font(){
     # This function expects a single string argument representing the font to switch to.
-    font_selection=$1
+    font=$1
 
     # Before updating the alacritty.yml we first need to get the current theme.
     # The template does not contain any information about themes so we will use
@@ -34,7 +34,7 @@ function set_font(){
     theme=$(alacritty-themes --current | head -n 1)
 
     # Fill in the font name in the template to create a new alacritty.yml file.
-    export ALACRITTY_FONT=$selection
+    export ALACRITTY_FONT=$font
     # Write the font selection to a file to better handle cases where the envvar is not set.
     echo "$ALACRITTY_FONT" > $XDG_CONFIG_HOME/alacritty/.font
 
@@ -42,16 +42,15 @@ function set_font(){
     envsubst < "${XDG_CONFIG_HOME}/alacritty/alacritty.yml.template" > "${XDG_CONFIG_HOME}/alacritty/alacritty.yml"
 
     # Reapply the color theme.
-    alacritty-themes $theme
+    alacritty-themes $theme > /dev/null
     # remove the annoying backup files created by alacritty-themes
     rm $XDG_CONFIG_HOME/alacritty/alacritty.yml.*.bak
 }
 
-selection=$(printf "%s\n" "${fonts[@]}" | sort -r | fzf) # TODO --bind "change:execute(set_font '{}')")
+selection=$(printf "%s\n" "${fonts[@]}" | sort -r | fzf --bind "focus:execute(set_font {})")
 if [[ -z "${selection}" ]]; then
-    # TODO: reset font if nothing selected
-    # set_font $current_font
+    # reset font if nothing selected
+    set_font $current_font
     return 0
 fi
-
 set_font $selection
