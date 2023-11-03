@@ -47,11 +47,11 @@ function set_font(){
     rm $XDG_CONFIG_HOME/alacritty/alacritty.yml.*.bak
 }
 
-selection=$(printf "%s\n" "${fonts[@]}" | sort -r | fzf)  # TODO --preview="set_font {}")
+selection=$(printf "%s\n" "${fonts[@]}" | sort -r | fzf) # TODO --bind "change:execute(set_font '{}')")
 if [[ -z "${selection}" ]]; then
-    # TODO: reset font if nothing was selected
-    #set_font $current_font
+    # TODO: reset font if nothing selected
+    # set_font $current_font
     return 0
 fi
 
-set_font $current_font
+set_font $selection
