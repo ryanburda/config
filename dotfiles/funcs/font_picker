@@ -16,9 +16,7 @@ fonts=(
     "Hack Nerd Font Mono,12"
     "JetBrainsMono Nerd Font Mono,12"
     "Liga SFMono Nerd Font,12"
-    "SauceCodePro Nerd Font Mono,13"
-    "OpenDyslexicM Nerd Font Mono,11"
-    "SpaceMono Nerd Font Mono,12"
+    "SauceCodePro Nerd Font Mono,12"
 )
 
 current_font=$(<$XDG_CONFIG_HOME/alacritty/.font)
