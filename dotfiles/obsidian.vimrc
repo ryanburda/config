@@ -14,8 +14,28 @@ nmap <Space>q :close
 exmap vsplit obcommand workspace:split-vertical
 nmap <Space><C-l> :vsplit
 
+exmap files obcommand file-explorer:open
+nmap <Space>ff :files
+
 exmap search obcommand global-search:open
-nmap <Space>ff :search
+nmap <Space>fg :search
 
 exmap sidebar obcommand app:toggle-left-sidebar
 nmap <Space>aa :sidebar
+
+exmap commands obcommand command-palette:open
+nmap <Space>c :commands
+
+exmap dailynote obcommand daily-notes
+nmap <Space>dd :dailynote
+
+exmap dailynext obcommand daily-notes:goto-next
+nmap <Space>dn :dailynext
+
+exmap dailyprev obcommand daily-notes:goto-prev
+nmap <Space>dn :dailyprev
+
+exmap deletefile obcommand app:delete-file
+nmap <Space>df :deletefile
+
+
