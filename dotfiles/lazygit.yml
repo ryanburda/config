@@ -43,7 +43,7 @@ customCommands:
     context: 'commits'
     subprocess: true
     description: 'Open diff of current branch to selected commit'
-  - key: 'F'
+  - key: 'S'
     command: "git fetch -p"
     context: 'remoteBranches'
-    description: 'Prune local branches that are no longer in remote'
+    description: 'Prune local branches that are no longer in remote (Sync)'
