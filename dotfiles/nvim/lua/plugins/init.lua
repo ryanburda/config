@@ -248,7 +248,9 @@ return {
     {
         'lukas-reineke/indent-blankline.nvim',
         config = function ()
-            require("ibl").setup {}
+            require("ibl").setup {
+                scope = {show_start = false}
+            }
         end
     },
 
@@ -314,6 +316,8 @@ return {
             vim.keymap.set('n', '<M-i>', "<cmd>lua require'dap'.step_into()<cr>"        , {desc = "Debug: Step into"})
             vim.keymap.set('n', '<M-o>', "<cmd>lua require'dap'.step_over()<cr>"        , {desc = "Debug: Step over"})
             vim.keymap.set('n', '<M-p>', "<cmd>lua require'dap'.continue()<cr>"         , {desc = "Debug: Continue to next breakpoint (Proceed)"})
+            vim.keymap.set('n', '<M-x>', "<cmd>lua require'dap'.close()<cr>"            , {desc = "Debug: Closes the current debug session"})
+            vim.keymap.set('n', '<M-Space>', "<cmd>lua require'dap'.run()<cr>"          , {desc = "Debug: Runs a new debug session"})
         end
     },
     {
