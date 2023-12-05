@@ -1,0 +1,8 @@
+#!/bin/zsh
+FILE=$(rg --files | fzf --preview "bat --color=always {}")
+
+if [[ ! -z "${NVIM_PIPE}" ]]; then
+    nvim --server $NVIM_PIPE --remote $FILE
+else
+    nvim $FILE
+fi

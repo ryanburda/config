@@ -109,6 +109,7 @@ mkdir -p ~/.config/alacritty
 
 ln -svfF "${SCRIPT_DIR}/dotfiles/zshrc" "${HOME}/.zshrc"
 mkdir -p "${HOME}/.zsh/funcs"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/find_file" "${HOME}/.zsh/funcs/find_file"
 ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/set_font" "${HOME}/.zsh/funcs/set_font"
 ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/font_picker" "${HOME}/.zsh/funcs/font_picker"
 ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/nvim_open" "${HOME}/.zsh/funcs/nvim_open"
