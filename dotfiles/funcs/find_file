@@ -1,5 +1,5 @@
 #!/bin/zsh
-FILE=$(rg --files | fzf --preview "bat --color=always {}")
+FILE=$(rg --files | fzf --preview "bat --color=always {}" --bind=ctrl-d:preview-half-page-down,ctrl-u:preview-half-page-up)
 
 if [[ ! -z "${NVIM_PIPE}" ]]; then
     nvim --server $NVIM_PIPE --remote $FILE
