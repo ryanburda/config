@@ -119,7 +119,7 @@ ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/theme_picker" "${HOME}/.zsh/funcs/theme_p
 ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/tse" "${HOME}/.zsh/funcs/tse"
 
 mkdir -p "${XDG_CONFIG_HOME}/lf"
-curl https://raw.githubusercontent.com/gokcehan/lf/master/etc/icons.example -o "${XDG_CONFIG_HOME}/lf/icons
+curl https://raw.githubusercontent.com/gokcehan/lf/master/etc/icons.example -o "${XDG_CONFIG_HOME}/lf/icons"
 ln -svfF "${SCRIPT_DIR}/dotfiles/lfrc" "${XDG_CONFIG_HOME}/lf/lfrc"
 
 mkdir -p "${XDG_CONFIG_HOME}/tmux"
@@ -132,6 +132,9 @@ ln -svfF "${SCRIPT_DIR}/dotfiles/gitconfig" "${HOME}/.gitconfig"
 ln -svfF "${SCRIPT_DIR}/dotfiles/psqlrc" "${HOME}/.psqlrc"
 ln -svfF "${SCRIPT_DIR}/dotfiles/pspgconf" "${HOME}/.pspgconf"
 ln -svfF "${SCRIPT_DIR}/dotfiles/octaverc" "${HOME}/.octaverc"
+ln -svfF "${SCRIPT_DIR}/dotfiles/nord-status-content.conf" "${HOME}/.config/tmux/plugins/tmux/src/nord-status-content.conf"
+
+source-file "${HOME}/.config/tmux/plugins/tmux/src/nord-status-content.conf"
 
 # Obsidian
 ln -svfF "${SCRIPT_DIR}/dotfiles/obsidian.vimrc" "${HOME}/Documents/notes/notes/.obsidian.vimrc"
