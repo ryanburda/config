@@ -2,11 +2,15 @@
 # Uncomment to profile zsh startup.
 # NOTE: must also uncomment last line.
 # zmodload zsh/zprof
+PROMPT="
+%F{gray}%n %F{blue}%~ %F{red}$(git rev-parse --abbrev-ref HEAD 2> /dev/null)
+%F{green}$ "
 
 # Set the command history to a very high value and add to the history immediately.
 export HISTFILESIZE=1000000000
 export HISTSIZE=1000000000
 setopt INC_APPEND_HISTORY
+setopt auto_cd
 export HISTTIMEFORMAT="[%F %T] "
 
 # Set default editor and pager
@@ -17,8 +21,8 @@ if [[ "$(command -v nvim)" ]]; then
 fi
 
 # Add to PATH
-path+=$HOME/.local/bin
-path+=$HOME/.local/bin/neovim/bin
+# path+=$HOME/.local/bin
+# path+=$HOME/.local/bin/neovim/bin
 fpath+=$HOME/.zsh/compdef/
 fpath+=$HOME/.zsh/funcs/
 autoload -U ~/.zsh/funcs/find_file
@@ -37,8 +41,6 @@ autoload -U ~/.zsh/funcs/psqlp
 source ~/Git/zsh-snap/znap.zsh  # Start Znap
 
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-zstyle :prompt:pure:git:stash show yes
-znap prompt sindresorhus/pure
 znap source zsh-users/zsh-syntax-highlighting
 znap source zsh-users/zsh-autosuggestions
 
@@ -65,9 +67,9 @@ alias db="nvim -c \"lua require('dbee').open()\""
 # source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
 #
 # python
-path+=$HOME/.pyenv/bin
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+# path+=$HOME/.pyenv/bin
+# eval "$(pyenv init -)"
+# eval "$(pyenv virtualenv-init -)"
 
 # Raise max files and max procs
 ulimit -n 200000
@@ -84,5 +86,3 @@ fi
 # Uncomment to profile zsh startup.
 # NOTE: must also uncomment first line.
 # zprof
-export PATH="/usr/local/sbin:$PATH"
-export PATH=$PATH:~/kubectl-plugins

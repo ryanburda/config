@@ -17,18 +17,12 @@ else
 fi
 
 # Applications
-read -qs "tf?Install applications? ('y' to install, any other key to skip)"
-if [[ "$tf" =~ ^[Yy]$ ]]
-then
-    brew install --cask alacritty
-    brew install --cask docker
-    brew install --cask google-chrome
-    brew install --cask firefox
-    brew install --cask karabiner-elements
-    brew install --cask alfred
-    brew install --cask rectangle
-    brew install --cask shifty
-fi
+brew install --cask alacritty
+brew install --cask docker
+brew install --cask karabiner-elements
+brew install --cask alfred
+brew install --cask rectangle
+brew install --cask shifty
 
 brew install coreutils
 brew install tmux

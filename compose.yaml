@@ -1,0 +1,30 @@
+services:
+  tmux-server:
+    build: .
+    ports:
+      - 5678:5678
+    networks:
+      - net
+    volumes:
+    - ~/Developer:/home/developer/Developer
+    env_file:
+      - .env
+
+  db-postgres:
+    cap_add:
+      - SYS_PTRACE
+    image: postgres:15.2
+    ports:
+      - 5432:5432
+    networks:
+      - net
+    volumes:
+        - postgres_data:/var/lib/postgresql/data  # Persist the database to a volume.
+    env_file:
+      - .env
+
+volumes:
+    postgres_data:
+
+networks:
+    net:
