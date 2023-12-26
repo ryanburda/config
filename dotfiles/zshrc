@@ -2,6 +2,7 @@
 # Uncomment to profile zsh startup.
 # NOTE: must also uncomment last line.
 # zmodload zsh/zprof
+
 PROMPT="
 %F{gray}%n %F{blue}%~ %F{red}$(git rev-parse --abbrev-ref HEAD 2> /dev/null)
 %F{green}$ "
@@ -33,16 +34,6 @@ autoload -U ~/.zsh/funcs/set_font
 autoload -U ~/.zsh/funcs/font_picker
 autoload -U ~/.zsh/funcs/theme_picker
 autoload -U ~/.zsh/funcs/psqlp
-
-# Download Znap, if it's not there yet.
-[[ -f ~/Git/zsh-snap/znap.zsh ]] ||
-    git clone --depth 1 -- https://github.com/marlonrichert/zsh-snap.git ~/Git/zsh-snap
-
-source ~/Git/zsh-snap/znap.zsh  # Start Znap
-
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-znap source zsh-users/zsh-syntax-highlighting
-znap source zsh-users/zsh-autosuggestions
 
 # autocompletion using arrow keys (based on history)
 bindkey '^[[A' history-search-backward
@@ -82,6 +73,9 @@ if [ -f $OPENAI_API_KEY_FILE ]; then
 else
     export OPENAI_API_KEY=""
 fi
+
+source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Uncomment to profile zsh startup.
 # NOTE: must also uncomment first line.

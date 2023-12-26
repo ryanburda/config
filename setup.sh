@@ -70,6 +70,8 @@ brew install libpq
 brew link --force libpq
 brew install octave
 brew install aichat
+brew install zsh-syntax-highlighting
+brew install zsh-autosuggestions
 
 # Fonts
 brew tap homebrew/cask-fonts
