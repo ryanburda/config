@@ -4,8 +4,8 @@
 # zmodload zsh/zprof
 
 PROMPT="
-%F{gray}%n %F{blue}%~ %F{red}$(git rev-parse --abbrev-ref HEAD 2> /dev/null)
-%F{green}$ "
+%F{cyan}%n %F{blue}%~ %F{green}$(git rev-parse --abbrev-ref HEAD 2> /dev/null)
+%F{yellow}> "
 
 # Set the command history to a very high value and add to the history immediately.
 export HISTFILESIZE=1000000000
@@ -13,6 +13,7 @@ export HISTSIZE=1000000000
 setopt INC_APPEND_HISTORY
 setopt auto_cd
 export HISTTIMEFORMAT="[%F %T] "
+export XDG_CONFIG_HOME=$HOME/.config
 
 # Set default editor and pager
 if [[ "$(command -v nvim)" ]]; then
@@ -74,6 +75,7 @@ else
     export OPENAI_API_KEY=""
 fi
 
+source $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
