@@ -23,8 +23,8 @@ function T.setup()
             icons_enabled = true,
             theme = 'auto',
             globalstatus = true,
-            component_separators = { left = '', right = ''},
-            section_separators = { left = '', right = '' },
+            component_separators = { left = '', right = ''},
+            section_separators = { left = '', right = '' },
         },
         extensions = {},
         sections = {
