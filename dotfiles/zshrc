@@ -4,8 +4,12 @@
 # zmodload zsh/zprof
 
 PROMPT="
-%F{cyan}%n %F{blue}%~ %F{green}$(git rev-parse --abbrev-ref HEAD 2> /dev/null)
+%F{yellow}%D{%T} %F{cyan}%n %F{blue}%~
 %F{yellow}> "
+
+# Case insensitive completion
+autoload -Uz compinit && compinit
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
 # Set the command history to a very high value and add to the history immediately.
 export HISTFILESIZE=1000000000
@@ -23,8 +27,6 @@ if [[ "$(command -v nvim)" ]]; then
 fi
 
 # Add to PATH
-# path+=$HOME/.local/bin
-# path+=$HOME/.local/bin/neovim/bin
 fpath+=$HOME/.zsh/compdef/
 fpath+=$HOME/.zsh/funcs/
 autoload -U ~/.zsh/funcs/find_file
@@ -56,12 +58,12 @@ alias db="nvim -c \"lua require('dbee').open()\""
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # google-cloud-sdk completions
-# source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
-#
+source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+
 # python
-# path+=$HOME/.pyenv/bin
-# eval "$(pyenv init -)"
-# eval "$(pyenv virtualenv-init -)"
+path+=$HOME/.pyenv/bin
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 
 # Raise max files and max procs
 ulimit -n 200000
