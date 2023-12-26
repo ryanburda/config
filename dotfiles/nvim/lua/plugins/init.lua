@@ -1,14 +1,5 @@
 return {
 
-    -- Greeter
-    {
-        'goolord/alpha-nvim',
-        dependencies = { 'kyazdani42/nvim-web-devicons' },
-        config = function ()
-            require'alpha'.setup(require'alpha.themes.startify'.config)
-        end
-    },
-
     -- Color Schemes
     {
         "rktjmp/fwatch.nvim",
@@ -121,15 +112,13 @@ return {
         end
     },
 
-    -- Scrolling
-    {  -- Scrollbar
-        'petertriho/nvim-scrollbar',
-        config = function() require("scrollbar").setup({
-            marks = {
-                Cursor = {
-                    text = "",
-                },
-            },
+    {
+        'dstein64/nvim-scrollview',
+        config = function() require('scrollview').setup({
+            excluded_filetypes = {'neo-tree'},
+            current_only = true,
+            signs_on_startup = {'all'},
+            diagnostics_severities = {vim.diagnostic.severity.ERROR}
         }) end
     },
     {  -- Smooth scrolling

@@ -19,7 +19,7 @@ function T.setup()
                 delay = 10,
                 reveal = {'close'}
             },
-            separator_style = "slant",
+            separator_style = "thin",
         }
     })
 
