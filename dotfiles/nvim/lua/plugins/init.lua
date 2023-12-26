@@ -211,15 +211,6 @@ return {
         end,
     },
 
-    -- Web Search
-    {
-        'voldikss/vim-browser-search',
-        config = function ()
-            vim.keymap.set('n', "<leader>ji", ":BrowserSearch<cr>", {desc = "Search for word under cursor in browser"})
-            vim.keymap.set('v', "<leader>ji", ":'<,'>BrowserSearch<cr>", {desc = "Search for visual selection in brower"})
-        end
-    },
-
     -- Highlight all occurrences of word under cursor
     {
         'RRethy/vim-illuminate',
