@@ -5,9 +5,7 @@
 
 export PATH="/usr/local/sbin:$PATH"
 
-PROMPT="
-%F{yellow}%D{%T} %F{cyan}%n %F{blue}%~
-%F{yellow}> "
+PROMPT="%F{yellow}%D{%T} %F{cyan}%n %F{blue}%~"$'\n'"%F{yellow}> "
 
 # Case insensitive completion
 autoload -Uz compinit && compinit
