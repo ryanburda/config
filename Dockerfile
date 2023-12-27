@@ -81,8 +81,6 @@ RUN ln -svfF "${PROJECT_DIR}/dotfiles/nvim"      /home/developer/.config/nvim
 
 RUN mkdir -p                                                    /home/developer/.config/tmux
 RUN ln -svfF "${PROJECT_DIR}/dotfiles/tmux.conf"                /home/developer/.config/tmux/tmux.conf
-RUN mkdir -p                                                    /home/developer/.config/tmux/plugins/tmux/src
-RUN ln -svfF "${PROJECT_DIR}/dotfiles/nord-status-content.conf" /home/developer/.config/tmux/plugins/tmux/src/nord-status-content.conf
 
 RUN mkdir -p                                                /home/developer/.zsh/funcs
 RUN ln -svfF "${PROJECT_DIR}/dotfiles/funcs/find_file"      /home/developer/.zsh/funcs/find_file
@@ -103,8 +101,6 @@ RUN ln -svfF "${PROJECT_DIR}/dotfiles/lfrc"                                     
 
 RUN ln -svfF "${PROJECT_DIR}/dotfiles/psqlrc"   /home/developer/.psqlrc
 RUN ln -svfF "${PROJECT_DIR}/dotfiles/pspgconf" /home/developer/.pspgconf
-
-RUN git clone https://github.com/tmux-plugins/tpm .tmux/plugins/tpm
 
 # Let zsh and nvim set themselves up now that the configs have been linked
 RUN ./.zshrc

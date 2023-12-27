@@ -138,9 +138,6 @@ ln -svfF "${SCRIPT_DIR}/dotfiles/obsidian.vimrc" "${HOME}/Documents/notes/notes/
 # Let nvim set itself up now that the config has been linked
 nvim --headless "+Lazy! sync" +qa
 
-# Tmux Plugin Manager
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-
 # Source zshrc so plugins are installed automatically.
 source ${HOME}/.zshrc
 
