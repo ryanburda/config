@@ -3,6 +3,8 @@
 # NOTE: must also uncomment last line.
 # zmodload zsh/zprof
 
+export PATH="/usr/local/sbin:$PATH"
+
 PROMPT="
 %F{yellow}%D{%T} %F{cyan}%n %F{blue}%~
 %F{yellow}> "

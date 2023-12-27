@@ -52,7 +52,6 @@ brew install k9s
 brew install fd
 brew install htop
 brew install node
-brew install node@16
 npm i -g alacritty-themes
 brew install lua
 brew install ripgrep

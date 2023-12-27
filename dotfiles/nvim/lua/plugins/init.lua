@@ -12,6 +12,8 @@ return {
             "rose-pine/neovim",
             "folke/tokyonight.nvim",
             "habamax/vim-gruvbit",
+            "aktersnurra/no-clown-fiesta.nvim",
+            "Verf/deepwhite.nvim",
         },
         config = require("plugins.configs.colorscheme").setup,
     },
