@@ -18,7 +18,6 @@ function T.setup()
     }
 
     require('gitsigns').setup(config)
-    require('scrollbar.handlers.gitsigns').setup()
 
 end
 
