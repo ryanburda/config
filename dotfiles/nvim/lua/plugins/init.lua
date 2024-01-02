@@ -4,15 +4,10 @@ return {
     {
         "rktjmp/fwatch.nvim",
         dependencies = {
-            "catppuccin/nvim",
             "sainnhe/everforest",
-            "ellisonleao/gruvbox.nvim",
+            "sainnhe/gruvbox-material",
             "rebelot/kanagawa.nvim",
             "EdenEast/nightfox.nvim",
-            "rose-pine/neovim",
-            "folke/tokyonight.nvim",
-            "habamax/vim-gruvbit",
-            "aktersnurra/no-clown-fiesta.nvim",
             "Verf/deepwhite.nvim",
         },
         config = require("plugins.configs.colorscheme").setup,
