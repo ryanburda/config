@@ -43,7 +43,7 @@ bindkey '^[[A' history-search-backward
 bindkey '^[[B' history-search-forward
 
 # Alias
-alias l="lsd -lah --group-dirs first --color never"
+alias l="lsd -lah"
 alias a="aichat"
 alias s="select_session"
 alias d="lazydocker"
