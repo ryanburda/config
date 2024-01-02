@@ -4,7 +4,7 @@ function T.setup()
 
     require('neoscroll').setup({
         mappings = {'<C-u>', '<C-d>', '<C-y>', '<C-e>', 'zt', 'zz', 'zb'},
-        time = 10
+        time = 2
     })
 
     local t = {}
