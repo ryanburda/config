@@ -58,6 +58,9 @@ vim.keymap.set('n', '<leader>p'      , '"0p'              , {desc = 'paste from 
 vim.keymap.set('n', '<leader>P'      , '"0P'              , {desc = 'paste from yank register'})
 vim.keymap.set('n', '<leader>0'      , ':%bd|e#|bd#<cr>'  , {desc = 'Close all buffers except current'})
 vim.keymap.set('n', '<leader>m'      , ':!open -a "Google Chrome" %<cr><cr>', {desc = 'Open current file in browser'})
+vim.keymap.set('n', '<leader>F'      , ":let @+=expand('%')<CR>", {desc = 'Copy relative file path to clipboard'})
+vim.keymap.set('n', '<leader>A'      , ":let @+=expand('%:p')<CR>", {desc = 'Copy absolute file path to clipboard'})
+vim.keymap.set('n', '<leader>D'      , ":let @+=expand('%:h')<CR>", {desc = 'Copy directory path to clipboard'})
 
 -- quick notes
 vim.keymap.set('n', '<leader>n' , ':edit ~/Documents/main.txt<cr>G$', opts)
