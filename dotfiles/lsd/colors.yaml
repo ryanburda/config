@@ -1,5 +1,5 @@
-user: 2
-group: 3
+user: 6
+group: 107
 permission:
   read: dark_green
   write: dark_yellow
@@ -15,9 +15,9 @@ date:
   older: 36
 size:
   none: 245
-  small: 6
-  medium: 6
-  large: 6
+  small: 109
+  medium: 109
+  large: 109
 inode:
   valid: 13
   invalid: 245
