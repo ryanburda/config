@@ -52,7 +52,6 @@ brew install k9s
 brew install fd
 brew install htop
 brew install node
-npm i -g alacritty-themes
 brew install lua
 brew install ripgrep
 brew install jq
@@ -103,23 +102,24 @@ mkdir -p $HOME/Developer
 SCRIPT_DIR=${0:a:h}
 
 mkdir -p ~/.config/alacritty
+ln -svfF "${SCRIPT_DIR}/dotfiles/alacritty/themes/" "${XDG_CONFIG_HOME}/alacritty/themes"
 
-ln -svfF "${SCRIPT_DIR}/dotfiles/zshrc"                "${HOME}/.zshrc"
-ln -svfF "${SCRIPT_DIR}/dotfiles/gitconfig"            "${HOME}/.gitconfig"
-ln -svfF "${SCRIPT_DIR}/dotfiles/psqlrc"               "${HOME}/.psqlrc"
-ln -svfF "${SCRIPT_DIR}/dotfiles/pspgconf"             "${HOME}/.pspgconf"
-ln -svfF "${SCRIPT_DIR}/dotfiles/octaverc"             "${HOME}/.octaverc"
-mkdir -p                                               "${HOME}/.zsh/funcs"
-ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/find_file"      "${HOME}/.zsh/funcs/find_file"
-ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/set_font"       "${HOME}/.zsh/funcs/set_font"
-ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/font_picker"    "${HOME}/.zsh/funcs/font_picker"
-ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/nvim_open"      "${HOME}/.zsh/funcs/nvim_open"
-ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/psqlp"          "${HOME}/.zsh/funcs/psqlp"
-ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/select_session" "${HOME}/.zsh/funcs/select_session"
-ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/theme_picker"   "${HOME}/.zsh/funcs/theme_picker"
-ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/tse"            "${HOME}/.zsh/funcs/tse"
+ln -svfF "${SCRIPT_DIR}/dotfiles/zshrc"                  "${HOME}/.zshrc"
+ln -svfF "${SCRIPT_DIR}/dotfiles/gitconfig"              "${HOME}/.gitconfig"
+ln -svfF "${SCRIPT_DIR}/dotfiles/psqlrc"                 "${HOME}/.psqlrc"
+ln -svfF "${SCRIPT_DIR}/dotfiles/pspgconf"               "${HOME}/.pspgconf"
+ln -svfF "${SCRIPT_DIR}/dotfiles/octaverc"               "${HOME}/.octaverc"
+mkdir -p                                                 "${HOME}/.zsh/funcs"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/find_file"        "${HOME}/.zsh/funcs/find_file"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/alacritty_config" "${HOME}/.zsh/funcs/alacritty_config"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/font_picker"      "${HOME}/.zsh/funcs/font_picker"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/nvim_open"        "${HOME}/.zsh/funcs/nvim_open"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/psqlp"            "${HOME}/.zsh/funcs/psqlp"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/select_session"   "${HOME}/.zsh/funcs/select_session"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/theme_picker"     "${HOME}/.zsh/funcs/theme_picker"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/tse"              "${HOME}/.zsh/funcs/tse"
 
-ln -svfF "${SCRIPT_DIR}/dotfiles/alacritty.yml.template"                       "${XDG_CONFIG_HOME}/alacritty/alacritty.yml.template"
+ln -svfF "${SCRIPT_DIR}/dotfiles/alacritty.toml.template"                      "${XDG_CONFIG_HOME}/alacritty/alacritty.toml.template"
 ln -svfF "${SCRIPT_DIR}/dotfiles/karabiner.json"                               "${XDG_CONFIG_HOME}/karabiner/karabiner.json"
 ln -svfF "${SCRIPT_DIR}/dotfiles/lazygit.yml"                                  "${XDG_CONFIG_HOME}/lazygit/config.yml"
 mkdir -p                                                                       "${XDG_CONFIG_HOME}/lf"

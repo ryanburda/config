@@ -7,9 +7,7 @@
 #   font_picker
 #
 # DESCRIPTION
-#   Use fzf to select a font. The font is then substituted into alacritty.yml.
-#   This is a separate command from the more generic `set_font` command so that
-#   only a specific set of fonts show up in the font picker.
+#   Use fzf to select a font. The font is then substituted into alacritty.toml.
 fonts=(
     "FiraCode Nerd Font Mono,11"
     "GohuFont 14 Nerd Font Mono,12"
@@ -22,10 +20,10 @@ fonts=(
 current_font=$(<$XDG_CONFIG_HOME/alacritty/.font)
 current_font_size=$(<$XDG_CONFIG_HOME/alacritty/.font_size)
 
-# TODO: figure out why full path to `set_font` needs to be specified
-selection=$(printf "%s\n" "${fonts[@]}" | sort -r | fzf --cycle --bind "focus:execute-silent(IFS=',' read -r font size <<< {}; ~/.zsh/funcs/set_font \"\$font\" \"\$size\")")
-if [[ -z "${selection}" ]]; then
-    # reset font if nothing selected
-    ~/.zsh/funcs/set_font $current_font $current_font_size
-    return 0
+selection=$(printf "%s\n" "${fonts[@]}" | sort -r | fzf --cycle)
+if [[ -n "${selection}" ]]; then
+    echo $(print $selection| awk -F ',' '{print $1}') > $XDG_CONFIG_HOME/alacritty/.font
+    echo $(print $selection| awk -F ',' '{print $2}') > $XDG_CONFIG_HOME/alacritty/.font_size
+
+    ~/.zsh/funcs/alacritty_config
 fi

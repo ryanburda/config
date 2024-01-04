@@ -1,0 +1,9 @@
+# This script reads the values in 3 separate files to set the look of the terminal:
+#   * the name of an installed font. (ex. "Hack Nerd Font Mono")
+#   * a size for that font. (ex. 11)
+#   * the alacritty theme. (ex. "everforest_dark")
+export ALACRITTY_FONT=$(cat $XDG_CONFIG_HOME/alacritty/.font)
+export ALACRITTY_FONT_SIZE=$(cat $XDG_CONFIG_HOME/alacritty/.font_size)
+export ALACRITTY_THEME=$(cat $XDG_CONFIG_HOME/alacritty/.theme)
+
+envsubst < "${XDG_CONFIG_HOME}/alacritty/alacritty.toml.template" > "${XDG_CONFIG_HOME}/alacritty/alacritty.toml"

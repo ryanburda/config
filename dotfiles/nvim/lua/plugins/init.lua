@@ -9,6 +9,7 @@ return {
             "rebelot/kanagawa.nvim",
             "EdenEast/nightfox.nvim",
             "Verf/deepwhite.nvim",
+            "Mofiqul/vscode.nvim",
         },
         config = require("plugins.configs.colorscheme").setup,
     },
