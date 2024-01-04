@@ -28,7 +28,7 @@ typeset -A themes=(
     ['Nightfox-day']="dayfox dayfox light"
     ['Nightfox-night']="nightfox nightfox dark"
     ['Nightfox-nord']="nordfox nordfox dark"
-    ['Nightfox-tera']="terfox terafox dark"
+    ['Nightfox-tera']="terafox terafox dark"
     ['VSCode']="vscode vscode light"
 )
 
