@@ -7,8 +7,14 @@ export PATH="/usr/local/sbin:$PATH"
 
 PROMPT="%B%F{yellow}%n %F{cyan}%~"$'\n'"%F{yellow}> %b"
 
+# Speed up zsh compinit by only checking cache once a day.
+# https://gist.github.com/ctechols/ca1035271ad134841284#gistcomment-2308206
+autoload -Uz compinit
+for dump in ~/.zcompdump(N.mh+24); do
+  compinit
+done
+compinit -C
 # Case insensitive completion
-autoload -Uz compinit && compinit
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
 # Set the command history to a very high value and add to the history immediately.
@@ -18,7 +24,31 @@ setopt INC_APPEND_HISTORY
 setopt auto_cd
 export HISTTIMEFORMAT="[%F %T] "
 export XDG_CONFIG_HOME=$HOME/.config
-export FZF_DEFAULT_OPTS="--history=$HOME/.fzf_history_dir $FZF_DEFAULT_OPTS"
+export FZF_DEFAULT_OPTS="
+  --history=$HOME/.fzf_history_dir
+  --bind=ctrl-d:preview-half-page-down
+  --bind=ctrl-u:preview-half-page-up
+  --bind=ctrl-i:previous-history
+  --bind=ctrl-o:next-history
+  --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+  $FZF_DEFAULT_OPTS"
+export FZF_CTRL_T_OPTS="
+  --bind=ctrl-n:down
+  --bind=ctrl-p:up
+  --bind=ctrl-i:previous-history
+  --bind=ctrl-o:next-history
+  --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+  --color header:italic
+  --header 'Press CTRL-Y to copy path into clipboard'"
+export FZF_CTRL_R_OPTS="
+  --preview 'echo {}' --preview-window up:3:hidden:wrap
+  --bind=ctrl-n:down
+  --bind=ctrl-p:up
+  --bind=ctrl-i:previous-history
+  --bind=ctrl-o:next-history
+  --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+  --color header:italic
+  --header 'Press CTRL-Y to copy command into clipboard'"
 export FZF_HISTORY_DIR=1
 
 # Set default editor and pager

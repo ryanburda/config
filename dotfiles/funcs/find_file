@@ -1,6 +1,0 @@
-#!/bin/zsh
-rg --files | fzf --preview "bat --color=always {}" --bind=ctrl-d:preview-half-page-down \
-                                                   --bind=ctrl-u:preview-half-page-up \
-                                                   --bind=ctrl-l:next-history \
-                                                   --bind=ctrl-h:previous-history \
-                                                   | pbcopy
