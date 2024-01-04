@@ -31,6 +31,15 @@ function T.setup()
             mappings = {
                 i = {
                     ["<C-x>"] = false,
+                    ["<C-y>"] = function()
+                        local entry = require("telescope.actions.state").get_selected_entry()
+                        local cb_opts = vim.opt.clipboard:get()
+                        if vim.tbl_contains(cb_opts, "unnamed") then vim.fn.setreg("*", entry.path) end
+                        if vim.tbl_contains(cb_opts, "unnamedplus") then
+                          vim.fn.setreg("+", entry.path)
+                        end
+                        vim.fn.setreg("", entry.path)
+                    end,
                     ["<C-k>"] = actions.send_to_qflist,
                     ["<C-o>"] = function(prompt_bufnr)
                         -- Open buffer and resume prompt
