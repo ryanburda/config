@@ -54,6 +54,9 @@ function set_theme(){
         
         ~/.zsh/funcs/alacritty_config
         echo "$theme_key" > $XDG_CONFIG_HOME/alacritty/.theme_key
+
+        # aichat theme
+        ~/.zsh/funcs/aichat_config
     fi
 }
 

@@ -118,6 +118,7 @@ ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/psqlp"            "${HOME}/.zsh/funcs/psq
 ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/select_session"   "${HOME}/.zsh/funcs/select_session"
 ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/theme_picker"     "${HOME}/.zsh/funcs/theme_picker"
 ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/tse"              "${HOME}/.zsh/funcs/tse"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/aichat_config"    "${HOME}/.zsh/funcs/aichat_config"
 
 ln -svfF "${SCRIPT_DIR}/dotfiles/alacritty.toml.template"                      "${XDG_CONFIG_HOME}/alacritty/alacritty.toml.template"
 ln -svfF "${SCRIPT_DIR}/dotfiles/karabiner.json"                               "${XDG_CONFIG_HOME}/karabiner/karabiner.json"
@@ -136,8 +137,8 @@ ln -svfF "${SCRIPT_DIR}/dotfiles/nord-status-content.conf"                     "
 source-file                                                                    "${XDG_CONFIG_HOME}/tmux/plugins/tmux/src/nord-status-content.conf"
 
 # AiChat - TODO: set this up in XDG_CONFIG_HOME
-mkdir -p                                                                       "${HOME}/Library/Application Support/aichat"
-ln -svfF "${SCRIPT_DIR}/dotfiles/aichat_config.yaml"                           "${HOME}/Library/Application Support/aichat/config.yaml"
+mkdir -p                                                      "${HOME}/Library/Application Support/aichat"
+ln -svfF "${SCRIPT_DIR}/dotfiles/aichat_config.yaml.template" "${HOME}/Library/Application Support/aichat/aichat_config.yaml.template"
 
 # Obsidian
 ln -svfF "${SCRIPT_DIR}/dotfiles/obsidian.vimrc" "${HOME}/Documents/notes/notes/.obsidian.vimrc"
