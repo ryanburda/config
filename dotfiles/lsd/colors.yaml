@@ -1,23 +1,23 @@
-user: 6
-group: 107
+user: 244
+group: 244
 permission:
-  read: dark_green
-  write: dark_yellow
-  exec: dark_red
-  exec-sticky: 5
-  no-access: 245
+  read: 6
+  write: 6
+  exec: 6
+  exec-sticky: 6
+  no-access: 6
   octal: 6
-  acl: dark_cyan
-  context: cyan
+  acl: 6
+  context: 6 
 date:
-  hour-old: 40
-  day-old: 42
-  older: 36
+  hour-old: 77
+  day-old: 71
+  older: 65
 size:
   none: 245
-  small: 109
-  medium: 109
-  large: 109
+  small: 214
+  medium: 208
+  large: 202
 inode:
   valid: 13
   invalid: 245
