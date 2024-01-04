@@ -18,6 +18,8 @@ setopt INC_APPEND_HISTORY
 setopt auto_cd
 export HISTTIMEFORMAT="[%F %T] "
 export XDG_CONFIG_HOME=$HOME/.config
+export FZF_DEFAULT_OPTS="--history=$HOME/.fzf_history_dir $FZF_DEFAULT_OPTS"
+export FZF_HISTORY_DIR=1
 
 # Set default editor and pager
 if [[ "$(command -v nvim)" ]]; then

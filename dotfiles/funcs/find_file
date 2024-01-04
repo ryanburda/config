@@ -1,8 +1,6 @@
 #!/bin/zsh
-FILE=$(rg --files | fzf --preview "bat --color=always {}" --bind=ctrl-d:preview-half-page-down,ctrl-u:preview-half-page-up)
-
-if [[ ! -z "${NVIM_PIPE}" ]]; then
-    nvim --server $NVIM_PIPE --remote $FILE
-else
-    nvim $FILE
-fi
+rg --files | fzf --preview "bat --color=always {}" --bind=ctrl-d:preview-half-page-down \
+                                                   --bind=ctrl-u:preview-half-page-up \
+                                                   --bind=ctrl-l:next-history \
+                                                   --bind=ctrl-h:previous-history \
+                                                   | pbcopy
