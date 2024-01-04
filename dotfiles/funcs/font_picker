@@ -11,12 +11,12 @@
 #   This is a separate command from the more generic `set_font` command so that
 #   only a specific set of fonts show up in the font picker.
 fonts=(
-    "FiraCode Nerd Font Mono,12"
-    "GohuFont 14 Nerd Font Mono,13"
-    "Hack Nerd Font Mono,12"
-    "JetBrainsMono Nerd Font Mono,12"
-    "Liga SFMono Nerd Font,12"
-    "SauceCodePro Nerd Font Mono,12"
+    "FiraCode Nerd Font Mono,11"
+    "GohuFont 14 Nerd Font Mono,12"
+    "Hack Nerd Font Mono,11"
+    "JetBrainsMono Nerd Font Mono,11"
+    "Liga SFMono Nerd Font,11"
+    "SauceCodePro Nerd Font Mono,11"
 )
 
 current_font=$(<$XDG_CONFIG_HOME/alacritty/.font)
