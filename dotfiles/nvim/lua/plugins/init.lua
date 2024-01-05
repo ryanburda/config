@@ -282,12 +282,13 @@ return {
                 '<leader>\'',
                 function()
                     vim.cmd.tabnew()
-                    --vim.api.nvim_cmd('tabnew')
                     require("dbee").open()
                 end,
                 {desc = "Open dbee"}
             )
         end,
     },
+
+    {"nanotee/sqls.nvim"},
 
 }
