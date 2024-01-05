@@ -42,8 +42,6 @@ function T.setup()
 
     T.set_colorscheme()
 
-    vim.keymap.set('n', '<leader>t', T.set_colorscheme, {desc = "Change colorscheme" })
-
     -- update the colorscheme when the colorscheme file changes.
     local fwatch = require('fwatch')
     fwatch.watch(T.COLORSCHEME_FILE, {

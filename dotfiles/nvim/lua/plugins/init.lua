@@ -194,11 +194,15 @@ return {
             'hrsh7th/cmp-cmdline',
             'L3MON4D3/LuaSnip',
             'saadparwaiz1/cmp_luasnip',
-            'hrsh7th/cmp-nvim-lsp-signature-help',
             'onsails/lspkind.nvim',
         },
         config = require('plugins.configs.nvim-cmp').setup
     },
+    {
+        'ray-x/lsp_signature.nvim',
+        config = function(_, opts) require'lsp_signature'.setup({}) end
+    },
+
     -- Debug
     {
         'mfussenegger/nvim-dap',
@@ -258,6 +262,32 @@ return {
         config = function ()
             require("copilot_cmp").setup()
         end
+    },
+
+    {
+        "kndndrj/nvim-dbee",
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+        },
+        build = function()
+            -- Install tries to automatically detect the install method.
+            -- if it fails, try calling it with one of these parameters:
+            --    "curl", "wget", "bitsadmin", "go"
+            require("dbee").install()
+        end,
+        config = function()
+            require("dbee").setup()
+            vim.keymap.set(
+                'n',
+                '<leader>\'',
+                function()
+                    vim.cmd.tabnew()
+                    --vim.api.nvim_cmd('tabnew')
+                    require("dbee").open()
+                end,
+                {desc = "Open dbee"}
+            )
+        end,
     },
 
 }
