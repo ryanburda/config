@@ -1,23 +1,23 @@
-user: 244
-group: 244
+user: 243
+group: 243
 permission:
-  read: 6
-  write: 6
-  exec: 6
-  exec-sticky: 6
-  no-access: 6
-  octal: 6
-  acl: 6
-  context: 6 
+  read: 73
+  write: 73
+  exec: 73
+  exec-sticky: 244
+  no-access: 244
+  octal: 244
+  acl: 244
+  context: 244 
 date:
-  hour-old: 77
+  hour-old: 70
   day-old: 71
   older: 65
 size:
   none: 245
-  small: 214
-  medium: 208
-  large: 202
+  small: 208
+  medium: 130
+  large: 124
 inode:
   valid: 13
   invalid: 245
@@ -29,10 +29,10 @@ git-status:
   default: 245
   unmodified: 245
   ignored: 245
-  new-in-index: dark_green
-  new-in-workdir: dark_green
-  typechange: dark_yellow
-  deleted: dark_red
-  renamed: dark_green
-  modified: dark_yellow
-  conflicted: dark_red
+  new-in-index: 2
+  new-in-workdir: 2
+  typechange: 3
+  deleted: 1
+  renamed: 2
+  modified: 3
+  conflicted: 1
