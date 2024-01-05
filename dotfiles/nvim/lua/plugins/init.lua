@@ -179,21 +179,23 @@ return {
         config = require("plugins.configs.mason-lspconfig").setup
     },
     {
-        "neovim/nvim-lspconfig",
+        "williamboman/mason.nvim",
         dependencies = {
             "hrsh7th/nvim-cmp",
-            "williamboman/mason.nvim",
         },
     },
     {
         'hrsh7th/nvim-cmp',
         dependencies = {
+            'neovim/nvim-lspconfig',
             'hrsh7th/cmp-nvim-lsp',
             'hrsh7th/cmp-buffer',
             'hrsh7th/cmp-path',
             'hrsh7th/cmp-cmdline',
+            
             'L3MON4D3/LuaSnip',
             'saadparwaiz1/cmp_luasnip',
+
             'onsails/lspkind.nvim',
         },
         config = require('plugins.configs.nvim-cmp').setup

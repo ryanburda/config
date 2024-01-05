@@ -20,7 +20,7 @@ function T.setup()
     capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
     local function on_attach(_, bufnr)
-        vim.keymap.set('i', '<C-i>'     , '<cmd>lua vim.lsp.buf.hover()<CR>', {desc = 'LSP: Hover', buffer = bufnr})
+        --vim.keymap.set('i', '<C-i>'     , '<cmd>lua vim.lsp.buf.hover()<CR>', {desc = 'LSP: Hover', buffer = bufnr})
         vim.keymap.set('n', '<leader>jh', '<cmd>lua vim.lsp.buf.hover()<CR>', {desc = 'LSP: Hover', buffer = bufnr})
         vim.keymap.set('n', '<leader>jj', '<cmd>lua vim.lsp.buf.definition()<CR>', {desc = 'LSP: jump to definition', buffer = bufnr})
         vim.keymap.set('n', '<leader>jt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', {desc = 'LSP: jump to type', buffer = bufnr})
