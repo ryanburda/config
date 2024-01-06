@@ -96,7 +96,7 @@ function T.setup()
             { name = 'nvim_lua', },
             { name = 'cmdline', },
             { name = 'nvim_lua', },
-            --{ name = "copilot", group_index = 2, },
+            { name = "copilot", group_index = 2, },
         }),
         formatting = {
             format = lspkind.cmp_format({

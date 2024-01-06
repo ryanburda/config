@@ -8,7 +8,12 @@ vim.opt.cursorline = true
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
-vim.opt.pumheight = 6  -- pumheight should be 2 less than scrolloff so that nvim-cmp always shows up below cursor.
+-- pumheight should always be 2 less than scrolloff.
+-- pumheigth sets the number of results in nvim-cmp.
+-- +2 accounts for the padding of the nvim-cmp floating window.
+-- scrolloff determines how many blank rows are padded below the last actual line of the buffer when scrolling down.
+-- This ensures that nvim-cmp always shows up below cursor even when scrolled to the bottom of the buffer.
+vim.opt.pumheight = 6
 vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 12
 vim.opt.cc = '120'
