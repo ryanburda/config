@@ -202,7 +202,10 @@ return {
     },
     {
         'ray-x/lsp_signature.nvim',
-        config = function(_, opts) require'lsp_signature'.setup({}) end
+        config = function(_, opts)
+            require'lsp_signature'.setup({})
+            vim.keymap.set('n', '<C-m>', function() vim.lsp.buf.signature_help() end, {desc = "toggle signature (hold)"})
+        end
     },
 
     -- Debug
