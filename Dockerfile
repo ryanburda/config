@@ -2,38 +2,36 @@
 FROM ubuntu:23.04
 
 RUN apt-get update && apt-get install -y \
-    sudo \
-    zsh \
-    tmux \
-    tmuxinator \
-    git \
-    fzf \
-    ripgrep \
-    jq \
-    curl \
-    wget \
-    make \
-    man \
-    tar \
-    unzip \
-    coreutils \
-    software-properties-common \
-    openssl \
-    golang \
-    htop \
-    rlwrap \
-    ninja-build \
-    gettext \
-    libtool \
-    libtool-bin \
     autoconf \
     automake \
     cmake \
-    g++ \
-    pkg-config \
+    coreutils \
+    curl \
     doxygen \
+    fzf \
+    git \
+    golang \
+    htop \
+    jq \
+    libtool \
+    libtool-bin \
+    make \
+    man \
+    neovim \
+    openssl \
+    pkg-config \
     postgresql-client \
-    pspg
+    pspg \
+    ripgrep \
+    rlwrap \
+    software-properties-common \
+    sudo \
+    tar \
+    tmux \
+    tmuxinator \
+    unzip \
+    wget \
+    zsh \
 
 RUN yes | unminimize
 
