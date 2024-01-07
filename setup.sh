@@ -85,10 +85,6 @@ brew install --cask shifty
 # rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
-# Create bin directory
-# All custom scripts should be put here
-mkdir -p "$HOME/.local/bin"
-
 # Create the compdef directory
 # All custom compdef files should be put here
 mkdir -p "$HOME/.zsh/compdef"
@@ -148,7 +144,8 @@ source ${HOME}/.zshrc
 # cloud-sql-proxy
 brew install --cask google-cloud-sdk
 CPU=$(sysctl -n machdep.cpu.brand_string)
-CLOUD_SQL_PROXY_PATH=$HOME/.local/bin/cloud_sql_proxy 
+mkdir -p "$HOME/.local/bin"
+CLOUD_SQL_PROXY_PATH=usr/local/bin/cloud_sql_proxy
 if [[ $CPU =~ ^Apple ]]; then
     curl -o $CLOUD_SQL_PROXY_PATH https://dl.google.com/cloudsql/cloud_sql_proxy.darwin.arm64
     chmod +x $CLOUD_SQL_PROXY_PATH
