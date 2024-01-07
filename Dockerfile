@@ -2,36 +2,67 @@
 FROM ubuntu:23.04
 
 RUN apt-get update && apt-get install -y \
+    aichat \
     autoconf \
     automake \
+    bat \
+    bottom \
     cmake \
+    composer \
     coreutils \
     curl \
+    deno \
+    diff-so-fancy \
     doxygen \
+    fd \
     fzf \
+    fzy \
+    gettext \
     git \
+    go \
     golang \
     htop \
     jq \
+    k9s \
+    kubectl \
+    kubectx \
+    lazydocker \
+    lazygit \
+    lf \
+    libpq \
     libtool \
     libtool-bin \
+    lsd \
+    lua \
     make \
     man \
     neovim \
+    ninja \
+    node \
+    octave \
     openssl \
+    php \
     pkg-config \
     postgresql-client \
     pspg \
+    pyenv \
+    pyenv-virtualenv \
     ripgrep \
     rlwrap \
+    sk \
     software-properties-common \
     sudo \
     tar \
+    tmate \
     tmux \
     tmuxinator \
+    ttyrec \
     unzip \
     wget \
     zsh \
+    zsh-autosuggestions \
+    zsh-syntax-highlighting \
+    zsh-vi-mode
 
 RUN yes | unminimize
 
