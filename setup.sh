@@ -38,7 +38,6 @@ brew install kubectl
 brew install kubectx
 brew install lazydocker
 brew install lazygit
-brew install lf
 brew install libpq
 brew link --force libpq
 brew install libtool
@@ -120,21 +119,18 @@ ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/theme_picker"     "${HOME}/.zsh/funcs/the
 ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/tse"              "${HOME}/.zsh/funcs/tse"
 ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/aichat_config"    "${HOME}/.zsh/funcs/aichat_config"
 
-ln -svfF "${SCRIPT_DIR}/dotfiles/alacritty.toml.template"                      "${XDG_CONFIG_HOME}/alacritty/alacritty.toml.template"
-ln -svfF "${SCRIPT_DIR}/dotfiles/karabiner.json"                               "${XDG_CONFIG_HOME}/karabiner/karabiner.json"
-ln -svfF "${SCRIPT_DIR}/dotfiles/lazygit.yml"                                  "${XDG_CONFIG_HOME}/lazygit/config.yml"
-mkdir -p                                                                       "${XDG_CONFIG_HOME}/lf"
-curl https://raw.githubusercontent.com/gokcehan/lf/master/etc/icons.example -o "${XDG_CONFIG_HOME}/lf/icons"
-ln -svfF "${SCRIPT_DIR}/dotfiles/lfrc"                                         "${XDG_CONFIG_HOME}/lf/lfrc"
-mkdir -p                                                                       "${XDG_CONFIG_HOME}/lsd"
-ln -svfF "${SCRIPT_DIR}/dotfiles/lsd/config.yaml"                              "${XDG_CONFIG_HOME}/lsd/config.yaml"
-ln -svfF "${SCRIPT_DIR}/dotfiles/lsd/colors.yaml"                              "${XDG_CONFIG_HOME}/lsd/colors.yaml"
-mkdir -p                                                                       "${XDG_CONFIG_HOME}/nvim"
-ln -svfF "${SCRIPT_DIR}/dotfiles/nvim"                                         "${XDG_CONFIG_HOME}/nvim"
-mkdir -p                                                                       "${XDG_CONFIG_HOME}/tmux"
-ln -svfF "${SCRIPT_DIR}/dotfiles/tmux.conf"                                    "${XDG_CONFIG_HOME}/tmux/tmux.conf"
-ln -svfF "${SCRIPT_DIR}/dotfiles/nord-status-content.conf"                     "${XDG_CONFIG_HOME}/tmux/plugins/tmux/src/nord-status-content.conf"
-source-file                                                                    "${XDG_CONFIG_HOME}/tmux/plugins/tmux/src/nord-status-content.conf"
+ln -svfF "${SCRIPT_DIR}/dotfiles/alacritty.toml.template"  "${XDG_CONFIG_HOME}/alacritty/alacritty.toml.template"
+ln -svfF "${SCRIPT_DIR}/dotfiles/karabiner.json"           "${XDG_CONFIG_HOME}/karabiner/karabiner.json"
+ln -svfF "${SCRIPT_DIR}/dotfiles/lazygit.yml"              "${XDG_CONFIG_HOME}/lazygit/config.yml"
+mkdir -p                                                   "${XDG_CONFIG_HOME}/lsd"
+ln -svfF "${SCRIPT_DIR}/dotfiles/lsd/config.yaml"          "${XDG_CONFIG_HOME}/lsd/config.yaml"
+ln -svfF "${SCRIPT_DIR}/dotfiles/lsd/colors.yaml"          "${XDG_CONFIG_HOME}/lsd/colors.yaml"
+mkdir -p                                                   "${XDG_CONFIG_HOME}/nvim"
+ln -svfF "${SCRIPT_DIR}/dotfiles/nvim"                     "${XDG_CONFIG_HOME}/nvim"
+mkdir -p                                                   "${XDG_CONFIG_HOME}/tmux"
+ln -svfF "${SCRIPT_DIR}/dotfiles/tmux.conf"                "${XDG_CONFIG_HOME}/tmux/tmux.conf"
+ln -svfF "${SCRIPT_DIR}/dotfiles/nord-status-content.conf" "${XDG_CONFIG_HOME}/tmux/plugins/tmux/src/nord-status-content.conf"
+source-file                                                "${XDG_CONFIG_HOME}/tmux/plugins/tmux/src/nord-status-content.conf"
 
 # AiChat - TODO: set this up in XDG_CONFIG_HOME
 mkdir -p                                                      "${HOME}/Library/Application Support/aichat"

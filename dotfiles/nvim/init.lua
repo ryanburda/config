@@ -105,7 +105,6 @@ vim.diagnostic.config({
 vim.keymap.set('n', '<leader>jo', '<cmd>lua vim.diagnostic.open_float()<CR>', {desc = 'Diagnostics: open float'})
 
 require('quickfix').keymaps()
-require('lf').keymaps()
 
 -- Plugins
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
