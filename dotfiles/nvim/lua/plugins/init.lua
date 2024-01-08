@@ -68,7 +68,7 @@ return {
             require("neo-tree").setup({
                 sources = { "filesystem", "document_symbols", },
                 filesystem = {
-                    follow_current_file = true,
+                    follow_current_file = {enabled = true},
                 },
                 source_selector = {
                     winbar = true,
