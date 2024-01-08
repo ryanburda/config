@@ -22,6 +22,7 @@ else
     brew update
 fi
 
+# CLI
 brew install aichat
 brew install automake
 brew install bat
@@ -96,7 +97,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 # Symlink config files
 SCRIPT_DIR=${0:a:h}
 mkdir -p                                                  "${HOME}/Developer"
-ln -svfF "${SCRIPT_DIR}/dotfiles/obsidian.vimrc"          "${HOME}/Documents/notes/.obsidian.vimrc"
+ln -svfF "${SCRIPT_DIR}/dotfiles/obsidian.vimrc"          "${HOME}/Documents/notes/.obsidian.vimrc"  # Needs to be linked again after signing into Obsidian.
 ln -svfF "${SCRIPT_DIR}/dotfiles/zshrc"                   "${HOME}/.zshrc"
 ln -svfF "${SCRIPT_DIR}/dotfiles/gitconfig"               "${HOME}/.gitconfig"
 ln -svfF "${SCRIPT_DIR}/dotfiles/psqlrc"                  "${HOME}/.psqlrc"
@@ -115,7 +116,7 @@ ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/aichat_config"     "${HOME}/.zsh/funcs/ai
 mkdir -p                                                  "${XDG_CONFIG_HOME}/alacritty"
 ln -svfF "${SCRIPT_DIR}/dotfiles/alacritty/themes/"       "${XDG_CONFIG_HOME}/alacritty/themes"
 ln -svfF "${SCRIPT_DIR}/dotfiles/alacritty.toml.template" "${XDG_CONFIG_HOME}/alacritty/alacritty.toml.template"
-cp       "${SCRIPT_DIR}/dotfiles/karabiner.json"          "${XDG_CONFIG_HOME}/karabiner/karabiner.json"
+cp       "${SCRIPT_DIR}/dotfiles/karabiner.json"          "${XDG_CONFIG_HOME}/karabiner/karabiner.json"  # Needs to be recopied if changed. Symlinks don't work for some reason.
 ln -svfF "${SCRIPT_DIR}/dotfiles/lazygit.yml"             "${XDG_CONFIG_HOME}/lazygit/config.yml"
 mkdir -p                                                  "${XDG_CONFIG_HOME}/lsd"
 ln -svfF "${SCRIPT_DIR}/dotfiles/lsd/config.yaml"         "${XDG_CONFIG_HOME}/lsd/config.yaml"
@@ -133,17 +134,3 @@ nvim --headless "+Lazy! sync" +qa
 
 # Source zshrc so plugins are installed automatically.
 source ${HOME}/.zshrc
-
-# cloud-sql-proxy
-brew install --cask google-cloud-sdk
-CPU=$(sysctl -n machdep.cpu.brand_string)
-CLOUD_SQL_PROXY_PATH=usr/local/bin/cloud_sql_proxy
-if [[ $CPU =~ ^Apple ]]; then
-    curl -o $CLOUD_SQL_PROXY_PATH https://dl.google.com/cloudsql/cloud_sql_proxy.darwin.arm64
-    chmod +x $CLOUD_SQL_PROXY_PATH
-elif [[ $CPU =~ ^Intel ]]; then
-    curl -o $CLOUD_SQL_PROXY_PATH https://dl.google.com/cloudsql/cloud_sql_proxy.darwin.amd64
-    chmod +x $CLOUD_SQL_PROXY_PATH
-else
-    echo "WARNING: could not determine which cloud-sql-proxy version to install."
-fi
