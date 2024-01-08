@@ -40,16 +40,6 @@ end
 
 function T.setup()
     -- Plugin config function.
-    local sysname = vim.loop.os_uname().sysname
-
-    if sysname == "Darwin" then
-        local handle = assert(io.popen("brew list node@16 | grep 'node$'"))
-        local node16_executable_path = handle:read("*l")
-        handle:close()
-
-        vim.g.copilot_node_command = node16_executable_path
-    end
-
     vim.cmd('Lazy load copilot.lua')
 
     require('copilot').setup()

@@ -116,7 +116,7 @@ ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/aichat_config"     "${HOME}/.zsh/funcs/ai
 mkdir -p                                                  "${XDG_CONFIG_HOME}/alacritty"
 ln -svfF "${SCRIPT_DIR}/dotfiles/alacritty/themes/"       "${XDG_CONFIG_HOME}/alacritty/themes"
 ln -svfF "${SCRIPT_DIR}/dotfiles/alacritty.toml.template" "${XDG_CONFIG_HOME}/alacritty/alacritty.toml.template"
-cp       "${SCRIPT_DIR}/dotfiles/karabiner.json"          "${XDG_CONFIG_HOME}/karabiner/karabiner.json"  # Needs to be recopied if changed. Symlinks don't work for some reason.
+cp       "${SCRIPT_DIR}/dotfiles/karabiner.json"          "${XDG_CONFIG_HOME}/karabiner/karabiner.json"  # Needs to be re-copied if changed. Symlinks don't work for some reason.
 ln -svfF "${SCRIPT_DIR}/dotfiles/lazygit.yml"             "${XDG_CONFIG_HOME}/lazygit/config.yml"
 mkdir -p                                                  "${XDG_CONFIG_HOME}/lsd"
 ln -svfF "${SCRIPT_DIR}/dotfiles/lsd/config.yaml"         "${XDG_CONFIG_HOME}/lsd/config.yaml"
@@ -128,6 +128,7 @@ ln -svfF "${SCRIPT_DIR}/dotfiles/tmux.conf"               "${XDG_CONFIG_HOME}/tm
 # AiChat - TODO: set this up in XDG_CONFIG_HOME
 mkdir -p                                                      "${HOME}/Library/Application Support/aichat"
 ln -svfF "${SCRIPT_DIR}/dotfiles/aichat_config.yaml.template" "${HOME}/Library/Application Support/aichat/aichat_config.yaml.template"
+touch                                                         "${HOME}/.openai_api_key"  # Add openai key to this file
 
 # Let nvim set itself up now that the config has been linked
 nvim --headless "+Lazy! sync" +qa
