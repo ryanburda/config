@@ -12,6 +12,8 @@ fi
 which -s brew
 if [[ $? != 0 ]] ; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    ln -svfF "${SCRIPT_DIR}/dotfiles/zprofile" "${HOME}/.zprofile"
+    eval "$(/opt/homebrew/bin/brew shellenv)"
 else
     brew update
 fi
@@ -75,6 +77,7 @@ brew tap shaunsingh/SFMono-Nerd-Font-Ligaturized
 brew install --cask font-sf-mono-nerd-font-ligaturized
 
 # Applications
+brew install --cask 1password
 brew install --cask alacritty
 brew install --cask alfred
 brew install --cask docker
@@ -116,12 +119,11 @@ ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/tse"              "${HOME}/.zsh/funcs/tse
 ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/aichat_config"    "${HOME}/.zsh/funcs/aichat_config"
 
 ln -svfF "${SCRIPT_DIR}/dotfiles/alacritty.toml.template"  "${XDG_CONFIG_HOME}/alacritty/alacritty.toml.template"
-ln -svfF "${SCRIPT_DIR}/dotfiles/karabiner.json"           "${XDG_CONFIG_HOME}/karabiner/karabiner.json"
+cp       "${SCRIPT_DIR}/dotfiles/karabiner.json"           "${XDG_CONFIG_HOME}/karabiner/karabiner.json"
 ln -svfF "${SCRIPT_DIR}/dotfiles/lazygit.yml"              "${XDG_CONFIG_HOME}/lazygit/config.yml"
 mkdir -p                                                   "${XDG_CONFIG_HOME}/lsd"
 ln -svfF "${SCRIPT_DIR}/dotfiles/lsd/config.yaml"          "${XDG_CONFIG_HOME}/lsd/config.yaml"
 ln -svfF "${SCRIPT_DIR}/dotfiles/lsd/colors.yaml"          "${XDG_CONFIG_HOME}/lsd/colors.yaml"
-mkdir -p                                                   "${XDG_CONFIG_HOME}/nvim"
 ln -svfF "${SCRIPT_DIR}/dotfiles/nvim"                     "${XDG_CONFIG_HOME}/nvim"
 mkdir -p                                                   "${XDG_CONFIG_HOME}/tmux"
 ln -svfF "${SCRIPT_DIR}/dotfiles/tmux.conf"                "${XDG_CONFIG_HOME}/tmux/tmux.conf"
