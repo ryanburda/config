@@ -8,6 +8,10 @@ else
     echo "Command Line Tools already installed"
 fi
 
+# Show task switcher on all monitors.
+defaults write com.apple.Dock appswitcher-all-displays -bool true
+killall Dock
+
 # Install Homebrew
 which -s brew
 if [[ $? != 0 ]] ; then
@@ -89,52 +93,40 @@ brew install --cask shifty
 # rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
-# Create the compdef directory
-# All custom compdef files should be put here
-mkdir -p "$HOME/.zsh/compdef"
-mkdir -p "$HOME/.zsh/funcs"
-
-# Create commonly used directories
-mkdir -p $HOME/Developer
-
 # Symlink config files
 SCRIPT_DIR=${0:a:h}
-
-mkdir -p ~/.config/alacritty
-ln -svfF "${SCRIPT_DIR}/dotfiles/alacritty/themes/" "${XDG_CONFIG_HOME}/alacritty/themes"
-
-ln -svfF "${SCRIPT_DIR}/dotfiles/zshrc"                  "${HOME}/.zshrc"
-ln -svfF "${SCRIPT_DIR}/dotfiles/gitconfig"              "${HOME}/.gitconfig"
-ln -svfF "${SCRIPT_DIR}/dotfiles/psqlrc"                 "${HOME}/.psqlrc"
-ln -svfF "${SCRIPT_DIR}/dotfiles/pspgconf"               "${HOME}/.pspgconf"
-ln -svfF "${SCRIPT_DIR}/dotfiles/octaverc"               "${HOME}/.octaverc"
-mkdir -p                                                 "${HOME}/.zsh/funcs"
-ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/find_file"        "${HOME}/.zsh/funcs/find_file"
-ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/alacritty_config" "${HOME}/.zsh/funcs/alacritty_config"
-ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/font_picker"      "${HOME}/.zsh/funcs/font_picker"
-ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/nvim_open"        "${HOME}/.zsh/funcs/nvim_open"
-ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/psqlp"            "${HOME}/.zsh/funcs/psqlp"
-ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/select_session"   "${HOME}/.zsh/funcs/select_session"
-ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/theme_picker"     "${HOME}/.zsh/funcs/theme_picker"
-ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/tse"              "${HOME}/.zsh/funcs/tse"
-ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/aichat_config"    "${HOME}/.zsh/funcs/aichat_config"
-
-ln -svfF "${SCRIPT_DIR}/dotfiles/alacritty.toml.template"  "${XDG_CONFIG_HOME}/alacritty/alacritty.toml.template"
-cp       "${SCRIPT_DIR}/dotfiles/karabiner.json"           "${XDG_CONFIG_HOME}/karabiner/karabiner.json"
-ln -svfF "${SCRIPT_DIR}/dotfiles/lazygit.yml"              "${XDG_CONFIG_HOME}/lazygit/config.yml"
-mkdir -p                                                   "${XDG_CONFIG_HOME}/lsd"
-ln -svfF "${SCRIPT_DIR}/dotfiles/lsd/config.yaml"          "${XDG_CONFIG_HOME}/lsd/config.yaml"
-ln -svfF "${SCRIPT_DIR}/dotfiles/lsd/colors.yaml"          "${XDG_CONFIG_HOME}/lsd/colors.yaml"
-ln -svfF "${SCRIPT_DIR}/dotfiles/nvim"                     "${XDG_CONFIG_HOME}/nvim"
-mkdir -p                                                   "${XDG_CONFIG_HOME}/tmux"
-ln -svfF "${SCRIPT_DIR}/dotfiles/tmux.conf"                "${XDG_CONFIG_HOME}/tmux/tmux.conf"
+mkdir -p                                                  "${HOME}/Developer"
+ln -svfF "${SCRIPT_DIR}/dotfiles/obsidian.vimrc"          "${HOME}/Documents/notes/.obsidian.vimrc"
+ln -svfF "${SCRIPT_DIR}/dotfiles/zshrc"                   "${HOME}/.zshrc"
+ln -svfF "${SCRIPT_DIR}/dotfiles/gitconfig"               "${HOME}/.gitconfig"
+ln -svfF "${SCRIPT_DIR}/dotfiles/psqlrc"                  "${HOME}/.psqlrc"
+ln -svfF "${SCRIPT_DIR}/dotfiles/pspgconf"                "${HOME}/.pspgconf"
+ln -svfF "${SCRIPT_DIR}/dotfiles/octaverc"                "${HOME}/.octaverc"
+mkdir -p                                                  "${HOME}/.zsh/funcs"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/find_file"         "${HOME}/.zsh/funcs/find_file"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/alacritty_config"  "${HOME}/.zsh/funcs/alacritty_config"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/font_picker"       "${HOME}/.zsh/funcs/font_picker"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/nvim_open"         "${HOME}/.zsh/funcs/nvim_open"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/psqlp"             "${HOME}/.zsh/funcs/psqlp"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/select_session"    "${HOME}/.zsh/funcs/select_session"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/theme_picker"      "${HOME}/.zsh/funcs/theme_picker"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/tse"               "${HOME}/.zsh/funcs/tse"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/aichat_config"     "${HOME}/.zsh/funcs/aichat_config"
+mkdir -p                                                  "${XDG_CONFIG_HOME}/alacritty"
+ln -svfF "${SCRIPT_DIR}/dotfiles/alacritty/themes/"       "${XDG_CONFIG_HOME}/alacritty/themes"
+ln -svfF "${SCRIPT_DIR}/dotfiles/alacritty.toml.template" "${XDG_CONFIG_HOME}/alacritty/alacritty.toml.template"
+cp       "${SCRIPT_DIR}/dotfiles/karabiner.json"          "${XDG_CONFIG_HOME}/karabiner/karabiner.json"
+ln -svfF "${SCRIPT_DIR}/dotfiles/lazygit.yml"             "${XDG_CONFIG_HOME}/lazygit/config.yml"
+mkdir -p                                                  "${XDG_CONFIG_HOME}/lsd"
+ln -svfF "${SCRIPT_DIR}/dotfiles/lsd/config.yaml"         "${XDG_CONFIG_HOME}/lsd/config.yaml"
+ln -svfF "${SCRIPT_DIR}/dotfiles/lsd/colors.yaml"         "${XDG_CONFIG_HOME}/lsd/colors.yaml"
+ln -svfF "${SCRIPT_DIR}/dotfiles/nvim"                    "${XDG_CONFIG_HOME}/nvim"
+mkdir -p                                                  "${XDG_CONFIG_HOME}/tmux"
+ln -svfF "${SCRIPT_DIR}/dotfiles/tmux.conf"               "${XDG_CONFIG_HOME}/tmux/tmux.conf"
 
 # AiChat - TODO: set this up in XDG_CONFIG_HOME
 mkdir -p                                                      "${HOME}/Library/Application Support/aichat"
 ln -svfF "${SCRIPT_DIR}/dotfiles/aichat_config.yaml.template" "${HOME}/Library/Application Support/aichat/aichat_config.yaml.template"
-
-# Obsidian
-ln -svfF "${SCRIPT_DIR}/dotfiles/obsidian.vimrc" "${HOME}/Documents/notes/.obsidian.vimrc"
 
 # Let nvim set itself up now that the config has been linked
 nvim --headless "+Lazy! sync" +qa
@@ -145,7 +137,6 @@ source ${HOME}/.zshrc
 # cloud-sql-proxy
 brew install --cask google-cloud-sdk
 CPU=$(sysctl -n machdep.cpu.brand_string)
-mkdir -p "$HOME/.local/bin"
 CLOUD_SQL_PROXY_PATH=usr/local/bin/cloud_sql_proxy
 if [[ $CPU =~ ^Apple ]]; then
     curl -o $CLOUD_SQL_PROXY_PATH https://dl.google.com/cloudsql/cloud_sql_proxy.darwin.arm64
@@ -156,7 +147,3 @@ elif [[ $CPU =~ ^Intel ]]; then
 else
     echo "WARNING: could not determine which cloud-sql-proxy version to install."
 fi
-
-# Show task switcher on all monitors.
-defaults write com.apple.Dock appswitcher-all-displays -bool true
-killall Dock

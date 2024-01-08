@@ -57,6 +57,49 @@ return {
         end
     },
 
+    {
+        "nvim-neo-tree/neo-tree.nvim",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "kyazdani42/nvim-web-devicons",
+            "MunifTanjim/nui.nvim",
+        },
+        config = function()
+            require("neo-tree").setup({
+                sources = { "filesystem", "document_symbols", },
+                filesystem = {
+                    follow_current_file = true,
+                },
+                source_selector = {
+                    winbar = true,
+                    sources = {
+                        { source = "filesystem", display_name = " 󰉓  Files " },
+                        { source = "document_symbols", display_name = "   Symbols " },
+                    },
+                },
+                default_component_configs = {
+                    git_status = {
+                        symbols = {
+                            -- Change type
+                            added     = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
+                            modified  = "", -- or "", but this is redundant info if you use git_status_colors on the name
+                            deleted   = "",-- this can only be used in the git_status source
+                            renamed   = "",-- this can only be used in the git_status source
+                            -- Status type
+                            untracked = "",
+                            ignored   = "",
+                            unstaged  = "",
+                            staged    = "",
+                            conflict  = "",
+                        },
+                    },
+                },
+            })
+
+            vim.keymap.set('n', "<leader>aa", ":Neotree toggle<CR>")
+        end
+    },
+
     -- Telescope
     {
         'nvim-telescope/telescope.nvim',
