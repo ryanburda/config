@@ -13,6 +13,12 @@ return {
         },
         config = require("plugins.configs.colorscheme").setup,
     },
+    {
+        "norcalli/nvim-colorizer.lua",
+        config = function()
+            require'colorizer'.setup()
+        end,
+    },
 
     -- Treesitter
     {

@@ -5,7 +5,8 @@ T.COLORSCHEME_FILE = vim.fn.stdpath('config') .. '/.colorscheme'
 T.BACKGROUND_DEFAULT = 'dark'
 T.BACKGROUND_FILE = vim.fn.stdpath('config') .. '/.background'
 
-function T.set_colorscheme()
+function T.set_colorscheme(is_setup)
+    is_setup = is_setup or false
 
     -- create the colorscheme file if it doesn't already exist
     if io.open(T.COLORSCHEME_FILE, "r") == nil then
@@ -36,11 +37,18 @@ function T.set_colorscheme()
     vim.cmd('set background=' .. background)
     vim.cmd('colorscheme ' .. colorscheme)
 
+    -- Don't reload the colorizer plugin if neovim is just starting up.
+    if is_setup == false then
+        -- Reload colorizer plugin.
+        -- NOTE: must refresh the current buffer manually (`:e`)
+        vim.cmd('Lazy reload nvim-colorizer.lua')
+    end
+
 end
 
 function T.setup()
 
-    T.set_colorscheme()
+    T.set_colorscheme(true)
 
     -- update the colorscheme when the colorscheme file changes.
     local fwatch = require('fwatch')
