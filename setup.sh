@@ -82,6 +82,7 @@ brew install --cask alacritty
 brew install --cask alfred
 brew install --cask docker
 brew install --cask karabiner-elements
+brew install --cask obsidian
 brew install --cask rectangle
 brew install --cask shifty
 
@@ -127,15 +128,13 @@ ln -svfF "${SCRIPT_DIR}/dotfiles/lsd/colors.yaml"          "${XDG_CONFIG_HOME}/l
 ln -svfF "${SCRIPT_DIR}/dotfiles/nvim"                     "${XDG_CONFIG_HOME}/nvim"
 mkdir -p                                                   "${XDG_CONFIG_HOME}/tmux"
 ln -svfF "${SCRIPT_DIR}/dotfiles/tmux.conf"                "${XDG_CONFIG_HOME}/tmux/tmux.conf"
-ln -svfF "${SCRIPT_DIR}/dotfiles/nord-status-content.conf" "${XDG_CONFIG_HOME}/tmux/plugins/tmux/src/nord-status-content.conf"
-source-file                                                "${XDG_CONFIG_HOME}/tmux/plugins/tmux/src/nord-status-content.conf"
 
 # AiChat - TODO: set this up in XDG_CONFIG_HOME
 mkdir -p                                                      "${HOME}/Library/Application Support/aichat"
 ln -svfF "${SCRIPT_DIR}/dotfiles/aichat_config.yaml.template" "${HOME}/Library/Application Support/aichat/aichat_config.yaml.template"
 
 # Obsidian
-ln -svfF "${SCRIPT_DIR}/dotfiles/obsidian.vimrc" "${HOME}/Documents/notes/notes/.obsidian.vimrc"
+ln -svfF "${SCRIPT_DIR}/dotfiles/obsidian.vimrc" "${HOME}/Documents/notes/.obsidian.vimrc"
 
 # Let nvim set itself up now that the config has been linked
 nvim --headless "+Lazy! sync" +qa
