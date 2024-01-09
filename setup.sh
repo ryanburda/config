@@ -32,7 +32,7 @@ brew install composer
 brew install coreutils
 brew install curl
 brew install deno
-brew install diff-so-fancy
+brew install git-delta
 brew install fd
 brew install fzf
 brew install fzy
@@ -118,7 +118,7 @@ mkdir -p                                                  "${XDG_CONFIG_HOME}/al
 ln -svfF "${SCRIPT_DIR}/dotfiles/alacritty/themes/"       "${XDG_CONFIG_HOME}/alacritty/themes"
 ln -svfF "${SCRIPT_DIR}/dotfiles/alacritty.toml.template" "${XDG_CONFIG_HOME}/alacritty/alacritty.toml.template"
 cp       "${SCRIPT_DIR}/dotfiles/karabiner.json"          "${XDG_CONFIG_HOME}/karabiner/karabiner.json"  # Needs to be re-copied if changed. Symlinks don't work for some reason.
-ln -svfF "${SCRIPT_DIR}/dotfiles/lazygit.yml"             "${XDG_CONFIG_HOME}/lazygit/config.yml"
+cp       "${SCRIPT_DIR}/dotfiles/lazygit.yml"             "${XDG_CONFIG_HOME}/lazygit/config.yml"  # Needs to be re-copied if changed. Symlinks don't work for some reason.
 mkdir -p                                                  "${XDG_CONFIG_HOME}/lsd"
 ln -svfF "${SCRIPT_DIR}/dotfiles/lsd/config.yaml"         "${XDG_CONFIG_HOME}/lsd/config.yaml"
 ln -svfF "${SCRIPT_DIR}/dotfiles/lsd/colors.yaml"         "${XDG_CONFIG_HOME}/lsd/colors.yaml"
