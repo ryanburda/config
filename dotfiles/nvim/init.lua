@@ -73,6 +73,7 @@ vim.keymap.set('n', '<leader>m'      , ':!open -a "Google Chrome" %<cr><cr>', {d
 vim.keymap.set('n', '<leader>F'      , ":let @+=expand('%')<CR>", {desc = 'Copy relative file path to clipboard'})
 vim.keymap.set('n', '<leader>A'      , ":let @+=expand('%:p')<CR>", {desc = 'Copy absolute file path to clipboard'})
 vim.keymap.set('n', '<leader>D'      , ":let @+=expand('%:h')<CR>", {desc = 'Copy directory path to clipboard'})
+vim.keymap.set('n', '<leader>ds'     , ":lua if vim.o.diff == false then vim.cmd('windo diffthis') else vim.cmd('windo diffoff') end<cr>", {desc = 'Toggle diff of current split'})
 
 -- quick notes
 vim.keymap.set('n', '<leader>n' , ':edit ~/Documents/main.txt<cr>G$', opts)
