@@ -52,11 +52,11 @@ function set_theme(){
             osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to true'
         fi
         
-        ~/.zsh/funcs/alacritty_config
         echo "$theme_key" > $XDG_CONFIG_HOME/alacritty/.theme_key
-
-        # aichat theme
+        # Regenerate templated configs
+        ~/.zsh/funcs/alacritty_config
         ~/.zsh/funcs/aichat_config
+        ~/.zsh/funcs/lazygit_config
     fi
 }
 

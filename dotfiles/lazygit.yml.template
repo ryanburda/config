@@ -18,7 +18,7 @@ gui:
 git:
   paging:
     colorArg: always
-    pager: delta --paging=never --line-numbers
+    pager: delta --${LIGHT_OR_DARK} --paging=never --line-numbers
 
 promptToReturnFromSubprocess: false
 

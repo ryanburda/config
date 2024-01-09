@@ -1,0 +1,3 @@
+export LIGHT_OR_DARK=$(cat $XDG_CONFIG_HOME/nvim/.background)
+
+envsubst < "${XDG_CONFIG_HOME}/lazygit/config.yml.template" > "${XDG_CONFIG_HOME}/lazygit/config.yml"

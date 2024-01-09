@@ -1,25 +1,25 @@
 [user]
-	email = ryanburda@gmail.com
-	name = Ryan Burda
+    email = ryanburda@gmail.com
+    name = Ryan Burda
 [pull]
-	ff = only
+    ff = only
 [core]
-	editor = nvim
+    editor = nvim
     pager = delta --line-numbers
 [init]
-	defaultBranch = main
+    defaultBranch = main
 [color]
-	ui = true
+    ui = true
 [color "diff-highlight"]
-	oldNormal = red bold
-	oldHighlight = red bold 52
-	newNormal = green bold
-	newHighlight = green bold 22
+    oldNormal = red bold
+    oldHighlight = red bold 52
+    newNormal = green bold
+    newHighlight = green bold 22
 [interactive]
     diffFilter = delta --color-only
 
 [includeIf "gitdir:~/Developer/sqsp/**/"]
-	path = ~/Developer/sqsp/.gitconfig_include
+    path = ~/Developer/sqsp/.gitconfig_include
 
 [merge]
     conflictstyle = diff3
