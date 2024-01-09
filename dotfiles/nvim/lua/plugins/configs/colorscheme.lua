@@ -41,7 +41,7 @@ function T.set_colorscheme(is_setup)
     if is_setup == false then
         -- Reload colorizer plugin.
         -- NOTE: must refresh the current buffer manually (`:e`)
-        vim.cmd('Lazy reload nvim-colorizer.lua')
+        vim.cmd('silent Lazy reload nvim-colorizer.lua')
     end
 
 end
