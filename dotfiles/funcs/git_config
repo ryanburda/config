@@ -1,0 +1,4 @@
+#!/bin/zsh
+export LIGHT_OR_DARK=$(cat $XDG_CONFIG_HOME/nvim/.background)
+
+envsubst < "${HOME}/.gitconfig.template" > "${HOME}/.gitconfig"

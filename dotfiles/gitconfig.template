@@ -5,7 +5,7 @@
     ff = only
 [core]
     editor = nvim
-    pager = delta --line-numbers
+    pager = delta --${LIGHT_OR_DARK} --line-numbers
 [init]
     defaultBranch = main
 [color]
