@@ -59,16 +59,22 @@ if [[ "$(command -v nvim)" ]]; then
 fi
 
 # Add to PATH
-fpath+=$HOME/.zsh/compdef/
-fpath+=$HOME/.zsh/funcs/
-autoload -U ~/.zsh/funcs/find_file
-autoload -U ~/.zsh/funcs/tse
-autoload -U ~/.zsh/funcs/nvim_open
-autoload -U ~/.zsh/funcs/select_session
-autoload -U ~/.zsh/funcs/set_font
-autoload -U ~/.zsh/funcs/font_picker
-autoload -U ~/.zsh/funcs/theme_picker
-autoload -U ~/.zsh/funcs/psqlp
+fpath=(
+    ~/.zsh/funcs
+    "${fpath[@]}"
+)
+autoload -Uz alacritty_config
+autoload -Uz aichat_config
+autoload -Uz git_config
+autoload -Uz lazygit_config
+autoload -Uz find_file
+autoload -Uz font_picker
+autoload -Uz macos_appearance
+autoload -Uz nvim_open
+autoload -Uz psqlp
+autoload -Uz select_session
+autoload -Uz theme_picker
+autoload -Uz tse
 
 # autocompletion using arrow keys (based on history)
 bindkey '^[[A' history-search-backward
