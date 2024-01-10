@@ -45,19 +45,14 @@ function set_theme(){
         echo "$a" > $XDG_CONFIG_HOME/alacritty/.theme
         echo "$b" > $XDG_CONFIG_HOME/nvim/.colorscheme
         echo "$c" > $XDG_CONFIG_HOME/nvim/.background
-
-        if [[ $c == 'light' ]]; then
-            osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to false'
-        else
-            osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to true'
-        fi
-        
         echo "$theme_key" > $XDG_CONFIG_HOME/alacritty/.theme_key
+
         # Regenerate templated configs
         ~/.zsh/funcs/alacritty_config
         ~/.zsh/funcs/aichat_config
         ~/.zsh/funcs/git_config
         ~/.zsh/funcs/lazygit_config
+        ~/.zsh/funcs/macos_appearance $(if [[ $c == 'light' ]]; then echo '-l'; fi)
     fi
 }
 

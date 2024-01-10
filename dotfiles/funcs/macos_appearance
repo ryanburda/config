@@ -1,0 +1,28 @@
+#!/bin/zsh
+print_help() {
+    echo "Switches MacOS to dark system theme. (Defaults to dark)"
+    echo "Options:"
+    echo "  -h    Show this help message"
+    echo "  -l    Switch to light system theme"
+}
+
+tf="true"
+
+while getopts ":lh" opt; do
+    case $opt in
+        h)
+            print_help
+            exit 0
+            ;;
+        l)
+            tf="false"
+            ;;
+        \?)
+            echo "Invalid option: -$OPTARG" >&2
+            print_help
+            exit 1
+            ;;
+    esac
+done
+
+osascript -e "tell app \"System Events\" to tell appearance preferences to set dark mode to ${tf}"
