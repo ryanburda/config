@@ -1,9 +1,9 @@
 #!/bin/zsh
 print_help() {
-    echo "Switches MacOS to dark system theme. (Defaults to dark)"
+    echo "Switches macOS appearance. (Defaults to dark)"
     echo "Options:"
     echo "  -h    Show this help message"
-    echo "  -l    Switch to light system theme"
+    echo "  -l    Switch to light appearance"
 }
 
 tf="true"
