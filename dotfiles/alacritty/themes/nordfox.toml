@@ -1,28 +1,21 @@
-# Colors (Nord)
-
-# Default colors
 [colors.primary]
-background = '#2E3440'
-foreground = '#D8DEE9'
-
-# Normal colors
+background = '#2e3440'
+foreground = '#d8dee9'
 [colors.normal]
-black   = '#3B4252'
-red     = '#BF616A'
-green   = '#A3BE8C'
-yellow  = '#EBCB8B'
-blue    = '#81A1C1'
-magenta = '#B48EAD'
-cyan    = '#88C0D0'
-white   = '#E5E9F0'
-
-# Bright colors
+black      = '#3b4252'
+blue       = '#81a1c1'
+cyan       = '#88c0d0'
+green      = '#a3be8c'
+magenta    = '#b48ead'
+red        = '#bf616a'
+white      = '#e5e9f0'
+yellow     = '#ebcb8b'
 [colors.bright]
-black   = '#4C566A'
-red     = '#BF616A'
-green   = '#A3BE8C'
-yellow  = '#EBCB8B'
-blue    = '#81A1C1'
-magenta = '#B48EAD'
-cyan    = '#8FBCBB'
-white   = '#ECEFF4'
+black      = '#4c566a'
+blue       = '#81a1c1'
+cyan       = '#8fbcbb'
+green      = '#a3be8c'
+magenta    = '#b48ead'
+red        = '#bf616a'
+white      = '#eceff4'
+yellow     = '#ebcb8b'
