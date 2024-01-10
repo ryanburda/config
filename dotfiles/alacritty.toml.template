@@ -11,3 +11,4 @@ size = ${ALACRITTY_FONT_SIZE}
 
 [window]
 option_as_alt = "OnlyLeft"
+startup_mode = "Maximized"
