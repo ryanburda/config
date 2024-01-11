@@ -38,16 +38,17 @@ function set_theme(){
     values=${themes[$theme_key]}
 
     if [[ ! -z $values ]]; then
-        a=$(print $values | awk -F ' ' '{print $1}')
-        b=$(print $values | awk -F ' ' '{print $2}')
-        c=$(print $values | awk -F ' ' '{print $3}')
+        a=$(print $values | awk '{print $1}')
+        b=$(print $values | awk '{print $2}')
+        c=$(print $values | awk '{print $3}')
 
+        # Write the values to files.
         echo "$a" > $XDG_CONFIG_HOME/alacritty/.theme
         echo "$b" > $XDG_CONFIG_HOME/nvim/.colorscheme
         echo "$c" > $XDG_CONFIG_HOME/nvim/.background
         echo "$theme_key" > $XDG_CONFIG_HOME/alacritty/.theme_key
 
-        # Regenerate templated configs
+        # Regenerate templated configs.
         ~/.zsh/funcs/alacritty_config
         ~/.zsh/funcs/aichat_config
         ~/.zsh/funcs/git_config
