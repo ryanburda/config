@@ -189,6 +189,13 @@ return {
         end
     },
 
+    -- Status line
+    {
+        'nvim-lualine/lualine.nvim',
+        dependencies = { 'kyazdani42/nvim-web-devicons', },
+        config = require('plugins.configs.lualine').setup
+    },
+
     {
         'folke/trouble.nvim',
         dependencies = { "kyazdani42/nvim-web-devicons", },
