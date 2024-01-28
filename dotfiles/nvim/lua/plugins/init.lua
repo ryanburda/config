@@ -241,7 +241,6 @@ return {
             'hrsh7th/cmp-buffer',
             'hrsh7th/cmp-path',
             'hrsh7th/cmp-cmdline',
-            
             'L3MON4D3/LuaSnip',
             'saadparwaiz1/cmp_luasnip',
 
@@ -251,7 +250,7 @@ return {
     },
     {
         'ray-x/lsp_signature.nvim',
-        config = function(_, opts)
+        config = function(_, _)
             require'lsp_signature'.setup({})
             vim.keymap.set('n', '<C-m>', function() vim.lsp.buf.signature_help() end, {desc = "toggle signature (hold)"})
         end

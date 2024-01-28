@@ -54,16 +54,16 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 local opts = { noremap=true, silent=false }
-vim.keymap.set('v', 'J'              , ":m '>+1<CR>gv=gv" , {desc = 'Move visual selection down'})
-vim.keymap.set('v', 'K'              , ":m '<-2<CR>gv=gv" , {desc = 'Move visual selection up'})
+--vim.keymap.set('v', 'D'              , ":m '>+1<CR>gv=gv" , {desc = 'Move visual selection down'})
+--vim.keymap.set('v', 'U'              , ":m '<-2<CR>gv=gv" , {desc = 'Move visual selection up'})
 vim.keymap.set('n', '<leader>t'      , ':tabnew<cr>'      , {desc = 'New Tab'})
 vim.keymap.set('n', '<leader>x'      , ':tabclose<cr>'    , {desc = 'Close Tab'})
 vim.keymap.set('n', '<leader><S-Tab>', ':tabprevious<cr>' , {desc = 'Previous Tab'})
 vim.keymap.set('n', '<leader><Tab>'  , ':tabnext<cr>'     , {desc = 'Next Tab'})
 vim.keymap.set('n', '<leader><C-j>'  , ':split<cr><C-w>j' , {desc = 'Horizontal split'})
 vim.keymap.set('n', '<leader><C-l>'  , ':vsplit<cr><C-w>l', {desc = 'Vertical split'})
-vim.keymap.set('n', 'L'              , 'zLgm'             , {desc = 'horizontal scroll right'})
-vim.keymap.set('n', 'H'              , 'zHgm'             , {desc = 'horizontal scroll left'})
+--vim.keymap.set('n', 'L'              , 'zLgm'             , {desc = 'horizontal scroll right'})
+--vim.keymap.set('n', 'H'              , 'zHgm'             , {desc = 'horizontal scroll left'})
 vim.keymap.set('n', 'n'              , 'nzz'              , {desc = 'next occurrence of search and center'})
 vim.keymap.set('n', 'N'              , 'Nzz'              , {desc = 'previous occurrence of search and center'})
 vim.keymap.set('n', '<leader>p'      , '"0p'              , {desc = 'paste from yank register'})
@@ -104,7 +104,7 @@ vim.diagnostic.config({
     },
 })
 
-vim.keymap.set('n', '<leader>jo', '<cmd>lua vim.diagnostic.open_float()<CR>', {desc = 'Diagnostics: open float'})
+vim.keymap.set('n', 'H', '<cmd>lua vim.diagnostic.open_float()<CR>', {desc = 'Diagnostics: open float'})
 
 require('quickfix').keymaps()
 
