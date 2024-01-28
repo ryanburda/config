@@ -35,6 +35,7 @@ brew install deno
 brew install git-delta
 brew install fd
 brew install fzf
+$(brew --prefix)/opt/fzf/install
 brew install fzy
 brew install gettext
 brew install go
