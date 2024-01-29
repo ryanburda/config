@@ -11,3 +11,12 @@ vim.keymap.set(
     end,
     { buffer = bufnr }
 )
+
+vim.keymap.set(
+    "n",
+    "<M-r>",
+    function()
+        vim.cmd.RustLsp('runnables')
+    end,
+    { buffer = bufnr }
+)
