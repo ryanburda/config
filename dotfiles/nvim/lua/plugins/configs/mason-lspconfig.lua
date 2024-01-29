@@ -94,9 +94,11 @@ function T.setup()
 
         ["rust_analyzer"] = function ()
             local rt = require("rust-tools")
+            local mason_registry = require("mason-registry")
 
-            -- Must install https://marketplace.visualstudio.com/items?itemName=vadimcn.vscode-lldb
-            local extension_path = vim.env.HOME .. '/.vscode/extensions/vadimcn.vscode-lldb-1.9.0/'
+            -- This will fail if codelldb isn't installed through Mason.
+            local codelldb = mason_registry.get_package("codelldb")
+            local extension_path = codelldb:get_install_path() .. "/extension/"
             local codelldb_path = extension_path .. 'adapter/codelldb'
             local liblldb_path = extension_path .. 'lldb/lib/liblldb.dylib'  -- MacOS
             --local liblldb_path = extension_path .. 'lldb/lib/liblldb.so'  -- Linux
