@@ -102,7 +102,9 @@ export FZF_CTRL_R_OPTS="
   --header 'Press CTRL-Y to copy command into clipboard'"
 export FZF_HISTORY_DIR=1
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# zsh-vi-mode will overwrite keybindings unless they are added to `zvm_after_init_commands`.
+# https://github.com/jeffreytse/zsh-vi-mode?tab=readme-ov-file#execute-extra-commands
+zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
 
 # python
 path+=$HOME/.pyenv/bin
