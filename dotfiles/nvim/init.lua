@@ -78,8 +78,9 @@ vim.keymap.set('n', '<leader>ds'     , ":lua if vim.o.diff == false then vim.cmd
 vim.keymap.set('n', '<leader>n' , ':edit ~/Documents/main.txt<cr>G$', opts)
 
 -- :help vim.diagnostic.*
-vim.keymap.set('n', '<C-n>', '<cmd>lua vim.diagnostic.goto_next()<CR>' , opts)
-vim.keymap.set('n', '<C-p>', '<cmd>lua vim.diagnostic.goto_prev()<CR>' , opts)
+vim.keymap.set('n', '<leader>n', '<cmd>lua vim.diagnostic.goto_next()<CR>' , opts)
+vim.keymap.set('n', '<leader>p', '<cmd>lua vim.diagnostic.goto_prev()<CR>' , opts)
+vim.keymap.set('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', {desc = 'Diagnostics: open float'})
 
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('UserLspConfig', {}),

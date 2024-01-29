@@ -26,10 +26,10 @@ function T.setup()
 
     local opts = { noremap=true, silent=true }
 
-    vim.api.nvim_set_keymap("n", "<leader>ei", ":VtrOpenRunner<cr>"                     , opts)
-    vim.api.nvim_set_keymap("n", "<leader>ea", ":VtrAttachToPane<cr>"                   , opts)
-    vim.api.nvim_set_keymap("x", "<leader>ee", ":call VtrSendLinesToRunnerWrapper()<cr>", opts)
-    vim.api.nvim_set_keymap("n", "<leader>ef", ":VtrSendFile<cr>"                       , opts)
+    vim.keymap.set("n", "<leader>ri", ":VtrOpenRunner<cr>"                     , opts)
+    vim.keymap.set("n", "<leader>ra", ":VtrAttachToPane<cr>"                   , opts)
+    vim.keymap.set("x", "<leader>re", ":call VtrSendLinesToRunnerWrapper()<cr>", opts)
+    vim.keymap.set("n", "<leader>rf", ":VtrSendFile<cr>"                       , opts)
 
 end
 

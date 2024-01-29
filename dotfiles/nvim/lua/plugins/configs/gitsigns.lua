@@ -3,13 +3,12 @@ local T = {}
 function T.setup()
 
     local on_attach = function(bufnr)
-        local opts = { noremap=true, silent=true }
-        vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>dn', ':Gitsigns next_hunk<CR>'                , opts)
-        vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>dp', ':Gitsigns prev_hunk<CR>'                , opts)
-        vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>di', ':Gitsigns preview_hunk<CR>'             , opts)  -- `di` for diff inspect
-        vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>dr', ':Gitsigns reset_hunk<CR>'               , opts)
-        vim.api.nvim_buf_set_keymap(bufnr, 'v', '<leader>dr', ':Gitsigns reset_hunk<CR>'               , opts)
-        vim.api.nvim_buf_set_keymap(bufnr, 'n', '<M-g>'     , ':Gitsigns toggle_current_line_blame<CR>', opts)
+        local opts = { noremap=true, silent=true, buffer=bufnr }
+        vim.keymap.set('n'       , '<C-n>'     , ':Gitsigns next_hunk<CR>'                , opts)
+        vim.keymap.set('n'       , '<C-p>'     , ':Gitsigns prev_hunk<CR>'                , opts)
+        vim.keymap.set('n'       , '<leader>di', ':Gitsigns preview_hunk<CR>'             , opts)  -- `di` for diff inspect
+        vim.keymap.set('n'       , '<M-g>'     , ':Gitsigns toggle_current_line_blame<CR>', opts)
+        vim.keymap.set({"n", "v"}, '<leader>dr', ':Gitsigns reset_hunk<CR>'               , opts)
     end
 
     local config = {
