@@ -74,6 +74,7 @@ brew install zsh-vi-mode
 
 # Fonts
 brew tap homebrew/cask-fonts
+brew install --cask font-caskaydia-mono-nerd-font
 brew install --cask font-fira-code-nerd-font
 brew install --cask font-gohufont-nerd-font
 brew install --cask font-hack-nerd-font

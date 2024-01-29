@@ -9,6 +9,7 @@
 # DESCRIPTION
 #   Use fzf to select a font. The font is then substituted into alacritty.toml.
 fonts=(
+    "CaskaydiaMono Nerd Font Mono,13"
     "FiraCode Nerd Font Mono,11"
     "GohuFont 14 Nerd Font Mono,12"
     "Hack Nerd Font Mono,11"
