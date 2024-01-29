@@ -96,7 +96,7 @@ return {
                 },
             })
 
-            vim.keymap.set('n', "<leader>aa", ":Neotree toggle<CR>")
+            vim.keymap.set('n', "<M-a>", ":Neotree toggle<CR>")
         end
     },
 
