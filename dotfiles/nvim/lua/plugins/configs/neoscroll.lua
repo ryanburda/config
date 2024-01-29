@@ -9,13 +9,13 @@ function T.setup()
 
     local t = {}
     -- Syntax: t[keys] = {function, {function arguments}}
-    t['<C-u>'] = {'scroll', {'-vim.wo.scroll', 'true', '95'}}
-    t['<C-d>'] = {'scroll', { 'vim.wo.scroll', 'true', '95'}}
-    t['<C-y>'] = {'scroll', {'-0.10', 'false', '95'}}
-    t['<C-e>'] = {'scroll', { '0.10', 'false', '95'}}
-    t['zt']    = {'zt', {'95'}}
-    t['zz']    = {'zz', {'95'}}
-    t['zb']    = {'zb', {'95'}}
+    t['<C-u>'] = {'scroll', {'-vim.wo.scroll', 'true', '60'}}
+    t['<C-d>'] = {'scroll', { 'vim.wo.scroll', 'true', '60'}}
+    t['<C-y>'] = {'scroll', {'-0.10', 'false', '60'}}
+    t['<C-e>'] = {'scroll', { '0.10', 'false', '60'}}
+    t['zt']    = {'zt', {'60'}}
+    t['zz']    = {'zz', {'60'}}
+    t['zb']    = {'zb', {'60'}}
 
     require('neoscroll.config').set_mappings(t)
 
