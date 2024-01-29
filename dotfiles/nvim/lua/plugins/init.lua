@@ -143,6 +143,18 @@ return {
     -- Motion
     'justinmk/vim-sneak',
 
+    -- Highlight word under cursor
+    {
+          'tzachar/local-highlight.nvim',
+          config = function()
+              require('local-highlight').setup({
+                  hlgroup = 'Search',
+                  cw_hlgroup = nil,
+                  insert_mode = false,
+              })
+          end
+    },
+
     -- Git
     {
         'lewis6991/gitsigns.nvim',
