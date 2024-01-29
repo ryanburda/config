@@ -294,10 +294,9 @@ return {
         config = function() require("nvim-dap-virtual-text").setup({}) end
     },
     {
-        'simrat39/rust-tools.nvim',
-        dependencies = {
-            'mfussenegger/nvim-dap',
-        },
+        'mrcjkb/rustaceanvim',
+        version = '^4', -- Recommended
+        ft = { 'rust' },
     },
     {
         'mfussenegger/nvim-dap-python',

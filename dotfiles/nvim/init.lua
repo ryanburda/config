@@ -60,8 +60,8 @@ vim.keymap.set('n', '<leader><S-Tab>', ':tabprevious<cr>' , {desc = 'Previous Ta
 vim.keymap.set('n', '<leader><Tab>'  , ':tabnext<cr>'     , {desc = 'Next Tab'})
 vim.keymap.set('n', '<leader><C-j>'  , ':split<cr><C-w>j' , {desc = 'Horizontal split'})
 vim.keymap.set('n', '<leader><C-l>'  , ':vsplit<cr><C-w>l', {desc = 'Vertical split'})
-vim.keymap.set('n', 'L'              , 'zLgm'             , {desc = 'horizontal scroll right'})
-vim.keymap.set('n', 'H'              , 'zHgm'             , {desc = 'horizontal scroll left'})
+--vim.keymap.set('n', 'L'              , 'zLgm'             , {desc = 'horizontal scroll right'})
+--vim.keymap.set('n', 'H'              , 'zHgm'             , {desc = 'horizontal scroll left'})
 vim.keymap.set('n', 'n'              , 'nzz'              , {desc = 'next occurrence of search and center'})
 vim.keymap.set('n', 'N'              , 'Nzz'              , {desc = 'previous occurrence of search and center'})
 vim.keymap.set('n', '<leader>p'      , '"0p'              , {desc = 'paste from yank register'})
@@ -78,8 +78,30 @@ vim.keymap.set('n', '<leader>ds'     , ":lua if vim.o.diff == false then vim.cmd
 vim.keymap.set('n', '<leader>n' , ':edit ~/Documents/main.txt<cr>G$', opts)
 
 -- :help vim.diagnostic.*
-vim.keymap.set('n', '<leader>hj', '<cmd>lua vim.diagnostic.goto_next()<CR>' , opts)
-vim.keymap.set('n', '<leader>hk', '<cmd>lua vim.diagnostic.goto_prev()<CR>' , opts)
+vim.keymap.set('n', '<C-n>', '<cmd>lua vim.diagnostic.goto_next()<CR>' , opts)
+vim.keymap.set('n', '<C-p>', '<cmd>lua vim.diagnostic.goto_prev()<CR>' , opts)
+
+vim.api.nvim_create_autocmd('LspAttach', {
+    group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+    callback = function(ev)
+        -- Enable completion triggered by <c-x><c-o>
+        vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+
+        -- Buffer local mappings.
+        -- See `:help vim.lsp.*` for documentation on any of the below functions
+        vim.keymap.set('n', '<leader>jd', vim.lsp.buf.definition, {desc = 'LSP: jump to definition', buffer = ev.buf})
+        vim.keymap.set('n', '<leader>jD', vim.lsp.buf.declaration, {desc = 'LSP: jump to declaration', buffer = ev.buf})
+        vim.keymap.set('n', '<leader>jt', vim.lsp.buf.type_definition, {desc = 'LSP: jump to type', buffer = ev.buf})
+        vim.keymap.set('n', '<leader>jk', vim.lsp.buf.references, {desc = 'LSP: references kwickfix', buffer = ev.buf})
+        vim.keymap.set('n', '<leader>jr', vim.lsp.buf.rename, {desc = 'LSP: rename', buffer = ev.buf})
+        vim.keymap.set({'n', 'v'}, '<leader>ja', vim.lsp.buf.code_action, {desc = 'LSP: code action', buffer = ev.buf})
+        vim.keymap.set('n', 'H', vim.lsp.buf.signature_help, {desc = 'LSP: signature help', buffer = ev.buf})
+        vim.keymap.set('n', 'K', vim.lsp.buf.hover, {desc = 'LSP: Hover', buffer = ev.buf})
+        vim.keymap.set('n', '<space>f', function()
+            vim.lsp.buf.format { async = true }
+        end, {desc = 'LSP: format', buffer = ev.buf})
+    end,
+})
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
     vim.lsp.handlers.hover, {
