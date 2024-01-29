@@ -29,7 +29,8 @@ typeset -A themes=(
     ['Nightfox-night']="nightfox nightfox dark"
     ['Nightfox-nord']="nordfox nordfox dark"
     ['Nightfox-tera']="terafox terafox dark"
-    ['VSCode']="vscode vscode light"
+    ['VSCode-light']="vscode_light vscode light"
+    ['VSCode-dark']="vscode_dark vscode dark"
 )
 
 function set_theme(){
