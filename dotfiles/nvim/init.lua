@@ -75,7 +75,7 @@ vim.keymap.set('n', '<leader>D'      , ":let @+=expand('%:h')<CR>", {desc = 'Cop
 vim.keymap.set('n', '<leader>ds'     , ":lua if vim.o.diff == false then vim.cmd('windo diffthis') else vim.cmd('windo diffoff') end<cr>", {desc = 'Toggle diff of current split'})
 
 -- quick notes
-vim.keymap.set('n', '<leader>n' , ':edit ~/Documents/main.txt<cr>G$', opts)
+vim.keymap.set('n', '<leader>N' , ':edit ~/Documents/main.txt<cr>G$', opts)
 
 -- :help vim.diagnostic.*
 vim.keymap.set('n', '<leader>n', '<cmd>lua vim.diagnostic.goto_next()<CR>' , opts)
