@@ -94,7 +94,6 @@ function T.setup()
             { name = 'buffer', },
             { name = 'path', },
             { name = 'nvim_lua', },
-            { name = 'cmdline', },
             { name = 'nvim_lua', },
             { name = "copilot", group_index = 2, },
         }),
@@ -130,7 +129,7 @@ function T.setup()
             { name = 'buffer' }
         },
         view = {
-            entries = { name = 'custom', selection_order = 'bottom_up' }
+            entries = { name = 'custom', selection_order = 'near_cursor' }
         },
     })
 
@@ -143,7 +142,7 @@ function T.setup()
             { name = 'cmdline' }
         }),
         view = {
-            entries = { name = 'custom', selection_order = 'bottom_up' }
+            entries = { name = 'custom', selection_order = 'near_cursor' }
         },
     })
 
