@@ -150,7 +150,7 @@ return {
               require('local-highlight').setup({
                   hlgroup = 'Search',
                   cw_hlgroup = nil,
-                  insert_mode = false,
+                  insert_mode = true,
               })
           end
     },
