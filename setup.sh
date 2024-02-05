@@ -108,6 +108,7 @@ ln -svfF "${SCRIPT_DIR}/dotfiles/gitconfig.template"      "${HOME}/.gitconfig.te
 ln -svfF "${SCRIPT_DIR}/dotfiles/psqlrc"                  "${HOME}/.psqlrc"
 ln -svfF "${SCRIPT_DIR}/dotfiles/pspgconf"                "${HOME}/.pspgconf"
 ln -svfF "${SCRIPT_DIR}/dotfiles/octaverc"                "${HOME}/.octaverc"
+ln -svfF "${SCRIPT_DIR}/dotfiles/zprofile"                "${HOME}/.zprofile"
 mkdir -p                                                  "${HOME}/.zsh/funcs"
 ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/alacritty_config"  "${HOME}/.zsh/funcs/alacritty_config"
 ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/aichat_config"     "${HOME}/.zsh/funcs/aichat_config"
