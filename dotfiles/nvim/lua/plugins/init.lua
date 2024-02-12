@@ -148,7 +148,7 @@ return {
           'tzachar/local-highlight.nvim',
           config = function()
               require('local-highlight').setup({
-                  hlgroup = 'Search',
+                  hlgroup = 'Underlined',
                   cw_hlgroup = nil,
                   insert_mode = true,
               })
