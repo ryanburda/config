@@ -95,6 +95,7 @@ brew install --cask obsidian
 brew install --cask rectangle
 brew install --cask shifty
 brew install --cask topnotch
+brew install --cask blackhole-2ch
 
 # rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
