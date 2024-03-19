@@ -10,6 +10,7 @@ return {
             "EdenEast/nightfox.nvim",
             "Verf/deepwhite.nvim",
             "Mofiqul/vscode.nvim",
+            "projekt0n/github-nvim-theme",
         },
         config = require("plugins.configs.colorscheme").setup,
     },
