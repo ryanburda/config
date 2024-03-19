@@ -21,6 +21,7 @@ typeset -A themes=(
     ['Everforest-light']="everforest_light everforest light"
     ['Github-dark']="github_dark github_dark dark"
     ['Github-dark-dimmed']="github_dark_dimmed github_dark_dimmed dark"
+    ['Github-dark-colorblind']="github_dark_colorblind github_dark_colorblind dark"
     ['Github-light']="github_light github_light light"
     ['Gruvbox-dark']="gruvbox_material_medium_dark gruvbox-material dark"
     ['Gruvbox-light']="gruvbox_material_medium_light gruvbox-material light"
