@@ -29,6 +29,7 @@ typeset -A themes=(
     ['Gruvbox-light']="gruvbox_material_medium_light gruvbox-material light"
     ['Kanagawa-dragon']="kanagawa_dragon kanagawa-dragon dark"
     ['Kanagawa-wave']="kanagawa_wave kanagawa-wave dark"
+    ['Miasma']="miasma miasma dark"
     ['Nightfox-carbon']="carbonfox carbonfox dark"
     ['Nightfox-dawn']="dawnfox dawnfox light"
     ['Nightfox-day']="dayfox dayfox light"

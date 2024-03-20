@@ -11,6 +11,7 @@ return {
             "Verf/deepwhite.nvim",
             "Mofiqul/vscode.nvim",
             "projekt0n/github-nvim-theme",
+            "xero/miasma.nvim",
         },
         config = require("plugins.configs.colorscheme").setup,
     },
