@@ -2,14 +2,14 @@
 background = '#ffffff'
 foreground = '#0E1116'
 [colors.normal]
-black      = '#b1c7b3'
+black      = '#92c6e3'
 red        = '#cf222e'
 green      = '#116329'
 yellow     = '#4d2d00'
 blue       = '#0969da'
 magenta    = '#8250df'
 cyan       = '#1b7c83'
-white      = '#444444'
+white      = '#333333'
 [colors.bright]
 black      = '#57606a'
 red        = '#a40e26'
