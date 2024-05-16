@@ -338,6 +338,12 @@ return {
         },
     },
 
+    -- sql
+    "nanotee/sqls.nvim",
+    "tpope/vim-dadbod",
+    "kristijanhusak/vim-dadbod-completion",
+    "kristijanhusak/vim-dadbod-ui",
+
     -- Github Copilot
     {
         'zbirenbaum/copilot.lua',
@@ -356,31 +362,5 @@ return {
         end
     },
 
-    {
-        "kndndrj/nvim-dbee",
-        dependencies = {
-            "MunifTanjim/nui.nvim",
-        },
-        build = function()
-            -- Install tries to automatically detect the install method.
-            -- if it fails, try calling it with one of these parameters:
-            --    "curl", "wget", "bitsadmin", "go"
-            require("dbee").install()
-        end,
-        config = function()
-            require("dbee").setup()
-            vim.keymap.set(
-                'n',
-                '<leader>\'',
-                function()
-                    vim.cmd.tabnew()
-                    require("dbee").open()
-                end,
-                {desc = "Open dbee"}
-            )
-        end,
-    },
-
-    {"nanotee/sqls.nvim"},
 
 }

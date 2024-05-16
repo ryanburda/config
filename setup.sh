@@ -133,6 +133,8 @@ mkdir -p                                                  "${XDG_CONFIG_HOME}/ls
 ln -svfF "${SCRIPT_DIR}/dotfiles/lsd/config.yaml"         "${XDG_CONFIG_HOME}/lsd/config.yaml"
 ln -svfF "${SCRIPT_DIR}/dotfiles/lsd/colors.yaml"         "${XDG_CONFIG_HOME}/lsd/colors.yaml"
 ln -svfF "${SCRIPT_DIR}/dotfiles/nvim"                    "${XDG_CONFIG_HOME}/nvim"
+mkdir -p                                                  "${XDG_CONFIG_HOME}/sqls"
+ln -svfF "${SCRIPT_DIR}/dotfiles/sqls_config.yml"         "${XDG_CONFIG_HOME}/sqls/config.yml"
 mkdir -p                                                  "${XDG_CONFIG_HOME}/tmux"
 ln -svfF "${SCRIPT_DIR}/dotfiles/tmux.conf"               "${XDG_CONFIG_HOME}/tmux/tmux.conf"
 
