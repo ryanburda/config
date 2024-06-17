@@ -5,7 +5,7 @@
 
 export PATH="/usr/local/sbin:$PATH"
 
-PROMPT="%B%F{yellow}%n %F{cyan}%~"$'\n'"%F{yellow}> %b"
+PROMPT="%F{blue%}[%D{%H:%M:%S}] %B%F{cyan}%~"$'\n'"%F{yellow}> %b"
 
 # Speed up zsh compinit by only checking cache once a day.
 # https://gist.github.com/ctechols/ca1035271ad134841284#gistcomment-2308206
