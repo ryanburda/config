@@ -2,13 +2,14 @@
 
 Terminal configuration and dotfiles.
 
-Local installation on macOS: (intended to be cloned into `~/Developer/config`)
+Setup: (intended to be cloned into `~/Developer/config`)
 ```
 mkdir ~/Developer
 cd ~/Developer
 git clone https://github.com/ryanburda/config.git
 cd config
-./setup.sh
+./setup_macos.sh
+# ./setup_ubuntu.sh
 ```
 
 Optional repo setup:
