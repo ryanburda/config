@@ -67,6 +67,7 @@ brew install tmate
 brew install tmux
 brew install tmuxinator
 brew install ttyrec
+brew install utm
 brew install wget
 brew install zsh-autosuggestions
 brew install zsh-syntax-highlighting
