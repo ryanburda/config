@@ -20,7 +20,6 @@ return {
             "Verf/deepwhite.nvim",
             "Mofiqul/vscode.nvim",
             "projekt0n/github-nvim-theme",
-            "xero/miasma.nvim",
             "ribru17/bamboo.nvim",
             "sho-87/kanagawa-paper.nvim",
             {

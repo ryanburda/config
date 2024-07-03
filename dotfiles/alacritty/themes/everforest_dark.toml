@@ -2,7 +2,7 @@
 background = '#2d353b'
 foreground = '#d3c6aa'
 [colors.normal]
-black      = '#475258'
+black      = '#3d5250'
 blue       = '#7fbbb3'
 cyan       = '#83c092'
 green      = '#a7c080'
