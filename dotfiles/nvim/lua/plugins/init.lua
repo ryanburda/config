@@ -21,6 +21,7 @@ return {
             "Mofiqul/vscode.nvim",
             "projekt0n/github-nvim-theme",
             "xero/miasma.nvim",
+            "ribru17/bamboo.nvim",
         },
         config = require("plugins.configs.colorscheme").setup,
     },

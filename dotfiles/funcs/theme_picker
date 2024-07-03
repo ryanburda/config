@@ -16,6 +16,7 @@
 #       * and neovim background
 #   in that order separated by spaces.
 typeset -A themes=(
+    ['Bamboo']="everforest bamboo dark"
     ['Deep-White']="deepwhite deepwhite light"
     ['Everforest-dark']="everforest_dark everforest dark"
     ['Everforest-light']="everforest_light everforest light"
