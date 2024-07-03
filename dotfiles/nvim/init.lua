@@ -35,6 +35,7 @@ vim.opt.list = true
 vim.opt.listchars = { tab = '›~'}
 vim.opt.autoread = true
 vim.opt.winbar = '%=%m %f'
+vim.o.statuscolumn = "%s%4l %2r  "
 
 vim.cmd('set noshowmode')
 vim.cmd('set noswapfile')
