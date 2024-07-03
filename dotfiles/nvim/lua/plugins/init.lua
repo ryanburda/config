@@ -22,6 +22,13 @@ return {
             "projekt0n/github-nvim-theme",
             "xero/miasma.nvim",
             "ribru17/bamboo.nvim",
+            "sho-87/kanagawa-paper.nvim",
+            {
+                "zenbones-theme/zenbones.nvim",
+                dependencies = {
+                    "rktjmp/lush.nvim",
+                },
+            },
         },
         config = require("plugins.configs.colorscheme").setup,
     },

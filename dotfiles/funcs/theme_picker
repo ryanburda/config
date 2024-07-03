@@ -16,7 +16,7 @@
 #       * and neovim background
 #   in that order separated by spaces.
 typeset -A themes=(
-    ['Bamboo']="everforest bamboo dark"
+    ['Bamboo']="bamboo bamboo dark"
     ['Deep-White']="deepwhite deepwhite light"
     ['Everforest-dark']="everforest_dark everforest dark"
     ['Everforest-light']="everforest_light everforest light"
@@ -29,6 +29,7 @@ typeset -A themes=(
     ['Gruvbox-dark']="gruvbox_material_medium_dark gruvbox-material dark"
     ['Gruvbox-light']="gruvbox_material_medium_light gruvbox-material light"
     ['Kanagawa-dragon']="kanagawa_dragon kanagawa-dragon dark"
+    ['Kanagawa-paper']="kanagawa_wave kanagawa-paper dark"
     ['Kanagawa-wave']="kanagawa_wave kanagawa-wave dark"
     ['Miasma']="miasma miasma dark"
     ['Nightfox-carbon']="carbonfox carbonfox dark"
@@ -39,6 +40,9 @@ typeset -A themes=(
     ['Nightfox-tera']="terafox terafox dark"
     ['VSCode-light']="vscode_light vscode light"
     ['VSCode-dark']="vscode_dark vscode dark"
+    ['ZenBones-forest']="everforest_dark forestbones dark"
+    ['ZenBones-neo']="neobones neobones dark"
+    ['ZenBones-rose-light']="dayfox rosebones light"
 )
 
 function set_theme(){
