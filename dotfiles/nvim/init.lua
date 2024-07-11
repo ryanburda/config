@@ -145,3 +145,7 @@ vim.opt.runtimepath:prepend(lazypath)
 require("lazy").setup(require("plugins"))
 
 vim.keymap.set('n', '<leader>`' , ':Lazy profile<CR>', {desc = 'Plugin Manager'})
+
+-- Project specific setup scripts
+require('projects.bde-airflow').setup()
+require('projects.finance-datamart').setup()
