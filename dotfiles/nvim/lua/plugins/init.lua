@@ -106,15 +106,15 @@ return {
         },
         config = function()
             require("neo-tree").setup({
-                sources = { "filesystem", "document_symbols", },
+                sources = { "filesystem" },
                 filesystem = {
                     follow_current_file = {enabled = true},
                 },
                 source_selector = {
                     winbar = true,
+                    statusline = false,
                     sources = {
                         { source = "filesystem", display_name = " 󰉓  Files " },
-                        { source = "document_symbols", display_name = "   Symbols " },
                     },
                 },
                 default_component_configs = {
