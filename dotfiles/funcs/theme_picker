@@ -39,7 +39,7 @@ typeset -A themes=(
     ['Light - Nightfox-dawn']="dawnfox dawnfox light"
     ['Light - Nightfox-day']="dayfox dayfox light"
     ['Light - VSCode']="vscode_light vscode light"
-    ['Light - ZenBones-rose']="dayfox rosebones light"
+    ['Light - ZenBones-rose']="zenbones_rose rosebones light"
 )
 
 function set_theme(){
