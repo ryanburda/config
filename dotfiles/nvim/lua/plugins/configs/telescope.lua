@@ -134,8 +134,8 @@ function T.setup()
     vim.keymap.set('n', "<leader>fe", "<cmd>lua require('telescope.builtin').diagnostics()<cr>")
     vim.keymap.set('n', "<leader>fd", "<cmd>lua require('telescope.builtin').git_status()<cr>")
     vim.keymap.set('n', "<leader>db", "<cmd>lua require('telescope.builtin').git_branches()<cr>")
-    vim.keymap.set('n', "<leader>dc", "<cmd>lua require('telescope.builtin').git_commits()<cr>")
     vim.keymap.set("n", "<leader>df", "<cmd>lua require('telescope').extensions.advanced_git_search.diff_commit_file()<CR>", { silent = true })
+    vim.keymap.set("n", "<leader>dc", "<cmd>lua require('telescope').extensions.advanced_git_search.search_log_content()<CR>", { silent = true })
 
 end
 
