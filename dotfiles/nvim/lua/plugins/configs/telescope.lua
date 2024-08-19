@@ -65,6 +65,9 @@ function T.setup()
                     },
                 },
             },
+            advanced_git_search = {
+                diff_plugin = "diffview"
+            },
         },
         pickers = {
             find_files = {
@@ -114,10 +117,12 @@ function T.setup()
 
     require('telescope').load_extension('fzf')
     require("telescope").load_extension("changed_files")
+    require("telescope").load_extension("advanced_git_search")
 
+    vim.keymap.set('n', "<leader>?", "<cmd>lua require('telescope.builtin').keymaps()<cr>")
     vim.keymap.set('n', "<leader>f ", "<cmd>lua require('telescope.builtin').resume()<cr>")
     vim.keymap.set('n', "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<cr>")
-    vim.keymap.set("n", "<leader>fg", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", { silent = true })
+    vim.keymap.set("n", "<leader>fg", "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", { silent = true })
     vim.keymap.set('n', "<leader>f/", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>")
     vim.keymap.set('n', "<leader>fj", "<cmd>lua require('telescope.builtin').grep_string()<cr>")
     vim.keymap.set('n', "<leader>fl", "<cmd>lua require('telescope.builtin').oldfiles()<cr>")
@@ -130,7 +135,7 @@ function T.setup()
     vim.keymap.set('n', "<leader>fd", "<cmd>lua require('telescope.builtin').git_status()<cr>")
     vim.keymap.set('n', "<leader>db", "<cmd>lua require('telescope.builtin').git_branches()<cr>")
     vim.keymap.set('n', "<leader>dc", "<cmd>lua require('telescope.builtin').git_commits()<cr>")
-    vim.keymap.set('n', "<leader>?", "<cmd>lua require('telescope.builtin').keymaps()<cr>")
+    vim.keymap.set("n", "<leader>df", "<cmd>lua require('telescope').extensions.advanced_git_search.diff_commit_file()<CR>", { silent = true })
 
 end
 
