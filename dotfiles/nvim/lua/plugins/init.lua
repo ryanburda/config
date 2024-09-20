@@ -386,9 +386,6 @@ return {
 
     -- sql
     "nanotee/sqls.nvim",
-    "tpope/vim-dadbod",
-    "kristijanhusak/vim-dadbod-completion",
-    "kristijanhusak/vim-dadbod-ui",
     {
         "kndndrj/nvim-dbee",
         dependencies = {
@@ -404,6 +401,24 @@ return {
             require("dbee").setup(--[[optional config]])
             vim.keymap.set('n', '<M-d>', "<cmd>lua require('dbee').toggle()<cr>", {desc = "Toggle nvim-dbee"})
         end,
+    },
+    {
+        "hrsh7th/nvim-cmp",
+        dependencies = {
+            {
+                "MattiasMTS/cmp-dbee",
+                dependencies = {
+                    {"kndndrj/nvim-dbee"}
+                },
+                ft = "sql", -- optional but good to have
+                opts = {}, -- needed
+            },
+        },
+        opts = {
+            sources = {
+                { "cmp-dbee" },
+            },
+        },
     },
 
     -- Github Copilot
