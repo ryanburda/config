@@ -84,7 +84,7 @@ vim.keymap.set('n', '<leader>m'      , ':!open -a "Google Chrome" %<cr><cr>', {d
 vim.keymap.set('n', '<leader>F'      , ":let @+=expand('%')<CR>", {desc = 'Copy relative file path to clipboard'})
 vim.keymap.set('n', '<leader>A'      , ":let @+=expand('%:p')<CR>", {desc = 'Copy absolute file path to clipboard'})
 vim.keymap.set('n', '<leader>D'      , ":let @+=expand('%:h')<CR>", {desc = 'Copy directory path to clipboard'})
-vim.keymap.set('n', '<leader>ds'     , ":lua if vim.o.diff == false then vim.cmd('windo diffthis') else vim.cmd('windo diffoff') end<cr>", {desc = 'Toggle diff of current split'})
+vim.keymap.set('n', '<leader>ds'     , ":lua if vim.o.diff == false then vim.cmd('windo diffthis') else vim.cmd('windo diffoff') end<cr>", {desc = 'Diff: Toggle diff of current split'})
 
 -- quick notes
 vim.keymap.set('n', '<leader>N' , ':edit ~/Documents/main.txt<cr>G$', opts)
@@ -140,6 +140,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.keymap.set('n', '<leader>jr', require('telescope.builtin').lsp_references, {desc = 'LSP: jump to references', buffer = event.buf})
         vim.keymap.set('n', '<leader>ji', require('telescope.builtin').lsp_implementations, {desc = 'LSP: jump to implementations', buffer = event.buf})
         vim.keymap.set('n', '<leader>fd', require('telescope.builtin').lsp_document_symbols, {desc = 'Find: symbols in current document', buffer = event.buf})
+        vim.keymap.set('n', '<leader>fw', require('telescope.builtin').lsp_dynamic_workspace_symbols, {desc = 'Find: symbols in entire workspace', buffer = event.buf})
         vim.keymap.set('n', '<leader>jD', vim.lsp.buf.declaration, {desc = 'LSP: jump to declaration', buffer = event.buf})
         vim.keymap.set('n', '<leader>jt', vim.lsp.buf.type_definition, {desc = 'LSP: jump to type', buffer = event.buf})
         vim.keymap.set('n', '<leader>jk', vim.lsp.buf.references, {desc = 'LSP: references kwickfix', buffer = event.buf})
