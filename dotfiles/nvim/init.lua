@@ -94,28 +94,6 @@ vim.keymap.set('n', '<leader>ej', '<cmd>lua vim.diagnostic.goto_next()<CR>' , op
 vim.keymap.set('n', '<leader>ek', '<cmd>lua vim.diagnostic.goto_prev()<CR>' , opts)
 vim.keymap.set('n', '<leader>ee', '<cmd>lua vim.diagnostic.open_float()<CR>', {desc = 'Diagnostics: open float'})
 
-vim.api.nvim_create_autocmd('LspAttach', {
-    group = vim.api.nvim_create_augroup('UserLspConfig', {}),
-    callback = function(ev)
-        -- Enable completion triggered by <c-x><c-o>
-        vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
-
-        -- Buffer local mappings.
-        -- See `:help vim.lsp.*` for documentation on any of the below functions
-        vim.keymap.set('n', '<leader>jd', vim.lsp.buf.definition, {desc = 'LSP: jump to definition', buffer = ev.buf})
-        vim.keymap.set('n', '<leader>jD', vim.lsp.buf.declaration, {desc = 'LSP: jump to declaration', buffer = ev.buf})
-        vim.keymap.set('n', '<leader>jt', vim.lsp.buf.type_definition, {desc = 'LSP: jump to type', buffer = ev.buf})
-        vim.keymap.set('n', '<leader>jk', vim.lsp.buf.references, {desc = 'LSP: references kwickfix', buffer = ev.buf})
-        vim.keymap.set('n', '<leader>jr', vim.lsp.buf.rename, {desc = 'LSP: rename', buffer = ev.buf})
-        vim.keymap.set({'n', 'v'}, '<leader>ja', vim.lsp.buf.code_action, {desc = 'LSP: code action', buffer = ev.buf})
-        vim.keymap.set('n', 'H', vim.lsp.buf.signature_help, {desc = 'LSP: signature help', buffer = ev.buf})
-        vim.keymap.set('n', 'K', vim.lsp.buf.hover, {desc = 'LSP: Hover', buffer = ev.buf})
-        vim.keymap.set('n', '<space>f', function()
-            vim.lsp.buf.format { async = true }
-        end, {desc = 'LSP: format', buffer = ev.buf})
-    end,
-})
-
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
     vim.lsp.handlers.hover, {
         border = "rounded"
@@ -154,6 +132,25 @@ end
 vim.opt.runtimepath:prepend(lazypath)
 
 require("lazy").setup(require("plugins"))
+
+vim.api.nvim_create_autocmd('LspAttach', {
+    group = vim.api.nvim_create_augroup('UserLspConfig', { clear = true }),
+    callback = function(event)
+        vim.keymap.set('n', '<leader>jd', require('telescope.builtin').lsp_definitions, {desc = 'LSP: jump to definition', buffer = event.buf})
+        vim.keymap.set('n', '<leader>jr', require('telescope.builtin').lsp_references, {desc = 'LSP: jump to references', buffer = event.buf})
+        vim.keymap.set('n', '<leader>ji', require('telescope.builtin').lsp_implementations, {desc = 'LSP: jump to implementations', buffer = event.buf})
+        vim.keymap.set('n', '<leader>jD', vim.lsp.buf.declaration, {desc = 'LSP: jump to declaration', buffer = event.buf})
+        vim.keymap.set('n', '<leader>jt', vim.lsp.buf.type_definition, {desc = 'LSP: jump to type', buffer = event.buf})
+        vim.keymap.set('n', '<leader>jk', vim.lsp.buf.references, {desc = 'LSP: references kwickfix', buffer = event.buf})
+        vim.keymap.set('n', '<leader>R', vim.lsp.buf.rename, {desc = 'LSP: rename', buffer = event.buf})
+        vim.keymap.set({'n', 'v'}, '<leader>ja', vim.lsp.buf.code_action, {desc = 'LSP: code action', buffer = event.buf})
+        vim.keymap.set('n', 'H', vim.lsp.buf.signature_help, {desc = 'LSP: signature help', buffer = event.buf})
+        vim.keymap.set('n', 'K', vim.lsp.buf.hover, {desc = 'LSP: Hover', buffer = event.buf})
+        vim.keymap.set('n', '<space>f', function()
+            vim.lsp.buf.format { async = true }
+        end, {desc = 'LSP: format', buffer = event.buf})
+    end,
+})
 
 vim.keymap.set('n', '<leader>`' , ':Lazy profile<CR>', {desc = 'Plugin Manager'})
 
