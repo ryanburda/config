@@ -108,6 +108,11 @@ require('auto_close_buf').setup()
 -- Keymaps
 require('keymaps')
 
+-- TODO: Move these scripts to the repos repo.
+--       From there they can be symlinked to the projects directory.
+--       The projects directory should be added to the gitignore of this repo.
+--       All files in the projects directory should be automatically loaded.
+--       That will keep project specific code out of this repo.
 -- Project specific setup scripts
 require('projects.bde-airflow').setup()
 require('projects.finance-datamart').setup()
