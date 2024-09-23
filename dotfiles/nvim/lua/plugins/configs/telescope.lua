@@ -119,24 +119,6 @@ function T.setup()
     require("telescope").load_extension("changed_files")
     require("telescope").load_extension("advanced_git_search")
 
-    vim.keymap.set('n', '<leader>?',  function() builtin.keymaps() end)
-    vim.keymap.set('n', '<leader>f ', function() builtin.resume() end)
-    vim.keymap.set('n', '<leader>ff', function() builtin.find_files() end)
-    vim.keymap.set('n', '<leader>fg', function() builtin.live_grep() end)
-    vim.keymap.set('n', '<leader>f/', function() builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown{ winblend = 10, previewer = false, }) end)
-    vim.keymap.set('n', '<leader>fj', function() builtin.grep_string() end)
-    vim.keymap.set('n', '<leader>fl', function() builtin.oldfiles() end)
-    vim.keymap.set('n', '<leader>fb', function() builtin.buffers() end)
-    vim.keymap.set('n', '<leader>fv', function() builtin.help_tags() end, {desc = "Search vim help"})
-    vim.keymap.set('n', '<leader>fm', function() builtin.man_pages() end, {desc = "Search man pages"})
-    vim.keymap.set('n', '<leader>fk', function() builtin.live_grep({search_dirs = require('plugins.configs.telescope').getqflist_files(), results_title = 'Quickfix Files'}) end)
-    vim.keymap.set('n', '<leader>fK', function() builtin.quickfix() end)
-    vim.keymap.set('n', '<leader>fe', function() builtin.diagnostics() end)
-    vim.keymap.set('n', '<leader>du', function() builtin.git_status() end, { desc = "Diff: Show uncommitted changes (Telescope)" })
-    vim.keymap.set('n', '<leader>db', function() builtin.git_branches() end, { desc = "Diff: Open branch selector in Telescope. Diff between selected branch and current is opened in DiffView"} )
-    vim.keymap.set("n", '<leader>df', function() require('telescope').extensions.advanced_git_search.diff_commit_file() end)
-    vim.keymap.set("n", '<leader>dc', function() require('telescope').extensions.advanced_git_search.search_log_content() end)
-
 end
 
 return T

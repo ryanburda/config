@@ -135,8 +135,6 @@ return {
                     },
                 },
             })
-
-            vim.keymap.set('n', "<M-a>", ":Neotree toggle<CR>")
         end
     },
 
@@ -182,10 +180,8 @@ return {
         config = require('plugins.configs.telescope').setup
     },
 
-    {  -- Smooth scrolling
-        'karb94/neoscroll.nvim',
-        config = require('plugins.configs.neoscroll').setup
-    },
+    -- Smooth scrolling
+    'karb94/neoscroll.nvim',
     {
         'Aasim-A/scrollEOF.nvim',
         config = function() require('scrollEOF').setup() end,
@@ -209,20 +205,35 @@ return {
     -- Git
     {
         'lewis6991/gitsigns.nvim',
-        config = require('plugins.configs.gitsigns').setup
-    },
-    {
-        'ruifm/gitlinker.nvim',
-        config = function ()
-            vim.keymap.set({'n', 'v'}, "<leader>gl", "<cmd>lua require('gitlinker').get_buf_range_url('n')<cr>", {desc = "Github link of current location in buffer"})
-            vim.keymap.set({'n', 'v'}, "<leader>gh", "<cmd>lua require('gitlinker').get_buf_range_url('n', {action_callback = require('gitlinker.actions').open_in_browser})<cr>", {desc = "Open Github in browser to current location in buffer"})
+        config = function()
+            require('gitsigns').setup({
+                current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d>: <abbrev_sha> - <summary>',
+            })
         end
     },
+    'ruifm/gitlinker.nvim',
     'tpope/vim-fugitive',
     {
         'sindrets/diffview.nvim',
         dependencies = { 'nvim-lua/plenary.nvim', },
-        config = require('plugins.configs.diffview').setup
+        config = function()
+            local actions = require("diffview.actions")
+
+            require("diffview").setup({
+                file_panel = {
+                    win_config = {
+                        position = "bottom",
+                        height = 16,
+                    },
+                },
+                keymaps = {
+                    view = {
+                        ["<leader>dh"] = actions.conflict_choose("ours"),
+                        ["<leader>dl"] = actions.conflict_choose("theirs"),
+                    },
+                },
+            })
+        end,
     },
 
     -- Tmux
@@ -233,14 +244,6 @@ return {
                 default_amount = 1,
                 ignored_buftypes = { 'NvimTree', 'Outline' },
             })
-            vim.keymap.set({"n", "v", "i", "x"}, '<C-h>', require('smart-splits').move_cursor_left)
-            vim.keymap.set({"n", "v", "i", "x"}, '<C-j>', require('smart-splits').move_cursor_down)
-            vim.keymap.set({"n", "v", "i", "x"}, '<C-k>', require('smart-splits').move_cursor_up)
-            vim.keymap.set({"n", "v", "i", "x"}, '<C-l>', require('smart-splits').move_cursor_right)
-            vim.keymap.set({"n", "v", "i", "x"}, '<M-h>', require('smart-splits').resize_left)
-            vim.keymap.set({"n", "v", "i", "x"}, '<M-j>', require('smart-splits').resize_down)
-            vim.keymap.set({"n", "v", "i", "x"}, '<M-k>', require('smart-splits').resize_up)
-            vim.keymap.set({"n", "v", "i", "x"}, '<M-l>', require('smart-splits').resize_right)
         end
     },
     {
@@ -252,19 +255,34 @@ return {
     {
         'akinsho/bufferline.nvim',
         dependencies = { 'kyazdani42/nvim-web-devicons', },
-        config = require('plugins.configs.bufferline').setup,
+        config = function ()
+            require('bufferline').setup({
+                options = {
+                    close_command = "Bdelete",
+                    show_close_icon = false,
+                    show_buffer_close_icons = true,
+                    offsets = {
+                        {
+                            filetype = "neo-tree",
+                            highlight = "Directory",
+                            separator = true -- use a "true" to enable the default, or set your own character
+                        },
+                    },
+                    hover = {
+                        enabled = true,
+                        delay = 10,
+                        reveal = {'close'}
+                    },
+                    separator_style = "thin",
+                }
+            })
+        end
     },
 
     -- Buffer deletion without changing layout
     {
         'famiu/bufdelete.nvim',
-        dependencies = { 'akinsho/bufferline.nvim', },
-        config = function ()
-            vim.keymap.set('n', '<leader>q', ':Bdelete<cr>', {desc = 'Delete buffer without changing window layout'})
-            vim.keymap.set('n', '<leader>Q', ':Bdelete!<cr>' , {desc = 'Force delete buffer without changing window layout'})
-
-            require('auto_close_buf').setup()
-        end
+        dependencies = { 'akinsho/bufferline.nvim', }
     },
 
     -- Status line
@@ -272,15 +290,6 @@ return {
         'nvim-lualine/lualine.nvim',
         dependencies = { 'kyazdani42/nvim-web-devicons', },
         config = require('plugins.configs.lualine').setup
-    },
-
-    {
-        'folke/trouble.nvim',
-        dependencies = { "kyazdani42/nvim-web-devicons", },
-        config = function ()
-            require("trouble").setup()
-            vim.keymap.set('n', "<M-f>", ":TroubleToggle<cr>", {desc = "Project Diagnostics Toggle" })
-        end,
     },
 
     -- Indentation lines
@@ -303,7 +312,6 @@ return {
         "williamboman/mason.nvim",
         config = function ()
             require("mason").setup()
-            vim.keymap.set('n', '<leader>~', ':Mason<cr>')
         end
     },
     -- LSP
@@ -337,7 +345,6 @@ return {
         'ray-x/lsp_signature.nvim',
         config = function(_, _)
             require'lsp_signature'.setup({})
-            vim.keymap.set('n', '<C-m>', function() vim.lsp.buf.signature_help() end, {desc = "toggle signature (hold)"})
         end
     },
 
@@ -347,15 +354,6 @@ return {
         dependencies = {
             'nvim-treesitter/nvim-treesitter',
         },
-        config = function ()
-            vim.keymap.set('n', '<M-b>', "<cmd>lua require'dap'.toggle_breakpoint()<cr>", {desc = "Debug: Set breakpoint"})
-            vim.keymap.set('n', '<M-c>', "<cmd>lua require'dap'.clear_breakpoints()<cr>", {desc = "Debug: Clear breakpoints"})
-            vim.keymap.set('n', '<M-i>', "<cmd>lua require'dap'.step_into()<cr>"        , {desc = "Debug: Step into"})
-            vim.keymap.set('n', '<M-o>', "<cmd>lua require'dap'.step_over()<cr>"        , {desc = "Debug: Step over"})
-            vim.keymap.set('n', '<M-p>', "<cmd>lua require'dap'.continue()<cr>"         , {desc = "Debug: Continue to next breakpoint (Proceed)"})
-            vim.keymap.set('n', '<M-x>', "<cmd>lua require'dap'.close()<cr>"            , {desc = "Debug: Closes the current debug session"})
-            vim.keymap.set('n', '<M-Space>', "<cmd>lua require'dap'.run()<cr>"          , {desc = "Debug: Runs a new debug session"})
-        end
     },
     {
         'rcarriga/nvim-dap-ui',
@@ -399,7 +397,6 @@ return {
         end,
         config = function()
             require("dbee").setup(--[[optional config]])
-            vim.keymap.set('n', '<M-d>', "<cmd>lua require('dbee').toggle()<cr>", {desc = "Toggle nvim-dbee"})
         end,
     },
     {

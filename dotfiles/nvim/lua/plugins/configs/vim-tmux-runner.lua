@@ -24,13 +24,6 @@ function T.setup()
     endfunction
     ]])
 
-    local opts = { noremap=true, silent=true }
-
-    vim.keymap.set("n", "<leader>ri", ":VtrOpenRunner<cr>"                     , opts)
-    vim.keymap.set("n", "<leader>ra", ":VtrAttachToPane<cr>"                   , opts)
-    vim.keymap.set("x", "<leader>re", ":call VtrSendLinesToRunnerWrapper()<cr>", opts)
-    vim.keymap.set("n", "<leader>rf", ":VtrSendFile<cr>"                       , opts)
-
 end
 
 return T

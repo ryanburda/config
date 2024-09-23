@@ -28,15 +28,4 @@ T.open_all = function ()
     end
 end
 
-T.keymaps = function ()
-    vim.keymap.set('n', '<leader>ko' , ':copen<CR>', {desc = "Quickfix open"})
-    vim.keymap.set('n', '<leader>kx' , ':cclose<CR>', {desc = "Quickfix close"})
-    vim.keymap.set('n', '<leader>ka' , T.open_all, {desc = "Quickfix open all files"})
-    vim.keymap.set('n', '<leader>kj' , ':cnext<CR>', {desc = "Quickfix next"})
-    vim.keymap.set('n', '<leader>kk' , ':cprev<CR>', {desc = "Quickfix previous"})
-    vim.keymap.set('n', '<leader>kgg', ':cfirst<CR>', {desc = "Quickfix first"})
-    vim.keymap.set('n', '<leader>kG' , ':clast<CR>', {desc = "Quickfix last"})
-    vim.keymap.set('n', '<leader>kc' , ':cexpr []<CR>', {desc = "Quickfix clear"})
-end
-
 return T
