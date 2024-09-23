@@ -139,6 +139,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.keymap.set('n', '<leader>jd', require('telescope.builtin').lsp_definitions, {desc = 'LSP: jump to definition', buffer = event.buf})
         vim.keymap.set('n', '<leader>jr', require('telescope.builtin').lsp_references, {desc = 'LSP: jump to references', buffer = event.buf})
         vim.keymap.set('n', '<leader>ji', require('telescope.builtin').lsp_implementations, {desc = 'LSP: jump to implementations', buffer = event.buf})
+        vim.keymap.set('n', '<leader>fd', require('telescope.builtin').lsp_document_symbols, {desc = 'Find: symbols in current document', buffer = event.buf})
         vim.keymap.set('n', '<leader>jD', vim.lsp.buf.declaration, {desc = 'LSP: jump to declaration', buffer = event.buf})
         vim.keymap.set('n', '<leader>jt', vim.lsp.buf.type_definition, {desc = 'LSP: jump to type', buffer = event.buf})
         vim.keymap.set('n', '<leader>jk', vim.lsp.buf.references, {desc = 'LSP: references kwickfix', buffer = event.buf})
