@@ -25,7 +25,7 @@ promptToReturnFromSubprocess: false
 
 customCommands:
   - key: 'o'
-    command: "if [[ -n $TMUX ]]; then NVIM_PIPE=$(tmux show-environment NVIM_PIPE 2> /dev/null | awk -F '=' '{print $2}'); if [[ $? == 0 ]]; then nvim --server $NVIM_PIPE --remote {{.SelectedFile.Name}}; fi; else nvim {{.SelectedFile.Name}}; fi"
+    command: "nvim {{.SelectedFile.Name}}"
     context: 'files'
     subprocess: true
     description: 'Open file in Neovim'

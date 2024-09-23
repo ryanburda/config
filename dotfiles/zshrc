@@ -44,7 +44,6 @@ autoload -Uz lazygit_config
 autoload -Uz find_file
 autoload -Uz font_picker
 autoload -Uz macos_appearance
-autoload -Uz nvim_open
 autoload -Uz psqlp
 autoload -Uz select_session
 autoload -Uz theme_picker

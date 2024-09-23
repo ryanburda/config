@@ -10,14 +10,6 @@ function T.setup()
         end
     end
 
-    local has_server_pipe = function()
-        if require('server').get_pipe() ~= nil then
-            return ""
-        else
-            return ""
-        end
-    end
-
     require('lualine').setup {
         options = {
             icons_enabled = true,
@@ -37,7 +29,7 @@ function T.setup()
                     path = 1
                 },
             },
-            lualine_x = { 'diagnostics', is_copilot_on, has_server_pipe, },
+            lualine_x = { 'diagnostics', is_copilot_on, },
             lualine_y = { 'filetype', },
             lualine_z = { 'location', 'progress' },
         },

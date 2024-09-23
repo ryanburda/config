@@ -104,7 +104,6 @@ require("lazy").setup(require("plugins"))
 -- Local plugins
 require('quickfix')
 require('auto_close_buf').setup()
-require('server').setup()
 
 -- Keymaps
 require('keymaps')
