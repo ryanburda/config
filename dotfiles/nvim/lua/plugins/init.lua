@@ -184,11 +184,15 @@ return {
         config = require('plugins.configs.telescope').setup
     },
 
-    -- Smooth scrolling
+    -- Scrolling
     'karb94/neoscroll.nvim',
     {
         'Aasim-A/scrollEOF.nvim',
         config = function() require('scrollEOF').setup() end,
+    },
+    {
+        'petertriho/nvim-scrollbar',
+        config = function() require("scrollbar").setup() end,
     },
 
     -- Motion
