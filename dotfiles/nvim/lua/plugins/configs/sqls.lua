@@ -1,11 +1,78 @@
 local T = {}
 
-function T.shorten_connection_string(connection_string)
-    -- HACK: This needs to be updated to handle connections to databases other than Postgres
+function T.setup()
+    vim.api.nvim_create_autocmd('User', {
+        pattern = 'SqlsConnectionChoice',
+        callback = function(event)
+            vim.g.sqls_connection = T.clean_connection_string(event.data.choice)
+        end
+    })
+end
+
+function T.get_all_connections()
+    -- Keep connection information outside of version control by grabbing this infomation from files like .pgpass
+    local conns = {}
+
+    -- Postgres
+    for _, c in ipairs(T.get_postgres_connections(os.getenv("HOME") .. "/.pgpass")) do
+        table.insert(conns, c)
+    end
+    -- TODO: add other types of connections.
+
+    return conns
+end
+
+function T.get_postgres_connections(file_path)
+    -- Parse a .pgpass file and return connection tables that sqls expects.
+    local connections = {}
+
+    -- Open the .pgpass file
+    local file = io.open(file_path, "r")
+    if not file then
+        print("Error: Could not open file " .. file_path)
+        return connections
+    end
+
+    -- Read each line from the file
+    for line in file:lines() do
+        -- Skip empty lines and lines that start with #
+        if line:match("^#") or line:match("^%s*$") then
+            goto continue
+        end
+
+        -- Split the line by colon (:)
+        local host, port, db, user, pass = line:match("([^:]+):([^:]+):([^:]+):([^:]+):([^:]+)")
+
+        if host and port and db and user and pass then
+            -- Construct the dataSourceName string
+            local dataSourceName = string.format(
+                "host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
+                host, port, user, pass, db
+            )
+
+            -- Insert the connection table into the connections list
+            table.insert(connections, {
+                driver = "postgresql",
+                dataSourceName = dataSourceName,
+            })
+        end
+
+        ::continue::
+    end
+
+    -- Close the file
+    file:close()
+    return connections
+end
+
+function T.clean_connection_string(connection_string)
+    -- Takes the connection string returned from SqlsConnectionChoice event and removes sensitive information.
+    --
     -- Assumes string will be of the form
     -- "<#> <db_type>  host=<host_name> port=<port_number> user=<user> password=<password> dbname=<db_name> sslmode=disable"
     -- For example:
     -- "2 postgresql  host=localhost port=5433 user=postgres password=postgres dbname=finance_datamart sslmode=disable"
+    -- HACK: This needs to be updated to handle connections to databases other than Postgres
 
     -- Capture the second word in the connection string which indicates the database type
     local db_type = connection_string:match("^%s*%S+%s+(%S+)")
@@ -16,15 +83,6 @@ function T.shorten_connection_string(connection_string)
     local dbname = connection_string:match("dbname=([^%s]+)")
 
     return string.format("%s %s:%s/%s user=%s", db_type, host, port, dbname, user)
-end
-
-function T.setup()
-    vim.api.nvim_create_autocmd('User', {
-        pattern = 'SqlsConnectionChoice',
-        callback = function(event)
-            vim.g.sqls_connection = T.shorten_connection_string(event.data.choice)
-        end
-    })
 end
 
 return T

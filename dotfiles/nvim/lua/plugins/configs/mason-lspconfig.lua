@@ -1,17 +1,5 @@
 local T = {}
 
-local function connections()
-    -- Keep connection information outside of version control by grabbing this infomation from files like .pgpass
-    local conns = {}
-
-    -- Postgres
-    for _, c in ipairs(require('pgpass_to_sqls_config').parse_pgpass(os.getenv("HOME") .. "/.pgpass")) do
-        table.insert(conns, c)
-    end
-    -- TODO: add other types of connections.
-
-    return conns
-end
 
 function T.setup()
 
@@ -114,7 +102,7 @@ function T.setup()
                 end,
                 settings = {
                     sqls = {
-                        connections = connections()
+                        connections = require('plugins.configs.sqls').get_all_connections()
                     },
                 },
             }

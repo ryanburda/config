@@ -11,6 +11,7 @@ function T.setup()
     end
 
     local sqls_connection = function()
+        -- TODO: add a check to see if any buffers are attached to sqls.
         if vim.g.sqls_connection then
             return "  " .. vim.g.sqls_connection
         else
