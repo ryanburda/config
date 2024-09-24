@@ -391,7 +391,10 @@ return {
     },
 
     -- sql
-    "nanotee/sqls.nvim",
+    {
+        'nanotee/sqls.nvim',
+        config = function() require('plugins.configs.sqls').setup() end,
+    },
 
     -- Github Copilot
     {
