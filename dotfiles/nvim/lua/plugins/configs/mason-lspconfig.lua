@@ -98,7 +98,13 @@ function T.setup()
             require('lspconfig').sqls.setup{
                 on_attach = function(client, bufnr)
                     require('sqls').on_attach(client, bufnr)
-                end
+                end,
+                settings = {
+                    sqls = {
+                        -- TODO: Break this out into its own function to aggregate connections from sources other than Postgres.
+                        connections = require('pgpass_to_sqls_config').parse_pgpass(os.getenv("HOME") .. "/.pgpass")
+                    },
+                },
             }
         end,
 
