@@ -38,16 +38,8 @@ vim.opt.signcolumn = "yes"
 vim.opt.list = true
 vim.opt.listchars = { tab = '›~'}
 vim.opt.autoread = true
+vim.opt.winbar = '%=%m %f'
 vim.opt.statuscolumn = "%s%4l %2r  "
--- winbar
--- this is used by sqls.nvim to update the connection information on the left side of the winbar.
--- TODO: make this so it only changes the winbar of the buffer that is connected to the sqls.
-vim.g.left_winbar_info = ""
-vim.opt.winbar = "%{%v:lua.vim.g.left_winbar_info%} %=%m %f"
-function WinbarContent()
-  return vim.g.left_winbar_info .. vim.fn.expand(" %=%m %f")
-end
-vim.opt.winbar = "%{%v:lua.WinbarContent()%}"
 
 vim.cmd('set noshowmode')
 vim.cmd('set noswapfile')

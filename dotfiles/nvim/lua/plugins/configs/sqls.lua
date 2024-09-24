@@ -22,8 +22,7 @@ function T.setup()
     vim.api.nvim_create_autocmd('User', {
         pattern = 'SqlsConnectionChoice',
         callback = function(event)
-            -- TODO: make this so it only changes the winbar of the buffer that is connected to the sqls.
-            vim.g.left_winbar_info = "  " .. T.shorten_connection_string(event.data.choice)
+            vim.g.sqls_connection = T.shorten_connection_string(event.data.choice)
         end
     })
 end

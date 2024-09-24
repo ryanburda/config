@@ -3,8 +3,16 @@ local T = {}
 function T.setup()
 
     local is_copilot_on = function()
-        if vim.g['is_copilot_on'] then
+        if vim.g.is_copilot_on then
             return ""
+        else
+            return ""
+        end
+    end
+
+    local sqls_connection = function()
+        if vim.g.sqls_connection then
+            return "  " .. vim.g.sqls_connection
         else
             return ""
         end
@@ -29,7 +37,7 @@ function T.setup()
                     path = 1
                 },
             },
-            lualine_x = { 'diagnostics', is_copilot_on, },
+            lualine_x = { 'diagnostics', sqls_connection, is_copilot_on },
             lualine_y = { 'filetype', },
             lualine_z = { 'location', 'progress' },
         },
