@@ -29,7 +29,6 @@ function T.get_postgres_connections(file_path)
     -- Open the .pgpass file
     local file = io.open(file_path, "r")
     if not file then
-        print("Error: Could not open file " .. file_path)
         return connections
     end
 
