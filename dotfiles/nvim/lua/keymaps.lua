@@ -234,56 +234,65 @@ vim.keymap.set(
 vim.keymap.set(
     'n',
     '<leader>ds',
-    ":lua if vim.o.diff == false then vim.cmd('windo diffthis') else vim.cmd('windo diffoff') end<cr>",
+    function()
+        if vim.o.diff == false then
+            vim.cmd('windo diffthis')
+        else vim.cmd('windo diffoff')
+        end
+    end,
     {desc = 'Diff: Toggle diff of current split'}
 )
 
 vim.keymap.set(
     {'n', 'v'},
     "<leader>gl",
-    "<cmd>lua require('gitlinker').get_buf_range_url('n')<cr>",
+    function()
+        require('gitlinker').get_buf_range_url('n')
+    end,
     {desc = "Diff: Github link of current location in buffer"}
 )
 
 vim.keymap.set(
     {'n', 'v'},
     "<leader>gh",
-    "<cmd>lua require('gitlinker').get_buf_range_url('n', {action_callback = require('gitlinker.actions').open_in_browser})<cr>",
+    function()
+        require('gitlinker').get_buf_range_url('n', {action_callback = require('gitlinker.actions').open_in_browser})
+    end,
     {desc = "Diff: Open Github in browser to current location in buffer"}
 )
 
 vim.keymap.set(
     'n',
     '<C-n>',
-    ':Gitsigns next_hunk<CR>',
+    require('gitsigns').next_hunk,
     {desc = 'Diff: Jump to next hunk'}
 )
 
 vim.keymap.set(
     'n',
     '<C-p>',
-    ':Gitsigns prev_hunk<CR>',
+    require('gitsigns').prev_hunk,
     {desc = 'Diff: Jump to previous hunk'}
 )
 
 vim.keymap.set(
     {"n", "v"},
     '<leader>dr',
-    ':Gitsigns reset_hunk<CR>',
+    require('gitsigns').reset_hunk,
     {desc = 'Diff: Reset hunk'}
 )
 
 vim.keymap.set(
     'n',
     '<leader>di',
-    ':Gitsigns preview_hunk<CR>',
+    require('gitsigns').preview_hunk,
     {desc = 'Diff: Inspect hunk'}
 )
 
 vim.keymap.set(
     'n',
     '<M-g>',
-    ':Gitsigns toggle_current_line_blame<CR>',
+    function() require('gitsigns').blame_line{full=true} end,
     {desc = 'Diff: Toogle line blame ghost text'}
 )
 
@@ -304,28 +313,28 @@ vim.keymap.set(
 vim.keymap.set(
     'n',
     '<leader>du',
-    function() require('telescope.builtin').git_status() end,
+    require('telescope.builtin').git_status,
     { desc = "Diff: Show uncommitted changes in Telescope" }
 )
 
 vim.keymap.set(
     'n',
     '<leader>db',
-    function() require('telescope.builtin').git_branches() end,
+    require('telescope.builtin').git_branches,
     { desc = "Diff: Open branch selector in Telescope. Diff between selected branch and current is opened in DiffView" }
 )
 
 vim.keymap.set(
     "n",
     '<leader>df',
-    function() require('telescope').extensions.advanced_git_search.diff_commit_file() end,
+    require('telescope').extensions.advanced_git_search.diff_commit_file,
     { desc = "Diff: Show commits for current file in Telescope. Diff between selected commit and current is opened in DiffView" }
 )
 
 vim.keymap.set(
     "n",
     '<leader>dc',
-    function() require('telescope').extensions.advanced_git_search.search_log_content() end,
+    require('telescope').extensions.advanced_git_search.search_log_content,
     { desc = "Diff: Show commits for current repo in Telescope. Diff between selected commit and current is opened in DiffView" }
 )
 
@@ -398,7 +407,7 @@ vim.keymap.set(
 vim.keymap.set(
     'n',
     '<leader>kF',
-    function() require('telescope.builtin').quickfix() end,
+    require('telescope.builtin').quickfix,
     { desc = "Quickfix: Show quickfix list in Telescope" }
 )
 
@@ -408,28 +417,28 @@ vim.keymap.set(
 vim.keymap.set(
     'n',
     '<leader>ej',
-    '<cmd>lua vim.diagnostic.goto_next()<CR>',
+    vim.diagnostic.goto_next,
     {desc = "Diagnostic: go to next"}
 )
 
 vim.keymap.set(
     'n',
     '<leader>ek',
-    '<cmd>lua vim.diagnostic.goto_prev()<CR>',
+    vim.diagnostic.goto_prev,
     {desc = "Diagnostic: go to previous"}
 )
 
 vim.keymap.set(
     'n',
     '<leader>ee',
-    '<cmd>lua vim.diagnostic.open_float()<CR>',
+    vim.diagnostic.open_float,
     {desc = 'Diagnostics: open float'}
 )
 
 vim.keymap.set(
     'n',
     '<leader>ef',
-    function() require('telescope.builtin').diagnostics() end,
+    require('telescope.builtin').diagnostics,
     { desc = "Diagnostic: Show errors in Telescope" }
 )
 
@@ -439,14 +448,14 @@ vim.keymap.set(
 vim.keymap.set(
     'n',
     '<leader>?',
-    function() require('telescope.builtin').keymaps() end,
+    require('telescope.builtin').keymaps,
     { desc = "Help: Show keymaps in Telescope" }
 )
 
 vim.keymap.set(
     'n',
     '<leader>`',
-    ':Lazy profile<CR>',
+    require("lazy").profile,
     {desc = 'Help: Lazy plugin manager'}
 )
 
@@ -460,14 +469,14 @@ vim.keymap.set(
 vim.keymap.set(
     'n',
     '<leader>vk',
-    function() require('telescope.builtin').help_tags() end,
+    require('telescope.builtin').help_tags,
     { desc = "Help: vim help pages in Telescope" }
 )
 
 vim.keymap.set(
     'n',
     '<leader>mk',
-    function() require('telescope.builtin').man_pages() end,
+    require('telescope.builtin').man_pages,
     { desc = "Help: man pages in Telescope" }
 )
 
@@ -574,49 +583,49 @@ vim.keymap.set(
 vim.keymap.set(
     'n',
     '<M-b>',
-    require'dap'.toggle_breakpoint,
+    require('dap').toggle_breakpoint,
     {desc = 'Debug: Set breakpoint'}
 )
 
 vim.keymap.set(
     'n',
     '<M-c>',
-    require'dap'.clear_breakpoints,
+    require('dap').clear_breakpoints,
     {desc = 'Debug: Clear breakpoints'}
 )
 
 vim.keymap.set(
     'n',
     '<M-i>',
-    require'dap'.step_into,
+    require('dap').step_into,
     {desc = 'Debug: Step into'}
 )
 
 vim.keymap.set(
     'n',
     '<M-o>',
-    require'dap'.step_over,
+    require('dap').step_over,
     {desc = 'Debug: Step over'}
 )
 
 vim.keymap.set(
     'n',
     '<M-p>',
-    require'dap'.continue,
+    require('dap').continue,
     {desc = 'Debug: Continue to next breakpoint (Proceed)'}
 )
 
 vim.keymap.set(
     'n',
     '<M-x>',
-    require'dap'.close,
+    require('dap').close,
     {desc = 'Debug: Closes the current debug session'}
 )
 
 vim.keymap.set(
     'n',
     '<M-Space>',
-    require'dap'.run,
+    require('dap').run,
     {desc = 'Debug: Runs a new debug session'}
 )
 
@@ -740,7 +749,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 ------------------------------------------------------------------------------------------------------------------------
--- Macro
+-- Macros
 ------------------------------------------------------------------------------------------------------------------------
 vim.keymap.set(
     'n',
