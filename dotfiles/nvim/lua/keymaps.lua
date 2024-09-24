@@ -400,7 +400,12 @@ vim.keymap.set(
 vim.keymap.set(
     'n',
     '<leader>kf',
-    function() require('telescope.builtin').live_grep({search_dirs = require('plugins.configs.telescope').getqflist_files(), results_title = 'Quickfix Files'}) end,
+    function()
+        require('telescope.builtin').live_grep({
+            search_dirs = require('plugins.configs.telescope').getqflist_files(),
+            results_title = 'Quickfix Files'
+        })
+    end,
     { desc = "Quickfix: Live grep quickfix list in Telescope" }
 )
 
@@ -617,6 +622,16 @@ vim.keymap.set(
     '<M-Space>',
     require('dap').run,
     {desc = 'Debug: Runs a new debug session'}
+)
+
+------------------------------------------------------------------------------------------------------------------------
+-- Database
+------------------------------------------------------------------------------------------------------------------------
+vim.keymap.set(
+    'n',
+    '<leader>sc',
+    ':SqlsSwitchConnection<cr>',
+    {desc = 'Database: Switch connection'}
 )
 
 ------------------------------------------------------------------------------------------------------------------------
