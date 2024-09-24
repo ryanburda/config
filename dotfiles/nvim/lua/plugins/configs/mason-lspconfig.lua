@@ -1,5 +1,18 @@
 local T = {}
 
+local function connections()
+    -- Keep connection information outside of version control by grabbing this infomation from files like .pgpass
+    local conns = {}
+
+    -- Postgres
+    for _, c in ipairs(require('pgpass_to_sqls_config').parse_pgpass(os.getenv("HOME") .. "/.pgpass")) do
+        table.insert(conns, c)
+    end
+    -- TODO: add other types of connections.
+
+    return conns
+end
+
 function T.setup()
 
     require("mason-lspconfig").setup({
@@ -101,8 +114,7 @@ function T.setup()
                 end,
                 settings = {
                     sqls = {
-                        -- TODO: Break this out into its own function to aggregate connections from sources other than Postgres.
-                        connections = require('pgpass_to_sqls_config').parse_pgpass(os.getenv("HOME") .. "/.pgpass")
+                        connections = connections()
                     },
                 },
             }
