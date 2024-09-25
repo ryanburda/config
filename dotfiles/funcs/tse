@@ -1,9 +1,0 @@
-#!/bin/zsh
-
-# Tmux Show Environment - shorthand for getting a variable from the tmux environment.
-if [[ -n "$TMUX" ]]; then
-    var=$(tmux show-environment $1 2> /dev/null)
-    if [[ $? == 0 ]] ; then
-        echo $var | awk -F '=' '{print $2}'
-    fi
-fi
