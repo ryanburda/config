@@ -1,4 +1,5 @@
 #!/bin/zsh
+SCRIPT_DIR=${0:a:h}
 
 # Command Line Tools
 which -s xcode-select
@@ -103,7 +104,6 @@ brew install --cask sublime-text
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 # Symlink config files
-SCRIPT_DIR=${0:a:h}
 mkdir -p                                                  "${HOME}/Developer"
 ln -svfF "${SCRIPT_DIR}/dotfiles/obsidian.vimrc"          "${HOME}/Documents/notes/.obsidian.vimrc"  # Needs to be linked again after signing into Obsidian.
 ln -svfF "${SCRIPT_DIR}/dotfiles/zshrc"                   "${HOME}/.zshrc"
@@ -136,9 +136,9 @@ ln -svfF "${SCRIPT_DIR}/dotfiles/sqls_config.yml"         "${XDG_CONFIG_HOME}/sq
 mkdir -p                                                  "${XDG_CONFIG_HOME}/tmux"
 ln -svfF "${SCRIPT_DIR}/dotfiles/tmux.conf"               "${XDG_CONFIG_HOME}/tmux/tmux.conf"
 
-# AiChat - TODO: set this up in XDG_CONFIG_HOME
-mkdir -p                                                      "${HOME}/Library/Application Support/aichat"
-ln -svfF "${SCRIPT_DIR}/dotfiles/aichat_config.yaml.template" "${HOME}/Library/Application Support/aichat/aichat_config.yaml.template"
+# AiChat
+mkdir -p                                                      "${XDG_CONFIG_HOME}/aichat"
+ln -svfF "${SCRIPT_DIR}/dotfiles/aichat_config.yaml.template" "${XDG_CONFIG_HOME}/aichat/aichat_config.yaml.template"
 touch                                                         "${HOME}/.openai_api_key"  # Add openai key to this file
 
 # Let nvim set itself up now that the config has been linked

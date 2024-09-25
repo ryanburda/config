@@ -9,5 +9,13 @@ else
     export AICHAT_LIGHT_THEME="false"
 fi
 
-# TODO: set this up in XDG_CONFIG_HOME
-envsubst < "${HOME}/Library/Application Support/aichat/aichat_config.yaml.template" > "${HOME}/Library/Application Support/aichat/config.yaml"
+OPENAI_API_KEY=$(cat $HOME/.openai_api_key)
+
+if [[ $OSTYPE == darwin* ]]; then
+    # macOS
+    envsubst < "${XDG_CONFIG_HOME}/aichat/aichat_config.yaml.template" > "${HOME}/Library/Application Support/aichat/config.yaml"
+else
+    # linux
+    envsubst < "${XDG_CONFIG_HOME}/aichat/aichat_config.yaml.template" > "${XDG_CONFIG_HOME}/aichat/config.yaml"
+fi
+
