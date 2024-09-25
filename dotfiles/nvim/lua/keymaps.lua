@@ -357,13 +357,6 @@ vim.keymap.set(
 
 vim.keymap.set(
     'n',
-    '<leader>ka',
-    require('quickfix').open_all,
-    {desc = "Quickfix: Open all files"}
-)
-
-vim.keymap.set(
-    'n',
     '<leader>kj',
     ':cnext<CR>',
     {desc = "Quickfix: Next"}

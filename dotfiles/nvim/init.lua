@@ -103,7 +103,7 @@ require("lazy").setup({
     checker = { enabled = true },
 })
 
-require('auto_close_buf').setup()
+-- keymaps
 require('keymaps')
 
 -- TODO: Move these scripts to the repos repo.
