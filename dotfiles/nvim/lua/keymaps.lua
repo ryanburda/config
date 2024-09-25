@@ -570,6 +570,20 @@ vim.keymap.set(
 ------------------------------------------------------------------------------------------------------------------------
 vim.keymap.set(
     'n',
+    '<leader>bb',
+    "<cmd>lua require'dapui'.toggle()<cr>",
+    {desc = 'Debug: Open debug UI'}
+)
+
+vim.keymap.set(
+    'n',
+    '<M-e>',
+    "<cmd>lua require('dapui').eval()<cr>",
+    {desc = 'Debug: Evaluate'}
+)
+
+vim.keymap.set(
+    'n',
     '<M-b>',
     require('dap').toggle_breakpoint,
     {desc = 'Debug: Set breakpoint'}

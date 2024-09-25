@@ -29,13 +29,6 @@ function T.setup()
     })
 
     dap.listeners.after.event_initialized['dapui_config'] = function () dapui.open() end
-    -- Close the dap-ui automatically after tests end or fail.
-    -- dap.listeners.before.event_terminated['dapui_config'] = function () dapui.close() end
-    -- dap.listeners.before.event_exited['dapui_config'] = function () dapui.close() end
-
-    local opts = { noremap=true, silent=true }
-    vim.api.nvim_set_keymap('n', '<M-v>', "<cmd>lua require'dapui'.toggle()<cr>", opts)
-    vim.api.nvim_set_keymap('n', '<M-e>', "<cmd>lua require('dapui').eval()<cr>", opts)
 
 end
 
