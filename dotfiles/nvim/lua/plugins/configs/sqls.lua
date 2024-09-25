@@ -34,7 +34,7 @@ function T.get_postgres_connections(file_path)
 
     -- Read each line from the file
     for line in file:lines() do
-        -- Skip empty lines and lines that start with #
+        -- Skip empty lines and comments
         if line:match("^#") or line:match("^%s*$") then
             goto continue
         end
@@ -71,7 +71,8 @@ function T.clean_connection_string(connection_string)
     -- "<#> <db_type>  host=<host_name> port=<port_number> user=<user> password=<password> dbname=<db_name> sslmode=disable"
     -- For example:
     -- "2 postgresql  host=localhost port=5433 user=postgres password=postgres dbname=finance_datamart sslmode=disable"
-    -- HACK: This needs to be updated to handle connections to databases other than Postgres
+    --
+    -- NOTE: This likely needs to be updated to support databases other than Postgres.
 
     -- Capture the second word in the connection string which indicates the database type
     local db_type = connection_string:match("^%s*%S+%s+(%S+)")
