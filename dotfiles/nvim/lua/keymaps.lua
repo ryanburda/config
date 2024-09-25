@@ -435,9 +435,9 @@ vim.keymap.set(
 
 vim.keymap.set(
     'n',
-    '<leader>ee',
+    '<leader>ei',
     vim.diagnostic.open_float,
-    {desc = 'Diagnostics: open float'}
+    {desc = 'Diagnostics: inspect'}
 )
 
 vim.keymap.set(

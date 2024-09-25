@@ -60,11 +60,11 @@ vim.opt.statuscolumn = "%s%4l %2r  "
 vim.cmd('set noshowmode')
 vim.cmd('set noswapfile')
 
+-- Open help window in a vertical split to the right.
 vim.api.nvim_create_autocmd("BufWinEnter", {
     group = vim.api.nvim_create_augroup("help_window_right", {}),
     pattern = { "*.txt" },
     callback = function()
-        -- Open help window in a vertical split to the right.
         if vim.o.filetype == 'help' then vim.cmd.wincmd("L") end
     end
 })
@@ -80,18 +80,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     end,
 })
 
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-    vim.lsp.handlers.hover, {
-        border = "rounded"
-    }
-)
-
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-    vim.lsp.handlers.signature_help, {
-        border = "rounded"
-    }
-)
-
+-- Rounded border around diagnostic float.
 vim.diagnostic.config({
     virtual_text = true,
     float = {
