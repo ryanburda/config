@@ -17,7 +17,7 @@ function T.setup()
         },
         window = {
             completion = cmp.config.window.bordered({
-                col_offset = 25,
+                col_offset = 30,
                 scrolloff = 4,
             }),
             documentation = cmp.config.window.bordered({max_width = 100}),
