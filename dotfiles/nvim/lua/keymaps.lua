@@ -312,9 +312,9 @@ vim.keymap.set(
 
 vim.keymap.set(
     'n',
-    '<leader>du',
+    '<leader>dl',
     require('telescope.builtin').git_status,
-    { desc = "Diff: Show uncommitted changes in Telescope" }
+    { desc = "Diff: List files with uncommitted changes in Telescope" }
 )
 
 vim.keymap.set(
