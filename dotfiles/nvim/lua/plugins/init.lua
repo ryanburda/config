@@ -23,6 +23,10 @@ return {
             "ribru17/bamboo.nvim",
             "sho-87/kanagawa-paper.nvim",
             {
+                "yorik1984/newpaper.nvim",
+                config = true,
+            },
+            {
                 "zenbones-theme/zenbones.nvim",
                 dependencies = {
                     "rktjmp/lush.nvim",

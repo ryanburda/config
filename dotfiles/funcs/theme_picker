@@ -36,6 +36,7 @@ typeset -A themes=(
     ['Light - Github']="github_light github_light light"
     ['Light - Github-colorblind']="github_light_colorblind github_light_colorblind light"
     ['Light - Gruvbox']="gruvbox_material_medium_light gruvbox-material light"
+    ['Light - Newpaper']="newpaper newpaper light"
     ['Light - Nightfox-dawn']="dawnfox dawnfox light"
     ['Light - Nightfox-day']="dayfox dayfox light"
     ['Light - VSCode']="vscode_light vscode light"
