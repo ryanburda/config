@@ -19,7 +19,6 @@ return {
             "EdenEast/nightfox.nvim",
             "Verf/deepwhite.nvim",
             "Mofiqul/vscode.nvim",
-            "projekt0n/github-nvim-theme",
             "ribru17/bamboo.nvim",
             "sho-87/kanagawa-paper.nvim",
             {
