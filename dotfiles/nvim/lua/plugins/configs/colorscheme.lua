@@ -54,7 +54,8 @@ function T.setup()
     local fwatch = require('fwatch')
     fwatch.watch(T.COLORSCHEME_FILE, {
         on_event = function()
-            vim.schedule(T.set_colorscheme)
+            -- sleep for a bit to make sure the background file is done being written to as well.
+            vim.schedule(function() vim.defer_fn(T.set_colorscheme, 100) end)
         end
     })
 
