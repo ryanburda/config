@@ -345,14 +345,14 @@ vim.keymap.set(
     'n',
     '<leader>ko',
     ':copen<CR>',
-    {desc = "Quickfix: Open"}
+    {desc = "Quickfix: Open window"}
 )
 
 vim.keymap.set(
     'n',
     '<leader>kx',
     ':cclose<CR>',
-    {desc = "Quickfix: Close"}
+    {desc = "Quickfix: Close window"}
 )
 
 vim.keymap.set(
@@ -371,20 +371,6 @@ vim.keymap.set(
 
 vim.keymap.set(
     'n',
-    '<leader>kgg',
-    ':cfirst<CR>',
-    {desc = "Quickfix: First"}
-)
-
-vim.keymap.set(
-    'n',
-    '<leader>kG',
-    ':clast<CR>',
-    {desc = "Quickfix: Last"}
-)
-
-vim.keymap.set(
-    'n',
     '<leader>kc',
     ':cexpr []<CR>',
     {desc = "Quickfix: Clear"}
@@ -393,20 +379,20 @@ vim.keymap.set(
 vim.keymap.set(
     'n',
     '<leader>kf',
+    require('telescope.builtin').quickfix,
+    { desc = "Quickfix: Find files" }
+)
+
+vim.keymap.set(
+    'n',
+    '<leader>kg',
     function()
         require('telescope.builtin').live_grep({
             search_dirs = require('plugins.configs.telescope').getqflist_files(),
             results_title = 'Quickfix Files'
         })
     end,
-    { desc = "Quickfix: Live grep quickfix list in Telescope" }
-)
-
-vim.keymap.set(
-    'n',
-    '<leader>kF',
-    require('telescope.builtin').quickfix,
-    { desc = "Quickfix: Show quickfix list in Telescope" }
+    { desc = "Quickfix: Grep" }
 )
 
 ------------------------------------------------------------------------------------------------------------------------
@@ -430,7 +416,7 @@ vim.keymap.set(
     'n',
     '<leader>ei',
     vim.diagnostic.open_float,
-    {desc = 'Diagnostics: inspect'}
+    {desc = 'Diagnostic: inspect'}
 )
 
 vim.keymap.set(
