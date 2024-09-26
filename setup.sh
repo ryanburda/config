@@ -1,4 +1,6 @@
 #!/bin/zsh
+
+# If config repo is in normal location then this is `SCRIPT_DIR=$HOME/Developer/config`
 SCRIPT_DIR=${0:a:h}
 
 # Command Line Tools
@@ -104,40 +106,40 @@ brew install --cask sublime-text
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 # Symlink config files
-mkdir -p                                                      "${HOME}/Developer"
-ln -svfF "${SCRIPT_DIR}/dotfiles/obsidian.vimrc"              "${HOME}/Documents/notes/.obsidian.vimrc"
-ln -svfF "${SCRIPT_DIR}/dotfiles/zshrc"                       "${HOME}/.zshrc"
-ln -svfF "${SCRIPT_DIR}/dotfiles/gitconfig.template"          "${HOME}/.gitconfig.template"
-ln -svfF "${SCRIPT_DIR}/dotfiles/psqlrc"                      "${HOME}/.psqlrc"
-ln -svfF "${SCRIPT_DIR}/dotfiles/pspgconf"                    "${HOME}/.pspgconf"
-ln -svfF "${SCRIPT_DIR}/dotfiles/octaverc"                    "${HOME}/.octaverc"
-touch                                                         "${HOME}/.openai_api_key"  # Add openai key to this file.
-ln -svfF "${SCRIPT_DIR}/dotfiles/zprofile"                    "${HOME}/.zprofile"
-mkdir -p                                                      "${HOME}/.zsh/funcs"
-ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/alacritty_config"      "${HOME}/.zsh/funcs/alacritty_config"
-ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/aichat_config"         "${HOME}/.zsh/funcs/aichat_config"
-ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/git_config"            "${HOME}/.zsh/funcs/git_config"
-ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/lazygit_config"        "${HOME}/.zsh/funcs/lazygit_config"
-ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/font_picker"           "${HOME}/.zsh/funcs/font_picker"
-ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/macos_appearance"      "${HOME}/.zsh/funcs/macos_appearance"
-ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/psqlp"                 "${HOME}/.zsh/funcs/psqlp"
-ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/select_session"        "${HOME}/.zsh/funcs/select_session"
-ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/theme_picker"          "${HOME}/.zsh/funcs/theme_picker"
-mkdir -p                                                      "${XDG_CONFIG_HOME}/alacritty"
-ln -svfF "${SCRIPT_DIR}/dotfiles/alacritty/themes/"           "${XDG_CONFIG_HOME}/alacritty/themes"
-ln -svfF "${SCRIPT_DIR}/dotfiles/alacritty.toml.template"     "${XDG_CONFIG_HOME}/alacritty/alacritty.toml.template"
-cp       "${SCRIPT_DIR}/dotfiles/karabiner.json"              "${XDG_CONFIG_HOME}/karabiner/karabiner.json"  # Needs to be re-copied if changed. Symlinks don't work for some reason.
-ln -svfF "${SCRIPT_DIR}/dotfiles/lazygit.yml.template"        "${XDG_CONFIG_HOME}/lazygit/config.yml.template"
-mkdir -p                                                      "${XDG_CONFIG_HOME}/lsd"
-ln -svfF "${SCRIPT_DIR}/dotfiles/lsd/config.yaml"             "${XDG_CONFIG_HOME}/lsd/config.yaml"
-ln -svfF "${SCRIPT_DIR}/dotfiles/lsd/colors.yaml"             "${XDG_CONFIG_HOME}/lsd/colors.yaml"
-ln -svfF "${SCRIPT_DIR}/dotfiles/nvim"                        "${XDG_CONFIG_HOME}/nvim"
-mkdir -p                                                      "${XDG_CONFIG_HOME}/sqls"
-ln -svfF "${SCRIPT_DIR}/dotfiles/sqls_config.yml"             "${XDG_CONFIG_HOME}/sqls/config.yml"
-mkdir -p                                                      "${XDG_CONFIG_HOME}/tmux"
-ln -svfF "${SCRIPT_DIR}/dotfiles/tmux.conf"                   "${XDG_CONFIG_HOME}/tmux/tmux.conf"
-mkdir -p                                                      "${XDG_CONFIG_HOME}/aichat"
-ln -svfF "${SCRIPT_DIR}/dotfiles/aichat_config.yaml.template" "${XDG_CONFIG_HOME}/aichat/aichat_config.yaml.template"
+mkdir -p                                                            "${HOME}/Developer"
+ln -svfF "${SCRIPT_DIR}/dotfiles/obsidian.vimrc"                    "${HOME}/Documents/notes/.obsidian.vimrc"
+ln -svfF "${SCRIPT_DIR}/dotfiles/zshrc"                             "${HOME}/.zshrc"
+ln -svfF "${SCRIPT_DIR}/dotfiles/gitconfig.template"                "${HOME}/.gitconfig.template"
+ln -svfF "${SCRIPT_DIR}/dotfiles/psqlrc"                            "${HOME}/.psqlrc"
+ln -svfF "${SCRIPT_DIR}/dotfiles/pspgconf"                          "${HOME}/.pspgconf"
+ln -svfF "${SCRIPT_DIR}/dotfiles/octaverc"                          "${HOME}/.octaverc"
+touch                                                               "${HOME}/.openai_api_key"  # Add openai key to this file.
+ln -svfF "${SCRIPT_DIR}/dotfiles/zprofile"                          "${HOME}/.zprofile"
+mkdir -p                                                            "${HOME}/.zsh/funcs"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/alacritty_config"            "${HOME}/.zsh/funcs/alacritty_config"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/aichat_config"               "${HOME}/.zsh/funcs/aichat_config"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/git_config"                  "${HOME}/.zsh/funcs/git_config"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/lazygit_config"              "${HOME}/.zsh/funcs/lazygit_config"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/font_picker"                 "${HOME}/.zsh/funcs/font_picker"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/macos_appearance"            "${HOME}/.zsh/funcs/macos_appearance"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/psqlp"                       "${HOME}/.zsh/funcs/psqlp"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/select_session"              "${HOME}/.zsh/funcs/select_session"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/theme_picker"                "${HOME}/.zsh/funcs/theme_picker"
+mkdir -p                                                            "${XDG_CONFIG_HOME}/alacritty"
+ln -svfF "${SCRIPT_DIR}/dotfiles/alacritty/themes/"                 "${XDG_CONFIG_HOME}/alacritty/themes"
+ln -svfF "${SCRIPT_DIR}/dotfiles/alacritty/alacritty.toml.template" "${XDG_CONFIG_HOME}/alacritty/alacritty.toml.template"
+cp       "${SCRIPT_DIR}/dotfiles/karabiner.json"                    "${XDG_CONFIG_HOME}/karabiner/karabiner.json"  # Needs to be re-copied if changed. Symlinks don't work for some reason.
+ln -svfF "${SCRIPT_DIR}/dotfiles/lazygit.yml.template"              "${XDG_CONFIG_HOME}/lazygit/config.yml.template"
+mkdir -p                                                            "${XDG_CONFIG_HOME}/lsd"
+ln -svfF "${SCRIPT_DIR}/dotfiles/lsd/config.yaml"                   "${XDG_CONFIG_HOME}/lsd/config.yaml"
+ln -svfF "${SCRIPT_DIR}/dotfiles/lsd/colors.yaml"                   "${XDG_CONFIG_HOME}/lsd/colors.yaml"
+ln -svfF "${SCRIPT_DIR}/dotfiles/nvim"                              "${XDG_CONFIG_HOME}/nvim"
+mkdir -p                                                            "${XDG_CONFIG_HOME}/sqls"
+ln -svfF "${SCRIPT_DIR}/dotfiles/sqls_config.yml"                   "${XDG_CONFIG_HOME}/sqls/config.yml"
+mkdir -p                                                            "${XDG_CONFIG_HOME}/tmux"
+ln -svfF "${SCRIPT_DIR}/dotfiles/tmux.conf"                         "${XDG_CONFIG_HOME}/tmux/tmux.conf"
+mkdir -p                                                            "${XDG_CONFIG_HOME}/aichat"
+ln -svfF "${SCRIPT_DIR}/dotfiles/aichat_config.yaml.template"       "${XDG_CONFIG_HOME}/aichat/aichat_config.yaml.template"
 
 # Source zshrc so plugins are installed automatically.
 source ${HOME}/.zshrc
