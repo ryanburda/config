@@ -39,7 +39,7 @@ typeset -A themes=(
 )
 
 function set_theme(){
-    # accepts a single parameter that is a valid key into the themes dictionary above.
+    # Accepts a single parameter that is a valid key into the themes dictionary above.
     theme_key=$1
     values=${themes[$theme_key]}
 
@@ -59,7 +59,7 @@ function set_theme(){
         ~/.zsh/funcs/aichat_config
         ~/.zsh/funcs/git_config
         ~/.zsh/funcs/lazygit_config
-        ~/.zsh/funcs/macos_appearance $(if [[ $c == 'light' ]]; then echo '-l'; fi)
+        ~/.zsh/funcs/dark_mode $(if [[ $c == 'light' ]]; then echo '-l'; fi)
     fi
 }
 

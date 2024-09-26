@@ -1,6 +1,6 @@
 #!/bin/zsh
 print_help() {
-    echo "Switches macOS appearance. (Defaults to dark)"
+    echo "Switches OS theme."
     echo "Options:"
     echo "  -h    Show this help message"
     echo "  -l    Switch to light appearance"
@@ -25,4 +25,9 @@ while getopts ":lh" opt; do
     esac
 done
 
-osascript -e "tell app \"System Events\" to tell appearance preferences to set dark mode to ${tf}"
+if [[ $OSTYPE == darwin* ]]; then
+    osascript -e "tell app \"System Events\" to tell appearance preferences to set dark mode to ${tf}"
+else
+    # linux
+    # TODO: implement
+fi

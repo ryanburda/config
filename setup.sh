@@ -3,104 +3,103 @@
 # If config repo is in normal location then this is `SCRIPT_DIR=$HOME/Developer/config`
 SCRIPT_DIR=${0:a:h}
 
-# Command Line Tools
-which -s xcode-select
-if [[ $? != 0 ]] ; then
-    xcode-select --install
-else
-    echo "Command Line Tools already installed"
+# OS specific installations
+if [[ $OSTYPE == darwin* ]]; then
+    # Command Line Tools
+    which -s xcode-select
+    if [[ $? != 0 ]] ; then
+        xcode-select --install
+    else
+        echo "Command Line Tools already installed"
+    fi
+
+    # Install Homebrew
+    which -s brew
+    if [[ $? != 0 ]] ; then
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        ln -svfF "${SCRIPT_DIR}/dotfiles/zprofile" "${HOME}/.zprofile"
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+    else
+        brew update
+    fi
+
+    # CLI
+    brew install aichat
+    brew install automake
+    brew install bat
+    brew install bottom
+    brew install cmake
+    brew install composer
+    brew install coreutils
+    brew install curl
+    brew install deno
+    brew install git-delta
+    brew install fd
+    brew install fzf
+    $(brew --prefix)/opt/fzf/install
+    brew install fzy
+    brew install gettext
+    brew install go
+    brew install htop
+    brew install jq
+    brew install k9s
+    brew install kubectl
+    brew install kubectx
+    brew install lazydocker
+    brew install lazygit
+    brew install libpq
+    brew link --force libpq
+    brew install libtool
+    brew install lsd
+    brew install lua
+    brew install neovim
+    brew install ninja
+    brew install node
+    brew install octave
+    brew install php
+    brew install pkg-config
+    brew install pspg
+    brew install pyenv
+    brew install pyenv-virtualenv
+    brew install ripgrep
+    brew install rlwrap
+    brew install sk
+    brew install tmate
+    brew install tmux
+    brew install tmuxinator
+    brew install ttyrec
+    brew install utm
+    brew install wget
+    brew install zsh-autosuggestions
+    brew install zsh-syntax-highlighting
+    brew install zsh-vi-mode
+
+    # Fonts
+    brew tap homebrew/cask-fonts
+    brew install --cask font-caskaydia-mono-nerd-font
+    brew install --cask font-fira-code-nerd-font
+    brew install --cask font-gohufont-nerd-font
+    brew install --cask font-hack-nerd-font
+    brew install --cask font-jetbrains-mono-nerd-font
+    brew install --cask homebrew/cask-fonts/font-meslo-lg-nerd-font
+    brew install --cask font-sauce-code-pro-nerd-font
+    brew install --cask font-terminess-ttf-nerd-font
+    brew tap shaunsingh/SFMono-Nerd-Font-Ligaturized
+    brew install --cask font-sf-mono-nerd-font-ligaturized
+
+    # Applications
+    brew install --cask 1password
+    brew install --cask alacritty
+    brew install --cask alfred
+    brew install --cask docker
+    brew install --cask karabiner-elements
+    brew install --cask obsidian
+    brew install --cask rectangle
+    brew install --cask shifty
+    brew install --cask topnotch
+    brew install --cask blackhole-2ch
+    brew install --cask sublime-text
 fi
-
-# Show task switcher on all monitors.
-defaults write com.apple.Dock appswitcher-all-displays -bool true
-killall Dock
-
-# Install Homebrew
-which -s brew
-if [[ $? != 0 ]] ; then
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    ln -svfF "${SCRIPT_DIR}/dotfiles/zprofile" "${HOME}/.zprofile"
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-else
-    brew update
-fi
-
-# CLI
-brew install aichat
-brew install automake
-brew install bat
-brew install bottom
-brew install cmake
-brew install composer
-brew install coreutils
-brew install curl
-brew install deno
-brew install git-delta
-brew install fd
-brew install fzf
-$(brew --prefix)/opt/fzf/install
-brew install fzy
-brew install gettext
-brew install go
-brew install htop
-brew install jq
-brew install k9s
-brew install kubectl
-brew install kubectx
-brew install lazydocker
-brew install lazygit
-brew install libpq
-brew link --force libpq
-brew install libtool
-brew install lsd
-brew install lua
-brew install neovim
-brew install ninja
-brew install node
-brew install octave
-brew install php
-brew install pkg-config
-brew install pspg
-brew install pyenv
-brew install pyenv-virtualenv
-brew install ripgrep
-brew install rlwrap
-brew install sk
-brew install tmate
-brew install tmux
-brew install tmuxinator
-brew install ttyrec
-brew install utm
-brew install wget
-brew install zsh-autosuggestions
-brew install zsh-syntax-highlighting
-brew install zsh-vi-mode
-
-# Fonts
-brew tap homebrew/cask-fonts
-brew install --cask font-caskaydia-mono-nerd-font
-brew install --cask font-fira-code-nerd-font
-brew install --cask font-gohufont-nerd-font
-brew install --cask font-hack-nerd-font
-brew install --cask font-jetbrains-mono-nerd-font
-brew install --cask homebrew/cask-fonts/font-meslo-lg-nerd-font
-brew install --cask font-sauce-code-pro-nerd-font
-brew install --cask font-terminess-ttf-nerd-font
-brew tap shaunsingh/SFMono-Nerd-Font-Ligaturized
-brew install --cask font-sf-mono-nerd-font-ligaturized
-
-# Applications
-brew install --cask 1password
-brew install --cask alacritty
-brew install --cask alfred
-brew install --cask docker
-brew install --cask karabiner-elements
-brew install --cask obsidian
-brew install --cask rectangle
-brew install --cask shifty
-brew install --cask topnotch
-brew install --cask blackhole-2ch
-brew install --cask sublime-text
 
 # rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -121,16 +120,13 @@ ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/aichat_config"               "${HOME}/.zs
 ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/git_config"                  "${HOME}/.zsh/funcs/git_config"
 ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/lazygit_config"              "${HOME}/.zsh/funcs/lazygit_config"
 ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/font_picker"                 "${HOME}/.zsh/funcs/font_picker"
-ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/macos_appearance"            "${HOME}/.zsh/funcs/macos_appearance"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/dark_mode"                   "${HOME}/.zsh/funcs/dark_mode"
 ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/psqlp"                       "${HOME}/.zsh/funcs/psqlp"
 ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/select_session"              "${HOME}/.zsh/funcs/select_session"
 ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/theme_picker"                "${HOME}/.zsh/funcs/theme_picker"
 mkdir -p                                                            "${XDG_CONFIG_HOME}/alacritty"
 ln -svfF "${SCRIPT_DIR}/dotfiles/alacritty/themes/"                 "${XDG_CONFIG_HOME}/alacritty/themes"
 ln -svfF "${SCRIPT_DIR}/dotfiles/alacritty/alacritty.toml.template" "${XDG_CONFIG_HOME}/alacritty/alacritty.toml.template"
-# TODO: Find out why this can't be symlined.
-# NOTE: Needs to be re-copied if changed. Symlinks don't work for some reason.
-cp       "${SCRIPT_DIR}/dotfiles/karabiner.json"                    "${XDG_CONFIG_HOME}/karabiner/karabiner.json"
 ln -svfF "${SCRIPT_DIR}/dotfiles/lazygit.yml.template"              "${XDG_CONFIG_HOME}/lazygit/config.yml.template"
 mkdir -p                                                            "${XDG_CONFIG_HOME}/lsd"
 ln -svfF "${SCRIPT_DIR}/dotfiles/lsd/config.yaml"                   "${XDG_CONFIG_HOME}/lsd/config.yaml"
@@ -143,8 +139,20 @@ ln -svfF "${SCRIPT_DIR}/dotfiles/tmux.conf"                         "${XDG_CONFI
 mkdir -p                                                            "${XDG_CONFIG_HOME}/aichat"
 ln -svfF "${SCRIPT_DIR}/dotfiles/aichat_config.yaml.template"       "${XDG_CONFIG_HOME}/aichat/aichat_config.yaml.template"
 
-# Source zshrc so plugins are installed automatically.
-source ${HOME}/.zshrc
+# OS specific symlinks
+if [[ $OSTYPE == darwin* ]]; then
+    # macOS
+    # TODO: Find out why this can't be symlined.
+    # NOTE: Needs to be re-copied if changed. Symlinks don't work for some reason.
+    cp "${SCRIPT_DIR}/dotfiles/karabiner.json" "${XDG_CONFIG_HOME}/karabiner/karabiner.json"
+fi
+
+# OS specific settings
+if [[ $OSTYPE == darwin* ]]; then
+    # Show task switcher on all monitors.
+    defaults write com.apple.Dock appswitcher-all-displays -bool true
+    killall Dock
+fi
 
 # Additional manual steps
 cat "${SCRIPT_DIR}/manual_steps.txt"

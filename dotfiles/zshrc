@@ -42,7 +42,7 @@ autoload -Uz aichat_config
 autoload -Uz git_config
 autoload -Uz lazygit_config
 autoload -Uz font_picker
-autoload -Uz macos_appearance
+autoload -Uz dark_mode
 autoload -Uz psqlp
 autoload -Uz select_session
 autoload -Uz theme_picker
