@@ -128,7 +128,9 @@ ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/theme_picker"                "${HOME}/.zs
 mkdir -p                                                            "${XDG_CONFIG_HOME}/alacritty"
 ln -svfF "${SCRIPT_DIR}/dotfiles/alacritty/themes/"                 "${XDG_CONFIG_HOME}/alacritty/themes"
 ln -svfF "${SCRIPT_DIR}/dotfiles/alacritty/alacritty.toml.template" "${XDG_CONFIG_HOME}/alacritty/alacritty.toml.template"
-cp       "${SCRIPT_DIR}/dotfiles/karabiner.json"                    "${XDG_CONFIG_HOME}/karabiner/karabiner.json"  # Needs to be re-copied if changed. Symlinks don't work for some reason.
+# TODO: Find out why this can't be symlined.
+# NOTE: Needs to be re-copied if changed. Symlinks don't work for some reason.
+cp       "${SCRIPT_DIR}/dotfiles/karabiner.json"                    "${XDG_CONFIG_HOME}/karabiner/karabiner.json"
 ln -svfF "${SCRIPT_DIR}/dotfiles/lazygit.yml.template"              "${XDG_CONFIG_HOME}/lazygit/config.yml.template"
 mkdir -p                                                            "${XDG_CONFIG_HOME}/lsd"
 ln -svfF "${SCRIPT_DIR}/dotfiles/lsd/config.yaml"                   "${XDG_CONFIG_HOME}/lsd/config.yaml"
