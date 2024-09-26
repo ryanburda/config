@@ -141,3 +141,6 @@ ln -svfF "${SCRIPT_DIR}/dotfiles/aichat_config.yaml.template" "${XDG_CONFIG_HOME
 
 # Source zshrc so plugins are installed automatically.
 source ${HOME}/.zshrc
+
+# Additional manual steps
+cat "${SCRIPT_DIR}/manual_steps.txt"
