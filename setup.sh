@@ -91,14 +91,13 @@ if [[ $OSTYPE == darwin* ]]; then
     brew install --cask 1password
     brew install --cask alacritty
     brew install --cask alfred
-    brew install --cask docker
+    brew install --cask rancher
     brew install --cask karabiner-elements
     brew install --cask obsidian
     brew install --cask rectangle
     brew install --cask shifty
     brew install --cask topnotch
     brew install --cask blackhole-2ch
-    brew install --cask sublime-text
 fi
 
 # rust
