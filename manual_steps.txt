@@ -1,6 +1,5 @@
 
 
-
 =====================================================================
 ===================== AUTOMATED SETUP COMPLETE ======================
 =====================================================================
@@ -24,5 +23,6 @@
 =====================================================================
 
 Perform the following steps to complete the setup:
+    - Clone project repos `./setup_repos.sh`
     - Add OpenAI API Key to ~/.openai_api_key.
     - Restart computer.
