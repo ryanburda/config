@@ -73,19 +73,25 @@ config.color_scheme = color_scheme_map(get_var_from_file(os.getenv("HOME") .. "/
 config.font = wezterm.font(get_var_from_file(os.getenv("HOME") .. "/.config/alacritty/.font"))
 config.font_size = tonumber(get_var_from_file(os.getenv("HOME") .. "/.config/alacritty/.font_size"))
 
---config.window_background_image = os.getenv("HOME") .. "/.config/wezterm/backgrounds/forest_lake.jpg"
---config.window_background_opacity = .9
+local function get_background_config()
+    local background_image = get_var_from_file(os.getenv("HOME") .. "/.config/wezterm/.background")
+
+    if background_image == nil then
+        return {}
+    else
+        return {
+            {
+                source = {
+                    File = os.getenv("HOME") .. "/.config/wezterm/backgrounds/" .. background_image,
+                },
+                hsb = { brightness = 0.015 },
+            },
+        }
+    end
+end
 
 -- background
-config.background = {
-  {
-    source = {
-      File = os.getenv("HOME") .. "/.config/wezterm/backgrounds/forest_lake.jpg",
-    },
-    hsb = { brightness = 0.025 },
-  },
-}
-
+config.background = get_background_config()
 config.window_decorations = "RESIZE"
 
 -- tab bar
