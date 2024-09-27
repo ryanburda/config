@@ -1,7 +1,5 @@
 #!/bin/zsh
 #
-# TODO: Update to work on both Alacritty and Wezterm.
-#
 # NAME
 #   font_picker - changes font in alacritty.
 #
@@ -15,7 +13,7 @@ fonts=(
     "FiraCode Nerd Font Mono,12"
     "GohuFont 14 Nerd Font Mono,13"
     "Hack Nerd Font Mono,12"
-    "JetBrainsMono Nerd Font Mono,12"
+    "JetBrains Mono NL,13"
     "Liga SFMono Nerd Font,12"
     "MesloLGM Nerd Font, 12"
     "SauceCodePro Nerd Font Mono,12"
@@ -30,5 +28,8 @@ if [[ -n "${selection}" ]]; then
     echo $(print $selection| awk -F ',' '{print $1}') > $XDG_CONFIG_HOME/alacritty/.font
     echo $(print $selection| awk -F ',' '{print $2}') > $XDG_CONFIG_HOME/alacritty/.font_size
 
+    # update alacritty config
     ~/.zsh/funcs/alacritty_config
+    # force reload of wezterm config
+    touch $XDG_CONFIG_HOME/wezterm/wezterm.lua
 fi
