@@ -90,6 +90,11 @@ vim.diagnostic.config({
     },
 })
 
+-- TODO: Look for the .background file in wezterm.
+--          - if it is there then run the autocommands
+--          - if not then skip
+-- TODO: Fix issue where only current pane is transparent.
+-- TODO: Fix light background colorschemes with background image.
 -- Define a function to set the background to transparent
 local function set_transparent_background()
     vim.cmd("highlight Normal guibg=none ctermbg=none")
