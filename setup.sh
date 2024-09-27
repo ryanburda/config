@@ -89,6 +89,7 @@ if [[ $OSTYPE == darwin* ]]; then
 
     # Applications
     brew install --cask 1password
+    brew install --cask wezterm
     brew install --cask alacritty
     brew install --cask alfred
     brew install --cask rancher
