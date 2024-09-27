@@ -24,7 +24,49 @@ local function get_var_from_file(file_path)
 end
 
 -- colors
-config.color_scheme = "nord"
+local function color_scheme_map(color_scheme)
+    if color_scheme == "bamboo" then
+        return "Bamboo"
+    elseif color_scheme == "everforest_dark" then
+        return "Everforest Dark (Gogh)"
+    elseif color_scheme == "gruvbox_material_medium_dark" then
+        return "Gruvbox Material (Gogh)"
+    elseif color_scheme == "kanagawa_wave" then
+        return "Kanagawa (Gogh)"
+    elseif color_scheme == "carbonfox" then
+        return "carbonfox"
+    elseif color_scheme == "nightfox" then
+        return "nightfox"
+    elseif color_scheme == "terafox" then
+        return "terafox"
+    elseif color_scheme == "nord" then
+        return "nord"
+    elseif color_scheme == "vscode_dark" then
+        return "Vs Code Dark+ (Gogh)"
+    elseif color_scheme == "neobones" then
+        return "neobones_dark"
+    elseif color_scheme == "deepwhite" then
+        return "Alabaster"
+    elseif color_scheme == "everforest_light" then
+        return "Everforest Light (Gogh)"
+    elseif color_scheme == "gruvbox_material_medium_light" then
+        return "GruvboxLight"
+    elseif color_scheme == "newpaper" then
+        return "PaperColor Light (base16)"
+    elseif color_scheme == "dawnfox" then
+        return "dawnfox"
+    elseif color_scheme == "dayfox" then
+        return "dayfox"
+    elseif color_scheme == "vscode_light" then
+            return "Vs Code Light+ (Gogh)"
+    elseif color_scheme == "zenbones_rose" then
+        return "zenbones"
+    else
+        return "Batman"
+    end
+end
+
+config.color_scheme = color_scheme_map(get_var_from_file("/Users/ryanburda/.config/alacritty/.theme"))
 
 -- font
 config.font = wezterm.font(get_var_from_file("/Users/ryanburda/.config/alacritty/.font"))
