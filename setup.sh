@@ -126,6 +126,7 @@ ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/select_session"              "${HOME}/.zs
 ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/theme_picker"                "${HOME}/.zsh/funcs/theme_picker"
 mkdir -p                                                            "${XDG_CONFIG_HOME}/wezterm"
 ln -svfF "${SCRIPT_DIR}/dotfiles/wezterm/wezterm.lua"               "${XDG_CONFIG_HOME}/wezterm/wezterm.lua"
+ln -svfF "${SCRIPT_DIR}/dotfiles/wezterm/backgrounds"               "${XDG_CONFIG_HOME}/wezterm/backgrounds"
 mkdir -p                                                            "${XDG_CONFIG_HOME}/alacritty"
 ln -svfF "${SCRIPT_DIR}/dotfiles/alacritty/themes/"                 "${XDG_CONFIG_HOME}/alacritty/themes"
 ln -svfF "${SCRIPT_DIR}/dotfiles/alacritty/alacritty.toml.template" "${XDG_CONFIG_HOME}/alacritty/alacritty.toml.template"

@@ -5,65 +5,65 @@ local wezterm = require("wezterm")
 local config = {}
 
 if wezterm.config_builder then
-    config = wezterm.config_builder()
+  config = wezterm.config_builder()
 end
 
 local function get_var_from_file(file_path)
-    local file, err = io.open(file_path, "r")
-    if not file then
-        print("Could not open file: " .. err)
-        return
-    end
+  local file, err = io.open(file_path, "r")
+  if not file then
+    print("Could not open file: " .. err)
+    return
+  end
 
-    local content = file:read("*a")
-    -- Remove trailing new lines
-    content = content:gsub("%s*$", "")
+  local content = file:read("*a")
+  -- Remove trailing new lines
+  content = content:gsub("%s*$", "")
 
-    file:close()
-    return content
+  file:close()
+  return content
 end
 
 -- colors
 local function color_scheme_map(color_scheme)
-    if color_scheme == "bamboo" then
-        return "Bamboo"
-    elseif color_scheme == "everforest_dark" then
-        return "Everforest Dark (Gogh)"
-    elseif color_scheme == "gruvbox_material_medium_dark" then
-        return "Gruvbox Material (Gogh)"
-    elseif color_scheme == "kanagawa_wave" then
-        return "Kanagawa (Gogh)"
-    elseif color_scheme == "carbonfox" then
-        return "carbonfox"
-    elseif color_scheme == "nightfox" then
-        return "nightfox"
-    elseif color_scheme == "terafox" then
-        return "terafox"
-    elseif color_scheme == "nord" then
-        return "nord"
-    elseif color_scheme == "vscode_dark" then
-        return "Vs Code Dark+ (Gogh)"
-    elseif color_scheme == "neobones" then
-        return "neobones_dark"
-    elseif color_scheme == "deepwhite" then
-        return "Alabaster"
-    elseif color_scheme == "everforest_light" then
-        return "Everforest Light (Gogh)"
-    elseif color_scheme == "gruvbox_material_medium_light" then
-        return "GruvboxLight"
-    elseif color_scheme == "newpaper" then
-        return "PaperColor Light (base16)"
-    elseif color_scheme == "dawnfox" then
-        return "dawnfox"
-    elseif color_scheme == "dayfox" then
-        return "dayfox"
-    elseif color_scheme == "vscode_light" then
-            return "Vs Code Light+ (Gogh)"
-    elseif color_scheme == "zenbones_rose" then
-        return "zenbones"
-    else
-        return "Batman"
-    end
+  if color_scheme == "bamboo" then
+    return "Bamboo"
+  elseif color_scheme == "everforest_dark" then
+    return "Everforest Dark (Gogh)"
+  elseif color_scheme == "gruvbox_material_medium_dark" then
+    return "Gruvbox Material (Gogh)"
+  elseif color_scheme == "kanagawa_wave" then
+    return "Kanagawa (Gogh)"
+  elseif color_scheme == "carbonfox" then
+    return "carbonfox"
+  elseif color_scheme == "nightfox" then
+    return "nightfox"
+  elseif color_scheme == "terafox" then
+    return "terafox"
+  elseif color_scheme == "nord" then
+    return "nord"
+  elseif color_scheme == "vscode_dark" then
+    return "Vs Code Dark+ (Gogh)"
+  elseif color_scheme == "neobones" then
+    return "neobones_dark"
+  elseif color_scheme == "deepwhite" then
+    return "Alabaster"
+  elseif color_scheme == "everforest_light" then
+    return "Everforest Light (Gogh)"
+  elseif color_scheme == "gruvbox_material_medium_light" then
+    return "GruvboxLight"
+  elseif color_scheme == "newpaper" then
+    return "PaperColor Light (base16)"
+  elseif color_scheme == "dawnfox" then
+    return "dawnfox"
+  elseif color_scheme == "dayfox" then
+    return "dayfox"
+  elseif color_scheme == "vscode_light" then
+    return "Vs Code Light+ (Gogh)"
+  elseif color_scheme == "zenbones_rose" then
+    return "zenbones"
+  else
+    return "Batman"
+  end
 end
 
 -- NOTE: `os.getenv("XDG_CONFIG_HOME")` returns nil. Using "HOME" as an alternative for now.
@@ -72,6 +72,19 @@ config.color_scheme = color_scheme_map(get_var_from_file(os.getenv("HOME") .. "/
 -- font
 config.font = wezterm.font(get_var_from_file(os.getenv("HOME") .. "/.config/alacritty/.font"))
 config.font_size = tonumber(get_var_from_file(os.getenv("HOME") .. "/.config/alacritty/.font_size"))
+
+--config.window_background_image = os.getenv("HOME") .. "/.config/wezterm/backgrounds/forest_lake.jpg"
+--config.window_background_opacity = .9
+
+-- background
+config.background = {
+  {
+    source = {
+      File = os.getenv("HOME") .. "/.config/wezterm/backgrounds/forest_lake.jpg",
+    },
+    hsb = { brightness = 0.025 },
+  },
+}
 
 config.window_decorations = "RESIZE"
 
