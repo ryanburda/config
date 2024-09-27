@@ -89,6 +89,7 @@ if [[ $OSTYPE == darwin* ]]; then
 
     # Applications
     brew install --cask 1password
+    brew install --cask wezterm
     brew install --cask alacritty
     brew install --cask alfred
     brew install --cask rancher
@@ -123,6 +124,8 @@ ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/dark_mode"                   "${HOME}/.zs
 ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/psqlp"                       "${HOME}/.zsh/funcs/psqlp"
 ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/select_session"              "${HOME}/.zsh/funcs/select_session"
 ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/theme_picker"                "${HOME}/.zsh/funcs/theme_picker"
+mkdir -p                                                            "${XDG_CONFIG_HOME}/wezterm"
+ln -svfF "${SCRIPT_DIR}/dotfiles/wezterm/wezterm.lua"               "${XDG_CONFIG_HOME}/wezterm/wezterm.lua"
 mkdir -p                                                            "${XDG_CONFIG_HOME}/alacritty"
 ln -svfF "${SCRIPT_DIR}/dotfiles/alacritty/themes/"                 "${XDG_CONFIG_HOME}/alacritty/themes"
 ln -svfF "${SCRIPT_DIR}/dotfiles/alacritty/alacritty.toml.template" "${XDG_CONFIG_HOME}/alacritty/alacritty.toml.template"
