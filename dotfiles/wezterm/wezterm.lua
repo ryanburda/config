@@ -9,17 +9,17 @@ if wezterm.config_builder then
 end
 
 -- colors
-config.color_scheme = "Catppuccin Macchiato"
+config.color_scheme = "nord"
 
 -- font
 config.font = wezterm.font("JetBrains Mono NL")
-config.font_size = 16
+config.font_size = 14
 
 config.window_decorations = "RESIZE"
 
 -- tab bar
 config.hide_tab_bar_if_only_one_tab = true
-config.tab_bar_at_bottom = true
+config.tab_bar_at_bottom = false
 config.use_fancy_tab_bar = false
 config.tab_and_split_indices_are_zero_based = true
 
