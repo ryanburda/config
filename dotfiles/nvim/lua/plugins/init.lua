@@ -21,6 +21,7 @@ return {
             "Mofiqul/vscode.nvim",
             "ribru17/bamboo.nvim",
             "sho-87/kanagawa-paper.nvim",
+            "shaunsingh/nord.nvim",
             {
                 "yorik1984/newpaper.nvim",
                 config = true,
