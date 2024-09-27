@@ -58,7 +58,7 @@ local function color_scheme_map(color_scheme)
     elseif color_scheme == "dayfox" then
         return "dayfox"
     elseif color_scheme == "vscode_light" then
-            return "Vs Code Light+ (Gogh)"
+        return "Vs Code Light+ (Gogh)"
     elseif color_scheme == "zenbones_rose" then
         return "zenbones"
     else
@@ -73,7 +73,36 @@ config.color_scheme = color_scheme_map(get_var_from_file(os.getenv("HOME") .. "/
 config.font = wezterm.font(get_var_from_file(os.getenv("HOME") .. "/.config/alacritty/.font"))
 config.font_size = tonumber(get_var_from_file(os.getenv("HOME") .. "/.config/alacritty/.font_size"))
 
+local function get_background_config()
+    local background_image = get_var_from_file(os.getenv("HOME") .. "/.config/wezterm/.background")
+
+    if background_image == nil then
+        return {}
+    else
+        -- sources are stacked on top of each other in the order they are defined.
+        return {
+            {
+                source = {
+                    File = os.getenv("HOME") .. "/.config/wezterm/backgrounds/" .. background_image
+                },
+            },
+            {
+                source = {
+                    Color = wezterm.get_builtin_color_schemes()[config.color_scheme].background
+                },
+                opacity = 0.95,
+                -- height and width needed due to https://github.com/wez/wezterm/issues/2817
+                height = '100%',
+                width = '100%',
+            },
+        }
+    end
+end
+
+-- background
+config.background = get_background_config()
 config.window_decorations = "RESIZE"
+config.text_background_opacity = 0.9
 
 -- tab bar
 config.hide_tab_bar_if_only_one_tab = true

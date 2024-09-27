@@ -46,6 +46,7 @@ autoload -Uz dark_mode
 autoload -Uz psqlp
 autoload -Uz select_session
 autoload -Uz theme_picker
+autoload -Uz background_picker
 
 # autocompletion using arrow keys (based on history)
 bindkey '^[[A' history-search-backward

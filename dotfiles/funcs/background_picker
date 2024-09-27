@@ -1,0 +1,44 @@
+#!/bin/zsh
+#
+# NAME
+#   background_picker
+#
+# SYNOPSIS
+#   Terminal background image picker.
+#
+# DESCRIPTION
+#   Use fzf to select a background image. The selected image is
+#   written to a file. The wezterm.lua file is then reloaded to
+#   trigger the code that performs the image change.
+
+typeset -A images=(
+    ['None']=""
+    ['Forest']="forest_lake.jpg"
+    ['Mountain']="snowy_mountains.png"
+)
+
+function set_image(){
+    # Accepts a single parameter that is a valid key into the images dictionary above.
+    key=$1
+    value=${images[$key]}
+
+    BACKGROUND_FILE_PATH=$XDG_CONFIG_HOME/wezterm/.background
+
+    if [[ $key = 'None' ]]; then
+        # Delete the file if 'None' was selected.
+        # Wezterm will not display an image if the file does not exist.
+        rm -f $BACKGROUND_FILE_PATH
+        return 1
+    fi
+
+    if [[ ! -z $value ]]; then
+        # Write the selection to a file and reload the wezterm config
+        echo $value > $BACKGROUND_FILE_PATH
+        touch $XDG_CONFIG_HOME/wezterm/wezterm.lua
+    fi
+}
+
+selection=$(printf "%s\n" "${(k)images[@]}" | sort -r | fzf --cycle)
+if [[ -n "${selection}" ]]; then
+    set_image $selection
+fi

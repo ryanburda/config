@@ -1,7 +1,7 @@
 #!/bin/zsh
 #
 # NAME
-#   theme_picker - synchonizes alacritty and neovim themes.
+#   theme_picker - synchonizes terminal and neovim themes.
 #
 # SYNOPSIS
 #   theme_picker
