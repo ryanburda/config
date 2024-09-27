@@ -459,6 +459,13 @@ vim.keymap.set(
 
 vim.keymap.set(
     'n',
+    '<leader>vr',
+    require('telescope.builtin').registers,
+    { desc = "Help: vim registers" }
+)
+
+vim.keymap.set(
+    'n',
     '<leader>mk',
     require('telescope.builtin').man_pages,
     { desc = "Help: man pages in Telescope" }
