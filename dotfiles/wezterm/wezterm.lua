@@ -66,11 +66,12 @@ local function color_scheme_map(color_scheme)
     end
 end
 
-config.color_scheme = color_scheme_map(get_var_from_file("/Users/ryanburda/.config/alacritty/.theme"))
+-- NOTE: `os.getenv("XDG_CONFIG_HOME")` returns nil. Using "HOME" as an alternative for now.
+config.color_scheme = color_scheme_map(get_var_from_file(os.getenv("HOME") .. "/.config/alacritty/.theme"))
 
 -- font
-config.font = wezterm.font(get_var_from_file("/Users/ryanburda/.config/alacritty/.font"))
-config.font_size = tonumber(get_var_from_file("/Users/ryanburda/.config/alacritty/.font_size"))
+config.font = wezterm.font(get_var_from_file(os.getenv("HOME") .. "/.config/alacritty/.font"))
+config.font_size = tonumber(get_var_from_file(os.getenv("HOME") .. "/.config/alacritty/.font_size"))
 
 config.window_decorations = "RESIZE"
 
