@@ -13,8 +13,8 @@
 
 typeset -A images=(
     ['None']=""
-    ['Forest']="forest_lake.jpg"
-    ['Mountain']="snowy_mountains.png"
+    ['Forest']="forest.jpg"
+    ['Snowy Mountains']="snowy_mountains.png"
 )
 
 function set_image(){
@@ -28,17 +28,30 @@ function set_image(){
         # Delete the file if 'None' was selected.
         # Wezterm will not display an image if the file does not exist.
         rm -f $BACKGROUND_FILE_PATH
+        # Touch the .colorscheme file. This file is being watched for changes.
+        # When a change is detected the neovim colorscheme is changed to the contents of the file.
+        # Changing the colorscheme then fires the ColorScheme autocmd in `transparency.lua`.
+        #
+        # This will remove transparency from the colorscheme setting it back to normal.
+        touch $XDG_CONFIG_HOME/nvim/.colorscheme
         return 1
     fi
 
     if [[ ! -z $value ]]; then
-        # Write the selection to a file and reload the wezterm config
+        # Persist the selection to a file.
         echo $value > $BACKGROUND_FILE_PATH
+        # Touch the wezterm config to reload wezterm
         touch $XDG_CONFIG_HOME/wezterm/wezterm.lua
+        # Touch the .colorscheme file. This file is being watched for changes.
+        # When a change is detected the neovim colorscheme is changed to the contents of the file.
+        # Changing the colorscheme then fires the ColorScheme autocmd in `transparency.lua`.
+        #
+        # This will make certain highlight groups transparent allowing the background image to show up.
+        touch $XDG_CONFIG_HOME/nvim/.colorscheme
     fi
 }
 
-selection=$(printf "%s\n" "${(k)images[@]}" | sort -r | fzf --cycle)
+selection=$(printf "%s\n" "${(k)images[@]}" | fzf --cycle)
 if [[ -n "${selection}" ]]; then
     set_image $selection
 fi
