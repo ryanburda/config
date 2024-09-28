@@ -93,7 +93,7 @@ local function get_background_config()
                     -- This allows the image to show through while retaining the look and feel of the color scheme.
                     Color = wezterm.get_builtin_color_schemes()[config.color_scheme].background
                 },
-                opacity = 0.95,
+                opacity = 0.94,
                 -- height and width needed due to https://github.com/wez/wezterm/issues/2817
                 height = '100%',
                 width = '100%',
