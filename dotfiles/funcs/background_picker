@@ -1,13 +1,15 @@
 #!/bin/zsh
 #
 # NAME
-#   background_picker - terminal background image picker.
-#
-# SYNOPSIS
 #   background_picker
 #
+# SYNOPSIS
+#   Terminal background image picker.
+#
 # DESCRIPTION
-#   Use fzf to select a background image.
+#   Use fzf to select a background image. The selected image is
+#   written to a file. The wezterm.lua file is then reloaded to
+#   trigger the code that performs the image change.
 
 typeset -A images=(
     ['None']=""
