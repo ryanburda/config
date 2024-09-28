@@ -12,7 +12,6 @@ local function set_transparent_background()
     vim.cmd("highlight NormalNC guibg=none ctermbg=none")
     vim.cmd("highlight NormalFloat guibg=none ctermbg=none")
     vim.cmd("highlight NonText guibg=none ctermbg=none")
-    vim.cmd("highlight LineNr guibg=none ctermbg=none")
 
     -- Colorscheme specific highlight group changes
     local colorscheme = vim.cmd('colorscheme')

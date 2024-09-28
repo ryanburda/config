@@ -14,6 +14,8 @@
 typeset -A images=(
     ['None']=""
     ['Forest']="forest.jpg"
+    ['Desk']="desk.jpg"
+    ['Lake']="lake.jpg"
     ['Snowy Mountains']="snowy_mountains.png"
 )
 
