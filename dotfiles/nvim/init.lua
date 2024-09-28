@@ -90,30 +90,6 @@ vim.diagnostic.config({
     },
 })
 
--- TODO: Look for the .background file in wezterm.
---          - if it is there then run the autocommands
---          - if not then skip
--- TODO: Fix issue where only current pane is transparent.
--- TODO: Fix light background colorschemes with background image.
--- Define a function to set the background to transparent
-local function set_transparent_background()
-    vim.cmd("highlight Normal guibg=none ctermbg=none")
-    vim.cmd("highlight NonText guibg=none ctermbg=none")
-    vim.cmd("highlight LineNr guibg=none ctermbg=none")
-    -- Add other highlight groups as needed
-end
-
--- Create an autocommand to apply the transparent background when the colorscheme changes
-vim.api.nvim_create_autocmd("ColorScheme", {
-    pattern = "*",
-    callback = function()
-        set_transparent_background()
-    end
-})
-
--- Apply the transparent background when Neovim starts
-set_transparent_background()
-
 -- Setup lazy.nvim
 require("lazy").setup({
     spec = {
@@ -129,6 +105,8 @@ require("lazy").setup({
 
 -- keymaps
 require('keymaps')
+-- colorschemes and background transparency.
+require('colorscheme')
 
 -- TODO: Move these scripts to the repos repo.
 --       From there they can be symlinked to the projects directory.

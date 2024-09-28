@@ -466,6 +466,13 @@ vim.keymap.set(
 
 vim.keymap.set(
     'n',
+    '<leader>vh',
+    require('telescope.builtin').highlights,
+    { desc = "Help: vim highlight groups" }
+)
+
+vim.keymap.set(
+    'n',
     '<leader>mk',
     require('telescope.builtin').man_pages,
     { desc = "Help: man pages in Telescope" }
