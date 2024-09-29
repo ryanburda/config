@@ -76,6 +76,12 @@ config.font_size = tonumber(get_var_from_file(os.getenv("HOME") .. "/.config/ala
 local function get_background_config()
     local background_image = get_var_from_file(os.getenv("HOME") .. "/.config/wezterm/.background")
 
+    local nvim_light_or_dark = get_var_from_file(os.getenv("HOME") .. "/.config/nvim/.background")
+    local opacity = 0.93
+    if nvim_light_or_dark == 'light' then
+        opacity = 0.85
+    end
+
     if background_image == nil then
         return {}
     else
@@ -93,7 +99,7 @@ local function get_background_config()
                     -- This allows the image to show through while retaining the look and feel of the color scheme.
                     Color = wezterm.get_builtin_color_schemes()[config.color_scheme].background
                 },
-                opacity = 0.94,
+                opacity = opacity,
                 -- height and width needed due to https://github.com/wez/wezterm/issues/2817
                 height = '100%',
                 width = '100%',
