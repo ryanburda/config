@@ -79,7 +79,7 @@ local function get_background_config()
     local nvim_light_or_dark = get_var_from_file(os.getenv("HOME") .. "/.config/nvim/.background")
     local opacity = 0.93
     if nvim_light_or_dark == 'light' then
-        opacity = 0.85
+        opacity = 0.84
     end
 
     if background_image == nil then
