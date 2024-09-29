@@ -119,6 +119,8 @@ config.tab_bar_at_bottom = false
 config.use_fancy_tab_bar = false
 config.tab_and_split_indices_are_zero_based = true
 config.window_close_confirmation = 'NeverPrompt'
+config.initial_rows = 40
+config.initial_cols = 140
 
 -- and finally, return the configuration to wezterm
 return config
