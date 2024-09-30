@@ -297,13 +297,6 @@ return {
         dependencies = { 'akinsho/bufferline.nvim', }
     },
 
-    -- Status line
-    {
-        'nvim-lualine/lualine.nvim',
-        dependencies = { 'kyazdani42/nvim-web-devicons', },
-        config = require('plugins.configs.lualine').setup
-    },
-
     -- Indentation lines
     {
         'lukas-reineke/indent-blankline.nvim',
