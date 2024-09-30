@@ -21,19 +21,6 @@ function set_image(){
 
     BACKGROUND_FILE_PATH=$XDG_CONFIG_HOME/wezterm/.background
 
-    if [[ $selection = 'NONE' ]]; then
-        # Delete the file if 'None' was selected.
-        # Wezterm will not display an image if the file does not exist.
-        rm -f $BACKGROUND_FILE_PATH
-        # Touch the .colorscheme file. This file is being watched for changes.
-        # When a change is detected the neovim colorscheme is changed to the contents of the file.
-        # Changing the colorscheme then fires the ColorScheme autocmd in `transparency.lua`.
-        #
-        # This will remove transparency from the colorscheme setting it back to normal.
-        touch $XDG_CONFIG_HOME/nvim/.colorscheme
-        return 1
-    fi
-
     if [[ ! -z $selection ]]; then
         # Persist the selection to a file.
         echo $selection > $BACKGROUND_FILE_PATH
@@ -49,6 +36,7 @@ function set_image(){
 }
 
 images=$(\ls ${XDG_CONFIG_HOME}/wezterm/backgrounds)
+images+=("\nTRANSPARENT")
 images+=("\nNONE")
 selection=$(print $images | fzf --cycle)
 

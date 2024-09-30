@@ -86,8 +86,22 @@ local function get_background_config()
         opacity = 0.84
     end
 
-    if background_image == nil then
+    if background_image == "NONE" or background_image == nil then
         return {}
+    elseif background_image == "TRANSPARENT" then
+        return {
+            {
+                source = {
+                    -- Use the current color scheme's background color as the only layer and add an opacity.
+                    -- This allows anything under the terminal to show through while retaining the look and feel of the color scheme.
+                    Color = wezterm.get_builtin_color_schemes()[config.color_scheme].background
+                },
+                opacity = opacity,
+                -- height and width needed due to https://github.com/wez/wezterm/issues/2817
+                height = '100%',
+                width = '100%',
+            },
+        }
     else
         -- sources are stacked on top of each other in the order they are defined.
         return {
