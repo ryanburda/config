@@ -20,13 +20,13 @@ fonts=(
     "Terminess Nerd Font Mono, 14"
 )
 
-current_font=$(<$XDG_CONFIG_HOME/alacritty/.font)
-current_font_size=$(<$XDG_CONFIG_HOME/alacritty/.font_size)
+current_font=$(<$XDG_CONFIG_HOME/wezterm//.font)
+current_font_size=$(<$XDG_CONFIG_HOME/wezterm/.font_size)
 
 selection=$(printf "%s\n" "${fonts[@]}" | sort -r | fzf --cycle)
 if [[ -n "${selection}" ]]; then
-    echo $(print $selection| awk -F ',' '{print $1}') > $XDG_CONFIG_HOME/.font
-    echo $(print $selection| awk -F ',' '{print $2}') > $XDG_CONFIG_HOME/.font_size
+    echo $(print $selection| awk -F ',' '{print $1}') > $XDG_CONFIG_HOME/wezterm/.font
+    echo $(print $selection| awk -F ',' '{print $2}') > $XDG_CONFIG_HOME/wezterm/.font_size
 
     # force reload of wezterm config
     touch $XDG_CONFIG_HOME/wezterm/wezterm.lua

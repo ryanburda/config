@@ -71,11 +71,11 @@ local function color_scheme_map(color_scheme)
 end
 
 -- NOTE: `os.getenv("XDG_CONFIG_HOME")` returns nil. Using "HOME" as an alternative for now.
-config.color_scheme = color_scheme_map(get_var_from_file(os.getenv("HOME") .. "/.config/.colorscheme_key"))
+config.color_scheme = color_scheme_map(get_var_from_file(os.getenv("HOME") .. "/.config/wezterm/.colorscheme_key"))
 
 -- font
-config.font = wezterm.font(get_var_from_file(os.getenv("HOME") .. "/.config/.font"))
-config.font_size = tonumber(get_var_from_file(os.getenv("HOME") .. "/.config/.font_size"))
+config.font = wezterm.font(get_var_from_file(os.getenv("HOME") .. "/.config/wezterm/.font"))
+config.font_size = tonumber(get_var_from_file(os.getenv("HOME") .. "/.config/wezterm/.font_size"))
 
 local function get_background_config()
     local background_image = get_var_from_file(os.getenv("HOME") .. "/.config/wezterm/.background")

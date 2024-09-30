@@ -53,7 +53,7 @@ function set_theme(){
         echo "$b" > $XDG_CONFIG_HOME/nvim/.background
 
         # This is used below to show a check mark next to the current theme when selecting via fzf
-        echo "$theme_key" > $XDG_CONFIG_HOME/.colorscheme_key
+        echo "$theme_key" > $XDG_CONFIG_HOME/wezterm/.colorscheme_key
 
         # Regenerate templated configs.
         touch $XDG_CONFIG_HOME/wezterm/wezterm.lua
@@ -64,7 +64,7 @@ function set_theme(){
     fi
 }
 
-current_theme_key=$(<$XDG_CONFIG_HOME/.colorscheme_key)
+current_theme_key=$(<$XDG_CONFIG_HOME/wezterm/.colorscheme_key)
 theme_key=$(printf "%s\n" "${(k)themes[@]}" | sort | awk -F '\n' -v cur="$current_theme_key" '{if($0==cur) print " " $0; else print $0}' | fzf --cycle)
 
 if [[ ! -z $theme_key ]]; then
