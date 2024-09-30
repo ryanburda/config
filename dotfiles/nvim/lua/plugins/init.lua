@@ -9,32 +9,6 @@ return {
         end
     },
 
-    -- Color Schemes
-    {
-        "rktjmp/fwatch.nvim",
-        dependencies = {
-            "sainnhe/everforest",
-            "sainnhe/gruvbox-material",
-            "rebelot/kanagawa.nvim",
-            "EdenEast/nightfox.nvim",
-            "Verf/deepwhite.nvim",
-            "Mofiqul/vscode.nvim",
-            "ribru17/bamboo.nvim",
-            "sho-87/kanagawa-paper.nvim",
-            "shaunsingh/nord.nvim",
-            {
-                "yorik1984/newpaper.nvim",
-                config = true,
-            },
-            {
-                "zenbones-theme/zenbones.nvim",
-                dependencies = {
-                    "rktjmp/lush.nvim",
-                },
-            },
-        },
-        config = require("plugins.configs.colorscheme").setup,
-    },
     {
         "norcalli/nvim-colorizer.lua",
         config = function()

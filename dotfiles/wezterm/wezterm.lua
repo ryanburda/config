@@ -121,6 +121,7 @@ config.tab_and_split_indices_are_zero_based = true
 config.window_close_confirmation = 'NeverPrompt'
 config.initial_rows = 40
 config.initial_cols = 140
+config.disable_default_key_bindings = true
 
 -- and finally, return the configuration to wezterm
 return config
