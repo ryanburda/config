@@ -405,9 +405,6 @@ return {
         'zbirenbaum/copilot.lua',
         dependencies = { "zbirenbaum/copilot-cmp", },
         lazy = true,
-        keys = {
-            { "<leader>ai", require('plugins.configs.copilot').toggle, desc = "Github Copilot Toggle" },
-        },
         config = require('plugins.configs.copilot').setup,
     },
     {

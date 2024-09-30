@@ -105,8 +105,6 @@ require("lazy").setup({
 
 -- keymaps
 require('keymaps')
--- background transparency
-require('transparency')
 
 -- TODO: Move these scripts to the repos repo.
 --       From there they can be symlinked to the projects directory.

@@ -113,7 +113,6 @@ config.background = get_background_config()
 config.window_decorations = "RESIZE"
 config.text_background_opacity = 0.9
 
--- tab bar
 config.hide_tab_bar_if_only_one_tab = true
 config.tab_bar_at_bottom = false
 config.use_fancy_tab_bar = false
@@ -121,6 +120,7 @@ config.tab_and_split_indices_are_zero_based = true
 config.window_close_confirmation = 'NeverPrompt'
 config.initial_rows = 40
 config.initial_cols = 140
+config.window_padding = { left = 0, right = 0, top = 20, bottom = 0 }
 
 -- and finally, return the configuration to wezterm
 return config

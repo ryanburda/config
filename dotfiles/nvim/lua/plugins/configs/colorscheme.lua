@@ -11,31 +11,44 @@ function T.set_colorscheme(is_setup)
     -- create the colorscheme file if it doesn't already exist
     if io.open(T.COLORSCHEME_FILE, "r") == nil then
         local colorscheme_file = io.open(T.COLORSCHEME_FILE, "w+")
-        colorscheme_file:write(T.COLORSCHEME_DEFAULT)
-        colorscheme_file:close()
+        if colorscheme_file ~= nil then
+            colorscheme_file:write(T.COLORSCHEME_DEFAULT)
+            colorscheme_file:close()
+        else
+            print("Error: Could not open colorscheme file for writing.")
+        end
     end
 
     -- create the background file if it doesn't already exist
     if io.open(T.BACKGROUND_FILE, "r") == nil then
         local background_file = io.open(T.BACKGROUND_FILE, "w+")
-        background_file:write(T.BACKGROUND_DEFAULT)
-        background_file:close()
+        if background_file ~= nil then
+            background_file:write(T.BACKGROUND_DEFAULT)
+            background_file:close()
+        else
+            print("Error: Could not open colorscheme file for writing.")
+        end
     end
 
     -- read the colorscheme from the colorscheme file
     local colorscheme_file = io.open(T.COLORSCHEME_FILE, "r")
-    local colorscheme = colorscheme_file:read("*a")
-    colorscheme_file:close()
+    if colorscheme_file ~= nil then
+        local colorscheme = colorscheme_file:read("*a")
+        vim.cmd('colorscheme ' .. colorscheme)
+        colorscheme_file:close()
+    else
+        print("Error: Could not read colorscheme file.")
+    end
 
     -- read the background from the background file
     local background_file = io.open(T.BACKGROUND_FILE, "r")
-    local background = background_file:read("*a")
-    background_file:close()
-
-    vim.cmd('set background=' .. background)
-    vim.cmd('colorscheme ' .. colorscheme)
-    vim.cmd('set background=' .. background)
-    vim.cmd('colorscheme ' .. colorscheme)
+    if background_file ~= nil then
+        local background = background_file:read("*a")
+        vim.cmd('set background=' .. background)
+        background_file:close()
+    else
+        print("Error: Could not read background file.")
+    end
 
     -- Don't reload the colorizer plugin if neovim is just starting up.
     if is_setup == false then
@@ -46,7 +59,57 @@ function T.set_colorscheme(is_setup)
 
 end
 
+function T.set_transparent_background()
+    -- This function makes specific highlight groups transparent on a per colorscheme basis.
+    -- It is therefore important to make sure the terminal neovim is running in has a
+    -- background color that looks good with the current colorscheme.
+    --
+    -- If colors look bad you likely want to change the wezterm background colors.
+    -- If things are not transparent that should be then you likely want to add
+    -- additional highlight groups below.
+
+    -- These highlight groups should be made transparent for all colorschemes.
+    vim.cmd("highlight Normal guibg=none ctermbg=none")
+    vim.cmd("highlight NormalNC guibg=none ctermbg=none")
+    vim.cmd("highlight NormalFloat guibg=none ctermbg=none")
+    vim.cmd("highlight NonText guibg=none ctermbg=none")
+
+    -- Colorscheme specific highlight group changes
+    local colorscheme = vim.g.colors_name
+    if colorscheme == "gruvbox-material" then
+        vim.cmd("highlight NeoTreeNormal guibg=none ctermbg=none")
+        vim.cmd("highlight NeoTreeNormalNC guibg=none ctermbg=none")
+        vim.cmd("highlight NeoTreeEndOfBuffer guibg=none ctermbg=none")
+    elseif colorscheme == "bamboo" then
+        vim.cmd("highlight NeoTreeNormal guibg=none ctermbg=none")
+        vim.cmd("highlight NeoTreeNormalNC guibg=none ctermbg=none")
+        vim.cmd("highlight NeoTreeEndOfBuffer guibg=none ctermbg=none")
+    elseif colorscheme == "everforest" then
+        vim.cmd("highlight NeoTreeNormal guibg=none ctermbg=none")
+        vim.cmd("highlight NeoTreeNormalNC guibg=none ctermbg=none")
+        vim.cmd("highlight NeoTreeEndOfBuffer guibg=none ctermbg=none")
+    end
+end
+
+function T.set_transparent_background_conditional()
+    -- Read the .background file
+    local file, _ = io.open(os.getenv("HOME") .. "/.config/wezterm/.background", "r")
+
+    -- Only make highlight groups transparent if the .background file exists.
+    -- If the .background file doesn't exist then a background image is not
+    -- being shown and colors should show up normally.
+    if file then
+        T.set_transparent_background()
+    end
+end
+
 function T.setup()
+    -- Autocommand to make specific highlight groups transparent when an background image is being shown.
+    -- This will run automatically whenever the colorscheme changes.
+    vim.api.nvim_create_autocmd("ColorScheme", {
+        pattern = "*",
+        callback = T.set_transparent_background_conditional
+    })
 
     T.set_colorscheme(true)
 
