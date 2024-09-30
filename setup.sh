@@ -88,11 +88,11 @@ if [[ $OSTYPE == darwin* ]]; then
     brew install --cask font-sf-mono-nerd-font-ligaturized
 
     # Applications
-    brew install --cask 1password
-    brew install --cask wezterm
-    brew install --cask alfred
+    brew install --cask wezterm@nightly
     brew install --cask rancher
     brew install --cask karabiner-elements
+    brew install --cask 1password
+    brew install --cask alfred
     brew install --cask obsidian
     brew install --cask rectangle
     brew install --cask shifty
