@@ -29,37 +29,41 @@ local function color_scheme_map(color_scheme)
         return "Bamboo"
     elseif color_scheme == "Dark - Everforest" then
         return "Everforest Dark (Gogh)"
-    elseif color_scheme == "gruvbox_material_medium_dark" then
+    elseif color_scheme == "Dark - Gruvbox" then
         return "Gruvbox Material (Gogh)"
-    elseif color_scheme == "kanagawa_wave" then
+    elseif color_scheme == "Dark - Kanagawa-paper" then
         return "Kanagawa (Gogh)"
-    elseif color_scheme == "carbonfox" then
+    elseif color_scheme == "Dark - Kanagawa-wave" then
+        return "Kanagawa (Gogh)"
+    elseif color_scheme == "Dark - Nightfox-carbon" then
         return "carbonfox"
-    elseif color_scheme == "nightfox" then
+    elseif color_scheme == "Dark - Nightfox-night" then
         return "nightfox"
-    elseif color_scheme == "terafox" then
+    elseif color_scheme == "Dark - Nightfox-tera" then
         return "terafox"
-    elseif color_scheme == "nord" then
+    elseif color_scheme == "Dark - Nord" then
         return "nord"
-    elseif color_scheme == "vscode_dark" then
+    elseif color_scheme == "Dark - VSCode" then
         return "Vs Code Dark+ (Gogh)"
-    elseif color_scheme == "neobones" then
+    elseif color_scheme == "Dark - ZenBones-forest" then
+        return "Everforest Dark (Gogh)"
+    elseif color_scheme == "Dark - ZenBones-neo" then
         return "neobones_dark"
-    elseif color_scheme == "deepwhite" then
+    elseif color_scheme == "Light - Deep-White" then
         return "Alabaster"
-    elseif color_scheme == "everforest_light" then
+    elseif color_scheme == "Light - Everforest" then
         return "Everforest Light (Gogh)"
-    elseif color_scheme == "gruvbox_material_medium_light" then
+    elseif color_scheme == "Light - Gruvbox" then
         return "GruvboxLight"
-    elseif color_scheme == "newpaper" then
+    elseif color_scheme == "Light - Newpaper" then
         return "PaperColor Light (base16)"
-    elseif color_scheme == "dawnfox" then
+    elseif color_scheme == "Light - Nightfox-dawn" then
         return "dawnfox"
-    elseif color_scheme == "dayfox" then
+    elseif color_scheme == "Light - Nightfox-day" then
         return "dayfox"
-    elseif color_scheme == "vscode_light" then
+    elseif color_scheme == "Light - VSCode" then
         return "Vs Code Light+ (Gogh)"
-    elseif color_scheme == "zenbones_rose" then
+    elseif color_scheme == "Light - ZenBones-rose" then
         return "zenbones"
     else
         return "Batman"

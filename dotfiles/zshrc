@@ -45,7 +45,7 @@ autoload -Uz font_picker
 autoload -Uz dark_mode
 autoload -Uz psqlp
 autoload -Uz select_session
-autoload -Uz theme_picker
+autoload -Uz colorscheme_picker
 autoload -Uz background_picker
 
 # autocompletion using arrow keys (based on history)
@@ -60,7 +60,7 @@ alias d="lazydocker"
 alias g="lazygit"
 alias t="btm"
 alias f="font_picker"
-alias c="theme_picker"
+alias c="colorscheme_picker"
 alias m="cal -A 1 -B 1"
 
 # Raise max files and max procs
