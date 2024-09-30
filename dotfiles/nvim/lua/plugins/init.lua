@@ -33,7 +33,7 @@ return {
                 },
             },
         },
-        config = require("plugins.configs.colorscheme").setup,
+        config = require("config.colorscheme").setup,
     },
     {
         "norcalli/nvim-colorizer.lua",
@@ -167,7 +167,7 @@ return {
                 },
             },
         },
-        config = require('plugins.configs.telescope').setup
+        config = require('config.telescope').setup
     },
 
     -- Scrolling
@@ -242,7 +242,7 @@ return {
     },
     {
         'christoomey/vim-tmux-runner',
-        config = require('plugins.configs.vim-tmux-runner').setup,
+        config = require('config.vim-tmux-runner').setup,
     },
 
     -- Buffer tabs
@@ -283,7 +283,7 @@ return {
     {
         'nvim-lualine/lualine.nvim',
         dependencies = { 'kyazdani42/nvim-web-devicons', },
-        config = require('plugins.configs.lualine').setup
+        config = require('config.lualine').setup
     },
 
     -- Indentation lines
@@ -312,7 +312,7 @@ return {
     {
         "williamboman/mason-lspconfig.nvim",
         dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig", "folke/neodev.nvim", },
-        config = require("plugins.configs.mason-lspconfig").setup
+        config = require("config.mason-lspconfig").setup
     },
     {
         "williamboman/mason.nvim",
@@ -333,7 +333,7 @@ return {
 
             'onsails/lspkind.nvim',
         },
-        config = require('plugins.configs.nvim-cmp').setup
+        config = require('config.nvim-cmp').setup
     },
     {
         'ray-x/lsp_signature.nvim',
@@ -355,7 +355,7 @@ return {
             'mfussenegger/nvim-dap',
             'nvim-neotest/nvim-nio',
         },
-        config = require("plugins.configs.nvim-dap-ui").setup
+        config = require("config.nvim-dap-ui").setup
     },
     {
         'theHamsta/nvim-dap-virtual-text',
@@ -379,7 +379,7 @@ return {
     -- sql
     {
         'nanotee/sqls.nvim',
-        config = function() require('plugins.configs.sqls').setup() end,
+        config = function() require('config.sqls').setup() end,
     },
 
     -- Github Copilot
@@ -387,7 +387,7 @@ return {
         'zbirenbaum/copilot.lua',
         dependencies = { "zbirenbaum/copilot-cmp", },
         lazy = true,
-        config = require('plugins.configs.copilot').setup,
+        config = require('config.copilot').setup,
     },
     {
         "zbirenbaum/copilot-cmp",

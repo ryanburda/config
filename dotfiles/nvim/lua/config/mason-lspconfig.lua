@@ -102,7 +102,7 @@ function T.setup()
                 end,
                 settings = {
                     sqls = {
-                        connections = require('plugins.configs.sqls').get_all_connections()
+                        connections = require('config.sqls').get_all_connections()
                     },
                 },
             }

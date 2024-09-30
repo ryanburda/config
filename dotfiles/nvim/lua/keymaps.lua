@@ -388,7 +388,7 @@ vim.keymap.set(
     '<leader>kg',
     function()
         require('telescope.builtin').live_grep({
-            search_dirs = require('plugins.configs.telescope').getqflist_files(),
+            search_dirs = require('config.telescope').getqflist_files(),
             results_title = 'Quickfix Files'
         })
     end,
@@ -766,7 +766,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 vim.keymap.set(
     'n',
     "<leader>ai",
-    require('plugins.configs.copilot').toggle,
+    require('config.copilot').toggle,
     { desc = "Github Copilot Toggle" }
 )
 
