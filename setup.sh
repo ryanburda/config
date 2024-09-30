@@ -28,6 +28,7 @@ if [[ $OSTYPE == darwin* ]]; then
     brew install automake
     brew install bat
     brew install bottom
+    brew install catimg
     brew install cmake
     brew install composer
     brew install coreutils

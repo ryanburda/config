@@ -50,7 +50,7 @@ function set_image(){
 
 images=$(\ls ${XDG_CONFIG_HOME}/wezterm/backgrounds)
 images+=("\nNONE")
-selection=$(print $images | fzf --cycle)
+selection=$(print $images | fzf --cycle --preview="catimg -H 0 ~/.config/wezterm/backgrounds/{}")
 
 if [[ -n "${selection}" ]]; then
     set_image $selection
