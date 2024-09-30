@@ -1,0 +1,72 @@
+#!/bin/zsh
+#
+# NAME
+#   colorscheme_picker - synchonizes neovim and terminal colorschemes.
+#
+# DESCRIPTION
+#   Use fzf to select a colorscheme. A colorscheme is applied to both the terminal and neovim.
+#   This script utilizes a hard coded associative list (dictionary) where the keys
+#   are unique theme names that will show up in fzf and the values are strings each
+#   containing:
+#       * the neovim colorscheme
+#       * and neovim background
+#   in that order separated by spaces.
+#
+#   The colorscheme changes happen as a result of either writing to files or from regeneration of config files:
+#       - nvim is updated when a change is detected in $XDG_CONFIG_HOME/nvim/.colorscheme
+#       - wezterm is updated by touching $XDG_CONFIG_HOME/wezterm/wezterm.lua
+#       - other scripts exist for handling colorscheme changes to other CLIs such as aichat and lazygit.
+typeset -A themes=(
+    ['Dark - Bamboo']="bamboo dark"
+    ['Dark - Everforest']="everforest dark"
+    ['Dark - Gruvbox']="gruvbox-material dark"
+    ['Dark - Kanagawa-paper']="kanagawa-paper dark"
+    ['Dark - Kanagawa-wave']="kanagawa-wave dark"
+    ['Dark - Nightfox-carbon']="carbonfox dark"
+    ['Dark - Nightfox-night']="nightfox dark"
+    ['Dark - Nightfox-tera']="terafox dark"
+    ['Dark - Nord']="nord dark"
+    ['Dark - VSCode']="vscode dark"
+    ['Dark - ZenBones-forest']="forestbones dark"
+    ['Dark - ZenBones-neo']="neobones dark"
+    ['Light - Deep-White']="deepwhite light"
+    ['Light - Everforest']="everforest light"
+    ['Light - Gruvbox']="gruvbox-material light"
+    ['Light - Newpaper']="newpaper light"
+    ['Light - Nightfox-dawn']="dawnfox light"
+    ['Light - Nightfox-day']="dayfox light"
+    ['Light - VSCode']="vscode light"
+    ['Light - ZenBones-rose']="rosebones light"
+)
+
+function set_theme(){
+    # Accepts a single parameter that is a valid key into the themes dictionary above.
+    theme_key=$1
+    values=${themes[$theme_key]}
+
+    if [[ ! -z $values ]]; then
+        a=$(print $values | awk '{print $1}')
+        b=$(print $values | awk '{print $2}')
+
+        # Write the values to files.
+        echo "$a" > $XDG_CONFIG_HOME/nvim/.colorscheme
+        echo "$b" > $XDG_CONFIG_HOME/nvim/.background
+
+        # This is used below to show a check mark next to the current theme when selecting via fzf
+        echo "$theme_key" > $XDG_CONFIG_HOME/.colorscheme_key
+
+        # Regenerate templated configs.
+        touch $XDG_CONFIG_HOME/wezterm/wezterm.lua
+        ~/.zsh/funcs/aichat_config
+        ~/.zsh/funcs/git_config
+        ~/.zsh/funcs/lazygit_config
+        ~/.zsh/funcs/dark_mode $(if [[ $b == 'light' ]]; then echo '-l'; fi)
+    fi
+}
+
+current_theme_key=$(<$XDG_CONFIG_HOME/.colorscheme_key)
+theme_key=$(printf "%s\n" "${(k)themes[@]}" | sort | awk -F '\n' -v cur="$current_theme_key" '{if($0==cur) print " " $0; else print $0}' | fzf --cycle)
+
+if [[ ! -z $theme_key ]]; then
+    set_theme $theme_key
+fi

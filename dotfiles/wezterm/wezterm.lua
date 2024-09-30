@@ -25,9 +25,9 @@ end
 
 -- colors
 local function color_scheme_map(color_scheme)
-    if color_scheme == "bamboo" then
+    if color_scheme == "Dark - Bamboo" then
         return "Bamboo"
-    elseif color_scheme == "everforest_dark" then
+    elseif color_scheme == "Dark - Everforest" then
         return "Everforest Dark (Gogh)"
     elseif color_scheme == "gruvbox_material_medium_dark" then
         return "Gruvbox Material (Gogh)"
@@ -67,11 +67,11 @@ local function color_scheme_map(color_scheme)
 end
 
 -- NOTE: `os.getenv("XDG_CONFIG_HOME")` returns nil. Using "HOME" as an alternative for now.
-config.color_scheme = color_scheme_map(get_var_from_file(os.getenv("HOME") .. "/.config/alacritty/.theme"))
+config.color_scheme = color_scheme_map(get_var_from_file(os.getenv("HOME") .. "/.config/.colorscheme_key"))
 
 -- font
-config.font = wezterm.font(get_var_from_file(os.getenv("HOME") .. "/.config/alacritty/.font"))
-config.font_size = tonumber(get_var_from_file(os.getenv("HOME") .. "/.config/alacritty/.font_size"))
+config.font = wezterm.font(get_var_from_file(os.getenv("HOME") .. "/.config/.font"))
+config.font_size = tonumber(get_var_from_file(os.getenv("HOME") .. "/.config/.font_size"))
 
 local function get_background_config()
     local background_image = get_var_from_file(os.getenv("HOME") .. "/.config/wezterm/.background")

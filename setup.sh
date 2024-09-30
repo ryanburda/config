@@ -90,7 +90,6 @@ if [[ $OSTYPE == darwin* ]]; then
     # Applications
     brew install --cask 1password
     brew install --cask wezterm
-    brew install --cask alacritty
     brew install --cask alfred
     brew install --cask rancher
     brew install --cask karabiner-elements
@@ -123,14 +122,11 @@ ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/font_picker"                 "${HOME}/.zs
 ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/dark_mode"                   "${HOME}/.zsh/funcs/dark_mode"
 ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/psqlp"                       "${HOME}/.zsh/funcs/psqlp"
 ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/select_session"              "${HOME}/.zsh/funcs/select_session"
-ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/theme_picker"                "${HOME}/.zsh/funcs/theme_picker"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/colorscheme_picker"          "${HOME}/.zsh/funcs/colorscheme_picker"
 ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/background_picker"           "${HOME}/.zsh/funcs/background_picker"
 mkdir -p                                                            "${XDG_CONFIG_HOME}/wezterm"
 ln -svfF "${SCRIPT_DIR}/dotfiles/wezterm/wezterm.lua"               "${XDG_CONFIG_HOME}/wezterm/wezterm.lua"
 ln -svfF "${SCRIPT_DIR}/dotfiles/wezterm/backgrounds"               "${XDG_CONFIG_HOME}/wezterm/backgrounds"
-mkdir -p                                                            "${XDG_CONFIG_HOME}/alacritty"
-ln -svfF "${SCRIPT_DIR}/dotfiles/alacritty/themes/"                 "${XDG_CONFIG_HOME}/alacritty/themes"
-ln -svfF "${SCRIPT_DIR}/dotfiles/alacritty/alacritty.toml.template" "${XDG_CONFIG_HOME}/alacritty/alacritty.toml.template"
 ln -svfF "${SCRIPT_DIR}/dotfiles/lazygit.yml.template"              "${XDG_CONFIG_HOME}/lazygit/config.yml.template"
 mkdir -p                                                            "${XDG_CONFIG_HOME}/lsd"
 ln -svfF "${SCRIPT_DIR}/dotfiles/lsd/config.yaml"                   "${XDG_CONFIG_HOME}/lsd/config.yaml"
