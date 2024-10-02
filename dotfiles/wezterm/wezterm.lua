@@ -22,7 +22,7 @@ local function get_background_config()
     local background_image = get_var_from_file(os.getenv("HOME") .. "/.config/wezterm/.background", 'NONE')
     local nvim_light_or_dark = get_var_from_file(os.getenv("HOME") .. "/.config/nvim/.background", 'dark')
 
-    local opacity = 0.91
+    local opacity = 0.90
     if nvim_light_or_dark == 'light' then
         opacity = 0.83
     end
