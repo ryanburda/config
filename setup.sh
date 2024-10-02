@@ -87,6 +87,8 @@ if [[ $OSTYPE == darwin* ]]; then
     brew install --cask font-terminess-ttf-nerd-font
     brew tap shaunsingh/SFMono-Nerd-Font-Ligaturized
     brew install --cask font-sf-mono-nerd-font-ligaturized
+    brew install --cask font-iosevka-term-slab-nerd-font
+    brew install --cask font-inconsolata-go-nerd-font
     brew install --cask font-zed-mono-nerd-font
 
     # Applications

@@ -1,13 +1,10 @@
 #!/bin/zsh
 #
 # NAME
-#   font_picker - changes font in alacritty.
-#
-# SYNOPSIS
-#   font_picker
+#   font_picker - changes terminal font.
 #
 # DESCRIPTION
-#   Use fzf to select a font. The font is then substituted into alacritty.toml.
+#   Use fzf to select a font.
 fonts=(
     "CaskaydiaMono Nerd Font Mono,14"
     "FiraCode Nerd Font Mono,12"
@@ -18,7 +15,9 @@ fonts=(
     "MesloLGM Nerd Font,12"
     "SauceCodePro Nerd Font Mono,12"
     "Terminess Nerd Font Mono,14"
-    "ZedMono Nerd Font Mono,14"
+    "IosevkaTermSlab Nerd Font Mono,13"
+    "InconsolataGo Nerd Font Mono,14"
+    "ZedMono Nerd Font Mono,13"
 )
 
 current_font=$(<$XDG_CONFIG_HOME/wezterm/.font)
