@@ -118,7 +118,6 @@ ln -svfF "${SCRIPT_DIR}/dotfiles/octaverc"                          "${HOME}/.oc
 touch                                                               "${HOME}/.openai_api_key"  # Add openai key to this file.
 ln -svfF "${SCRIPT_DIR}/dotfiles/zprofile"                          "${HOME}/.zprofile"
 mkdir -p                                                            "${HOME}/.zsh/funcs"
-ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/alacritty_config"            "${HOME}/.zsh/funcs/alacritty_config"
 ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/aichat_config"               "${HOME}/.zsh/funcs/aichat_config"
 ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/git_config"                  "${HOME}/.zsh/funcs/git_config"
 ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/lazygit_config"              "${HOME}/.zsh/funcs/lazygit_config"

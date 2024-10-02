@@ -37,7 +37,6 @@ fpath=(
     ~/.zsh/funcs
     "${fpath[@]}"
 )
-autoload -Uz alacritty_config
 autoload -Uz aichat_config
 autoload -Uz git_config
 autoload -Uz lazygit_config
