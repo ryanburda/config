@@ -1,11 +1,12 @@
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
-local function get_var_from_file(file_path)
-    local file, err = io.open(file_path, "r")
+local function get_var_from_file(file_path, default)
+    -- Reads value from `file_path`, returns `default` if file does not exist.
+    local file, _ = io.open(file_path, "r")
     if not file then
-        print("Could not open file: " .. err)
-        return
+        -- Could not open file
+        return default
     end
 
     local content = file:read("*a")
@@ -18,8 +19,8 @@ local function get_var_from_file(file_path)
 end
 
 local function get_background_config()
-    local background_image = get_var_from_file(os.getenv("HOME") .. "/.config/wezterm/.background")
-    local nvim_light_or_dark = get_var_from_file(os.getenv("HOME") .. "/.config/nvim/.background")
+    local background_image = get_var_from_file(os.getenv("HOME") .. "/.config/wezterm/.background", 'NONE')
+    local nvim_light_or_dark = get_var_from_file(os.getenv("HOME") .. "/.config/nvim/.background", 'dark')
 
     local opacity = 0.91
     if nvim_light_or_dark == 'light' then
@@ -28,7 +29,7 @@ local function get_background_config()
 
     local background_config = {}
 
-    if background_image == "NONE" or background_image == nil then
+    if background_image == "NONE" then
         return background_config
     end
 
@@ -58,9 +59,9 @@ local function get_background_config()
 end
 
 -- NOTE: `os.getenv("XDG_CONFIG_HOME")` returns nil. Using "HOME" as an alternative for now.
-config.color_scheme = get_var_from_file(os.getenv("HOME") .. "/.config/wezterm/.colorscheme")
-config.font = wezterm.font(get_var_from_file(os.getenv("HOME") .. "/.config/wezterm/.font"))
-config.font_size = tonumber(get_var_from_file(os.getenv("HOME") .. "/.config/wezterm/.font_size"))
+config.color_scheme = get_var_from_file(os.getenv("HOME") .. "/.config/wezterm/.colorscheme", 'Batman')
+config.font = wezterm.font(get_var_from_file(os.getenv("HOME") .. "/.config/wezterm/.font", 'JetBrains Mono'))
+config.font_size = tonumber(get_var_from_file(os.getenv("HOME") .. "/.config/wezterm/.font_size", '12'))
 config.background = get_background_config()
 config.window_decorations = "RESIZE"
 config.text_background_opacity = 0.9
