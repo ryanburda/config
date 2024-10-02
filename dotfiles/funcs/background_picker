@@ -39,7 +39,7 @@ current_background=$(<$XDG_CONFIG_HOME/wezterm/.background)
 backgrounds=$(\ls ${XDG_CONFIG_HOME}/wezterm/backgrounds)
 backgrounds+=("\nTRANSPARENT")
 backgrounds+=("\nNONE")
-selection=$(print $backgrounds | sort | awk -F '\n' -v cur="$current_background" '{if($0==cur) print " " $0; else print $0}' | fzf --cycle)
+selection=$(print $backgrounds | sort | fzf --cycle)
 
 if [[ -n "${selection}" ]]; then
     set_image $selection

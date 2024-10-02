@@ -39,7 +39,7 @@ local function color_scheme_map(color_scheme)
     elseif color_scheme == "Dark - Kanagawa-wave" then
         return "Kanagawa (Gogh)"
     elseif color_scheme == "Dark - Nightfox-carbon" then
-        return "carbonfox"
+        return "Modus Vivendi (Gogh)"
     elseif color_scheme == "Dark - Nightfox-night" then
         return "nightfox"
     elseif color_scheme == "Dark - Nightfox-tera" then

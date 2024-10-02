@@ -67,7 +67,7 @@ function set_theme(){
 }
 
 current_theme_key=$(<$XDG_CONFIG_HOME/wezterm/.colorscheme_key)
-theme_key=$(printf "%s\n" "${(k)themes[@]}" | sort | awk -F '\n' -v cur="$current_theme_key" '{if($0==cur) print " " $0; else print $0}' | fzf --cycle)
+theme_key=$(printf "%s\n" "${(k)themes[@]}" | sort | fzf --cycle)
 
 if [[ ! -z $theme_key ]]; then
     set_theme $theme_key
