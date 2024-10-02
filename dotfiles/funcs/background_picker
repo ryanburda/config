@@ -16,7 +16,7 @@
 #   to either apply or remove transparency.
 
 function set_image(){
-    # Accepts a single parameter that is a valid key into the images dictionary above.
+    # Accepts a single parameter that is a valid key into the backgrounds dictionary above.
     selection=$1
 
     BACKGROUND_FILE_PATH=$XDG_CONFIG_HOME/wezterm/.background
@@ -35,10 +35,11 @@ function set_image(){
     fi
 }
 
-images=$(\ls ${XDG_CONFIG_HOME}/wezterm/backgrounds)
-images+=("\nTRANSPARENT")
-images+=("\nNONE")
-selection=$(print $images | fzf --cycle)
+current_background=$(<$XDG_CONFIG_HOME/wezterm/.background)
+backgrounds=$(\ls ${XDG_CONFIG_HOME}/wezterm/backgrounds)
+backgrounds+=("\nTRANSPARENT")
+backgrounds+=("\nNONE")
+selection=$(print $backgrounds | sort | awk -F '\n' -v cur="$current_background" '{if($0==cur) print " " $0; else print $0}' | fzf --cycle)
 
 if [[ -n "${selection}" ]]; then
     set_image $selection
