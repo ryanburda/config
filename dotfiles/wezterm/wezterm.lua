@@ -1,10 +1,5 @@
 local wezterm = require("wezterm")
-
-local config = {}
-
-if wezterm.config_builder then
-    config = wezterm.config_builder()
-end
+local config = wezterm.config_builder()
 
 local function get_var_from_file(file_path)
     local file, err = io.open(file_path, "r")
@@ -14,6 +9,7 @@ local function get_var_from_file(file_path)
     end
 
     local content = file:read("*a")
+
     -- Remove trailing new lines
     content = content:gsub("%s*$", "")
 
@@ -23,51 +19,42 @@ end
 
 local function get_background_config()
     local background_image = get_var_from_file(os.getenv("HOME") .. "/.config/wezterm/.background")
-
     local nvim_light_or_dark = get_var_from_file(os.getenv("HOME") .. "/.config/nvim/.background")
-    local opacity = 0.92
+
+    local opacity = 0.91
     if nvim_light_or_dark == 'light' then
-        opacity = 0.84
+        opacity = 0.83
     end
+
+    local background_config = {}
 
     if background_image == "NONE" or background_image == nil then
-        return {}
-    elseif background_image == "TRANSPARENT" then
-        return {
-            {
-                source = {
-                    -- Use the current color scheme's background color as the only layer and add an opacity.
-                    -- This allows anything under the terminal to show through while retaining the look and feel of the color scheme.
-                    Color = wezterm.get_builtin_color_schemes()[config.color_scheme].background
-                },
-                opacity = opacity,
-                -- height and width needed due to https://github.com/wez/wezterm/issues/2817
-                height = '100%',
-                width = '100%',
-            },
-        }
-    else
-        -- sources are stacked on top of each other in the order they are defined.
-        return {
-            {
-                source = {
-                    -- Lay the image down first.
-                    File = os.getenv("HOME") .. "/.config/wezterm/backgrounds/" .. background_image
-                },
-            },
-            {
-                source = {
-                    -- Lay the current color scheme's background color on top of the image and add an opacity.
-                    -- This allows the image to show through while retaining the look and feel of the color scheme.
-                    Color = wezterm.get_builtin_color_schemes()[config.color_scheme].background
-                },
-                opacity = opacity,
-                -- height and width needed due to https://github.com/wez/wezterm/issues/2817
-                height = '100%',
-                width = '100%',
-            },
-        }
+        return background_config
     end
+
+    -- Lay the image down first if one was selected.
+    if background_image ~= "TRANSPARENT" then
+        table.insert(background_config, {
+            source = {
+                File = os.getenv("HOME") .. "/.config/wezterm/backgrounds/" .. background_image
+            },
+        })
+    end
+
+    -- Layer the current color scheme's background color and add an opacity.
+    -- This allows any layers above to show through while retaining the look and feel of the color scheme.
+    table.insert(background_config, {
+        source = {
+            Color = wezterm.get_builtin_color_schemes()[config.color_scheme].background
+        },
+        opacity = opacity,
+        -- height and width needed due to https://github.com/wez/wezterm/issues/2817
+        height = '100%',
+        width = '100%',
+    })
+
+    return background_config
+
 end
 
 -- NOTE: `os.getenv("XDG_CONFIG_HOME")` returns nil. Using "HOME" as an alternative for now.

@@ -11,7 +11,7 @@
 #       * the neovim colorscheme
 #       * the neovim background
 #       * the wezterm colorscheme
-#   in that order separated by spaces.
+#   in that order separated by commas.
 #
 #   The colorscheme changes happen as a result of either writing to files or from regeneration of config files:
 #       - nvim is updated when a change is detected in $XDG_CONFIG_HOME/nvim/.colorscheme
