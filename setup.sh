@@ -75,6 +75,7 @@ if [[ $OSTYPE == darwin* ]]; then
     brew install zsh-vi-mode
 
     # Fonts
+    # brew install --cask font-<FONT NAME>-nerd-font
     brew tap homebrew/cask-fonts
     brew install --cask font-caskaydia-mono-nerd-font
     brew install --cask font-fira-code-nerd-font
@@ -86,6 +87,7 @@ if [[ $OSTYPE == darwin* ]]; then
     brew install --cask font-terminess-ttf-nerd-font
     brew tap shaunsingh/SFMono-Nerd-Font-Ligaturized
     brew install --cask font-sf-mono-nerd-font-ligaturized
+    brew install --cask font-zed-mono-nerd-font
 
     # Applications
     brew install --cask wezterm@nightly
