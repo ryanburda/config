@@ -73,22 +73,21 @@ function T.set_transparent_background()
     vim.cmd("highlight NormalNC guibg=none ctermbg=none")
     vim.cmd("highlight NormalFloat guibg=none ctermbg=none")
     vim.cmd("highlight NonText guibg=none ctermbg=none")
+    vim.cmd("highlight NeoTreeNormal guibg=none ctermbg=none")
+    vim.cmd("highlight NeoTreeNormalNC guibg=none ctermbg=none")
+    vim.cmd("highlight NeoTreeEndOfBuffer guibg=none ctermbg=none")
 
     -- Colorscheme specific highlight group changes
-    local colorscheme = vim.g.colors_name
-    if colorscheme == "gruvbox-material" then
-        vim.cmd("highlight NeoTreeNormal guibg=none ctermbg=none")
-        vim.cmd("highlight NeoTreeNormalNC guibg=none ctermbg=none")
-        vim.cmd("highlight NeoTreeEndOfBuffer guibg=none ctermbg=none")
-    elseif colorscheme == "bamboo" then
-        vim.cmd("highlight NeoTreeNormal guibg=none ctermbg=none")
-        vim.cmd("highlight NeoTreeNormalNC guibg=none ctermbg=none")
-        vim.cmd("highlight NeoTreeEndOfBuffer guibg=none ctermbg=none")
-    elseif colorscheme == "everforest" then
-        vim.cmd("highlight NeoTreeNormal guibg=none ctermbg=none")
-        vim.cmd("highlight NeoTreeNormalNC guibg=none ctermbg=none")
-        vim.cmd("highlight NeoTreeEndOfBuffer guibg=none ctermbg=none")
-    end
+    -- local colorscheme = vim.g.colors_name
+    -- if colorscheme == "adwaita" then
+    --     vim.cmd("highlight NeoTreeNormal guibg=none ctermbg=none")
+    --     vim.cmd("highlight NeoTreeNormalNC guibg=none ctermbg=none")
+    --     vim.cmd("highlight NeoTreeEndOfBuffer guibg=none ctermbg=none")
+    -- elseif colorscheme == "gruvbox-material" then
+    --     vim.cmd("highlight NeoTreeNormal guibg=none ctermbg=none")
+    --     vim.cmd("highlight NeoTreeNormalNC guibg=none ctermbg=none")
+    --     vim.cmd("highlight NeoTreeEndOfBuffer guibg=none ctermbg=none")
+    -- end
 end
 
 function T.set_transparent_background_conditional()

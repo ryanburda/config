@@ -17,6 +17,7 @@
 #       - wezterm is updated by touching $XDG_CONFIG_HOME/wezterm/wezterm.lua
 #       - other scripts exist for handling colorscheme changes to other CLIs such as aichat and lazygit.
 typeset -A themes=(
+    ['Dark - Adwaita']="adwaita dark"
     ['Dark - Bamboo']="bamboo dark"
     ['Dark - Everforest']="everforest dark"
     ['Dark - Gruvbox']="gruvbox-material dark"
@@ -29,6 +30,7 @@ typeset -A themes=(
     ['Dark - VSCode']="vscode dark"
     ['Dark - ZenBones-forest']="forestbones dark"
     ['Dark - ZenBones-neo']="neobones dark"
+    ['Light - Adwaita']="adwaita light"
     ['Light - Deep-White']="deepwhite light"
     ['Light - Everforest']="everforest light"
     ['Light - Gruvbox']="gruvbox-material light"

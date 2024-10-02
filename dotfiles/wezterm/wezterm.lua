@@ -24,11 +24,14 @@ local function get_var_from_file(file_path)
 end
 
 -- colors
+-- TODO: Move this logic to the colorscheme_picker
 local function color_scheme_map(color_scheme)
     if color_scheme == "Dark - Bamboo" then
         return "Bamboo"
     elseif color_scheme == "Dark - Everforest" then
         return "Everforest Dark (Gogh)"
+    elseif color_scheme == "Dark - Adwaita" then
+        return "Modus Vivendi (Gogh)"
     elseif color_scheme == "Dark - Gruvbox" then
         return "Gruvbox Material (Gogh)"
     elseif color_scheme == "Dark - Kanagawa-paper" then
@@ -65,6 +68,8 @@ local function color_scheme_map(color_scheme)
         return "Vs Code Light+ (Gogh)"
     elseif color_scheme == "Light - ZenBones-rose" then
         return "zenbones"
+    elseif color_scheme == "Light - Adwaita" then
+        return "Modus Operandi (Gogh)"
     else
         return "Batman"
     end
@@ -81,7 +86,7 @@ local function get_background_config()
     local background_image = get_var_from_file(os.getenv("HOME") .. "/.config/wezterm/.background")
 
     local nvim_light_or_dark = get_var_from_file(os.getenv("HOME") .. "/.config/nvim/.background")
-    local opacity = 0.93
+    local opacity = 0.92
     if nvim_light_or_dark == 'light' then
         opacity = 0.84
     end
