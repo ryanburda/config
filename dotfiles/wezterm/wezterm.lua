@@ -43,7 +43,7 @@ local function get_background_config()
     end
 
     -- Layer the current color scheme's background color and add an opacity.
-    -- This allows any layers above to show through while retaining the look and feel of the color scheme.
+    -- This allows any layers below to show through while retaining the look and feel of the color scheme.
     table.insert(background_config, {
         source = {
             Color = wezterm.get_builtin_color_schemes()[config.color_scheme].background
