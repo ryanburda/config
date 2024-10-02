@@ -1,7 +1,5 @@
--- Pull in the wezterm API
 local wezterm = require("wezterm")
 
--- This table will hold the configuration.
 local config = {}
 
 if wezterm.config_builder then
@@ -22,65 +20,6 @@ local function get_var_from_file(file_path)
     file:close()
     return content
 end
-
--- colors
--- TODO: Move this logic to the colorscheme_picker
-local function color_scheme_map(color_scheme)
-    if color_scheme == "Dark - Bamboo" then
-        return "Bamboo"
-    elseif color_scheme == "Dark - Everforest" then
-        return "Everforest Dark (Gogh)"
-    elseif color_scheme == "Dark - Adwaita" then
-        return "Modus Vivendi (Gogh)"
-    elseif color_scheme == "Dark - Gruvbox" then
-        return "Gruvbox Material (Gogh)"
-    elseif color_scheme == "Dark - Kanagawa-paper" then
-        return "Kanagawa (Gogh)"
-    elseif color_scheme == "Dark - Kanagawa-wave" then
-        return "Kanagawa (Gogh)"
-    elseif color_scheme == "Dark - Nightfox-carbon" then
-        return "Modus Vivendi (Gogh)"
-    elseif color_scheme == "Dark - Nightfox-night" then
-        return "nightfox"
-    elseif color_scheme == "Dark - Nightfox-tera" then
-        return "terafox"
-    elseif color_scheme == "Dark - Nord" then
-        return "nord"
-    elseif color_scheme == "Dark - VSCode" then
-        return "Vs Code Dark+ (Gogh)"
-    elseif color_scheme == "Dark - ZenBones-forest" then
-        return "Everforest Dark (Gogh)"
-    elseif color_scheme == "Dark - ZenBones-neo" then
-        return "neobones_dark"
-    elseif color_scheme == "Light - Deep-White" then
-        return "Alabaster"
-    elseif color_scheme == "Light - Everforest" then
-        return "Everforest Light (Gogh)"
-    elseif color_scheme == "Light - Gruvbox" then
-        return "GruvboxLight"
-    elseif color_scheme == "Light - Newpaper" then
-        return "PaperColor Light (base16)"
-    elseif color_scheme == "Light - Nightfox-dawn" then
-        return "dawnfox"
-    elseif color_scheme == "Light - Nightfox-day" then
-        return "dayfox"
-    elseif color_scheme == "Light - VSCode" then
-        return "Vs Code Light+ (Gogh)"
-    elseif color_scheme == "Light - ZenBones-rose" then
-        return "zenbones"
-    elseif color_scheme == "Light - Adwaita" then
-        return "Modus Operandi (Gogh)"
-    else
-        return "Batman"
-    end
-end
-
--- NOTE: `os.getenv("XDG_CONFIG_HOME")` returns nil. Using "HOME" as an alternative for now.
-config.color_scheme = color_scheme_map(get_var_from_file(os.getenv("HOME") .. "/.config/wezterm/.colorscheme_key"))
-
--- font
-config.font = wezterm.font(get_var_from_file(os.getenv("HOME") .. "/.config/wezterm/.font"))
-config.font_size = tonumber(get_var_from_file(os.getenv("HOME") .. "/.config/wezterm/.font_size"))
 
 local function get_background_config()
     local background_image = get_var_from_file(os.getenv("HOME") .. "/.config/wezterm/.background")
@@ -131,11 +70,13 @@ local function get_background_config()
     end
 end
 
--- background
+-- NOTE: `os.getenv("XDG_CONFIG_HOME")` returns nil. Using "HOME" as an alternative for now.
+config.color_scheme = get_var_from_file(os.getenv("HOME") .. "/.config/wezterm/.colorscheme")
+config.font = wezterm.font(get_var_from_file(os.getenv("HOME") .. "/.config/wezterm/.font"))
+config.font_size = tonumber(get_var_from_file(os.getenv("HOME") .. "/.config/wezterm/.font_size"))
 config.background = get_background_config()
 config.window_decorations = "RESIZE"
 config.text_background_opacity = 0.9
-
 config.hide_tab_bar_if_only_one_tab = true
 config.tab_bar_at_bottom = false
 config.use_fancy_tab_bar = false
@@ -145,5 +86,4 @@ config.initial_rows = 40
 config.initial_cols = 140
 config.window_padding = { left = 0, right = 0, top = 20, bottom = 0 }
 
--- and finally, return the configuration to wezterm
 return config

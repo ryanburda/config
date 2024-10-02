@@ -9,7 +9,8 @@
 #   are unique theme names that will show up in fzf and the values are strings each
 #   containing:
 #       * the neovim colorscheme
-#       * and neovim background
+#       * the neovim background
+#       * the wezterm colorscheme
 #   in that order separated by spaces.
 #
 #   The colorscheme changes happen as a result of either writing to files or from regeneration of config files:
@@ -17,28 +18,28 @@
 #       - wezterm is updated by touching $XDG_CONFIG_HOME/wezterm/wezterm.lua
 #       - other scripts exist for handling colorscheme changes to other CLIs such as aichat and lazygit.
 typeset -A themes=(
-    ['Dark - Adwaita']="adwaita dark"
-    ['Dark - Bamboo']="bamboo dark"
-    ['Dark - Everforest']="everforest dark"
-    ['Dark - Gruvbox']="gruvbox-material dark"
-    ['Dark - Kanagawa-paper']="kanagawa-paper dark"
-    ['Dark - Kanagawa-wave']="kanagawa-wave dark"
-    ['Dark - Nightfox-carbon']="carbonfox dark"
-    ['Dark - Nightfox-night']="nightfox dark"
-    ['Dark - Nightfox-tera']="terafox dark"
-    ['Dark - Nord']="nord dark"
-    ['Dark - VSCode']="vscode dark"
-    ['Dark - ZenBones-forest']="forestbones dark"
-    ['Dark - ZenBones-neo']="neobones dark"
-    ['Light - Adwaita']="adwaita light"
-    ['Light - Deep-White']="deepwhite light"
-    ['Light - Everforest']="everforest light"
-    ['Light - Gruvbox']="gruvbox-material light"
-    ['Light - Newpaper']="newpaper light"
-    ['Light - Nightfox-dawn']="dawnfox light"
-    ['Light - Nightfox-day']="dayfox light"
-    ['Light - VSCode']="vscode light"
-    ['Light - ZenBones-rose']="rosebones light"
+    ['Dark - Adwaita']="adwaita,dark,Modus Vivendi (Gogh)"
+    ['Dark - Bamboo']="bamboo,dark,Bamboo"
+    ['Dark - Everforest']="everforest,dark,Everforest Dark (Gogh)"
+    ['Dark - Gruvbox']="gruvbox-material,dark,Gruvbox Material (Gogh)"
+    ['Dark - Kanagawa-paper']="kanagawa-paper,dark,Kanagawa (Gogh)"
+    ['Dark - Kanagawa-wave']="kanagawa-wave,dark,Kanagawa (Gogh)"
+    ['Dark - Nightfox-carbon']="carbonfox,dark,Modus Vivendi (Gogh)"
+    ['Dark - Nightfox-night']="nightfox,dark,nightfox"
+    ['Dark - Nightfox-tera']="terafox,dark,terafox"
+    ['Dark - Nord']="nord,dark,nord"
+    ['Dark - VSCode']="vscode,dark,Vs Code Dark+ (Gogh)"
+    ['Dark - ZenBones-forest']="forestbones,dark,Everforest Dark (Gogh)"
+    ['Dark - ZenBones-neo']="neobones,dark,neobones_dark"
+    ['Light - Adwaita']="adwaita,light,Modus Operandi (Gogh)"
+    ['Light - Deep-White']="deepwhite,light,Alabaster"
+    ['Light - Everforest']="everforest,light,Everforest Light (Gogh)"
+    ['Light - Gruvbox']="gruvbox-material,light,GruvboxLight"
+    ['Light - Newpaper']="newpaper,light,PaperColor Light (base16)"
+    ['Light - Nightfox-dawn']="dawnfox,light,dawnfox"
+    ['Light - Nightfox-day']="dayfox,light,dayfox"
+    ['Light - VSCode']="vscode,light,Vs Code Light+ (Gogh)"
+    ['Light - ZenBones-rose']="rosebones,light,zenbones"
 )
 
 function set_theme(){
@@ -47,12 +48,14 @@ function set_theme(){
     values=${themes[$theme_key]}
 
     if [[ ! -z $values ]]; then
-        a=$(print $values | awk '{print $1}')
-        b=$(print $values | awk '{print $2}')
+        a=$(print $values | awk -F, '{print $1}')
+        b=$(print $values | awk -F, '{print $2}')
+        c=$(print $values | awk -F, '{print $3}')
 
         # Write the values to files.
         echo "$a" > $XDG_CONFIG_HOME/nvim/.colorscheme
         echo "$b" > $XDG_CONFIG_HOME/nvim/.background
+        echo "$c" > $XDG_CONFIG_HOME/wezterm/.colorscheme
 
         # This is used below to show a check mark next to the current theme when selecting via fzf
         echo "$theme_key" > $XDG_CONFIG_HOME/wezterm/.colorscheme_key
