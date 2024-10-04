@@ -129,6 +129,7 @@ ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/colorscheme_picker"          "${HOME}/.zs
 ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/background_picker"           "${HOME}/.zsh/funcs/background_picker"
 mkdir -p                                                            "${XDG_CONFIG_HOME}/wezterm"
 ln -svfF "${SCRIPT_DIR}/dotfiles/wezterm/wezterm.lua"               "${XDG_CONFIG_HOME}/wezterm/wezterm.lua"
+ln -svfF "${SCRIPT_DIR}/dotfiles/wezterm/helpers.lua"               "${XDG_CONFIG_HOME}/wezterm/helpers.lua"
 ln -svfF "${SCRIPT_DIR}/dotfiles/wezterm/backgrounds"               "${XDG_CONFIG_HOME}/wezterm/backgrounds"
 ln -svfF "${SCRIPT_DIR}/dotfiles/lazygit.yml.template"              "${XDG_CONFIG_HOME}/lazygit/config.yml.template"
 mkdir -p                                                            "${XDG_CONFIG_HOME}/lsd"
