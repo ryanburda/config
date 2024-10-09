@@ -116,10 +116,8 @@ else
     export OPENAI_API_KEY=""
 fi
 
+export PATH="$HOME/.rd/bin:$PATH"
+
 # Uncomment to profile zsh startup.
 # NOTE: must also uncomment first line.
 # zprof
-
-### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
-export PATH="$HOME/.rd/bin:$PATH"
-### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
