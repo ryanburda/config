@@ -116,6 +116,7 @@ else
     export OPENAI_API_KEY=""
 fi
 
+# Rancher
 export PATH="$HOME/.rd/bin:$PATH"
 
 # Uncomment to profile zsh startup.
