@@ -70,7 +70,7 @@ function T.clean_connection_string(connection_string)
     -- Assumes string will be of the form
     -- "<#> <db_type>  host=<host_name> port=<port_number> user=<user> password=<password> dbname=<db_name> sslmode=disable"
     -- For example:
-    -- "2 postgresql  host=localhost port=5433 user=postgres password=postgres dbname=finance_datamart sslmode=disable"
+    -- "1 postgresql  host=localhost port=5432 user=postgres password=postgres dbname=postgres sslmode=disable"
     --
     -- NOTE: This likely needs to be updated to support databases other than Postgres.
 
