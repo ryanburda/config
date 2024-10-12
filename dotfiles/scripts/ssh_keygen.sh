@@ -17,7 +17,7 @@ while true; do
 done
 
 # Generate ssh key.
-ssh-keygen -t rsa -b 4096 -C $email
+ssh-keygen -t ed25519 -C $email
 # Start the ssh-agent.
 eval "$(ssh-agent -s)"
 
@@ -29,14 +29,3 @@ else
 fi
 
 gh auth login
-
-# Give the ssh key a title in GitHub.
-ssh_key_name_default="$(whoami)_$(date +%Y%m%d_%H%M%S)"
-read "ssh_key_name?Enter GitHub ssh key title (default: $ssh_key_name_default): "
-
-if [[ -z "$ssh_key_name" ]]; then
-  ssh_key_name=$ssh_key_name_default
-fi
-
-# Add the ssh key to GitHub.
-gh ssh-key add ~/.ssh/id_ed25519.pub --type signing --title $ssh_key_name
