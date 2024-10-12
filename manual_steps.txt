@@ -1,5 +1,4 @@
 
-
 =====================================================================
 ===================== AUTOMATED SETUP COMPLETE ======================
 =====================================================================
@@ -24,10 +23,10 @@
 
 Perform the following steps to complete the setup:
     - Create SSH key
-        - https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#generating-a-new-ssh-key
-        - https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#adding-your-ssh-key-to-the-ssh-agent
-        - https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account?tool=webui#about-addition-of-ssh-keys-to-your-account
-    - Clone project repos `./setup_repos.sh`
+        - `./dotfiles/scripts/ssh_keygen.sh`
+    - Clone project repos
+        - `./setup_repos.sh`
     - Add OpenAI API Key to ~/.openai_api_key.
-    - Give WezTerm Full Disk Access. In Settings -> Privacy & Security -> Full Disk Access -> toggle WezTerm
+    - Give WezTerm Full Disk Access.
+        - In Settings -> Privacy & Security -> Full Disk Access -> toggle WezTerm
     - Restart computer.

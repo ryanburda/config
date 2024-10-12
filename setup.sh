@@ -47,6 +47,7 @@ if [[ $OSTYPE == darwin* ]]; then
     $(brew --prefix)/opt/fzf/install
     brew install fzy
     brew install gettext
+    brew install gh
     brew install git-delta
     brew install go
     brew install htop
@@ -126,6 +127,8 @@ ln -svfF "${SCRIPT_DIR}/dotfiles/psqlrc"                      "${HOME}/.psqlrc"
 ln -svfF "${SCRIPT_DIR}/dotfiles/pspgconf"                    "${HOME}/.pspgconf"
 ln -svfF "${SCRIPT_DIR}/dotfiles/octaverc"                    "${HOME}/.octaverc"
 touch                                                         "${HOME}/.openai_api_key"  # Add openai key to this file.
+mkdir -p                                                      "${HOME}/.ssh"
+ln -svfF "${SCRIPT_DIR}/dotfiles/ssh_config"                  "${HOME}/.ssh/config"
 ln -svfF "${SCRIPT_DIR}/dotfiles/zprofile"                    "${HOME}/.zprofile"
 mkdir -p                                                      "${HOME}/.zsh/funcs"
 ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/aichat_config"         "${HOME}/.zsh/funcs/aichat_config"
