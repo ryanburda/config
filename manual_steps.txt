@@ -26,6 +26,8 @@ Perform the following steps to complete the setup:
         - `./dotfiles/scripts/ssh_keygen.sh`
     - Clone project repos
         - `./setup_repos.sh`
+    - MacOs keyboard/dock
+        - `./dotfiles/scripts/macos.sh`
     - Add OpenAI API Key to ~/.openai_api_key.
     - Give WezTerm Full Disk Access.
         - In Settings -> Privacy & Security -> Full Disk Access -> toggle WezTerm
