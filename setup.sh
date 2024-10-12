@@ -1,5 +1,14 @@
 #!/bin/zsh
 
+if [ -z "$XDG_CONFIG_HOME" ]; then
+    echo "=============WARNING============="
+    echo "== XDG_CONFIG_HOME is not set. =="
+    echo "== Reset terminal by running:  =="
+    echo "== `reset`                     =="
+    echo "================================="
+    exit -1
+fi
+
 # If config repo is in normal location then this is `SCRIPT_DIR=$HOME/Developer/config`
 SCRIPT_DIR=${0:a:h}
 
@@ -95,6 +104,7 @@ if [[ $OSTYPE == darwin* ]]; then
     brew install --cask wezterm@nightly
     brew install --cask rancher
     brew install --cask karabiner-elements
+    brew install --cask google-chrome
     brew install --cask 1password
     brew install --cask alfred
     brew install --cask obsidian
@@ -131,6 +141,7 @@ mkdir -p                                                            "${XDG_CONFI
 ln -svfF "${SCRIPT_DIR}/dotfiles/wezterm/wezterm.lua"               "${XDG_CONFIG_HOME}/wezterm/wezterm.lua"
 ln -svfF "${SCRIPT_DIR}/dotfiles/wezterm/helpers.lua"               "${XDG_CONFIG_HOME}/wezterm/helpers.lua"
 ln -svfF "${SCRIPT_DIR}/dotfiles/wezterm/backgrounds"               "${XDG_CONFIG_HOME}/wezterm/backgrounds"
+mkdir -p                                                            "${XDG_CONFIG_HOME}/lazygit"
 ln -svfF "${SCRIPT_DIR}/dotfiles/lazygit.yml.template"              "${XDG_CONFIG_HOME}/lazygit/config.yml.template"
 mkdir -p                                                            "${XDG_CONFIG_HOME}/lsd"
 ln -svfF "${SCRIPT_DIR}/dotfiles/lsd/config.yaml"                   "${XDG_CONFIG_HOME}/lsd/config.yaml"

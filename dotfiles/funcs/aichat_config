@@ -12,8 +12,14 @@ fi
 OPENAI_API_KEY=$(cat $HOME/.openai_api_key)
 
 if [[ $OSTYPE == darwin* ]]; then
-    envsubst < "${XDG_CONFIG_HOME}/aichat/aichat_config.yaml.template" > "${HOME}/Library/Application Support/aichat/config.yaml"
+    FILE_PATH="${HOME}/Library/Application Support/aichat/config.yaml"
 else
-    envsubst < "${XDG_CONFIG_HOME}/aichat/aichat_config.yaml.template" > "${XDG_CONFIG_HOME}/aichat/config.yaml"
+    FILE_PATH="${XDG_CONFIG_HOME}/aichat/config.yaml"
 fi
 
+if [ ! -f $FILE_PATH ]; then
+    mkdir -p $(dirname "$FILE_PATH")
+    touch $FILE_PATH
+fi
+
+envsubst < "${XDG_CONFIG_HOME}/aichat/aichat_config.yaml.template" > $FILE_PATH
