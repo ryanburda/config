@@ -6,7 +6,7 @@ Setup: (intended to be cloned into `~/Developer/config`)
 ```
 mkdir ~/Developer
 cd ~/Developer
-git clone https://github.com/ryanburda/config.git
+git clone git@github.com:ryanburda/config.git
 cd config
 ./setup.sh
 ```
