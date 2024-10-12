@@ -42,12 +42,12 @@ if [[ $OSTYPE == darwin* ]]; then
     brew install coreutils
     brew install curl
     brew install deno
-    brew install git-delta
     brew install fd
     brew install fzf
     $(brew --prefix)/opt/fzf/install
     brew install fzy
     brew install gettext
+    brew install git-delta
     brew install go
     brew install htop
     brew install jq
@@ -90,69 +90,69 @@ if [[ $OSTYPE == darwin* ]]; then
     brew install --cask font-fira-code-nerd-font
     brew install --cask font-gohufont-nerd-font
     brew install --cask font-hack-nerd-font
+    brew install --cask font-inconsolata-go-nerd-font
+    brew install --cask font-iosevka-term-slab-nerd-font
     brew install --cask font-jetbrains-mono-nerd-font
-    brew install --cask homebrew/cask-fonts/font-meslo-lg-nerd-font
     brew install --cask font-sauce-code-pro-nerd-font
-    brew install --cask font-terminess-ttf-nerd-font
     brew tap shaunsingh/SFMono-Nerd-Font-Ligaturized
     brew install --cask font-sf-mono-nerd-font-ligaturized
-    brew install --cask font-iosevka-term-slab-nerd-font
-    brew install --cask font-inconsolata-go-nerd-font
+    brew install --cask font-terminess-ttf-nerd-font
     brew install --cask font-zed-mono-nerd-font
+    brew install --cask homebrew/cask-fonts/font-meslo-lg-nerd-font
 
     # Applications
-    brew install --cask wezterm@nightly
-    brew install --cask rancher
-    brew install --cask karabiner-elements
-    brew install --cask google-chrome
     brew install --cask 1password
     brew install --cask alfred
+    brew install --cask blackhole-2ch
+    brew install --cask google-chrome
+    brew install --cask karabiner-elements
     brew install --cask obsidian
+    brew install --cask rancher
     brew install --cask rectangle
     brew install --cask shifty
     brew install --cask topnotch
-    brew install --cask blackhole-2ch
+    brew install --cask wezterm@nightly
 fi
 
 # rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 # Symlink config files
-mkdir -p                                                            "${HOME}/Developer"
-ln -svfF "${SCRIPT_DIR}/dotfiles/obsidian.vimrc"                    "${HOME}/Documents/notes/.obsidian.vimrc"
-ln -svfF "${SCRIPT_DIR}/dotfiles/zshrc"                             "${HOME}/.zshrc"
-ln -svfF "${SCRIPT_DIR}/dotfiles/gitconfig.template"                "${HOME}/.gitconfig.template"
-ln -svfF "${SCRIPT_DIR}/dotfiles/psqlrc"                            "${HOME}/.psqlrc"
-ln -svfF "${SCRIPT_DIR}/dotfiles/pspgconf"                          "${HOME}/.pspgconf"
-ln -svfF "${SCRIPT_DIR}/dotfiles/octaverc"                          "${HOME}/.octaverc"
-touch                                                               "${HOME}/.openai_api_key"  # Add openai key to this file.
-ln -svfF "${SCRIPT_DIR}/dotfiles/zprofile"                          "${HOME}/.zprofile"
-mkdir -p                                                            "${HOME}/.zsh/funcs"
-ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/aichat_config"               "${HOME}/.zsh/funcs/aichat_config"
-ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/git_config"                  "${HOME}/.zsh/funcs/git_config"
-ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/lazygit_config"              "${HOME}/.zsh/funcs/lazygit_config"
-ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/font_picker"                 "${HOME}/.zsh/funcs/font_picker"
-ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/dark_mode"                   "${HOME}/.zsh/funcs/dark_mode"
-ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/psqlp"                       "${HOME}/.zsh/funcs/psqlp"
-ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/select_session"              "${HOME}/.zsh/funcs/select_session"
-ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/colorscheme_picker"          "${HOME}/.zsh/funcs/colorscheme_picker"
-ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/background_picker"           "${HOME}/.zsh/funcs/background_picker"
-mkdir -p                                                            "${XDG_CONFIG_HOME}/wezterm"
-ln -svfF "${SCRIPT_DIR}/dotfiles/wezterm/wezterm.lua"               "${XDG_CONFIG_HOME}/wezterm/wezterm.lua"
-ln -svfF "${SCRIPT_DIR}/dotfiles/wezterm/helpers.lua"               "${XDG_CONFIG_HOME}/wezterm/helpers.lua"
-ln -svfF "${SCRIPT_DIR}/dotfiles/wezterm/backgrounds"               "${XDG_CONFIG_HOME}/wezterm/backgrounds"
-mkdir -p                                                            "${XDG_CONFIG_HOME}/lazygit"
-ln -svfF "${SCRIPT_DIR}/dotfiles/lazygit.yml.template"              "${XDG_CONFIG_HOME}/lazygit/config.yml.template"
-mkdir -p                                                            "${XDG_CONFIG_HOME}/lsd"
-ln -svfF "${SCRIPT_DIR}/dotfiles/lsd/config.yaml"                   "${XDG_CONFIG_HOME}/lsd/config.yaml"
-ln -svfF "${SCRIPT_DIR}/dotfiles/lsd/colors.yaml"                   "${XDG_CONFIG_HOME}/lsd/colors.yaml"
-ln -svfF "${SCRIPT_DIR}/dotfiles/nvim"                              "${XDG_CONFIG_HOME}/nvim"
-mkdir -p                                                            "${XDG_CONFIG_HOME}/sqls"
-ln -svfF "${SCRIPT_DIR}/dotfiles/sqls_config.yml"                   "${XDG_CONFIG_HOME}/sqls/config.yml"
-mkdir -p                                                            "${XDG_CONFIG_HOME}/tmux"
-ln -svfF "${SCRIPT_DIR}/dotfiles/tmux.conf"                         "${XDG_CONFIG_HOME}/tmux/tmux.conf"
-mkdir -p                                                            "${XDG_CONFIG_HOME}/aichat"
-ln -svfF "${SCRIPT_DIR}/dotfiles/aichat_config.yaml.template"       "${XDG_CONFIG_HOME}/aichat/aichat_config.yaml.template"
+mkdir -p                                                      "${HOME}/Developer"
+ln -svfF "${SCRIPT_DIR}/dotfiles/obsidian.vimrc"              "${HOME}/Documents/notes/.obsidian.vimrc"
+ln -svfF "${SCRIPT_DIR}/dotfiles/zshrc"                       "${HOME}/.zshrc"
+ln -svfF "${SCRIPT_DIR}/dotfiles/gitconfig.template"          "${HOME}/.gitconfig.template"
+ln -svfF "${SCRIPT_DIR}/dotfiles/psqlrc"                      "${HOME}/.psqlrc"
+ln -svfF "${SCRIPT_DIR}/dotfiles/pspgconf"                    "${HOME}/.pspgconf"
+ln -svfF "${SCRIPT_DIR}/dotfiles/octaverc"                    "${HOME}/.octaverc"
+touch                                                         "${HOME}/.openai_api_key"  # Add openai key to this file.
+ln -svfF "${SCRIPT_DIR}/dotfiles/zprofile"                    "${HOME}/.zprofile"
+mkdir -p                                                      "${HOME}/.zsh/funcs"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/aichat_config"         "${HOME}/.zsh/funcs/aichat_config"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/git_config"            "${HOME}/.zsh/funcs/git_config"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/lazygit_config"        "${HOME}/.zsh/funcs/lazygit_config"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/font_picker"           "${HOME}/.zsh/funcs/font_picker"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/dark_mode"             "${HOME}/.zsh/funcs/dark_mode"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/psqlp"                 "${HOME}/.zsh/funcs/psqlp"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/select_session"        "${HOME}/.zsh/funcs/select_session"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/colorscheme_picker"    "${HOME}/.zsh/funcs/colorscheme_picker"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/background_picker"     "${HOME}/.zsh/funcs/background_picker"
+mkdir -p                                                      "${XDG_CONFIG_HOME}/wezterm"
+ln -svfF "${SCRIPT_DIR}/dotfiles/wezterm/wezterm.lua"         "${XDG_CONFIG_HOME}/wezterm/wezterm.lua"
+ln -svfF "${SCRIPT_DIR}/dotfiles/wezterm/helpers.lua"         "${XDG_CONFIG_HOME}/wezterm/helpers.lua"
+ln -svfF "${SCRIPT_DIR}/dotfiles/wezterm/backgrounds"         "${XDG_CONFIG_HOME}/wezterm/backgrounds"
+mkdir -p                                                      "${XDG_CONFIG_HOME}/lazygit"
+ln -svfF "${SCRIPT_DIR}/dotfiles/lazygit.yml.template"        "${XDG_CONFIG_HOME}/lazygit/config.yml.template"
+mkdir -p                                                      "${XDG_CONFIG_HOME}/lsd"
+ln -svfF "${SCRIPT_DIR}/dotfiles/lsd/config.yaml"             "${XDG_CONFIG_HOME}/lsd/config.yaml"
+ln -svfF "${SCRIPT_DIR}/dotfiles/lsd/colors.yaml"             "${XDG_CONFIG_HOME}/lsd/colors.yaml"
+ln -svfF "${SCRIPT_DIR}/dotfiles/nvim"                        "${XDG_CONFIG_HOME}/nvim"
+mkdir -p                                                      "${XDG_CONFIG_HOME}/sqls"
+ln -svfF "${SCRIPT_DIR}/dotfiles/sqls_config.yml"             "${XDG_CONFIG_HOME}/sqls/config.yml"
+mkdir -p                                                      "${XDG_CONFIG_HOME}/tmux"
+ln -svfF "${SCRIPT_DIR}/dotfiles/tmux.conf"                   "${XDG_CONFIG_HOME}/tmux/tmux.conf"
+mkdir -p                                                      "${XDG_CONFIG_HOME}/aichat"
+ln -svfF "${SCRIPT_DIR}/dotfiles/aichat_config.yaml.template" "${XDG_CONFIG_HOME}/aichat/aichat_config.yaml.template"
 
 # OS specific symlinks
 if [[ $OSTYPE == darwin* ]]; then

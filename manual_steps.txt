@@ -29,5 +29,5 @@ Perform the following steps to complete the setup:
         - https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account?tool=webui#about-addition-of-ssh-keys-to-your-account
     - Clone project repos `./setup_repos.sh`
     - Add OpenAI API Key to ~/.openai_api_key.
-    - Restart computer.
     - Give WezTerm Full Disk Access. In Settings -> Privacy & Security -> Full Disk Access -> toggle WezTerm
+    - Restart computer.
