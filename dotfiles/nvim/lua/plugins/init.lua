@@ -21,7 +21,6 @@ return {
             "Mofiqul/vscode.nvim",
             "ribru17/bamboo.nvim",
             "sho-87/kanagawa-paper.nvim",
-            "shaunsingh/nord.nvim",
             "Mofiqul/adwaita.nvim",
             {
                 "yorik1984/newpaper.nvim",
