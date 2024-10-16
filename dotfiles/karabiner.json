@@ -102,9 +102,9 @@
           {
             "manipulators": [
               {
-                "description": "Change tab to Hyper on hold",
+                "description": "Change RCMD to Hyper on hold",
                 "from": {
-                  "key_code": "tab"
+                  "key_code": "right_command"
                 },
                 "to": [
                   {
@@ -236,13 +236,18 @@
           {
             "manipulators": [
               {
-                "description": "Right Command to Left Option (Alt)",
+                "description": "Change Tab to Alt on hold",
                 "from": {
-                  "key_code": "right_command"
+                  "key_code": "tab"
                 },
                 "to": [
                   {
                     "key_code": "left_option"
+                  }
+                ],
+                "to_if_alone": [
+                  {
+                    "key_code": "tab"
                   }
                 ],
                 "type": "basic"

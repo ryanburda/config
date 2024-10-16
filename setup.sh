@@ -161,9 +161,8 @@ ln -svfF "${SCRIPT_DIR}/dotfiles/aichat_config.yaml.template" "${XDG_CONFIG_HOME
 
 # OS specific symlinks
 if [[ $OSTYPE == darwin* ]]; then
-    # macOS
-    # TODO: Find out why this can't be symlined.
-    # NOTE: Needs to be re-copied if changed. Symlinks don't work for some reason.
+    # NOTE: Needs to be re-copied if changed. Symlinks don't work.
+    # https://karabiner-elements.pqrs.org/docs/manual/misc/configuration-file-path/
     cp "${SCRIPT_DIR}/dotfiles/karabiner.json" "${XDG_CONFIG_HOME}/karabiner/karabiner.json"
 fi
 
