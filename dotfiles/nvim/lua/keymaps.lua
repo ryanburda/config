@@ -102,7 +102,7 @@ vim.keymap.set(
 
 vim.keymap.set(
     'n',
-    "<M-a>",
+    "<leader>aa",
     ":Neotree toggle<CR>",
     {desc = "Window Management: Toogle file tree"}
 )
@@ -291,7 +291,7 @@ vim.keymap.set(
 
 vim.keymap.set(
     'n',
-    '<M-g>',
+    '<leader>gg',
     function() require('gitsigns').blame_line{full=true} end,
     {desc = 'Diff: Toogle line blame ghost text'}
 )
@@ -570,28 +570,28 @@ vim.keymap.set(
 ------------------------------------------------------------------------------------------------------------------------
 vim.keymap.set(
     'n',
-    '<leader>bb',
+    '<leader>eo',
     "<cmd>lua require'dapui'.toggle()<cr>",
     {desc = 'Debug: Open debug UI'}
 )
 
 vim.keymap.set(
     'n',
-    '<M-e>',
+    '<leader>ee',
     "<cmd>lua require('dapui').eval()<cr>",
     {desc = 'Debug: Evaluate'}
 )
 
 vim.keymap.set(
     'n',
-    '<M-b>',
+    '<leader>ew',
     require('dap').toggle_breakpoint,
     {desc = 'Debug: Set breakpoint'}
 )
 
 vim.keymap.set(
     'n',
-    '<M-c>',
+    '<leader>eq',
     require('dap').clear_breakpoints,
     {desc = 'Debug: Clear breakpoints'}
 )
@@ -619,14 +619,14 @@ vim.keymap.set(
 
 vim.keymap.set(
     'n',
-    '<M-x>',
+    '<leader>ex',
     require('dap').close,
     {desc = 'Debug: Closes the current debug session'}
 )
 
 vim.keymap.set(
     'n',
-    '<M-Space>',
+    '<leader>e ',
     require('dap').run,
     {desc = 'Debug: Runs a new debug session'}
 )
