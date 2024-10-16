@@ -10,6 +10,7 @@ if [ -z "$XDG_CONFIG_HOME" ]; then
 fi
 
 # If config repo is in normal location then this is `SCRIPT_DIR=$HOME/Developer/config`
+# The following can be used when testing manually:  `SCRIPT_DIR=$(pwd)`
 SCRIPT_DIR=${0:a:h}
 
 # OS specific installations
@@ -32,7 +33,6 @@ if [[ $OSTYPE == darwin* ]]; then
         brew update
     fi
 
-    # CLI
     brew install aichat
     brew install automake
     brew install bat
@@ -165,13 +165,6 @@ if [[ $OSTYPE == darwin* ]]; then
     # TODO: Find out why this can't be symlined.
     # NOTE: Needs to be re-copied if changed. Symlinks don't work for some reason.
     cp "${SCRIPT_DIR}/dotfiles/karabiner.json" "${XDG_CONFIG_HOME}/karabiner/karabiner.json"
-fi
-
-# OS specific settings
-if [[ $OSTYPE == darwin* ]]; then
-    # Show task switcher on all monitors.
-    defaults write com.apple.Dock appswitcher-all-displays -bool true
-    killall Dock
 fi
 
 # Additional manual steps
