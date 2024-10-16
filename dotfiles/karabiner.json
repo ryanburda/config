@@ -17,65 +17,6 @@
           {
             "manipulators": [
               {
-                "description": "Tab left in Chrome",
-                "from": {
-                  "key_code": "i",
-                  "modifiers": [
-                    "left_control"
-                  ]
-                },
-                "to": {
-                  "key_code": "tab",
-                  "modifiers": [
-                    "left_control"
-                  ]
-                },
-                "type": "basic",
-                "conditions": [
-                  {
-                    "type": "frontmost_application_if",
-                    "description": "Google Chrome",
-                    "bundle_identifiers": [
-                      "^com\\.google\\.Chrome$"
-                    ]
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "manipulators": [
-              {
-                "description": "Tab right in Chrome",
-                "from": {
-                  "key_code": "o",
-                  "modifiers": [
-                    "left_control"
-                  ]
-                },
-                "to": {
-                  "key_code": "tab",
-                  "modifiers": [
-                    "left_shift",
-                    "left_control"
-                  ]
-                },
-                "type": "basic",
-                "conditions": [
-                  {
-                    "type": "frontmost_application_if",
-                    "description": "Google Chrome",
-                    "bundle_identifiers": [
-                      "^com\\.google\\.Chrome$"
-                    ]
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "manipulators": [
-              {
                 "description": "Change caps_lock to control on hold",
                 "from": {
                   "key_code": "caps_lock",
@@ -102,15 +43,14 @@
           {
             "manipulators": [
               {
-                "description": "Change tab to Hyper on hold",
+                "description": "Change RCMD to Hyper on hold",
                 "from": {
-                  "key_code": "tab"
+                  "key_code": "right_command"
                 },
                 "to": [
                   {
-                    "key_code": "left_shift",
+                    "key_code": "left_command",
                     "modifiers": [
-                      "left_command",
                       "left_control",
                       "left_option"
                     ]
@@ -133,7 +73,6 @@
                   "key_code": "h",
                   "modifiers": {
                     "mandatory": [
-                      "left_shift",
                       "left_command",
                       "left_control",
                       "left_option"
@@ -160,7 +99,6 @@
                   "key_code": "j",
                   "modifiers": {
                     "mandatory": [
-                      "left_shift",
                       "left_command",
                       "left_control",
                       "left_option"
@@ -187,7 +125,6 @@
                   "key_code": "k",
                   "modifiers": {
                     "mandatory": [
-                      "left_shift",
                       "left_command",
                       "left_control",
                       "left_option"
@@ -214,7 +151,6 @@
                   "key_code": "l",
                   "modifiers": {
                     "mandatory": [
-                      "left_shift",
                       "left_command",
                       "left_control",
                       "left_option"
@@ -236,13 +172,18 @@
           {
             "manipulators": [
               {
-                "description": "Right Command to Left Option (Alt)",
+                "description": "Change Tab to Alt on hold",
                 "from": {
-                  "key_code": "right_command"
+                  "key_code": "tab"
                 },
                 "to": [
                   {
                     "key_code": "left_option"
+                  }
+                ],
+                "to_if_alone": [
+                  {
+                    "key_code": "tab"
                   }
                 ],
                 "type": "basic"
@@ -257,7 +198,6 @@
                   "key_code": "delete_or_backspace",
                   "modifiers": {
                     "mandatory": [
-                      "left_shift",
                       "left_command",
                       "left_control",
                       "left_option"
@@ -270,6 +210,123 @@
                 "to": [
                   {
                     "key_code": "delete_forward"
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "manipulators": [
+              {
+                "description": "Hyper+i to Ctrl Shift Tab",
+                "from": {
+                  "key_code": "i",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_command",
+                      "left_control",
+                      "left_option"
+                    ],
+                    "optional": [
+                      "any"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "tab",
+                    "modifiers": [
+                      "left_control",
+                      "left_shift"
+                    ]
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "manipulators": [
+              {
+                "description": "Hyper+o to Ctrl Tab",
+                "from": {
+                  "key_code": "o",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_command",
+                      "left_control",
+                      "left_option"
+                    ],
+                    "optional": [
+                      "any"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "tab",
+                    "modifiers": [
+                      "left_control"
+                    ]
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "manipulators": [
+              {
+                "description": "Hyper+w to CMD [",
+                "from": {
+                  "key_code": "w",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_command",
+                      "left_control",
+                      "left_option"
+                    ],
+                    "optional": [
+                      "any"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "open_bracket",
+                    "modifiers": [
+                      "left_command"
+                    ]
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "manipulators": [
+              {
+                "description": "Hyper+e to CMD ]",
+                "from": {
+                  "key_code": "e",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_command",
+                      "left_control",
+                      "left_option"
+                    ],
+                    "optional": [
+                      "any"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "close_bracket",
+                    "modifiers": [
+                      "left_command"
+                    ]
                   }
                 ],
                 "type": "basic"

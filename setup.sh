@@ -10,6 +10,7 @@ if [ -z "$XDG_CONFIG_HOME" ]; then
 fi
 
 # If config repo is in normal location then this is `SCRIPT_DIR=$HOME/Developer/config`
+# The following can be used when testing manually:  `SCRIPT_DIR=$(pwd)`
 SCRIPT_DIR=${0:a:h}
 
 # OS specific installations
@@ -32,7 +33,6 @@ if [[ $OSTYPE == darwin* ]]; then
         brew update
     fi
 
-    # CLI
     brew install aichat
     brew install automake
     brew install bat
@@ -103,13 +103,13 @@ if [[ $OSTYPE == darwin* ]]; then
 
     # Applications
     brew install --cask 1password
+    brew install --cask nikitabobko/tap/aerospace
     brew install --cask alfred
     brew install --cask blackhole-2ch
     brew install --cask google-chrome
     brew install --cask karabiner-elements
     brew install --cask obsidian
     brew install --cask rancher
-    brew install --cask rectangle
     brew install --cask shifty
     brew install --cask topnotch
     brew install --cask wezterm@nightly
@@ -144,6 +144,8 @@ mkdir -p                                                      "${XDG_CONFIG_HOME
 ln -svfF "${SCRIPT_DIR}/dotfiles/wezterm/wezterm.lua"         "${XDG_CONFIG_HOME}/wezterm/wezterm.lua"
 ln -svfF "${SCRIPT_DIR}/dotfiles/wezterm/helpers.lua"         "${XDG_CONFIG_HOME}/wezterm/helpers.lua"
 ln -svfF "${SCRIPT_DIR}/dotfiles/wezterm/backgrounds"         "${XDG_CONFIG_HOME}/wezterm/backgrounds"
+mkdir -p                                                      "${XDG_CONFIG_HOME}/aerospace"
+ln -svfF "${SCRIPT_DIR}/dotfiles/aerospace.toml"              "${XDG_CONFIG_HOME}/aerospace/aerospace.toml"
 mkdir -p                                                      "${XDG_CONFIG_HOME}/lazygit"
 ln -svfF "${SCRIPT_DIR}/dotfiles/lazygit.yml.template"        "${XDG_CONFIG_HOME}/lazygit/config.yml.template"
 mkdir -p                                                      "${XDG_CONFIG_HOME}/lsd"
@@ -159,17 +161,9 @@ ln -svfF "${SCRIPT_DIR}/dotfiles/aichat_config.yaml.template" "${XDG_CONFIG_HOME
 
 # OS specific symlinks
 if [[ $OSTYPE == darwin* ]]; then
-    # macOS
-    # TODO: Find out why this can't be symlined.
-    # NOTE: Needs to be re-copied if changed. Symlinks don't work for some reason.
+    # NOTE: Needs to be re-copied if changed. Symlinks don't work.
+    # https://karabiner-elements.pqrs.org/docs/manual/misc/configuration-file-path/
     cp "${SCRIPT_DIR}/dotfiles/karabiner.json" "${XDG_CONFIG_HOME}/karabiner/karabiner.json"
-fi
-
-# OS specific settings
-if [[ $OSTYPE == darwin* ]]; then
-    # Show task switcher on all monitors.
-    defaults write com.apple.Dock appswitcher-all-displays -bool true
-    killall Dock
 fi
 
 # Additional manual steps
