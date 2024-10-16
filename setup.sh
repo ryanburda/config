@@ -103,13 +103,13 @@ if [[ $OSTYPE == darwin* ]]; then
 
     # Applications
     brew install --cask 1password
+    brew install --cask nikitabobko/tap/aerospace
     brew install --cask alfred
     brew install --cask blackhole-2ch
     brew install --cask google-chrome
     brew install --cask karabiner-elements
     brew install --cask obsidian
     brew install --cask rancher
-    brew install --cask rectangle
     brew install --cask shifty
     brew install --cask topnotch
     brew install --cask wezterm@nightly
@@ -144,6 +144,8 @@ mkdir -p                                                      "${XDG_CONFIG_HOME
 ln -svfF "${SCRIPT_DIR}/dotfiles/wezterm/wezterm.lua"         "${XDG_CONFIG_HOME}/wezterm/wezterm.lua"
 ln -svfF "${SCRIPT_DIR}/dotfiles/wezterm/helpers.lua"         "${XDG_CONFIG_HOME}/wezterm/helpers.lua"
 ln -svfF "${SCRIPT_DIR}/dotfiles/wezterm/backgrounds"         "${XDG_CONFIG_HOME}/wezterm/backgrounds"
+mkdir -p                                                      "${XDG_CONFIG_HOME}/aerospace"
+ln -svfF "${SCRIPT_DIR}/dotfiles/aerospace.toml"              "${XDG_CONFIG_HOME}/aerospace/aerospace.toml"
 mkdir -p                                                      "${XDG_CONFIG_HOME}/lazygit"
 ln -svfF "${SCRIPT_DIR}/dotfiles/lazygit.yml.template"        "${XDG_CONFIG_HOME}/lazygit/config.yml.template"
 mkdir -p                                                      "${XDG_CONFIG_HOME}/lsd"
