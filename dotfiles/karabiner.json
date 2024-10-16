@@ -17,65 +17,6 @@
           {
             "manipulators": [
               {
-                "description": "Tab left in Chrome",
-                "from": {
-                  "key_code": "i",
-                  "modifiers": [
-                    "left_control"
-                  ]
-                },
-                "to": {
-                  "key_code": "tab",
-                  "modifiers": [
-                    "left_control"
-                  ]
-                },
-                "type": "basic",
-                "conditions": [
-                  {
-                    "type": "frontmost_application_if",
-                    "description": "Google Chrome",
-                    "bundle_identifiers": [
-                      "^com\\.google\\.Chrome$"
-                    ]
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "manipulators": [
-              {
-                "description": "Tab right in Chrome",
-                "from": {
-                  "key_code": "o",
-                  "modifiers": [
-                    "left_control"
-                  ]
-                },
-                "to": {
-                  "key_code": "tab",
-                  "modifiers": [
-                    "left_shift",
-                    "left_control"
-                  ]
-                },
-                "type": "basic",
-                "conditions": [
-                  {
-                    "type": "frontmost_application_if",
-                    "description": "Google Chrome",
-                    "bundle_identifiers": [
-                      "^com\\.google\\.Chrome$"
-                    ]
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "manipulators": [
-              {
                 "description": "Change caps_lock to control on hold",
                 "from": {
                   "key_code": "caps_lock",
@@ -108,9 +49,8 @@
                 },
                 "to": [
                   {
-                    "key_code": "left_shift",
+                    "key_code": "left_command",
                     "modifiers": [
-                      "left_command",
                       "left_control",
                       "left_option"
                     ]
@@ -133,7 +73,6 @@
                   "key_code": "h",
                   "modifiers": {
                     "mandatory": [
-                      "left_shift",
                       "left_command",
                       "left_control",
                       "left_option"
@@ -160,7 +99,6 @@
                   "key_code": "j",
                   "modifiers": {
                     "mandatory": [
-                      "left_shift",
                       "left_command",
                       "left_control",
                       "left_option"
@@ -187,7 +125,6 @@
                   "key_code": "k",
                   "modifiers": {
                     "mandatory": [
-                      "left_shift",
                       "left_command",
                       "left_control",
                       "left_option"
@@ -214,7 +151,6 @@
                   "key_code": "l",
                   "modifiers": {
                     "mandatory": [
-                      "left_shift",
                       "left_command",
                       "left_control",
                       "left_option"
@@ -262,7 +198,6 @@
                   "key_code": "delete_or_backspace",
                   "modifiers": {
                     "mandatory": [
-                      "left_shift",
                       "left_command",
                       "left_control",
                       "left_option"
