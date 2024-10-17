@@ -65,7 +65,7 @@ local opacity
 if is_nvim_background_dark then
     opacity = 0.90
 else
-    opacity = 0.83
+    opacity = 0.85
 end
 
 -- background config
