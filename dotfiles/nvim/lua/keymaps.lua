@@ -509,33 +509,36 @@ vim.keymap.set(
     {desc = "Tmux: move cursor right"}
 )
 
---vim.keymap.set(
---    {"n", "v", "i", "x"},
---    '<C-S-h>',
---    require('smart-splits').resize_left,
---    {desc = "Tmux: resize left"}
---)
---
---vim.keymap.set(
---    {"n", "v", "i", "x"},
---    '<C-S-j>',
---    require('smart-splits').resize_down,
---    {desc = "Tmux: resize down"}
---)
---
---vim.keymap.set(
---    {"n", "v", "i", "x"},
---    '<C-S-k>',
---    require('smart-splits').resize_up,
---    {desc = "Tmux: resize up"}
---)
---
---vim.keymap.set(
---    {"n", "v", "i", "x"},
---    '<C-S-l>',
---    require('smart-splits').resize_right,
---    {desc = "Tmux: resize right"}
---)
+-- These keymaps aren't used directly.
+-- Instead Tmux is responsible for resizing splits.
+-- These keymaps need to match up with the corresponding keymaps in the tmux.conf.
+vim.keymap.set(
+    {"n", "v", "i", "x"},
+    '<leader>Rh',
+    require('smart-splits').resize_left,
+    {desc = "Tmux: resize left"}
+)
+
+vim.keymap.set(
+    {"n", "v", "i", "x"},
+    '<leader>Rj',
+    require('smart-splits').resize_down,
+    {desc = "Tmux: resize down"}
+)
+
+vim.keymap.set(
+    {"n", "v", "i", "x"},
+    '<leader>Rk',
+    require('smart-splits').resize_up,
+    {desc = "Tmux: resize up"}
+)
+
+vim.keymap.set(
+    {"n", "v", "i", "x"},
+    '<leader>Rl',
+    require('smart-splits').resize_right,
+    {desc = "Tmux: resize right"}
+)
 
 vim.keymap.set(
     "n",
