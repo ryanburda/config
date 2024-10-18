@@ -106,11 +106,13 @@ if [[ $OSTYPE == darwin* ]]; then
     brew install --cask nikitabobko/tap/aerospace
     brew install --cask alfred
     brew install --cask blackhole-2ch
+    brew install --cask boom
     brew install --cask google-chrome
     brew install --cask karabiner-elements
     brew install --cask obsidian
     brew install --cask rancher
     brew install --cask shifty
+    brew install --cask spotify
     brew install --cask topnotch
     brew install --cask wezterm@nightly
 fi
