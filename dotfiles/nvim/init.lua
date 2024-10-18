@@ -90,6 +90,23 @@ vim.diagnostic.config({
     },
 })
 
+local function get_var_from_file(file_path, default)
+    -- Reads value from `file_path`, returns `default` if file does not exist.
+    local file, _ = io.open(file_path, "r")
+    if not file then
+        -- Could not open file
+        return default
+    end
+
+    local content = file:read("*a")
+
+    -- Remove trailing new lines
+    content = content:gsub("%s*$", "")
+
+    file:close()
+    return content
+end
+
 -- Setup lazy.nvim
 require("lazy").setup({
     spec = {
@@ -98,7 +115,9 @@ require("lazy").setup({
     },
     -- Configure any other settings here. See the documentation for more details.
     -- colorscheme that will be used when installing plugins.
-    install = { colorscheme = { "habamax" } },
+    install = {
+        colorscheme = { get_var_from_file(os.getenv("HOME") .. "/.config/nvim/.colorscheme", "habamax") }
+    },
     -- automatically check for plugin updates
     checker = { enabled = true },
 })
