@@ -25,6 +25,7 @@ typeset -A themes=(
     ['Dark - Gruvbox']="gruvbox-material,dark,Gruvbox Material (Gogh)"
     ['Dark - Kanagawa-paper']="kanagawa-paper,dark,Kanagawa (Gogh)"
     ['Dark - Kanagawa-wave']="kanagawa-wave,dark,Kanagawa (Gogh)"
+    ['Dark - Lackluster']="lackluster,dark,carbonfox"
     ['Dark - Nightfox-carbon']="carbonfox,dark,carbonfox"
     ['Dark - Nightfox-night']="nightfox,dark,nightfox"
     ['Dark - Nightfox-tera']="terafox,dark,terafox"

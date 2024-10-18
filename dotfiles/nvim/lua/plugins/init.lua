@@ -23,6 +23,7 @@ return {
             "sho-87/kanagawa-paper.nvim",
             "Mofiqul/adwaita.nvim",
             "catppuccin/nvim",
+            "slugbyte/lackluster.nvim",
             {
                 "yorik1984/newpaper.nvim",
                 config = true,
