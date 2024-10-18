@@ -74,6 +74,8 @@ source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # fzf
 export FZF_DEFAULT_OPTS="
   --history=$HOME/.fzf_history_dir
+  --bind=ctrl-n:down
+  --bind=ctrl-p:up
   --bind=ctrl-d:preview-half-page-down
   --bind=ctrl-u:preview-half-page-up
   --bind=ctrl-i:previous-history
