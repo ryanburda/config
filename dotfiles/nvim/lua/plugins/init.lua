@@ -24,6 +24,8 @@ return {
             "Mofiqul/adwaita.nvim",
             "catppuccin/nvim",
             "slugbyte/lackluster.nvim",
+            "sainnhe/sonokai",
+            "polirritmico/monokai-nightasty.nvim",
             {
                 "yorik1984/newpaper.nvim",
                 config = true,
