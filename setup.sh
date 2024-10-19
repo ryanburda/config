@@ -99,7 +99,7 @@ if [[ $OSTYPE == darwin* ]]; then
     brew install --cask font-sf-mono-nerd-font-ligaturized
     brew install --cask font-terminess-ttf-nerd-font
     brew install --cask font-zed-mono-nerd-font
-    brew install --cask homebrew/cask-fonts/font-meslo-lg-nerd-font
+    brew install --cask font-meslo-lg-nerd-font
 
     # Applications
     brew install --cask 1password
