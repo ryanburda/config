@@ -78,7 +78,6 @@ if [[ $OSTYPE == darwin* ]]; then
     brew install tmux
     brew install tmuxinator
     brew install ttyrec
-    brew install utm
     brew install wget
     brew install zsh-autosuggestions
     brew install zsh-syntax-highlighting
@@ -114,6 +113,7 @@ if [[ $OSTYPE == darwin* ]]; then
     brew install --cask shifty
     brew install --cask spotify
     brew install --cask topnotch
+    brew install --cask utm
     brew install --cask wezterm@nightly
 fi
 
