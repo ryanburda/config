@@ -7,6 +7,7 @@ function T.setup()
         ensure_installed = {
             "bashls",
             "dockerls",
+            "gopls",
             "jsonls",
             "lua_ls",
             "pyright",
@@ -59,6 +60,27 @@ function T.setup()
                         },
                     }
                 }
+            })
+        end,
+
+        ["gopls"] = function  ()
+            require("lspconfig")["gopls"].setup({
+                on_attach = function(client, bufnr)
+                    require('gopls').on_attach(client, bufnr)
+                end,
+                capabilities = capabilities,
+                cmd = {"gopls"},
+                filetypes = { "go", "gomod", "gowork", "gotmpl" },
+                root_dir = require("lspconfig/util").root_pattern("go.work", "go.mod", ".git"),
+                settings = {
+                    gopls = {
+                        completeUnimported = true,
+                        usePlaceholders = true,
+                        analyses = {
+                            unusedparams = true
+                        },
+                    },
+                },
             })
         end,
 

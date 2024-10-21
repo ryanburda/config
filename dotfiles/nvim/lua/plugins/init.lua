@@ -61,7 +61,17 @@ return {
         'nvim-treesitter/nvim-treesitter',
         config = function ()
             require('nvim-treesitter.configs').setup({
-                ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "python", "rust", "sql" },
+                ensure_installed = {
+                    "c",
+                    "go",
+                    "lua",
+                    "python",
+                    "query",
+                    "rust",
+                    "sql",
+                    "vim",
+                    "vimdoc",
+                },
                 sync_install = false,
                 auto_install = true,
                 ignore_install = {},
@@ -107,7 +117,18 @@ return {
             })
         end
     },
-
+    -- autoformat on save
+    {
+        'stevearc/conform.nvim',
+        config = function ()
+            require("conform").setup({
+                formatters_by_ft = {
+                    rust = { "rustfmt", lsp_format = "fallback" },
+                    go = { "gofmt" }
+                },
+            })
+        end
+    },
     {
         "nvim-neo-tree/neo-tree.nvim",
         dependencies = {
