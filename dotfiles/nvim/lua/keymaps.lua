@@ -513,28 +513,28 @@ vim.keymap.set(
 -- Instead Tmux is responsible for resizing splits.
 -- These keymaps need to match up with the corresponding keymaps in the tmux.conf.
 vim.keymap.set(
-    {"n", "v", "i", "x"},
+    {"n", "v", "x"},
     '<leader>Rh',
     require('smart-splits').resize_left,
     {desc = "Tmux: resize left"}
 )
 
 vim.keymap.set(
-    {"n", "v", "i", "x"},
+    {"n", "v", "x"},
     '<leader>Rj',
     require('smart-splits').resize_down,
     {desc = "Tmux: resize down"}
 )
 
 vim.keymap.set(
-    {"n", "v", "i", "x"},
+    {"n", "v", "x"},
     '<leader>Rk',
     require('smart-splits').resize_up,
     {desc = "Tmux: resize up"}
 )
 
 vim.keymap.set(
-    {"n", "v", "i", "x"},
+    {"n", "v", "x"},
     '<leader>Rl',
     require('smart-splits').resize_right,
     {desc = "Tmux: resize right"}
