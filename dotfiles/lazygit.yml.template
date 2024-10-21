@@ -1,9 +1,9 @@
 gui:
   theme:
     selectedLineBgColor:
-      - reverse
+      - black
     selectedRangeBgColor:
-      - reverse
+      - black
   enlargedSideViewLocation: 'top'
   showCommandLog: false
   showIcons: true

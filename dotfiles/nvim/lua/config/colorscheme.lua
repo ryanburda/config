@@ -59,6 +59,23 @@ function T.set_colorscheme(is_setup)
 
 end
 
+local function get_var_from_file(file_path, default)
+    -- Reads value from `file_path`, returns `default` if file does not exist.
+    local file, _ = io.open(file_path, "r")
+    if not file then
+        -- Could not open file
+        return default
+    end
+
+    local content = file:read("*a")
+
+    -- Remove trailing new lines
+    content = content:gsub("%s*$", "")
+
+    file:close()
+    return content
+end
+
 function T.set_transparent_background()
     -- This function makes specific highlight groups transparent on a per colorscheme basis.
     -- It is therefore important to make sure the terminal neovim is running in has a
@@ -92,12 +109,9 @@ end
 
 function T.set_transparent_background_conditional()
     -- Read the .background file
-    local file, _ = io.open(os.getenv("HOME") .. "/.config/wezterm/.background", "r")
+    local background = get_var_from_file(os.getenv("HOME") .. "/.config/wezterm/.background", "NONE")
 
-    -- Only make highlight groups transparent if the .background file exists.
-    -- If the .background file doesn't exist then a background image is not
-    -- being shown and colors should show up normally.
-    if file then
+    if background ~= "NONE" then
         T.set_transparent_background()
     end
 end

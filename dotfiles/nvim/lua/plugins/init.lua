@@ -21,7 +21,6 @@ return {
             "Mofiqul/vscode.nvim",
             "ribru17/bamboo.nvim",
             "sho-87/kanagawa-paper.nvim",
-            "Mofiqul/adwaita.nvim",
             "catppuccin/nvim",
             "slugbyte/lackluster.nvim",
             "sainnhe/sonokai",
