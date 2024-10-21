@@ -20,7 +20,7 @@
 typeset -A themes=(
     ['Dark - Adwaita']="adwaita,dark,Modus Vivendi (Gogh)"
     ['Dark - Bamboo']="bamboo,dark,Bamboo"
-    ['Dark - Cattppuccin']="catppuccin,dark,catppuccin"
+    ['Dark - Catppuccin']="catppuccin,dark,catppuccin-macchiato"
     ['Dark - Everforest']="everforest,dark,Everforest Dark (Gogh)"
     ['Dark - Gruvbox']="gruvbox-material,dark,Gruvbox Material (Gogh)"
     ['Dark - Kanagawa-paper']="kanagawa-paper,dark,Kanagawa (Gogh)"
@@ -36,7 +36,7 @@ typeset -A themes=(
     ['Dark - ZenBones-forest']="forestbones,dark,Everforest Dark (Gogh)"
     ['Dark - ZenBones-neo']="neobones,dark,neobones_dark"
     ['Light - Adwaita']="adwaita,light,Modus Operandi (Gogh)"
-    ['Light - Cattppuccin']="catppuccin-latte,light,catppuccin-latte"
+    ['Light - Catppuccin']="catppuccin-latte,light,catppuccin-latte"
     ['Light - Deep-White']="deepwhite,light,Alabaster"
     ['Light - Everforest']="everforest,light,Everforest Light (Gogh)"
     ['Light - Gruvbox']="gruvbox-material,light,GruvboxLight"
