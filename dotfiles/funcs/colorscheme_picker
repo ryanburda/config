@@ -19,7 +19,7 @@
 #       - other scripts exist for handling colorscheme changes to other CLIs such as aichat and lazygit.
 typeset -A themes=(
     ['Dark - Bamboo']="bamboo,dark,Bamboo"
-    ['Dark - Catppuccin']="catppuccin-frappe,dark,Catppuccin Frappe"
+    ['Dark - Catppuccin']="catppuccin-mocha,dark,Catppuccin Mocha"
     ['Dark - Everforest']="everforest,dark,Everforest Dark (Gogh)"
     ['Dark - Gruvbox']="gruvbox-material,dark,Gruvbox Material (Gogh)"
     ['Dark - Kanagawa-paper']="kanagawa-paper,dark,Kanagawa (Gogh)"
