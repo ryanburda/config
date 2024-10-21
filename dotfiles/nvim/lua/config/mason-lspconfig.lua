@@ -63,7 +63,7 @@ function T.setup()
             })
         end,
 
-        ["gopls"] = function  ()
+        ["gopls"] = function ()
             require("lspconfig")["gopls"].setup({
                 on_attach = function(client, bufnr)
                     require('gopls').on_attach(client, bufnr)
