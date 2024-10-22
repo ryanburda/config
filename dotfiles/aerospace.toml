@@ -102,6 +102,13 @@ alt-j = 'focus down'
 alt-k = 'focus up'
 alt-l = 'focus right'
 
+# See: https://nikitabobko.github.io/AeroSpace/commands#workspace
+alt-f = ['workspace F', 'mode main']
+alt-u = ['workspace U', 'mode main']
+alt-i = ['workspace I', 'mode main']
+alt-o = ['workspace O', 'mode main']
+alt-p = ['workspace P', 'mode main']
+
 [mode.alt.binding]
 esc = ['mode main']
 
@@ -111,25 +118,12 @@ comma = ['layout accordion horizontal', 'mode main']
 period = ['reload-config', 'mode main']
 slash = ['layout tiles horizontal', 'mode main']
 
-# See: https://nikitabobko.github.io/AeroSpace/commands#workspace
-a = ['workspace A', 'mode main']
-s = ['workspace S', 'mode main']
-d = ['workspace D', 'mode main']
-f = ['workspace F', 'mode main']
-q = ['workspace Q', 'mode main']
-w = ['workspace W', 'mode main']
-e = ['workspace E', 'mode main']
-r = ['workspace R', 'mode main']
-
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
-shift-a = ['move-node-to-workspace A', 'mode main']
-shift-s = ['move-node-to-workspace S', 'mode main']
-shift-d = ['move-node-to-workspace D', 'mode main']
-shift-f = ['move-node-to-workspace F', 'mode main']
-shift-q = ['move-node-to-workspace Q', 'mode main']
-shift-w = ['move-node-to-workspace W', 'mode main']
-shift-e = ['move-node-to-workspace E', 'mode main']
-shift-r = ['move-node-to-workspace R', 'mode main']
+f = ['move-node-to-workspace F', 'mode main']
+u = ['move-node-to-workspace U', 'mode main']
+i = ['move-node-to-workspace I', 'mode main']
+o = ['move-node-to-workspace O', 'mode main']
+p = ['move-node-to-workspace P', 'mode main']
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#resize
 alt-h = 'resize width +20'
