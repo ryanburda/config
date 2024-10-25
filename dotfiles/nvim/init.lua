@@ -52,7 +52,7 @@ vim.opt.updatetime = 250
 vim.opt.laststatus = 3
 vim.opt.signcolumn = "yes"
 vim.opt.list = true
-vim.opt.listchars = { tab = '│─'}
+vim.opt.listchars = { tab = '│ '}
 vim.opt.autoread = true
 vim.opt.winbar = '%=%m %f'
 vim.opt.statuscolumn = "%s%4l %2r  "
