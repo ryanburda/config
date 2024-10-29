@@ -87,13 +87,27 @@ outer.right =      0
 # 'main' binding mode must be always presented
 # Fallback value (if you omit the key): mode.main.binding = {}
 [mode.main.binding]
-alt-semicolon = ['mode alt']
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus
 alt-h = 'focus left'
 alt-j = 'focus down'
 alt-k = 'focus up'
 alt-l = 'focus right'
+
+# See: https://nikitabobko.github.io/AeroSpace/commands#resize
+alt-ctrl-h = 'resize width +20'
+alt-ctrl-j = 'resize height +50'
+alt-ctrl-k = 'resize height -50'
+alt-ctrl-l = 'resize width -20'
+
+# See: https://nikitabobko.github.io/AeroSpace/commands#move
+alt-shift-h = ['move left', 'mode main']
+alt-shift-j = ['move down', 'mode main']
+alt-shift-k = ['move up', 'mode main']
+alt-shift-l = ['move right', 'mode main']
+
+# See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
+alt-tab = ['move-workspace-to-monitor --wrap-around next', 'mode main']
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
 alt-a = ['workspace A', 'mode main']
@@ -105,39 +119,21 @@ alt-w = ['workspace W', 'mode main']
 alt-e = ['workspace E', 'mode main']
 alt-r = ['workspace R', 'mode main']
 
-[mode.alt.binding]
-esc = ['mode main']
+# See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
+alt-shift-a = ['move-node-to-workspace A', 'mode main']
+alt-shift-s = ['move-node-to-workspace S', 'mode main']
+alt-shift-d = ['move-node-to-workspace D', 'mode main']
+alt-shift-f = ['move-node-to-workspace F', 'mode main']
+alt-shift-q = ['move-node-to-workspace Q', 'mode main']
+alt-shift-w = ['move-node-to-workspace W', 'mode main']
+alt-shift-e = ['move-node-to-workspace E', 'mode main']
+alt-shift-r = ['move-node-to-workspace R', 'mode main']
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
-m = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
-comma = ['layout accordion horizontal', 'mode main']
-period = ['reload-config', 'mode main']
-slash = ['layout tiles horizontal', 'mode main']
-
-# See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
-a = ['move-node-to-workspace A', 'mode main']
-s = ['move-node-to-workspace S', 'mode main']
-d = ['move-node-to-workspace D', 'mode main']
-f = ['move-node-to-workspace F', 'mode main']
-q = ['move-node-to-workspace Q', 'mode main']
-w = ['move-node-to-workspace W', 'mode main']
-e = ['move-node-to-workspace E', 'mode main']
-r = ['move-node-to-workspace R', 'mode main']
-
-# See: https://nikitabobko.github.io/AeroSpace/commands#resize
-alt-h = 'resize width +20'
-alt-j = 'resize height +50'
-alt-k = 'resize height -50'
-alt-l = 'resize width -20'
-
-# See: https://nikitabobko.github.io/AeroSpace/commands#move
-shift-h = ['move left', 'mode main']
-shift-j = ['move down', 'mode main']
-shift-k = ['move up', 'mode main']
-shift-l = ['move right', 'mode main']
-
-# See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
-tab = ['move-workspace-to-monitor --wrap-around next', 'mode main']
+alt-m = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
+alt-comma = ['layout accordion horizontal', 'mode main']
+alt-period = ['reload-config', 'mode main']
+alt-slash = ['layout tiles horizontal', 'mode main']
 
 [[on-window-detected]]
 if.app-id = 'com.github.wez.wezterm'
