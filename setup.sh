@@ -102,7 +102,6 @@ if [[ $OSTYPE == darwin* ]]; then
 
     # Applications
     brew install --cask 1password
-    brew install --cask nikitabobko/tap/aerospace
     brew install --cask alfred
     brew install --cask blackhole-2ch
     brew install --cask boom
@@ -110,6 +109,7 @@ if [[ $OSTYPE == darwin* ]]; then
     brew install --cask karabiner-elements
     brew install --cask obsidian
     brew install --cask rancher
+    brew install --cask rectangle
     brew install --cask shifty
     brew install --cask spotify
     brew install --cask topnotch

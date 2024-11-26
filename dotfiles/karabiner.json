@@ -280,7 +280,7 @@
               {
                 "description": "Hyper+w to CMD [",
                 "from": {
-                  "key_code": "w",
+                  "key_code": "u",
                   "modifiers": {
                     "mandatory": [
                       "left_command",
@@ -309,7 +309,7 @@
               {
                 "description": "Hyper+e to CMD ]",
                 "from": {
-                  "key_code": "e",
+                  "key_code": "p",
                   "modifiers": {
                     "mandatory": [
                       "left_command",
