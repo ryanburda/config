@@ -364,6 +364,27 @@
           {
             "manipulators": [
               {
+                "description": "Open Wezterm",
+                "from": {
+                  "key_code": "f",
+                  "modifiers": {
+                    "mandatory": [
+                      "left_option"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "open -a 'Wezterm.app'"
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
+            "manipulators": [
+              {
                 "description": "Double Shift to Caps Lock2",
                 "type": "basic",
                 "from": {
