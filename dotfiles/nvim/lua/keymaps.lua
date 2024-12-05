@@ -46,14 +46,14 @@ vim.keymap.set(
 
 vim.keymap.set(
     'n',
-    '<leader><C-j>',
+    '<leader>j',
     ':split<cr><C-w>j',
     {desc = 'Window Management: Horizontal split'}
 )
 
 vim.keymap.set(
     'n',
-    '<leader><C-l>',
+    '<leader>l',
     ':vsplit<cr><C-w>l',
     {desc = 'Window Management: Vertical split'}
 )
@@ -102,7 +102,7 @@ vim.keymap.set(
 
 vim.keymap.set(
     'n',
-    "<leader>aa",
+    "<leader>a",
     ":Neotree toggle<CR>",
     {desc = "Window Management: Toogle file tree"}
 )
@@ -768,7 +768,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 ------------------------------------------------------------------------------------------------------------------------
 vim.keymap.set(
     'n',
-    "<leader>ai",
+    "<leader>h",
     require('config.copilot').toggle,
     { desc = "Github Copilot Toggle" }
 )
