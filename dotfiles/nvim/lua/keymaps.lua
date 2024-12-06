@@ -25,13 +25,6 @@ vim.keymap.set(
 
 vim.keymap.set(
     'n',
-    '<leader>x',
-    ':tabclose<cr>',
-    {desc = 'Window Management: Close Tab'}
-)
-
-vim.keymap.set(
-    'n',
     '<leader><S-Tab>',
     ':tabprevious<cr>',
     {desc = 'Window Management: Previous Tab'}
@@ -781,4 +774,21 @@ vim.keymap.set(
     '<leader>cn',
     ':s/ *, */\\r/g<cr>',
     {desc = 'Macro: Split comma separated value into new lines'}
+)
+
+------------------------------------------------------------------------------------------------------------------------
+-- Other
+------------------------------------------------------------------------------------------------------------------------
+vim.keymap.set(
+    'n',
+    "<leader>x",
+    ":.lua<cr>",
+    {desc = 'Other: Execute current line in lua'}
+)
+
+vim.keymap.set(
+    'v',
+    "<leader>x",
+    ":lua<cr>",
+    {desc = 'Other: Execute visual select in lua'}
 )
