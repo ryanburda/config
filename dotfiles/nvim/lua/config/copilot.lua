@@ -43,7 +43,6 @@ function T.setup()
     vim.cmd('Lazy load copilot.lua')
 
     require('copilot').setup()
-
 end
 
 return T

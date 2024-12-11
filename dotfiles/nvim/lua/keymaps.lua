@@ -257,14 +257,18 @@ vim.keymap.set(
 vim.keymap.set(
     'n',
     '<C-n>',
-    function() require('gitsigns').nav_hunk('next') end,
+    function()
+        require('gitsigns').nav_hunk('next')
+    end,
     {desc = 'Diff: Jump to next hunk'}
 )
 
 vim.keymap.set(
     'n',
     '<C-p>',
-    function() require('gitsigns').nav_hunk('prev') end,
+    function()
+        require('gitsigns').nav_hunk('prev')
+    end,
     {desc = 'Diff: Jump to previous hunk'}
 )
 
@@ -285,7 +289,9 @@ vim.keymap.set(
 vim.keymap.set(
     'n',
     '<leader>gg',
-    function() require('gitsigns').blame_line{full=true} end,
+    function()
+        require('gitsigns').blame_line{full=true}
+    end,
     {desc = 'Diff: Toogle line blame ghost text'}
 )
 
@@ -658,7 +664,7 @@ vim.keymap.set(
     'n',
     '<leader>fg',
     require('multigrep').live_multigrep,
-    { desc = 'Find: live grep in Telescope' }
+    { desc = 'Find: grep with optional glob filter following double space' }
 )
 
 vim.keymap.set(
@@ -701,9 +707,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
         vim.keymap.set(
             'n',
-            '<leader>fr',
+            '<leader>fa',
             require('telescope.builtin').lsp_references,
-            {desc = 'Find: references', buffer = event.buf}
+            {desc = 'Find: all references', buffer = event.buf}
         )
 
         vim.keymap.set(
