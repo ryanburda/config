@@ -1,4 +1,4 @@
-model: openai:gpt-4o-mini
+model: openai
 highlight: true
 light_theme: ${AICHAT_LIGHT_THEME}
 wrap: no
