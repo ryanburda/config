@@ -257,14 +257,14 @@ vim.keymap.set(
 vim.keymap.set(
     'n',
     '<C-n>',
-    require('gitsigns').next_hunk,
+    function() require('gitsigns').nav_hunk('next') end,
     {desc = 'Diff: Jump to next hunk'}
 )
 
 vim.keymap.set(
     'n',
     '<C-p>',
-    require('gitsigns').prev_hunk,
+    function() require('gitsigns').nav_hunk('prev') end,
     {desc = 'Diff: Jump to previous hunk'}
 )
 
@@ -657,7 +657,7 @@ vim.keymap.set(
 vim.keymap.set(
     'n',
     '<leader>fg',
-    require('telescope.builtin').live_grep,
+    require('multigrep').live_multigrep,
     { desc = 'Find: live grep in Telescope' }
 )
 
@@ -791,4 +791,13 @@ vim.keymap.set(
     "<leader>x",
     ":lua<cr>",
     {desc = 'Other: Execute visual select in lua'}
+)
+
+vim.keymap.set(
+    'n',
+    '<leader>X',
+    function()
+        vim.cmd('source %')
+    end,
+    {desc = "Other: Source current file" }
 )
