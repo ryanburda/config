@@ -670,8 +670,8 @@ vim.keymap.set(
 vim.keymap.set(
     'n',
     '<leader>fg',
-    require('multigrep').grep_glob,
-    { desc = 'Find: grep with optional glob filter following double space' }
+    require('grep_glob').grep_glob,
+    { desc = 'Find: grep with optional glob filter following double space delimiter. ie `autocmd **/config/**.lua`' }
 )
 
 vim.keymap.set(
@@ -790,20 +790,20 @@ vim.keymap.set(
 )
 
 ------------------------------------------------------------------------------------------------------------------------
--- Other
+-- Execute
 ------------------------------------------------------------------------------------------------------------------------
 vim.keymap.set(
     'n',
     "<leader>:",
     ":.lua<cr>",
-    {desc = 'Other: Execute current line in lua'}
+    {desc = 'Execute: Execute current line in lua'}
 )
 
 vim.keymap.set(
     'v',
     "<leader>:",
     ":lua<cr>",
-    {desc = 'Other: Execute visual select in lua'}
+    {desc = 'Execute: Execute visual select in lua'}
 )
 
 vim.keymap.set(
@@ -812,5 +812,5 @@ vim.keymap.set(
     function()
         vim.cmd('source %')
     end,
-    {desc = "Other: Source current file" }
+    {desc = "Execute: Source current file" }
 )
