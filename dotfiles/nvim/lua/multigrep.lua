@@ -5,7 +5,7 @@ local conf = require "telescope.config".values
 
 local M = {}
 
-M.live_multigrep = function(opts)
+M.grep_glob = function(opts)
     opts = opts or {}
     opts.cwd = opts.cwd or vim.uv.cwd()
 
@@ -39,7 +39,7 @@ M.live_multigrep = function(opts)
 
     pickers.new(opts, {
         debounce = 100,
-        prompt_title = "Multi Grep",
+        prompt_title = "Grep Glob",
         finder = finder,
         previewer = conf.grep_previewer(opts),
         sorter = require("telescope.sorters").empty(),

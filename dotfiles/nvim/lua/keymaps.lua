@@ -25,6 +25,13 @@ vim.keymap.set(
 
 vim.keymap.set(
     'n',
+    '<leader>x',
+    ':tabclose<cr>',
+    {desc = 'Window Management: Close Tab'}
+)
+
+vim.keymap.set(
+    'n',
     '<leader><S-Tab>',
     ':tabprevious<cr>',
     {desc = 'Window Management: Previous Tab'}
@@ -663,7 +670,7 @@ vim.keymap.set(
 vim.keymap.set(
     'n',
     '<leader>fg',
-    require('multigrep').live_multigrep,
+    require('multigrep').grep_glob,
     { desc = 'Find: grep with optional glob filter following double space' }
 )
 
@@ -787,21 +794,21 @@ vim.keymap.set(
 ------------------------------------------------------------------------------------------------------------------------
 vim.keymap.set(
     'n',
-    "<leader>x",
+    "<leader>:",
     ":.lua<cr>",
     {desc = 'Other: Execute current line in lua'}
 )
 
 vim.keymap.set(
     'v',
-    "<leader>x",
+    "<leader>:",
     ":lua<cr>",
     {desc = 'Other: Execute visual select in lua'}
 )
 
 vim.keymap.set(
     'n',
-    '<leader>X',
+    '<leader>;',
     function()
         vim.cmd('source %')
     end,
