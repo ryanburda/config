@@ -63,9 +63,9 @@ local is_nvim_background_dark = (helpers.get_var_from_file(nvim_background_file_
 local opacity
 
 if is_nvim_background_dark then
-    opacity = 0.90
+    opacity = 0.92
 else
-    opacity = 0.85
+    opacity = 0.87
 end
 
 -- background config
