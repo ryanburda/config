@@ -60,9 +60,22 @@ vim.opt.statuscolumn = "%s%4l %2r  "
 vim.cmd('set noshowmode')
 vim.cmd('set noswapfile')
 
+-- Treat help buffers as normal buffers.
+vim.api.nvim_create_augroup('HelpBuffersListed', { clear = true })
+vim.api.nvim_create_autocmd('BufWinEnter', {
+    group = 'HelpBuffersListed',
+    pattern = '*.txt', -- Help files have a '.txt' extension in Neovim
+    callback = function()
+        if vim.bo.filetype == 'help' then
+            vim.bo.buflisted = true -- Make the buffer listed
+        end
+    end,
+})
+
 -- Open help window in a vertical split to the right.
+-- TODO: don't open help window.
 vim.api.nvim_create_autocmd("BufWinEnter", {
-    group = vim.api.nvim_create_augroup("help_window_right", {}),
+    group = 'HelpBuffersListed',
     pattern = { "*.txt" },
     callback = function()
         if vim.o.filetype == 'help' then vim.cmd.wincmd("L") end

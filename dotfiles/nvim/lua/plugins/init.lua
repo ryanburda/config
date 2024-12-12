@@ -300,11 +300,6 @@ return {
                     },
                     separator_style = "thin",
                     custom_filter = function(buf, _)
-                        -- dont show help buffers
-                        if vim.bo[buf].filetype == "help" then
-                            return false
-                        end
-
                         -- don't show quickfix buffers
                         local buf_type = vim.bo[buf].bt
                         if buf_type == 'quickfix' then
