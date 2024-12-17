@@ -4,8 +4,6 @@
 defaults write "com.apple.dock" "persistent-apps" -array
 # Show task switcher on all monitors.
 defaults write com.apple.Dock appswitcher-all-displays -bool true
-# Aerospace - Group windows by application
-defaults write com.apple.dock expose-group-apps -bool true
 killall Dock
 
 # Change key repeat rate and delay until repeat
