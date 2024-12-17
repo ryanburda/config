@@ -714,9 +714,16 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
         vim.keymap.set(
             'n',
-            '<leader>fa',
+            '<leader>fr',
             require('telescope.builtin').lsp_references,
             {desc = 'Find: all references', buffer = event.buf}
+        )
+
+        vim.keymap.set(
+            'n',
+            '<leader>ft',
+            require('telescope.builtin').lsp_type_definitions,
+            {desc = 'Find: type definitions', buffer = event.buf}
         )
 
         vim.keymap.set(
