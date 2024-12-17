@@ -1,17 +1,9 @@
 #!/bin/zsh
 
-if [ -z "$XDG_CONFIG_HOME" ]; then
-    echo "=============WARNING============="
-    echo "== XDG_CONFIG_HOME is not set. =="
-    echo "== Reset terminal by running:  =="
-    echo "== `reset`                     =="
-    echo "================================="
-    exit -1
-fi
-
 # If config repo is in normal location then this is `SCRIPT_DIR=$HOME/Developer/config`
 # The following can be used when testing manually:  `SCRIPT_DIR=$(pwd)`
 SCRIPT_DIR=${0:a:h}
+XDG_CONFIG_HOME="${HOME}/.config"
 
 # OS specific installations
 if [[ $OSTYPE == darwin* ]]; then
@@ -146,8 +138,6 @@ mkdir -p                                                      "${XDG_CONFIG_HOME
 ln -svfF "${SCRIPT_DIR}/dotfiles/wezterm/wezterm.lua"         "${XDG_CONFIG_HOME}/wezterm/wezterm.lua"
 ln -svfF "${SCRIPT_DIR}/dotfiles/wezterm/helpers.lua"         "${XDG_CONFIG_HOME}/wezterm/helpers.lua"
 ln -svfF "${SCRIPT_DIR}/dotfiles/wezterm/backgrounds"         "${XDG_CONFIG_HOME}/wezterm/backgrounds"
-mkdir -p                                                      "${XDG_CONFIG_HOME}/aerospace"
-ln -svfF "${SCRIPT_DIR}/dotfiles/aerospace.toml"              "${XDG_CONFIG_HOME}/aerospace/aerospace.toml"
 mkdir -p                                                      "${XDG_CONFIG_HOME}/lazygit"
 ln -svfF "${SCRIPT_DIR}/dotfiles/lazygit.yml.template"        "${XDG_CONFIG_HOME}/lazygit/config.yml.template"
 mkdir -p                                                      "${XDG_CONFIG_HOME}/lsd"
