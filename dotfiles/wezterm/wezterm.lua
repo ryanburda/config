@@ -11,7 +11,7 @@ local font_file_path =            os.getenv("HOME") .. "/.config/wezterm/.font"
 local font_size_file_path =       os.getenv("HOME") .. "/.config/wezterm/.font_size"
 local nvim_background_file_path = os.getenv("HOME") .. "/.config/nvim/.background"
 
-config.color_scheme = helpers.get_var_from_file(color_scheme_file_path, 'Batman')
+config.color_scheme = helpers.get_var_from_file(color_scheme_file_path, 'Bamboo')
 config.font = wezterm.font(helpers.get_var_from_file(font_file_path, 'JetBrains Mono'))
 config.font_size = tonumber(helpers.get_var_from_file(font_size_file_path, '12'))
 config.window_decorations = "RESIZE"
