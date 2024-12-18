@@ -4,9 +4,12 @@
 # The following can be used when testing manually:  `SCRIPT_DIR=$(pwd)`
 SCRIPT_DIR=${0:a:h}
 
-# This needs to match the `export XDG_CONFIG_HOME=$HOME/.config` in zshrc
-# since that file will not exist the first time this script is run.
-XDG_CONFIG_HOME="${HOME}/.config"
+# symlink and source environment files so that variables
+# can be used throughout the rest of this script.
+ln -svfF "${SCRIPT_DIR}/dotfiles/zshrc" "${HOME}/.zshrc"
+source ~/.zshrc
+ln -svfF "${SCRIPT_DIR}/dotfiles/zprofile" "${HOME}/.zprofile"
+source ~/.zprofile
 
 # OS specific installations
 if [[ $OSTYPE == darwin* ]]; then
@@ -22,8 +25,8 @@ if [[ $OSTYPE == darwin* ]]; then
     which -s brew
     if [[ $? != 0 ]] ; then
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        ln -svfF "${SCRIPT_DIR}/dotfiles/zprofile" "${HOME}/.zprofile"
-        eval "$(/opt/homebrew/bin/brew shellenv)"
+        # Source zprofile again now that brew is installed.
+        source ~/.zprofile
     else
         brew update
     fi
@@ -80,7 +83,6 @@ if [[ $OSTYPE == darwin* ]]; then
 
     # Fonts
     # brew install --cask font-<FONT NAME>-nerd-font
-    brew tap homebrew/cask-fonts
     brew install --cask font-caskaydia-mono-nerd-font
     brew install --cask font-fira-code-nerd-font
     brew install --cask font-gohufont-nerd-font
@@ -108,8 +110,10 @@ if [[ $OSTYPE == darwin* ]]; then
     brew install --cask shifty
     brew install --cask spotify
     brew install --cask topnotch
-    brew install --cask utm
     brew install --cask wezterm@nightly
+
+    # MacOS specific settings
+    ./dotfiles/scripts/macos.sh
 fi
 
 # rust
@@ -126,7 +130,6 @@ ln -svfF "${SCRIPT_DIR}/dotfiles/octaverc"                    "${HOME}/.octaverc
 touch                                                         "${HOME}/.openai_api_key"  # Add openai key to this file.
 mkdir -p                                                      "${HOME}/.ssh"
 ln -svfF "${SCRIPT_DIR}/dotfiles/ssh_config"                  "${HOME}/.ssh/config"
-ln -svfF "${SCRIPT_DIR}/dotfiles/zprofile"                    "${HOME}/.zprofile"
 mkdir -p                                                      "${HOME}/.zsh/funcs"
 ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/aichat_config"         "${HOME}/.zsh/funcs/aichat_config"
 ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/git_config"            "${HOME}/.zsh/funcs/git_config"
@@ -160,6 +163,3 @@ if [[ $OSTYPE == darwin* ]]; then
     # https://karabiner-elements.pqrs.org/docs/manual/misc/configuration-file-path/
     cp "${SCRIPT_DIR}/dotfiles/karabiner.json" "${XDG_CONFIG_HOME}/karabiner/karabiner.json"
 fi
-
-# Additional manual steps
-cat "${SCRIPT_DIR}/manual_steps.txt"
