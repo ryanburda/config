@@ -3,6 +3,9 @@
 # If config repo is in normal location then this is `SCRIPT_DIR=$HOME/Developer/config`
 # The following can be used when testing manually:  `SCRIPT_DIR=$(pwd)`
 SCRIPT_DIR=${0:a:h}
+
+# This needs to match the `export XDG_CONFIG_HOME=$HOME/.config` in zshrc
+# since that file will not exist the first time this script is run.
 XDG_CONFIG_HOME="${HOME}/.config"
 
 # OS specific installations
