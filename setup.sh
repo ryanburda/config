@@ -163,3 +163,6 @@ if [[ $OSTYPE == darwin* ]]; then
     # https://karabiner-elements.pqrs.org/docs/manual/misc/configuration-file-path/
     cp "${SCRIPT_DIR}/dotfiles/karabiner.json" "${XDG_CONFIG_HOME}/karabiner/karabiner.json"
 fi
+
+# Generate SSH keys
+./dotfiles/scripts/ssh_keygen.sh

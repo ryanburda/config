@@ -1,5 +1,10 @@
 #!/bin/zsh
 
+echo "########################################"
+echo "#          SSH Key Generation          #"
+echo "########################################"
+echo
+
 is_valid_email() {
     regex='^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
     [[ $1 =~ $regex ]]
