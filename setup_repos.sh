@@ -1,8 +1,7 @@
 #!/bin/zsh
 
-###############
-# Setup Repos #
-###############
+# Clones are repo that sets up other repos.
+# This separates the setup of tools from the projects those tools are used on.
 REPOS_PROJECT_DIR=$HOME/Developer/repos
 mkdir -p $REPOS_PROJECT_DIR
 

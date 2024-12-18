@@ -2,16 +2,13 @@
 
 Terminal configuration and dotfiles.
 
-Setup: (intended to be cloned into `~/Developer/config`)
 ```
 mkdir ~/Developer
 cd ~/Developer
-git clone git@github.com:ryanburda/config.git
+git clone https://github.com/ryanburda/config.git
 cd config
 ./setup.sh
-```
 
-Optional repo setup:
-```
+# Optional: Setup all other repos
 ./setup_repos.sh
 ```
