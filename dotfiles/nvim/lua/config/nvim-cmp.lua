@@ -13,11 +13,11 @@ function T.setup()
             end,
         },
         experimental = {
-            ghost_text = true,
+            ghost_text = false,
         },
         window = {
             completion = cmp.config.window.bordered({
-                col_offset = 30,
+                col_offset = 12,
                 scrolloff = 4,
             }),
             documentation = cmp.config.window.bordered({max_width = 100}),
