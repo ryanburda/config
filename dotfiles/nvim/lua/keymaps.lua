@@ -821,3 +821,10 @@ vim.keymap.set(
     end,
     {desc = "Execute: Source current file" }
 )
+
+vim.keymap.set(
+    'n',
+    "<leader>fe",
+    ":Oil<CR>",
+    {desc = "File management"}
+)
