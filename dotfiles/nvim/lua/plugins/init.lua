@@ -143,25 +143,34 @@ return {
         ---@module 'oil'
         ---@type oil.SetupOpts
         opts = {
+            use_default_keymaps = false,
             keymaps = {
+                ["?"] = { "actions.show_help", mode = "n" },
                 ["<CR>"] = "actions.select",
-                ["g?"] = { "actions.show_help", mode = "n" },
-                ["gh"] = { "actions.toggle_hidden", mode = "n" },
-                ["gs"] = { "actions.change_sort", mode = "n" },
-                ["gx"] = "actions.open_external",
-                ["g."] = "actions.refresh",
+                ["<C-h>"] = { "actions.parent", mode = "n" },
+                ["<C-j>"] = { "j", mode = "n" },
+                ["<C-k>"] = { "k", mode = "n" },
+                ["<C-l>"] = "actions.select",
                 ["<C-p>"] = "actions.preview",
                 ["<C-c>"] = { "actions.close", mode = "n" },
-                ["-"] = { "actions.parent", mode = "n" },
-                ["_"] = { "actions.open_cwd", mode = "n" },
+                ["<C-s>"] = { "actions.change_sort", mode = "n" },
+                ["<C-o>"] = { "actions.open_cwd", mode = "n" },
+                ["<C-x>"] = "actions.open_external",
+                ["<C-t>"] = { "actions.toggle_trash", mode = "n" },
+                ["H"] = { "actions.toggle_hidden", mode = "n" },
+                ["L"] = "actions.refresh",
+                ["`"] = { "actions.cd", mode = "n" },
+                ["~"] = { "actions.cd", opts = { scope = "tab" }, mode = "n" },
             },
+            delete_to_trash = true,
+            skip_confirm_for_simple_edits = true,
             view_options = {
                 show_hidden = true,
             },
             float = {
-                -- Padding around the floating window
                 max_width = 100,
                 max_height = 32,
+                preview_split = "right",
             },
         },
         dependencies = { { "echasnovski/mini.icons", opts = {} } },
