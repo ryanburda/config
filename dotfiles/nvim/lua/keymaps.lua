@@ -825,6 +825,6 @@ vim.keymap.set(
 vim.keymap.set(
     'n',
     "<leader>fe",
-    ":Oil<CR>",
+    require('oil').toggle_float,
     {desc = "File management"}
 )

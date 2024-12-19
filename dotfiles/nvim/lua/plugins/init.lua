@@ -3,7 +3,7 @@ return {
     -- Greeter
     {
         'goolord/alpha-nvim',
-        dependencies = { 'nvim-tree/nvim-web-devicons' },
+        dependencies = { 'echasnovski/mini.icons' },
         config = function ()
             require'alpha'.setup(require'alpha.themes.startify'.config)
         end
@@ -182,10 +182,29 @@ return {
         'stevearc/oil.nvim',
         ---@module 'oil'
         ---@type oil.SetupOpts
-        opts = {},
-        -- Optional dependencies
+        opts = {
+            keymaps = {
+                ["<CR>"] = "actions.select",
+                ["g?"] = { "actions.show_help", mode = "n" },
+                ["gh"] = { "actions.toggle_hidden", mode = "n" },
+                ["gs"] = { "actions.change_sort", mode = "n" },
+                ["gx"] = "actions.open_external",
+                ["g."] = "actions.refresh",
+                ["<C-p>"] = "actions.preview",
+                ["<C-c>"] = { "actions.close", mode = "n" },
+                ["-"] = { "actions.parent", mode = "n" },
+                ["_"] = { "actions.open_cwd", mode = "n" },
+            },
+            view_options = {
+                show_hidden = true,
+            },
+            float = {
+                -- Padding around the floating window
+                max_width = 100,
+                max_height = 32,
+            },
+        },
         dependencies = { { "echasnovski/mini.icons", opts = {} } },
-        -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
     },
 
     -- Telescope
