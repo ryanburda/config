@@ -100,13 +100,6 @@ vim.keymap.set(
     {desc = 'Window Management: Move current buffer to the right in the bufferline'}
 )
 
-vim.keymap.set(
-    'n',
-    "<leader>a",
-    ":Neotree toggle<CR>",
-    {desc = "Window Management: Toogle file tree"}
-)
-
 ------------------------------------------------------------------------------------------------------------------------
 -- Navigation
 ------------------------------------------------------------------------------------------------------------------------

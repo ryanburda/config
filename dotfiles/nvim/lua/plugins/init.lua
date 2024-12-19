@@ -136,46 +136,6 @@ return {
             })
         end
     },
-    {
-        "nvim-neo-tree/neo-tree.nvim",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "kyazdani42/nvim-web-devicons",
-            "MunifTanjim/nui.nvim",
-        },
-        config = function()
-            require("neo-tree").setup({
-                sources = { "filesystem" },
-                filesystem = {
-                    follow_current_file = {enabled = true},
-                },
-                source_selector = {
-                    winbar = true,
-                    statusline = false,
-                    sources = {
-                        { source = "filesystem", display_name = " 󰉓  Files " },
-                    },
-                },
-                default_component_configs = {
-                    git_status = {
-                        symbols = {
-                            -- Change type
-                            added     = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
-                            modified  = "", -- or "", but this is redundant info if you use git_status_colors on the name
-                            deleted   = "",-- this can only be used in the git_status source
-                            renamed   = "",-- this can only be used in the git_status source
-                            -- Status type
-                            untracked = "",
-                            ignored   = "",
-                            unstaged  = "",
-                            staged    = "",
-                            conflict  = "",
-                        },
-                    },
-                },
-            })
-        end
-    },
 
     -- Oil.nvim
     {
