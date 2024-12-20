@@ -216,14 +216,14 @@ return {
 
   -- Highlight word under cursor
   {
-     'tzachar/local-highlight.nvim',
-     config = function()
-       require('local-highlight').setup({
-         hlgroup = 'Underlined',
-         cw_hlgroup = nil,
-         insert_mode = true,
-       })
-     end
+    'tzachar/local-highlight.nvim',
+    config = function()
+      require('local-highlight').setup({
+        hlgroup = 'Underlined',
+        cw_hlgroup = nil,
+        insert_mode = true,
+      })
+    end
   },
 
   -- Git
