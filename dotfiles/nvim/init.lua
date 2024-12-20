@@ -119,8 +119,13 @@ require("lazy").setup({
     install = {
         colorscheme = { get_var_from_file(os.getenv("HOME") .. "/.config/nvim/.colorscheme", "habamax") }
     },
-    -- automatically check for plugin updates
-    checker = { enabled = true },
+    checker = {
+        enabled = false, -- automatically check for plugin updates
+    },
+    change_detection = {
+        enabled = true, -- automatically check for config file changes and reload the ui
+        notify = false, -- get a notification when changes are found
+    },
 })
 
 -- keymaps
