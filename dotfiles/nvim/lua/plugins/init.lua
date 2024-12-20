@@ -1,3 +1,14 @@
+-- Defines all of the plugins that are managed by lazy.nvim.
+--
+-- The convention being followed in this repo is to put all plugins in the table below.
+-- Lazy.nvim does allow for plugins to be definied in their own files but I generally
+-- find it easier to track what plugins come in and out of use in the commit history
+-- of a single file instead of the commit history of an entire directory.
+-- This is a preference, not a requirement.
+--
+-- Plugins with larger than normal `config` functions (telescope for example) can
+-- have their config functions broken out into a separate file in `../config/`.
+
 return {
 
   -- Greeter
