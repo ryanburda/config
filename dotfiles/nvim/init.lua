@@ -1,17 +1,17 @@
 -- Setup lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
-    local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-    local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
-    if vim.v.shell_error ~= 0 then
-        vim.api.nvim_echo({
-            { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-            { out, "WarningMsg" },
-            { "\nPress any key to exit..." },
-        }, true, {})
-        vim.fn.getchar()
-        os.exit(1)
-    end
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+  if vim.v.shell_error ~= 0 then
+    vim.api.nvim_echo({
+      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+      { out, "WarningMsg" },
+      { "\nPress any key to exit..." },
+    }, true, {})
+    vim.fn.getchar()
+    os.exit(1)
+  end
 end
 vim.opt.rtp:prepend(lazypath)
 
@@ -63,69 +63,69 @@ vim.cmd('set noswapfile')
 -- Open help window in a vertical split to the right.
 vim.api.nvim_create_augroup('HelpWin', { clear = true })
 vim.api.nvim_create_autocmd("BufWinEnter", {
-    group = 'HelpWin',
-    pattern = { "*.txt" },
-    callback = function()
-        if vim.o.filetype == 'help' then vim.cmd.wincmd("L") end
-    end
+  group = 'HelpWin',
+  pattern = { "*.txt" },
+  callback = function()
+    if vim.o.filetype == 'help' then vim.cmd.wincmd("L") end
+  end
 })
 
 -- Highlight when yanking text.
 -- Try it with `yap` in normal mode
 -- See: `:help.vim.highlihgt.on_yank()`
 vim.api.nvim_create_autocmd('TextYankPost', {
-    desc = 'Highlight when yanking text',
-    group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
-    callback = function()
-        vim.highlight.on_yank()
-    end,
+  desc = 'Highlight when yanking text',
+  group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
+  callback = function()
+    vim.highlight.on_yank()
+  end,
 })
 
 -- Rounded border around diagnostic float.
 vim.diagnostic.config({
-    virtual_text = true,
-    float = {
-        border = "rounded",
-        focusable = false,
-        scope = "line",
-    },
+  virtual_text = true,
+  float = {
+    border = "rounded",
+    focusable = false,
+    scope = "line",
+  },
 })
 
 local function get_var_from_file(file_path, default)
-    -- Reads value from `file_path`, returns `default` if file does not exist.
-    local file, _ = io.open(file_path, "r")
-    if not file then
-        -- Could not open file
-        return default
-    end
+  -- Reads value from `file_path`, returns `default` if file does not exist.
+  local file, _ = io.open(file_path, "r")
+  if not file then
+    -- Could not open file
+    return default
+  end
 
-    local content = file:read("*a")
+  local content = file:read("*a")
 
-    -- Remove trailing new lines
-    content = content:gsub("%s*$", "")
+  -- Remove trailing new lines
+  content = content:gsub("%s*$", "")
 
-    file:close()
-    return content
+  file:close()
+  return content
 end
 
 -- Setup lazy.nvim
 require("lazy").setup({
-    spec = {
-        -- import your plugins
-        { import = "plugins" },
-    },
-    -- Configure any other settings here. See the documentation for more details.
-    -- colorscheme that will be used when installing plugins.
-    install = {
-        colorscheme = { get_var_from_file(os.getenv("HOME") .. "/.config/nvim/.colorscheme", "habamax") }
-    },
-    checker = {
-        enabled = false, -- automatically check for plugin updates
-    },
-    change_detection = {
-        enabled = true, -- automatically check for config file changes and reload the ui
-        notify = false, -- get a notification when changes are found
-    },
+  spec = {
+    -- import your plugins
+    { import = "plugins" },
+  },
+  -- Configure any other settings here. See the documentation for more details.
+  -- colorscheme that will be used when installing plugins.
+  install = {
+    colorscheme = { get_var_from_file(os.getenv("HOME") .. "/.config/nvim/.colorscheme", "habamax") }
+  },
+  checker = {
+    enabled = false, -- automatically check for plugin updates
+  },
+  change_detection = {
+    enabled = true, -- automatically check for config file changes and reload the ui
+    notify = false, -- get a notification when changes are found
+  },
 })
 
 -- keymaps

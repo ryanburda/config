@@ -28,34 +28,34 @@ config.window_padding = { left = 0, right = 0, top = 20, bottom = 0 }
 -- BACKGROUND
 --
 -- the value in `background_file_path` can be one of the following:
---     - 'NONE': if no background image or color layer should be shown. (default background)
---     - 'TRANSPARENT': the current colorschemes background will be rendered semi transparent
---          to allow any windows under the terminal to show through.
---     - <Image path>: The leaf of the image path relative to `background_image_dir` that will be shown.
---          Similar to 'TRANSPARENT', the current colorschemes background will be rendered
---          semi transparent to allow the image to show through.
+--   - 'NONE': if no background image or color layer should be shown. (default background)
+--   - 'TRANSPARENT': the current colorschemes background will be rendered semi transparent
+--       to allow any windows under the terminal to show through.
+--   - <Image path>: The leaf of the image path relative to `background_image_dir` that will be shown.
+--       Similar to 'TRANSPARENT', the current colorschemes background will be rendered
+--       semi transparent to allow the image to show through.
 
 -- background image
 local current_background = helpers.get_var_from_file(background_file_path , "NONE")
 local background_image_path = nil
 
 if current_background ~= nil and current_background ~= "TRANSPARENT" and current_background ~= "NONE" then
-    background_image_path =  background_image_dir .. current_background
-    -- Try opening the file to see if it exists
-    local file = io.open(background_file_path, "r")
-    if not file then
-        current_background = "NONE"
-        background_image_path = nil
-    else
-        file:close()
-    end
+  background_image_path =  background_image_dir .. current_background
+  -- Try opening the file to see if it exists
+  local file = io.open(background_file_path, "r")
+  if not file then
+    current_background = "NONE"
+    background_image_path = nil
+  else
+    file:close()
+  end
 end
 
 -- background color
 local background_color = nil
 
 if current_background ~= "NONE" then
-    background_color = wezterm.get_builtin_color_schemes()[config.color_scheme].background
+  background_color = wezterm.get_builtin_color_schemes()[config.color_scheme].background
 end
 
 -- background opacity
@@ -63,40 +63,40 @@ local is_nvim_background_dark = (helpers.get_var_from_file(nvim_background_file_
 local opacity
 
 if is_nvim_background_dark then
-    opacity = 0.92
+  opacity = 0.92
 else
-    opacity = 0.87
+  opacity = 0.87
 end
 
 -- background config
 local background = {}
 
 if background_image_path ~= nil then
-    -- Lay the image down first.
-    table.insert(
-        background,
-        {
-            source = {
-                File = background_image_path
-            },
-        }
-    )
+  -- Lay the image down first.
+  table.insert(
+    background,
+    {
+      source = {
+        File = background_image_path
+      },
+    }
+  )
 end
 
 if background_color ~= nil then
-    -- Add the color layer on top.
-    table.insert(
-        background,
-        {
-            source = {
-                Color = background_color
-            },
-            opacity = opacity,
-            -- height and width needed due to https://github.com/wez/wezterm/issues/2817
-            height = '100%',
-            width = '100%',
-        }
-    )
+  -- Add the color layer on top.
+  table.insert(
+    background,
+    {
+      source = {
+        Color = background_color
+      },
+      opacity = opacity,
+      -- height and width needed due to https://github.com/wez/wezterm/issues/2817
+      height = '100%',
+      width = '100%',
+    }
+  )
 end
 
 config.background = background
