@@ -353,31 +353,49 @@ return {
         dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig", "folke/neodev.nvim", },
         config = require("config.mason-lspconfig").setup
     },
+    "williamboman/mason.nvim",
+
     {
-        "williamboman/mason.nvim",
-        dependencies = {
-            "hrsh7th/nvim-cmp",
+        'saghen/blink.cmp',
+        dependencies = 'rafamadriz/friendly-snippets',
+
+        version = 'v0.*',
+
+        opts = {
+            keymap = {
+                preset = 'default',
+                ['<C-l>'] = { 'select_and_accept' },
+                ['<C-u>'] = { 'scroll_documentation_up', 'fallback' },
+                ['<C-d>'] = { 'scroll_documentation_down', 'fallback' },
+            },
+            completion = {
+                menu = {
+                    border = "rounded",
+                    draw = {
+                        align_to_component = 'label',
+                    },
+                },
+                documentation = {
+                    auto_show = true,
+                    auto_show_delay_ms = 0,
+                    window = {
+                        border = "rounded",
+                    },
+                },
+            },
+
+            appearance = {
+                use_nvim_cmp_as_default = true,
+                nerd_font_variant = 'mono'
+            },
+
+            signature = {
+                enabled = true,
+                window = {
+                    border = 'rounded',
+                },
+            }
         },
-    },
-    {
-        'hrsh7th/nvim-cmp',
-        dependencies = {
-            'neovim/nvim-lspconfig',
-            'hrsh7th/cmp-nvim-lsp',
-            'hrsh7th/cmp-buffer',
-            'hrsh7th/cmp-path',
-            'hrsh7th/cmp-cmdline',
-            'L3MON4D3/LuaSnip',
-            'saadparwaiz1/cmp_luasnip',
-            'onsails/lspkind.nvim',
-        },
-        config = require('config.nvim-cmp').setup
-    },
-    {
-        'ray-x/lsp_signature.nvim',
-        config = function(_, _)
-            require'lsp_signature'.setup({})
-        end
     },
 
     -- Debug
