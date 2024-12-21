@@ -119,6 +119,9 @@ fi
 # rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
+# tpm
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
 # Symlink config files
 mkdir -p                                                      "${HOME}/Developer"
 ln -svfF "${SCRIPT_DIR}/dotfiles/obsidian.vimrc"              "${HOME}/Documents/notes/.obsidian.vimrc"
