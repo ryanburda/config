@@ -141,6 +141,7 @@ ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/font_picker"           "${HOME}/.zsh/func
 ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/dark_mode"             "${HOME}/.zsh/funcs/dark_mode"
 ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/psqlp"                 "${HOME}/.zsh/funcs/psqlp"
 ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/select_session"        "${HOME}/.zsh/funcs/select_session"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/select_active_session" "${HOME}/.zsh/funcs/select_active_session"
 ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/colorscheme_picker"    "${HOME}/.zsh/funcs/colorscheme_picker"
 ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/background_picker"     "${HOME}/.zsh/funcs/background_picker"
 mkdir -p                                                      "${XDG_CONFIG_HOME}/wezterm"

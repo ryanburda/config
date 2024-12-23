@@ -44,6 +44,7 @@ autoload -Uz font_picker
 autoload -Uz dark_mode
 autoload -Uz psqlp
 autoload -Uz select_session
+autoload -Uz select_active_session
 autoload -Uz colorscheme_picker
 autoload -Uz background_picker
 
