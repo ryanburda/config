@@ -6,9 +6,10 @@
 # SYNOPSIS
 #   select_active_session
 while true; do
-    # TODO: get rid of duplication between original call to fzf and reload().
+    # TODO: get rid of duplication between original call being piped to fzf and reload().
     SESSION=$(tmux ls | awk -F: '{print $1}' | sort -u | fzf --cycle \
-                                                             --bind 'ctrl-x:execute(tmux kill-session -t {})+clear-query+reload(tmux ls | awk -F: '\''{print $1}'\'' | sort -u)')
+                                                             --bind 'ctrl-x:execute(tmux kill-session -t {})+clear-query+reload(tmux ls | awk -F: '\''{print $1}'\'' | sort -u)' \
+                                                             --header 'ctrl-x: kill-session')
 
     if [[ -z $SESSION ]]; then
         break
