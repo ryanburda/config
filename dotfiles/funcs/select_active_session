@@ -14,7 +14,8 @@ while true; do
     SESSION=$(list_sessions | \
               fzf --cycle \
                   --bind "ctrl-x:execute(tmux kill-session -t {})+clear-query+reload($(declare -f list_sessions); list_sessions)" \
-                  --header 'ctrl-x: kill-session')
+                  --bind "tab:execute(tmux switch-client -l)+abort" \
+                  --header "ctrl-x: kill-session, tab: previous-session")
 
     if [[ -z $SESSION ]]; then
         break
