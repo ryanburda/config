@@ -52,14 +52,14 @@ function set_theme(){
     values=${themes[$theme_key]}
 
     if [[ ! -z $values ]]; then
-        a=$(print $values | awk -F, '{print $1}')
-        b=$(print $values | awk -F, '{print $2}')
-        c=$(print $values | awk -F, '{print $3}')
+        nvim_colorscheme=$(print $values | awk -F, '{print $1}')
+        nvim_background=$(print $values | awk -F, '{print $2}')
+        wezterm_colorscheme=$(print $values | awk -F, '{print $3}')
 
         # Write the values to files.
-        echo "$a" > $XDG_CONFIG_HOME/nvim/.colorscheme
-        echo "$b" > $XDG_CONFIG_HOME/nvim/.background
-        echo "$c" > $XDG_CONFIG_HOME/wezterm/.colorscheme
+        echo "$nvim_colorscheme" > $XDG_CONFIG_HOME/nvim/.colorscheme
+        echo "$nvim_background" > $XDG_CONFIG_HOME/nvim/.background
+        echo "$wezterm_colorscheme" > $XDG_CONFIG_HOME/wezterm/.colorscheme
 
         # This is used below to show a check mark next to the current theme when selecting via fzf
         echo "$theme_key" > $XDG_CONFIG_HOME/wezterm/.colorscheme_key
