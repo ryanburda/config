@@ -1,0 +1,40 @@
+#!/bin/zsh
+
+# NAME
+#   tmux_session_select - a tmux session switcher that uses a fuzzy finder.
+#
+# DESCRIPTION
+#   Use fzf to select from a list of active tmux sessions.
+#   Keybinds:
+#       - tab: previous-session
+#       - ctrl-x: kill-session
+#       - ctrl-s: switch to tmuxinator_session_select
+
+active_sessions() {
+    tmux ls 2> /dev/null | awk -F: '{print $1}' | sort -u
+}
+
+SESSION=$(active_sessions | \
+          fzf --cycle \
+              --bind "tab:execute(tmux switch-client -l)+abort" \
+              --bind "ctrl-x:execute(tmux kill-session -t {})+clear-query+reload($(declare -f active_sessions); active_sessions)" \
+              --bind "ctrl-s:become(echo 'TMUXINATOR')+abort" \
+              --header "tab: previous-session, ctrl-x: kill-session, ctrl-s: list tmuxinator sessions")
+
+if [[ "$SESSION" == "TMUXINATOR" ]]; then
+    # This script cannot be called inside a `--bind "<key>:become(<./script>)` because of the following error
+    # ```
+    # open terminal failed: can't use /dev/tty
+    # ```
+    # Therefore it is being called out here.
+    ~/.zsh/funcs/tmuxinator_session_select
+    return 0
+fi
+
+if [[ ! -z $SESSION ]]; then
+    if [[ -z $TMUX ]]; then
+        # Attach to tmux if currently detached.
+        tmux attach
+    fi
+    tmux switch-client -t $SESSION
+fi

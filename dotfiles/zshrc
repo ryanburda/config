@@ -43,8 +43,8 @@ autoload -Uz lazygit_config
 autoload -Uz font_picker
 autoload -Uz dark_mode
 autoload -Uz psqlp
-autoload -Uz select_session
-autoload -Uz select_active_session
+autoload -Uz tmux_session_select
+autoload -Uz tmuxinator_session_select
 autoload -Uz colorscheme_picker
 autoload -Uz background_picker
 
@@ -55,7 +55,7 @@ bindkey '^[[B' history-search-forward
 # Alias
 alias l="lsd -lah"
 alias a="aichat"
-alias s="select_session"
+alias s="tmux_session_select"
 alias d="lazydocker"
 alias g="lazygit"
 alias t="btm"

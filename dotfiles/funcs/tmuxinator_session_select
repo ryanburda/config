@@ -1,0 +1,32 @@
+#!/bin/zsh
+
+# NAME
+#   tmuxinator_session_select - lists tmuxinator sessions in a fuzzy finder.
+#
+# DESCRIPTION
+#   Use fzf to select from a list of tmuxinator sessions.
+#   Keybinds:
+#       - ctrl-s: switch to tmux_session_select
+
+tmuxinator_sessions() {
+    ls -l ~/.config/tmuxinator/ | awk 'NR > 1 {print $9}' | awk -F. '{print $1}'
+}
+
+SESSION=$(tmuxinator_sessions | \
+          fzf --cycle \
+              --bind "ctrl-s:become(echo 'TMUX')+abort" \
+              --header "ctrl-s: list active tmux sessions")
+
+if [[ "$SESSION" == "TMUX" ]]; then
+    # This script cannot be called inside a `--bind "<key>:become(<./script>)` because of the following error
+    # ```
+    # open terminal failed: can't use /dev/tty
+    # ```
+    # Therefore it is being called out here.
+    ~/.zsh/funcs/tmux_session_select
+    return 0
+fi
+
+if [[ ! -z $SESSION ]]; then
+    tmuxinator start $SESSION
+fi
