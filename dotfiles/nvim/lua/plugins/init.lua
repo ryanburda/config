@@ -380,9 +380,6 @@ return {
       completion = {
         menu = {
           border = "rounded",
-          draw = {
-            align_to_component = 'label',
-          },
         },
         documentation = {
           auto_show = true,
