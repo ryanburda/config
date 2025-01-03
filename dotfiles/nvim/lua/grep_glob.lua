@@ -7,7 +7,7 @@ local M = {}
 
 M.grep_glob = function(opts)
   opts = opts or {}
-  opts.cwd = opts.cwd or vim.uv.cwd()
+  opts.cwd = opts.search_dir or opts.cwd or vim.uv.cwd()
 
   local finder = finders.new_async_job {
     command_generator = function(prompt)

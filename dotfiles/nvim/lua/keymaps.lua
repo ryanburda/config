@@ -669,6 +669,13 @@ vim.keymap.set(
 
 vim.keymap.set(
   'n',
+  '<leader>ss',
+  function() require('grep_glob').grep_glob({search_dir = "~/Developer/snippets/"}) end,
+  { desc = 'Find: grep with optional glob filter following double space delimiter. ie `autocmd **/config/**.lua`' }
+)
+
+vim.keymap.set(
+  'n',
   '<leader>f/',
   function() require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown{ winblend = 10, previewer = false, }) end,
   { desc = 'Find: current buffer fuzzy find in Telescope' }
