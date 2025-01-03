@@ -9,6 +9,8 @@ M.grep_glob = function(opts)
   opts = opts or {}
   opts.cwd = opts.search_dir or opts.cwd or vim.uv.cwd()
 
+  local prompt_title = opts.prompt_title or "Grep Glob"
+
   local finder = finders.new_async_job {
     command_generator = function(prompt)
       if not prompt or prompt == "" then
@@ -39,7 +41,7 @@ M.grep_glob = function(opts)
 
   pickers.new(opts, {
     debounce = 100,
-    prompt_title = "Grep Glob",
+    prompt_title = prompt_title,
     finder = finder,
     previewer = conf.grep_previewer(opts),
     sorter = require("telescope.sorters").empty(),

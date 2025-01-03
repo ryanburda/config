@@ -669,8 +669,8 @@ vim.keymap.set(
 
 vim.keymap.set(
   'n',
-  '<leader>ss',
-  function() require('grep_glob').grep_glob({search_dir = "~/Developer/snippets/"}) end,
+  '<leader>fs',
+  function() require('grep_glob').grep_glob({search_dir = "~/Developer/snippets/", prompt_title = "Grep Glob Snippets"}) end,
   { desc = 'Find: grep with optional glob filter following double space delimiter. ie `autocmd **/config/**.lua`' }
 )
 
@@ -735,7 +735,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     vim.keymap.set(
       'n',
-      '<leader>fs',
+      '<leader>fS',
       require('telescope.builtin').lsp_document_symbols,
       {desc = 'Find: symbols in current document', buffer = event.buf}
     )
