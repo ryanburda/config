@@ -169,4 +169,15 @@ if [[ $OSTYPE == darwin* ]]; then
 fi
 
 # Generate SSH keys
-./dotfiles/scripts/ssh_keygen.sh
+while true; do
+    read -r "yn?Do you want to generate a new ssh key? (y/n): "
+
+    if [[ $yn == "y" ]]; then
+        ./dotfiles/scripts/ssh_keygen.sh
+        break
+    elif [[ $yn == "n" ]]; then
+        break
+    else
+        echo "Invalid response. Please enter 'y' or 'n'."
+    fi
+done
