@@ -30,6 +30,7 @@ typeset -A themes=(
     ['Dark - Nightfox-night']="nightfox,dark,nightfox"
     ['Dark - Nightfox-tera']="terafox,dark,terafox"
     ['Dark - Nord']="nordfox,dark,nord"
+    ['Dark - Nordic']="nordic,dark,Nudge (terminal.sexy)"
     ['Dark - Sonokai']="sonokai,dark,Monokai Pro (Gogh)"
     ['Dark - VSCode']="vscode,dark,Vs Code Dark+ (Gogh)"
     ['Dark - ZenBones-forest']="forestbones,dark,Everforest Dark (Gogh)"

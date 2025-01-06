@@ -36,6 +36,7 @@ return {
       "slugbyte/lackluster.nvim",
       "sainnhe/sonokai",
       "polirritmico/monokai-nightasty.nvim",
+      "AlexvZyl/nordic.nvim",
       {
         "yorik1984/newpaper.nvim",
         config = true,
