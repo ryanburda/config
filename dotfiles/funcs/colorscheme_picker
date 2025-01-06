@@ -21,6 +21,7 @@ typeset -A themes=(
     ['Dark - Bamboo']="bamboo,dark,Bamboo"
     ['Dark - Catppuccin']="catppuccin-mocha,dark,Catppuccin Mocha"
     ['Dark - Everforest']="everforest,dark,Everforest Dark (Gogh)"
+    ['Dark - Evergarden']="evergarden,dark,Andromeda"
     ['Dark - Gruvbox']="gruvbox-material,dark,Gruvbox Material (Gogh)"
     ['Dark - Kanagawa-paper']="kanagawa-paper,dark,Kanagawa (Gogh)"
     ['Dark - Kanagawa-wave']="kanagawa-wave,dark,Kanagawa (Gogh)"
