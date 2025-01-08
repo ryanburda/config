@@ -54,6 +54,7 @@ if [[ $OSTYPE == darwin* ]]; then
     brew install k9s
     brew install kubectl
     brew install kubectx
+    brew install kubetui
     brew install lazydocker
     brew install lazygit
     brew install libpq
