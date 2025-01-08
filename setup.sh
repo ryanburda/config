@@ -72,8 +72,8 @@ if [[ $OSTYPE == darwin* ]]; then
     brew install ripgrep
     brew install rlwrap
     brew install sk
-    brew install tmate
     brew install tmux
+    brew install owenthereal/upterm/upterm
     brew install tmuxinator
     brew install ttyrec
     brew install wget
