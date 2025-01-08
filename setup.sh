@@ -73,6 +73,7 @@ if [[ $OSTYPE == darwin* ]]; then
     brew install rlwrap
     brew install sk
     brew install tmux
+    # See https://github.com/owenthereal/upterm/issues/135 if you are having issues with `upterm host`
     brew install owenthereal/upterm/upterm
     brew install tmuxinator
     brew install ttyrec
