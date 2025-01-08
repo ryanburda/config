@@ -36,6 +36,7 @@ if [[ $OSTYPE == darwin* ]]; then
     brew install bat
     brew install bottom
     brew install cmake
+    brew install cloud-sql-proxy
     brew install composer
     brew install coreutils
     brew install curl
