@@ -147,6 +147,7 @@ ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/tmux_session_select"       "${HOME}/.zsh/
 ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/tmuxinator_session_select" "${HOME}/.zsh/funcs/tmuxinator_session_select"
 ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/colorscheme_picker"        "${HOME}/.zsh/funcs/colorscheme_picker"
 ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/background_picker"         "${HOME}/.zsh/funcs/background_picker"
+ln -svfF "${SCRIPT_DIR}/dotfiles/funcs/find_file"                 "${HOME}/.zsh/funcs/find_file"
 mkdir -p                                                          "${XDG_CONFIG_HOME}/wezterm"
 ln -svfF "${SCRIPT_DIR}/dotfiles/wezterm/wezterm.lua"             "${XDG_CONFIG_HOME}/wezterm/wezterm.lua"
 ln -svfF "${SCRIPT_DIR}/dotfiles/wezterm/helpers.lua"             "${XDG_CONFIG_HOME}/wezterm/helpers.lua"
