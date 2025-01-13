@@ -5,6 +5,7 @@ wrap: no
 wrap_code: false
 keybindings: vi
 save_session: false
+save_shell_history: true
 left_prompt: 'intern $ '
 clients:
 - type: openai
