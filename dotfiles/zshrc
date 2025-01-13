@@ -63,6 +63,7 @@ alias l="lsd -lah"
 alias s="tmux_session_select"
 alias ff="find_file"
 alias cal="cal -A 1 -B 1"
+alias ai="aichat -s"
 
 # Raise max files and max procs
 ulimit -n 200000
@@ -105,6 +106,7 @@ export FZF_CTRL_R_OPTS="
   --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
   --color header:italic
   --header 'Press CTRL-Y to copy command into clipboard'"
+export FZF_ALT_C_COMMAND='fd -t d . ~'
 export FZF_HISTORY_DIR=1
 
 # zsh-vi-mode will overwrite keybindings unless they are added to `zvm_after_init_commands`.
@@ -112,7 +114,7 @@ export FZF_HISTORY_DIR=1
 zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
 
 function zvm_after_init() {
-  bindkey '^e' edit-command-line
+  bindkey '^o' edit-command-line
   bindkey '^f' fzf-file-widget
 }
 

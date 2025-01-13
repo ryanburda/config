@@ -4,6 +4,8 @@ light_theme: ${AICHAT_LIGHT_THEME}
 wrap: no
 wrap_code: false
 keybindings: vi
+save_session: false
+left_prompt: 'intern $ '
 clients:
 - type: openai
   api_key: ${OPENAI_API_KEY}
