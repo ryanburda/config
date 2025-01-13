@@ -6,7 +6,7 @@ wrap_code: false
 keybindings: vi
 save_session: false
 save_shell_history: true
-left_prompt: 'intern $ '
+left_prompt: '🤖> '
 clients:
 - type: openai
   api_key: ${OPENAI_API_KEY}
