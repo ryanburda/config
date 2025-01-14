@@ -4,6 +4,7 @@ light_theme: ${AICHAT_LIGHT_THEME}
 wrap: no
 wrap_code: false
 keybindings: vi
+editor: ${EDITOR}
 save_session: false
 save_shell_history: true
 left_prompt: '🤖 󰅂 '
