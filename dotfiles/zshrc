@@ -10,10 +10,12 @@ PROMPT="%F{blue%}[%D{%H:%M:%S}] %B%F{cyan}%~"$'\n'"%F{yellow}> %b"
 # Speed up zsh compinit by only checking cache once a day.
 # https://gist.github.com/ctechols/ca1035271ad134841284#gistcomment-2308206
 autoload -Uz compinit
-for dump in ~/.zcompdump(N.mh+24); do
-  compinit
-done
-compinit -C
+if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
+  compinit;
+else
+  compinit -C;
+fi;
+
 # Case insensitive completion
 zstyle ':completion:*' menu-select
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
@@ -117,9 +119,9 @@ function zvm_after_init() {
 }
 
 # python
-path+=$HOME/.pyenv/bin
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+# path+=$HOME/.pyenv/bin
+# eval "$(pyenv init -)"
+# eval "$(pyenv virtualenv-init -)"
 
 # ChatGPT
 OPENAI_API_KEY_FILE=$HOME/.openai_api_key
