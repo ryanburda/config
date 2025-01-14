@@ -1,4 +1,5 @@
 #!/bin/zsh
+
 # Uncomment to profile zsh startup.
 # NOTE: must also uncomment last line.
 # zmodload zsh/zprof
@@ -34,15 +35,6 @@ autoload -Uz compinit && compinit
 
 zinit cdreplay -q
 
-# Keybindings
-bindkey -e
-bindkey '^p' history-search-backward
-bindkey '^n' history-search-forward
-# same but arrow keys
-bindkey '^[[A' history-search-backward
-bindkey '^[[B' history-search-forward
-bindkey '^[w' kill-region
-
 # History
 HISTSIZE=10000
 HISTFILE=~/.zsh_history
@@ -67,10 +59,6 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 export EDITOR='nvim'
 export MANPAGER='nvim +Man!'
 
-# Edit line in nvim with ctrl-e
-autoload edit-command-line
-zle -N edit-command-line
-
 # Add to PATH
 fpath=(
   ~/.zsh/funcs
@@ -88,31 +76,26 @@ autoload -Uz colorscheme_picker
 autoload -Uz background_picker
 autoload -Uz find_file
 
-# Alias
-alias l="lsd -lah"
-alias s="tmux_session_select"
-alias cal="cal -A 1 -B 1"
-alias ai="aichat -s"
-
 # Raise max files and max procs
 ulimit -n 200000
 ulimit -u 2048
 
-# fzf
-export FZF_DEFAULT_OPTS="
-  --history=$HOME/.fzf_history_dir
-  --bind=ctrl-n:down
-  --bind=ctrl-p:up
-  --bind=ctrl-d:preview-half-page-down
-  --bind=ctrl-u:preview-half-page-up
-  --bind=ctrl-i:previous-history
-  --bind=ctrl-o:next-history
-  --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
-  $FZF_DEFAULT_OPTS"
+# zsh-vi-mode will overwrite keybindings unless they are added to `zvm_after_init_commands`.
+# https://github.com/jeffreytse/zsh-vi-mode?tab=readme-ov-file#execute-extra-commands
+zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
+
+function zvm_after_init() {
+  bindkey '^p' history-search-backward
+  bindkey '^n' history-search-forward
+
+  autoload edit-command-line
+  zle -N edit-command-line
+  bindkey '^o' edit-command-line
+}
+
+# FZF
 export FZF_CTRL_T_OPTS="
   --preview 'bat -n --color=always {}' \
-  --bind=ctrl-n:down
-  --bind=ctrl-p:up
   --bind=ctrl-d:preview-half-page-down
   --bind=ctrl-u:preview-half-page-up
   --bind=ctrl-i:previous-history
@@ -121,28 +104,14 @@ export FZF_CTRL_T_OPTS="
   --color header:italic
   --header 'Press CTRL-Y to copy path into clipboard'"
 export FZF_CTRL_R_OPTS="
-  --preview 'echo {}'
-  --preview-window up:3:hidden:wrap
-  --bind=ctrl-n:down
-  --bind=ctrl-p:up
   --bind=ctrl-i:previous-history
   --bind=ctrl-o:next-history
   --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
   --color header:italic
   --header 'Press CTRL-Y to copy command into clipboard'"
-export FZF_ALT_C_COMMAND='fd -t d . ~'
 export FZF_HISTORY_DIR=1
 
-# zsh-vi-mode will overwrite keybindings unless they are added to `zvm_after_init_commands`.
-# https://github.com/jeffreytse/zsh-vi-mode?tab=readme-ov-file#execute-extra-commands
-zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
-
-function zvm_after_init() {
-  # edit command in nvim
-  bindkey '^o' edit-command-line
-}
-
-# python
+# Python
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 # https://github.com/pyenv/pyenv-virtualenv/issues/259
@@ -159,6 +128,12 @@ fi
 
 # Rancher
 export PATH="$HOME/.rd/bin:$PATH"
+
+# Alias
+alias l="lsd -lah"
+alias s="tmux_session_select"
+alias cal="cal -A 1 -B 1"
+alias ai="aichat -s"
 
 # Uncomment to profile zsh startup.
 # NOTE: must also uncomment first line.
