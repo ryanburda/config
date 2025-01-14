@@ -27,11 +27,9 @@ export HISTTIMEFORMAT="[%F %T] "
 export XDG_CONFIG_HOME=$HOME/.config
 
 # Set default editor and pager
-if [[ "$(command -v nvim)" ]]; then
-  export EDITOR='nvim'
-  export MANPAGER='nvim +Man!'
-  export MANWIDTH=999
-fi
+export EDITOR='nvim'
+export MANPAGER='nvim +Man!'
+export MANWIDTH=999
 
 # Edit line in nvim with ctrl-e
 autoload edit-command-line
