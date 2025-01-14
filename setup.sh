@@ -80,9 +80,6 @@ if [[ $OSTYPE == darwin* ]]; then
     brew install tmuxinator
     brew install ttyrec
     brew install wget
-    brew install zsh-autosuggestions
-    brew install zsh-syntax-highlighting
-    brew install zsh-vi-mode
 
     # Fonts
     # brew install --cask font-<FONT NAME>-nerd-font
