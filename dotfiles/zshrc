@@ -5,7 +5,7 @@
 
 export PATH="/usr/local/sbin:$PATH"
 
-PROMPT="%F{blue%}[%D{%H:%M:%S}] %B%F{cyan}%~"$'\n'"%F{yellow}> %b"
+PROMPT="%F{blue%}[%D{%H:%M:%S}] %B%F{cyan}%~"$'\n'"%F{yellow}󰅂 %b"
 
 # Speed up zsh compinit by only checking cache once a day.
 # https://gist.github.com/ctechols/ca1035271ad134841284#gistcomment-2308206
@@ -119,8 +119,11 @@ function zvm_after_init() {
 }
 
 # python
-# path+=$HOME/.pyenv/bin
-# eval "$(pyenv init -)"
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+path+=$HOME/.pyenv/bin
+# https://github.com/pyenv/pyenv-virtualenv/issues/259
+# eval "$(pyenv init - zsh)"
 # eval "$(pyenv virtualenv-init -)"
 
 # ChatGPT
