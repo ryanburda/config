@@ -3,12 +3,14 @@
 Terminal configuration and dotfiles.
 
 ```
-mkdir ~/Developer
-cd ~/Developer
+# Clone in home directory
 git clone https://github.com/ryanburda/config.git
 cd config
 ./setup.sh
 
-# Optional: Setup all other repos
+# Setup all other repos
 ./setup_repos.sh
+
+# File management
+stow dotfiles
 ```
