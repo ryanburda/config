@@ -17,4 +17,4 @@ if [ ! -f $FILE_PATH ]; then
     touch $FILE_PATH
 fi
 
-envsubst < "${XDG_CONFIG_HOME}/aichat/aichat_config.yaml.template" > $FILE_PATH
+envsubst < "${XDG_CONFIG_HOME}/aichat/config.yaml.template" > $FILE_PATH
