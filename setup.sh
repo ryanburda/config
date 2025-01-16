@@ -1,13 +1,5 @@
 #!/bin/zsh
 
-# Command Line Tools
-which -s xcode-select
-if [[ $? != 0 ]] ; then
-    xcode-select --install
-else
-    echo "Command Line Tools already installed"
-fi
-
 # Install Homebrew
 which -s brew
 if [[ $? != 0 ]] ; then
