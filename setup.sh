@@ -9,24 +9,23 @@ else
 fi
 
 brew install aichat
-brew install automake
+brew install automake #n
 brew install bat
 brew install bottom
-brew install cmake
+brew install cmake #n
 brew install cloud-sql-proxy
-brew install composer
+brew install composer #n
 brew install coreutils
 brew install curl
-brew install deno
+brew install deno #n
 brew install fd
 brew install fzf
-$(brew --prefix)/opt/fzf/install
+$(brew --prefix)/opt/fzf/install #n
 brew install fzy
-brew install gettext
+brew install gettext #n
 brew install gh
 brew install git-delta
 brew install go
-brew install htop
 brew install jq
 brew install k9s
 brew install kubectl
@@ -34,28 +33,26 @@ brew install kubectx
 brew install kubetui
 brew install lazydocker
 brew install lazygit
-brew install libpq
-brew link --force libpq
-brew install libtool
+brew install libpq #n
+brew link --force libpq #n
+brew install libtool #n
 brew install lsd
 brew install lua
 brew install neovim
-brew install ninja
-brew install node
+brew install ninja #n
+brew install node #n
 brew install octave
 brew install owenthereal/upterm/upterm  # See https://github.com/owenthereal/upterm/issues/135 if you are having issues with `upterm host`
-brew install php
-brew install pkg-config
+brew install php #n
+brew install pkg-config #n
 brew install pspg
 brew install pyenv
 brew install pyenv-virtualenv
 brew install ripgrep
 brew install rlwrap
-brew install sk
 brew install stow
 brew install tmux
 brew install tmuxinator
-brew install ttyrec
 brew install wget
 # Fonts
 brew install --cask font-caskaydia-mono-nerd-font
