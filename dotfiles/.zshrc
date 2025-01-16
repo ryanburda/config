@@ -66,17 +66,15 @@ fpath=(
   ~/.zsh/funcs
   "${fpath[@]}"
 )
-autoload -Uz aichat_config
-autoload -Uz git_config
-autoload -Uz lazygit_config
-autoload -Uz font_picker
 autoload -Uz dark_mode
 autoload -Uz psqlp
 autoload -Uz tmux_session_select
 autoload -Uz tmuxinator_session_select
-autoload -Uz colorscheme_picker
-autoload -Uz background_picker
 autoload -Uz find_file
+
+for file in ~/.zsh/funcs/**.sh; do
+    [ -r "$file" ] && source "$file"
+done
 
 # Raise max files and max procs
 ulimit -n 200000
