@@ -95,7 +95,7 @@ brew install --cask topnotch
 brew install --cask wezterm@nightly
 
 # Symlink config files
-stow dotfiles --target="${HOME}"
+stow dotfiles
 
 # tmux-plugin-manager
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
