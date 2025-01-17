@@ -17,9 +17,9 @@ active_sessions() {
 SESSION=$(active_sessions | \
           fzf --cycle \
               --bind "tab:execute(tmux switch-client -l)+abort" \
-              --bind "ctrl-x:execute(tmux kill-session -t {})+clear-query+reload($(declare -f active_sessions); active_sessions)" \
-              --bind "ctrl-s:become(echo 'TMUXINATOR')+abort" \
-              --header $'tab:    previous session\nctrl-x: kill session\nctrl-s: list tmuxinator sessions')
+              --bind "ctrl-k:execute(tmux kill-session -t {})+clear-query+reload($(declare -f active_sessions); active_sessions)" \
+              --bind "ctrl-l:become(echo 'TMUXINATOR')+abort" \
+              --header $'tab:    previous session\nctrl-k: kill session\nctrl-l: list tmuxinator sessions')
 
 if [[ "$SESSION" == "TMUXINATOR" ]]; then
     # This script cannot be called inside a `--bind "<key>:become(<./script>)` because of the following error

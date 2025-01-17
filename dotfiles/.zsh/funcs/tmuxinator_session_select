@@ -14,8 +14,8 @@ tmuxinator_sessions() {
 
 SESSION=$(tmuxinator_sessions | \
           fzf --cycle \
-              --bind "ctrl-s:become(echo 'TMUX')+abort" \
-              --header "ctrl-s: list active tmux sessions")
+              --bind "ctrl-l:become(echo 'TMUX')+abort" \
+              --header "ctrl-l: list active tmux sessions")
 
 if [[ "$SESSION" == "TMUX" ]]; then
     # This script cannot be called inside a `--bind "<key>:become(<./script>)` because of the following error
