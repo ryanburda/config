@@ -38,7 +38,10 @@ nmap <Space>dn :dailyprev
 exmap deletefile obcommand app:delete-file
 nmap <Space>df :deletefile
 
-" Up/Down one display line. Helpful when text wraps.
+" Helpful when text wraps.
+" Up/Down one display line.
 nnoremap k gk
 nnoremap j gj
+" Beginning/End of display line.
 nnoremap 0 g0
+nnoremap $ g$
