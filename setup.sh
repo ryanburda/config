@@ -93,6 +93,14 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 # TODO: automate adding this.
 touch "${HOME}/.openai_api_key"
 
+# If config repo is in normal location then this is `SCRIPT_DIR=$HOME/Developer/config`
+# The following can be used when testing manually:  `SCRIPT_DIR=$(pwd)`
+SCRIPT_DIR=${0:a:h}
+# karabiner.json needs to be copied.
+# https://karabiner-elements.pqrs.org/docs/manual/misc/configuration-file-path/
+mkdir -p "${HOME}/.config/karabiner"
+cp "${SCRIPT_DIR}/dotfiles/.config/karabiner.json" "${HOME}/.config/karabiner/karabiner.json"
+
 # MacOS specific settings
 ./scripts/macos.sh
 
