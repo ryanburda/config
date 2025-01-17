@@ -41,3 +41,4 @@ nmap <Space>df :deletefile
 " Up/Down one display line. Helpful when text wraps.
 nnoremap k gk
 nnoremap j gj
+nnoremap 0 g0
