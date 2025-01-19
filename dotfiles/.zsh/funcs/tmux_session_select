@@ -14,31 +14,36 @@ tmuxinator_sessions() {
     ls -l ~/.config/tmuxinator/ | awk 'NR > 1 {print $9}' | awk -F. '{print $1}'
 }
 
+# Show tmuxinator sessions if there are no active sessions.
 tmux ls >/dev/null 2>&1
 if [ $? -eq 0 ]; then
-    SESSION_TYPE="TMUX"
+    SESSION_TYPE="_TMUX"
 else
-    SESSION_TYPE="TMUXINATOR"
+    SESSION_TYPE="_TMUXINATOR"
 fi
 
 while true; do
 
     CURRENT_SESSION_TYPE=$SESSION_TYPE
 
-    if [[ "$SESSION_TYPE" == "TMUX" ]]; then
+    if [[ "$SESSION_TYPE" == "_TMUX" ]]; then
         SESSION=$(tmux_sessions | \
                   fzf --cycle \
                       --bind "tab:execute(tmux switch-client -l)+abort" \
+                      --bind "ctrl-s:become(echo '_TMUX_NEW')+abort" \
+                      --bind "ctrl-l:become(echo '_TMUXINATOR')+abort" \
                       --bind "ctrl-k:execute(tmux kill-session -t {})+clear-query+reload($(declare -f tmux_sessions); tmux_sessions)" \
-                      --bind "ctrl-l:become(echo 'TMUXINATOR')+abort" \
-                      --header $'tab:    previous session\nctrl-k: kill session\nctrl-l: list tmuxinator sessions')
+                      --header $'tab:    previous session\nctrl-s: new session\nctrl-k: kill session\nctrl-l: list tmuxinator sessions')
 
-        if [[ "$SESSION" == "TMUXINATOR" ]]; then
-            SESSION_TYPE="TMUXINATOR"
+        if [[ "$SESSION" == "_TMUXINATOR" ]]; then
+            SESSION_TYPE="_TMUXINATOR"
             continue
-        fi
-
-        if [[ ! -z $SESSION ]]; then
+        elif [[ "$SESSION" == "_TMUX_NEW" ]]; then
+            read -r "s?Enter new session name: "
+            tmux new-session -d -s $s
+            tmux switch-client -t $s
+            exit
+        elif [[ ! -z $SESSION ]]; then
             if [[ -z $TMUX ]]; then
                 # Attach to tmux if currently detached.
                 tmux attach
@@ -46,18 +51,16 @@ while true; do
             tmux switch-client -t $SESSION
             break
         fi
-    elif [[ "$SESSION_TYPE" == "TMUXINATOR" ]]; then
+    elif [[ "$SESSION_TYPE" == "_TMUXINATOR" ]]; then
         SESSION=$(tmuxinator_sessions | \
                   fzf --cycle \
-                      --bind "ctrl-l:become(echo 'TMUX')+abort" \
+                      --bind "ctrl-l:become(echo '_TMUX')+abort" \
                       --header "ctrl-l: list active tmux sessions")
 
-        if [[ "$SESSION" == "TMUX" ]]; then
-            SESSION_TYPE="TMUX"
+        if [[ "$SESSION" == "_TMUX" ]]; then
+            SESSION_TYPE="_TMUX"
             continue
-        fi
-
-        if [[ ! -z $SESSION ]]; then
+        elif [[ ! -z $SESSION ]]; then
             tmuxinator start $SESSION
             break
         fi
