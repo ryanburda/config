@@ -1,40 +1,71 @@
 #!/bin/zsh
 
 # NAME
-#   tmux_session_select - a tmux session switcher that uses a fuzzy finder.
+#   tmux_session_select - a tmux session switcher.
 #
 # DESCRIPTION
-#   Use fzf to select from a list of active tmux sessions.
-#   Keybinds:
-#       - tab: previous-session
-#       - ctrl-x: kill-session
-#       - ctrl-s: switch to tmuxinator_session_select
+#   Use fzf to select from a list of active tmux sessions. Can also start tmuxinator sessions.
 
-active_sessions() {
+tmux_sessions() {
     tmux ls 2> /dev/null | awk -F: '{print $1}' | sort -u
 }
 
-SESSION=$(active_sessions | \
-          fzf --cycle \
-              --bind "tab:execute(tmux switch-client -l)+abort" \
-              --bind "ctrl-k:execute(tmux kill-session -t {})+clear-query+reload($(declare -f active_sessions); active_sessions)" \
-              --bind "ctrl-l:become(echo 'TMUXINATOR')+abort" \
-              --header $'tab:    previous session\nctrl-k: kill session\nctrl-l: list tmuxinator sessions')
+tmuxinator_sessions() {
+    ls -l ~/.config/tmuxinator/ | awk 'NR > 1 {print $9}' | awk -F. '{print $1}'
+}
 
-if [[ "$SESSION" == "TMUXINATOR" ]]; then
-    # This script cannot be called inside a `--bind "<key>:become(<./script>)` because of the following error
-    # ```
-    # open terminal failed: can't use /dev/tty
-    # ```
-    # Therefore it is being called out here.
-    ~/.zsh/funcs/tmuxinator_session_select
-    return 0
+tmux ls >/dev/null 2>&1
+if [ $? -eq 0 ]; then
+    SESSION_TYPE="TMUX"
+else
+    SESSION_TYPE="TMUXINATOR"
 fi
 
-if [[ ! -z $SESSION ]]; then
-    if [[ -z $TMUX ]]; then
-        # Attach to tmux if currently detached.
-        tmux attach
+while true; do
+
+    CURRENT_SESSION_TYPE=$SESSION_TYPE
+
+    if [[ "$SESSION_TYPE" == "TMUX" ]]; then
+        SESSION=$(tmux_sessions | \
+                  fzf --cycle \
+                      --bind "tab:execute(tmux switch-client -l)+abort" \
+                      --bind "ctrl-k:execute(tmux kill-session -t {})+clear-query+reload($(declare -f tmux_sessions); tmux_sessions)" \
+                      --bind "ctrl-l:become(echo 'TMUXINATOR')+abort" \
+                      --header $'tab:    previous session\nctrl-k: kill session\nctrl-l: list tmuxinator sessions')
+
+        if [[ "$SESSION" == "TMUXINATOR" ]]; then
+            SESSION_TYPE="TMUXINATOR"
+            continue
+        fi
+
+        if [[ ! -z $SESSION ]]; then
+            if [[ -z $TMUX ]]; then
+                # Attach to tmux if currently detached.
+                tmux attach
+            fi
+            tmux switch-client -t $SESSION
+            break
+        fi
+    elif [[ "$SESSION_TYPE" == "TMUXINATOR" ]]; then
+        SESSION=$(tmuxinator_sessions | \
+                  fzf --cycle \
+                      --bind "ctrl-l:become(echo 'TMUX')+abort" \
+                      --header "ctrl-l: list active tmux sessions")
+
+        if [[ "$SESSION" == "TMUX" ]]; then
+            SESSION_TYPE="TMUX"
+            continue
+        fi
+
+        if [[ ! -z $SESSION ]]; then
+            tmuxinator start $SESSION
+            break
+        fi
     fi
-    tmux switch-client -t $SESSION
-fi
+
+    # Exit the loop if the session type has not changed.
+    if [[ $SESSION_TYPE = $CURRENT_SESSION_TYPE ]]; then
+        break
+    fi
+
+done
