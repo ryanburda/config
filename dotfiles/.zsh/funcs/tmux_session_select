@@ -14,6 +14,12 @@ tmuxinator_sessions() {
     ls -l ~/.config/tmuxinator/ | awk 'NR > 1 {print $9}' | awk -F. '{print $1}'
 }
 
+create_new_tmux_session() {
+    read -r "s?Enter new session name: "
+    tmux new-session -d -s $s
+    tmux switch-client -t $s
+}
+
 # Show tmuxinator sessions if there are no active sessions.
 tmux ls >/dev/null 2>&1
 if [ $? -eq 0 ]; then
@@ -39,9 +45,7 @@ while true; do
             SESSION_TYPE="_TMUXINATOR"
             continue
         elif [[ "$SESSION" == "_TMUX_NEW" ]]; then
-            read -r "s?Enter new session name: "
-            tmux new-session -d -s $s
-            tmux switch-client -t $s
+            create_new_tmux_session
             exit
         elif [[ ! -z $SESSION ]]; then
             if [[ -z $TMUX ]]; then
@@ -54,12 +58,16 @@ while true; do
     elif [[ "$SESSION_TYPE" == "_TMUXINATOR" ]]; then
         SESSION=$(tmuxinator_sessions | \
                   fzf --cycle \
+                      --bind "ctrl-s:become(echo '_TMUX_NEW')+abort" \
                       --bind "ctrl-l:become(echo '_TMUX')+abort" \
-                      --header "ctrl-l: list active tmux sessions")
+                      --header $'ctrl-s: new session\nctrl-l: list active tmux sessions')
 
         if [[ "$SESSION" == "_TMUX" ]]; then
             SESSION_TYPE="_TMUX"
             continue
+        elif [[ "$SESSION" == "_TMUX_NEW" ]]; then
+            create_new_tmux_session
+            exit
         elif [[ ! -z $SESSION ]]; then
             tmuxinator start $SESSION
             break
