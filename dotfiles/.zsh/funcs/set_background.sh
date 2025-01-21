@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+BACKGROUND_FILE_PATH=$XDG_CONFIG_HOME/wezterm/.background
+
 set_background() {
     # NAME
     #   set_background
@@ -23,8 +25,6 @@ set_background() {
     selection=$(print $backgrounds | sort | fzf --cycle)
 
     if [[ -n "${selection}" ]]; then
-        BACKGROUND_FILE_PATH=$XDG_CONFIG_HOME/wezterm/.background
-
         if [[ ! -z $selection ]]; then
             # Persist the selection to a file.
             echo $selection > $BACKGROUND_FILE_PATH
