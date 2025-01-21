@@ -22,7 +22,7 @@ set_background() {
     backgrounds=$(\ls ${XDG_CONFIG_HOME}/wezterm/backgrounds)
     backgrounds+=("\nTRANSPARENT")
     backgrounds+=("\nNONE")
-    selection=$(print $backgrounds | sort | fzf --cycle)
+    selection=$(print $backgrounds | sort | fzf --cycle --header "${current_background}")
 
     if [[ -n "${selection}" ]]; then
         if [[ ! -z $selection ]]; then
