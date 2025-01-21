@@ -31,6 +31,8 @@ fi
 while true; do
 
     CURRENT_SESSION_TYPE=$SESSION_TYPE
+    CURRENT_SESSION=$(tmux display-message -p '#S')
+    PREVIOUS_SESSION=$(tmux display-message -p '#{client_last_session}')
 
     if [[ "$SESSION_TYPE" == "_TMUX" ]]; then
         SESSION=$(tmux_sessions | \
@@ -39,7 +41,7 @@ while true; do
                       --bind "ctrl-s:become(echo '_TMUX_NEW')+abort" \
                       --bind "ctrl-l:become(echo '_TMUXINATOR')+abort" \
                       --bind "ctrl-k:execute(tmux kill-session -t {})+clear-query+reload($(declare -f tmux_sessions); tmux_sessions)" \
-                      --header $'tab:    previous session\nctrl-s: new session\nctrl-k: kill session\nctrl-l: list tmuxinator sessions')
+                      --header $'---> '$CURRENT_SESSION$'\ntab: '"$PREVIOUS_SESSION"$'\nctrl-s: new session\nctrl-k: kill session\nctrl-l: list tmuxinator sessions')
 
         if [[ "$SESSION" == "_TMUXINATOR" ]]; then
             SESSION_TYPE="_TMUXINATOR"
