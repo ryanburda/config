@@ -6,7 +6,7 @@
 # DESCRIPTION
 #   Use fzf to select a font.
 fonts=(
-    "CaskaydiaMono Nerd Font Mono,14"
+    "CaskaydiaMono Nerd Font Mono,13"
     "FiraCode Nerd Font Mono,12"
     "GohuFont 14 Nerd Font Mono,13"
     "Hack Nerd Font Mono,12"
