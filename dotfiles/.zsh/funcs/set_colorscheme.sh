@@ -1,9 +1,9 @@
 #!/bin/zsh
 
-COLORSCHEME_KEY_FILE_PATH=$XDG_CONFIG_HOME/wezterm/.colorscheme_key
-NVIM_COLORSCHEME_FILE_PATH=$XDG_CONFIG_HOME/nvim/.colorscheme
-NVIM_BACKGROUND_FILE_PATH=$XDG_CONFIG_HOME/nvim/.background
-WEZTERM_COLORSCHEME_FILE_PATH=$XDG_CONFIG_HOME/wezterm/.colorscheme
+COLORSCHEME_KEY_FILE_PATH="${XDG_CONFIG_HOME}/wezterm/.colorscheme_key"
+WEZTERM_COLORSCHEME_FILE_PATH="${XDG_CONFIG_HOME}/wezterm/.colorscheme"
+NVIM_COLORSCHEME_FILE_PATH="${XDG_CONFIG_HOME}/nvim/.colorscheme"
+NVIM_BACKGROUND_FILE_PATH="${XDG_CONFIG_HOME}/nvim/.background"
 
 set_colorscheme() {
     # NAME
@@ -65,9 +65,9 @@ set_colorscheme() {
             wezterm_colorscheme=$(print $values | awk -F, '{print $3}')
 
             # Write the values to files.
-            echo "$nvim_colorscheme" > NVIM_COLORSCHEME_FILE_PATH
-            echo "$nvim_background" > NVIM_BACKGROUND_FILE_PATH
-            echo "$wezterm_colorscheme" > WEZTERM_COLORSCHEME_FILE_PATH
+            echo "$nvim_colorscheme" > $NVIM_COLORSCHEME_FILE_PATH
+            echo "$nvim_background" > $NVIM_BACKGROUND_FILE_PATH
+            echo "$wezterm_colorscheme" > $WEZTERM_COLORSCHEME_FILE_PATH
 
             # This is used below to show a check mark next to the current theme when selecting via fzf
             echo "$theme_key" > $XDG_CONFIG_HOME/wezterm/.colorscheme_key
