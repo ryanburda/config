@@ -35,7 +35,7 @@ return {
       "catppuccin/nvim",
       "slugbyte/lackluster.nvim",
       "sainnhe/sonokai",
-      "polirritmico/monokai-nightasty.nvim",
+      "loctvl842/monokai-pro.nvim",
       "AlexvZyl/nordic.nvim",
       {
         'comfysage/evergarden',
