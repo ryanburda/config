@@ -66,7 +66,7 @@ set_colorscheme() {
             regenerate_aichat_config
             regenerate_git_config
             regenerate_lazygit_config
-            ~/.zsh/funcs/dark_mode $(if [[ $b == 'light' ]]; then echo '-l'; fi)
+            ~/.zsh/funcs/dark_mode $(if [[ $nvim_background == 'light' ]]; then echo '-l'; fi)
         fi
     }
 
