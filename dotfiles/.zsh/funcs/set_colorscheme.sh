@@ -50,7 +50,7 @@ set_colorscheme() {
         ['Light - Nightfox-dawn']="dawnfox,light,dawnfox"
         ['Light - Nightfox-day']="dayfox,light,dayfox"
         ['Light - VSCode']="vscode,light,Vs Code Light+ (Gogh)"
-        ['Light - ZenBones-rose']="rosebones,light,zenbones"
+        ['Light - ZenBones-rose']="rosebones,light,rose-pine-dawn"
     )
 
     function set_theme(){
