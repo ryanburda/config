@@ -19,9 +19,7 @@ set_font() {
         "MesloLGM Nerd Font,12"
         "SauceCodePro Nerd Font Mono,12"
         "Terminess Nerd Font Mono,14"
-        "IosevkaTermSlab Nerd Font Mono,13"
         "InconsolataGo Nerd Font Mono,14"
-        "ZedMono Nerd Font Mono,13"
     )
 
     current_font=$(<$FONT_FILE_PATH)

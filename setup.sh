@@ -60,13 +60,11 @@ brew install --cask font-fira-code-nerd-font
 brew install --cask font-gohufont-nerd-font
 brew install --cask font-hack-nerd-font
 brew install --cask font-inconsolata-go-nerd-font
-brew install --cask font-iosevka-term-slab-nerd-font
 brew install --cask font-jetbrains-mono-nerd-font
 brew install --cask font-sauce-code-pro-nerd-font
 brew tap shaunsingh/SFMono-Nerd-Font-Ligaturized
 brew install --cask font-sf-mono-nerd-font-ligaturized
 brew install --cask font-terminess-ttf-nerd-font
-brew install --cask font-zed-mono-nerd-font
 brew install --cask font-meslo-lg-nerd-font
 # Applications
 brew install --cask 1password
