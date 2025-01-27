@@ -26,15 +26,10 @@ return {
     dependencies = {
       "sainnhe/everforest",
       "sainnhe/gruvbox-material",
-      "rebelot/kanagawa.nvim",
       "EdenEast/nightfox.nvim",
       "Verf/deepwhite.nvim",
-      "Mofiqul/vscode.nvim",
       "ribru17/bamboo.nvim",
-      "sho-87/kanagawa-paper.nvim",
       "catppuccin/nvim",
-      "slugbyte/lackluster.nvim",
-      "sainnhe/sonokai",
       "loctvl842/monokai-pro.nvim",
       "AlexvZyl/nordic.nvim",
       {
@@ -49,12 +44,6 @@ return {
       {
         "yorik1984/newpaper.nvim",
         config = true,
-      },
-      {
-        "zenbones-theme/zenbones.nvim",
-        dependencies = {
-          "rktjmp/lush.nvim",
-        },
       },
     },
     config = require("config.colorscheme").setup,

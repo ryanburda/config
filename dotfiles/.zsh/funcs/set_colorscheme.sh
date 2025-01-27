@@ -29,19 +29,11 @@ set_colorscheme() {
         ['Dark - Everforest']="everforest,dark,Everforest Dark (Gogh)"
         ['Dark - Evergarden']="evergarden,dark,Andromeda"
         ['Dark - Gruvbox']="gruvbox-material,dark,Gruvbox Material (Gogh)"
-        ['Dark - Kanagawa-paper']="kanagawa-paper,dark,Kanagawa (Gogh)"
-        ['Dark - Kanagawa-wave']="kanagawa-wave,dark,Kanagawa (Gogh)"
-        ['Dark - Lackluster']="lackluster,dark,carbonfox"
         ['Dark - Monokai']="monokai-pro,dark,Monokai (base16)"
-        ['Dark - Nightfox-carbon']="carbonfox,dark,carbonfox"
         ['Dark - Nightfox-night']="nightfox,dark,nightfox"
         ['Dark - Nightfox-tera']="terafox,dark,terafox"
         ['Dark - Nord']="nordfox,dark,nord"
         ['Dark - Nordic']="nordic,dark,Andromeda"
-        ['Dark - Sonokai']="sonokai,dark,Monokai Pro (Gogh)"
-        ['Dark - VSCode']="vscode,dark,Vs Code Dark+ (Gogh)"
-        ['Dark - ZenBones-forest']="forestbones,dark,Everforest Dark (Gogh)"
-        ['Dark - ZenBones-neo']="neobones,dark,neobones_dark"
         ['Light - Catppuccin']="catppuccin-latte,light,catppuccin-latte"
         ['Light - Deep-White']="deepwhite,light,dawnfox"
         ['Light - Everforest']="everforest,light,Everforest Light (Gogh)"
@@ -49,8 +41,6 @@ set_colorscheme() {
         ['Light - Newpaper']="newpaper,light,PaperColor Light (base16)"
         ['Light - Nightfox-dawn']="dawnfox,light,dawnfox"
         ['Light - Nightfox-day']="dayfox,light,dayfox"
-        ['Light - VSCode']="vscode,light,Vs Code Light+ (Gogh)"
-        ['Light - ZenBones-rose']="rosebones,light,rose-pine-dawn"
     )
 
     function set_theme(){
