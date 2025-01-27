@@ -310,6 +310,13 @@ vim.keymap.set(
 )
 
 vim.keymap.set(
+  "n",
+  '<leader>df',
+  ':DiffviewFileHistory %<cr>',
+  { desc = "Diff: Full commit history for current file in diff viewer" }
+)
+
+vim.keymap.set(
   'n',
   '<leader>dl',
   require('telescope.builtin').git_status,
@@ -321,13 +328,6 @@ vim.keymap.set(
   '<leader>db',
   require('telescope.builtin').git_branches,
   { desc = "Diff: Open branch selector in Telescope. Diff between selected branch and current is opened in DiffView" }
-)
-
-vim.keymap.set(
-  "n",
-  '<leader>df',
-  require('telescope').extensions.advanced_git_search.diff_commit_file,
-  { desc = "Diff: Show commits for current file in Telescope. Diff between selected commit and current is opened in DiffView" }
 )
 
 vim.keymap.set(
