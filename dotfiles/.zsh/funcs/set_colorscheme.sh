@@ -43,7 +43,7 @@ set_colorscheme() {
         ['Dark - ZenBones-forest']="forestbones,dark,Everforest Dark (Gogh)"
         ['Dark - ZenBones-neo']="neobones,dark,neobones_dark"
         ['Light - Catppuccin']="catppuccin-latte,light,catppuccin-latte"
-        ['Light - Deep-White']="deepwhite,light,Alabaster"
+        ['Light - Deep-White']="deepwhite,light,dawnfox"
         ['Light - Everforest']="everforest,light,Everforest Light (Gogh)"
         ['Light - Gruvbox']="gruvbox-material,light,GruvboxLight"
         ['Light - Newpaper']="newpaper,light,PaperColor Light (base16)"
