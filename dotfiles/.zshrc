@@ -135,6 +135,14 @@ alias s="tmux_session_select"
 alias cal="cal -A 1 -B 1"
 alias ai="aichat -s"
 
+# zshrc Extensions
+# Looks for executable files in directory.
+for file in ~/.zsh/zshrc_extensions/*; do
+  if [[ -x "$file" ]]; then
+    source "$file"
+  fi
+done
+
 # Uncomment to profile zsh startup.
 # NOTE: must also uncomment first line.
 # zprof

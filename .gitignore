@@ -12,3 +12,7 @@ lazy-lock.json
 
 # upterm
 tmux-client-*.log
+
+# zsh extensions
+dotfiles/.zsh/zshrc_extensions/*
+!dotfiles/.zsh/zshrc_extensions/README.md
