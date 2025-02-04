@@ -49,6 +49,7 @@ brew install pkg-config #n
 brew install pspg
 brew install pyenv
 brew install pyenv-virtualenv
+brew install poetry
 brew install ripgrep
 brew install rlwrap
 brew install stow
