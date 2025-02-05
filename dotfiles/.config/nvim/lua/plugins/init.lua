@@ -30,9 +30,9 @@ return {
       "Verf/deepwhite.nvim",
       "ribru17/bamboo.nvim",
       "catppuccin/nvim",
-      "loctvl842/monokai-pro.nvim",
       "AlexvZyl/nordic.nvim",
       "rose-pine/neovim",
+      "savq/melange-nvim",
       {
         'comfysage/evergarden',
         priority = 1000, -- Colorscheme plugin is loaded first before any other plugins
