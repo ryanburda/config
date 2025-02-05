@@ -34,6 +34,7 @@ set_colorscheme() {
         ['Dark - Nightfox-tera']="terafox,dark,terafox"
         ['Dark - Nord']="nordfox,dark,nord"
         ['Dark - Nordic']="nordic,dark,Andromeda"
+        ['Dark - Rose-pine']="rose-pine-moon,dark,rose-pine-moon"
         ['Light - Catppuccin']="catppuccin-latte,light,catppuccin-latte"
         ['Light - Deep-White']="deepwhite,light,dawnfox"
         ['Light - Everforest']="everforest,light,Everforest Light (Gogh)"
@@ -41,6 +42,7 @@ set_colorscheme() {
         ['Light - Newpaper']="newpaper,light,PaperColor Light (base16)"
         ['Light - Nightfox-dawn']="dawnfox,light,dawnfox"
         ['Light - Nightfox-day']="dayfox,light,dayfox"
+        ['Light - Rose-pine']="rose-pine-dawn,light,rose-pine-dawn"
     )
 
     function set_theme(){
