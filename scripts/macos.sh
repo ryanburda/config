@@ -20,4 +20,5 @@ Battery -> Options -> Slightly dim the display on battery -> Off
 Displays -> Automatically adjust brightness -> Off
 Lock Screen -> Start Screen Saver when inactive -> Never
 Lock Screen -> Turn display off on battery when inactive -> For 5 minutes
+Accessibility -> Display -> Reduce transparency
 EOF
