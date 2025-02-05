@@ -80,7 +80,6 @@ brew install --cask rancher
 brew install --cask rectangle
 brew install --cask shifty
 brew install --cask spotify
-brew install --cask topnotch
 brew install --cask wezterm@nightly
 
 # Symlink config files
