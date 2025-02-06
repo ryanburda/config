@@ -211,6 +211,13 @@ return {
     config = require('config.telescope').setup
   },
 
+  -- TheHarpoonagen
+  {
+    "ThePrimeagen/harpoon",
+    branch = "harpoon2",
+    dependencies = { "nvim-lua/plenary.nvim" },
+  },
+
   -- Scrolling
   'karb94/neoscroll.nvim',
   {

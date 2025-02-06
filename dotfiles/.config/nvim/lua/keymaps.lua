@@ -739,14 +739,14 @@ vim.keymap.set(
 
 vim.keymap.set(
   'n',
-  '<leader>fj',
+  '<leader>fw',
   require('telescope.builtin').grep_string,
   { desc = 'Find: grep for word under cursor in Telescope' }
 )
 
 vim.keymap.set(
   'n',
-  '<leader>fl',
+  '<leader>fo',
   require('telescope.builtin').oldfiles,
   { desc = 'Find: last opened files' }
 )
@@ -798,7 +798,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     vim.keymap.set(
       'n',
-      '<leader>fw',
+      '<leader>fW',
       require('telescope.builtin').lsp_dynamic_workspace_symbols,
       {desc = 'Find: symbols in entire workspace', buffer = event.buf}
     )
@@ -831,6 +831,40 @@ vim.api.nvim_create_autocmd('LspAttach', {
       {desc = 'Code: Format', buffer = event.buf})
   end,
 })
+
+local harpoon = require("harpoon")
+
+-- REQUIRED
+harpoon:setup()
+-- REQUIRED
+
+vim.keymap.set(
+  "n",
+  "<leader>fl",
+  function() harpoon.ui:toggle_quick_menu(harpoon:list()) end,
+  {desc = 'Find: Harpoon toggle' }
+)
+
+vim.keymap.set(
+  "n",
+  "<leader>fa",
+  function() harpoon:list():add() end,
+  {desc = 'Find: Harpoon add' }
+)
+
+vim.keymap.set(
+  "n",
+  "<leader>fj",
+  function() harpoon:list():next() end,
+  {desc = 'Find: Harpoon next' }
+)
+
+vim.keymap.set(
+  "n",
+  "<leader>fk",
+  function() harpoon:list():prev() end,
+  {desc = 'Find: Harpoon prev' }
+)
 
 ------------------------------------------------------------------------------------------------------------------------
 -- AI
