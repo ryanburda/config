@@ -667,11 +667,67 @@ vim.keymap.set(
   { desc = 'Find: grep with optional glob filter following double space delimiter. ie `autocmd **/config/**.lua`' }
 )
 
+local function yank_file_to_clipboard(file_path)
+  -- TODO: yank the contents of the file to the clipboard
+  -- Read the file content
+  local file = io.open(file_path, "r")
+  if file then
+    local content = file:read("*all")
+    file:close()
+
+    -- Yank content to the clipboard
+    vim.fn.setreg('+', content)
+
+    -- Optional: Print a message to confirm
+    print(file_path .. " yanked to clipboard")
+  else
+    print("Could not open file: " .. file_path)
+  end
+end
+
 vim.keymap.set(
   'n',
-  '<leader>fs',
-  function() require('grep_glob').grep_glob({search_dir = "~/Developer/snippets/", prompt_title = "Grep Glob Snippets"}) end,
-  { desc = 'Find: grep with optional glob filter following double space delimiter. ie `autocmd **/config/**.lua`' }
+  '<leader>sg',
+  function() require('grep_glob').grep_glob({
+    search_dir = "~/Developer/snippets/",
+    prompt_title = "Grep Glob Snippets",
+    attach_mappings = function(_, map)
+      map(
+        "i",
+        "<C-y>",
+        function(prompt_bufnr)
+          local file_path = require("telescope.actions.state").get_selected_entry().path
+          yank_file_to_clipboard(file_path)
+          require("telescope.actions").close(prompt_bufnr)
+        end
+      )
+      -- return true to have default mappings
+      return true
+    end,
+  }) end,
+  { desc = 'Find: grep glob in snippets folder' }
+)
+
+vim.keymap.set(
+  'n',
+  '<leader>sf',
+  function() require('telescope.builtin').find_files({
+    cwd = "~/Developer/snippets/",
+    attach_mappings = function(_, map)
+      map(
+        "i",
+        "<C-y>",
+        function(prompt_bufnr)
+          local file_path = require("telescope.actions.state").get_selected_entry().path
+          yank_file_to_clipboard(file_path)
+          require("telescope.actions").close(prompt_bufnr)
+        end
+      )
+      -- return true to have default mappings
+      return true
+    end,
+  }) end,
+  { desc = 'Find: find files in snippets folder' }
 )
 
 vim.keymap.set(
