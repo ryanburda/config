@@ -464,4 +464,7 @@ return {
     end
   },
 
+  -- Local plugins
+  { dir = "~/Developer/trail_markers.nvim" },
+
 }

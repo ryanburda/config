@@ -18,7 +18,7 @@
 ------------------------------------------------------------------------------------------------------------------------
 vim.keymap.set(
   'n',
-  '<leader>t',
+  '<leader>T',
   ':tabnew<cr>',
   {desc = 'Window Management: New Tab'}
 )
@@ -917,4 +917,56 @@ vim.keymap.set(
   "<leader>fe",
   require('oil').toggle_float,
   {desc = "File management"}
+)
+
+------------------------------------------------------------------------------------------------------------------------
+-- Local Plugins
+------------------------------------------------------------------------------------------------------------------------
+vim.keymap.set(
+  'n',
+  '<leader>tm',
+  require("trail_markers").trail_map,
+  { desc = "Trail Markers: List markers on current trail" }
+)
+
+vim.keymap.set(
+  'n',
+  '<leader>ta',
+  require("trail_markers").place_marker,
+  { desc = "Trail Markers: Add marker to current trail" }
+)
+
+vim.keymap.set(
+  'n',
+  '<leader>tt',
+  require("trail_markers").current_marker,
+  { desc = "Trail Markers: Go to current marker" }
+)
+
+vim.keymap.set(
+  'n',
+  '<leader>tj',
+  require("trail_markers").next_marker,
+  { desc = "Trail Markers: Go to next marker" }
+)
+
+vim.keymap.set(
+  'n',
+  '<leader>tk',
+  require("trail_markers").prev_marker,
+  { desc = "Trail Markers: Go to previous marker" }
+)
+
+vim.keymap.set(
+  'n',
+  '<leader>tgg',
+  require("trail_markers").trail_head,
+  { desc = "Trail Markers: Go to start of trail" }
+)
+
+vim.keymap.set(
+  'n',
+  '<leader>tG',
+  require("trail_markers").trail_end,
+  { desc = "Trail Markers: Go to end of trail" }
 )
