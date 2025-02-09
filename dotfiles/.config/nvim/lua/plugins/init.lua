@@ -465,6 +465,6 @@ return {
   },
 
   -- Local plugins
-  { dir = "~/Developer/trail_markers.nvim" },
+  { dir = "~/Developer/trail_marker.nvim" },
 
 }

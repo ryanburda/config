@@ -925,48 +925,48 @@ vim.keymap.set(
 vim.keymap.set(
   'n',
   '<leader>tm',
-  require("trail_markers").trail_map,
+  require("trail_marker").trail_map,
   { desc = "Trail Markers: List markers on current trail" }
 )
 
 vim.keymap.set(
   'n',
   '<leader>ta',
-  require("trail_markers").place_marker,
+  require("trail_marker").place_marker,
   { desc = "Trail Markers: Add marker to current trail" }
 )
 
 vim.keymap.set(
   'n',
   '<leader>tt',
-  require("trail_markers").current_marker,
+  require("trail_marker").current_marker,
   { desc = "Trail Markers: Go to current marker" }
 )
 
 vim.keymap.set(
   'n',
   '<leader>tj',
-  require("trail_markers").next_marker,
+  require("trail_marker").next_marker,
   { desc = "Trail Markers: Go to next marker" }
 )
 
 vim.keymap.set(
   'n',
   '<leader>tk',
-  require("trail_markers").prev_marker,
+  require("trail_marker").prev_marker,
   { desc = "Trail Markers: Go to previous marker" }
 )
 
 vim.keymap.set(
   'n',
   '<leader>tgg',
-  require("trail_markers").trail_head,
+  require("trail_marker").trail_head,
   { desc = "Trail Markers: Go to start of trail" }
 )
 
 vim.keymap.set(
   'n',
   '<leader>tG',
-  require("trail_markers").trail_end,
+  require("trail_marker").trail_end,
   { desc = "Trail Markers: Go to end of trail" }
 )
