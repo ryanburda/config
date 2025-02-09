@@ -88,10 +88,6 @@ stow dotfiles
 # tmux-plugin-manager
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
-# Add openai key to this file.
-# TODO: automate adding this.
-touch "${HOME}/.openai_api_key"
-
 # If config repo is in normal location then this is `SCRIPT_DIR=$HOME/Developer/config`
 # The following can be used when testing manually:  `SCRIPT_DIR=$(pwd)`
 SCRIPT_DIR=${0:a:h}
