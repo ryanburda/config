@@ -970,3 +970,17 @@ vim.keymap.set(
   require("trail_marker").trail_end,
   { desc = "Trail Markers: Go to end of trail" }
 )
+
+vim.keymap.set(
+  'n',
+  '<leader>tx',
+  require("trail_marker").clear_trail,
+  { desc = "Trail Markers: Remove all markers from trail" }
+)
+
+vim.keymap.set(
+  'n',
+  '<leader>tv',
+  require("trail_marker").virtual_text_toggle,
+  { desc = "Trail Markers: Toggle virtual text" }
+)
