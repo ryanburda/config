@@ -938,6 +938,13 @@ vim.keymap.set(
 
 vim.keymap.set(
   'n',
+  '<leader>td',
+  require("trail_marker").remove_marker,
+  { desc = "Trail Markers: Remove marker from current trail" }
+)
+
+vim.keymap.set(
+  'n',
   '<leader>tt',
   require("trail_marker").current_marker,
   { desc = "Trail Markers: Go to current marker" }
