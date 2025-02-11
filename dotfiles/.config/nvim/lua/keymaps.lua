@@ -991,3 +991,10 @@ vim.keymap.set(
   require("trail_marker").virtual_text_toggle,
   { desc = "Trail Markers: Toggle virtual text" }
 )
+
+vim.keymap.set(
+  'n',
+  '<leader>ts',
+  require("trail_marker").save_trail,
+  { desc = "Trail Markers: Save trail" }
+)
