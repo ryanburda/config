@@ -994,7 +994,21 @@ vim.keymap.set(
 
 vim.keymap.set(
   'n',
-  '<leader>ts',
-  require("trail_marker").save_trail,
-  { desc = "Trail Markers: Save trail" }
+  '<leader>tn',
+  ':TrailMarker new_trail ',
+  { desc = "Trail Markers: New trail" }
+)
+
+vim.keymap.set(
+  'n',
+  '<leader>tc',
+  ':TrailMarker change_trail ',
+  { desc = "Trail Markers: Change trail" }
+)
+
+vim.keymap.set(
+  'n',
+  '<leader>tr',
+  ':TrailMarker remove_trail ',
+  { desc = "Trail Markers: Remove trail" }
 )
