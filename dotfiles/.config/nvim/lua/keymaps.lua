@@ -926,89 +926,96 @@ vim.keymap.set(
   'n',
   '<leader>tm',
   require("trail_marker").trail_map,
-  { desc = "Trail Markers: List markers on current trail" }
+  { desc = "Trail Marker: List markers on current trail" }
 )
 
 vim.keymap.set(
   'n',
   '<leader>ta',
   require("trail_marker").place_marker,
-  { desc = "Trail Markers: Add marker to current trail" }
+  { desc = "Trail Marker: Add marker to current trail" }
 )
 
 vim.keymap.set(
   'n',
   '<leader>td',
   require("trail_marker").remove_marker,
-  { desc = "Trail Markers: Remove marker from current trail" }
+  { desc = "Trail Marker: Remove marker from current trail" }
 )
 
 vim.keymap.set(
   'n',
   '<leader>tt',
   require("trail_marker").current_marker,
-  { desc = "Trail Markers: Go to current marker" }
+  { desc = "Trail Marker: Go to current marker" }
 )
 
 vim.keymap.set(
   'n',
   '<leader>tj',
   require("trail_marker").next_marker,
-  { desc = "Trail Markers: Go to next marker" }
+  { desc = "Trail Marker: Go to next marker" }
 )
 
 vim.keymap.set(
   'n',
   '<leader>tk',
   require("trail_marker").prev_marker,
-  { desc = "Trail Markers: Go to previous marker" }
+  { desc = "Trail Marker: Go to previous marker" }
 )
 
 vim.keymap.set(
   'n',
   '<leader>tgg',
   require("trail_marker").trail_head,
-  { desc = "Trail Markers: Go to start of trail" }
+  { desc = "Trail Marker: Go to start of trail" }
 )
 
 vim.keymap.set(
   'n',
   '<leader>tG',
   require("trail_marker").trail_end,
-  { desc = "Trail Markers: Go to end of trail" }
+  { desc = "Trail Marker: Go to end of trail" }
 )
 
 vim.keymap.set(
   'n',
   '<leader>tx',
   require("trail_marker").clear_trail,
-  { desc = "Trail Markers: Remove all markers from trail" }
+  { desc = "Trail Marker: Remove all markers from trail" }
 )
 
 vim.keymap.set(
   'n',
   '<leader>tv',
   require("trail_marker").virtual_text_toggle,
-  { desc = "Trail Markers: Toggle virtual text" }
+  { desc = "Trail Marker: Toggle virtual text" }
+)
+
+vim.keymap.set(
+  'n',
+  '<leader>tl',
+  require("trail_marker").leave_trail,
+  { desc = "Trail Marker: Leave trail" }
 )
 
 vim.keymap.set(
   'n',
   '<leader>tn',
   ':TrailMarker new_trail ',
-  { desc = "Trail Markers: New trail" }
+  { desc = "Trail Marker: New trail" }
 )
 
 vim.keymap.set(
   'n',
   '<leader>tc',
   ':TrailMarker change_trail ',
-  { desc = "Trail Markers: Change trail" }
+  { desc = "Trail Marker: Change trail" }
 )
 
 vim.keymap.set(
   'n',
   '<leader>tr',
   ':TrailMarker remove_trail ',
-  { desc = "Trail Markers: Remove trail" }
+  { desc = "Trail Marker: Remove trail" }
 )
