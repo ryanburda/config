@@ -19,6 +19,14 @@ function T.setup()
     end
   end
 
+  local trail_marker_info = function()
+    if vim.g.trail_marker_info then
+      return vim.g.trail_marker_info
+    else
+      return ""
+    end
+  end
+
   require('lualine').setup {
     options = {
       icons_enabled = true,
@@ -38,9 +46,9 @@ function T.setup()
           path = 1
         },
       },
-      lualine_x = { 'diagnostics', sqls_connection, is_copilot_on },
+      lualine_x = { 'diagnostics', sqls_connection, is_copilot_on, },
       lualine_y = { 'filetype', },
-      lualine_z = { 'location', 'progress' },
+      lualine_z = { trail_marker_info, 'location', 'progress', },
     },
     tabline = {},
   }
