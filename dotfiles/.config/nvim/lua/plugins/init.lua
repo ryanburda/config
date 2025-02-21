@@ -465,6 +465,9 @@ return {
   },
 
   -- Local plugins
-  { dir = "~/Developer/trail_marker.nvim" },
+  {
+    dir = "~/Developer/trail_marker.nvim",
+    dependencies = { 'kyazdani42/nvim-web-devicons', },
+  },
 
 }
