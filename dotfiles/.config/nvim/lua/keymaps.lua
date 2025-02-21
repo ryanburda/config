@@ -379,7 +379,7 @@ vim.keymap.set(
   'n',
   '<leader>kf',
   require('telescope.builtin').quickfix,
-  { desc = "Quickfix: Find files" }
+  { desc = "Quickfix: Find quickfix files" }
 )
 
 vim.keymap.set(
