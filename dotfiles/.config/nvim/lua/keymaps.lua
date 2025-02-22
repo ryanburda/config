@@ -784,6 +784,13 @@ vim.keymap.set(
 
 vim.keymap.set(
   'n',
+  '<leader>/',
+  require('fzf-lua').grep_curbuf,
+  { desc = 'Grep current buffer' }
+)
+
+vim.keymap.set(
+  'n',
   '<leader>fw',
   require('telescope.builtin').grep_string,
   { desc = 'Find: grep for word under cursor in Telescope' }
