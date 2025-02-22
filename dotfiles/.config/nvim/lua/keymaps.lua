@@ -708,7 +708,7 @@ end
 
 vim.keymap.set(
   'n',
-  '<leader>sg',
+  '<leader>Sg',
   function() require('grep_glob').grep_glob({
     search_dir = "~/Developer/snippets/",
     prompt_title = "Grep Glob Snippets",
@@ -731,7 +731,19 @@ vim.keymap.set(
 
 vim.keymap.set(
   'n',
-  '<leader>sf',
+  '<leader>sg',
+  function()
+    require('fzf-lua').live_grep({
+      cwd="~/Developer/snippets/",
+      prompt="Grep Snippets",
+    })
+  end,
+  { desc = 'Grep snippets folder' }
+)
+
+vim.keymap.set(
+  'n',
+  '<leader>Sf',
   function() require('telescope.builtin').find_files({
     cwd = "~/Developer/snippets/",
     attach_mappings = function(_, map)
@@ -749,6 +761,18 @@ vim.keymap.set(
     end,
   }) end,
   { desc = 'Find: find files in snippets folder' }
+)
+
+vim.keymap.set(
+  'n',
+  '<leader>sf',
+  function()
+    require('fzf-lua').files({
+      cwd="~/Developer/snippets/",
+      prompt="Find Snippets",
+    })
+  end,
+  { desc = 'Find snippets' }
 )
 
 vim.keymap.set(

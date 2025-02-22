@@ -216,7 +216,7 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {
       grep = {
-        hidden = true,
+        rg_opts = "--hidden --column --line-number --no-heading --color=always --smart-case",
       }
     },
   },
