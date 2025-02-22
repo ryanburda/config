@@ -6,7 +6,7 @@
 -- of a single file instead of the commit history of an entire directory.
 -- This is a preference, not a requirement.
 --
--- Plugins with larger than normal `config` functions (telescope for example) can
+-- Plugins with larger than normal `config` functions (mason for example) can
 -- have their config functions broken out into a separate file in `../config/`.
 
 return {
@@ -41,10 +41,6 @@ return {
           variant = 'hard', -- 'hard'|'medium'|'soft'
           overrides = { }, -- add custom overrides
         }
-      },
-      {
-        "yorik1984/newpaper.nvim",
-        config = true,
       },
     },
     config = require("config.colorscheme").setup,
@@ -187,35 +183,37 @@ return {
     dependencies = { { "echasnovski/mini.icons", opts = {} } },
   },
 
-  -- Telescope
+  -- File Finders
   {
-    'nvim-telescope/telescope.nvim',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'nvim-telescope/telescope-fzf-native.nvim',
-      'freestingo/telescope-changed-files',
-      'nvim-telescope/telescope-live-grep-args.nvim',
-      {
-        'nvim-telescope/telescope-fzf-native.nvim',
-        build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+    "ibhagwan/fzf-lua",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    opts = {
+      grep = {
+        rg_opts = "--hidden --column --line-number --no-heading --color=always --smart-case",
       },
-      {
-        "aaronhallaert/advanced-git-search.nvim",
-        dependencies = {
-          "nvim-telescope/telescope.nvim",
-          "tpope/vim-fugitive",
-          "sindrets/diffview.nvim",
+      winopts = {
+        backdrop = 100,
+        preview = {
+          layout = "vertical",
+          vertical = "down:60%",
+        },
+      },
+      keymap = {
+        fzf = {
+          ["ctrl-d"] = "preview-page-down",
+          ["ctrl-u"] = "preview-page-up",
         },
       },
     },
-    config = require('config.telescope').setup
   },
 
-  -- TheHarpoonagen
   {
     "ThePrimeagen/harpoon",
     branch = "harpoon2",
     dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require("harpoon"):setup()
+    end,
   },
 
   -- Scrolling

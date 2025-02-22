@@ -136,6 +136,7 @@ alias l="lsd -lah"
 alias s="tmux_session_select"
 alias cal="cal -A 1 -B 1"
 alias ai="aichat -s"
+alias rg="rg --hidden"
 
 # zshrc Extensions
 # Looks for executable files in directory.

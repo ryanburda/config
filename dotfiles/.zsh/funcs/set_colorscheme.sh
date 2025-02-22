@@ -41,7 +41,6 @@ set_colorscheme() {
         ['Light - Everforest']="everforest,light,Everforest Light (Gogh)"
         ['Light - Gruvbox']="gruvbox-material,light,GruvboxLight"
         ['Light - Melange']="melange,light,dayfox"
-        ['Light - Newpaper']="newpaper,light,PaperColor Light (base16)"
         ['Light - Nightfox-dawn']="dawnfox,light,dawnfox"
         ['Light - Nightfox-day']="dayfox,light,dayfox"
         ['Light - Rose-pine']="rose-pine-dawn,light,rose-pine-dawn"
@@ -75,7 +74,7 @@ set_colorscheme() {
     }
 
     current_theme_key=$(<$COLORSCHEME_KEY_FILE_PATH)
-    theme_key=$(printf "%s\n" "${(k)themes[@]}" | sort | fzf --cycle --header "${current_theme_key}")
+    theme_key=$(printf "%s\n" "${(k)themes[@]}" | sort | fzf --layout reverse --cycle --header "${current_theme_key}")
 
     if [[ ! -z $theme_key ]]; then
         set_theme $theme_key

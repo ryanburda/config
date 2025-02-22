@@ -1,14 +1,14 @@
 -- Keymaps in this file are grouped by purpose, not plugin.
 --
 -- For example, keymaps associated with diffs/version control currently use the following plugins:
---      * telescope
+--      * fzf-lua
 --      * diffview
 --      * gitsigns
 -- and are all prefixed with '<leader>d*':
 --      * '<leader>dr' - diff reset hunk. (gitsigns)
 --      * '<leader>dd' - open diffview. (diffview)
---      * '<leader>db' - opens a branch picker in telescope, upon selection diffview is opened
---                       showing diff between current code and selected branch. (telescope + diffview)
+--      * '<leader>db' - opens a branch picker in fzf-lua, selected entry is opened in diffview to
+--                       show a diff between current code and selected branch. (fzf-lua + diffview)
 --
 -- This last example is important because declaring a keymap with two plugin dependencies outside the setup
 -- functions of either plugin eliminates the need for plugin dependencies that exist solely for keymap creation.
@@ -319,22 +319,53 @@ vim.keymap.set(
 vim.keymap.set(
   'n',
   '<leader>dl',
-  require('telescope.builtin').git_status,
-  { desc = "Diff: List files with uncommitted changes in Telescope" }
+  require('fzf-lua').git_status,
+  { desc = "Diff: List files with uncommitted" }
 )
 
 vim.keymap.set(
   'n',
   '<leader>db',
-  require('telescope.builtin').git_branches,
-  { desc = "Diff: Open branch selector in Telescope. Diff between selected branch and current is opened in DiffView" }
+  function()
+    require('fzf-lua').git_branches({
+      actions = {
+        ["default"] = function(selected)
+          local selected_branch = selected[1]:match("[^%s]+")
+          if selected_branch then
+            -- Open DiffView with the selected branch
+            vim.cmd("DiffviewOpen " .. selected_branch)
+          else
+            vim.notify("No branch selected!", vim.log.levels.WARN)
+          end
+        end
+      }
+    })
+  end,
+  { desc = "Diff: Open branch selector. Diff between selected branch and current is opened in DiffView" }
 )
 
 vim.keymap.set(
   "n",
   '<leader>dc',
-  require('telescope').extensions.advanced_git_search.search_log_content,
-  { desc = "Diff: Show commits for current repo in Telescope. Diff between selected commit and current is opened in DiffView" }
+  function()
+    require('fzf-lua').git_commits({
+      actions = {
+        -- When a commit is selected, this action will be triggered
+        -- 'selected' is a table with information about the commit
+        ["default"] = function(selected)
+          -- Extract the commit hash from the selected entry
+          local commit_hash = selected[1]:match("%w+")
+          -- Open diff view between current and selected commit
+          if commit_hash then
+            require("diffview").open(commit_hash.."^.."..commit_hash)
+          else
+            print("No commit selected!")
+          end
+        end,
+      },
+    })
+  end,
+  { desc = "Diff: Show commits for current repo. Diff between selected commit and current is opened in DiffView" }
 )
 
 ------------------------------------------------------------------------------------------------------------------------
@@ -378,19 +409,14 @@ vim.keymap.set(
 vim.keymap.set(
   'n',
   '<leader>kf',
-  require('telescope.builtin').quickfix,
+  require('fzf-lua').quickfix,
   { desc = "Quickfix: Find quickfix files" }
 )
 
 vim.keymap.set(
   'n',
   '<leader>kg',
-  function()
-    require('telescope.builtin').live_grep({
-      search_dirs = require('config.telescope').getqflist_files(),
-      results_title = 'Quickfix Files'
-    })
-  end,
+  require('fzf-lua').grep_quickfix,
   { desc = "Quickfix: Grep" }
 )
 
@@ -421,8 +447,15 @@ vim.keymap.set(
 vim.keymap.set(
   'n',
   '<leader>ef',
-  require('telescope.builtin').diagnostics,
-  { desc = "Diagnostic: Show errors in Telescope" }
+  require('fzf-lua').diagnostics_document,
+  { desc = "Diagnostic: Show errors" }
+)
+
+vim.keymap.set(
+  'n',
+  '<leader>ep',
+  require('fzf-lua').diagnostics_workspace,
+  { desc = "Diagnostic: Show errors" }
 )
 
 ------------------------------------------------------------------------------------------------------------------------
@@ -431,8 +464,8 @@ vim.keymap.set(
 vim.keymap.set(
   'n',
   '<leader>?',
-  require('telescope.builtin').keymaps,
-  { desc = "Help: Show keymaps in Telescope" }
+  require('fzf-lua').keymaps,
+  { desc = "Help: Show keymaps" }
 )
 
 vim.keymap.set(
@@ -452,29 +485,29 @@ vim.keymap.set(
 vim.keymap.set(
   'n',
   '<leader>vk',
-  require('telescope.builtin').help_tags,
-  { desc = "Help: vim help pages in Telescope" }
+  require('fzf-lua').helptags,
+  { desc = "Help: vim help" }
 )
 
 vim.keymap.set(
   'n',
   '<leader>vr',
-  require('telescope.builtin').registers,
+  require('fzf-lua').registers,
   { desc = "Help: vim registers" }
 )
 
 vim.keymap.set(
   'n',
   '<leader>vh',
-  require('telescope.builtin').highlights,
+  require('fzf-lua').highlights,
   { desc = "Help: vim highlight groups" }
 )
 
 vim.keymap.set(
   'n',
   '<leader>mk',
-  require('telescope.builtin').man_pages,
-  { desc = "Help: man pages in Telescope" }
+  require('fzf-lua').manpages,
+  { desc = "Help: man pages" }
 )
 
 ------------------------------------------------------------------------------------------------------------------------
@@ -649,112 +682,73 @@ vim.keymap.set(
 vim.keymap.set(
   'n',
   '<leader>f ',
-  require('telescope.builtin').resume,
-  { desc = 'Find: resume previous Telescope session' }
+  require('fzf-lua').resume,
+  { desc = 'Find: resume previous fzf-lua session' }
 )
 
 vim.keymap.set(
   'n',
   '<leader>ff',
-  require('telescope.builtin').find_files,
-  { desc = 'Find: find files in Telescope' }
+  require('fzf-lua').files,
+  { desc = 'Find: find files' }
 )
 
 vim.keymap.set(
   'n',
   '<leader>fg',
-  require('grep_glob').grep_glob,
-  { desc = 'Find: grep with optional glob filter following double space delimiter. ie `autocmd **/config/**.lua`' }
+  require('fzf-lua').live_grep,
+  { desc = 'Grep' }
 )
-
-local function yank_file_to_clipboard(file_path)
-  -- TODO: yank the contents of the file to the clipboard
-  -- Read the file content
-  local file = io.open(file_path, "r")
-  if file then
-    local content = file:read("*all")
-    file:close()
-
-    -- Yank content to the clipboard
-    vim.fn.setreg('+', content)
-
-    -- Optional: Print a message to confirm
-    print(file_path .. " yanked to clipboard")
-  else
-    print("Could not open file: " .. file_path)
-  end
-end
 
 vim.keymap.set(
   'n',
   '<leader>sg',
-  function() require('grep_glob').grep_glob({
-    search_dir = "~/Developer/snippets/",
-    prompt_title = "Grep Glob Snippets",
-    attach_mappings = function(_, map)
-      map(
-        "i",
-        "<C-y>",
-        function(prompt_bufnr)
-          local file_path = require("telescope.actions.state").get_selected_entry().path
-          yank_file_to_clipboard(file_path)
-          require("telescope.actions").close(prompt_bufnr)
-        end
-      )
-      -- return true to have default mappings
-      return true
-    end,
-  }) end,
-  { desc = 'Find: grep glob in snippets folder' }
+  function()
+    require('fzf-lua').live_grep({
+      cwd="~/Developer/snippets/",
+      prompt="Grep Snippets",
+    })
+  end,
+  { desc = 'Grep snippets folder' }
 )
 
 vim.keymap.set(
   'n',
   '<leader>sf',
-  function() require('telescope.builtin').find_files({
-    cwd = "~/Developer/snippets/",
-    attach_mappings = function(_, map)
-      map(
-        "i",
-        "<C-y>",
-        function(prompt_bufnr)
-          local file_path = require("telescope.actions.state").get_selected_entry().path
-          yank_file_to_clipboard(file_path)
-          require("telescope.actions").close(prompt_bufnr)
-        end
-      )
-      -- return true to have default mappings
-      return true
-    end,
-  }) end,
-  { desc = 'Find: find files in snippets folder' }
+  function()
+    require('fzf-lua').files({
+      cwd="~/Developer/snippets/",
+      prompt="Find Snippets",
+    })
+  end,
+  { desc = 'Find snippets' }
 )
 
 vim.keymap.set(
   'n',
-  '<leader>f/',
-  function() require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown{ winblend = 10, previewer = false, }) end,
-  { desc = 'Find: current buffer fuzzy find in Telescope' }
+  '<leader>/',
+  require('fzf-lua').grep_curbuf,
+  { desc = 'Grep current buffer' }
 )
 
 vim.keymap.set(
   'n',
   '<leader>fw',
-  require('telescope.builtin').grep_string,
-  { desc = 'Find: grep for word under cursor in Telescope' }
+  require('fzf-lua').grep_cword,
+  { desc = 'Find: grep for word under cursor' }
 )
 
 vim.keymap.set(
   'n',
   '<leader>fo',
-  require('telescope.builtin').oldfiles,
+  require('fzf-lua').oldfiles,
   { desc = 'Find: last opened files' }
 )
 
 vim.keymap.set(
   'n',
   '<leader>fb',
-  require('telescope.builtin').buffers,
+  require('fzf-lua').buffers,
   { desc = 'Find: open buffers' }
 )
 
@@ -764,42 +758,42 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set(
       'n',
       '<leader>fd',
-      require('telescope.builtin').lsp_definitions,
+      require('fzf-lua').lsp_definitions,
       {desc = 'Find: definition', buffer = event.buf}
     )
 
     vim.keymap.set(
       'n',
       '<leader>fr',
-      require('telescope.builtin').lsp_references,
+      require('fzf-lua').lsp_references,
       {desc = 'Find: all references', buffer = event.buf}
     )
 
     vim.keymap.set(
       'n',
       '<leader>ft',
-      require('telescope.builtin').lsp_type_definitions,
+      require('fzf-lua').lsp_typedefs,
       {desc = 'Find: type definitions', buffer = event.buf}
     )
 
     vim.keymap.set(
       'n',
       '<leader>fi',
-      require('telescope.builtin').lsp_implementations,
+      require('fzf-lua').lsp_implementations,
       {desc = 'Find: implementations', buffer = event.buf}
     )
 
     vim.keymap.set(
       'n',
       '<leader>fS',
-      require('telescope.builtin').lsp_document_symbols,
+      require('fzf-lua').lsp_document_symbols,
       {desc = 'Find: symbols in current document', buffer = event.buf}
     )
 
     vim.keymap.set(
       'n',
       '<leader>fW',
-      require('telescope.builtin').lsp_dynamic_workspace_symbols,
+      require('fzf-lua').lsp_live_workspace_symbols,
       {desc = 'Find: symbols in entire workspace', buffer = event.buf}
     )
 
@@ -832,37 +826,34 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
-local harpoon = require("harpoon")
-
--- REQUIRED
-harpoon:setup()
--- REQUIRED
-
 vim.keymap.set(
   "n",
   "<leader>fl",
-  function() harpoon.ui:toggle_quick_menu(harpoon:list()) end,
+  function()
+    local harpoon = require("harpoon")
+    harpoon.ui:toggle_quick_menu(harpoon:list())
+  end,
   {desc = 'Find: Harpoon toggle' }
 )
 
 vim.keymap.set(
   "n",
   "<leader>fa",
-  function() harpoon:list():add() end,
+  function() require("harpoon"):list():add() end,
   {desc = 'Find: Harpoon add' }
 )
 
 vim.keymap.set(
   "n",
   "<leader>fj",
-  function() harpoon:list():next() end,
+  function() require("harpoon"):list():next() end,
   {desc = 'Find: Harpoon next' }
 )
 
 vim.keymap.set(
   "n",
   "<leader>fk",
-  function() harpoon:list():prev() end,
+  function() require("harpoon"):list():prev() end,
   {desc = 'Find: Harpoon prev' }
 )
 
@@ -922,13 +913,6 @@ vim.keymap.set(
 ------------------------------------------------------------------------------------------------------------------------
 -- Local Plugins
 ------------------------------------------------------------------------------------------------------------------------
-vim.keymap.set(
-  'n',
-  '<leader>tm',
-  require("trail_marker").trail_map,
-  { desc = "Trail Marker: List markers on current trail" }
-)
-
 vim.keymap.set(
   'n',
   '<leader>ta',
@@ -994,7 +978,7 @@ vim.keymap.set(
 
 vim.keymap.set(
   'n',
-  '<leader>tl',
+  '<leader>tq',
   require("trail_marker").leave_trail,
   { desc = "Trail Marker: Leave trail" }
 )
@@ -1008,14 +992,21 @@ vim.keymap.set(
 
 vim.keymap.set(
   'n',
-  '<leader>tc',
-  ':TrailMarker change_trail ',
-  { desc = "Trail Marker: Change trail" }
+  '<leader>tr',
+  ':TrailMarker remove_trail ',
+  { desc = "Trail Marker: Remove trail" }
 )
 
 vim.keymap.set(
   'n',
-  '<leader>tr',
-  ':TrailMarker remove_trail ',
-  { desc = "Trail Marker: Remove trail" }
+  '<leader>tc',
+  require("trail_marker").fzf_lua_change_trail,
+  { desc = "TrailMarker: Change trails" }
+)
+
+vim.keymap.set(
+  'n',
+  '<leader>tm',
+  require("trail_marker").fzf_lua_trail_map,
+  { desc = "Trail Marker: List markers on current trail" }
 )
