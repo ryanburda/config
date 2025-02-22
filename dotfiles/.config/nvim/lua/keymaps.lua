@@ -646,6 +646,7 @@ vim.keymap.set(
 ------------------------------------------------------------------------------------------------------------------------
 -- Find
 ------------------------------------------------------------------------------------------------------------------------
+-- deprecate
 vim.keymap.set(
   'n',
   '<leader>F ',
@@ -660,6 +661,7 @@ vim.keymap.set(
   { desc = 'Find: resume previous fzf-lua session' }
 )
 
+-- deprecate
 vim.keymap.set(
   'n',
   '<leader>Ff',
@@ -674,6 +676,7 @@ vim.keymap.set(
   { desc = 'Find: find files' }
 )
 
+-- deprecate
 vim.keymap.set(
   'n',
   '<leader>Fg',
@@ -688,6 +691,7 @@ vim.keymap.set(
   { desc = 'Grep' }
 )
 
+-- deprecate
 local function yank_file_to_clipboard(file_path)
   -- TODO: yank the contents of the file to the clipboard
   -- Read the file content
@@ -706,6 +710,7 @@ local function yank_file_to_clipboard(file_path)
   end
 end
 
+-- deprecate
 vim.keymap.set(
   'n',
   '<leader>Sg',
@@ -741,6 +746,7 @@ vim.keymap.set(
   { desc = 'Grep snippets folder' }
 )
 
+-- deprecate
 vim.keymap.set(
   'n',
   '<leader>Sf',
@@ -775,6 +781,7 @@ vim.keymap.set(
   { desc = 'Find snippets' }
 )
 
+-- deprecate
 vim.keymap.set(
   'n',
   '<leader>f/',
