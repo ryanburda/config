@@ -648,16 +648,30 @@ vim.keymap.set(
 ------------------------------------------------------------------------------------------------------------------------
 vim.keymap.set(
   'n',
-  '<leader>f ',
+  '<leader>F ',
   require('telescope.builtin').resume,
   { desc = 'Find: resume previous Telescope session' }
 )
 
 vim.keymap.set(
   'n',
-  '<leader>ff',
+  '<leader>f ',
+  require('fzf-lua').resume,
+  { desc = 'Find: resume previous fzf-lua session' }
+)
+
+vim.keymap.set(
+  'n',
+  '<leader>Ff',
   require('telescope.builtin').find_files,
   { desc = 'Find: find files in Telescope' }
+)
+
+vim.keymap.set(
+  'n',
+  '<leader>ff',
+  require('fzf-lua').files,
+  { desc = 'Find: find files' }
 )
 
 vim.keymap.set(
@@ -994,7 +1008,7 @@ vim.keymap.set(
 
 vim.keymap.set(
   'n',
-  '<leader>tl',
+  '<leader>tq',
   require("trail_marker").leave_trail,
   { desc = "Trail Marker: Leave trail" }
 )
