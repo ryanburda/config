@@ -676,9 +676,16 @@ vim.keymap.set(
 
 vim.keymap.set(
   'n',
-  '<leader>fg',
+  '<leader>Fg',
   require('grep_glob').grep_glob,
   { desc = 'Find: grep with optional glob filter following double space delimiter. ie `autocmd **/config/**.lua`' }
+)
+
+vim.keymap.set(
+  'n',
+  '<leader>fg',
+  require('fzf-lua').live_grep,
+  { desc = 'Grep' }
 )
 
 local function yank_file_to_clipboard(file_path)
