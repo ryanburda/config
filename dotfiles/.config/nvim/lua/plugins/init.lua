@@ -207,6 +207,7 @@ return {
     config = require('config.telescope').setup
   },
 
+  -- File Finders
   {
     "ibhagwan/fzf-lua",
     dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -217,7 +218,6 @@ return {
     },
   },
 
-  -- TheHarpoonagen
   {
     "ThePrimeagen/harpoon",
     branch = "harpoon2",
