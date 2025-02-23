@@ -319,7 +319,7 @@ vim.keymap.set(
 -- deprecate
 -- vim.keymap.set(
 --   'n',
---   '<leader>Dl',
+--   '<leader>dl',
 --   require('telescope.builtin').git_status,
 --   { desc = "Diff: List files with uncommitted changes in Telescope" }
 -- )
@@ -334,7 +334,7 @@ vim.keymap.set(
 -- deprecate
 -- vim.keymap.set(
 --   'n',
---   '<leader>Db',
+--   '<leader>db',
 --   require('telescope.builtin').git_branches,
 --   { desc = "Diff: Open branch selector in Telescope. Diff between selected branch and current is opened in DiffView" }
 -- )
@@ -363,7 +363,7 @@ vim.keymap.set(
 -- deprecate
 -- vim.keymap.set(
 --   "n",
---   '<leader>Dc',
+--   '<leader>dc',
 --   require('telescope').extensions.advanced_git_search.search_log_content,
 --   { desc = "Diff: Show commits for current repo in Telescope. Diff between selected commit and current is opened in DiffView" }
 -- )
@@ -483,11 +483,19 @@ vim.keymap.set(
 ------------------------------------------------------------------------------------------------------------------------
 -- Help
 ------------------------------------------------------------------------------------------------------------------------
+-- deprecate
+-- vim.keymap.set(
+--   'n',
+--   '<leader>?',
+--   require('telescope.builtin').keymaps,
+--   { desc = "Help: Show keymaps in Telescope" }
+-- )
+
 vim.keymap.set(
   'n',
   '<leader>?',
-  require('telescope.builtin').keymaps,
-  { desc = "Help: Show keymaps in Telescope" }
+  require('fzf-lua').keymaps,
+  { desc = "Help: Show keymaps" }
 )
 
 vim.keymap.set(
@@ -704,7 +712,7 @@ vim.keymap.set(
 -- deprecate
 -- vim.keymap.set(
 --   'n',
---   '<leader>F ',
+--   '<leader>f ',
 --   require('telescope.builtin').resume,
 --   { desc = 'Find: resume previous Telescope session' }
 -- )
@@ -719,7 +727,7 @@ vim.keymap.set(
 -- deprecate
 -- vim.keymap.set(
 --   'n',
---   '<leader>Ff',
+--   '<leader>ff',
 --   require('telescope.builtin').find_files,
 --   { desc = 'Find: find files in Telescope' }
 -- )
@@ -734,7 +742,7 @@ vim.keymap.set(
 -- deprecate
 -- vim.keymap.set(
 --   'n',
---   '<leader>Fg',
+--   '<leader>fg',
 --   require('grep_glob').grep_glob,
 --   { desc = 'Find: grep with optional glob filter following double space delimiter. ie `autocmd **/config/**.lua`' }
 -- )
@@ -768,7 +776,7 @@ vim.keymap.set(
 -- deprecate
 -- vim.keymap.set(
 --   'n',
---   '<leader>Sg',
+--   '<leader>sg',
 --   function() require('grep_glob').grep_glob({
 --     search_dir = "~/Developer/snippets/",
 --     prompt_title = "Grep Glob Snippets",
@@ -804,7 +812,7 @@ vim.keymap.set(
 -- deprecate
 -- vim.keymap.set(
 --   'n',
---   '<leader>Sf',
+--   '<leader>sf',
 --   function() require('telescope.builtin').find_files({
 --     cwd = "~/Developer/snippets/",
 --     attach_mappings = function(_, map)
@@ -854,7 +862,7 @@ vim.keymap.set(
 -- deprecate
 -- vim.keymap.set(
 --   'n',
---   '<leader>Fw',
+--   '<leader>fw',
 --   require('telescope.builtin').grep_string,
 --   { desc = 'Find: grep for word under cursor in Telescope' }
 -- )
