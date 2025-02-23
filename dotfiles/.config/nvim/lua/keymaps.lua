@@ -316,11 +316,19 @@ vim.keymap.set(
   { desc = "Diff: Full commit history for current file in diff viewer" }
 )
 
+-- deprecate
+vim.keymap.set(
+  'n',
+  '<leader>Dl',
+  require('telescope.builtin').git_status,
+  { desc = "Diff: List files with uncommitted changes in Telescope" }
+)
+
 vim.keymap.set(
   'n',
   '<leader>dl',
-  require('telescope.builtin').git_status,
-  { desc = "Diff: List files with uncommitted changes in Telescope" }
+  require('fzf-lua').git_status,
+  { desc = "Diff: List files with uncommitted" }
 )
 
 vim.keymap.set(
