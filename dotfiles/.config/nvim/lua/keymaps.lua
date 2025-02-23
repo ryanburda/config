@@ -1,14 +1,14 @@
 -- Keymaps in this file are grouped by purpose, not plugin.
 --
 -- For example, keymaps associated with diffs/version control currently use the following plugins:
---      * telescope
+--      * fzf-lua
 --      * diffview
 --      * gitsigns
 -- and are all prefixed with '<leader>d*':
 --      * '<leader>dr' - diff reset hunk. (gitsigns)
 --      * '<leader>dd' - open diffview. (diffview)
---      * '<leader>db' - opens a branch picker in telescope, upon selection diffview is opened
---                       showing diff between current code and selected branch. (telescope + diffview)
+--      * '<leader>db' - opens a branch picker in fzf-lua, selected entry is opened in diffview to
+--                       show a diff between current code and selected branch. (fzf-lua + diffview)
 --
 -- This last example is important because declaring a keymap with two plugin dependencies outside the setup
 -- functions of either plugin eliminates the need for plugin dependencies that exist solely for keymap creation.
