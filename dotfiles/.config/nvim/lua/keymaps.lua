@@ -826,37 +826,34 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
-local harpoon = require("harpoon")
-
--- REQUIRED
-harpoon:setup()
--- REQUIRED
-
 vim.keymap.set(
   "n",
   "<leader>fl",
-  function() harpoon.ui:toggle_quick_menu(harpoon:list()) end,
+  function()
+    local harpoon = require("harpoon")
+    harpoon.ui:toggle_quick_menu(harpoon:list())
+  end,
   {desc = 'Find: Harpoon toggle' }
 )
 
 vim.keymap.set(
   "n",
   "<leader>fa",
-  function() harpoon:list():add() end,
+  function() require("harpoon"):list():add() end,
   {desc = 'Find: Harpoon add' }
 )
 
 vim.keymap.set(
   "n",
   "<leader>fj",
-  function() harpoon:list():next() end,
+  function() require("harpoon"):list():next() end,
   {desc = 'Find: Harpoon next' }
 )
 
 vim.keymap.set(
   "n",
   "<leader>fk",
-  function() harpoon:list():prev() end,
+  function() require("harpoon"):list():prev() end,
   {desc = 'Find: Harpoon prev' }
 )
 
