@@ -42,10 +42,6 @@ return {
           overrides = { }, -- add custom overrides
         }
       },
-      {
-        "yorik1984/newpaper.nvim",
-        config = true,
-      },
     },
     config = require("config.colorscheme").setup,
   },

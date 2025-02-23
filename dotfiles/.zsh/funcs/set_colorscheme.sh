@@ -41,7 +41,6 @@ set_colorscheme() {
         ['Light - Everforest']="everforest,light,Everforest Light (Gogh)"
         ['Light - Gruvbox']="gruvbox-material,light,GruvboxLight"
         ['Light - Melange']="melange,light,dayfox"
-        ['Light - Newpaper']="newpaper,light,PaperColor Light (base16)"
         ['Light - Nightfox-dawn']="dawnfox,light,dawnfox"
         ['Light - Nightfox-day']="dayfox,light,dayfox"
         ['Light - Rose-pine']="rose-pine-dawn,light,rose-pine-dawn"
