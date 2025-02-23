@@ -317,12 +317,12 @@ vim.keymap.set(
 )
 
 -- deprecate
-vim.keymap.set(
-  'n',
-  '<leader>Dl',
-  require('telescope.builtin').git_status,
-  { desc = "Diff: List files with uncommitted changes in Telescope" }
-)
+-- vim.keymap.set(
+--   'n',
+--   '<leader>Dl',
+--   require('telescope.builtin').git_status,
+--   { desc = "Diff: List files with uncommitted changes in Telescope" }
+-- )
 
 vim.keymap.set(
   'n',
@@ -331,12 +331,13 @@ vim.keymap.set(
   { desc = "Diff: List files with uncommitted" }
 )
 
-vim.keymap.set(
-  'n',
-  '<leader>Db',
-  require('telescope.builtin').git_branches,
-  { desc = "Diff: Open branch selector in Telescope. Diff between selected branch and current is opened in DiffView" }
-)
+-- deprecate
+-- vim.keymap.set(
+--   'n',
+--   '<leader>Db',
+--   require('telescope.builtin').git_branches,
+--   { desc = "Diff: Open branch selector in Telescope. Diff between selected branch and current is opened in DiffView" }
+-- )
 
 vim.keymap.set(
   'n',
@@ -676,12 +677,12 @@ vim.keymap.set(
 -- Find
 ------------------------------------------------------------------------------------------------------------------------
 -- deprecate
-vim.keymap.set(
-  'n',
-  '<leader>F ',
-  require('telescope.builtin').resume,
-  { desc = 'Find: resume previous Telescope session' }
-)
+-- vim.keymap.set(
+--   'n',
+--   '<leader>F ',
+--   require('telescope.builtin').resume,
+--   { desc = 'Find: resume previous Telescope session' }
+-- )
 
 vim.keymap.set(
   'n',
@@ -691,12 +692,12 @@ vim.keymap.set(
 )
 
 -- deprecate
-vim.keymap.set(
-  'n',
-  '<leader>Ff',
-  require('telescope.builtin').find_files,
-  { desc = 'Find: find files in Telescope' }
-)
+-- vim.keymap.set(
+--   'n',
+--   '<leader>Ff',
+--   require('telescope.builtin').find_files,
+--   { desc = 'Find: find files in Telescope' }
+-- )
 
 vim.keymap.set(
   'n',
@@ -706,12 +707,12 @@ vim.keymap.set(
 )
 
 -- deprecate
-vim.keymap.set(
-  'n',
-  '<leader>Fg',
-  require('grep_glob').grep_glob,
-  { desc = 'Find: grep with optional glob filter following double space delimiter. ie `autocmd **/config/**.lua`' }
-)
+-- vim.keymap.set(
+--   'n',
+--   '<leader>Fg',
+--   require('grep_glob').grep_glob,
+--   { desc = 'Find: grep with optional glob filter following double space delimiter. ie `autocmd **/config/**.lua`' }
+-- )
 
 vim.keymap.set(
   'n',
@@ -721,47 +722,47 @@ vim.keymap.set(
 )
 
 -- deprecate
-local function yank_file_to_clipboard(file_path)
-  -- TODO: yank the contents of the file to the clipboard
-  -- Read the file content
-  local file = io.open(file_path, "r")
-  if file then
-    local content = file:read("*all")
-    file:close()
-
-    -- Yank content to the clipboard
-    vim.fn.setreg('+', content)
-
-    -- Optional: Print a message to confirm
-    print(file_path .. " yanked to clipboard")
-  else
-    print("Could not open file: " .. file_path)
-  end
-end
+-- local function yank_file_to_clipboard(file_path)
+--   -- TODO: yank the contents of the file to the clipboard
+--   -- Read the file content
+--   local file = io.open(file_path, "r")
+--   if file then
+--     local content = file:read("*all")
+--     file:close()
+-- 
+--     -- Yank content to the clipboard
+--     vim.fn.setreg('+', content)
+-- 
+--     -- Optional: Print a message to confirm
+--     print(file_path .. " yanked to clipboard")
+--   else
+--     print("Could not open file: " .. file_path)
+--   end
+-- end
 
 -- deprecate
-vim.keymap.set(
-  'n',
-  '<leader>Sg',
-  function() require('grep_glob').grep_glob({
-    search_dir = "~/Developer/snippets/",
-    prompt_title = "Grep Glob Snippets",
-    attach_mappings = function(_, map)
-      map(
-        "i",
-        "<C-y>",
-        function(prompt_bufnr)
-          local file_path = require("telescope.actions.state").get_selected_entry().path
-          yank_file_to_clipboard(file_path)
-          require("telescope.actions").close(prompt_bufnr)
-        end
-      )
-      -- return true to have default mappings
-      return true
-    end,
-  }) end,
-  { desc = 'Find: grep glob in snippets folder' }
-)
+-- vim.keymap.set(
+--   'n',
+--   '<leader>Sg',
+--   function() require('grep_glob').grep_glob({
+--     search_dir = "~/Developer/snippets/",
+--     prompt_title = "Grep Glob Snippets",
+--     attach_mappings = function(_, map)
+--       map(
+--         "i",
+--         "<C-y>",
+--         function(prompt_bufnr)
+--           local file_path = require("telescope.actions.state").get_selected_entry().path
+--           yank_file_to_clipboard(file_path)
+--           require("telescope.actions").close(prompt_bufnr)
+--         end
+--       )
+--       -- return true to have default mappings
+--       return true
+--     end,
+--   }) end,
+--   { desc = 'Find: grep glob in snippets folder' }
+-- )
 
 vim.keymap.set(
   'n',
@@ -776,27 +777,27 @@ vim.keymap.set(
 )
 
 -- deprecate
-vim.keymap.set(
-  'n',
-  '<leader>Sf',
-  function() require('telescope.builtin').find_files({
-    cwd = "~/Developer/snippets/",
-    attach_mappings = function(_, map)
-      map(
-        "i",
-        "<C-y>",
-        function(prompt_bufnr)
-          local file_path = require("telescope.actions.state").get_selected_entry().path
-          yank_file_to_clipboard(file_path)
-          require("telescope.actions").close(prompt_bufnr)
-        end
-      )
-      -- return true to have default mappings
-      return true
-    end,
-  }) end,
-  { desc = 'Find: find files in snippets folder' }
-)
+-- vim.keymap.set(
+--   'n',
+--   '<leader>Sf',
+--   function() require('telescope.builtin').find_files({
+--     cwd = "~/Developer/snippets/",
+--     attach_mappings = function(_, map)
+--       map(
+--         "i",
+--         "<C-y>",
+--         function(prompt_bufnr)
+--           local file_path = require("telescope.actions.state").get_selected_entry().path
+--           yank_file_to_clipboard(file_path)
+--           require("telescope.actions").close(prompt_bufnr)
+--         end
+--       )
+--       -- return true to have default mappings
+--       return true
+--     end,
+--   }) end,
+--   { desc = 'Find: find files in snippets folder' }
+-- )
 
 vim.keymap.set(
   'n',
@@ -811,12 +812,12 @@ vim.keymap.set(
 )
 
 -- deprecate
-vim.keymap.set(
-  'n',
-  '<leader>f/',
-  function() require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown{ winblend = 10, previewer = false, }) end,
-  { desc = 'Find: current buffer fuzzy find in Telescope' }
-)
+-- vim.keymap.set(
+--   'n',
+--   '<leader>f/',
+--   function() require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown{ winblend = 10, previewer = false, }) end,
+--   { desc = 'Find: current buffer fuzzy find in Telescope' }
+-- )
 
 vim.keymap.set(
   'n',
@@ -825,11 +826,19 @@ vim.keymap.set(
   { desc = 'Grep current buffer' }
 )
 
+-- deprecate
+-- vim.keymap.set(
+--   'n',
+--   '<leader>Fw',
+--   require('telescope.builtin').grep_string,
+--   { desc = 'Find: grep for word under cursor in Telescope' }
+-- )
+
 vim.keymap.set(
   'n',
   '<leader>fw',
-  require('telescope.builtin').grep_string,
-  { desc = 'Find: grep for word under cursor in Telescope' }
+  require('fzf-lua').grep_cword,
+  { desc = 'Find: grep for word under cursor' }
 )
 
 vim.keymap.set(
