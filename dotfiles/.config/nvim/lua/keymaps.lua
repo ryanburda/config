@@ -360,11 +360,36 @@ vim.keymap.set(
   { desc = "Diff: Open branch selector. Diff between selected branch and current is opened in DiffView" }
 )
 
+-- deprecate
+-- vim.keymap.set(
+--   "n",
+--   '<leader>Dc',
+--   require('telescope').extensions.advanced_git_search.search_log_content,
+--   { desc = "Diff: Show commits for current repo in Telescope. Diff between selected commit and current is opened in DiffView" }
+-- )
+
 vim.keymap.set(
   "n",
   '<leader>dc',
-  require('telescope').extensions.advanced_git_search.search_log_content,
-  { desc = "Diff: Show commits for current repo in Telescope. Diff between selected commit and current is opened in DiffView" }
+  function()
+    require('fzf-lua').git_commits({
+      actions = {
+        -- When a commit is selected, this action will be triggered
+        -- 'selected' is a table with information about the commit
+        ["default"] = function(selected)
+          -- Extract the commit hash from the selected entry
+          local commit_hash = selected[1]:match("%w+")
+          -- Open diff view between current and selected commit
+          if commit_hash then
+            require("diffview").open(commit_hash.."^.."..commit_hash)
+          else
+            print("No commit selected!")
+          end
+        end,
+      },
+    })
+  end,
+  { desc = "Diff: Show commits for current repo. Diff between selected commit and current is opened in DiffView" }
 )
 
 ------------------------------------------------------------------------------------------------------------------------
