@@ -409,19 +409,14 @@ vim.keymap.set(
 vim.keymap.set(
   'n',
   '<leader>kf',
-  require('telescope.builtin').quickfix,
+  require('fzf-lua').quickfix,
   { desc = "Quickfix: Find quickfix files" }
 )
 
 vim.keymap.set(
   'n',
   '<leader>kg',
-  function()
-    require('telescope.builtin').live_grep({
-      search_dirs = require('config.telescope').getqflist_files(),
-      results_title = 'Quickfix Files'
-    })
-  end,
+  require('fzf-lua').grep_quickfix,
   { desc = "Quickfix: Grep" }
 )
 
