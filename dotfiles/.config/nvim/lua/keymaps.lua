@@ -483,29 +483,29 @@ vim.keymap.set(
 vim.keymap.set(
   'n',
   '<leader>vk',
-  require('telescope.builtin').help_tags,
-  { desc = "Help: vim help pages in Telescope" }
+  require('fzf-lua').helptags,
+  { desc = "Help: vim help" }
 )
 
 vim.keymap.set(
   'n',
   '<leader>vr',
-  require('telescope.builtin').registers,
+  require('fzf-lua').registers,
   { desc = "Help: vim registers" }
 )
 
 vim.keymap.set(
   'n',
   '<leader>vh',
-  require('telescope.builtin').highlights,
+  require('fzf-lua').highlights,
   { desc = "Help: vim highlight groups" }
 )
 
 vim.keymap.set(
   'n',
   '<leader>mk',
-  require('telescope.builtin').man_pages,
-  { desc = "Help: man pages in Telescope" }
+  require('fzf-lua').manpages,
+  { desc = "Help: man pages" }
 )
 
 ------------------------------------------------------------------------------------------------------------------------
