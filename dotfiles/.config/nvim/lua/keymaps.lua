@@ -452,8 +452,15 @@ vim.keymap.set(
 vim.keymap.set(
   'n',
   '<leader>ef',
-  require('telescope.builtin').diagnostics,
-  { desc = "Diagnostic: Show errors in Telescope" }
+  require('fzf-lua').diagnostics_document,
+  { desc = "Diagnostic: Show errors" }
+)
+
+vim.keymap.set(
+  'n',
+  '<leader>ep',
+  require('fzf-lua').diagnostics_workspace,
+  { desc = "Diagnostic: Show errors" }
 )
 
 ------------------------------------------------------------------------------------------------------------------------
@@ -763,35 +770,35 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set(
       'n',
       '<leader>fr',
-      require('telescope.builtin').lsp_references,
+      require('fzf-lua').lsp_references,
       {desc = 'Find: all references', buffer = event.buf}
     )
 
     vim.keymap.set(
       'n',
       '<leader>ft',
-      require('telescope.builtin').lsp_type_definitions,
+      require('fzf-lua').lsp_typedefs,
       {desc = 'Find: type definitions', buffer = event.buf}
     )
 
     vim.keymap.set(
       'n',
       '<leader>fi',
-      require('telescope.builtin').lsp_implementations,
+      require('fzf-lua').lsp_implementations,
       {desc = 'Find: implementations', buffer = event.buf}
     )
 
     vim.keymap.set(
       'n',
       '<leader>fS',
-      require('telescope.builtin').lsp_document_symbols,
+      require('fzf-lua').lsp_document_symbols,
       {desc = 'Find: symbols in current document', buffer = event.buf}
     )
 
     vim.keymap.set(
       'n',
       '<leader>fW',
-      require('telescope.builtin').lsp_dynamic_workspace_symbols,
+      require('fzf-lua').lsp_live_workspace_symbols,
       {desc = 'Find: symbols in entire workspace', buffer = event.buf}
     )
 
