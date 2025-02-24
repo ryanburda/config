@@ -47,6 +47,7 @@ while true; do
 
         SESSION=$(tmux_sessions | \
                   fzf --cycle \
+                      --layout reverse \
                       --bind "tab:execute(tmux switch-client -l)+abort" \
                       --bind "ctrl-s:become(echo '_TMUX_NEW')+abort" \
                       --bind "ctrl-l:become(echo '_TMUXINATOR')+abort" \
@@ -76,6 +77,7 @@ while true; do
 
         SESSION=$(tmuxinator_sessions | \
                   fzf --cycle \
+                      --layout reverse \
                       --bind "ctrl-s:become(echo '_TMUX_NEW')+abort" \
                       --bind "ctrl-l:become(echo '_TMUX')+abort" \
                       --header $HEADER)

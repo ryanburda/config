@@ -25,7 +25,7 @@ set_font() {
     current_font=$(<$FONT_FILE_PATH)
     current_font_size=$(<$FONT_SIZE_FILE_PATH)
 
-    selection=$(printf "%s\n" "${fonts[@]}" | sort | fzf --cycle --header "${current_font},${current_font_size}")
+    selection=$(printf "%s\n" "${fonts[@]}" | sort | fzf --layout reverse --cycle --header "${current_font},${current_font_size}")
     if [[ -n "${selection}" ]]; then
         echo $(print $selection| awk -F ',' '{print $1}') > $FONT_FILE_PATH
         echo $(print $selection| awk -F ',' '{print $2}') > $FONT_SIZE_FILE_PATH

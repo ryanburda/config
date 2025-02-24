@@ -74,7 +74,7 @@ set_colorscheme() {
     }
 
     current_theme_key=$(<$COLORSCHEME_KEY_FILE_PATH)
-    theme_key=$(printf "%s\n" "${(k)themes[@]}" | sort | fzf --cycle --header "${current_theme_key}")
+    theme_key=$(printf "%s\n" "${(k)themes[@]}" | sort | fzf --layout reverse --cycle --header "${current_theme_key}")
 
     if [[ ! -z $theme_key ]]; then
         set_theme $theme_key
