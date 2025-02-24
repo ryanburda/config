@@ -1000,35 +1000,7 @@ vim.keymap.set(
 vim.keymap.set(
   'n',
   '<leader>tc',
-  function()
-    require('fzf-lua').files({
-      cwd=require("trail_marker.serde").get_current_project_dir(),
-      prompt="Trails",
-      previewer = false,
-      actions = {
-        ["default"] = function(selected)
-          local trail_name = selected[1]:match("%w+")
-          if trail_name then
-            require("trail_marker").change_trail(trail_name)
-          else
-            vim.notify("No trail selected!", vim.log.levels.WARN)
-          end
-        end,
-        ["ctrl-d"] = function(selected)
-          local trail_name = selected[1]:match("%w+")
-          if trail_name then
-            require("trail_marker").remove_trail(trail_name)
-          else
-            vim.notify("No trail selected!", vim.log.levels.WARN)
-          end
-        end,
-      },
-      --winopts = {
-      --  width = .40,
-      --  height = .40,
-      --},
-    })
-  end,
+  require("trail_marker").fzf_lua_change_trail,
   { desc = "TrailMarker: Change trails" }
 )
 
