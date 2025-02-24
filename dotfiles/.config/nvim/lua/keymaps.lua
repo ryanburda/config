@@ -695,6 +695,13 @@ vim.keymap.set(
 
 vim.keymap.set(
   'n',
+  '<leader>fg',
+  require('fzf-lua').live_grep,
+  { desc = 'Grep snippets folder' }
+)
+
+vim.keymap.set(
+  'n',
   '<leader>vc',
   require('fzf-lua').command_history,
   { desc = 'Vim command history' }

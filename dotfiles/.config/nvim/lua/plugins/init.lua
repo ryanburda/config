@@ -202,9 +202,9 @@ return {
         },
       },
       keymap = {
-        fzf = {
-          ["ctrl-d"] = "preview-page-down",
-          ["ctrl-u"] = "preview-page-up",
+        builtin = {
+          ['<C-u>'] = 'preview-page-up',
+          ['<C-d>'] = 'preview-page-down',
         },
       },
     },
