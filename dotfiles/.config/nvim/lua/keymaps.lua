@@ -1007,13 +1007,13 @@ vim.keymap.set(
 vim.keymap.set(
   'n',
   '<leader>tc',
-  require("trail_marker").fzf_lua_change_trail,
+  require("trail_marker.extensions.fzf-lua").change_trail,
   { desc = "TrailMarker: Change trails" }
 )
 
 vim.keymap.set(
   'n',
   '<leader>tm',
-  require("trail_marker").fzf_lua_trail_map,
+  require("trail_marker.extensions.fzf-lua").trail_map,
   { desc = "Trail Marker: List markers on current trail" }
 )
