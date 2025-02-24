@@ -916,7 +916,7 @@ vim.keymap.set(
 vim.keymap.set(
   'n',
   '<leader>tm',
-  require("trail_marker").trail_map,
+  require("trail_marker").telescope_trail_map,
   { desc = "Trail Marker: List markers on current trail" }
 )
 
@@ -999,14 +999,37 @@ vim.keymap.set(
 
 vim.keymap.set(
   'n',
-  '<leader>tc',
-  ':TrailMarker change_trail ',
-  { desc = "Trail Marker: Change trail" }
+  '<leader>tr',
+  ':TrailMarker remove_trail ',
+  { desc = "Trail Marker: Remove trail" }
 )
 
 vim.keymap.set(
   'n',
-  '<leader>tr',
-  ':TrailMarker remove_trail ',
-  { desc = "Trail Marker: Remove trail" }
+  '<leader>tc',
+  function()
+    require('fzf-lua').files({
+      cwd=require("trail_marker.serde").get_current_project_dir(),
+      prompt="Trails",
+      actions = {
+        ["default"] = function(selected)
+          local trail_name = selected[1]:match("%w+")
+          if trail_name then
+            require("trail_marker").change_trail(trail_name)
+          else
+            vim.notify("No trail selected!", vim.log.levels.WARN)
+          end
+        end,
+        ["ctrl-d"] = function(selected)
+          local trail_name = selected[1]:match("%w+")
+          if trail_name then
+            require("trail_marker").remove_trail(trail_name)
+          else
+            vim.notify("No trail selected!", vim.log.levels.WARN)
+          end
+        end,
+      }
+    })
+  end,
+  { desc = "TrailMarker: Change trails" }
 )
