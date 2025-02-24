@@ -6,7 +6,7 @@
 -- of a single file instead of the commit history of an entire directory.
 -- This is a preference, not a requirement.
 --
--- Plugins with larger than normal `config` functions (telescope for example) can
+-- Plugins with larger than normal `config` functions (mason for example) can
 -- have their config functions broken out into a separate file in `../config/`.
 
 return {
@@ -181,30 +181,6 @@ return {
       },
     },
     dependencies = { { "echasnovski/mini.icons", opts = {} } },
-  },
-
-  -- Telescope
-  {
-    'nvim-telescope/telescope.nvim',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'nvim-telescope/telescope-fzf-native.nvim',
-      'freestingo/telescope-changed-files',
-      'nvim-telescope/telescope-live-grep-args.nvim',
-      {
-        'nvim-telescope/telescope-fzf-native.nvim',
-        build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
-      },
-      {
-        "aaronhallaert/advanced-git-search.nvim",
-        dependencies = {
-          "nvim-telescope/telescope.nvim",
-          "tpope/vim-fugitive",
-          "sindrets/diffview.nvim",
-        },
-      },
-    },
-    config = require('config.telescope').setup
   },
 
   -- File Finders
