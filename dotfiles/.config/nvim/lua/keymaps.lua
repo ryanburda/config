@@ -1011,6 +1011,7 @@ vim.keymap.set(
     require('fzf-lua').files({
       cwd=require("trail_marker.serde").get_current_project_dir(),
       prompt="Trails",
+      previewer = false,
       actions = {
         ["default"] = function(selected)
           local trail_name = selected[1]:match("%w+")
@@ -1028,7 +1029,11 @@ vim.keymap.set(
             vim.notify("No trail selected!", vim.log.levels.WARN)
           end
         end,
-      }
+      },
+      --winopts = {
+      --  width = .40,
+      --  height = .40,
+      --},
     })
   end,
   { desc = "TrailMarker: Change trails" }
