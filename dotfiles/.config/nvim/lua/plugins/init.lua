@@ -234,16 +234,15 @@ return {
   'justinmk/vim-sneak',
 
   -- Highlight word under cursor
-  {
-    'tzachar/local-highlight.nvim',
-    config = function()
-      require('local-highlight').setup({
-        hlgroup = 'Underlined',
-        cw_hlgroup = nil,
-        insert_mode = true,
-      })
-    end
-  },
+  -- NOTE: this is requiring folke/snacks.nvim
+  -- {
+  --   'tzachar/local-highlight.nvim',
+  --   config = function()
+  --     require('local-highlight').setup({
+  --       animate = { enabled = false },
+  --     })
+  --   end
+  -- },
 
   -- Git
   {
