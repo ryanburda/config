@@ -915,13 +915,6 @@ vim.keymap.set(
 ------------------------------------------------------------------------------------------------------------------------
 vim.keymap.set(
   'n',
-  '<leader>tm',
-  require("trail_marker").telescope_trail_map,
-  { desc = "Trail Marker: List markers on current trail" }
-)
-
-vim.keymap.set(
-  'n',
   '<leader>ta',
   require("trail_marker").place_marker,
   { desc = "Trail Marker: Add marker to current trail" }
@@ -1037,4 +1030,11 @@ vim.keymap.set(
     })
   end,
   { desc = "TrailMarker: Change trails" }
+)
+
+vim.keymap.set(
+  'n',
+  '<leader>tm',
+  require("trail_marker").fzf_lua_trail_map,
+  { desc = "Trail Marker: List markers on current trail" }
 )
