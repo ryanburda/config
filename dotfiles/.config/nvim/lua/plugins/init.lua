@@ -217,6 +217,16 @@ return {
       },
       winopts = {
         backdrop = 100,
+        preview = {
+          layout = "vertical",
+          vertical = "down:60%",
+        },
+      },
+      keymap = {
+        fzf = {
+          ["ctrl-d"] = "preview-page-down",
+          ["ctrl-u"] = "preview-page-up",
+        },
       },
     },
   },
