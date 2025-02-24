@@ -695,9 +695,9 @@ vim.keymap.set(
 
 vim.keymap.set(
   'n',
-  '<leader>fg',
-  require('fzf-lua').live_grep,
-  { desc = 'Grep' }
+  '<leader>vc',
+  require('fzf-lua').command_history,
+  { desc = 'Vim command history' }
 )
 
 vim.keymap.set(
