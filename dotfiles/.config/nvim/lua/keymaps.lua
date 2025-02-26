@@ -192,21 +192,28 @@ vim.keymap.set(
 
 vim.keymap.set(
   'n',
-  '<leader>F',
-  ":let @+=expand('%')<CR>",
+  '<leader>fp',
+  ':let @+ = expand("%")<CR>',
   {desc = 'Clipboard: Copy relative file path to clipboard'}
 )
 
 vim.keymap.set(
   'n',
-  '<leader>A',
-  ":let @+=expand('%:p')<CR>",
+  '<leader>fP',
+  ':let @+ = expand("%:p")<CR>',
   {desc = 'Clipboard: Copy absolute file path to clipboard'}
 )
 
 vim.keymap.set(
   'n',
-  '<leader>D',
+  '<leader>fn',
+  ':let @+ = expand("%:t")<CR>',
+  {desc = 'Clipboard: Copy file name to clipboard'}
+)
+
+vim.keymap.set(
+  'n',
+  '<leader>dp',
   ":let @+=expand('%:h')<CR>",
   {desc = 'Clipboard: Copy directory path to clipboard'}
 )
@@ -216,7 +223,7 @@ vim.keymap.set(
 ------------------------------------------------------------------------------------------------------------------------
 vim.keymap.set(
   'n',
-  '<leader>m',
+  '<leader>O',
   ':!open -a "Google Chrome" %<cr><cr>',
   {desc = 'Browser: Open current file in browser'}
 )
@@ -256,7 +263,7 @@ vim.keymap.set(
 
 vim.keymap.set(
   'n',
-  '<C-n>',
+  '<leader>dj',
   function()
     require('gitsigns').nav_hunk('next')
   end,
@@ -265,7 +272,7 @@ vim.keymap.set(
 
 vim.keymap.set(
   'n',
-  '<C-p>',
+  '<leader>dk',
   function()
     require('gitsigns').nav_hunk('prev')
   end,
@@ -503,13 +510,6 @@ vim.keymap.set(
   { desc = "Help: vim highlight groups" }
 )
 
-vim.keymap.set(
-  'n',
-  '<leader>mk',
-  require('fzf-lua').manpages,
-  { desc = "Help: man pages" }
-)
-
 ------------------------------------------------------------------------------------------------------------------------
 -- Tmux
 ------------------------------------------------------------------------------------------------------------------------
@@ -572,33 +572,33 @@ vim.keymap.set(
   {desc = "Tmux: resize right"}
 )
 
-vim.keymap.set(
-  "n",
-  "<leader>ri",
-  ":VtrOpenRunner<cr>",
-  {desc = "Tmux: Open runner"}
-)
-
-vim.keymap.set(
-  "n",
-  "<leader>ra",
-  ":VtrAttachToPane<cr>",
-  {desc = "Tmux: Attach to pane"}
-)
-
-vim.keymap.set(
-  "x",
-  "<leader>re",
-  ":call VtrSendLinesToRunnerWrapper()<cr>",
-  {desc = "Tmux: Send lines to runner"}
-)
-
-vim.keymap.set(
-  "n",
-  "<leader>rf",
-  ":VtrSendFile<cr>",
-  {desc = "Tmux: Send file to runner"}
-)
+--vim.keymap.set(
+--  "n",
+--  "<leader>ri",
+--  ":VtrOpenRunner<cr>",
+--  {desc = "Tmux: Open runner"}
+--)
+--
+--vim.keymap.set(
+--  "n",
+--  "<leader>ra",
+--  ":VtrAttachToPane<cr>",
+--  {desc = "Tmux: Attach to pane"}
+--)
+--
+--vim.keymap.set(
+--  "x",
+--  "<leader>re",
+--  ":call VtrSendLinesToRunnerWrapper()<cr>",
+--  {desc = "Tmux: Send lines to runner"}
+--)
+--
+--vim.keymap.set(
+--  "n",
+--  "<leader>rf",
+--  ":VtrSendFile<cr>",
+--  {desc = "Tmux: Send file to runner"}
+--)
 
 ------------------------------------------------------------------------------------------------------------------------
 -- Debug
@@ -922,98 +922,56 @@ vim.keymap.set(
 ------------------------------------------------------------------------------------------------------------------------
 vim.keymap.set(
   'n',
-  '<leader>ta',
+  '<leader>a',
   require("trail_marker").place_marker,
   { desc = "Trail Marker: Add marker to current trail" }
 )
 
 vim.keymap.set(
   'n',
-  '<leader>td',
+  '<leader>r',
   require("trail_marker").remove_marker,
   { desc = "Trail Marker: Remove marker from current trail" }
 )
 
 vim.keymap.set(
   'n',
-  '<leader>tt',
+  '<C-t>',
   require("trail_marker").current_marker,
   { desc = "Trail Marker: Go to current marker" }
 )
 
 vim.keymap.set(
   'n',
-  '<leader>tj',
+  '<C-n>',
   require("trail_marker").next_marker,
   { desc = "Trail Marker: Go to next marker" }
 )
 
 vim.keymap.set(
   'n',
-  '<leader>tk',
+  '<C-p>',
   require("trail_marker").prev_marker,
   { desc = "Trail Marker: Go to previous marker" }
 )
 
 vim.keymap.set(
   'n',
-  '<leader>tgg',
-  require("trail_marker").trail_head,
-  { desc = "Trail Marker: Go to start of trail" }
-)
-
-vim.keymap.set(
-  'n',
-  '<leader>tG',
-  require("trail_marker").trail_end,
-  { desc = "Trail Marker: Go to end of trail" }
-)
-
-vim.keymap.set(
-  'n',
-  '<leader>tx',
-  require("trail_marker").clear_trail,
-  { desc = "Trail Marker: Remove all markers from trail" }
-)
-
-vim.keymap.set(
-  'n',
-  '<leader>tv',
-  require("trail_marker").virtual_text_toggle,
-  { desc = "Trail Marker: Toggle virtual text" }
-)
-
-vim.keymap.set(
-  'n',
-  '<leader>tq',
-  require("trail_marker").leave_trail,
-  { desc = "Trail Marker: Leave trail" }
-)
-
-vim.keymap.set(
-  'n',
-  '<leader>tn',
-  ':TrailMarker new_trail ',
-  { desc = "Trail Marker: New trail" }
-)
-
-vim.keymap.set(
-  'n',
-  '<leader>tr',
-  ':TrailMarker remove_trail ',
-  { desc = "Trail Marker: Remove trail" }
-)
-
-vim.keymap.set(
-  'n',
-  '<leader>tc',
-  require("trail_marker.extensions.fzf-lua").change_trail,
-  { desc = "TrailMarker: Change trails" }
-)
-
-vim.keymap.set(
-  'n',
-  '<leader>tm',
+  '<C-m>',
   require("trail_marker.extensions.fzf-lua").trail_map,
   { desc = "Trail Marker: List markers on current trail" }
+)
+
+vim.keymap.set(
+  'n',
+  '<leader>S',
+  require("trail_marker.extensions.fzf-lua").change_trail,
+  { desc = "TrailMarker: Switch trails" }
+)
+
+vim.keymap.set(
+  'n',
+  '<leader>A',
+  ':TrailMarker new_trail ',
+  { desc = "Trail Marker: New trail" }
 )
