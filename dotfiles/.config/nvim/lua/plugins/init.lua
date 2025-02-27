@@ -471,6 +471,8 @@ return {
     end
   },
 
+  'junegunn/vim-easy-align',
+
   -- Local plugins
   {
     dir = "~/Developer/trail_marker.nvim",
