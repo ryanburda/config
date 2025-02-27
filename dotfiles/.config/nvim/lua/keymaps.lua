@@ -964,14 +964,7 @@ vim.keymap.set(
 
 vim.keymap.set(
   'n',
-  '<leader>S',
+  '<C-s>',
   require("trail_marker.extensions.fzf-lua").change_trail,
   { desc = "TrailMarker: Switch trails" }
-)
-
-vim.keymap.set(
-  'n',
-  '<leader>A',
-  ':TrailMarker new_trail ',
-  { desc = "Trail Marker: New trail" }
 )
