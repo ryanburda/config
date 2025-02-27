@@ -211,13 +211,6 @@ vim.keymap.set(
   {desc = 'Clipboard: Copy file name to clipboard'}
 )
 
-vim.keymap.set(
-  'n',
-  '<leader>dp',
-  ":let @+=expand('%:h')<CR>",
-  {desc = 'Clipboard: Copy directory path to clipboard'}
-)
-
 ------------------------------------------------------------------------------------------------------------------------
 -- Browser
 ------------------------------------------------------------------------------------------------------------------------
@@ -311,23 +304,33 @@ vim.keymap.set(
 
 vim.keymap.set(
   'n',
-  '<leader>dh',
-  ':DiffviewFileHistory<cr>',
-  {desc = "Diff: Full repo commit history in diff viewer"}
-)
-
-vim.keymap.set(
-  "n",
-  '<leader>df',
-  ':DiffviewFileHistory %<cr>',
-  { desc = "Diff: Full commit history for current file in diff viewer" }
+  '<leader>dl',
+  require('fzf-lua').git_status,
+  { desc = "Diff: List files with uncommitted" }
 )
 
 vim.keymap.set(
   'n',
-  '<leader>dl',
-  require('fzf-lua').git_status,
-  { desc = "Diff: List files with uncommitted" }
+  '<leader>df',
+  function()
+    require('fzf-lua').git_bcommits({
+      actions = {
+        -- When a commit is selected, this action will be triggered
+        -- 'selected' is a table with information about the commit
+        ["default"] = function(selected)
+          -- Extract the commit hash from the selected entry
+          local commit_hash = selected[1]:match("%w+")
+          -- Open diff view between current and selected commit
+          if commit_hash then
+            require("diffview").open(commit_hash.."^.."..commit_hash)
+          else
+            print("No commit selected!")
+          end
+        end,
+      },
+    })
+  end,
+  { desc = "Diff: list commits on file" }
 )
 
 vim.keymap.set(
