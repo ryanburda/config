@@ -205,7 +205,14 @@ return {
         builtin = {
           ['<C-u>'] = 'preview-page-up',
           ['<C-d>'] = 'preview-page-down',
+          ['<C-k>'] = 'select-all+accept',
         },
+        fzf = {
+          ['ctrl-u'] = 'preview-page-up',
+          ['ctrl-d'] = 'preview-page-down',
+          ['ctrl-k'] = 'select-all+accept',
+        },
+
       },
     },
   },
