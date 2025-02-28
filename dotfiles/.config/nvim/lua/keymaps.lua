@@ -945,13 +945,6 @@ vim.keymap.set(
 
 vim.keymap.set(
   'n',
-  '<C-t>',
-  require("trail_marker").current_marker,
-  { desc = "Trail Marker: Go to current marker" }
-)
-
-vim.keymap.set(
-  'n',
   '<C-n>',
   require("trail_marker").next_marker,
   { desc = "Trail Marker: Go to next marker" }
@@ -967,6 +960,13 @@ vim.keymap.set(
 vim.keymap.set(
   'n',
   '<C-m>',
+  require("trail_marker").current_marker,
+  { desc = "Trail Marker: Go to current marker" }
+)
+
+vim.keymap.set(
+  'n',
+  '<C-t>',
   require("trail_marker.extensions.fzf-lua").trail_map,
   { desc = "Trail Marker: List markers on current trail" }
 )
