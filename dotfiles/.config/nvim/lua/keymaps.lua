@@ -110,33 +110,33 @@ vim.keymap.set(
   {desc = 'Navigation: Close all buffers except current'}
 )
 
-vim.keymap.set(
-  { 'n', 'v', 'x' },
-  '<C-u>',
-  function() require('neoscroll').ctrl_u({ duration = 100 }) end,
-  { desc = "Navigation: Up half page" }
-)
-
-vim.keymap.set(
-  { 'n', 'v', 'x' },
-  '<C-d>',
-  function() require('neoscroll').ctrl_d({ duration = 100 }) end,
-  { desc = "Navigation: Down half page" }
-)
-
-vim.keymap.set(
-  { 'n', 'v', 'x' },
-  '<C-y>',
-  function() require('neoscroll').scroll(-0.1, { move_cursor=false; duration = 100 }) end,
-  { desc = "Navigation: Show more on top" }
-)
-
-vim.keymap.set(
-  { 'n', 'v', 'x' },
-  '<C-e>',
-  function() require('neoscroll').scroll(0.1, { move_cursor=false; duration = 100 }) end,
-  { desc = "Navigation: Show more on bottom" }
-)
+--vim.keymap.set(
+--  { 'n', 'v', 'x' },
+--  '<C-u>',
+--  function() require('neoscroll').ctrl_u({ duration = 100 }) end,
+--  { desc = "Navigation: Up half page" }
+--)
+--
+--vim.keymap.set(
+--  { 'n', 'v', 'x' },
+--  '<C-d>',
+--  function() require('neoscroll').ctrl_d({ duration = 100 }) end,
+--  { desc = "Navigation: Down half page" }
+--)
+--
+--vim.keymap.set(
+--  { 'n', 'v', 'x' },
+--  '<C-y>',
+--  function() require('neoscroll').scroll(-0.1, { move_cursor=false; duration = 100 }) end,
+--  { desc = "Navigation: Show more on top" }
+--)
+--
+--vim.keymap.set(
+--  { 'n', 'v', 'x' },
+--  '<C-e>',
+--  function() require('neoscroll').scroll(0.1, { move_cursor=false; duration = 100 }) end,
+--  { desc = "Navigation: Show more on bottom" }
+--)
 
 vim.keymap.set(
   'n',
@@ -807,37 +807,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
       {desc = 'Code: Format', buffer = event.buf})
   end,
 })
-
-vim.keymap.set(
-  "n",
-  "<leader>fl",
-  function()
-    local harpoon = require("harpoon")
-    harpoon.ui:toggle_quick_menu(harpoon:list())
-  end,
-  {desc = 'Find: Harpoon toggle' }
-)
-
-vim.keymap.set(
-  "n",
-  "<leader>fa",
-  function() require("harpoon"):list():add() end,
-  {desc = 'Find: Harpoon add' }
-)
-
-vim.keymap.set(
-  "n",
-  "<leader>fj",
-  function() require("harpoon"):list():next() end,
-  {desc = 'Find: Harpoon next' }
-)
-
-vim.keymap.set(
-  "n",
-  "<leader>fk",
-  function() require("harpoon"):list():prev() end,
-  {desc = 'Find: Harpoon prev' }
-)
 
 ------------------------------------------------------------------------------------------------------------------------
 -- AI

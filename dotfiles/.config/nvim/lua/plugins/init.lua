@@ -11,15 +11,6 @@
 
 return {
 
-  -- Greeter
-  {
-    'goolord/alpha-nvim',
-    dependencies = { 'echasnovski/mini.icons' },
-    config = function ()
-      require'alpha'.setup(require'alpha.themes.startify'.config)
-    end
-  },
-
   -- Color Schemes
   {
     "rktjmp/fwatch.nvim",
@@ -57,10 +48,6 @@ return {
         }
       })
     end,
-  },
-  {
-    "folke/todo-comments.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
   },
 
   -- Treesitter
@@ -183,7 +170,7 @@ return {
     dependencies = { { "echasnovski/mini.icons", opts = {} } },
   },
 
-  -- File Finders
+  -- Fuzzy Finder
   {
     "ibhagwan/fzf-lua",
     dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -218,38 +205,11 @@ return {
   },
 
   {
-    "ThePrimeagen/harpoon",
-    branch = "harpoon2",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    config = function()
-      require("harpoon"):setup()
-    end,
-  },
-
-  -- Scrolling
-  'karb94/neoscroll.nvim',
-  {
     'Aasim-A/scrollEOF.nvim',
     config = function() require('scrollEOF').setup() end,
   },
-  {
-    'petertriho/nvim-scrollbar',
-    config = function() require("scrollbar").setup() end,
-  },
 
-  -- Motion
   'justinmk/vim-sneak',
-
-  -- Highlight word under cursor
-  -- NOTE: this is requiring folke/snacks.nvim
-  -- {
-  --   'tzachar/local-highlight.nvim',
-  --   config = function()
-  --     require('local-highlight').setup({
-  --       animate = { enabled = false },
-  --     })
-  --   end
-  -- },
 
   -- Git
   {
@@ -261,7 +221,6 @@ return {
     end
   },
   'ruifm/gitlinker.nvim',
-  'tpope/vim-fugitive',
   {
     'sindrets/diffview.nvim',
     dependencies = { 'nvim-lua/plenary.nvim', },
@@ -285,7 +244,6 @@ return {
     end,
   },
 
-  -- Tmux
   {
     'mrjones2014/smart-splits.nvim',
     config = function ()
@@ -295,19 +253,13 @@ return {
       })
     end
   },
-  {
-    'christoomey/vim-tmux-runner',
-    config = require('config.vim-tmux-runner').setup,
-  },
 
-  -- Status line
   {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'kyazdani42/nvim-web-devicons', },
     config = require('config.lualine').setup
   },
 
-  -- Indentation lines
   {
     'lukas-reineke/indent-blankline.nvim',
     config = function ()
@@ -427,8 +379,6 @@ return {
       require("copilot_cmp").setup()
     end
   },
-
-  'junegunn/vim-easy-align',
 
   -- Local plugins
   {
