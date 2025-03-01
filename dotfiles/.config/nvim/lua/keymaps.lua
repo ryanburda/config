@@ -60,44 +60,16 @@ vim.keymap.set(
 
 vim.keymap.set(
   'n',
-  '<leader>q',
-  ':Bdelete<cr>',
-  {desc = 'Window Management: Delete buffer without changing window layout'}
-)
-
-vim.keymap.set(
-  'n',
-  '<leader>Q',
-  ':Bdelete!<cr>',
-  {desc = 'Window Management: Force delete buffer without changing window layout'}
-)
-
-vim.keymap.set(
-  'n',
   '<leader>i',
-  ':BufferLineCyclePrev<cr>',
-  {desc = 'Window Management: Cycle through buffers left. (Mnemonic: overlaps with jumplist navigation <C-i>)'}
+  ':bnext<cr>',
+  {desc = 'Buffers: Cycle through buffers previous. (Mnemonic: overlaps with jumplist navigation <C-i>)'}
 )
 
 vim.keymap.set(
   'n',
   '<leader>o',
-  ':BufferLineCycleNext<cr>',
-  {desc = 'Window Management: Cycle through buffers right. (Mnemonic: overlaps with jumplist navigation <C-o>)'}
-)
-
-vim.keymap.set(
-  'n',
-  '<leader>I',
-  ':BufferLineMovePrev<cr>',
-  {desc = 'Window Management: Move current buffer to the left in the bufferline'}
-)
-
-vim.keymap.set(
-  'n',
-  '<leader>O',
-  ':BufferLineMoveNext<cr>',
-  {desc = 'Window Management: Move current buffer to the right in the bufferline'}
+  ':bprev<cr>',
+  {desc = 'Buffers: Cycle through buffers next. (Mnemonic: overlaps with jumplist navigation <C-o>)'}
 )
 
 ------------------------------------------------------------------------------------------------------------------------
@@ -750,14 +722,14 @@ vim.keymap.set(
 
 vim.keymap.set(
   'n',
-  '<leader>fo',
+  '<leader>fO',
   require('fzf-lua').oldfiles,
   { desc = 'Find: last opened files' }
 )
 
 vim.keymap.set(
   'n',
-  '<leader>fb',
+  '<leader>fo',
   require('fzf-lua').buffers,
   { desc = 'Find: open buffers' }
 )

@@ -300,49 +300,6 @@ return {
     config = require('config.vim-tmux-runner').setup,
   },
 
-  -- Buffer tabs
-  {
-    'akinsho/bufferline.nvim',
-    dependencies = { 'kyazdani42/nvim-web-devicons', },
-    config = function ()
-      require('bufferline').setup({
-        options = {
-          close_command = "Bdelete",
-          show_close_icon = false,
-          show_buffer_close_icons = true,
-          offsets = {
-            {
-              filetype = "neo-tree",
-              highlight = "Directory",
-              separator = true -- use a "true" to enable the default, or set your own character
-            },
-          },
-          hover = {
-            enabled = true,
-            delay = 10,
-            reveal = {'close'}
-          },
-          separator_style = "thin",
-          custom_filter = function(buf, _)
-            -- don't show quickfix buffers
-            local buf_type = vim.bo[buf].bt
-            if buf_type == 'quickfix' then
-              return false
-            end
-
-            return true
-          end,
-        }
-      })
-    end
-  },
-
-  -- Buffer deletion without changing layout
-  {
-    'famiu/bufdelete.nvim',
-    dependencies = { 'akinsho/bufferline.nvim', }
-  },
-
   -- Status line
   {
     'nvim-lualine/lualine.nvim',
