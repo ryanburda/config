@@ -30,7 +30,7 @@ vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 -- scrolloff - Minimal number of screen lines to keep above and below the cursor.
-vim.opt.scrolloff = 10
+vim.opt.scrolloff = 12
 -- pumheight - Maximum number of items to show in a popup menu.
 -- This should always be 2 less than scrolloff to ensure nvim-cmp completion popup always appears below the cursor
 -- even when the cursor is at the very bottom of the screen. Subtracting 2 accounts for padding of the popup window.

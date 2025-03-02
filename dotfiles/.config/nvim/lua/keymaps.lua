@@ -77,6 +77,24 @@ vim.keymap.set(
 ------------------------------------------------------------------------------------------------------------------------
 vim.keymap.set(
   'n',
+  '<C-d>',
+  function()
+    vim.cmd('execute "normal! 12j"')
+  end,
+  { desc = "Scroll down" }
+)
+
+vim.keymap.set(
+  'n',
+  '<C-u>',
+  function()
+    vim.cmd('execute "normal! 12k"')
+  end,
+  { desc = "Scroll up" }
+)
+
+vim.keymap.set(
+  'n',
   'L',
   'zLgm',
   {desc = 'Navigation: Horizontal scroll right'}
@@ -889,47 +907,4 @@ vim.keymap.set(
   '<C-s>',
   require("trail_marker.extensions.fzf-lua").change_trail,
   { desc = "TrailMarker: Switch trails" }
-)
-
----Scroll a percentage of the page.
----@param percentage number The percentage of the page to scroll.
-function ScrollPage(percentage)
-  -- Get the current window and buffer
-  local win = vim.api.nvim_get_current_win()
-  local buf = vim.api.nvim_win_get_buf(win)
-
-  -- Get the current window height
-  local height = vim.api.nvim_win_get_height(win)
-
-  -- Calculate number of lines to scroll
-  local scroll_lines = math.ceil(height * percentage)
-
-  -- Get the current cursor position
-  local current_cursor = vim.api.nvim_win_get_cursor(win)
-  local current_line = current_cursor[1]
-
-  -- Set the new cursor position
-  local _, err = pcall(function() vim.api.nvim_win_set_cursor(win, {current_line + scroll_lines, 0}) end)
-  if err then
-    if percentage >= 0 then
-      local line_count = vim.api.nvim_buf_line_count(0)
-      vim.api.nvim_win_set_cursor(win, {line_count, 0})
-    else
-      vim.api.nvim_win_set_cursor(win, {1, 0})
-    end
-  end
-end
-
-vim.keymap.set(
-  'n',
-  '<C-d>',
-  function() ScrollPage(0.33) end,
-  { desc = "Scroll down a third of a page." }
-)
-
-vim.keymap.set(
-  'n',
-  '<C-u>',
-  function() ScrollPage(-0.33) end,
-  { desc = "Scroll down a third of a page." }
 )
