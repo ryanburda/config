@@ -908,21 +908,16 @@ function ScrollPage(percentage)
   local current_cursor = vim.api.nvim_win_get_cursor(win)
   local current_line = current_cursor[1]
 
-  -- Calculate the new cursor position
-  local new_line = current_line + scroll_lines
-
-  -- Get the total number of lines in the buffer
-  local line_count = vim.api.nvim_buf_line_count(buf)
-
-  -- Clamp the new cursor position within the valid range of lines
-  if new_line < 1 then
-    new_line = 1
-  elseif new_line > line_count then
-    new_line = line_count
-  end
-
   -- Set the new cursor position
-  vim.api.nvim_win_set_cursor(win, {new_line, 0})
+  local _, err = pcall(function() vim.api.nvim_win_set_cursor(win, {current_line + scroll_lines, 0}) end)
+  if err then
+    if percentage >= 0 then
+      local line_count = vim.api.nvim_buf_line_count(0)
+      vim.api.nvim_win_set_cursor(win, {line_count, 0})
+    else
+      vim.api.nvim_win_set_cursor(win, {1, 0})
+    end
+  end
 end
 
 vim.keymap.set(
