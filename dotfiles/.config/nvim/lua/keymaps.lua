@@ -928,13 +928,13 @@ end
 vim.keymap.set(
   'n',
   '<C-d>',
-  function() ScrollPage(0.25) end,
-  { desc = "Scroll down a quarter page." }
+  function() ScrollPage(0.33) end,
+  { desc = "Scroll down a third of a page." }
 )
 
 vim.keymap.set(
   'n',
   '<C-u>',
-  function() ScrollPage(-0.25) end,
-  { desc = "Scroll down a quarter page." }
+  function() ScrollPage(-0.33) end,
+  { desc = "Scroll down a third of a page." }
 )
