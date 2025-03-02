@@ -30,7 +30,8 @@ set_font() {
         echo $(print $selection| awk -F ',' '{print $1}') > $FONT_FILE_PATH
         echo $(print $selection| awk -F ',' '{print $2}') > $FONT_SIZE_FILE_PATH
 
-        # force reload of wezterm config
+        # reload terminal configs
         touch $XDG_CONFIG_HOME/wezterm/wezterm.lua
+        regenerate_ghostty_config
     fi
 }

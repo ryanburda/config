@@ -1,6 +1,9 @@
 # macos
 .DS_Store
 
+# templated configs
+dotfiles/.config/ghostty/config
+
 # nvim
 nvim/plugin/*
 *en.utf-8.add.spl
@@ -9,6 +12,7 @@ lazy-lock.json
 .colorscheme
 .background
 .theme
+.shader
 
 # upterm
 tmux-client-*.log

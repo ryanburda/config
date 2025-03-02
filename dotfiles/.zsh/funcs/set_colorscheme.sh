@@ -61,7 +61,8 @@ set_colorscheme() {
             echo "$nvim_background" > $NVIM_BACKGROUND_FILE_PATH
             echo "$wezterm_colorscheme" > $WEZTERM_COLORSCHEME_FILE_PATH
 
-            # This is used below to show a check mark next to the current theme when selecting via fzf
+            # This is used below to show a check mark next to the current theme when selecting via fzf.
+            # TODO: move this out of the wezterm directory to make it terminal agnostic.
             echo "$theme_key" > $XDG_CONFIG_HOME/wezterm/.colorscheme_key
 
             # Regenerate templated configs.
@@ -69,6 +70,7 @@ set_colorscheme() {
             regenerate_aichat_config
             regenerate_git_config
             regenerate_lazygit_config
+            regenerate_ghostty_config
             ~/.zsh/funcs/dark_mode $(if [[ $nvim_background == 'light' ]]; then echo '-l'; fi)
         fi
     }
