@@ -62,14 +62,14 @@ vim.keymap.set(
   'n',
   '<leader>i',
   ':bnext<cr>',
-  {desc = 'Buffers: Cycle through buffers previous. (Mnemonic: overlaps with jumplist navigation <C-i>)'}
+  {desc = 'Buffers: Cycle through buffers next. (Mnemonic: overlaps with jumplist navigation <C-i>)'}
 )
 
 vim.keymap.set(
   'n',
   '<leader>o',
   ':bprev<cr>',
-  {desc = 'Buffers: Cycle through buffers next. (Mnemonic: overlaps with jumplist navigation <C-o>)'}
+  {desc = 'Buffers: Cycle through buffers previous. (Mnemonic: overlaps with jumplist navigation <C-o>)'}
 )
 
 ------------------------------------------------------------------------------------------------------------------------
@@ -109,34 +109,6 @@ vim.keymap.set(
   ':%bd|e#|bd#<cr>',
   {desc = 'Navigation: Close all buffers except current'}
 )
-
---vim.keymap.set(
---  { 'n', 'v', 'x' },
---  '<C-u>',
---  function() require('neoscroll').ctrl_u({ duration = 100 }) end,
---  { desc = "Navigation: Up half page" }
---)
---
---vim.keymap.set(
---  { 'n', 'v', 'x' },
---  '<C-d>',
---  function() require('neoscroll').ctrl_d({ duration = 100 }) end,
---  { desc = "Navigation: Down half page" }
---)
---
---vim.keymap.set(
---  { 'n', 'v', 'x' },
---  '<C-y>',
---  function() require('neoscroll').scroll(-0.1, { move_cursor=false; duration = 100 }) end,
---  { desc = "Navigation: Show more on top" }
---)
---
---vim.keymap.set(
---  { 'n', 'v', 'x' },
---  '<C-e>',
---  function() require('neoscroll').scroll(0.1, { move_cursor=false; duration = 100 }) end,
---  { desc = "Navigation: Show more on bottom" }
---)
 
 vim.keymap.set(
   'n',
@@ -917,4 +889,52 @@ vim.keymap.set(
   '<C-s>',
   require("trail_marker.extensions.fzf-lua").change_trail,
   { desc = "TrailMarker: Switch trails" }
+)
+
+---Scroll a percentage of the page.
+---@param percentage number The percentage of the page to scroll.
+function ScrollPage(percentage)
+  -- Get the current window and buffer
+  local win = vim.api.nvim_get_current_win()
+  local buf = vim.api.nvim_win_get_buf(win)
+
+  -- Get the current window height
+  local height = vim.api.nvim_win_get_height(win)
+
+  -- Calculate number of lines to scroll
+  local scroll_lines = math.ceil(height * percentage)
+
+  -- Get the current cursor position
+  local current_cursor = vim.api.nvim_win_get_cursor(win)
+  local current_line = current_cursor[1]
+
+  -- Calculate the new cursor position
+  local new_line = current_line + scroll_lines
+
+  -- Get the total number of lines in the buffer
+  local line_count = vim.api.nvim_buf_line_count(buf)
+
+  -- Clamp the new cursor position within the valid range of lines
+  if new_line < 1 then
+    new_line = 1
+  elseif new_line > line_count then
+    new_line = line_count
+  end
+
+  -- Set the new cursor position
+  vim.api.nvim_win_set_cursor(win, {new_line, 0})
+end
+
+vim.keymap.set(
+  'n',
+  '<C-d>',
+  function() ScrollPage(0.25) end,
+  { desc = "Scroll down a quarter page." }
+)
+
+vim.keymap.set(
+  'n',
+  '<C-u>',
+  function() ScrollPage(-0.25) end,
+  { desc = "Scroll down a quarter page." }
 )
