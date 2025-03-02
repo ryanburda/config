@@ -179,7 +179,7 @@ return {
         ['--cycle'] = true,
       },
       grep = {
-        rg_opts = "--hidden --column --line-number --no-heading --color=always --smart-case",
+        rg_opts = "--hidden --column --line-number --no-heading --color=always --smart-case --glob=!.git",
       },
       winopts = {
         backdrop = 100,
