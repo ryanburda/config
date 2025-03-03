@@ -2,8 +2,7 @@
 
 regenerate_aichat_config() {
     # Creates the aichat config yaml based off templated values
-
-    LIGHT_OR_DARK=$(cat $XDG_CONFIG_HOME/nvim/.background)
+    LIGHT_OR_DARK=$(envget nvim_background)
 
     if [[ "$LIGHT_OR_DARK" == "light" ]]; then
         export AICHAT_LIGHT_THEME="true"

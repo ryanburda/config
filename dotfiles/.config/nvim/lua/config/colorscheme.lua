@@ -1,9 +1,9 @@
 local T = {}
 
 T.COLORSCHEME_DEFAULT = 'bamboo'
-T.COLORSCHEME_FILE = vim.fn.stdpath('config') .. '/.colorscheme'
+T.COLORSCHEME_FILE = os.getenv('HOME') .. '/.config/.env/nvim_colorscheme'
 T.BACKGROUND_DEFAULT = 'dark'
-T.BACKGROUND_FILE = vim.fn.stdpath('config') .. '/.background'
+T.BACKGROUND_FILE = os.getenv('HOME') .. '/.config/.env/nvim_background'
 
 function T.set_colorscheme(is_setup)
   is_setup = is_setup or false

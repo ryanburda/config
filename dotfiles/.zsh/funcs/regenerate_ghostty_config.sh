@@ -1,8 +1,6 @@
 #!/bin/zsh
 
 regenerate_ghostty_config() {
-    # TODO: The colorscheme_id should be terminal agnostic.
-    #       A ghostty specific mapping of colorscheme_id to colorscheme name should exist in here.
 
     typeset -A themes=(
         ['Dark - Bamboo']="Batman"
@@ -27,11 +25,13 @@ regenerate_ghostty_config() {
         ['Light - Rose-pine']="rose-pine-dawn"
     )
 
-    theme_key=$(cat "${XDG_CONFIG_HOME}/wezterm/.colorscheme_key")
+    theme_key=$(envget colorscheme_key "Dark - Rose-pine")
     export THEME=${themes[$theme_key]}
-    export SHADER=$(cat "${XDG_CONFIG_HOME}/ghostty/.shader")
-    export FONT_FAMILY=$(cat "${XDG_CONFIG_HOME}/wezterm/.font")
-    export FONT_SIZE=$(cat "${XDG_CONFIG_HOME}/wezterm/.font_size")
+
+    export FONT_FAMILY=$(envget font_family)
+    export FONT_SIZE=$(envget font_size)
+
+    export SHADER=$(envget ghostty_shader "NONE")
 
     FILE_PATH="${XDG_CONFIG_HOME}/ghostty/config"
 
@@ -41,5 +41,4 @@ regenerate_ghostty_config() {
     fi
 
     envsubst < "${XDG_CONFIG_HOME}/ghostty/config.template" > $FILE_PATH
-
 }

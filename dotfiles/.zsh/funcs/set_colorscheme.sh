@@ -1,10 +1,5 @@
 #!/bin/zsh
 
-COLORSCHEME_KEY_FILE_PATH="${XDG_CONFIG_HOME}/wezterm/.colorscheme_key"
-WEZTERM_COLORSCHEME_FILE_PATH="${XDG_CONFIG_HOME}/wezterm/.colorscheme"
-NVIM_COLORSCHEME_FILE_PATH="${XDG_CONFIG_HOME}/nvim/.colorscheme"
-NVIM_BACKGROUND_FILE_PATH="${XDG_CONFIG_HOME}/nvim/.background"
-
 set_colorscheme() {
     # NAME
     #   set_colorscheme - synchonizes neovim and terminal colorschemes.
@@ -52,18 +47,14 @@ set_colorscheme() {
         values=${themes[$theme_key]}
 
         if [[ ! -z $values ]]; then
-            nvim_colorscheme=$(print $values | awk -F, '{print $1}')
-            nvim_background=$(print $values | awk -F, '{print $2}')
-            wezterm_colorscheme=$(print $values | awk -F, '{print $3}')
+            nvim_colorscheme=$(print $values | awk -F ',' '{print $1}')
+            nvim_background=$(print $values | awk -F ',' '{print $2}')
+            wezterm_colorscheme=$(print $values | awk -F ',' '{print $3}')
 
-            # Write the values to files.
-            echo "$nvim_colorscheme" > $NVIM_COLORSCHEME_FILE_PATH
-            echo "$nvim_background" > $NVIM_BACKGROUND_FILE_PATH
-            echo "$wezterm_colorscheme" > $WEZTERM_COLORSCHEME_FILE_PATH
-
-            # This is used below to show a check mark next to the current theme when selecting via fzf.
-            # TODO: move this out of the wezterm directory to make it terminal agnostic.
-            echo "$theme_key" > $XDG_CONFIG_HOME/wezterm/.colorscheme_key
+            envset colorscheme_key $theme_key
+            envset nvim_colorscheme $nvim_colorscheme
+            envset nvim_background $nvim_background
+            envset wezterm_colorscheme $wezterm_colorscheme
 
             # Regenerate templated configs.
             touch $XDG_CONFIG_HOME/wezterm/wezterm.lua
@@ -71,12 +62,11 @@ set_colorscheme() {
             regenerate_git_config
             regenerate_lazygit_config
             regenerate_ghostty_config
-            ~/.zsh/funcs/dark_mode $(if [[ $nvim_background == 'light' ]]; then echo '-l'; fi)
+            ~/.zsh/funcs/dark_mode $(if [[ $(envget nvim_background) == 'light' ]]; then echo '-l'; fi)
         fi
     }
 
-    current_theme_key=$(<$COLORSCHEME_KEY_FILE_PATH)
-    theme_key=$(printf "%s\n" "${(k)themes[@]}" | sort | fzf --layout reverse --cycle --header "${current_theme_key}")
+    theme_key=$(printf "%s\n" "${(k)themes[@]}" | sort | fzf --layout reverse --cycle --header "$(envget colorscheme_key)")
 
     if [[ ! -z $theme_key ]]; then
         set_theme $theme_key

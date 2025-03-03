@@ -146,16 +146,6 @@ for file in ~/.zsh/zshrc_extensions/*; do
   fi
 done
 
-# Maintaining changing environment variables.
-#
-# Use ~/.config/.env as a simple key value store.
-# File names are keys, contents of the files are values.
-export ENV_DIR="${XDG_CONFIG_HOME}/.env"
-
-function envset { echo $2 > "${ENV_DIR}/$1" }
-function envget { echo $(cat "${ENV_DIR}/$1") }
-function envls { \ls $ENV_DIR }
-
 # Uncomment to profile zsh startup.
 # NOTE: must also uncomment first line.
 # zprof
