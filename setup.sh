@@ -86,6 +86,12 @@ brew install --cask wezterm@nightly
 # Symlink config files
 stow dotfiles
 
+# Source zshrc to get access to environment variables.
+source ~/.zshrc
+
+# Create environment variables directory.
+mkdir -p $ENV_DIR
+
 # tmux-plugin-manager
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
