@@ -326,6 +326,13 @@ vim.keymap.set(
   { desc = "Diff: Show commits for current repo. Diff between selected commit and current is opened in DiffView" }
 )
 
+vim.keymap.set(
+  'n',
+  '<leader>gb',
+  ':Git blame<cr>',
+  { desc = "Diff: Git blame" }
+)
+
 ------------------------------------------------------------------------------------------------------------------------
 -- Quickfix
 ------------------------------------------------------------------------------------------------------------------------
