@@ -153,7 +153,7 @@ done
 export ENV_DIR="${XDG_CONFIG_HOME}/.env"
 
 function envset { echo $2 > "${ENV_DIR}/$1" }
-function envget { echo $(cat "${ENV_DIR}/$1") }
+function envget { cat "${ENV_DIR}/$1" }
 function envls { \ls $ENV_DIR }
 
 # Uncomment to profile zsh startup.
