@@ -146,6 +146,25 @@ for file in ~/.zsh/zshrc_extensions/*; do
   fi
 done
 
+
+##############################################
+# Maintaining changing environment variables #
+##############################################
+export ENV_DIR="${XDG_CONFIG_HOME}/env"
+
+kvp_set() {
+    key=$1
+    value=$2
+    mkdir -p $ENV_DIR
+    echo $value > "${ENV_DIR}/${key}"
+}
+
+kvp_get() {
+    key=$1
+    mkdir -p $ENV_DIR
+    echo $(cat "${ENV_DIR}/${key}")
+}
+
 # Uncomment to profile zsh startup.
 # NOTE: must also uncomment first line.
 # zprof
