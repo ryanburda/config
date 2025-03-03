@@ -58,20 +58,6 @@ vim.keymap.set(
   {desc = 'Window Management: Vertical split'}
 )
 
-vim.keymap.set(
-  'n',
-  '<leader>i',
-  ':bnext<cr>',
-  {desc = 'Buffers: Cycle through buffers next. (Mnemonic: overlaps with jumplist navigation <C-i>)'}
-)
-
-vim.keymap.set(
-  'n',
-  '<leader>o',
-  ':bprev<cr>',
-  {desc = 'Buffers: Cycle through buffers previous. (Mnemonic: overlaps with jumplist navigation <C-o>)'}
-)
-
 ------------------------------------------------------------------------------------------------------------------------
 -- Navigation
 ------------------------------------------------------------------------------------------------------------------------
@@ -712,16 +698,23 @@ vim.keymap.set(
 
 vim.keymap.set(
   'n',
-  '<leader>fO',
+  '<leader>fo',
   require('fzf-lua').oldfiles,
   { desc = 'Find: last opened files' }
 )
 
 vim.keymap.set(
   'n',
-  '<leader>fo',
+  '<C-f>',
   require('fzf-lua').buffers,
   { desc = 'Find: open buffers' }
+)
+
+vim.keymap.set(
+  'n',
+  '<C-g>',
+  ':b#<cr>',
+  { desc = 'Alternate buffer' }
 )
 
 vim.api.nvim_create_autocmd('LspAttach', {
