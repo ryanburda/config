@@ -65,7 +65,7 @@ vim.keymap.set(
   'n',
   '<C-d>',
   function()
-    vim.cmd('execute "normal! 12j"')
+    vim.cmd('execute "normal! 16j"')
   end,
   { desc = "Scroll down" }
 )
@@ -74,7 +74,7 @@ vim.keymap.set(
   'n',
   '<C-u>',
   function()
-    vim.cmd('execute "normal! 12k"')
+    vim.cmd('execute "normal! 16k"')
   end,
   { desc = "Scroll up" }
 )
@@ -890,7 +890,7 @@ vim.keymap.set(
 
 vim.keymap.set(
   'n',
-  '<C-m>',
+  '<leader>t',
   require("trail_marker").current_marker,
   { desc = "Trail Marker: Go to current marker" }
 )
