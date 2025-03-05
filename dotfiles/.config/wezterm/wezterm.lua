@@ -7,13 +7,11 @@ local config = wezterm.config_builder()
 local background_image_dir =      os.getenv("HOME") .. "/.config/wezterm/backgrounds/"
 local background_file_path =      os.getenv("HOME") .. "/.config/wezterm/.background"
 local color_scheme_file_path =    os.getenv("HOME") .. "/.config/wezterm/.colorscheme"
-local font_file_path =            os.getenv("HOME") .. "/.config/wezterm/.font"
-local font_size_file_path =       os.getenv("HOME") .. "/.config/wezterm/.font_size"
 local nvim_background_file_path = os.getenv("HOME") .. "/.config/nvim/.background"
 
 config.color_scheme = helpers.get_var_from_file(color_scheme_file_path, 'Bamboo')
-config.font = wezterm.font(helpers.get_var_from_file(font_file_path, 'JetBrains Mono'))
-config.font_size = tonumber(helpers.get_var_from_file(font_size_file_path, '12'))
+config.font = wezterm.font(helpers.envget('font_family', 'JetBrains Mono'))
+config.font_size = tonumber(helpers.envget('font_size', '12'))
 config.window_decorations = "RESIZE"
 config.text_background_opacity = 0.5
 config.hide_tab_bar_if_only_one_tab = true

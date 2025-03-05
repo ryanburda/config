@@ -30,8 +30,8 @@ regenerate_ghostty_config() {
     theme_key=$(cat "${XDG_CONFIG_HOME}/wezterm/.colorscheme_key")
     export THEME=${themes[$theme_key]}
     export SHADER=$(cat "${XDG_CONFIG_HOME}/ghostty/.shader")
-    export FONT_FAMILY=$(cat "${XDG_CONFIG_HOME}/wezterm/.font")
-    export FONT_SIZE=$(cat "${XDG_CONFIG_HOME}/wezterm/.font_size")
+    export FONT_FAMILY=$(envget font_family)
+    export FONT_SIZE=$(envget font_size)
 
     FILE_PATH="${XDG_CONFIG_HOME}/ghostty/config"
 

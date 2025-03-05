@@ -1,7 +1,7 @@
 #!/bin/zsh
 
-FONT_FILE_PATH="${XDG_CONFIG_HOME}/wezterm/.font"
-FONT_SIZE_FILE_PATH="${XDG_CONFIG_HOME}/wezterm/.font_size"
+DEFAULT_FONT_FAMILY="JetBrainsMono Nerd Font Mono"
+DEFAULT_FONT_SIZE="12"
 
 set_font() {
     # NAME
@@ -22,13 +22,16 @@ set_font() {
         "InconsolataGo Nerd Font Mono,14"
     )
 
-    current_font=$(<$FONT_FILE_PATH)
-    current_font_size=$(<$FONT_SIZE_FILE_PATH)
+    current_font_family=$(envget font_family $DEFAULT_FONT_FAMILY)
+    current_font_size=$(envget font_size $DEFAULT_FONT_SIZE)
 
-    selection=$(printf "%s\n" "${fonts[@]}" | sort | fzf --layout reverse --cycle --header "${current_font},${current_font_size}")
+    selection=$(printf "%s\n" "${fonts[@]}" | sort | fzf --layout reverse --cycle --header "${current_font_family},${current_font_size}")
     if [[ -n "${selection}" ]]; then
-        echo $(print $selection| awk -F ',' '{print $1}') > $FONT_FILE_PATH
-        echo $(print $selection| awk -F ',' '{print $2}') > $FONT_SIZE_FILE_PATH
+        font_family=$(print $selection | awk -F ',' '{print $1}')
+        font_size=$(print $selection | awk -F ',' '{print $2}')
+
+        envset font_family $font_family
+        envset font_size $font_size
 
         # reload terminal configs
         touch $XDG_CONFIG_HOME/wezterm/wezterm.lua

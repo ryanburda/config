@@ -1,4 +1,5 @@
-!/bin/bash
+#!/bin/bash
+
 # Use directory of files as a simple key value store.
 #
 # This should be used when environment variables need
