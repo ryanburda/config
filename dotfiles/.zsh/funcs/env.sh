@@ -29,6 +29,18 @@ function envget {
     fi
 }
 
+# Remove an environment variable
+# Arguments:
+#   $1 - The name of the environment variable to remove
+function envrm {
+    local file="${ENV_DIR}/$1"
+    if [[ -f "$file" ]]; then
+        rm "$file"
+    else
+        echo "env var not found"
+    fi
+}
+
 # List all stored environment variables
 # Arguments:
 #   None
