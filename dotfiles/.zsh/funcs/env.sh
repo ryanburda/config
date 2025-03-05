@@ -1,0 +1,36 @@
+!/bin/bash
+# Use directory of files as a simple key value store.
+#
+# This should be used when environment variables need
+# to remain consistent across all active shells.
+
+# Directory to store environment variables
+export ENV_DIR="${XDG_CONFIG_HOME}/.env"
+
+# Set an environment variable
+# Arguments:
+#   $1 - The name of the environment variable
+#   $2 - The value to set for the environment variable
+function envset {
+    echo "$2" > "${ENV_DIR}/$1"
+}
+
+# Get the value of an environment variable
+# Arguments:
+#   $1 - The name of the environment variable to retrieve
+#   $2 - (Optional) A default value to return if the variable does not exist
+function envget {
+    local file="${ENV_DIR}/$1"
+    if [[ -f "$file" ]]; then
+        cat "$file"
+    else
+        echo "$2"
+    fi
+}
+
+# List all stored environment variables
+# Arguments:
+#   None
+function envls {
+    \ls "$ENV_DIR"
+}
