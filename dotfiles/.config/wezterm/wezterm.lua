@@ -6,10 +6,9 @@ local config = wezterm.config_builder()
 -- NOTE: `os.getenv("XDG_CONFIG_HOME")` returns nil. Using "HOME" as an alternative for now.
 local background_image_dir =      os.getenv("HOME") .. "/.config/wezterm/backgrounds/"
 local background_file_path =      os.getenv("HOME") .. "/.config/wezterm/.background"
-local color_scheme_file_path =    os.getenv("HOME") .. "/.config/wezterm/.colorscheme"
 local nvim_background_file_path = os.getenv("HOME") .. "/.config/nvim/.background"
 
-config.color_scheme = helpers.get_var_from_file(color_scheme_file_path, 'Bamboo')
+config.color_scheme = helpers.envget('wezterm_colorscheme', 'Catppuccin Mocha')
 config.font = wezterm.font(helpers.envget('font_family', 'JetBrains Mono'))
 config.font_size = tonumber(helpers.envget('font_size', '12'))
 config.window_decorations = "RESIZE"
@@ -57,7 +56,7 @@ if current_background ~= "NONE" then
 end
 
 -- background opacity
-local is_nvim_background_dark = (helpers.get_var_from_file(nvim_background_file_path, 'dark')) == 'dark'
+local is_nvim_background_dark = (helpers.envget('nvim_background', 'dark')) == 'dark'
 local opacity
 
 if is_nvim_background_dark then

@@ -41,8 +41,7 @@ function T.envget(filename, defaultValue)
     -- Check if the file exists
     local file = io.open(filePath, "r")
     if file then
-        -- File exists, read and return its contents
-        local content = file:read("*a")
+        local content = file:read("*a"):gsub("%s*$", "")
         file:close()
         return content
     else
