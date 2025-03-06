@@ -31,7 +31,7 @@ regenerate_ghostty_config() {
     export FONT_FAMILY=$(envget font_family)
     export FONT_SIZE=$(envget font_size)
 
-    export SHADER=$(cat "${XDG_CONFIG_HOME}/ghostty/.shader")
+    export SHADER=$(envget ghostty_shader "NONE")
 
     FILE_PATH="${XDG_CONFIG_HOME}/ghostty/config"
 
