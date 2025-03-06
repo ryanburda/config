@@ -5,7 +5,6 @@ local config = wezterm.config_builder()
 -- important paths
 -- NOTE: `os.getenv("XDG_CONFIG_HOME")` returns nil. Using "HOME" as an alternative for now.
 local background_image_dir =      os.getenv("HOME") .. "/.config/.assets/backgrounds/"
-local background_file_path =      os.getenv("HOME") .. "/.config/wezterm/.background"
 
 config.color_scheme = helpers.envget('wezterm_colorscheme', 'Catppuccin Mocha')
 config.font = wezterm.font(helpers.envget('font_family', 'JetBrains Mono'))
@@ -34,17 +33,8 @@ config.window_padding = { left = 0, right = 0, top = 20, bottom = 0 }
 -- background image
 local current_background = helpers.envget("wezterm_background", "NONE")
 local background_image_path = nil
-
-if current_background ~= nil and current_background ~= "TRANSPARENT" and current_background ~= "NONE" then
+if current_background ~= "NONE" then
   background_image_path =  background_image_dir .. current_background
-  -- Try opening the file to see if it exists
-  local file = io.open(background_file_path, "r")
-  if not file then
-    current_background = "NONE"
-    background_image_path = nil
-  else
-    file:close()
-  end
 end
 
 -- background color
