@@ -8,10 +8,10 @@
 # Directory to store environment variables
 export ENV_DIR="${XDG_CONFIG_HOME}/.env"
 
-# Set an environment variable
+# Set an environment variable.
 # Arguments:
-#   $1 - The name of the environment variable
-#   $2 - The value to set for the environment variable
+#   $1 - The name of the environment variable.
+#   $2 - The value to set for the environment variable.
 function envset {
     echo "$2" > "${ENV_DIR}/$1"
 }
@@ -29,9 +29,17 @@ function envget {
     fi
 }
 
-# Remove an environment variable
+# Touch an environment variable without changing its value.
+# Useful if environment variable files are being watched for changes.
 # Arguments:
-#   $1 - The name of the environment variable to remove
+#   $1 - The name of the environment variable to touch.
+function envtouch {
+    touch "${ENV_DIR}/$1"
+}
+
+# Remove an environment variable.
+# Arguments:
+#   $1 - The name of the environment variable to remove.
 function envrm {
     local file="${ENV_DIR}/$1"
     if [[ -f "$file" ]]; then
@@ -41,7 +49,7 @@ function envrm {
     fi
 }
 
-# List all stored environment variables
+# List all stored environment variables.
 # Arguments:
 #   None
 function envls {

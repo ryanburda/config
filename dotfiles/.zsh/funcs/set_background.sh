@@ -1,41 +1,26 @@
 #!/bin/zsh
 
-BACKGROUND_FILE_PATH=$XDG_CONFIG_HOME/wezterm/.background
-
 set_background() {
     # NAME
     #   set_background
     #
-    # SYNOPSIS
-    #   Terminal background image picker.
-    #
     # DESCRIPTION
-    #   Use fzf to select a background image.
-    #   The selected image is written to a file.
-    #   The wezterm.lua file is then reloaded to
-    #   trigger the code that performs the image change.
-    #   The neovim colorsheme file is touched in order
-    #   to force an update of the neovim colorscheme
-    #   to either apply or remove transparency.
-
-    current_background=$(<$XDG_CONFIG_HOME/wezterm/.background)
-    backgrounds=$(\ls ${XDG_CONFIG_HOME}/wezterm/backgrounds)
+    #   Terminal background image picker.
+    current_background=$(envget wezterm_background)
+    backgrounds=$(\ls "${XDG_CONFIG_HOME}/.assets/backgrounds")
     backgrounds+=("\nTRANSPARENT")
     backgrounds+=("\nNONE")
+
     selection=$(print $backgrounds | sort | fzf --layout reverse --cycle --header "${current_background}")
 
     if [[ -n "${selection}" ]]; then
         if [[ ! -z $selection ]]; then
             # Persist the selection to a file.
-            echo $selection > $BACKGROUND_FILE_PATH
+            envset wezterm_background $selection
             # Touch the wezterm config to reload wezterm
             touch $XDG_CONFIG_HOME/wezterm/wezterm.lua
-            # Touch the .colorscheme file. This file is being watched for changes.
-            # When a change is detected the neovim colorscheme is changed to the contents of the file.
-            # Changing the colorscheme then fires the ColorScheme autocmd in `transparency.lua`.
-            #
-            # This will make certain highlight groups transparent allowing the background image to show up.
-            touch $XDG_CONFIG_HOME/nvim/.colorscheme
+            # Touch the nvim_colorscheme environment variable to apply/remove transparency in neovim.
+            envtouch nvim_colorscheme
         fi
     fi
 }

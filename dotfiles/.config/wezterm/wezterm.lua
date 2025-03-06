@@ -4,7 +4,7 @@ local config = wezterm.config_builder()
 
 -- important paths
 -- NOTE: `os.getenv("XDG_CONFIG_HOME")` returns nil. Using "HOME" as an alternative for now.
-local background_image_dir =      os.getenv("HOME") .. "/.config/wezterm/backgrounds/"
+local background_image_dir =      os.getenv("HOME") .. "/.config/.assets/backgrounds/"
 local background_file_path =      os.getenv("HOME") .. "/.config/wezterm/.background"
 
 config.color_scheme = helpers.envget('wezterm_colorscheme', 'Catppuccin Mocha')
@@ -23,7 +23,7 @@ config.window_padding = { left = 0, right = 0, top = 20, bottom = 0 }
 
 -- BACKGROUND
 --
--- the value in `background_file_path` can be one of the following:
+-- the wezterm_background environment variable can be one of the following:
 --   - 'NONE': if no background image or color layer should be shown. (default background)
 --   - 'TRANSPARENT': the current colorschemes background will be rendered semi transparent
 --       to allow any windows under the terminal to show through.
@@ -32,7 +32,7 @@ config.window_padding = { left = 0, right = 0, top = 20, bottom = 0 }
 --       semi transparent to allow the image to show through.
 
 -- background image
-local current_background = helpers.get_var_from_file(background_file_path , "NONE")
+local current_background = helpers.envget("wezterm_background", "NONE")
 local background_image_path = nil
 
 if current_background ~= nil and current_background ~= "TRANSPARENT" and current_background ~= "NONE" then
