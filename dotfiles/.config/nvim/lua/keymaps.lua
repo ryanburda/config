@@ -991,7 +991,6 @@ local function buffers()
 
         -- Check if the buffer is loaded and has a file path
         if vim.api.nvim_buf_is_loaded(buf_id) and path ~= "" then
-          local t = {}
           local path_reversed = reverse_path(path)
 
           -- cursor position
@@ -1004,7 +1003,7 @@ local function buffers()
           -- local is_modified = vim.api.nvim_buf_get_option(buf_id, 'modified')
 
           -- icon
-          local icon, hl = devicons.get_icon_color(t.path, nil, {default = true})
+          local icon, hl = devicons.get_icon_color(path, nil, {default = true})
           local icon_colored = fzf_utils.ansi_from_rgb(hl, icon)
 
           -- fzf display string
