@@ -911,11 +911,15 @@ vim.keymap.set(
 
 -- Show buffers with path in reverse order.
 --    ~/project/folder/file_a.lua -> file_a.lua/folder/project/~
+-- TODOs:
+--    * highlight leaf of path in different color
+--    * pad buffer number by 5 digits so things line up better
+--    * fix header to be more like fzf-lua's buffer command
+--    * order buffers by when they were used
 local fzf_utils = require("fzf-lua.utils")
-local devicons = require("nvim-web-devicons")  -- TODO: make this an optional dependency.
+local devicons = require("nvim-web-devicons")
 
-
-function reverse_path(path)
+local function reverse_path(path)
     -- Create a table to store components of the path
     local components = {}
 
@@ -1008,7 +1012,6 @@ local function buffers()
           local icon_colored = fzf_utils.ansi_from_rgb(hl, icon)
 
           -- fzf display string
-          -- TODO: improve this
           local fzf_display_string = string.format("[%s] %s %s:%s:%s", tostring(buf_id), icon_colored, path_reversed, cursor_row, cursor_col)
 
           -- fzf full string
