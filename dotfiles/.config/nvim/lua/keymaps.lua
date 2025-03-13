@@ -912,33 +912,12 @@ vim.keymap.set(
 -- Show buffers with path in reverse order.
 --    ~/project/folder/file_a.lua -> file_a.lua/folder/project/~
 -- TODOs:
---    * highlight leaf of path in different color
 --    * pad buffer number by 5 digits so things line up better
 --    * fix header to be more like fzf-lua's buffer command
 --    * order buffers by when they were used
+--    * add modified indicator
 local fzf_utils = require("fzf-lua.utils")
 local devicons = require("nvim-web-devicons")
-
-local function reverse_path(path)
-    -- Create a table to store components of the path
-    local components = {}
-
-    -- Use pattern matching to split the path by the directory separator `/`
-    for component in string.gmatch(path, "([^/]+)") do
-        table.insert(components, component)
-    end
-
-    -- Reverse the order of components
-    local reversed_components = {}
-    for i = #components, 1, -1 do
-        table.insert(reversed_components, components[i])
-    end
-
-    -- Concatenate the reversed components with `/` as the separator
-    local reversed_path = table.concat(reversed_components, "/")
-
-    return reversed_path
-end
 
 local function buffers()
 
@@ -997,12 +976,16 @@ local function buffers()
 
         -- Check if the buffer is loaded and has a file path
         if is_listed and is_loaded and path ~= "" then
-          local path_reversed = reverse_path(path)
+
+          local relative_path = fzf_utils.ansi_codes.blue(vim.fn.fnamemodify(path, ':.'))
+          local path_leaf = fzf_utils.ansi_codes.green(path:match("([^/\\]+)$"))
 
           -- cursor position
           local cursor_pos = vim.api.nvim_buf_get_mark(buf_id, '\'')
           local cursor_row = cursor_pos[1]
           local cursor_col = cursor_pos[2]
+          local cursor_row_colored = fzf_utils.ansi_codes.yellow(tostring(cursor_row))
+          local cursor_col_colored = fzf_utils.ansi_codes.cyan(tostring(cursor_col))
 
           -- dirty
           -- local is_modified = vim.api.nvim_buf_get_option(buf_id, 'modified')
@@ -1012,7 +995,7 @@ local function buffers()
           local icon_colored = fzf_utils.ansi_from_rgb(hl, icon)
 
           -- fzf display string
-          local fzf_display_string = string.format("[%s] %s %s:%s:%s", tostring(buf_id), icon_colored, path_reversed, cursor_row, cursor_col)
+          local fzf_display_string = string.format("[%s] %s %s %s:%s:%s", tostring(buf_id), icon_colored, path_leaf, relative_path, cursor_row_colored, cursor_col_colored)
 
           -- fzf full string
           local fzf_full_string = string.format("%s|%s|%s|%s|%s", tostring(buf_id), path, cursor_row, cursor_col, fzf_display_string)
