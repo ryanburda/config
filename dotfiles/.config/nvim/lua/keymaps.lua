@@ -994,8 +994,7 @@ local function buffers()
           local path_reversed = reverse_path(path)
 
           -- cursor position
-          local windows = vim.fn.win_findbuf(buf_id)
-          local cursor_pos = vim.api.nvim_win_get_cursor(windows[1])
+          local cursor_pos = vim.api.nvim_buf_get_mark(buf_id, '\'')
           local cursor_row = cursor_pos[1]
           local cursor_col = cursor_pos[2]
 
