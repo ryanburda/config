@@ -941,13 +941,13 @@ local function buffers()
   local function parse_entry(str)
     -- Deserialize the string created in `marker_to_string` above and return it as a table.
     if str then
-      local idx, path, row, col, picker_str = str:match("([^:]+)|([^:]+)|([^:]+)|([^:]+)|([^:]+)")
+      local buf_id, path, row, col, picker_str = str:match("([^:]+)|([^:]+)|([^:]+)|([^:]+)|([^:]+)")
 
       return {
-        idx = idx,
+        buf_id = tonumber(buf_id),
         path = path,
-        row = row,
-        col = col,
+        row = tonumber(row),
+        col = tonumber(col),
         picker_str = picker_str,
       }
     end
@@ -966,10 +966,10 @@ local function buffers()
   function previewer:parse_entry(entry_str)
     local t = parse_entry(entry_str)
     return {
-      bufnr = tonumber(t.bufnr),
+      idx = t.buf_id,
       path = t.path,
-      line = tonumber(t.row),
-      col = tonumber(t.col),
+      line = t.row,
+      col = t.col,
     }
   end
 
@@ -988,9 +988,11 @@ local function buffers()
       -- Loop through each buffer ID to get additional information.
       for _, buf_id in ipairs(buffer_ids) do
         local path = vim.api.nvim_buf_get_name(buf_id)
+        local is_listed = vim.api.nvim_buf_get_option(buf_id, "buflisted")
+        local is_loaded = vim.api.nvim_buf_is_loaded(buf_id)
 
         -- Check if the buffer is loaded and has a file path
-        if vim.api.nvim_buf_is_loaded(buf_id) and path ~= "" then
+        if is_listed and is_loaded and path ~= "" then
           local path_reversed = reverse_path(path)
 
           -- cursor position
@@ -1029,14 +1031,14 @@ local function buffers()
           local buffer = selected[1]
           if buffer then
             local t = parse_entry(buffer)
-            vim.api.nvim_set_current_buf(t.bufnr)
+            vim.api.nvim_set_current_buf(t.buf_id)
           end
         end,
         ["ctrl-x"] = function(selected)
           if selected[1] ~= nil then
             local buffer = selected[1]
             local t = parse_entry(buffer)
-            vim.api.nvim_buf_delete(t.bufnr, { force = false })
+            vim.api.nvim_buf_delete(t.buf_id, { force = false })
           end
           require("fzf-lua").resume()
         end,
