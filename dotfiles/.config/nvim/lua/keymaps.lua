@@ -908,3 +908,153 @@ vim.keymap.set(
   require("trail_marker.extensions.fzf-lua").change_trail,
   { desc = "TrailMarker: Switch trails" }
 )
+
+-- Show buffers with path in reverse order.
+--    ~/project/folder/file_a.lua -> file_a.lua/folder/project/~
+local fzf_utils = require("fzf-lua.utils")
+local devicons = require("nvim-web-devicons")  -- TODO: make this an optional dependency.
+
+
+function reverse_path(path)
+    -- Create a table to store components of the path
+    local components = {}
+
+    -- Use pattern matching to split the path by the directory separator `/`
+    for component in string.gmatch(path, "([^/]+)") do
+        table.insert(components, component)
+    end
+
+    -- Reverse the order of components
+    local reversed_components = {}
+    for i = #components, 1, -1 do
+        table.insert(reversed_components, components[i])
+    end
+
+    -- Concatenate the reversed components with `/` as the separator
+    local reversed_path = table.concat(reversed_components, "/")
+
+    return reversed_path
+end
+
+local function buffers()
+
+  local function parse_entry(str)
+    -- Deserialize the string created in `marker_to_string` above and return it as a table.
+    if str then
+      local idx, path, row, col, picker_str = str:match("([^:]+)|([^:]+)|([^:]+)|([^:]+)|([^:]+)")
+
+      return {
+        idx = idx,
+        path = path,
+        row = row,
+        col = col,
+        picker_str = picker_str,
+      }
+    end
+  end
+
+  local builtin = require("fzf-lua.previewer.builtin")
+
+  local previewer = builtin.buffer_or_file:extend()
+
+  function previewer:new(o, opts, fzf_win)
+    previewer.super.new(self, o, opts, fzf_win)
+    setmetatable(self, previewer)
+    return self
+  end
+
+  function previewer:parse_entry(entry_str)
+    local t = parse_entry(entry_str)
+    return {
+      bufnr = tonumber(t.bufnr),
+      path = t.path,
+      line = tonumber(t.row),
+      col = tonumber(t.col),
+    }
+  end
+
+  local keymap_header = function(key, purpose)
+    return string.format("<%s> to %s", fzf_utils.ansi_codes.yellow(key), fzf_utils.ansi_codes.red(purpose))
+  end
+
+  local ctrl_x = keymap_header("ctrl-x", "close")
+  local header = string.format(":: %s", ctrl_x)
+
+  require("fzf-lua").fzf_exec(
+    function(cb)
+      -- Get the list of buffer IDs
+      local buffer_ids = vim.api.nvim_list_bufs()
+
+      -- Loop through each buffer ID to get additional information.
+      for _, buf_id in ipairs(buffer_ids) do
+        local path = vim.api.nvim_buf_get_name(buf_id)
+
+        -- Check if the buffer is loaded and has a file path
+        if vim.api.nvim_buf_is_loaded(buf_id) and path ~= "" then
+          local t = {}
+          local path_reversed = reverse_path(path)
+
+          -- cursor position
+          local windows = vim.fn.win_findbuf(buf_id)
+          local cursor_pos = vim.api.nvim_win_get_cursor(windows[1])
+          local cursor_row = cursor_pos[1]
+          local cursor_col = cursor_pos[2]
+
+          -- dirty
+          -- local is_modified = vim.api.nvim_buf_get_option(buf_id, 'modified')
+
+          -- icon
+          local icon, hl = devicons.get_icon_color(t.path, nil, {default = true})
+          local icon_colored = fzf_utils.ansi_from_rgb(hl, icon)
+
+          -- fzf display string
+          -- TODO: improve this
+          local fzf_display_string = string.format("[%s] %s %s:%s:%s", tostring(buf_id), icon_colored, path_reversed, cursor_row, cursor_col)
+
+          -- fzf full string
+          local fzf_full_string = string.format("%s|%s|%s|%s|%s", tostring(buf_id), path, cursor_row, cursor_col, fzf_display_string)
+
+          cb(fzf_full_string)
+        end
+      end
+      cb()
+    end,
+    {
+      prompt = "Buffers> ",
+      previewer = previewer,
+      actions = {
+        ["default"] = function(selected)
+          if selected[1] == nil then
+            return
+          end
+
+          local buffer = selected[1]
+          if buffer then
+            local t = parse_entry(buffer)
+            vim.api.nvim_set_current_buf(t.bufnr)
+          end
+        end,
+        ["ctrl-x"] = function(selected)
+          if selected[1] ~= nil then
+            local buffer = selected[1]
+            local t = parse_entry(buffer)
+            vim.api.nvim_buf_delete(t.bufnr, { force = false })
+          end
+          require("fzf-lua").resume()
+        end,
+      },
+      fzf_opts = {
+        ["--delimiter"] = "|",
+        ["--with-nth"] = "5",
+        ["--header"] = header,
+      },
+    }
+  )
+end
+
+vim.keymap.set(
+  'n',
+  '<leader>fb',
+  buffers,
+  { desc = 'Find: open buffers' }
+)
