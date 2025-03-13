@@ -128,5 +128,7 @@ require("lazy").setup({
   },
 })
 
+require('bufs').setup()
+
 -- keymaps
 require('keymaps')

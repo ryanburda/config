@@ -660,6 +660,13 @@ vim.keymap.set(
 
 vim.keymap.set(
   'n',
+  '<C-f>',
+  require('bufs').buffers,
+  { desc = 'Find: open buffers' }
+)
+
+vim.keymap.set(
+  'n',
   '<leader>vc',
   require('fzf-lua').command_history,
   { desc = 'Vim command history' }
@@ -708,13 +715,6 @@ vim.keymap.set(
   '<leader>fo',
   require('fzf-lua').oldfiles,
   { desc = 'Find: last opened files' }
-)
-
-vim.keymap.set(
-  'n',
-  '<C-f>',
-  require('fzf-lua').buffers,
-  { desc = 'Find: open buffers' }
 )
 
 vim.keymap.set(
