@@ -970,7 +970,7 @@ local function buffers()
     local buffer_ids = vim.api.nvim_list_bufs()
 
     -- Loop through each buffer ID to get additional information.
-    for _, buf_id in ipairs(buffer_ids) do
+    for idx, buf_id in ipairs(buffer_ids) do
       local path = vim.api.nvim_buf_get_name(buf_id)
       local is_listed = vim.api.nvim_buf_get_option(buf_id, "buflisted")
       local is_loaded = vim.api.nvim_buf_is_loaded(buf_id)
@@ -978,8 +978,15 @@ local function buffers()
       -- Check if the buffer is loaded and has a file path
       if is_listed and is_loaded and path ~= "" then
 
+        -- path
         local relative_path = fzf_utils.ansi_codes.blue(vim.fn.fnamemodify(path, ':.'))
         local path_leaf = fzf_utils.ansi_codes.green(path:match("([^/\\]+)$"))
+        local buf_indicator = " "
+        if idx == 1 then
+          buf_indicator = fzf_utils.ansi_codes.grey('%')
+        elseif idx == 2 then
+          buf_indicator = fzf_utils.ansi_codes.grey('#')
+        end
 
         -- cursor position
         local cursor_pos = vim.api.nvim_buf_get_mark(buf_id, '\'')
@@ -989,14 +996,18 @@ local function buffers()
         local cursor_col_colored = fzf_utils.ansi_codes.cyan(tostring(cursor_col))
 
         -- dirty
-        -- local is_modified = vim.api.nvim_buf_get_option(buf_id, 'modified')
+        local is_modified = vim.api.nvim_buf_get_option(buf_id, 'modified')
+        local is_modified_str = " "
+        if is_modified then
+          is_modified_str = "+"
+        end
 
         -- icon
         local icon, hl = devicons.get_icon_color(path, nil, {default = true})
         local icon_colored = fzf_utils.ansi_from_rgb(hl, icon)
 
         -- fzf display string
-        local fzf_display_string = string.format("[%s] %s %s %s:%s:%s", tostring(buf_id), icon_colored, path_leaf, relative_path, cursor_row_colored, cursor_col_colored)
+        local fzf_display_string = string.format("[%s] %s %s %s %s %s:%s:%s", tostring(buf_id), buf_indicator, is_modified_str, icon_colored, path_leaf, relative_path, cursor_row_colored, cursor_col_colored)
 
         -- fzf full string
         local fzf_full_string = string.format("%s|%s|%s|%s|%s", tostring(buf_id), path, cursor_row, cursor_col, fzf_display_string)
