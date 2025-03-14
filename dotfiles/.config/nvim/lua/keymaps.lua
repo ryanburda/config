@@ -911,11 +911,10 @@ vim.keymap.set(
 
 -- Show buffers with path in reverse order.
 --    ~/project/folder/file_a.lua -> file_a.lua/folder/project/~
--- TODOs:
---    * pad buffer number by 5 digits so things line up better
---    * fix header to be more like fzf-lua's buffer command
---    * order buffers by when they were used
---    * add modified indicator
+--
+-- TODO:
+--    * Add <C-g> jump to alternate buffer
+--    * Add <C-j> and <C-k> to reorder buffer list
 local fzf_utils = require("fzf-lua.utils")
 local devicons = require("nvim-web-devicons")
 
@@ -1046,26 +1045,18 @@ local function buffers()
   end
 
   local ctrl_x = keymap_header("ctrl-x", "close")
-  local b = get_bufs()
-  local current_buffer_str = ""
-  if b[1] ~= nil then
-    current_buffer_str = parse_entry(b[1]).fzf_display_string
-  end
-  local header = string.format(":: %s\n%s", ctrl_x, current_buffer_str)
+  local header = string.format(":: %s", ctrl_x)
 
   require("fzf-lua").fzf_exec(
     function(cb)
       local bufs = get_bufs()
-      for idx, buf in ipairs(bufs) do
-        -- the first line is shown in the header
-        if idx > 1 then
-          cb(buf)
-        end
+      for _, buf in ipairs(bufs) do
+        cb(buf)
       end
       cb()
     end,
     {
-      prompt = "Buffers> ",
+      prompt = "bufs> ",
       previewer = previewer,
       actions = {
         ["default"] = function(selected)
