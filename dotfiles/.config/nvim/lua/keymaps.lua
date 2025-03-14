@@ -947,14 +947,14 @@ local function buffers()
   local function parse_entry(str)
     -- Deserialize the string created in `marker_to_string` above and return it as a table.
     if str then
-      local buf_id, path, row, col, picker_str = str:match("([^:]+)|([^:]+)|([^:]+)|([^:]+)|([^:]+)")
+      local buf_id, path, row, col, fzf_display_string = str:match("([^:]+)|([^:]+)|([^:]+)|([^:]+)|([^:]+)")
 
       return {
         buf_id = tonumber(buf_id),
         path = path,
         row = tonumber(row),
         col = tonumber(col),
-        picker_str = picker_str,
+        fzf_display_string = fzf_display_string
       }
     end
   end
@@ -1014,7 +1014,7 @@ local function buffers()
         local icon_colored = fzf_utils.ansi_from_rgb(hl, icon)
 
         -- fzf display string
-        local fzf_display_string = string.format("%s %s %s %s %s %s:%s:%s", buf_id_str, buf_indicator, is_modified_str, icon_colored, path_leaf, relative_path, cursor_row_colored, cursor_col_colored)
+        local fzf_display_string = string.format("%s %s %s %s %s:%s:%s %s", icon_colored, buf_indicator, path_leaf, is_modified_str, relative_path, cursor_row_colored, cursor_col_colored, buf_id_str)
 
         -- fzf full string
         local fzf_full_string = string.format("%s|%s|%s|%s|%s", tostring(buf_id), path, cursor_row, cursor_col, fzf_display_string)
@@ -1035,7 +1035,7 @@ local function buffers()
   local bufs = get_bufs()
   local current_buffer_str = ""
   if bufs[1] ~= nil then
-    current_buffer_str = parse_entry(bufs[1]).picker_str
+    current_buffer_str = parse_entry(bufs[1]).fzf_display_string
   end
   local header = string.format(":: %s\n%s", ctrl_x, current_buffer_str)
 
