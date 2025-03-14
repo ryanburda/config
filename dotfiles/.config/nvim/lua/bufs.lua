@@ -33,9 +33,10 @@ local function get_bufs()
   local max_file_name_length = 0
 
   -- Loop through each buffer ID to get additional information.
-  for _, buf_id in ipairs(vim.g.buffer_list) do
+  for idx, buf_id in ipairs(vim.g.buffer_list) do
     local buf = {}
 
+    buf.idx = idx
     buf.buf_id = buf_id
     buf.path = vim.api.nvim_buf_get_name(buf_id)
     buf.relative_path = fzf_utils.ansi_codes.blue(vim.fn.fnamemodify(buf.path, ':.'))
@@ -89,7 +90,8 @@ local function get_bufs()
     )
 
     local fzf_full_string = string.format(
-      "%s|%s|%s|%s|%s",
+      "%s|%s|%s|%s|%s|%s",
+      buf.idx,
       tostring(buf.buf_id),
       buf.path,
       buf.cursor_row,
@@ -105,9 +107,10 @@ end
 
 local function parse_entry(str)
   if str then
-    local buf_id, path, row, col, fzf_display_string = str:match("([^:]+)|([^:]+)|([^:]+)|([^:]+)|([^:]+)")
+    local idx, buf_id, path, row, col, fzf_display_string = str:match("([^:]+)|([^:]+)|([^:]+)|([^:]+)|([^:]+)|([^:]+)")
 
     return {
+      idx = tonumber(idx),
       buf_id = tonumber(buf_id),
       path = path,
       row = tonumber(row),
@@ -251,10 +254,25 @@ M.buffers = function()
           end
           require("fzf-lua").resume()
         end,
+        ["ctrl-j"] = function(selected)
+          if selected[1] ~= nil then
+            local buffer = selected[1]
+            local t = parse_entry(buffer)
+
+            local buffer_list = vim.g.buffer_list
+
+            -- Move the entry down one
+            table.remove(buffer_list, t.idx)
+            table.insert(buffer_list, math.min(t.idx + 1, #buffer_list + 1), t.buf_id)
+
+            vim.g.buffer_list = buffer_list
+          end
+          require("fzf-lua").resume()
+        end,
       },
       fzf_opts = {
         ["--delimiter"] = "|",
-        ["--with-nth"] = "5",
+        ["--with-nth"] = "6",
         ["--header"] = get_header(),
       },
     }
