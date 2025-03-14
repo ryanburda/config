@@ -2,6 +2,20 @@
 --    * Shows leaf of file paths in its own column
 --    * Does not reorder based on last used
 --    * Allows for list to be reordered
+--
+-- Example usage
+-- ```lua
+-- --run setup for autocommands
+-- require('bufs').setup()
+--
+-- -- Create a keymap
+-- vim.keymap.set(
+--   'n',
+--   '<C-f>',
+--   require('bufs').buffers,
+--   { desc = 'buffers' }
+-- )
+-- ```
 local fzf_utils = require("fzf-lua.utils")
 local devicons = require("nvim-web-devicons")
 
