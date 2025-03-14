@@ -214,12 +214,10 @@ M.setup = function()
   vim.api.nvim_create_autocmd({'BufDelete'}, {
     group = 'BufferList',
     pattern = '*',
-    callback = function()
-      local bufnr = vim.api.nvim_get_current_buf()
-
+    callback = function(event)
       local buffer_list = vim.g.buffer_list
       for i, v in ipairs(buffer_list) do
-        if v == bufnr then
+        if v == event.buf then
           table.remove(buffer_list, i)
           break
         end
