@@ -183,13 +183,16 @@ M.setup = function()
     callback = function(event)
       local bufnr = event.buf
       local path = vim.api.nvim_buf_get_name(bufnr)
-      local is_listed = true --vim.api.nvim_buf_get_option(bufnr, "buflisted")
-      local is_loaded = true --vim.api.nvim_buf_is_loaded(bufnr)
+      local is_listed = vim.api.nvim_buf_get_option(bufnr, "buflisted")
+      local is_loaded = vim.api.nvim_buf_is_loaded(bufnr)
 
       -- Check if the buffer is loaded and has a file path
+      local buffer_list = vim.g.buffer_list
       if is_listed and is_loaded and path ~= "" then
-        table.insert(vim.g.buffer_list, bufnr)
+        table.insert(buffer_list, bufnr)
       end
+
+      vim.g.buffer_list = buffer_list
     end,
   })
 
@@ -198,12 +201,16 @@ M.setup = function()
     pattern = '*',
     callback = function()
       local bufnr = vim.api.nvim_get_current_buf()
-      for i, v in ipairs(vim.g.buffer_list) do
+
+      local buffer_list = vim.g.buffer_list
+      for i, v in ipairs(buffer_list) do
         if v == bufnr then
-          table.remove(vim.g.buffer_list, i)
+          table.remove(buffer_list, i)
           break
         end
       end
+
+      vim.g.buffer_list = buffer_list
     end,
   })
 
