@@ -30,60 +30,47 @@ end
 
 local function get_bufs()
   local bufs = {}
-
-  -- Get the list of buffer IDs
-  local buffer_ids = vim.api.nvim_list_bufs()
-
   local max_file_name_length = 0
 
   -- Loop through each buffer ID to get additional information.
-  for _, buf_id in ipairs(buffer_ids) do
-    local path = vim.api.nvim_buf_get_name(buf_id)
-    local is_listed = vim.api.nvim_buf_get_option(buf_id, "buflisted")
-    local is_loaded = vim.api.nvim_buf_is_loaded(buf_id)
+  for _, buf_id in ipairs(vim.g.buffer_list) do
+    local t = {}
 
-    -- Check if the buffer is loaded and has a file path
-    if is_listed and is_loaded and path ~= "" then
-      local t = {}
+    t.buf_id = buf_id
+    t.path = vim.api.nvim_buf_get_name(buf_id)
+    t.relative_path = fzf_utils.ansi_codes.blue(vim.fn.fnamemodify(t.path, ':.'))
+    t.path_leaf = fzf_utils.ansi_codes.green(t.path:match("([^/\\]+)$"))
 
-      t.buf_id = buf_id
-      t.path = path
-
-      -- path
-      t.relative_path = fzf_utils.ansi_codes.blue(vim.fn.fnamemodify(path, ':.'))
-      t.path_leaf = fzf_utils.ansi_codes.green(path:match("([^/\\]+)$"))
-
-      if #t.path_leaf > max_file_name_length then
-        max_file_name_length = #t.path_leaf
-      end
-
-      t.buf_indicator = " "
-      if t.buf_id == vim.fn.bufnr('%') then
-        t.buf_indicator = fzf_utils.ansi_codes.grey('%')
-      elseif t.buf_id == vim.fn.bufnr('#') then
-        t.buf_indicator = fzf_utils.ansi_codes.grey('#')
-      end
-
-      -- cursor position
-      local cursor_pos = get_last_cursor_position(t.buf_id)
-      t.cursor_row = cursor_pos[1]
-      t.cursor_col = cursor_pos[2]
-      t.cursor_row_colored = fzf_utils.ansi_codes.yellow(tostring(t.cursor_row))
-      t.cursor_col_colored = fzf_utils.ansi_codes.cyan(tostring(t.cursor_col))
-
-      -- dirty
-      local is_modified = vim.api.nvim_buf_get_option(buf_id, 'modified')
-      t.is_modified_str = " "
-      if is_modified then
-        t.is_modified_str = "+"
-      end
-
-      -- icon
-      local icon, hl = devicons.get_icon_color(path, nil, {default = true})
-      t.icon = fzf_utils.ansi_from_rgb(hl, icon)
-
-      table.insert(bufs, t)
+    if #t.path_leaf > max_file_name_length then
+      max_file_name_length = #t.path_leaf
     end
+
+    t.buf_indicator = " "
+    if t.buf_id == vim.fn.bufnr('%') then
+      t.buf_indicator = fzf_utils.ansi_codes.grey('%')
+    elseif t.buf_id == vim.fn.bufnr('#') then
+      t.buf_indicator = fzf_utils.ansi_codes.grey('#')
+    end
+
+    -- cursor position
+    local cursor_pos = get_last_cursor_position(t.buf_id)
+    t.cursor_row = cursor_pos[1]
+    t.cursor_col = cursor_pos[2]
+    t.cursor_row_colored = fzf_utils.ansi_codes.yellow(tostring(t.cursor_row))
+    t.cursor_col_colored = fzf_utils.ansi_codes.cyan(tostring(t.cursor_col))
+
+    -- dirty
+    local is_modified = vim.api.nvim_buf_get_option(buf_id, 'modified')
+    t.is_modified_str = " "
+    if is_modified then
+      t.is_modified_str = "+"
+    end
+
+    -- icon
+    local icon, hl = devicons.get_icon_color(t.path, nil, {default = true})
+    t.icon = fzf_utils.ansi_from_rgb(hl, icon)
+
+    table.insert(bufs, t)
   end
 
   local picker_strs = {}
@@ -185,6 +172,41 @@ M.setup = function()
       vim.b[bufnr].last_cursor_position = cursor_position
     end,
   })
+
+  -- Buffer list autocommands
+  vim.g.buffer_list = {}
+  vim.api.nvim_create_augroup('BufferList', { clear = true })
+
+  vim.api.nvim_create_autocmd({'BufReadPost'}, {
+    group = 'BufferList',
+    pattern = '*',
+    callback = function(event)
+      local bufnr = event.buf
+      local path = vim.api.nvim_buf_get_name(bufnr)
+      local is_listed = true --vim.api.nvim_buf_get_option(bufnr, "buflisted")
+      local is_loaded = true --vim.api.nvim_buf_is_loaded(bufnr)
+
+      -- Check if the buffer is loaded and has a file path
+      if is_listed and is_loaded and path ~= "" then
+        table.insert(vim.g.buffer_list, bufnr)
+      end
+    end,
+  })
+
+  vim.api.nvim_create_autocmd({'BufDelete'}, {
+    group = 'BufferList',
+    pattern = '*',
+    callback = function()
+      local bufnr = vim.api.nvim_get_current_buf()
+      for i, v in ipairs(vim.g.buffer_list) do
+        if v == bufnr then
+          table.remove(vim.g.buffer_list, i)
+          break
+        end
+      end
+    end,
+  })
+
 end
 
 M.buffers = function()
