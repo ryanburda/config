@@ -908,6 +908,8 @@ vim.keymap.set(
 -- TODO:
 --    * Add <C-g> jump to alternate buffer
 --    * Add <C-j> and <C-k> to reorder buffer list
+--    * Fix current and alternate buffer indicators
+--    * Fix row/column (they're all the same value)
 local fzf_utils = require("fzf-lua.utils")
 local devicons = require("nvim-web-devicons")
 
@@ -991,14 +993,14 @@ local function buffers()
         end
 
         t.buf_indicator = " "
-        if buf_id == vim.fn.bufnr('%') then
+        if t.buf_id == vim.fn.bufnr('%') then
           t.buf_indicator = fzf_utils.ansi_codes.grey('%')
-        elseif buf_id == vim.fn.bufnr('#') then
+        elseif t.buf_id == vim.fn.bufnr('#') then
           t.buf_indicator = fzf_utils.ansi_codes.grey('#')
         end
 
         -- cursor position
-        local cursor_pos = vim.api.nvim_buf_get_mark(buf_id, '\'')
+        local cursor_pos = vim.api.nvim_buf_get_mark(t.buf_id, '\'')
         t.cursor_row = cursor_pos[1]
         t.cursor_col = cursor_pos[2]
         t.cursor_row_colored = fzf_utils.ansi_codes.yellow(tostring(t.cursor_row))
