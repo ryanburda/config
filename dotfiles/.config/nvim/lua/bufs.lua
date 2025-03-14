@@ -34,43 +34,43 @@ local function get_bufs()
 
   -- Loop through each buffer ID to get additional information.
   for _, buf_id in ipairs(vim.g.buffer_list) do
-    local t = {}
+    local buf = {}
 
-    t.buf_id = buf_id
-    t.path = vim.api.nvim_buf_get_name(buf_id)
-    t.relative_path = fzf_utils.ansi_codes.blue(vim.fn.fnamemodify(t.path, ':.'))
-    t.path_leaf = fzf_utils.ansi_codes.green(t.path:match("([^/\\]+)$"))
+    buf.buf_id = buf_id
+    buf.path = vim.api.nvim_buf_get_name(buf_id)
+    buf.relative_path = fzf_utils.ansi_codes.blue(vim.fn.fnamemodify(buf.path, ':.'))
+    buf.path_leaf = fzf_utils.ansi_codes.green(buf.path:match("([^/\\]+)$"))
 
-    if #t.path_leaf > max_file_name_length then
-      max_file_name_length = #t.path_leaf
+    if #buf.path_leaf > max_file_name_length then
+      max_file_name_length = #buf.path_leaf
     end
 
-    t.buf_indicator = " "
-    if t.buf_id == vim.fn.bufnr('%') then
-      t.buf_indicator = fzf_utils.ansi_codes.grey('%')
-    elseif t.buf_id == vim.fn.bufnr('#') then
-      t.buf_indicator = fzf_utils.ansi_codes.grey('#')
+    buf.buf_indicator = " "
+    if buf.buf_id == vim.fn.bufnr('%') then
+      buf.buf_indicator = fzf_utils.ansi_codes.grey('%')
+    elseif buf.buf_id == vim.fn.bufnr('#') then
+      buf.buf_indicator = fzf_utils.ansi_codes.grey('#')
     end
 
     -- cursor position
-    local cursor_pos = get_last_cursor_position(t.buf_id)
-    t.cursor_row = cursor_pos[1]
-    t.cursor_col = cursor_pos[2]
-    t.cursor_row_colored = fzf_utils.ansi_codes.yellow(tostring(t.cursor_row))
-    t.cursor_col_colored = fzf_utils.ansi_codes.cyan(tostring(t.cursor_col))
+    local cursor_pos = get_last_cursor_position(buf.buf_id)
+    buf.cursor_row = cursor_pos[1]
+    buf.cursor_col = cursor_pos[2]
+    buf.cursor_row_colored = fzf_utils.ansi_codes.yellow(tostring(buf.cursor_row))
+    buf.cursor_col_colored = fzf_utils.ansi_codes.cyan(tostring(buf.cursor_col))
 
     -- dirty
     local is_modified = vim.api.nvim_buf_get_option(buf_id, 'modified')
-    t.is_modified_str = " "
+    buf.is_modified_str = " "
     if is_modified then
-      t.is_modified_str = "+"
+      buf.is_modified_str = "+"
     end
 
     -- icon
-    local icon, hl = devicons.get_icon_color(t.path, nil, {default = true})
-    t.icon = fzf_utils.ansi_from_rgb(hl, icon)
+    local icon, hl = devicons.get_icon_color(buf.path, nil, {default = true})
+    buf.icon = fzf_utils.ansi_from_rgb(hl, icon)
 
-    table.insert(bufs, t)
+    table.insert(bufs, buf)
   end
 
   local picker_strs = {}
