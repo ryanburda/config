@@ -269,6 +269,21 @@ M.buffers = function()
           end
           require("fzf-lua").resume()
         end,
+        ["ctrl-k"] = function(selected)
+          if selected[1] ~= nil then
+            local buffer = selected[1]
+            local t = parse_entry(buffer)
+
+            local buffer_list = vim.g.buffer_list
+
+            -- Move the entry up one
+            table.remove(buffer_list, t.idx)
+            table.insert(buffer_list, math.max(t.idx - 1, 1), t.buf_id)
+
+            vim.g.buffer_list = buffer_list
+          end
+          require("fzf-lua").resume()
+        end,
       },
       fzf_opts = {
         ["--delimiter"] = "|",
