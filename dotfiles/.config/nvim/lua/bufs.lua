@@ -125,11 +125,7 @@ local keymap_header = function(key, purpose)
   return string.format("<%s> to %s", fzf_utils.ansi_codes.yellow(key), fzf_utils.ansi_codes.red(purpose))
 end
 
-
-local M = {}
-
-M.buffers = function()
-
+local function get_previewer()
   local builtin = require("fzf-lua.previewer.builtin")
 
   local previewer = builtin.buffer_or_file:extend()
@@ -150,10 +146,20 @@ M.buffers = function()
     }
   end
 
-  -- Header
+  return previewer
+end
+
+local function get_header()
   local ctrl_x = keymap_header("ctrl-x", "close")
   local header = string.format(":: %s", ctrl_x)
 
+  return header
+end
+
+
+local M = {}
+
+M.buffers = function()
   require("fzf-lua").fzf_exec(
     function(cb)
       local bufs = get_bufs()
@@ -164,7 +170,7 @@ M.buffers = function()
     end,
     {
       prompt = "bufs> ",
-      previewer = previewer,
+      previewer = get_previewer(),
       actions = {
         ["default"] = function(selected)
           if selected[1] == nil then
@@ -189,7 +195,7 @@ M.buffers = function()
       fzf_opts = {
         ["--delimiter"] = "|",
         ["--with-nth"] = "5",
-        ["--header"] = header,
+        ["--header"] = get_header(),
       },
     }
   )
