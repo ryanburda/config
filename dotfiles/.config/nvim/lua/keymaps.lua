@@ -977,7 +977,7 @@ local function buffers()
     local max_file_name_length = 0
 
     -- Loop through each buffer ID to get additional information.
-    for idx, buf_id in ipairs(buffer_ids) do
+    for _, buf_id in ipairs(buffer_ids) do
       local path = vim.api.nvim_buf_get_name(buf_id)
       local is_listed = vim.api.nvim_buf_get_option(buf_id, "buflisted")
       local is_loaded = vim.api.nvim_buf_is_loaded(buf_id)
@@ -998,13 +998,11 @@ local function buffers()
         end
 
         t.buf_indicator = " "
-        if idx == 1 then
+        if buf_id == vim.fn.bufnr('%') then
           t.buf_indicator = fzf_utils.ansi_codes.grey('%')
-        elseif idx == 2 then
+        elseif buf_id == vim.fn.bufnr('#') then
           t.buf_indicator = fzf_utils.ansi_codes.grey('#')
         end
-
-        t.buf_id_str = pad_string(string.format("[%s]", tostring(buf_id)), 6)
 
         -- cursor position
         local cursor_pos = vim.api.nvim_buf_get_mark(buf_id, '\'')
@@ -1031,7 +1029,7 @@ local function buffers()
     local picker_strs = {}
 
     for _, buf in ipairs(bufs) do
-      local fzf_display_string = string.format("%s %s %s %s %s:%s:%s %s", buf.icon, buf.buf_indicator, pad_string(buf.path_leaf, max_file_name_length), buf.is_modified_str, buf.relative_path, buf.cursor_row_colored, buf.cursor_col_colored, buf.buf_id_str)
+      local fzf_display_string = string.format("%s %s %s %s %s:%s:%s [%s]", buf.icon, buf.buf_indicator, pad_string(buf.path_leaf, max_file_name_length), buf.is_modified_str, buf.relative_path, buf.cursor_row_colored, buf.cursor_col_colored, tostring(buf.buf_id))
       local fzf_full_string = string.format("%s|%s|%s|%s|%s", tostring(buf.buf_id), buf.path, buf.cursor_row, buf.cursor_col, fzf_display_string)
       table.insert(picker_strs, fzf_full_string)
     end
@@ -1045,7 +1043,7 @@ local function buffers()
   end
 
   local ctrl_x = keymap_header("ctrl-x", "close")
-  local header = string.format(":: %s", ctrl_x)
+  local header = string.format(":: %s %s %s", ctrl_x, vim.fn.bufnr('%'), vim.fn.bufnr('#'))
 
   require("fzf-lua").fzf_exec(
     function(cb)
