@@ -50,7 +50,7 @@ local function get_bufs()
     buf.buf_id = buf_id
     buf.path = vim.api.nvim_buf_get_name(buf_id)
     buf.relative_path = fzf_utils.ansi_codes.blue(vim.fn.fnamemodify(buf.path, ':.'))
-    buf.path_leaf = fzf_utils.ansi_codes.green(buf.path:match("([^/\\]+)$"))
+    buf.path_leaf = fzf_utils.ansi_codes.cyan(buf.path:match("([^/\\]+)$"))
 
     if #buf.path_leaf > max_file_name_length then
       max_file_name_length = #buf.path_leaf
@@ -58,17 +58,17 @@ local function get_bufs()
 
     buf.buf_indicator = " "
     if buf.buf_id == vim.fn.bufnr('%') then
-      buf.buf_indicator = fzf_utils.ansi_codes.grey('%')
+      buf.buf_indicator = fzf_utils.ansi_codes.red('%')
     elseif buf.buf_id == vim.fn.bufnr('#') then
-      buf.buf_indicator = fzf_utils.ansi_codes.grey('#')
+      buf.buf_indicator = fzf_utils.ansi_codes.green('#')
     end
 
     -- cursor position
     local cursor_pos = get_last_cursor_position(buf.buf_id)
     buf.cursor_row = cursor_pos[1]
     buf.cursor_col = cursor_pos[2]
-    buf.cursor_row_colored = fzf_utils.ansi_codes.yellow(tostring(buf.cursor_row))
-    buf.cursor_col_colored = fzf_utils.ansi_codes.cyan(tostring(buf.cursor_col))
+    buf.cursor_row_colored = tostring(buf.cursor_row)
+    buf.cursor_col_colored = tostring(buf.cursor_col)
 
     -- dirty
     local is_modified = vim.api.nvim_buf_get_option(buf_id, 'modified')
@@ -162,7 +162,8 @@ local function get_header()
   local ctrl_x = keymap_header("ctrl-x", "close")
   local ctrl_j = keymap_header("ctrl-j", "reorder down")
   local ctrl_k = keymap_header("ctrl-k", "reorder up")
-  local header = string.format(":: %s | %s | %s", ctrl_x, ctrl_j, ctrl_k)
+  local ctrl_g = keymap_header("ctrl-g", "# buffer")
+  local header = string.format(":: %s | %s | %s | %s", ctrl_x, ctrl_j, ctrl_k, ctrl_g)
 
   return header
 end
@@ -294,6 +295,14 @@ M.buffers = function()
           end
           M.buffers()
         end,
+        ["ctrl-g"] = function()
+          local alt_bufnr = vim.fn.bufnr('#')
+
+          if alt_bufnr ~= -1 then
+            vim.api.nvim_set_current_buf(alt_bufnr)
+          end
+        end,
+
       },
       fzf_opts = {
         ["--delimiter"] = "|",
