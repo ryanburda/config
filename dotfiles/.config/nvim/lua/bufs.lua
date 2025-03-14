@@ -1,11 +1,7 @@
 -- Personal take on `:FzfLua buffers`
 --    * Shows leaf of file paths in its own column
 --    * Does not reorder based on last used
---    * Allows for list to be reordered (not implemented)
---
--- TODO:
---    * Add <C-g> jump to alternate buffer
---    * Add <C-j> and <C-k> to reorder buffer list
+--    * Allows for list to be reordered
 local fzf_utils = require("fzf-lua.utils")
 local devicons = require("nvim-web-devicons")
 
@@ -120,10 +116,6 @@ local function parse_entry(str)
   end
 end
 
-local keymap_header = function(key, purpose)
-  return string.format("<%s> to %s", fzf_utils.ansi_codes.yellow(key), fzf_utils.ansi_codes.red(purpose))
-end
-
 local function get_previewer()
   local builtin = require("fzf-lua.previewer.builtin")
 
@@ -148,9 +140,15 @@ local function get_previewer()
   return previewer
 end
 
+local keymap_header = function(key, purpose)
+  return string.format("<%s> to %s", fzf_utils.ansi_codes.yellow(key), fzf_utils.ansi_codes.red(purpose))
+end
+
 local function get_header()
   local ctrl_x = keymap_header("ctrl-x", "close")
-  local header = string.format(":: %s", ctrl_x)
+  local ctrl_j = keymap_header("ctrl-j", "reorder down")
+  local ctrl_k = keymap_header("ctrl-k", "reorder up")
+  local header = string.format(":: %s | %s | %s", ctrl_x, ctrl_j, ctrl_k)
 
   return header
 end
