@@ -925,6 +925,19 @@ local function buffers()
 
   local previewer = builtin.buffer_or_file:extend()
 
+  local function pad_string(input_string, num_characters)
+      -- Check the current length of the input string
+      local length = #input_string
+
+      -- Pad with spaces until the length is 5
+      while length < num_characters do
+          input_string = input_string .. " "
+          length = length + 1
+      end
+
+      return input_string
+  end
+
   function previewer:new(o, opts, fzf_win)
     previewer.super.new(self, o, opts, fzf_win)
     setmetatable(self, previewer)
@@ -956,13 +969,6 @@ local function buffers()
     }
   end
 
-  local keymap_header = function(key, purpose)
-    return string.format("<%s> to %s", fzf_utils.ansi_codes.yellow(key), fzf_utils.ansi_codes.red(purpose))
-  end
-
-  local ctrl_x = keymap_header("ctrl-x", "close")
-  local header = string.format(":: %s", ctrl_x)
-
   local function get_bufs()
     local bufs = {}
 
@@ -987,6 +993,7 @@ local function buffers()
         elseif idx == 2 then
           buf_indicator = fzf_utils.ansi_codes.grey('#')
         end
+        local buf_id_str = pad_string(string.format("[%s]", tostring(buf_id)), 5)
 
         -- cursor position
         local cursor_pos = vim.api.nvim_buf_get_mark(buf_id, '\'')
@@ -1007,7 +1014,7 @@ local function buffers()
         local icon_colored = fzf_utils.ansi_from_rgb(hl, icon)
 
         -- fzf display string
-        local fzf_display_string = string.format("[%s] %s %s %s %s %s:%s:%s", tostring(buf_id), buf_indicator, is_modified_str, icon_colored, path_leaf, relative_path, cursor_row_colored, cursor_col_colored)
+        local fzf_display_string = string.format("%s %s %s %s %s %s:%s:%s", buf_id_str, buf_indicator, is_modified_str, icon_colored, path_leaf, relative_path, cursor_row_colored, cursor_col_colored)
 
         -- fzf full string
         local fzf_full_string = string.format("%s|%s|%s|%s|%s", tostring(buf_id), path, cursor_row, cursor_col, fzf_display_string)
@@ -1019,11 +1026,27 @@ local function buffers()
     return bufs
   end
 
+  -- Header
+  local keymap_header = function(key, purpose)
+    return string.format("<%s> to %s", fzf_utils.ansi_codes.yellow(key), fzf_utils.ansi_codes.red(purpose))
+  end
+
+  local ctrl_x = keymap_header("ctrl-x", "close")
+  local bufs = get_bufs()
+  local current_buffer_str = ""
+  if bufs[1] ~= nil then
+    current_buffer_str = parse_entry(bufs[1]).picker_str
+  end
+  local header = string.format(":: %s\n%s", ctrl_x, current_buffer_str)
+
   require("fzf-lua").fzf_exec(
     function(cb)
       local bufs = get_bufs()
-      for _, buf in ipairs(bufs) do
+      for idx, buf in ipairs(bufs) do
+        -- the first line is shown in the header
+        if idx > 1 then
           cb(buf)
+        end
       end
       cb()
     end,
