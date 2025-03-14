@@ -975,6 +975,8 @@ local function buffers()
     -- Get the list of buffer IDs
     local buffer_ids = vim.api.nvim_list_bufs()
 
+    local max_file_name_length = 0
+
     -- Loop through each buffer ID to get additional information.
     for idx, buf_id in ipairs(buffer_ids) do
       local path = vim.api.nvim_buf_get_name(buf_id)
@@ -983,47 +985,59 @@ local function buffers()
 
       -- Check if the buffer is loaded and has a file path
       if is_listed and is_loaded and path ~= "" then
+        local t = {}
+
+        t.buf_id = buf_id
+        t.path = path
 
         -- path
-        local relative_path = fzf_utils.ansi_codes.blue(vim.fn.fnamemodify(path, ':.'))
-        local path_leaf = fzf_utils.ansi_codes.green(path:match("([^/\\]+)$"))
-        local buf_indicator = " "
-        if idx == 1 then
-          buf_indicator = fzf_utils.ansi_codes.grey('%')
-        elseif idx == 2 then
-          buf_indicator = fzf_utils.ansi_codes.grey('#')
+        t.relative_path = fzf_utils.ansi_codes.blue(vim.fn.fnamemodify(path, ':.'))
+        t.path_leaf = fzf_utils.ansi_codes.green(path:match("([^/\\]+)$"))
+
+        if #t.path_leaf > max_file_name_length then
+          max_file_name_length = #t.path_leaf
         end
-        local buf_id_str = pad_string(string.format("[%s]", tostring(buf_id)), 6)
+
+        t.buf_indicator = " "
+        if idx == 1 then
+          t.buf_indicator = fzf_utils.ansi_codes.grey('%')
+        elseif idx == 2 then
+          t.buf_indicator = fzf_utils.ansi_codes.grey('#')
+        end
+
+        t.buf_id_str = pad_string(string.format("[%s]", tostring(buf_id)), 6)
 
         -- cursor position
         local cursor_pos = vim.api.nvim_buf_get_mark(buf_id, '\'')
-        local cursor_row = cursor_pos[1]
-        local cursor_col = cursor_pos[2]
-        local cursor_row_colored = fzf_utils.ansi_codes.yellow(tostring(cursor_row))
-        local cursor_col_colored = fzf_utils.ansi_codes.cyan(tostring(cursor_col))
+        t.cursor_row = cursor_pos[1]
+        t.cursor_col = cursor_pos[2]
+        t.cursor_row_colored = fzf_utils.ansi_codes.yellow(tostring(t.cursor_row))
+        t.cursor_col_colored = fzf_utils.ansi_codes.cyan(tostring(t.cursor_col))
 
         -- dirty
         local is_modified = vim.api.nvim_buf_get_option(buf_id, 'modified')
-        local is_modified_str = " "
+        t.is_modified_str = " "
         if is_modified then
-          is_modified_str = "+"
+          t.is_modified_str = "+"
         end
 
         -- icon
         local icon, hl = devicons.get_icon_color(path, nil, {default = true})
-        local icon_colored = fzf_utils.ansi_from_rgb(hl, icon)
+        t.icon = fzf_utils.ansi_from_rgb(hl, icon)
 
-        -- fzf display string
-        local fzf_display_string = string.format("%s %s %s %s %s:%s:%s %s", icon_colored, buf_indicator, path_leaf, is_modified_str, relative_path, cursor_row_colored, cursor_col_colored, buf_id_str)
-
-        -- fzf full string
-        local fzf_full_string = string.format("%s|%s|%s|%s|%s", tostring(buf_id), path, cursor_row, cursor_col, fzf_display_string)
-
-        table.insert(bufs, fzf_full_string)
+        table.insert(bufs, t)
       end
     end
 
-    return bufs
+    local picker_strs = {}
+
+    for _, buf in ipairs(bufs) do
+      local fzf_display_string = string.format("%s %s %s %s %s:%s:%s %s", buf.icon, buf.buf_indicator, pad_string(buf.path_leaf, max_file_name_length), buf.is_modified_str, buf.relative_path, buf.cursor_row_colored, buf.cursor_col_colored, buf.buf_id_str)
+      local fzf_full_string = string.format("%s|%s|%s|%s|%s", tostring(buf.buf_id), buf.path, buf.cursor_row, buf.cursor_col, fzf_display_string)
+      table.insert(picker_strs, fzf_full_string)
+    end
+
+    return picker_strs
   end
 
   -- Header
@@ -1032,10 +1046,10 @@ local function buffers()
   end
 
   local ctrl_x = keymap_header("ctrl-x", "close")
-  local bufs = get_bufs()
+  local b = get_bufs()
   local current_buffer_str = ""
-  if bufs[1] ~= nil then
-    current_buffer_str = parse_entry(bufs[1]).fzf_display_string
+  if b[1] ~= nil then
+    current_buffer_str = parse_entry(b[1]).fzf_display_string
   end
   local header = string.format(":: %s\n%s", ctrl_x, current_buffer_str)
 
