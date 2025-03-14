@@ -1,10 +1,11 @@
--- Show buffers in a way that is easier on the eyes.
+-- Personal take on `:FzfLua buffers`
+--    * Shows leaf of file paths in its own column
+--    * Does not reorder based on last used
+--    * Allows for list to be reordered (not implemented)
 --
 -- TODO:
 --    * Add <C-g> jump to alternate buffer
 --    * Add <C-j> and <C-k> to reorder buffer list
---    * Fix current and alternate buffer indicators
---    * Fix row/column (they're all the same value)
 local fzf_utils = require("fzf-lua.utils")
 local devicons = require("nvim-web-devicons")
 
