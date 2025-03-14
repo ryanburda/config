@@ -8,6 +8,14 @@
 local fzf_utils = require("fzf-lua.utils")
 local devicons = require("nvim-web-devicons")
 
+local function get_last_cursor_position(bufnr)
+  if vim.b[bufnr] and vim.b[bufnr].last_cursor_position then
+    return vim.b[bufnr].last_cursor_position
+  else
+    return nil
+  end
+end
+
 local function pad_string(input_string, num_characters)
     local length = #input_string
 
@@ -56,7 +64,7 @@ local function get_bufs()
       end
 
       -- cursor position
-      local cursor_pos = vim.api.nvim_buf_get_mark(t.buf_id, '"')
+      local cursor_pos = get_last_cursor_position(t.buf_id)
       t.cursor_row = cursor_pos[1]
       t.cursor_col = cursor_pos[2]
       t.cursor_row_colored = fzf_utils.ansi_codes.yellow(tostring(t.cursor_row))
@@ -158,6 +166,25 @@ end
 
 
 local M = {}
+
+M.setup = function()
+  -- Cursor position autocommands.
+  vim.api.nvim_create_augroup('SaveCursorPos', { clear = true })
+
+  -- Create an autocommand to update the last known cursor position
+  vim.api.nvim_create_autocmd({'CursorMoved', 'BufReadPost'}, {
+    group = 'SaveCursorPos',
+    pattern = '*',
+    callback = function()
+      -- Get the current buffer number and the cursor position
+      local bufnr = vim.api.nvim_get_current_buf()
+      local cursor_position = vim.api.nvim_win_get_cursor(0)
+
+      -- Save the cursor position to a buffer variable
+      vim.b[bufnr].last_cursor_position = cursor_position
+    end,
+  })
+end
 
 M.buffers = function()
   -- Call `get_bufs` before calling `fzf_exec`.
