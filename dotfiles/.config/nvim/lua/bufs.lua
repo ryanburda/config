@@ -160,9 +160,12 @@ end
 local M = {}
 
 M.buffers = function()
+  -- call `get_bufs` first so the unlisted buffer that is created
+  -- by fzf-lua does not take the place of the current buffer.
+  local bufs = get_bufs()
+
   require("fzf-lua").fzf_exec(
     function(cb)
-      local bufs = get_bufs()
       for _, buf in ipairs(bufs) do
         cb(buf)
       end
