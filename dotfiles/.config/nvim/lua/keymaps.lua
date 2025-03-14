@@ -712,13 +712,6 @@ vim.keymap.set(
 
 vim.keymap.set(
   'n',
-  '<C-f>',
-  require('fzf-lua').buffers,
-  { desc = 'Find: open buffers' }
-)
-
-vim.keymap.set(
-  'n',
   '<C-g>',
   ':b#<cr>',
   { desc = 'Alternate buffer' }
@@ -1043,7 +1036,7 @@ local function buffers()
   end
 
   local ctrl_x = keymap_header("ctrl-x", "close")
-  local header = string.format(":: %s %s %s", ctrl_x, vim.fn.bufnr('%'), vim.fn.bufnr('#'))
+  local header = string.format(":: %s", ctrl_x)
 
   require("fzf-lua").fzf_exec(
     function(cb)
@@ -1088,7 +1081,7 @@ end
 
 vim.keymap.set(
   'n',
-  '<leader>fb',
+  '<C-f>',
   buffers,
   { desc = 'Find: open buffers' }
 )
