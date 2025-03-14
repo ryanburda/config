@@ -160,8 +160,8 @@ end
 local M = {}
 
 M.buffers = function()
-  -- call `get_bufs` first so the unlisted buffer that is created
-  -- by fzf-lua does not take the place of the current buffer.
+  -- Call `get_bufs` before calling `fzf_exec`.
+  -- This ensures that we preserve the current/alternate buffers before `fzf_exec` creates an unlisted buffer.
   local bufs = get_bufs()
 
   require("fzf-lua").fzf_exec(
