@@ -993,7 +993,7 @@ local function buffers()
         elseif idx == 2 then
           buf_indicator = fzf_utils.ansi_codes.grey('#')
         end
-        local buf_id_str = pad_string(string.format("[%s]", tostring(buf_id)), 5)
+        local buf_id_str = pad_string(string.format("[%s]", tostring(buf_id)), 6)
 
         -- cursor position
         local cursor_pos = vim.api.nvim_buf_get_mark(buf_id, '\'')
