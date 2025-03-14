@@ -921,6 +921,16 @@ local devicons = require("nvim-web-devicons")
 
 local function buffers()
 
+  local builtin = require("fzf-lua.previewer.builtin")
+
+  local previewer = builtin.buffer_or_file:extend()
+
+  function previewer:new(o, opts, fzf_win)
+    previewer.super.new(self, o, opts, fzf_win)
+    setmetatable(self, previewer)
+    return self
+  end
+
   local function parse_entry(str)
     -- Deserialize the string created in `marker_to_string` above and return it as a table.
     if str then
@@ -934,16 +944,6 @@ local function buffers()
         picker_str = picker_str,
       }
     end
-  end
-
-  local builtin = require("fzf-lua.previewer.builtin")
-
-  local previewer = builtin.buffer_or_file:extend()
-
-  function previewer:new(o, opts, fzf_win)
-    previewer.super.new(self, o, opts, fzf_win)
-    setmetatable(self, previewer)
-    return self
   end
 
   function previewer:parse_entry(entry_str)
@@ -964,7 +964,6 @@ local function buffers()
   local header = string.format(":: %s", ctrl_x)
 
   local function get_bufs()
-
     local bufs = {}
 
     -- Get the list of buffer IDs
