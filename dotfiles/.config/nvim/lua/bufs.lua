@@ -250,7 +250,7 @@ M.buffers = function()
             local t = parse_entry(buffer)
             vim.api.nvim_buf_delete(t.buf_id, { force = false })
           end
-          require("fzf-lua").resume()
+          M.buffers()
         end,
         ["ctrl-j"] = function(selected)
           if selected[1] ~= nil then
@@ -265,7 +265,7 @@ M.buffers = function()
 
             vim.g.buffer_list = buffer_list
           end
-          require("fzf-lua").resume()
+          M.buffers()
         end,
         ["ctrl-k"] = function(selected)
           if selected[1] ~= nil then
@@ -280,7 +280,7 @@ M.buffers = function()
 
             vim.g.buffer_list = buffer_list
           end
-          require("fzf-lua").resume()
+          M.buffers()
         end,
       },
       fzf_opts = {
