@@ -56,7 +56,7 @@ local function get_bufs()
       end
 
       -- cursor position
-      local cursor_pos = vim.api.nvim_buf_get_mark(t.buf_id, '\'')
+      local cursor_pos = vim.api.nvim_buf_get_mark(t.buf_id, '"')
       t.cursor_row = cursor_pos[1]
       t.cursor_col = cursor_pos[2]
       t.cursor_row_colored = fzf_utils.ansi_codes.yellow(tostring(t.cursor_row))
