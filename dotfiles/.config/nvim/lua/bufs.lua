@@ -1,11 +1,20 @@
 -- Personal take on `:FzfLua buffers`
 --    * Shows leaf of file paths in its own column
---    * Does not reorder based on last used
---    * Allows for list to be reordered (not implemented)
+--    * Orders buffers alphabetically based on leaf of path
 --
--- TODO:
---    * Add <C-g> jump to alternate buffer
---    * Add <C-j> and <C-k> to reorder buffer list
+-- Example usage
+-- ```lua
+-- --run setup for autocommands
+-- require('bufs').setup()
+--
+-- -- Create a keymap
+-- vim.keymap.set(
+--   'n',
+--   '<C-f>',
+--   require('bufs').buffers,
+--   { desc = 'buffers' }
+-- )
+-- ```
 local fzf_utils = require("fzf-lua.utils")
 local devicons = require("nvim-web-devicons")
 
@@ -59,9 +68,9 @@ local function get_bufs()
 
       t.buf_indicator = " "
       if t.buf_id == vim.fn.bufnr('%') then
-        t.buf_indicator = fzf_utils.ansi_codes.grey('%')
+        t.buf_indicator = fzf_utils.ansi_codes.red('%')
       elseif t.buf_id == vim.fn.bufnr('#') then
-        t.buf_indicator = fzf_utils.ansi_codes.grey('#')
+        t.buf_indicator = fzf_utils.ansi_codes.green('#')
       end
 
       -- cursor position
@@ -85,6 +94,9 @@ local function get_bufs()
       table.insert(bufs, t)
     end
   end
+
+  -- Sort alphabetically by file name.
+  table.sort(bufs, function(a, b) return a.path_leaf < b.path_leaf end)
 
   local picker_strs = {}
 
@@ -160,7 +172,8 @@ end
 
 local function get_header()
   local ctrl_x = keymap_header("ctrl-x", "close")
-  local header = string.format(":: %s", ctrl_x)
+  local ctrl_g = keymap_header("ctrl-g", "# buffer")
+  local header = string.format(":: %s | %s", ctrl_x, ctrl_g)
 
   return header
 end
@@ -220,7 +233,14 @@ M.buffers = function()
             local t = parse_entry(buffer)
             vim.api.nvim_buf_delete(t.buf_id, { force = false })
           end
-          require("fzf-lua").resume()
+          M.buffers()
+        end,
+        ["ctrl-g"] = function()
+          local alt_bufnr = vim.fn.bufnr('#')
+
+          if alt_bufnr ~= -1 then
+            vim.api.nvim_set_current_buf(alt_bufnr)
+          end
         end,
       },
       fzf_opts = {
