@@ -216,9 +216,10 @@ end
 
 local function get_header()
   local buf_indicators = string.format("%s current buffer, %s alternate buffer", fzf_utils.ansi_codes.red("%"), fzf_utils.ansi_codes.green("#"))
-  local ctrl_x = keymap_header("ctrl-x", "close buffer")
   local ctrl_g = keymap_header("ctrl-g", "alternate buffer")
-  local header = string.format("  %s | %s | %s", buf_indicators, ctrl_x, ctrl_g)
+  local ctrl_x = keymap_header("ctrl-x", "close buffer")
+  local ctrl_o = keymap_header("ctrl-o", "close all but selected")
+  local header = string.format("  %s | %s | %s \n  %s", ctrl_g, ctrl_x, ctrl_o, buf_indicators)
 
   return header
 end
@@ -300,6 +301,24 @@ M.buffers = function()
             vim.api.nvim_set_current_buf(alt_bufnr)
           end
         end,
+        ["ctrl-o"] = function(selected)
+          if selected[1] ~= nil then
+            local buffer = selected[1]
+            local t = parse_entry(buffer)
+
+            -- get list of buffers
+            local buffers = get_bufs()
+
+            for _, buf in ipairs(buffers) do
+              local parsed_buf = parse_entry(buf)
+              if t.buf_id ~= parsed_buf.buf_id then
+                vim.api.nvim_buf_delete(parsed_buf.buf_id, { force = false })
+              end
+            end
+          end
+
+          M.buffers()
+        end
       },
       fzf_opts = {
         ["--delimiter"] = "|",
