@@ -72,7 +72,7 @@ local function get_bufs()
       if t.buf_id == vim.fn.bufnr('%') then
         t.buf_indicator = fzf_utils.ansi_codes.red('%')
       elseif t.buf_id == vim.fn.bufnr('#') then
-        t.buf_indicator = fzf_utils.ansi_codes.green('#')
+        t.buf_indicator = fzf_utils.ansi_codes.yellow('#')
       end
 
       -- cursor position
@@ -215,7 +215,7 @@ local function get_previewer()
 end
 
 local function get_header()
-  local buf_indicators = string.format("%s current buffer, %s alternate buffer", fzf_utils.ansi_codes.red("%"), fzf_utils.ansi_codes.green("#"))
+  local buf_indicators = string.format("%s current buffer, %s alternate buffer", fzf_utils.ansi_codes.red("%"), fzf_utils.ansi_codes.yellow("#"))
   local ctrl_g = keymap_header("ctrl-g", "alternate buffer")
   local ctrl_x = keymap_header("ctrl-x", "close buffer")
   local ctrl_o = keymap_header("ctrl-o", "close all but selected")
