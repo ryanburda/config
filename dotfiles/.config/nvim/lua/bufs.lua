@@ -131,7 +131,7 @@ local function get_bufs()
 end
 
 local function get_files()
-  local command = "find . -type d -name .git -prune -o -type f -print"
+  local command = os.getenv("FZF_DEFAULT_COMMAND")
   local handle = io.popen(command)
   local result = handle:read("*a")
   handle:close()
@@ -305,6 +305,7 @@ M.buffers = function()
         ["--delimiter"] = "|",
         ["--with-nth"] = "5",
         ["--header"] = get_header(),
+        ["--no-sort"] = "",  -- ensure buffers stay on top of the list
       },
     }
   )
