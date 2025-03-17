@@ -1,6 +1,8 @@
--- Personal take on `:FzfLua buffers`
---    * Shows leaf of file paths in its own column
---    * Orders buffers alphabetically based on leaf of path
+-- Personal take on a combination between `:FzfLua buffers` and `FzfLua files`.
+--    * Buffers are shown at the top
+--      * Shows leaf of file paths in its own column
+--      * Orders buffers alphabetically based on leaf of path
+--    * Files are shown below buffers
 --
 -- Example usage
 -- ```lua
@@ -128,6 +130,48 @@ local function get_bufs()
   return picker_strs
 end
 
+local function get_files()
+  local command = "find . -type d -name .git -prune -o -type f -print"
+  local handle = io.popen(command)
+  local result = handle:read("*a")
+  handle:close()
+
+  local files = {}
+
+  for filename in string.gmatch(result, "[^\n]+") do
+      table.insert(files, filename)
+  end
+
+  local picker_strs = {}
+
+  for _, path in ipairs(files) do
+    -- icon
+    local icon, hl = devicons.get_icon_color(path, nil, {default = true})
+    local icon_colored = fzf_utils.ansi_from_rgb(hl, icon)
+
+
+    local fzf_display_string = string.format(
+      "%s   %s",
+      icon_colored,
+      fzf_utils.ansi_codes.blue(path)
+    )
+
+    local fzf_full_string = string.format(
+      "%s|%s|%s|%s|%s",
+      nil,
+      path,
+      nil,
+      nil,
+      fzf_display_string
+    )
+
+    table.insert(picker_strs, fzf_full_string)
+  end
+
+  return picker_strs
+
+end
+
 local function parse_entry(str)
   if str then
     local buf_id, path, row, col, fzf_display_string = str:match("([^:]+)|([^:]+)|([^:]+)|([^:]+)|([^:]+)")
@@ -171,9 +215,10 @@ local function get_previewer()
 end
 
 local function get_header()
-  local ctrl_x = keymap_header("ctrl-x", "close")
-  local ctrl_g = keymap_header("ctrl-g", "# buffer")
-  local header = string.format(":: %s | %s", ctrl_x, ctrl_g)
+  local buf_indicators = string.format("%s current buffer, %s alternate buffer", fzf_utils.ansi_codes.red("%"), fzf_utils.ansi_codes.green("#"))
+  local ctrl_x = keymap_header("ctrl-x", "close buffer")
+  local ctrl_g = keymap_header("ctrl-g", "alternate buffer")
+  local header = string.format("  %s | %s | %s", buf_indicators, ctrl_x, ctrl_g)
 
   return header
 end
@@ -204,6 +249,11 @@ M.buffers = function()
   -- Call `get_bufs` before calling `fzf_exec`.
   -- This ensures that we preserve the current/alternate buffers before `fzf_exec` creates an unlisted buffer.
   local bufs = get_bufs()
+  local files = get_files()
+
+  for i = 1, #files do
+      table.insert(bufs, files[i])
+  end
 
   require("fzf-lua").fzf_exec(
     function(cb)
@@ -213,7 +263,7 @@ M.buffers = function()
       cb()
     end,
     {
-      prompt = "bufs> ",
+      prompt = "open> ",
       previewer = get_previewer(),
       actions = {
         ["default"] = function(selected)
@@ -221,17 +271,25 @@ M.buffers = function()
             return
           end
 
-          local buffer = selected[1]
+          local buffer = selected[1]  -- TOOD: rename this since this contains both buffers and files.
           if buffer then
             local t = parse_entry(buffer)
-            vim.api.nvim_set_current_buf(t.buf_id)
+            if t.buf_id then
+              -- If the buffer exists, switch to it
+              vim.api.nvim_set_current_buf(t.buf_id)
+            else
+              -- Otherwise, open the file in a new buffer
+              vim.cmd('edit ' .. vim.fn.fnameescape(t.path))
+            end
           end
         end,
         ["ctrl-x"] = function(selected)
           if selected[1] ~= nil then
             local buffer = selected[1]
             local t = parse_entry(buffer)
-            vim.api.nvim_buf_delete(t.buf_id, { force = false })
+            if t.buf_id then
+              vim.api.nvim_buf_delete(t.buf_id, { force = false })
+            end
           end
           M.buffers()
         end,

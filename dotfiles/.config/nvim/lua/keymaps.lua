@@ -646,13 +646,6 @@ vim.keymap.set(
 
 vim.keymap.set(
   'n',
-  '<leader>ff',
-  require('fzf-lua').files,
-  { desc = 'Find: find files' }
-)
-
-vim.keymap.set(
-  'n',
   '<leader>fg',
   require('fzf-lua').live_grep,
   { desc = 'Grep snippets folder' }
