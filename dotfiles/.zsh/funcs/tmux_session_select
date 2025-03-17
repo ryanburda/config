@@ -40,7 +40,7 @@ while true; do
             "---> ${CURRENT_SESSION}"
             "tab: ${PREVIOUS_SESSION}"
             "ctrl-s: new session"
-            "ctrl-k: kill session"
+            "ctrl-x: kill session"
             "ctrl-l: list tmuxinator sessions"
         )
         HEADER=$(printf "%s\n" "${HEADER_LINES[@]}")
@@ -51,7 +51,7 @@ while true; do
                       --bind "tab:execute(tmux switch-client -l)+abort" \
                       --bind "ctrl-s:become(echo '_TMUX_NEW')+abort" \
                       --bind "ctrl-l:become(echo '_TMUXINATOR')+abort" \
-                      --bind "ctrl-k:execute(tmux kill-session -t {})+clear-query+reload($(declare -f tmux_sessions); tmux_sessions)" \
+                      --bind "ctrl-x:execute(tmux kill-session -t {})+clear-query+reload($(declare -f tmux_sessions); tmux_sessions)" \
                       --header $HEADER)
 
         if [[ "$SESSION" == "_TMUXINATOR" ]]; then
