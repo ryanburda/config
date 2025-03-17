@@ -185,7 +185,7 @@ return {
         backdrop = 100,
         preview = {
           layout = "vertical",
-          vertical = "down:60%",
+          vertical = "down:50%",
         },
       },
       keymap = {
