@@ -186,10 +186,6 @@ local function parse_entry(str)
   end
 end
 
-local keymap_header = function(key, purpose)
-  return string.format("<%s> to %s", fzf_utils.ansi_codes.yellow(key), fzf_utils.ansi_codes.red(purpose))
-end
-
 local function get_previewer()
   local builtin = require("fzf-lua.previewer.builtin")
 
@@ -214,12 +210,15 @@ local function get_previewer()
   return previewer
 end
 
+local keymap_header = function(key, purpose)
+  return string.format("<%s> to %s", fzf_utils.ansi_codes.yellow(key), fzf_utils.ansi_codes.red(purpose))
+end
+
 local function get_header()
-  local buf_indicators = string.format("%s current buffer, %s alternate buffer", fzf_utils.ansi_codes.red("%"), fzf_utils.ansi_codes.yellow("#"))
-  local ctrl_g = keymap_header("ctrl-g", "alternate buffer")
+  local ctrl_g = keymap_header("ctrl-g", "alternate buffer #")
   local ctrl_x = keymap_header("ctrl-x", "close buffer")
-  local ctrl_o = keymap_header("ctrl-o", "close all but selected")
-  local header = string.format("  %s | %s | %s \n  %s", ctrl_g, ctrl_x, ctrl_o, buf_indicators)
+  local ctrl_o = keymap_header("ctrl-o", "close all but selected buffer")
+  local header = string.format("  %s | %s | %s", ctrl_g, ctrl_x, ctrl_o)
 
   return header
 end
