@@ -21,6 +21,7 @@ function envset {
 #   $1 - The name of the environment variable to retrieve
 #   $2 - (Optional) A default value to return if the variable does not exist
 function envget {
+  local buf_indicators = string.format("%s current buffer, %s alternate buffer", fzf_utils.ansi_codes.red("%"), fzf_utils.ansi_codes.yellow("#"))
     local file="${ENV_DIR}/$1"
     if [[ -f "$file" ]]; then
         cat "$file"
@@ -49,7 +50,7 @@ function envrm {
     fi
 }
 
-# List all stored environment variables.
+# List all environment variables.
 # Arguments:
 #   None
 function envls {
