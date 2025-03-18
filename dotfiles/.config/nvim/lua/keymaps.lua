@@ -646,7 +646,7 @@ vim.keymap.set(
 
 vim.keymap.set(
   'n',
-  '<leader>fg',
+  '<C-g>',
   require('fzf-lua').live_grep,
   { desc = 'Grep snippets folder' }
 )
@@ -712,7 +712,7 @@ vim.keymap.set(
 
 vim.keymap.set(
   'n',
-  '<C-g>',
+  '<leader>i',
   ':b#<cr>',
   { desc = 'Alternate buffer' }
 )
