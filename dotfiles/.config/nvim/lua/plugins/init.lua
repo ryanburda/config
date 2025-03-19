@@ -255,12 +255,6 @@ return {
   },
 
   {
-    'nvim-lualine/lualine.nvim',
-    dependencies = { 'kyazdani42/nvim-web-devicons', },
-    config = require('config.lualine').setup
-  },
-
-  {
     'lukas-reineke/indent-blankline.nvim',
     config = function ()
       require("ibl").setup {
