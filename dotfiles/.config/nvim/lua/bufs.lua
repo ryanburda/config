@@ -39,6 +39,20 @@ local function pad_string(input_string, num_characters)
     return input_string
 end
 
+local function parse_entry(str)
+  if str then
+    local buf_id, path, row, col, fzf_display_string = str:match("([^:]+)|([^:]+)|([^:]+)|([^:]+)|([^:]+)")
+
+    return {
+      buf_id = tonumber(buf_id),
+      path = path,
+      row = tonumber(row),
+      col = tonumber(col),
+      fzf_display_string = fzf_display_string
+    }
+  end
+end
+
 local function get_bufs()
   local bufs = {}
 
@@ -140,10 +154,24 @@ local function get_files()
   local result = handle:read("*a")
   handle:close()
 
-  local files = {}
+  local buf_paths = {}
+  for _, buf in ipairs(get_bufs()) do
+    table.insert(buf_paths, parse_entry(buf).path)
+  end
 
+  -- Get all of the files, removing buffers from the list.
+  local files = {}
   for filename in string.gmatch(result, "[^\n]+") do
+    local is_buf = false
+    for _, buf_path in ipairs(buf_paths) do
+      if buf_path == filename then
+        is_buf = true
+        break
+      end
+    end
+    if not is_buf then
       table.insert(files, filename)
+    end
   end
 
   local picker_strs = {}
@@ -153,11 +181,12 @@ local function get_files()
     local icon, hl = devicons.get_icon_color(path, nil, {default = true})
     local icon_colored = fzf_utils.ansi_from_rgb(hl, icon)
 
-
     local fzf_display_string = string.format(
-      "%s   %s",
+      "%s   %s%s",
       icon_colored,
-      fzf_utils.ansi_codes.blue(path)
+      -- HACK: fzf sorts based off length. This will make files sink to the bottoms to allow buffers to stay on top.
+      fzf_utils.ansi_codes.blue(path),
+      "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   :"
     )
 
     local fzf_full_string = string.format(
@@ -174,20 +203,6 @@ local function get_files()
 
   return picker_strs
 
-end
-
-local function parse_entry(str)
-  if str then
-    local buf_id, path, row, col, fzf_display_string = str:match("([^:]+)|([^:]+)|([^:]+)|([^:]+)|([^:]+)")
-
-    return {
-      buf_id = tonumber(buf_id),
-      path = path,
-      row = tonumber(row),
-      col = tonumber(col),
-      fzf_display_string = fzf_display_string
-    }
-  end
 end
 
 local function get_previewer()
@@ -344,7 +359,7 @@ M.buffers = function()
         ["--delimiter"] = "|",
         ["--with-nth"] = "5",
         ["--header"] = get_header(),
-        ["--no-sort"] = "",  -- ensure buffers stay on top of the list
+        --["--no-sort"] = "",  -- ensure buffers stay on top of the list
       },
     }
   )
