@@ -58,7 +58,6 @@ vim.opt.winbar = '%t %m'
 vim.opt.statuscolumn = "%s%3l %2r  "
 vim.opt.statusline = [[%<%f %h%m%r%=%=  %{luaeval("require('trail_marker.extensions.info').info()")}  %l,%c%V]]
 
-
 vim.cmd('set noshowmode')
 vim.cmd('set noswapfile')
 
@@ -93,23 +92,6 @@ vim.diagnostic.config({
   },
 })
 
-local function get_var_from_file(file_path, default)
-  -- Reads value from `file_path`, returns `default` if file does not exist.
-  local file, _ = io.open(file_path, "r")
-  if not file then
-    -- Could not open file
-    return default
-  end
-
-  local content = file:read("*a")
-
-  -- Remove trailing new lines
-  content = content:gsub("%s*$", "")
-
-  file:close()
-  return content
-end
-
 -- Setup lazy.nvim
 require("lazy").setup({
   spec = {
@@ -117,10 +99,6 @@ require("lazy").setup({
     { import = "plugins" },
   },
   -- Configure any other settings here. See the documentation for more details.
-  -- colorscheme that will be used when installing plugins.
-  install = {
-    colorscheme = { get_var_from_file(os.getenv("HOME") .. "/.config/nvim/.colorscheme", "habamax") }
-  },
   checker = {
     enabled = false, -- automatically check for plugin updates
   },
@@ -129,8 +107,6 @@ require("lazy").setup({
     notify = false, -- get a notification when changes are found
   },
 })
-
-require('bufs').setup()
 
 -- keymaps
 require('keymaps')

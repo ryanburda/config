@@ -377,7 +377,10 @@ return {
   -- Local plugins
   {
     dir = "~/Developer/trail_marker.nvim",
-    dependencies = { 'kyazdani42/nvim-web-devicons', },
+    dependencies = { 'kyazdani42/nvim-web-devicons', 'ibhagwan/fzf-lua', },
+    config = function()
+      require('bufs').setup()
+    end,
   },
 
 }
