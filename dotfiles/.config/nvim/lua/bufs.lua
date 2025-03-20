@@ -159,16 +159,18 @@ local function get_files()
     table.insert(buf_paths, parse_entry(buf).path)
   end
 
-  -- Get all of the files, removing buffers from the list.
+  -- Get all files, removing buffers from the list.
   local files = {}
   for filename in string.gmatch(result, "[^\n]+") do
     local is_buf = false
+
     for _, buf_path in ipairs(buf_paths) do
       if buf_path == filename then
         is_buf = true
         break
       end
     end
+
     if not is_buf then
       table.insert(files, filename)
     end

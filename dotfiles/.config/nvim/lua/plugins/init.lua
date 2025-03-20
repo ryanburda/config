@@ -36,19 +36,6 @@ return {
     },
     config = require("config.colorscheme").setup,
   },
-  {
-    "norcalli/nvim-colorizer.lua",
-    config = function()
-      require'colorizer'.setup({
-        'css';
-        'javascript';
-        'toml';
-        html = {
-          mode = 'foreground';
-        }
-      })
-    end,
-  },
 
   -- Treesitter
   {
@@ -128,7 +115,8 @@ return {
           require("conform").format({ bufnr = args.buf })
         end,
       })
-    end
+    end,
+    lazy = true,
   },
 
   -- Oil.nvim
@@ -313,6 +301,7 @@ return {
     dependencies = {
       'nvim-treesitter/nvim-treesitter',
     },
+    lazy = true,
   },
   {
     'rcarriga/nvim-dap-ui',
@@ -320,6 +309,7 @@ return {
       'mfussenegger/nvim-dap',
       'nvim-neotest/nvim-nio',
     },
+    lazy = true,
     config = require("config.nvim-dap-ui").setup
   },
   {
@@ -327,24 +317,28 @@ return {
     dependencies = {
       'mfussenegger/nvim-dap',
     },
+    lazy = true,
     config = function() require("nvim-dap-virtual-text").setup({}) end
   },
   {
     'mrcjkb/rustaceanvim',
     version = '^4', -- Recommended
     ft = { 'rust' },
+    lazy = true,
   },
   {
     'mfussenegger/nvim-dap-python',
     dependencies = {
       'mfussenegger/nvim-dap',
     },
+    lazy = true,
   },
 
   -- sql
   {
     'nanotee/sqls.nvim',
     config = function() require('config.sqls').setup() end,
+    lazy = true,
   },
 
   -- Github Copilot

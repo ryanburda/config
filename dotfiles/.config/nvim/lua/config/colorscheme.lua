@@ -50,13 +50,6 @@ function T.set_colorscheme(is_setup)
     print("Error: Could not read background file.")
   end
 
-  -- Don't reload the colorizer plugin if neovim is just starting up.
-  if is_setup == false then
-    -- Reload colorizer plugin.
-    -- NOTE: must refresh the current buffer manually (`:e`)
-    vim.cmd('silent Lazy reload nvim-colorizer.lua')
-  end
-
 end
 
 local function get_var_from_file(file_path, default)
