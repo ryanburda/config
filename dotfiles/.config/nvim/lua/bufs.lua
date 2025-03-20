@@ -98,7 +98,11 @@ local function get_bufs()
   end
 
   -- Sort alphabetically by file name.
-  table.sort(bufs, function(a, b) return a.path_leaf < b.path_leaf end)
+  -- table.sort(bufs, function(a, b) return a.path_leaf < b.path_leaf end)
+  -- Sort by bufnr (order buffers were opened)
+  -- table.sort(bufs, function(a, b) return a.buf_id < b.buf_id end)
+  -- Sort by last used
+  table.sort(bufs, function(a, b) return vim.b[a.buf_id].last_entered_ts > vim.b[b.buf_id].last_entered_ts end)
 
   local picker_strs = {}
 
@@ -243,6 +247,23 @@ M.setup = function()
       vim.b[bufnr].last_cursor_position = cursor_position
     end,
   })
+
+  -- Buffer entered ts autocommands.
+  vim.api.nvim_create_augroup('EnterTs', { clear = true })
+
+  -- Create an autocommand to update the last entered timestamp
+  vim.api.nvim_create_autocmd({'BufEnter'}, {
+    group = 'EnterTs',
+    pattern = '*',
+    callback = function()
+      -- Get the current buffer number and the cursor position
+      local bufnr = vim.api.nvim_get_current_buf()
+
+      -- Save enter ts to a buffer variable
+      vim.b[bufnr].last_entered_ts = os.time()
+    end,
+  })
+
 end
 
 M.buffers = function()
