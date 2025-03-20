@@ -32,9 +32,7 @@ function T.setup()
     -- end,
     -- Next, you can provide a dedicated handler for specific servers.
     ["lua_ls"] = function ()
-      require("neodev").setup({
-        -- add any options here, or leave empty to use the default settings
-      })
+      require("neodev").setup({})
 
       -- then setup your lsp server as usual
       local lspconfig = require('lspconfig')
