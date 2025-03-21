@@ -116,5 +116,7 @@ require("lazy").setup({
   },
 })
 
+-- custom buffer/file picker
+require('bufs').setup()
 -- keymaps
 require('keymaps')
