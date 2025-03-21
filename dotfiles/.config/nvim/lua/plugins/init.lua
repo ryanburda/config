@@ -87,6 +87,25 @@ return {
       })
     end
   },
+  {
+      "rachartier/tiny-inline-diagnostic.nvim",
+      event = "VeryLazy", -- Or `LspAttach`
+      priority = 1000, -- needs to be loaded in first
+      config = function()
+        require('tiny-inline-diagnostic').setup({
+          preset = "modern",
+          options = {
+            break_line = {
+              -- Enable the feature to break messages after a specific length
+              enabled = false,
+              -- Number of characters after which to break the line
+              after = 30,
+            },
+          },
+        })
+        vim.diagnostic.config({ virtual_text = false }) -- Only if needed in your configuration, if you already have native LSP diagnostics
+      end
+  },
   -- autoformat on save
   {
     'stevearc/conform.nvim',
