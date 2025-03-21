@@ -92,6 +92,15 @@ vim.diagnostic.config({
   },
 })
 
+-- Open diagnostic float on cursor hold for lines that have diagnostics.
+vim.api.nvim_create_autocmd("CursorHold", {
+  callback = function()
+    vim.diagnostic.open_float(nil, {
+      focusable = false,
+    })
+  end,
+})
+
 -- Setup lazy.nvim
 require("lazy").setup({
   spec = {
