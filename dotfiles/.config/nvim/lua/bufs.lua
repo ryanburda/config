@@ -157,20 +157,18 @@ local function get_files()
   local buf_paths = {}
   local buffers = get_bufs()
   for _, buf in ipairs(buffers) do
-    table.insert(buf_paths, parse_entry(buf).path)
+    local relpath = vim.fn.fnamemodify(parse_entry(buf).path, ':.')
+    table.insert(buf_paths, relpath)
   end
 
   -- Get all files, removing buffers from the list.
   local files = {}
-  local log_file = io.open("example.txt", "a")
 
   for filename in string.gmatch(result, "[^\n]+") do
     local is_buf = false
 
-    log_file:write(string.format("filename: %s\n", filename))
     for _, buf_path in ipairs(buf_paths) do
       if buf_path == filename then
-        log_file:write(string.format("buffer: %s\n", filename))
         is_buf = true
         break
       end
@@ -180,8 +178,6 @@ local function get_files()
       table.insert(files, filename)
     end
   end
-
-  log_file:close()
 
   local picker_strs = {}
 
