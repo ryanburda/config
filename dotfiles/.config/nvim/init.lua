@@ -84,7 +84,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 -- Rounded border around diagnostic float.
 vim.diagnostic.config({
-  virtual_text = true,
+  virtual_text = false,
   float = {
     border = "rounded",
     focusable = false,
