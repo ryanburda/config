@@ -364,7 +364,6 @@ M.buffers = function()
         ["--delimiter"] = "|",
         ["--with-nth"] = "5",
         ["--header"] = get_header(),
-        --["--no-sort"] = "",  -- ensure buffers stay on top of the list
       },
     }
   )
