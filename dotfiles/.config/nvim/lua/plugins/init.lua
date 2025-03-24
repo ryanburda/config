@@ -240,6 +240,9 @@ return {
         ['<C-l>'] = { 'select_and_accept' },
         ['<C-u>'] = { 'scroll_documentation_up', 'fallback' },
         ['<C-d>'] = { 'scroll_documentation_down', 'fallback' },
+        ['<C-j>'] = { 'snippet_backward', 'fallback' },
+        ['<C-k>'] = { 'snippet_forward', 'fallback' },
+        ['<C-h>'] = { 'show_signature', 'hide_signature', 'fallback' },
       },
       completion = {
         menu = {
