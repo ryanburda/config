@@ -4,7 +4,7 @@
 #   tmux_session_select - a tmux session switcher.
 #
 # DESCRIPTION
-#   Use fzf to select from a list of active tmux sessions. Can also start tmuxinator sessions.
+#   Use fzf to select from a list of active tmux sessions and tmuxinator sessions.
 
 tmux_sessions() {
     tmux ls 2> /dev/null | awk -F: '{print $1}' | sort -u
@@ -14,89 +14,57 @@ tmuxinator_sessions() {
     ls -l ~/.config/tmuxinator/ | awk 'NR > 1 {print $9}' | awk -F. '{print $1}'
 }
 
+combined_sessions() {
+    # Get active tmux sessions
+    local active_sessions=$(tmux_sessions)
+
+    # Get tmuxinator sessions
+    local tmuxinator_only_sessions=$(tmuxinator_sessions)
+
+    # Remove active sessions from tmuxinator sessions
+    local inactive_tmuxinator_sessions=$(echo "$tmuxinator_only_sessions" | while read -r session; do
+        if ! echo "$active_sessions" | grep -q "^$session$"; then
+            echo $session
+        fi
+    done)
+
+    # Combine the lists with active sessions first
+    echo "$active_sessions"
+    echo "$inactive_tmuxinator_sessions"
+}
+
 create_new_tmux_session() {
     read -r "s?Enter new session name: "
     tmux new-session -d -s $s
     tmux switch-client -t $s
 }
 
-# Show tmuxinator sessions if there are no active sessions.
-tmux ls >/dev/null 2>&1
-if [ $? -eq 0 ]; then
-    SESSION_TYPE="_TMUX"
-else
-    SESSION_TYPE="_TMUXINATOR"
+CURRENT_SESSION=$(tmux display-message -p '#S')
+PREVIOUS_SESSION=$(tmux display-message -p '#{client_last_session}')
+
+HEADER_LINES=(
+    "---> ${CURRENT_SESSION}"
+    "tab: ${PREVIOUS_SESSION}"
+    "ctrl-s: new session"
+    "ctrl-x: kill session"
+)
+HEADER=$(printf "%s\n" "${HEADER_LINES[@]}")
+
+SESSION=$(combined_sessions | \
+          fzf --cycle \
+              --layout reverse \
+              --bind "tab:execute(tmux switch-client -l)+abort" \
+              --bind "ctrl-s:become($(declare -f create_new_tmux_session); create_new_tmux_session)" \
+              --bind "ctrl-x:execute(tmux kill-session -t {})+clear-query+reload($(declare -f combined_sessions); combined_sessions)" \
+              --header $HEADER)
+
+if [[ ! -z $SESSION ]]; then
+    if echo $(tmux_sessions) | grep -q "$SESSION"; then
+        if [[ -z $TMUX ]]; then
+            tmux attach
+        fi
+        tmux switch-client -t $SESSION
+    else
+        tmuxinator start $SESSION
+    fi
 fi
-
-while true; do
-
-    CURRENT_SESSION_TYPE=$SESSION_TYPE
-
-    if [[ "$SESSION_TYPE" == "_TMUX" ]]; then
-        CURRENT_SESSION=$(tmux display-message -p '#S')
-        PREVIOUS_SESSION=$(tmux display-message -p '#{client_last_session}')
-
-        HEADER_LINES=(
-            "---> ${CURRENT_SESSION}"
-            "tab: ${PREVIOUS_SESSION}"
-            "ctrl-s: new session"
-            "ctrl-x: kill session"
-            "ctrl-l: list tmuxinator sessions"
-        )
-        HEADER=$(printf "%s\n" "${HEADER_LINES[@]}")
-
-        SESSION=$(tmux_sessions | \
-                  fzf --cycle \
-                      --layout reverse \
-                      --bind "tab:execute(tmux switch-client -l)+abort" \
-                      --bind "ctrl-s:become(echo '_TMUX_NEW')+abort" \
-                      --bind "ctrl-l:become(echo '_TMUXINATOR')+abort" \
-                      --bind "ctrl-x:execute(tmux kill-session -t {})+clear-query+reload($(declare -f tmux_sessions); tmux_sessions)" \
-                      --header $HEADER)
-
-        if [[ "$SESSION" == "_TMUXINATOR" ]]; then
-            SESSION_TYPE="_TMUXINATOR"
-            continue
-        elif [[ "$SESSION" == "_TMUX_NEW" ]]; then
-            create_new_tmux_session
-            exit
-        elif [[ ! -z $SESSION ]]; then
-            if [[ -z $TMUX ]]; then
-                # Attach to tmux if currently detached.
-                tmux attach
-            fi
-            tmux switch-client -t $SESSION
-            break
-        fi
-    elif [[ "$SESSION_TYPE" == "_TMUXINATOR" ]]; then
-        HEADER_LINES=(
-            "ctrl-s: new session"
-            "ctrl-l: list active tmux sessions"
-        )
-        HEADER=$(printf "%s\n" "${HEADER_LINES[@]}")
-
-        SESSION=$(tmuxinator_sessions | \
-                  fzf --cycle \
-                      --layout reverse \
-                      --bind "ctrl-s:become(echo '_TMUX_NEW')+abort" \
-                      --bind "ctrl-l:become(echo '_TMUX')+abort" \
-                      --header $HEADER)
-
-        if [[ "$SESSION" == "_TMUX" ]]; then
-            SESSION_TYPE="_TMUX"
-            continue
-        elif [[ "$SESSION" == "_TMUX_NEW" ]]; then
-            create_new_tmux_session
-            exit
-        elif [[ ! -z $SESSION ]]; then
-            tmuxinator start $SESSION
-            break
-        fi
-    fi
-
-    # Exit the loop if the session type has not changed.
-    if [[ $SESSION_TYPE = $CURRENT_SESSION_TYPE ]]; then
-        break
-    fi
-
-done
