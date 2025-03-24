@@ -42,9 +42,9 @@ combined_sessions() {
             INDICATOR="${YELLOW}# ${RESET}"
         fi
 
-        COLORED_SESSION="${INDICATOR}${GREEN}${session}${RESET}"
+        FORMATTED_SESSION="${INDICATOR}${GREEN}${session}${RESET}"
 
-        echo "${session}|${COLORED_SESSION}"
+        echo "${session}|${FORMATTED_SESSION}"
     done
 
     echo "$inactive_tmuxinator_sessions"
@@ -76,7 +76,8 @@ SESSION=$(combined_sessions | \
               --header $HEADER)
 
 if [[ ! -z $SESSION ]]; then
-    # Use `cut` to get the uncolorized session name which is the field after the pipe
+    # The SESSION returned from fzf includes both the session name
+    # and the formatted session name. We just want the first part.
     SESSION=$(echo $SESSION | awk -F'|' '{print $1}')
 
     if echo $(tmux_sessions) | grep -q "$SESSION"; then
