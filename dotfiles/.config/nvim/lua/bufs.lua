@@ -112,11 +112,11 @@ local function get_bufs()
   end
 
   -- Sort alphabetically by file name.
-  -- table.sort(bufs, function(a, b) return a.path_leaf < b.path_leaf end)
+  table.sort(bufs, function(a, b) return a.path_leaf < b.path_leaf end)
   -- Sort by bufnr (order buffers were opened)
   -- table.sort(bufs, function(a, b) return a.buf_id < b.buf_id end)
   -- Sort by last used
-  table.sort(bufs, function(a, b) return vim.b[a.buf_id].last_entered_ts > vim.b[b.buf_id].last_entered_ts end)
+  -- table.sort(bufs, function(a, b) return vim.b[a.buf_id].last_entered_ts > vim.b[b.buf_id].last_entered_ts end)
 
   local picker_strs = {}
 
