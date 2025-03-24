@@ -15,20 +15,16 @@ tmuxinator_sessions() {
 }
 
 combined_sessions() {
-    # Get active tmux sessions
-    local active_sessions=$(tmux_sessions)
+    active_sessions=$(tmux_sessions)
 
-    # Get tmuxinator sessions
-    local tmuxinator_only_sessions=$(tmuxinator_sessions)
+    tmuxinator_only_sessions=$(tmuxinator_sessions)
 
-    # Remove active sessions from tmuxinator sessions
-    local inactive_tmuxinator_sessions=$(echo "$tmuxinator_only_sessions" | while read -r session; do
+    inactive_tmuxinator_sessions=$(echo "$tmuxinator_only_sessions" | while read -r session; do
         if ! echo "$active_sessions" | grep -q "^$session$"; then
             echo $session
         fi
     done)
 
-    # Combine the lists with active sessions first
     echo "$active_sessions"
     echo "$inactive_tmuxinator_sessions"
 }
@@ -55,7 +51,7 @@ SESSION=$(combined_sessions | \
               --layout reverse \
               --bind "tab:execute(tmux switch-client -l)+abort" \
               --bind "ctrl-s:become($(declare -f create_new_tmux_session); create_new_tmux_session)" \
-              --bind "ctrl-x:execute(tmux kill-session -t {})+clear-query+reload($(declare -f combined_sessions); combined_sessions)" \
+              --bind "ctrl-x:execute(tmux kill-session -t {})+clear-query+reload($(declare -f tmux_sessions tmuxinator_sessions combined_sessions); combined_sessions)" \
               --header $HEADER)
 
 if [[ ! -z $SESSION ]]; then
