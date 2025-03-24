@@ -32,8 +32,8 @@ combined_sessions() {
         YELLOW="\033[33m"
         RESET="\033[0m"
 
-        CURRENT_SESSION=$(tmux display-message -p '#S')
-        PREVIOUS_SESSION=$(tmux display-message -p '#{client_last_session}')
+        CURRENT_SESSION=$(tmux display-message -p '#S' 2> /dev/null)
+        PREVIOUS_SESSION=$(tmux display-message -p '#{client_last_session}' 2> /dev/null)
         
         INDICATOR="  "
         if [[ $session == $CURRENT_SESSION ]]; then
