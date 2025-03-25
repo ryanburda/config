@@ -11,7 +11,7 @@ set_font() {
     #   Use fzf to select a font.
     fonts=(
         "CaskaydiaMono Nerd Font Mono,13"
-        "FiraCode Nerd Font Mono,12"
+        "FiraMono Nerd Font Mono,12"
         "GohuFont 14 Nerd Font Mono,13"
         "Hack Nerd Font Mono,12"
         "JetBrainsMono Nerd Font Mono,12"
@@ -21,7 +21,6 @@ set_font() {
         "Terminess Nerd Font Mono,14"
         "InconsolataGo Nerd Font Mono,14"
         "DepartureMono Nerd Font Mono,12"
-        "EnvCodeR Nerd Font Mono,12"
     )
 
     current_font_family=$(envget font_family $DEFAULT_FONT_FAMILY)

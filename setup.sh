@@ -58,7 +58,7 @@ brew install tmuxinator
 brew install wget
 # Fonts
 brew install --cask font-caskaydia-mono-nerd-font
-brew install --cask font-fira-code-nerd-font
+brew install --cask font-fira-mono-nerd-font
 brew install --cask font-gohufont-nerd-font
 brew install --cask font-hack-nerd-font
 brew install --cask font-inconsolata-go-nerd-font
