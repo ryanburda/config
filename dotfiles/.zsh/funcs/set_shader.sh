@@ -3,7 +3,7 @@
 SHADER_FOLDER="${XDG_CONFIG_HOME}/.assets/shaders"
 
 set_shader() {
-    shaders=$(\ls -l $SHADER_FOLDER | awk 'NR > 1 {print $9}')
+    shaders=$(\ls -lL $SHADER_FOLDER | awk 'NR > 1 {print $9}')
     shaders+=("\nNONE")
 
     SHADER=$(print $shaders | sort | fzf --cycle --layout reverse)
