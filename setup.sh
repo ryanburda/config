@@ -69,7 +69,8 @@ brew install --cask font-sf-mono-nerd-font-ligaturized
 brew install --cask font-terminess-ttf-nerd-font
 brew install --cask font-meslo-lg-nerd-font
 brew install --cask font-departure-mono-nerd-font
-brew install --cask font-envy-code-r-nerd-font
+brew install --cask font-martian-mono-nerd-font
+brew install --cask font-recursive-mono-nerd-font
 # Applications
 brew install --cask 1password
 brew install --cask alfred
