@@ -58,19 +58,15 @@ brew install tmuxinator
 brew install wget
 # Fonts
 brew install --cask font-caskaydia-mono-nerd-font
+brew install --cask font-departure-mono-nerd-font
 brew install --cask font-fira-mono-nerd-font
 brew install --cask font-gohufont-nerd-font
 brew install --cask font-hack-nerd-font
 brew install --cask font-inconsolata-go-nerd-font
 brew install --cask font-jetbrains-mono-nerd-font
-brew install --cask font-sauce-code-pro-nerd-font
-brew tap shaunsingh/SFMono-Nerd-Font-Ligaturized
-brew install --cask font-sf-mono-nerd-font-ligaturized
-brew install --cask font-terminess-ttf-nerd-font
-brew install --cask font-meslo-lg-nerd-font
-brew install --cask font-departure-mono-nerd-font
 brew install --cask font-martian-mono-nerd-font
 brew install --cask font-recursive-mono-nerd-font
+brew install --cask font-terminess-ttf-nerd-font
 # Applications
 brew install --cask 1password
 brew install --cask alfred
