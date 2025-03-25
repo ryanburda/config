@@ -68,6 +68,7 @@ brew tap shaunsingh/SFMono-Nerd-Font-Ligaturized
 brew install --cask font-sf-mono-nerd-font-ligaturized
 brew install --cask font-terminess-ttf-nerd-font
 brew install --cask font-meslo-lg-nerd-font
+brew install --cask font-bigblue-terminal-nerd-font
 # Applications
 brew install --cask 1password
 brew install --cask alfred

@@ -20,6 +20,7 @@ set_font() {
         "SauceCodePro Nerd Font Mono,12"
         "Terminess Nerd Font Mono,14"
         "InconsolataGo Nerd Font Mono,14"
+        "DepartureMono Nerd Font Mono,12"
     )
 
     current_font_family=$(envget font_family $DEFAULT_FONT_FAMILY)
