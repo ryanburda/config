@@ -29,14 +29,14 @@ local function get_last_cursor_position(bufnr)
 end
 
 local function pad_string(input_string, num_characters)
-    local length = #input_string
+  local length = #input_string
 
-    while length < num_characters do
-        input_string = input_string .. " "
-        length = length + 1
-    end
+  while length < num_characters do
+    input_string = input_string .. " "
+    length = length + 1
+  end
 
-    return input_string
+  return input_string
 end
 
 local function parse_entry(str)
