@@ -92,9 +92,6 @@ source ~/.zshrc
 # Create environment variables directory.
 mkdir -p $ENV_DIR
 
-# tmux-plugin-manager
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-
 # If config repo is in normal location then this is `SCRIPT_DIR=$HOME/Developer/config`
 # The following can be used when testing manually:  `SCRIPT_DIR=$(pwd)`
 SCRIPT_DIR=${0:a:h}
