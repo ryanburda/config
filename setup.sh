@@ -53,6 +53,7 @@ brew install poetry
 brew install ripgrep
 brew install rlwrap
 brew install stow
+brew intsall tldr
 brew install tmux
 brew install tmuxinator
 brew install wget
