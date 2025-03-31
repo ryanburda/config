@@ -203,7 +203,6 @@ return {
     dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig", "folke/neodev.nvim", },
     config = require("config.mason-lspconfig").setup
   },
-  "williamboman/mason.nvim",
 
   {
     'saghen/blink.cmp',
