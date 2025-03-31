@@ -98,7 +98,7 @@ return {
         preview_split = "right",
       },
     },
-    dependencies = { { "echasnovski/mini.icons", opts = {} } },
+    dependencies = { { "nvim-tree/nvim-web-devicons", opts = {} } },
   },
 
   -- Fuzzy Finder
@@ -284,25 +284,10 @@ return {
     lazy = true,
   },
 
-  -- Github Copilot
-  {
-    'zbirenbaum/copilot.lua',
-    dependencies = { "zbirenbaum/copilot-cmp", },
-    lazy = true,
-    config = require('config.copilot').setup,
-  },
-  {
-    "zbirenbaum/copilot-cmp",
-    lazy = true,
-    config = function ()
-      require("copilot_cmp").setup()
-    end
-  },
-
   -- Local plugins
   {
     dir = "~/Developer/trail_marker.nvim",
-    dependencies = { 'kyazdani42/nvim-web-devicons', 'ibhagwan/fzf-lua', },
+    dependencies = { 'nvim-tree/nvim-web-devicons', 'ibhagwan/fzf-lua', },
   },
 
 }

@@ -40,13 +40,11 @@ function T.setup()
       { name = 'path', },
       { name = 'nvim_lua', },
       { name = 'nvim_lua', },
-      { name = "copilot", group_index = 2, },
     }),
     formatting = {
       format = lspkind.cmp_format({
         mode = "symbol_text",
         max_width = 75,
-        symbol_map = { Copilot = "" }
       })
     },
   })
