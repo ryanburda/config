@@ -9,10 +9,6 @@ nvim/plugin/*
 *en.utf-8.add.spl
 .luarc.json
 lazy-lock.json
-.colorscheme
-.background
-.theme
-.shader
 
 # upterm
 tmux-client-*.log
