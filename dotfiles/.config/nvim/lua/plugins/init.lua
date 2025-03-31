@@ -151,7 +151,9 @@ return {
       })
     end
   },
+
   'ruifm/gitlinker.nvim',
+
   {
     'sindrets/diffview.nvim',
     dependencies = { 'nvim-lua/plenary.nvim', },
@@ -259,6 +261,7 @@ return {
       'mfussenegger/nvim-dap',
     },
     lazy = true,
+    ---@diagnostic disable-next-line: missing-fields
     config = function() require("nvim-dap-virtual-text").setup({}) end
   },
   {

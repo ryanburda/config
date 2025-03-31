@@ -52,6 +52,7 @@ vim.opt.updatetime = 250
 vim.opt.laststatus = 3
 vim.opt.signcolumn = "yes"
 vim.opt.list = true
+---@diagnostic disable-next-line: missing-fields
 vim.opt.listchars = { tab = '│ '}
 vim.opt.autoread = true
 vim.opt.winbar = '%t %m'
