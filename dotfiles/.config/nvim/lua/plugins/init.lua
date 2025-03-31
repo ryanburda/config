@@ -200,7 +200,7 @@ return {
   -- LSP
   {
     "williamboman/mason-lspconfig.nvim",
-    dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig", "folke/neodev.nvim", },
+    dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig", "folke/lazydev.nvim", },
     config = require("config.mason-lspconfig").setup
   },
 
