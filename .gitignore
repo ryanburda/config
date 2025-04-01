@@ -2,13 +2,18 @@
 .DS_Store
 
 # templated configs
+dotfiles/.config/aichat/config.yaml
 dotfiles/.config/ghostty/config
+dotfiles/.config/lazygit/config.yml
 
 # nvim
 dotfiles/.config/nvim/lua/plugins/integrations/*.lua
 *en.utf-8.add.spl
 .luarc.json
 lazy-lock.json
+
+# ssh
+*/.ssh/id_*
 
 # upterm
 tmux-client-*.log
