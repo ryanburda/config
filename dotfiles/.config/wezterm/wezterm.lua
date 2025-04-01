@@ -6,6 +6,7 @@ local config = wezterm.config_builder()
 -- NOTE: `os.getenv("XDG_CONFIG_HOME")` returns nil. Using "HOME" as an alternative for now.
 local background_image_dir = os.getenv("HOME") .. "/.config/.assets/backgrounds/"
 
+config.term = 'wezterm'
 config.color_scheme = helpers.envget('wezterm_colorscheme', 'Catppuccin Mocha')
 config.font = wezterm.font(helpers.envget('font_family', 'JetBrains Mono'))
 config.font_size = tonumber(helpers.envget('font_size', '12'))
@@ -18,6 +19,7 @@ config.window_close_confirmation = 'NeverPrompt'
 config.initial_rows = 40
 config.initial_cols = 140
 config.window_padding = { left = 0, right = 0, top = 20, bottom = 0 }
+config.warn_about_missing_glyphs = false
 
 -- BACKGROUND
 --

@@ -53,9 +53,10 @@ set_colorscheme() {
             envset wezterm_colorscheme $wezterm_colorscheme
 
             # Update all running nvim instances
-            local nvim_runtime_dir="${TMPDIR:-/tmp}"
-            # Try both macOS pattern (nvim.*/*/nvim.*.0) and Linux pattern (nvim.*/0)
-            for socket in "$nvim_runtime_dir"/nvim.*/*/nvim.*.0 "$nvim_runtime_dir"/nvim.*/0; do
+            # On Linux, use XDG_RUNTIME_DIR; on macOS, use TMPDIR or /tmp
+            local nvim_runtime_dir="${XDG_RUNTIME_DIR:-${TMPDIR:-/tmp}}"
+            # Try both macOS pattern (nvim.*/*/nvim.*.0) and Linux pattern (nvim.*.0)
+            for socket in "$nvim_runtime_dir"/nvim.*/*/nvim.*.0 "$nvim_runtime_dir"/nvim.*.0; do
                 if [[ -S "$socket" ]]; then
                     # redirect stderr to /dev/null since stale socket files can remain even after Neovim instances have closed.
                     nvim --server "$socket" --remote-send "<Cmd>luafile ${XDG_CONFIG_HOME}/nvim/lua/colorscheme.lua<CR>" 2>/dev/null
