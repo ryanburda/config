@@ -1,5 +1,9 @@
 #!/bin/zsh
 
+# TODO: figure out how to run this during install.
+pacman -S --noconfirm gnome
+sudo systemctl enable gdm.service
+
 pacman -S --noconfirm 1password-cli
 pacman -S --noconfirm aichat
 pacman -S --noconfirm bat
