@@ -11,6 +11,7 @@ pacman -S --noconfirm bottom
 pacman -S --noconfirm cloud-sql-proxy
 pacman -S --noconfirm coreutils
 pacman -S --noconfirm curl
+pacman -S --noconfirm docker
 pacman -S --noconfirm fd
 pacman -S --noconfirm fzf
 pacman -S --noconfirm git
@@ -81,7 +82,6 @@ yay -S 1password-cli
 yay -S ttf-recursive-nerd
 yay -S npm
 yay -S python-poetry
-yay -S rancher-desktop
 
 # Create environment variables directory.
 mkdir -p $ENV_DIR
