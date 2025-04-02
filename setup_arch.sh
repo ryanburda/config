@@ -13,6 +13,7 @@ pacman -S --noconfirm coreutils
 pacman -S --noconfirm curl
 pacman -S --noconfirm fd
 pacman -S --noconfirm fzf
+pacman -S --noconfirm git
 pacman -S --noconfirm github-cli
 pacman -S --noconfirm git-delta
 pacman -S --noconfirm go
@@ -32,7 +33,6 @@ pacman -S --noconfirm ripgrep
 pacman -S --noconfirm stow
 pacman -S --noconfirm tldr
 pacman -S --noconfirm tmux
-pacman -S --noconfirm tmuxinator
 pacman -S --noconfirm wget
 # Fonts
 pacman -Qg font-caskaydia-mono-nerd-font
@@ -60,12 +60,22 @@ pacman -Qg font-terminess-ttf-nerd-font
 # pacman -S --cask spotify
 # pacman -S --cask wezterm@nightly
 
+
 # Symlink config files
 stow dotfiles
 
 # Source zshrc to get access to environment variables.
 source ~/.zshrc
 chsh -s /bin/zsh
+
+# yay
+git clone https://aur.archlinux.org/yay.git $HOME/yay
+cd $HOME/yay
+makepkg -si
+
+yay tmuxinator
+mkdir -p "${XDG_CONFIG_HOME}/tmuxinator"
+yay 1password-cli
 
 # Create environment variables directory.
 mkdir -p $ENV_DIR
