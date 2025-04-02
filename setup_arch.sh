@@ -75,9 +75,13 @@ makepkg -si
 
 yay tmuxinator
 mkdir -p "${XDG_CONFIG_HOME}/tmuxinator"
+yay -S aur/1password
+gpg --receive-keys 3FEF9748469ADBE15DA7CA80AC2D62742012EA22
 yay -S 1password-cli
 yay -S ttf-recursive-nerd
 yay -S npm
+yay -S python-poetry
+yay -S rancher-desktop
 
 # Create environment variables directory.
 mkdir -p $ENV_DIR
