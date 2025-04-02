@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 regenerate_lazygit_config() {
-    export LIGHT_OR_DARK=$(envget nvim_background)
+    export LIGHT_OR_DARK=$(envget nvim_background 'dark')
 
     FILE_PATH="${XDG_CONFIG_HOME}/lazygit/config.yml"
 
