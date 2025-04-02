@@ -75,8 +75,9 @@ makepkg -si
 
 yay tmuxinator
 mkdir -p "${XDG_CONFIG_HOME}/tmuxinator"
-yay 1password-cli
-yay extra/ttf-recursive-nerd
+yay -S 1password-cli
+yay -S ttf-recursive-nerd
+yay -S npm
 
 # Create environment variables directory.
 mkdir -p $ENV_DIR
