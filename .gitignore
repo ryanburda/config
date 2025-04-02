@@ -13,7 +13,8 @@ nvim/plugin/*
 lazy-lock.json
 
 # ssh
-*/.ssh/id_*
+dotfiles/.ssh/*
+!dotfiles/.ssh/config
 
 # upterm
 tmux-client-*.log
