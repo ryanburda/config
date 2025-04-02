@@ -65,8 +65,8 @@ pacman -Qg font-terminess-ttf-nerd-font
 stow dotfiles
 
 # Source zshrc to get access to environment variables.
+chsh -s /bin/zsh  # Move this to arch installation
 source ~/.zshrc
-chsh -s /bin/zsh
 
 # yay
 git clone https://aur.archlinux.org/yay.git $HOME/yay
@@ -76,6 +76,7 @@ makepkg -si
 yay tmuxinator
 mkdir -p "${XDG_CONFIG_HOME}/tmuxinator"
 yay 1password-cli
+yay extra/ttf-recursive-nerd
 
 # Create environment variables directory.
 mkdir -p $ENV_DIR
