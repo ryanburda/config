@@ -284,21 +284,7 @@ vim.keymap.set(
 vim.keymap.set(
   'n',
   '<leader>db',
-  function()
-    require('fzf-lua').git_branches({
-      actions = {
-        ["default"] = function(selected)
-          local selected_branch = selected[1]:match("[^%s]+")
-          if selected_branch then
-            -- Open DiffView with the selected branch
-            vim.cmd("DiffviewOpen " .. selected_branch)
-          else
-            vim.notify("No branch selected!", vim.log.levels.WARN)
-          end
-        end
-      }
-    })
-  end,
+  require('fzf-lua').git_branches,
   { desc = "Diff: Open branch selector. Diff between selected branch and current is opened in DiffView" }
 )
 

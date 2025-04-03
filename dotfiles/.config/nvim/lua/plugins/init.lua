@@ -112,6 +112,70 @@ return {
       grep = {
         rg_opts = "--hidden --column --line-number --no-heading --color=always --smart-case --glob=!.git",
       },
+      git = {
+        branches = {
+          actions = {
+            ["default"] = function(selected)
+              local selected_branch = selected[1]:match("[^%s]+")
+              if selected_branch then
+                -- Open DiffView with the selected branch
+                vim.cmd("DiffviewOpen " .. selected_branch)
+              else
+                vim.notify("No branch selected!", vim.log.levels.WARN)
+              end
+            end,
+            ["ctrl-l"] = function(selected)
+              -- Get the current branch name
+              local current_branch = vim.fn.systemlist("git symbolic-ref --short HEAD")[1]
+              if not current_branch then
+                print("Not on a Git branch!")
+                return
+              end
+
+              -- Get the selected branch from fzf output
+              local target_branch = selected[1]
+              if not target_branch then
+                return
+              end
+
+              -- Trim leading and trailing whitespace and split by spaces
+              local branch_split = vim.split(target_branch:match("^%s*(.-)%s*$"), "%s+")
+              local selected_branch = branch_split[1]
+
+              -- Run git diff to get the list of files changed between branches
+              local diff_files_cmd = string.format("git diff --name-only %s..%s", current_branch, selected_branch)
+              local diff_files = vim.fn.systemlist(diff_files_cmd)
+
+              local preview_cmd = string.format(
+                "git diff %s..%s -- {} | delta",
+                current_branch,
+                selected_branch
+              )
+
+              -- Display the files using another fzf-lua picker
+              require("fzf-lua").fzf_exec(diff_files, {
+                prompt = 'Diff Files> ',
+                preview = preview_cmd,
+                actions = {
+                  ["default"] = function(selected_file)
+                    if #selected_file == 0 then
+                      vim.notify("No file selected!", vim.log.levels.WARN)
+                      return
+                    end
+
+                    -- Open the selected file in a new buffer
+                    local file_to_open = selected_file[1]
+
+                    -- Use your preferred method to open the file. Here's an example:
+                    vim.cmd("edit " .. file_to_open)
+                  end,
+                },
+              })
+            end,
+          },
+          preview = "git diff --color=always $(git rev-parse --abbrev-ref HEAD)...{} | delta",
+        },
+      },
       winopts = {
         backdrop = 100,
         preview = {
