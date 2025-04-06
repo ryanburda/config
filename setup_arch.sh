@@ -12,6 +12,7 @@ pacman -S --noconfirm cloud-sql-proxy
 pacman -S --noconfirm coreutils
 pacman -S --noconfirm curl
 pacman -S --noconfirm docker
+sudo setfacl --modify user:$(whoami):rw /var/run/docker.sock
 pacman -S --noconfirm fd
 pacman -S --noconfirm fzf
 pacman -S --noconfirm git
@@ -23,7 +24,6 @@ pacman -S --noconfirm k9s
 pacman -S --noconfirm kubectl
 pacman -S --noconfirm kubectx
 pacman -S --noconfirm kubetui
-pacman -S --noconfirm lazydocker
 pacman -S --noconfirm lazygit
 pacman -S --noconfirm lsd
 pacman -S --noconfirm lua
@@ -75,13 +75,18 @@ cd $HOME/yay
 makepkg -si
 
 yay tmuxinator
-mkdir -p "${XDG_CONFIG_HOME}/tmuxinator"
+mkdir -p "${XDG_CONFIG_HOME}/tmuxinator"  # is this still needed?
+
 yay -S aur/1password
 gpg --receive-keys 3FEF9748469ADBE15DA7CA80AC2D62742012EA22
 yay -S 1password-cli
-yay -S ttf-recursive-nerd
+
 yay -S npm
 yay -S python-poetry
+yay -S lazydocker
+
+# fonts
+yay -S ttf-recursive-nerd
 
 # Create environment variables directory.
 mkdir -p $ENV_DIR
