@@ -72,11 +72,7 @@ return {
       keymaps = {
         ["?"] = { "actions.show_help", mode = "n" },
         ["<CR>"] = "actions.select",
-        ["<C-h>"] = { "actions.parent", mode = "n" },
-        ["<C-j>"] = { "j", mode = "n" },
-        ["<C-k>"] = { "k", mode = "n" },
-        ["<C-l>"] = "actions.select",
-        ["<C-p>"] = "actions.preview",
+        ["<C-p>"] = { "actions.parent", mode = "n" },
         ["<C-c>"] = { "actions.close", mode = "n" },
         ["<C-s>"] = { "actions.change_sort", mode = "n" },
         ["<C-o>"] = { "actions.open_cwd", mode = "n" },
