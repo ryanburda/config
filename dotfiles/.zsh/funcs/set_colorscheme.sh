@@ -23,6 +23,7 @@ set_colorscheme() {
         ['Dark - Catppuccin']="catppuccin-mocha,dark,Catppuccin Mocha"
         ['Dark - Everforest']="everforest,dark,Everforest Dark (Gogh)"
         ['Dark - Gruvbox']="gruvbox-material,dark,Gruvbox Material (Gogh)"
+        ['Dark - Gruvbox-baby']="gruvbox-baby,dark,Gruvbox Material (Gogh)"
         ['Dark - Nightfox-dusk']="duskfox,dark,duskfox"
         ['Dark - Nightfox-night']="nightfox,dark,nightfox"
         ['Dark - Nightfox-tera']="terafox,dark,terafox"

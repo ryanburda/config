@@ -22,6 +22,7 @@ return {
       "ribru17/bamboo.nvim",
       "catppuccin/nvim",
       "rose-pine/neovim",
+      "luisiacc/gruvbox-baby",
     },
     config = require("config.colorscheme").setup,
   },
