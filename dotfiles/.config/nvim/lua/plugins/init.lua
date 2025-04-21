@@ -269,7 +269,7 @@ return {
   {
     'saghen/blink.cmp',
     dependencies = 'rafamadriz/friendly-snippets',
-    version = 'v0.*',
+    version = '1.*',
     opts = {
       keymap = {
         preset = 'default',
@@ -301,7 +301,15 @@ return {
         window = {
           border = 'rounded',
         },
-      }
+      },
+      cmdline = {
+        enabled = true,
+        completion = {
+          menu = {
+            auto_show = true
+          },
+        },
+      },
     },
   },
 

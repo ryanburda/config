@@ -83,6 +83,9 @@ brew install --cask shifty
 brew install --cask spotify
 brew install --cask wezterm@nightly
 
+# Rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
 # Symlink config files
 stow dotfiles
 
