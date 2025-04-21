@@ -29,6 +29,7 @@ set_colorscheme() {
         ['Dark - Nightfox-tera']="terafox,dark,terafox"
         ['Dark - Nightfox-nord']="nordfox,dark,nord"
         ['Dark - Rose-pine']="rose-pine-moon,dark,rose-pine-moon"
+        ['Dark - Vague']="vague,dark,Vacuous 2 (terminal.sexy)"
         ['Light - Catppuccin']="catppuccin-latte,light,catppuccin-latte"
         ['Light - Deep-White']="deepwhite,light,dawnfox"
         ['Light - Everforest']="everforest,light,Everforest Light (Gogh)"

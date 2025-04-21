@@ -23,6 +23,7 @@ return {
       "catppuccin/nvim",
       "rose-pine/neovim",
       "luisiacc/gruvbox-baby",
+      "vague2k/vague.nvim",
     },
     config = require("config.colorscheme").setup,
   },
