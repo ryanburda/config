@@ -180,9 +180,8 @@ return {
         backdrop = 100,
         preview = {
           border = "border-bottom",
-          --border = "none",
           layout = "vertical",
-          vertical = "up:70%",
+          vertical = "up:67%",
         },
       },
       keymap = {
