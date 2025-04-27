@@ -826,6 +826,13 @@ vim.api.nvim_set_keymap('x', 'ga', '<Plug>(EasyAlign)', {})
 -- Set up EasyAlign for a motion/text object in normal mode
 vim.api.nvim_set_keymap('n', 'ga', '<Plug>(EasyAlign)', {})
 
+vim.keymap.set(
+  'n',
+  '<leader>cv',
+  ':CsvViewToggle<cr>',
+  { desc = "CSV toggle alignment" }
+)
+
 ------------------------------------------------------------------------------------------------------------------------
 -- Local Plugins
 ------------------------------------------------------------------------------------------------------------------------

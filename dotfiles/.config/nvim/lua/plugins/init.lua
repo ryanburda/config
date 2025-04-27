@@ -356,6 +356,10 @@ return {
     config = function() require('config.sqls').setup() end,
     lazy = true,
   },
+  {
+    'hat0uma/csvview.nvim',
+    config = function() require('csvview').setup() end,
+  },
 
   -- Local plugins
   {
