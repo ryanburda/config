@@ -86,6 +86,10 @@ brew install --cask wezterm@nightly
 # Rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
+# terminal gif recorder
+cargo install --locked --git https://github.com/asciinema/asciinema
+cargo install --git https://github.com/asciinema/agg
+
 # Symlink config files
 stow dotfiles
 
