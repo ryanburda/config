@@ -175,13 +175,13 @@ return {
         },
       },
       winopts = {
-        fullscreen = true,
-        border = "none",
+        fullscreen = false,
+        border = "rounded",
         backdrop = 100,
         preview = {
-          border = "border-bottom",
+          border = "rounded",
           layout = "vertical",
-          vertical = "up:67%",
+          vertical = "up:60%",
         },
       },
       keymap = {
