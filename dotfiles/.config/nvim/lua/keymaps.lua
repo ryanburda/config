@@ -839,36 +839,36 @@ vim.keymap.set(
 vim.keymap.set(
   'n',
   '<leader>a',
-  require("trail_marker").place_marker,
-  { desc = "Trail Marker: Add marker to current trail" }
+  ':TrailMarker place_marker<cr>',
+  { desc = "Trail Marker: Add marker to current trail", silent = false }
 )
 
 vim.keymap.set(
   'n',
   '<leader>r',
-  require("trail_marker").remove_marker,
-  { desc = "Trail Marker: Remove marker from current trail" }
+  ':TrailMarker remove_marker<cr>',
+  { desc = "Trail Marker: Remove marker from current trail", silent = false }
 )
 
 vim.keymap.set(
   'n',
   '<C-n>',
-  require("trail_marker").next_marker,
-  { desc = "Trail Marker: Go to next marker" }
+  ':TrailMarker next_marker<cr>',
+  { desc = "Trail Marker: Go to next marker", silent = false }
 )
 
 vim.keymap.set(
   'n',
   '<C-p>',
-  require("trail_marker").prev_marker,
-  { desc = "Trail Marker: Go to previous marker" }
+  ':TrailMarker prev_marker<cr>',
+  { desc = "Trail Marker: Go to previous marker", silent = false }
 )
 
 vim.keymap.set(
   'n',
   '<leader>t',
-  require("trail_marker").current_marker,
-  { desc = "Trail Marker: Go to current marker" }
+  ':TrailMarker current_marker<cr>',
+  { desc = "Trail Marker: Go to current marker", silent = false }
 )
 
 vim.keymap.set(
