@@ -181,7 +181,7 @@ return {
         preview = {
           border = "rounded",
           layout = "vertical",
-          vertical = "up:60%",
+          vertical = "down:50%",
         },
       },
       keymap = {

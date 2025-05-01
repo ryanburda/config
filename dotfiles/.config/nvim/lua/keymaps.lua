@@ -18,6 +18,13 @@
 ------------------------------------------------------------------------------------------------------------------------
 vim.keymap.set(
   'n',
+  '<leader>q',
+  ':bd<cr>',
+  {desc = 'close current buffer'}
+)
+
+vim.keymap.set(
+  'n',
   '<leader>T',
   ':tabnew<cr>',
   {desc = 'Window Management: New Tab'}
