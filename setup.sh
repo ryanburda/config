@@ -89,6 +89,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 # terminal gif recorder
 cargo install --locked --git https://github.com/asciinema/asciinema
 cargo install --git https://github.com/asciinema/agg
+go install github.com/cirocosta/asciinema-edit@latest
 
 # Symlink config files
 stow dotfiles
