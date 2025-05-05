@@ -646,6 +646,24 @@ vim.keymap.set(
 
 vim.keymap.set(
   'n',
+  '<leader>fg',
+  function()
+    require('fzf-lua').live_grep({ rg_opts = "--hidden --column --line-number --no-heading --color=always --smart-case --no-ignore" })
+  end,
+  { desc = 'Grep --no-ignore' }
+)
+
+vim.keymap.set(
+  'n',
+  '<leader>ff',
+  function()
+    require('fzf-lua').files({ cmd = 'rg --files --no-ignore' })
+  end,
+  { desc = 'Find --no-ignore' }
+)
+
+vim.keymap.set(
+  'n',
   '<C-f>',
   require('bufs').buffers,
   { desc = 'Find: open buffers' }
@@ -846,36 +864,36 @@ vim.keymap.set(
 vim.keymap.set(
   'n',
   '<leader>a',
-  ':TrailMarker place_marker<cr>',
-  { desc = "Trail Marker: Add marker to current trail", silent = false }
+  require("trail_marker").place_marker,
+  { desc = "Trail Marker: Add marker to current trail" }
 )
 
 vim.keymap.set(
   'n',
   '<leader>r',
-  ':TrailMarker remove_marker<cr>',
-  { desc = "Trail Marker: Remove marker from current trail", silent = false }
+  require("trail_marker").remove_marker,
+  { desc = "Trail Marker: Remove marker from current trail" }
 )
 
 vim.keymap.set(
   'n',
   '<C-n>',
-  ':TrailMarker next_marker<cr>',
-  { desc = "Trail Marker: Go to next marker", silent = false }
+  require("trail_marker").next_marker,
+  { desc = "Trail Marker: Go to next marker" }
 )
 
 vim.keymap.set(
   'n',
   '<C-p>',
-  ':TrailMarker prev_marker<cr>',
-  { desc = "Trail Marker: Go to previous marker", silent = false }
+  require("trail_marker").prev_marker,
+  { desc = "Trail Marker: Go to previous marker" }
 )
 
 vim.keymap.set(
   'n',
   '<leader>t',
-  ':TrailMarker current_marker<cr>',
-  { desc = "Trail Marker: Go to current marker", silent = false }
+  require("trail_marker").current_marker,
+  { desc = "Trail Marker: Go to current marker" }
 )
 
 vim.keymap.set(
