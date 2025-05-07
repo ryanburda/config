@@ -790,7 +790,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set(
       'n',
       'K',
-      vim.lsp.buf.hover,
+      function()
+        vim.lsp.buf.hover({border = "rounded"})
+      end,
       {desc = 'Code: Hover info', buffer = event.buf}
     )
 

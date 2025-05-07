@@ -266,6 +266,7 @@ return {
   {
     "williamboman/mason-lspconfig.nvim",
     dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig", "folke/lazydev.nvim", },
+    version = 'v1.*',
     config = require("config.mason-lspconfig").setup
   },
 
