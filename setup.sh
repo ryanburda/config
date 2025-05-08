@@ -42,6 +42,7 @@ brew install lua
 brew install neovim
 brew install ninja #n
 brew install node #n
+brew install npm
 brew install octave
 brew install owenthereal/upterm/upterm  # See https://github.com/owenthereal/upterm/issues/135 if you are having issues with `upterm host`
 brew install php #n
