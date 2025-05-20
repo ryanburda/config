@@ -20,18 +20,14 @@ set_colorscheme() {
     #       - other scripts exist for handling colorscheme changes to other CLIs such as aichat and lazygit.
     typeset -A themes=(
         ['Dark - Bamboo']="bamboo,dark,Bamboo"
-        ['Dark - Catppuccin']="catppuccin-mocha,dark,Catppuccin Mocha"
         ['Dark - Everforest']="everforest,dark,Everforest Dark (Gogh)"
         ['Dark - Gruvbox']="gruvbox-material,dark,Gruvbox Material (Gogh)"
-        ['Dark - Gruvbox-baby']="gruvbox-baby,dark,Gruvbox Material (Gogh)"
         ['Dark - Nightfox-dusk']="duskfox,dark,duskfox"
         ['Dark - Nightfox-night']="nightfox,dark,nightfox"
         ['Dark - Nightfox-tera']="terafox,dark,terafox"
         ['Dark - Nightfox-nord']="nordfox,dark,nord"
         ['Dark - Rose-pine']="rose-pine-moon,dark,rose-pine-moon"
         ['Dark - Vague']="vague,dark,Vacuous 2 (terminal.sexy)"
-        ['Light - Catppuccin']="catppuccin-latte,light,catppuccin-latte"
-        ['Light - Deep-White']="deepwhite,light,dawnfox"
         ['Light - Everforest']="everforest,light,Everforest Light (Gogh)"
         ['Light - Gruvbox']="gruvbox-material,light,GruvboxLight"
         ['Light - Nightfox-dawn']="dawnfox,light,dawnfox"
