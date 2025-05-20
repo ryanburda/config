@@ -31,35 +31,6 @@ function T.setup()
     --     })
     -- end,
     -- Next, you can provide a dedicated handler for specific servers.
-    ["lua_ls"] = function ()
-      require("lazydev").setup({})
-
-      -- then setup your lsp server as usual
-      local lspconfig = require('lspconfig')
-
-      -- example to setup lua_ls and enable call snippets
-      lspconfig.lua_ls.setup({
-        capabilities = capabilities,
-        settings = {
-          Lua = {
-            completion = {
-              callSnippet = "Replace"
-            },
-            runtime = {
-              -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-              version = 'LuaJIT',
-            },
-            diagnostics = {
-              -- Get the language server to recognize the `vim` global
-              globals = { 'require', 'vim', },
-              telemetry = {
-                enable = false
-              },
-            },
-          }
-        }
-      })
-    end,
 
     ["gopls"] = function ()
       require("lspconfig")["gopls"].setup({
@@ -95,20 +66,6 @@ function T.setup()
           vim.keymap.set('n', '<M-.>', ":lua require('dap-python').debug_selection()<cr>", { buffer = bufnr })
         end,
         capabilities = capabilities
-      })
-    end,
-
-    ["yamlls"] = function ()
-      require("lspconfig")["yamlls"].setup({
-        capabilities = capabilities,
-        settings = {
-          yaml = {
-            schemas = {
-              ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "docker-compose.y*ml",
-              ["https://json.schemastore.org/drone.json"] = ".drone.y*ml",
-            }
-          }
-        }
       })
     end,
 
