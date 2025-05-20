@@ -19,7 +19,6 @@ set_colorscheme() {
     #       - wezterm is updated by touching $XDG_CONFIG_HOME/wezterm/wezterm.lua
     #       - other scripts exist for handling colorscheme changes to other CLIs such as aichat and lazygit.
     typeset -A themes=(
-        ['Dark - Bamboo']="bamboo,dark,Bamboo"
         ['Dark - Everforest']="everforest,dark,Everforest Dark (Gogh)"
         ['Dark - Gruvbox']="gruvbox-material,dark,Gruvbox Material (Gogh)"
         ['Dark - Nightfox-dusk']="duskfox,dark,duskfox"

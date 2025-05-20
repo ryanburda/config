@@ -15,7 +15,6 @@ return {
       "sainnhe/everforest",
       "sainnhe/gruvbox-material",
       "EdenEast/nightfox.nvim",
-      "ribru17/bamboo.nvim",
       "rose-pine/neovim",
       "vague2k/vague.nvim",
     },
