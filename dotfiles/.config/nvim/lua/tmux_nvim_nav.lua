@@ -14,7 +14,7 @@ local nvim_to_tmux_direction_map = {
   ['l'] = 'R'
 }
 
-T.tmux_nvim_move = function(direction)
+T.move = function(direction)
   local original_nvim_winnr = vim.fn.winnr()
 
   -- Try to move in the specified direction
@@ -28,7 +28,7 @@ T.tmux_nvim_move = function(direction)
   end
 end
 
-T.tmux_nvim_resize = function(direction, amount)
+T.resize = function(direction, amount)
 
   local direction_str = 'horizontal'
   if direction == 'h' or direction == 'l' then
@@ -57,7 +57,7 @@ T.tmux_nvim_resize = function(direction, amount)
   end
 
   -- Resize the tmux pane if there isn't a nvim split on either side of the current split.
-  os.execute(string.format("tmux resize-pane -%s %d", nvim_to_tmux_direction_map[direction], amount))
+  os.execute(string.format("tmux resize-pane -%s %d 2>/dev/null", nvim_to_tmux_direction_map[direction], amount))
 
 end
 

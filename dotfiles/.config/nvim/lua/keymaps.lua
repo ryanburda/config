@@ -468,7 +468,7 @@ vim.keymap.set(
   {"n", "v", "i", "x"},
   '<C-h>',
   function()
-    require('tmux_nvim_nav').tmux_nvim_move('h')
+    require('tmux_nvim_nav').move('h')
   end,
   {desc = "Navigation: move to split left"}
 )
@@ -477,7 +477,7 @@ vim.keymap.set(
   {"n", "v", "i", "x"},
   '<C-j>',
   function()
-    require('tmux_nvim_nav').tmux_nvim_move('j')
+    require('tmux_nvim_nav').move('j')
   end,
   {desc = "Tmux: move cursor down"}
 )
@@ -486,7 +486,7 @@ vim.keymap.set(
   {"n", "v", "i", "x"},
   '<C-k>',
   function()
-    require('tmux_nvim_nav').tmux_nvim_move('k')
+    require('tmux_nvim_nav').move('k')
   end,
   {desc = "Tmux: move cursor up"}
 )
@@ -495,7 +495,7 @@ vim.keymap.set(
   {"n", "v", "i", "x"},
   '<C-l>',
   function()
-    require('tmux_nvim_nav').tmux_nvim_move('l')
+    require('tmux_nvim_nav').move('l')
   end,
   {desc = "Tmux: move cursor right"}
 )
@@ -507,7 +507,7 @@ vim.keymap.set(
   {"n", "v", "x"},
   '<leader>Rh',
   function()
-    require('tmux_nvim_nav').tmux_nvim_resize('h', 1)
+    require('tmux_nvim_nav').resize('h', 1)
   end,
   {desc = "Splits: resize left"}
 )
@@ -516,7 +516,7 @@ vim.keymap.set(
   {"n", "v", "x"},
   '<leader>Rj',
   function()
-    require('tmux_nvim_nav').tmux_nvim_resize('j', 1)
+    require('tmux_nvim_nav').resize('j', 1)
   end,
   {desc = "Splits: resize down"}
 )
@@ -525,7 +525,7 @@ vim.keymap.set(
   {"n", "v", "x"},
   '<leader>Rk',
   function()
-    require('tmux_nvim_nav').tmux_nvim_resize('k', 1)
+    require('tmux_nvim_nav').resize('k', 1)
   end,
   {desc = "Splits: resize up"}
 )
@@ -534,7 +534,7 @@ vim.keymap.set(
   {"n", "v", "x"},
   '<leader>Rl',
   function()
-    require('tmux_nvim_nav').tmux_nvim_resize('l', 1)
+    require('tmux_nvim_nav').resize('l', 1)
   end,
   {desc = "Splits: resize right"}
 )
