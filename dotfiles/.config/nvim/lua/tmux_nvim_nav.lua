@@ -1,7 +1,7 @@
 local T = {}
 
 local nvim_opposite_direction_map = {
-  ['h'] = 'j',
+  ['h'] = 'l',
   ['j'] = 'k',
   ['k'] = 'j',
   ['l'] = 'h'
@@ -14,55 +14,18 @@ local nvim_to_tmux_direction_map = {
   ['l'] = 'R'
 }
 
-local function get_tmux_pane_id()
-    local handle = io.popen("tmux display-message -p '#{pane_id}' 2>/dev/null")
-    local result = handle:read("*a")
-    handle:close()
-    return result:gsub("%s+", "") -- Trim any trailing whitespace/newline
-end
+T.tmux_nvim_move = function(direction)
+  local original_nvim_winnr = vim.fn.winnr()
 
-local function get_split_type(direction)
-  -- returns either:
-  --   nil
-  --   nvim
-  --   tmux
-  -- showing what kind of split is in that direction.
-  local current_nvim_winnr = vim.fn.winnr()
-  local current_tmux_pane_id = get_tmux_pane_id()
-
-  -- Move that direction in nvim
+  -- Try to move in the specified direction
   vim.cmd(string.format('wincmd %s', direction))
 
-  if current_nvim_winnr ~= vim.fn.winnr() then
-    vim.cmd('wincmd p')
-    return 'nvim'
-  end
-
-  -- Move that direction in tmux
-  local handle = io.popen(string.format('tmux select-pane -%s 2>/dev/null', nvim_to_tmux_direction_map[direction]))
-  local result = handle:read("*a")
-  handle:close()
-
-  if get_tmux_pane_id() ~= current_tmux_pane_id then
-    local command = "tmux select-pane -l 2>/dev/null"
-    os.execute(command)
-    return 'tmux'
-  end
-
-  return nil
-end
-
-T.tmux_nvim_move = function(direction)
-  local split_type = get_split_type(direction)
-
-  if split_type == 'nvim' then
-    vim.cmd(string.format('wincmd %s', direction))
-  else
+  -- Move tmux split if there wasn't a nvim split in that direction
+  if vim.fn.winnr() == original_nvim_winnr then
     local handle = io.popen(string.format('tmux select-pane -%s 2>/dev/null', nvim_to_tmux_direction_map[direction]))
     local result = handle:read("*a")
     handle:close()
   end
-
 end
 
 T.tmux_nvim_resize = function(direction, amount)
@@ -72,18 +35,29 @@ T.tmux_nvim_resize = function(direction, amount)
     direction_str = 'vertical'
   end
 
-  local opposite_direction = nvim_opposite_direction_map[direction]
+  -- Get the current window number
+  local original_nvim_winnr = vim.fn.winnr()
 
-  local direction_split_type = get_split_type(direction)
-  local opposite_direction_split_type = get_split_type(opposite_direction)
+  -- Move the specified direction in nvim
+  vim.cmd(string.format('wincmd %s', direction))
 
-  if direction_split_type == 'nvim' then
-    vim.cmd(string.format('%s resize +%s', direction_str, amount))
-  elseif opposite_direction_split_type == 'nvim' then
-    vim.cmd(string.format('%s resize -%s', direction_str, amount))
-  elseif direction_split_type == 'tmux' then
-    os.execute(string.format("tmux resize-pane -%s %d", nvim_to_tmux_direction_map[direction], amount))
+  if original_nvim_winnr ~= vim.fn.winnr() then
+    vim.cmd('wincmd p')
+    vim.cmd(string.format('%s resize +%d', direction_str, amount))
+    return
   end
+
+  -- Move opposite direction in nvim
+  vim.cmd(string.format('wincmd %s', nvim_opposite_direction_map[direction]))
+
+  if original_nvim_winnr ~= vim.fn.winnr() then
+    vim.cmd('wincmd p')
+    vim.cmd(string.format('%s resize -%d', direction_str, amount))
+    return
+  end
+
+  -- Resize the tmux pane if there isn't a nvim split on either side of the current split.
+  os.execute(string.format("tmux resize-pane -%s %d", nvim_to_tmux_direction_map[direction], amount))
 
 end
 
