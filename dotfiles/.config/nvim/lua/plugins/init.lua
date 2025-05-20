@@ -54,7 +54,6 @@ return {
         end,
       })
     end,
-    lazy = true,
   },
 
   -- Oil.nvim
@@ -235,22 +234,9 @@ return {
     end,
   },
 
-  ----------------------------
-  -- Package Manager: Mason --
-  ----------------------------
   {
-    "williamboman/mason.nvim",
-    lazy = true,
-    config = function ()
-      require("mason").setup()
-    end
-  },
-  -- LSP
-  {
-    "williamboman/mason-lspconfig.nvim",
-    dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig", "folke/lazydev.nvim", },
-    version = 'v1.*',
-    config = require("config.mason-lspconfig").setup
+    "mason-org/mason.nvim",
+    opts = {}
   },
 
   {
@@ -330,7 +316,6 @@ return {
   {
     'nanotee/sqls.nvim',
     config = function() require('config.sqls').setup() end,
-    lazy = true,
   },
   {
     'hat0uma/csvview.nvim',

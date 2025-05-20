@@ -116,3 +116,10 @@ require("lazy").setup({
 require('open').setup()
 -- keymaps
 require('keymaps')
+
+-- lsp
+vim.lsp.enable({
+  "luals",
+  "pyright",
+  "sqls",
+})
