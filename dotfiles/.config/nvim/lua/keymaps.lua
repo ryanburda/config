@@ -573,15 +573,15 @@ vim.keymap.set(
 vim.keymap.set(
   'n',
   '<leader>eo',
-  "<cmd>lua require'dapui'.toggle()<cr>",
+  ":DapViewOpen<cr>",
   {desc = 'Debug: Open debug UI'}
 )
 
 vim.keymap.set(
   'n',
-  '<leader>ee',
-  "<cmd>lua require('dapui').eval()<cr>",
-  {desc = 'Debug: Evaluate'}
+  '<leader>ex',
+  ":DapViewClose<cr>",
+  {desc = 'Debug: Closes the current debug session'}
 )
 
 vim.keymap.set(
@@ -617,13 +617,6 @@ vim.keymap.set(
   '<M-p>',
   require('dap').continue,
   {desc = 'Debug: Continue to next breakpoint (Proceed)'}
-)
-
-vim.keymap.set(
-  'n',
-  '<leader>ex',
-  require('dap').close,
-  {desc = 'Debug: Closes the current debug session'}
 )
 
 vim.keymap.set(

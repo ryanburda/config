@@ -305,30 +305,22 @@ return {
   },
 
   -- Debug
-  'mfussenegger/nvim-dap',
   {
-    'rcarriga/nvim-dap-ui',
+    'mfussenegger/nvim-dap',
     dependencies = {
-      'mfussenegger/nvim-dap',
-      'nvim-neotest/nvim-nio',
-    },
-    lazy = true,
-    config = require("config.nvim-dap-ui").setup
-  },
-  {
-    'theHamsta/nvim-dap-virtual-text',
-    dependencies = {
-      'mfussenegger/nvim-dap',
-    },
-    lazy = true,
-    ---@diagnostic disable-next-line: missing-fields
-    config = function() require("nvim-dap-virtual-text").setup({}) end
-  },
-  {
-    'mrcjkb/rustaceanvim',
-    version = '^4', -- Recommended
-    ft = { 'rust' },
-    lazy = true,
+      {
+        "igorlfs/nvim-dap-view", opts = {}
+      },
+      {
+        'theHamsta/nvim-dap-virtual-text',
+        dependencies = {
+          'mfussenegger/nvim-dap',
+        },
+        lazy = true,
+        ---@diagnostic disable-next-line: missing-fields
+        config = function() require("nvim-dap-virtual-text").setup({}) end
+      },
+    }
   },
   {
     'mfussenegger/nvim-dap-python',
