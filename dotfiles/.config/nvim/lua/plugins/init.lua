@@ -5,9 +5,6 @@
 -- find it easier to track what plugins come in and out of use in the commit history
 -- of a single file instead of the commit history of an entire directory.
 -- This is a preference, not a requirement.
---
--- Plugins with larger than normal `config` functions (mason for example) can
--- have their config functions broken out into a separate file in `../config/`.
 
 return {
 
