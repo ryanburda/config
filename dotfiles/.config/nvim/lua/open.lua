@@ -1,20 +1,16 @@
--- Personal take on a combination between `:FzfLua buffers` and `FzfLua files`.
---    * Buffers are shown at the top
---      * Shows leaf of file paths in its own column
---      * Orders buffers alphabetically based on leaf of path
---    * Files are shown below buffers
+-- Combination between `:FzfLua buffers` and `FzfLua files`.
 --
 -- Example usage
 -- ```lua
 -- --run setup for autocommands
--- require('bufs').setup()
+-- require('open').setup()
 --
 -- -- Create a keymap
 -- vim.keymap.set(
 --   'n',
 --   '<C-f>',
---   require('bufs').buffers,
---   { desc = 'buffers' }
+--   require('open').open,
+--   { desc = 'file and buffer picker' }
 -- )
 -- ```
 local fzf_utils = require("fzf-lua.utils")
@@ -26,17 +22,6 @@ local function get_last_cursor_position(bufnr)
   else
     return nil
   end
-end
-
-local function pad_string(input_string, num_characters)
-  local length = #input_string
-
-  while length < num_characters do
-    input_string = input_string .. " "
-    length = length + 1
-  end
-
-  return input_string
 end
 
 local function parse_entry(str)
@@ -74,20 +59,7 @@ local function get_bufs()
       t.buf_id = buf_id
       t.path = path
 
-      -- path
-      t.relative_path = fzf_utils.ansi_codes.blue(vim.fn.fnamemodify(path, ':.'))
-      t.path_leaf = fzf_utils.ansi_codes.green(path:match("([^/\\]+)$"))
-
-      if #t.path_leaf > max_file_name_length then
-        max_file_name_length = #t.path_leaf
-      end
-
-      t.buf_indicator = " "
-      if t.buf_id == vim.fn.bufnr('%') then
-        t.buf_indicator = fzf_utils.ansi_codes.red('%')
-      elseif t.buf_id == vim.fn.bufnr('#') then
-        t.buf_indicator = fzf_utils.ansi_codes.yellow('#')
-      end
+      t.relative_path = fzf_utils.ansi_codes.cyan(vim.fn.fnamemodify(path, ':.'))
 
       -- cursor position
       local cursor_pos = get_last_cursor_position(t.buf_id)
@@ -112,21 +84,18 @@ local function get_bufs()
   end
 
   -- Sort alphabetically by file name.
-  table.sort(bufs, function(a, b) return a.path_leaf < b.path_leaf end)
+  -- table.sort(bufs, function(a, b) return a.relative_path < b.relative_path end)
   -- Sort by bufnr (order buffers were opened)
   -- table.sort(bufs, function(a, b) return a.buf_id < b.buf_id end)
   -- Sort by last used
-  -- table.sort(bufs, function(a, b) return vim.b[a.buf_id].last_entered_ts > vim.b[b.buf_id].last_entered_ts end)
+  table.sort(bufs, function(a, b) return vim.b[a.buf_id].last_entered_ts > vim.b[b.buf_id].last_entered_ts end)
 
   local picker_strs = {}
 
   for _, buf in ipairs(bufs) do
     local fzf_display_string = string.format(
-      "%s %s %s %s %s:%s:%s [%s]",
+      "%s %s:%s:%s [%s]",
       buf.icon,
-      buf.buf_indicator,
-      pad_string(buf.path_leaf, max_file_name_length),
-      buf.is_modified_str,
       buf.relative_path,
       buf.cursor_row_colored,
       buf.cursor_col_colored,
@@ -186,13 +155,7 @@ local function get_files()
     local icon, hl = devicons.get_icon_color(path, nil, {default = true})
     local icon_colored = fzf_utils.ansi_from_rgb(hl, icon)
 
-    local fzf_display_string = string.format(
-      "%s   %s%s",
-      icon_colored,
-      -- HACK: fzf sorts based off length. This will make files sink to the bottoms to allow buffers to stay on top.
-      fzf_utils.ansi_codes.blue(path),
-      "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   :"
-    )
+    local fzf_display_string = string.format("%s %s", icon_colored, fzf_utils.ansi_codes.white(path))
 
     local fzf_full_string = string.format(
       "%s|%s|%s|%s|%s",
@@ -239,10 +202,9 @@ local keymap_header = function(key, purpose)
 end
 
 local function get_header()
-  local ctrl_g = keymap_header("ctrl-g", "alternate buffer #")
   local ctrl_x = keymap_header("ctrl-x", "close buffer")
   local ctrl_o = keymap_header("ctrl-o", "close all but selected buffer")
-  local header = string.format("  %s | %s | %s", ctrl_g, ctrl_x, ctrl_o)
+  local header = string.format("  %s | %s", ctrl_x, ctrl_o)
 
   return header
 end
@@ -286,7 +248,7 @@ M.setup = function()
 
 end
 
-M.buffers = function()
+M.open = function()
   -- Call `get_bufs` before calling `fzf_exec`.
   -- This ensures that we preserve the current/alternate buffers before `fzf_exec` creates an unlisted buffer.
   local bufs = get_bufs()
@@ -333,13 +295,6 @@ M.buffers = function()
             end
           end
           M.buffers()
-        end,
-        ["ctrl-g"] = function()
-          local alt_bufnr = vim.fn.bufnr('#')
-
-          if alt_bufnr ~= -1 then
-            vim.api.nvim_set_current_buf(alt_bufnr)
-          end
         end,
         ["ctrl-o"] = function(selected)
           if selected[1] ~= nil then

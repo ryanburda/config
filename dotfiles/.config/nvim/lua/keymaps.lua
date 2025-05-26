@@ -674,8 +674,8 @@ vim.keymap.set(
 vim.keymap.set(
   'n',
   '<C-f>',
-  require('bufs').buffers,
-  { desc = 'Find: open buffers' }
+  require('open').open,
+  { desc = 'Find: files and buffers' }
 )
 
 vim.keymap.set(

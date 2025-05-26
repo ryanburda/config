@@ -49,7 +49,7 @@ vim.opt.clipboard = 'unnamedplus'
 vim.opt.whichwrap = '<,>,h,l,[,]'
 vim.opt.timeoutlen = 1000
 vim.opt.updatetime = 250
-vim.opt.laststatus = 2
+--vim.opt.laststatus = 3
 vim.opt.signcolumn = "yes"
 vim.opt.list = true
 ---@diagnostic disable-next-line: missing-fields
@@ -113,6 +113,6 @@ require("lazy").setup({
 })
 
 -- custom buffer/file picker
-require('bufs').setup()
+require('open').setup()
 -- keymaps
 require('keymaps')
