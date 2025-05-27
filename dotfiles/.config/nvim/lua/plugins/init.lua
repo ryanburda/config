@@ -62,21 +62,7 @@ return {
     ---@module 'oil'
     ---@type oil.SetupOpts
     opts = {
-      use_default_keymaps = false,
-      keymaps = {
-        ["?"] = { "actions.show_help", mode = "n" },
-        ["<CR>"] = "actions.select",
-        ["<C-p>"] = { "actions.parent", mode = "n" },
-        ["<C-c>"] = { "actions.close", mode = "n" },
-        ["<C-s>"] = { "actions.change_sort", mode = "n" },
-        ["<C-o>"] = { "actions.open_cwd", mode = "n" },
-        ["<C-x>"] = "actions.open_external",
-        ["<C-t>"] = { "actions.toggle_trash", mode = "n" },
-        ["H"] = { "actions.toggle_hidden", mode = "n" },
-        ["L"] = "actions.refresh",
-        ["`"] = { "actions.cd", mode = "n" },
-        ["~"] = { "actions.cd", opts = { scope = "tab" }, mode = "n" },
-      },
+      use_default_keymaps = true,
       delete_to_trash = true,
       skip_confirm_for_simple_edits = true,
       view_options = {

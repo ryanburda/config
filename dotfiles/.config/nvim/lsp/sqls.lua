@@ -3,5 +3,9 @@ return {
   cmd = { 'sqls' },
   filetypes = { 'sql', 'mysql' },
   root_markers = { 'config.yml' },
-  settings = {},
+  settings = {
+    sqls = {
+      connections = require('config.sqls').get_all_connections()
+    },
+  },
 }
