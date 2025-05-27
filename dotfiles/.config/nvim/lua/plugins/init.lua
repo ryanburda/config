@@ -9,17 +9,11 @@
 return {
 
   -- Color Schemes
-  {
-    "rktjmp/fwatch.nvim",
-    dependencies = {
-      "sainnhe/everforest",
-      "sainnhe/gruvbox-material",
-      "EdenEast/nightfox.nvim",
-      "rose-pine/neovim",
-      "vague2k/vague.nvim",
-    },
-    config = require("config.colorscheme").setup,
-  },
+  "sainnhe/everforest",
+  "sainnhe/gruvbox-material",
+  "EdenEast/nightfox.nvim",
+  "rose-pine/neovim",
+  "vague2k/vague.nvim",
 
   -- Treesitter
   {

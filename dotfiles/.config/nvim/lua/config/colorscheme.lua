@@ -1,5 +1,23 @@
 local T = {}
 
+local function watch_file_for_changes(filepath, callback)
+  local uv = vim.loop
+  local fs_event = uv.new_fs_event()
+
+  fs_event:start(filepath, {}, vim.schedule_wrap(function(err, filename, events)
+    if err then
+      print("Error watching file:", err)
+      return
+    end
+    -- You might want to add logic here to handle specific types of events
+    -- local eventRename = not not string.match(events, 'rename')
+    -- local eventChange = not not string.match(events, 'change')
+    if filename then
+      callback(filename)
+    end
+  end))
+end
+
 T.COLORSCHEME_DEFAULT = 'bamboo'
 T.COLORSCHEME_FILE = os.getenv('HOME') .. '/.config/.env/nvim_colorscheme'
 T.BACKGROUND_DEFAULT = 'dark'
@@ -120,13 +138,10 @@ function T.setup()
   T.set_colorscheme(true)
 
   -- update the colorscheme when the colorscheme file changes.
-  local fwatch = require('fwatch')
-  fwatch.watch(T.COLORSCHEME_FILE, {
-    on_event = function()
-      -- sleep for a bit to make sure the background file is done being written to as well.
-      vim.schedule(function() vim.defer_fn(T.set_colorscheme, 100) end)
-    end
-  })
+  watch_file_for_changes(T.COLORSCHEME_FILE, function()
+    -- Callback function triggered on file change
+    T.set_colorscheme(true)
+  end)
 
 end
 
