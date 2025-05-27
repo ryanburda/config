@@ -1,7 +1,11 @@
 return {
   cmd = { "lua-language-server" },
   filetypes = { "lua" },
-  root_markers = { ".luarc.json", ".luarc.jsonc" },
+  root_markers = {
+    ".luarc.json",
+    ".luarc.jsonc",
+    ".git",
+  },
   telemetry = { enabled = false },
   formatters = {
     ignoreComments = false,
@@ -26,4 +30,5 @@ return {
       },
     },
   },
+  single_file_support = true,
 }
