@@ -112,10 +112,6 @@ require("lazy").setup({
   },
 })
 
--- custom buffer/file picker
-require('open').setup()
--- keymaps
-require('keymaps')
 -- lsp
 local lsp_configs = {}
 for _, f in pairs(vim.api.nvim_get_runtime_file("lsp/*.lua", true)) do
@@ -123,3 +119,6 @@ for _, f in pairs(vim.api.nvim_get_runtime_file("lsp/*.lua", true)) do
   table.insert(lsp_configs, server_name)
 end
 vim.lsp.enable(lsp_configs)
+
+-- keymaps
+require('keymaps')

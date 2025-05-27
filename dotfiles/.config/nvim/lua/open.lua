@@ -266,7 +266,7 @@ M.open = function()
       cb()
     end,
     {
-      prompt = "open> ",
+      prompt = "  > ",
       previewer = get_previewer(),
       actions = {
         ["default"] = function(selected)
