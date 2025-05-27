@@ -72,6 +72,7 @@ local function get_bufs()
       local is_modified = vim.api.nvim_buf_get_option(buf_id, 'modified')
       t.is_modified_str = " "
       if is_modified then
+
         t.is_modified_str = "+"
       end
 
@@ -155,7 +156,7 @@ local function get_files()
     local icon, hl = devicons.get_icon_color(path, nil, {default = true})
     local icon_colored = fzf_utils.ansi_from_rgb(hl, icon)
 
-    local fzf_display_string = string.format("%s %s", icon_colored, fzf_utils.ansi_codes.white(path))
+    local fzf_display_string = string.format("%s %s", icon_colored, path)
 
     local fzf_full_string = string.format(
       "%s|%s|%s|%s|%s",
