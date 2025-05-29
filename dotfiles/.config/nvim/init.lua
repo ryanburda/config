@@ -61,16 +61,6 @@ vim.opt.statusline = [[%<%f %h%m%r%=%=  %{luaeval("require('trail_marker.extensi
 vim.cmd('set noshowmode')
 vim.cmd('set noswapfile')
 
--- Open help window in a vertical split to the right.
-vim.api.nvim_create_augroup('HelpWin', { clear = true })
-vim.api.nvim_create_autocmd("BufWinEnter", {
-  group = 'HelpWin',
-  pattern = { "*.txt" },
-  callback = function()
-    if vim.o.filetype == 'help' then vim.cmd.wincmd("L") end
-  end
-})
-
 -- Highlight when yanking text.
 -- Try it with `yap` in normal mode
 -- See: `:help.vim.highlihgt.on_yank()`
