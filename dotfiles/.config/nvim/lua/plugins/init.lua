@@ -65,7 +65,7 @@ return {
       float = {
         max_width = 100,
         max_height = 32,
-        preview_split = "right",
+        preview_split = "below",
       },
     },
     dependencies = { { "nvim-tree/nvim-web-devicons", opts = {} } },
