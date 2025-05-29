@@ -5,7 +5,7 @@ return {
   root_markers = { 'config.yml' },
   settings = {
     sqls = {
-      connections = require('config.sqls').get_all_connections()
+      connections = require('sqls').get_all_connections()
     },
   },
 }

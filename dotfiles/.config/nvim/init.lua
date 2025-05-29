@@ -124,4 +124,4 @@ vim.lsp.enable(lsp_configs)
 require('keymaps')
 
 -- colorscheme
-require("config.colorscheme").setup()
+require("colorscheme").setup()

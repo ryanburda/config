@@ -300,7 +300,7 @@ return {
   -- sql
   {
     'nanotee/sqls.nvim',
-    config = function() require('config.sqls').setup() end,
+    config = function() require('sqls').setup() end,
   },
   {
     'hat0uma/csvview.nvim',
