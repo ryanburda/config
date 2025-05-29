@@ -384,14 +384,14 @@ vim.keymap.set(
 vim.keymap.set(
   'n',
   '<leader>ej',
-  vim.diagnostic.goto_next,
+  function() vim.diagnostic.jump({count = 1}) end,
   {desc = "Diagnostic: go to next"}
 )
 
 vim.keymap.set(
   'n',
   '<leader>ek',
-  vim.diagnostic.goto_prev,
+  function() vim.diagnostic.jump({count = -1}) end,
   {desc = "Diagnostic: go to previous"}
 )
 
@@ -538,34 +538,6 @@ vim.keymap.set(
   end,
   {desc = "Splits: resize right"}
 )
-
---vim.keymap.set(
---  "n",
---  "<leader>ri",
---  ":VtrOpenRunner<cr>",
---  {desc = "Tmux: Open runner"}
---)
---
---vim.keymap.set(
---  "n",
---  "<leader>ra",
---  ":VtrAttachToPane<cr>",
---  {desc = "Tmux: Attach to pane"}
---)
---
---vim.keymap.set(
---  "x",
---  "<leader>re",
---  ":call VtrSendLinesToRunnerWrapper()<cr>",
---  {desc = "Tmux: Send lines to runner"}
---)
---
---vim.keymap.set(
---  "n",
---  "<leader>rf",
---  ":VtrSendFile<cr>",
---  {desc = "Tmux: Send file to runner"}
---)
 
 ------------------------------------------------------------------------------------------------------------------------
 -- Debug
