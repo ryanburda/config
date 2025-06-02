@@ -544,58 +544,58 @@ vim.keymap.set(
 ------------------------------------------------------------------------------------------------------------------------
 vim.keymap.set(
   'n',
-  '<leader>eo',
+  '<M-o>',
   ":DapViewOpen<cr>",
   {desc = 'Debug: Open debug UI'}
 )
 
 vim.keymap.set(
   'n',
-  '<leader>ex',
+  '<M-x>',
   ":DapViewClose<cr>",
   {desc = 'Debug: Closes the current debug session'}
 )
 
 vim.keymap.set(
   'n',
-  '<leader>ew',
+  '<M-b>',
   require('dap').toggle_breakpoint,
   {desc = 'Debug: Set breakpoint'}
 )
 
 vim.keymap.set(
   'n',
-  '<leader>eq',
-  require('dap').clear_breakpoints,
-  {desc = 'Debug: Clear breakpoints'}
-)
-
-vim.keymap.set(
-  'n',
-  '<M-i>',
+  '<M-j>',
   require('dap').step_into,
   {desc = 'Debug: Step into'}
 )
 
 vim.keymap.set(
   'n',
-  '<M-o>',
+  '<M-k>',
   require('dap').step_over,
   {desc = 'Debug: Step over'}
 )
 
 vim.keymap.set(
   'n',
-  '<M-p>',
+  '<M-l>',
   require('dap').continue,
   {desc = 'Debug: Continue to next breakpoint (Proceed)'}
 )
 
 vim.keymap.set(
   'n',
-  '<leader>e ',
+  '<M-r> ',
   require('dap').run,
   {desc = 'Debug: Runs a new debug session'}
+)
+
+vim.keymap.set(
+  'n',
+  '<leader>fb',
+  require('fzf-lua').dap_breakpoints,
+  {desc = 'Debug: Find breakpoints'}
 )
 
 ------------------------------------------------------------------------------------------------------------------------
