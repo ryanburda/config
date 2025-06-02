@@ -544,16 +544,9 @@ vim.keymap.set(
 ------------------------------------------------------------------------------------------------------------------------
 vim.keymap.set(
   'n',
-  '<M-o>',
-  ":DapViewOpen<cr>",
-  {desc = 'Debug: Open debug UI'}
-)
-
-vim.keymap.set(
-  'n',
-  '<M-x>',
-  ":DapViewClose<cr>",
-  {desc = 'Debug: Closes the current debug session'}
+  '<M-t>',
+  ":DapViewToggle<cr>",
+  {desc = 'Debug: Toggle debug UI'}
 )
 
 vim.keymap.set(
@@ -586,16 +579,23 @@ vim.keymap.set(
 
 vim.keymap.set(
   'n',
-  '<M-r> ',
+  '<M-r>',
   require('dap').run,
   {desc = 'Debug: Runs a new debug session'}
 )
 
 vim.keymap.set(
   'n',
-  '<leader>fb',
-  require('fzf-lua').dap_breakpoints,
-  {desc = 'Debug: Find breakpoints'}
+  '<M-c>',
+  require("dap").run_to_cursor,
+  {desc = "Debug: Run to Cursor"}
+)
+
+vim.keymap.set(
+  'n',
+  '<M-x>',
+  require("dap").terminate,
+  {desc = "Debug: Terminate"}
 )
 
 ------------------------------------------------------------------------------------------------------------------------

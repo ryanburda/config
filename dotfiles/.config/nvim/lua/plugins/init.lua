@@ -282,7 +282,15 @@ return {
     'mfussenegger/nvim-dap',
     dependencies = {
       {
-        "igorlfs/nvim-dap-view", opts = {}
+        "igorlfs/nvim-dap-view",
+        opts = {
+          winbar = {
+            controls = {
+              enabled = true,
+            },
+          },
+          switchbuf = "usetab",
+        }
       },
       {
         'theHamsta/nvim-dap-virtual-text',
