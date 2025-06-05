@@ -48,14 +48,14 @@ T.setup = function()
 
   -- Git branch global variable.
   local update_git_branch_group = vim.api.nvim_create_augroup("UpdateGitBranch", { clear = true })
-  vim.api.nvim_create_autocmd({"FocusGained", "BufWritePost", "BufWinEnter", "BufReadPost"}, {
+  vim.api.nvim_create_autocmd({"FocusGained", "BufWritePre", "BufWinEnter", "BufReadPost"}, {
     group = update_git_branch_group,
     callback = T.git_branch
   })
 
   -- Git status is dirty.
   local git_status_is_dirty_group = vim.api.nvim_create_augroup("GitStatusIsDirty", { clear = true })
-  vim.api.nvim_create_autocmd({"FocusGained", "BufWritePost", "BufWinEnter", "BufReadPost"} , {
+  vim.api.nvim_create_autocmd({"FocusGained", "BufWritePre", "BufWinEnter", "BufReadPost"} , {
     group = git_status_is_dirty_group,
     callback = T.git_status_is_dirty
   })
