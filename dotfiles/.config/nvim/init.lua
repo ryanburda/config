@@ -49,14 +49,15 @@ vim.opt.clipboard = 'unnamedplus'
 vim.opt.whichwrap = '<,>,h,l,[,]'
 vim.opt.timeoutlen = 1000
 vim.opt.updatetime = 250
---vim.opt.laststatus = 3
+vim.opt.laststatus = 3
 vim.opt.signcolumn = "yes"
 vim.opt.list = true
 ---@diagnostic disable-next-line: missing-fields
 vim.opt.listchars = { tab = '│ '}
 vim.opt.autoread = true
---vim.opt.winbar = '%t %m'
-vim.opt.statusline = [[%<%f %h%m%r%=%=  %{luaeval("require('trail_marker.extensions.info').info()")}  %l,%c%V]]
+vim.opt.winbar = '%f %h%m%r %=%l:%c %p%%'
+
+vim.opt.statusline = [[%<%{luaeval("require('statusline').git_branch()")} %{luaeval("require('statusline').git_status()")} %= %{luaeval("require('trail_marker.extensions.info').info()")}]]
 
 vim.cmd('set noshowmode')
 vim.cmd('set noswapfile')
