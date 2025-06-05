@@ -55,9 +55,9 @@ vim.opt.list = true
 ---@diagnostic disable-next-line: missing-fields
 vim.opt.listchars = { tab = '│ '}
 vim.opt.autoread = true
-vim.opt.winbar = '%f %h%m%r %=%l:%c %p%%'
-
-vim.opt.statusline = [[%<%{luaeval("require('statusline').git_branch()")} %{luaeval("require('statusline').git_status()")} %= %{luaeval("require('trail_marker.extensions.info').info()")}]]
+vim.opt.winbar = [[%<%f %h%m%r %=%{luaeval("require('statusline').lsp_diagnostics()")} %l:%c]]
+require('statusline').setup()
+vim.opt.statusline = [[%<%{luaeval("require('statusline').get_git_branch()")} %{luaeval("require('statusline').get_git_status_is_dirty()")} %= %{luaeval("require('trail_marker.extensions.info').info()")}]]
 
 vim.cmd('set noshowmode')
 vim.cmd('set noswapfile')
