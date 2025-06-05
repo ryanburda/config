@@ -1,21 +1,5 @@
 local T = {}
 
-T.lsp_diagnostics = function()
-  local bufnr = vim.api.nvim_get_current_buf()
-
-  local error_count = vim.diagnostic.count(bufnr, {severity = vim.diagnostic.severity.ERROR})[0]
-  if error_count == nil then
-    error_count = 0
-  end
-
-  local warning_count = vim.diagnostic.count(bufnr, {severity = vim.diagnostic.severity.WARN})[0]
-  if warning_count == nil then
-    warning_count = 0
-  end
-
-  return string.format('E:%d W:%d', error_count, warning_count)
-end
-
 T.git_branch = function()
     -- This command gets the current git branch name
     local handle = io.popen("git rev-parse --abbrev-ref HEAD 2>/dev/null")
@@ -77,6 +61,5 @@ T.get_git_status_is_dirty = function()
     return ""
   end
 end
-
 
 return T
