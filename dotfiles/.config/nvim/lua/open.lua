@@ -295,7 +295,7 @@ M.open = function()
               vim.api.nvim_buf_delete(t.buf_id, { force = false })
             end
           end
-          M.buffers()
+          M.open()
         end,
         ["ctrl-o"] = function(selected)
           if selected[1] ~= nil then
@@ -313,7 +313,7 @@ M.open = function()
             end
           end
 
-          M.buffers()
+          M.open()
         end
       },
       fzf_opts = {
