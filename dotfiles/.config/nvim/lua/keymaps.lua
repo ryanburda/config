@@ -646,8 +646,27 @@ vim.keymap.set(
 vim.keymap.set(
   'n',
   '<C-f>',
-  require('open').open,
-  { desc = 'Find: files and buffers' }
+  function()
+    -- Get a list of all buffer handles
+    local buffers = vim.api.nvim_list_bufs()
+    -- Initialize a count for open buffers
+    local open_buffer_count = 0
+    -- Iterate over each buffer handle
+    for _, buffer in ipairs(buffers) do
+      -- Check if the buffer is loaded
+      if vim.api.nvim_buf_is_loaded(buffer) then
+        -- Increment the count if the buffer is valid (open)
+        open_buffer_count = open_buffer_count + 1
+      end
+    end
+
+    if open_buffer_count > 1 then
+      require('fzf-lua').buffers()
+    else
+      require('fzf-lua').files()
+    end
+  end,
+  { desc = 'Find: buffers' }
 )
 
 vim.keymap.set(
