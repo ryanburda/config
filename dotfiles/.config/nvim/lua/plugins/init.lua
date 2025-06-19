@@ -86,23 +86,11 @@ return {
         fzf_opts = {
           ['--cycle'] = true,
         },
-        buffers = {
-          actions = {
-            ["ctrl-f"] = function(_, opts)
-              local query = opts.query or ""
-              require('fzf-lua').files({
-                query = query
-              })
-            end
-          },
-        },
         files = {
           actions = {
             ["ctrl-f"] = function(_, opts)
               local query = opts.query or ""
-              require('fzf-lua').buffers({
-                query = query
-              })
+              require('bufs').buffers()  -- TODO: make this take the current query.
             end
           },
         },
@@ -256,9 +244,12 @@ return {
             ['ctrl-d'] = 'preview-page-down',
             ['ctrl-k'] = 'select-all+accept',
           },
-
         },
       })
+
+      -- custom buffer
+      require('bufs').setup()
+
     end,
   },
 
