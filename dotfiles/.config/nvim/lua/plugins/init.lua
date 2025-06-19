@@ -86,6 +86,26 @@ return {
         fzf_opts = {
           ['--cycle'] = true,
         },
+        buffers = {
+          actions = {
+            ["ctrl-f"] = function(_, opts)
+              local query = opts.query or ""
+              require('fzf-lua').files({
+                query = query
+              })
+            end
+          },
+        },
+        files = {
+          actions = {
+            ["ctrl-f"] = function(_, opts)
+              local query = opts.query or ""
+              require('fzf-lua').buffers({
+                query = query
+              })
+            end
+          },
+        },
         grep = {
           rg_opts = "--hidden --column --line-number --no-heading --color=always --smart-case --glob=!.git",
         },
@@ -239,9 +259,6 @@ return {
 
         },
       })
-
-      -- custom buffer/file picker
-      require('open').setup()
     end,
   },
 
