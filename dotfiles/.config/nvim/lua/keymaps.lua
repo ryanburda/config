@@ -192,7 +192,7 @@ vim.keymap.set(
 )
 
 vim.keymap.set(
-  {'n', 'v'},
+  'n',
   "<leader>gl",
   function()
     require('gitlinker').get_buf_range_url('n')
@@ -201,10 +201,28 @@ vim.keymap.set(
 )
 
 vim.keymap.set(
-  {'n', 'v'},
+  'v',
+  "<leader>gl",
+  function()
+    require('gitlinker').get_buf_range_url('v')
+  end,
+  {desc = "Diff: Github link of current location in buffer"}
+)
+
+vim.keymap.set(
+  'n',
   "<leader>gh",
   function()
     require('gitlinker').get_buf_range_url('n', {action_callback = require('gitlinker.actions').open_in_browser})
+  end,
+  {desc = "Diff: Open Github in browser to current location in buffer"}
+)
+
+vim.keymap.set(
+  'v',
+  "<leader>gh",
+  function()
+    require('gitlinker').get_buf_range_url('v', {action_callback = require('gitlinker.actions').open_in_browser})
   end,
   {desc = "Diff: Open Github in browser to current location in buffer"}
 )
