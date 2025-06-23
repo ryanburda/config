@@ -16,7 +16,9 @@
 local fzf_utils = require("fzf-lua.utils")
 local devicons = require("nvim-web-devicons")
 
-local function get_last_cursor_position(bufnr)
+local M = {}
+
+M.get_last_cursor_position = function(bufnr)
   if vim.b[bufnr] and vim.b[bufnr].last_cursor_position then
     return vim.b[bufnr].last_cursor_position
   else
@@ -24,18 +26,7 @@ local function get_last_cursor_position(bufnr)
   end
 end
 
-local function pad_string(input_string, num_characters)
-  local length = #input_string
-
-  while length < num_characters do
-    input_string = input_string .. " "
-    length = length + 1
-  end
-
-  return input_string
-end
-
-local function parse_entry(str)
+M.parse_entry = function(str)
   if str then
     local buf_id, path, row, col, fzf_display_string = str:match("([^:]+)|([^:]+)|([^:]+)|([^:]+)|([^:]+)")
 
@@ -49,7 +40,7 @@ local function parse_entry(str)
   end
 end
 
-local function get_previewer()
+M.get_previewer = function()
   local builtin = require("fzf-lua.previewer.builtin")
 
   local previewer = builtin.buffer_or_file:extend()
@@ -61,7 +52,7 @@ local function get_previewer()
   end
 
   function previewer:parse_entry(entry_str)
-    local t = parse_entry(entry_str)
+    local t = M.parse_entry(entry_str)
     return {
       idx = t.buf_id,
       path = t.path,
@@ -71,6 +62,17 @@ local function get_previewer()
   end
 
   return previewer
+end
+
+M.pad_string = function(input_string, num_characters)
+  local length = #input_string
+
+  while length < num_characters do
+    input_string = input_string .. " "
+    length = length + 1
+  end
+
+  return input_string
 end
 
 local keymap_header = function(key, purpose)
@@ -85,9 +87,6 @@ local function get_header()
 
   return header
 end
-
-
-local M = {}
 
 M.setup = function()
   -- Cursor position autocommands.
@@ -162,7 +161,7 @@ M.get_bufs = function()
       end
 
       -- cursor position
-      local cursor_pos = get_last_cursor_position(t.buf_id)
+      local cursor_pos = M.get_last_cursor_position(t.buf_id)
       t.cursor_row = cursor_pos[1]
       t.cursor_col = cursor_pos[2]
       t.cursor_row_colored = fzf_utils.ansi_codes.yellow(tostring(t.cursor_row))
@@ -197,7 +196,7 @@ M.get_bufs = function()
       "%s %s %s %s %s:%s:%s [%s]",
       buf.icon,
       buf.buf_indicator,
-      pad_string(buf.path_leaf, max_file_name_length),
+      M.pad_string(buf.path_leaf, max_file_name_length),
       buf.is_modified_str,
       buf.relative_path,
       buf.cursor_row_colored,
@@ -220,8 +219,6 @@ M.get_bufs = function()
   return picker_strs
 end
 
-
-
 M.buffers = function(query)
   -- Call `get_bufs` before calling `fzf_exec`.
   -- This ensures that we preserve the current/alternate buffers before `fzf_exec` creates an unlisted buffer.
@@ -236,7 +233,7 @@ M.buffers = function(query)
     end,
     {
       prompt = "buffs>",
-      previewer = get_previewer(),
+      previewer = M.get_previewer(),
       query = query or "",
       actions = {
         ["default"] = function(selected)
@@ -246,7 +243,7 @@ M.buffers = function(query)
 
           local buffer = selected[1]
           if buffer then
-            local t = parse_entry(buffer)
+            local t = M.parse_entry(buffer)
             if t.buf_id then
               -- If the buffer exists, switch to it
               vim.api.nvim_set_current_buf(t.buf_id)
@@ -259,7 +256,7 @@ M.buffers = function(query)
         ["ctrl-x"] = function(selected)
           if selected[1] ~= nil then
             local buffer = selected[1]
-            local t = parse_entry(buffer)
+            local t = M.parse_entry(buffer)
             if t.buf_id then
               vim.api.nvim_buf_delete(t.buf_id, { force = false })
             end
@@ -269,13 +266,13 @@ M.buffers = function(query)
         ["ctrl-o"] = function(selected)
           if selected[1] ~= nil then
             local buffer = selected[1]
-            local t = parse_entry(buffer)
+            local t = M.parse_entry(buffer)
 
             -- get list of buffers
             local buffers = get_bufs()
 
             for _, buf in ipairs(buffers) do
-              local parsed_buf = parse_entry(buf)
+              local parsed_buf = M.parse_entry(buf)
               if t.buf_id ~= parsed_buf.buf_id then
                 vim.api.nvim_buf_delete(parsed_buf.buf_id, { force = false })
               end

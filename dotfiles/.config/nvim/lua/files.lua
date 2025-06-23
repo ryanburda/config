@@ -8,15 +8,19 @@ local function get_files()
   local result = handle:read("*a")
   handle:close()
 
-  local buffers = require('bufs').get_bufs()
   local files = {}
 
   for filename in string.gmatch(result, "[^\n]+") do
       table.insert(files, filename)
   end
 
-  local picker_strs = {}
+  local buffer_strs = require('bufs').get_bufs()
+  local buffers = {}
+  for _, buf_str in ipairs(buffer_strs) do
+    table.insert(buffers, require('bufs').parse_entry(buf_str))
+  end
 
+  local picker_strs = {}
   for _, path in ipairs(files) do
     -- icon
     local icon, hl = devicons.get_icon_color(path, nil, {default = true})
@@ -27,15 +31,15 @@ local function get_files()
     local display_path = path
 
     for _, buffer in ipairs(buffers) do
-      if buffer.path == vim.fn.fnamemodify(path, ':.') then
-        local cursor_row_colored = fzf_utils.ansi_codes.yellow(tostring(buffer.cursor_row))
-        local cursor_col_colored = fzf_utils.ansi_codes.cyan(tostring(buffer.cursor_col))
+      if vim.fn.fnamemodify(buffer.path, ':.') == path then
+        local cursor_row_colored = fzf_utils.ansi_codes.yellow(tostring(buffer.row))
+        local cursor_col_colored = fzf_utils.ansi_codes.cyan(tostring(buffer.col))
         local path_colored = fzf_utils.ansi_codes.cyan(path)
         display_path = string.format("%s:%s:%s [%s]", path_colored, cursor_row_colored, cursor_col_colored, buffer.buf_id)
 
-        buf_id = buffer.buf_id
-        row = buffer.cursor_row
-        col = buffer.cursor_col
+        buf_id = buffer.idx
+        row = buffer.line
+        col = buffer.col
 
         break
       end
