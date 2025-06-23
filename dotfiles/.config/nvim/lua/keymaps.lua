@@ -665,16 +665,8 @@ vim.keymap.set(
   'n',
   '<C-f>',
   function()
-    -- Get the count of open buffers.
-    local buffers = vim.api.nvim_list_bufs()
-    local open_buffer_count = 0
-    for _, buffer in ipairs(buffers) do
-      if vim.api.nvim_buf_is_loaded(buffer) then
-        open_buffer_count = open_buffer_count + 1
-      end
-    end
     -- Open buffers picker if you have a couple open. Otherwise open the files picker.
-    if open_buffer_count > 1 then
+    if #require('bufs').get_bufs() > 1 then
       require('bufs').buffers()
     else
       require('files').files()
