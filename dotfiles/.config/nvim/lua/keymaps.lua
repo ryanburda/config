@@ -19,7 +19,7 @@
 vim.keymap.set(
   'n',
   '<leader>q',
-  ':bd<cr>',
+  ':BufDel<cr>',
   {desc = 'close current buffer'}
 )
 

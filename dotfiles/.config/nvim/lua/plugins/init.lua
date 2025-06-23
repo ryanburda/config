@@ -36,6 +36,9 @@ return {
     end,
   },
 
+  -- Delete buffers without changing window layout.
+  'ojroques/nvim-bufdel',
+
   -- autoformat on save
   {
     'stevearc/conform.nvim',
