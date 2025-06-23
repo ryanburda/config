@@ -677,7 +677,7 @@ vim.keymap.set(
     if open_buffer_count > 1 then
       require('bufs').buffers()
     else
-      require('fzf-lua').files()
+      require('files').files()
     end
   end,
   { desc = 'Find: buffers' }

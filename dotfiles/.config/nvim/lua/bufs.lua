@@ -35,7 +35,97 @@ local function pad_string(input_string, num_characters)
   return input_string
 end
 
-local function get_bufs()
+local function parse_entry(str)
+  if str then
+    local buf_id, path, row, col, fzf_display_string = str:match("([^:]+)|([^:]+)|([^:]+)|([^:]+)|([^:]+)")
+
+    return {
+      buf_id = tonumber(buf_id),
+      path = path,
+      row = tonumber(row),
+      col = tonumber(col),
+      fzf_display_string = fzf_display_string
+    }
+  end
+end
+
+local function get_previewer()
+  local builtin = require("fzf-lua.previewer.builtin")
+
+  local previewer = builtin.buffer_or_file:extend()
+
+  function previewer:new(o, opts, fzf_win)
+    previewer.super.new(self, o, opts, fzf_win)
+    setmetatable(self, previewer)
+    return self
+  end
+
+  function previewer:parse_entry(entry_str)
+    local t = parse_entry(entry_str)
+    return {
+      idx = t.buf_id,
+      path = t.path,
+      line = t.row,
+      col = t.col,
+    }
+  end
+
+  return previewer
+end
+
+local keymap_header = function(key, purpose)
+  return string.format("<%s> to %s", fzf_utils.ansi_codes.yellow(key), fzf_utils.ansi_codes.red(purpose))
+end
+
+local function get_header()
+  local ctrl_f = keymap_header("ctrl-f", "file selector")
+  local ctrl_x = keymap_header("ctrl-x", "close buffer")
+  local ctrl_o = keymap_header("ctrl-o", "close all but selected buffer")
+  local header = string.format("  %s | %s | %s", ctrl_f, ctrl_x, ctrl_o)
+
+  return header
+end
+
+
+local M = {}
+
+M.setup = function()
+  -- Cursor position autocommands.
+  vim.api.nvim_create_augroup('SaveCursorPos', { clear = true })
+
+  -- Create an autocommand to update the last known cursor position
+  vim.api.nvim_create_autocmd({'CursorMoved', 'BufReadPost'}, {
+    group = 'SaveCursorPos',
+    pattern = '*',
+    callback = function()
+      -- Get the current buffer number and the cursor position
+      local bufnr = vim.api.nvim_get_current_buf()
+      local cursor_position = vim.api.nvim_win_get_cursor(0)
+
+      -- Save the cursor position to a buffer variable
+      vim.b[bufnr].last_cursor_position = cursor_position
+    end,
+  })
+
+  -- Buffer entered ts autocommands.
+  vim.api.nvim_create_augroup('EnterTs', { clear = true })
+
+  -- Create an autocommand to update the last entered timestamp
+  vim.api.nvim_create_autocmd({'BufEnter'}, {
+    group = 'EnterTs',
+    pattern = '*',
+    callback = function()
+      -- Get the current buffer number and the cursor position
+      local bufnr = vim.api.nvim_get_current_buf()
+
+      -- Save enter ts to a buffer variable
+      vim.b[bufnr].last_entered_ts = os.time()
+    end,
+  })
+
+end
+
+M.get_bufs = function()
   local bufs = {}
 
   -- Get the list of buffer IDs
@@ -130,100 +220,12 @@ local function get_bufs()
   return picker_strs
 end
 
-local function parse_entry(str)
-  if str then
-    local buf_id, path, row, col, fzf_display_string = str:match("([^:]+)|([^:]+)|([^:]+)|([^:]+)|([^:]+)")
-
-    return {
-      buf_id = tonumber(buf_id),
-      path = path,
-      row = tonumber(row),
-      col = tonumber(col),
-      fzf_display_string = fzf_display_string
-    }
-  end
-end
-
-local function get_previewer()
-  local builtin = require("fzf-lua.previewer.builtin")
-
-  local previewer = builtin.buffer_or_file:extend()
-
-  function previewer:new(o, opts, fzf_win)
-    previewer.super.new(self, o, opts, fzf_win)
-    setmetatable(self, previewer)
-    return self
-  end
-
-  function previewer:parse_entry(entry_str)
-    local t = parse_entry(entry_str)
-    return {
-      idx = t.buf_id,
-      path = t.path,
-      line = t.row,
-      col = t.col,
-    }
-  end
-
-  return previewer
-end
-
-local keymap_header = function(key, purpose)
-  return string.format("<%s> to %s", fzf_utils.ansi_codes.yellow(key), fzf_utils.ansi_codes.red(purpose))
-end
-
-local function get_header()
-  local ctrl_f = keymap_header("ctrl-f", "file selector")
-  local ctrl_x = keymap_header("ctrl-x", "close buffer")
-  local ctrl_o = keymap_header("ctrl-o", "close all but selected buffer")
-  local header = string.format("  %s | %s | %s", ctrl_f, ctrl_x, ctrl_o)
-
-  return header
-end
 
 
-local M = {}
-
-M.setup = function()
-  -- Cursor position autocommands.
-  vim.api.nvim_create_augroup('SaveCursorPos', { clear = true })
-
-  -- Create an autocommand to update the last known cursor position
-  vim.api.nvim_create_autocmd({'CursorMoved', 'BufReadPost'}, {
-    group = 'SaveCursorPos',
-    pattern = '*',
-    callback = function()
-      -- Get the current buffer number and the cursor position
-      local bufnr = vim.api.nvim_get_current_buf()
-      local cursor_position = vim.api.nvim_win_get_cursor(0)
-
-      -- Save the cursor position to a buffer variable
-      vim.b[bufnr].last_cursor_position = cursor_position
-    end,
-  })
-
-  -- Buffer entered ts autocommands.
-  vim.api.nvim_create_augroup('EnterTs', { clear = true })
-
-  -- Create an autocommand to update the last entered timestamp
-  vim.api.nvim_create_autocmd({'BufEnter'}, {
-    group = 'EnterTs',
-    pattern = '*',
-    callback = function()
-      -- Get the current buffer number and the cursor position
-      local bufnr = vim.api.nvim_get_current_buf()
-
-      -- Save enter ts to a buffer variable
-      vim.b[bufnr].last_entered_ts = os.time()
-    end,
-  })
-
-end
-
-M.buffers = function()
+M.buffers = function(query)
   -- Call `get_bufs` before calling `fzf_exec`.
   -- This ensures that we preserve the current/alternate buffers before `fzf_exec` creates an unlisted buffer.
-  local bufs = get_bufs()
+  local bufs = M.get_bufs()
 
   require("fzf-lua").fzf_exec(
     function(cb)
@@ -233,8 +235,9 @@ M.buffers = function()
       cb()
     end,
     {
-      prompt = "buf > ",
+      prompt = "buffs>",
       previewer = get_previewer(),
+      query = query or "",
       actions = {
         ["default"] = function(selected)
           if selected[1] == nil then
@@ -281,9 +284,7 @@ M.buffers = function()
         end,
         ["ctrl-l"] = function(_, opts)
             local query = opts.query or ""
-            require('fzf-lua').files({
-              query = query
-            })
+            require('files').files(query)
         end,
       },
       fzf_opts = {
