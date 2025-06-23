@@ -1,4 +1,4 @@
--- `:FzfLua buffers` buf shows leaf of path first
+-- `:FzfLua buffers` but shows leaf of path first
 --
 -- Example usage
 -- ```lua
@@ -16,7 +16,9 @@
 local fzf_utils = require("fzf-lua.utils")
 local devicons = require("nvim-web-devicons")
 
-local function get_last_cursor_position(bufnr)
+local M = {}
+
+M.get_last_cursor_position = function(bufnr)
   if vim.b[bufnr] and vim.b[bufnr].last_cursor_position then
     return vim.b[bufnr].last_cursor_position
   else
@@ -24,113 +26,7 @@ local function get_last_cursor_position(bufnr)
   end
 end
 
-local function pad_string(input_string, num_characters)
-  local length = #input_string
-
-  while length < num_characters do
-    input_string = input_string .. " "
-    length = length + 1
-  end
-
-  return input_string
-end
-
-local function get_bufs()
-  local bufs = {}
-
-  -- Get the list of buffer IDs
-  local buffer_ids = vim.api.nvim_list_bufs()
-
-  local max_file_name_length = 0
-
-  -- Loop through each buffer ID to get additional information.
-  for _, buf_id in ipairs(buffer_ids) do
-    local path = vim.api.nvim_buf_get_name(buf_id)
-    local is_listed = vim.api.nvim_buf_get_option(buf_id, "buflisted")
-    local is_loaded = vim.api.nvim_buf_is_loaded(buf_id)
-
-    -- Check if the buffer is loaded and has a file path
-    if is_listed and is_loaded and path ~= "" then
-      local t = {}
-
-      t.buf_id = buf_id
-      t.path = path
-
-      -- path
-      t.relative_path = vim.fn.fnamemodify(path, ':.')
-      t.path_leaf = fzf_utils.ansi_codes.cyan(path:match("([^/\\]+)$"))
-
-      if #t.path_leaf > max_file_name_length then
-        max_file_name_length = #t.path_leaf
-      end
-
-      t.buf_indicator = " "
-      if t.buf_id == vim.fn.bufnr('%') then
-        t.buf_indicator = fzf_utils.ansi_codes.red('%')
-      elseif t.buf_id == vim.fn.bufnr('#') then
-        t.buf_indicator = fzf_utils.ansi_codes.yellow('#')
-      end
-
-      -- cursor position
-      local cursor_pos = get_last_cursor_position(t.buf_id)
-      t.cursor_row = cursor_pos[1]
-      t.cursor_col = cursor_pos[2]
-      t.cursor_row_colored = fzf_utils.ansi_codes.yellow(tostring(t.cursor_row))
-      t.cursor_col_colored = fzf_utils.ansi_codes.cyan(tostring(t.cursor_col))
-
-      -- dirty
-      local is_modified = vim.api.nvim_buf_get_option(buf_id, 'modified')
-      t.is_modified_str = " "
-      if is_modified then
-        t.is_modified_str = "+"
-      end
-
-      -- icon
-      local icon, hl = devicons.get_icon_color(path, nil, {default = true})
-      t.icon = fzf_utils.ansi_from_rgb(hl, icon)
-
-      table.insert(bufs, t)
-    end
-  end
-
-  -- Sort alphabetically by file name.
-  -- table.sort(bufs, function(a, b) return a.path_leaf < b.path_leaf end)
-  -- Sort by bufnr (order buffers were opened)
-  -- table.sort(bufs, function(a, b) return a.buf_id < b.buf_id end)
-  -- Sort by last used
-  table.sort(bufs, function(a, b) return vim.b[a.buf_id].last_entered_ts > vim.b[b.buf_id].last_entered_ts end)
-
-  local picker_strs = {}
-
-  for _, buf in ipairs(bufs) do
-    local fzf_display_string = string.format(
-      "%s %s %s %s %s:%s:%s [%s]",
-      buf.icon,
-      buf.buf_indicator,
-      pad_string(buf.path_leaf, max_file_name_length),
-      buf.is_modified_str,
-      buf.relative_path,
-      buf.cursor_row_colored,
-      buf.cursor_col_colored,
-      tostring(buf.buf_id)
-    )
-
-    local fzf_full_string = string.format(
-      "%s|%s|%s|%s|%s",
-      tostring(buf.buf_id),
-      buf.path,
-      buf.cursor_row,
-      buf.cursor_col,
-      fzf_display_string
-    )
-
-    table.insert(picker_strs, fzf_full_string)
-  end
-
-  return picker_strs
-end
-
-local function parse_entry(str)
+M.parse_entry = function(str)
   if str then
     local buf_id, path, row, col, fzf_display_string = str:match("([^:]+)|([^:]+)|([^:]+)|([^:]+)|([^:]+)")
 
@@ -144,7 +40,7 @@ local function parse_entry(str)
   end
 end
 
-local function get_previewer()
+M.get_previewer = function()
   local builtin = require("fzf-lua.previewer.builtin")
 
   local previewer = builtin.buffer_or_file:extend()
@@ -156,7 +52,7 @@ local function get_previewer()
   end
 
   function previewer:parse_entry(entry_str)
-    local t = parse_entry(entry_str)
+    local t = M.parse_entry(entry_str)
     return {
       idx = t.buf_id,
       path = t.path,
@@ -168,21 +64,29 @@ local function get_previewer()
   return previewer
 end
 
+M.pad_string = function(input_string, num_characters)
+  local length = #input_string
+
+  while length < num_characters do
+    input_string = input_string .. " "
+    length = length + 1
+  end
+
+  return input_string
+end
+
 local keymap_header = function(key, purpose)
   return string.format("<%s> to %s", fzf_utils.ansi_codes.yellow(key), fzf_utils.ansi_codes.red(purpose))
 end
 
 local function get_header()
-  local ctrl_f = keymap_header("ctrl-f", "file selector")
+  local ctrl_l = keymap_header("ctrl-l", "file selector")
   local ctrl_x = keymap_header("ctrl-x", "close buffer")
   local ctrl_o = keymap_header("ctrl-o", "close all but selected buffer")
-  local header = string.format("  %s | %s | %s", ctrl_f, ctrl_x, ctrl_o)
+  local header = string.format("  %s | %s | %s", ctrl_l, ctrl_x, ctrl_o)
 
   return header
 end
-
-
-local M = {}
 
 M.setup = function()
   -- Cursor position autocommands.
@@ -220,10 +124,105 @@ M.setup = function()
 
 end
 
-M.buffers = function()
+M.get_bufs = function()
+  local bufs = {}
+
+  -- Get the list of buffer IDs
+  local buffer_ids = vim.api.nvim_list_bufs()
+
+  local max_file_name_length = 0
+
+  -- Loop through each buffer ID to get additional information.
+  for _, buf_id in ipairs(buffer_ids) do
+    local path = vim.api.nvim_buf_get_name(buf_id)
+    local is_listed = vim.api.nvim_buf_get_option(buf_id, "buflisted")
+    local is_loaded = vim.api.nvim_buf_is_loaded(buf_id)
+
+    -- Check if the buffer is loaded and has a file path
+    if is_listed and is_loaded and path ~= "" then
+      local t = {}
+
+      t.buf_id = buf_id
+      t.path = path
+
+      -- path
+      t.relative_path = vim.fn.fnamemodify(path, ':.')
+      t.path_leaf = fzf_utils.ansi_codes.cyan(path:match("([^/\\]+)$"))
+
+      if #t.path_leaf > max_file_name_length then
+        max_file_name_length = #t.path_leaf
+      end
+
+      t.buf_indicator = " "
+      if t.buf_id == vim.fn.bufnr('%') then
+        t.buf_indicator = fzf_utils.ansi_codes.red('%')
+      elseif t.buf_id == vim.fn.bufnr('#') then
+        t.buf_indicator = fzf_utils.ansi_codes.yellow('#')
+      end
+
+      -- cursor position
+      local cursor_pos = M.get_last_cursor_position(t.buf_id)
+      t.cursor_row = cursor_pos[1]
+      t.cursor_col = cursor_pos[2]
+      t.cursor_row_colored = fzf_utils.ansi_codes.yellow(tostring(t.cursor_row))
+      t.cursor_col_colored = fzf_utils.ansi_codes.cyan(tostring(t.cursor_col))
+
+      -- dirty
+      local is_modified = vim.api.nvim_buf_get_option(buf_id, 'modified')
+      t.is_modified_str = " "
+      if is_modified then
+        t.is_modified_str = "+"
+      end
+
+      -- icon
+      local icon, hl = devicons.get_icon_color(path, nil, {default = true})
+      t.icon = fzf_utils.ansi_from_rgb(hl, icon)
+
+      table.insert(bufs, t)
+    end
+  end
+
+  -- Sort alphabetically by file name.
+  -- table.sort(bufs, function(a, b) return a.path_leaf < b.path_leaf end)
+  -- Sort by bufnr (order buffers were opened)
+  -- table.sort(bufs, function(a, b) return a.buf_id < b.buf_id end)
+  -- Sort by last used
+  table.sort(bufs, function(a, b) return vim.b[a.buf_id].last_entered_ts > vim.b[b.buf_id].last_entered_ts end)
+
+  local picker_strs = {}
+
+  for _, buf in ipairs(bufs) do
+    local fzf_display_string = string.format(
+      "%s %s %s %s %s:%s:%s [%s]",
+      buf.icon,
+      buf.buf_indicator,
+      M.pad_string(buf.path_leaf, max_file_name_length),
+      buf.is_modified_str,
+      buf.relative_path,
+      buf.cursor_row_colored,
+      buf.cursor_col_colored,
+      tostring(buf.buf_id)
+    )
+
+    local fzf_full_string = string.format(
+      "%s|%s|%s|%s|%s",
+      tostring(buf.buf_id),
+      buf.path,
+      buf.cursor_row,
+      buf.cursor_col,
+      fzf_display_string
+    )
+
+    table.insert(picker_strs, fzf_full_string)
+  end
+
+  return picker_strs
+end
+
+M.buffers = function(query)
   -- Call `get_bufs` before calling `fzf_exec`.
   -- This ensures that we preserve the current/alternate buffers before `fzf_exec` creates an unlisted buffer.
-  local bufs = get_bufs()
+  local bufs = M.get_bufs()
 
   require("fzf-lua").fzf_exec(
     function(cb)
@@ -233,8 +232,9 @@ M.buffers = function()
       cb()
     end,
     {
-      prompt = "buf > ",
-      previewer = get_previewer(),
+      prompt = "  > ",
+      previewer = M.get_previewer(),
+      query = query or "",
       actions = {
         ["default"] = function(selected)
           if selected[1] == nil then
@@ -243,7 +243,7 @@ M.buffers = function()
 
           local buffer = selected[1]
           if buffer then
-            local t = parse_entry(buffer)
+            local t = M.parse_entry(buffer)
             if t.buf_id then
               -- If the buffer exists, switch to it
               vim.api.nvim_set_current_buf(t.buf_id)
@@ -256,7 +256,7 @@ M.buffers = function()
         ["ctrl-x"] = function(selected)
           if selected[1] ~= nil then
             local buffer = selected[1]
-            local t = parse_entry(buffer)
+            local t = M.parse_entry(buffer)
             if t.buf_id then
               vim.api.nvim_buf_delete(t.buf_id, { force = false })
             end
@@ -266,13 +266,13 @@ M.buffers = function()
         ["ctrl-o"] = function(selected)
           if selected[1] ~= nil then
             local buffer = selected[1]
-            local t = parse_entry(buffer)
+            local t = M.parse_entry(buffer)
 
             -- get list of buffers
-            local buffers = get_bufs()
+            local buffers = M.get_bufs()
 
             for _, buf in ipairs(buffers) do
-              local parsed_buf = parse_entry(buf)
+              local parsed_buf = M.parse_entry(buf)
               if t.buf_id ~= parsed_buf.buf_id then
                 vim.api.nvim_buf_delete(parsed_buf.buf_id, { force = false })
               end
@@ -281,9 +281,7 @@ M.buffers = function()
         end,
         ["ctrl-l"] = function(_, opts)
             local query = opts.query or ""
-            require('fzf-lua').files({
-              query = query
-            })
+            require('files').files(query)
         end,
       },
       fzf_opts = {
