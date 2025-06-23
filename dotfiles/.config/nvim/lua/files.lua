@@ -1,22 +1,4 @@
--- Personal take on a combination between `:FzfLua buffers` and `FzfLua files`.
---    * Buffers are shown at the top
---      * Shows leaf of file paths in its own column
---      * Orders buffers alphabetically based on leaf of path
---    * Files are shown below buffers
---
--- Example usage
--- ```lua
--- --run setup for autocommands
--- require('bufs').setup()
---
--- -- Create a keymap
--- vim.keymap.set(
---   'n',
---   '<C-f>',
---   require('bufs').buffers,
---   { desc = 'buffers' }
--- )
--- ```
+-- Personal take on `FzfLua files` that shows buffers in a different color.
 local fzf_utils = require("fzf-lua.utils")
 local devicons = require("nvim-web-devicons")
 
@@ -26,6 +8,7 @@ local function get_files()
   local result = handle:read("*a")
   handle:close()
 
+  local buffers = require('bufs').get_bufs()
   local files = {}
 
   for filename in string.gmatch(result, "[^\n]+") do
@@ -39,20 +22,27 @@ local function get_files()
     local icon, hl = devicons.get_icon_color(path, nil, {default = true})
     local icon_colored = fzf_utils.ansi_from_rgb(hl, icon)
 
-    local fzf_display_string = string.format(
-      "%s   %s",
-      icon_colored,
-      path
-    )
+    -- add buffer information if the file is currently open.
+    local buf_id, col, row = nil, nil, nil
+    local display_path = path
 
-    local fzf_full_string = string.format(
-      "%s|%s|%s|%s|%s",
-      nil,
-      path,
-      nil,
-      nil,
-      fzf_display_string
-    )
+    for _, buffer in ipairs(buffers) do
+      if buffer.path == vim.fn.fnamemodify(path, ':.') then
+        local cursor_row_colored = fzf_utils.ansi_codes.yellow(tostring(buffer.cursor_row))
+        local cursor_col_colored = fzf_utils.ansi_codes.cyan(tostring(buffer.cursor_col))
+        local path_colored = fzf_utils.ansi_codes.cyan(path)
+        display_path = string.format("%s:%s:%s [%s]", path_colored, cursor_row_colored, cursor_col_colored, buffer.buf_id)
+
+        buf_id = buffer.buf_id
+        row = buffer.cursor_row
+        col = buffer.cursor_col
+
+        break
+      end
+    end
+
+    local fzf_display_string = string.format("%s %s", icon_colored, display_path)
+    local fzf_full_string = string.format("%s|%s|%s|%s|%s", path, buf_id, row, col, fzf_display_string)
 
     table.insert(picker_strs, fzf_full_string)
   end
@@ -63,11 +53,11 @@ end
 
 local function parse_entry(str)
   if str then
-    local buf_id, path, row, col, fzf_display_string = str:match("([^:]+)|([^:]+)|([^:]+)|([^:]+)|([^:]+)")
+    local path, buf_id, row, col, fzf_display_string = str:match("([^:]+)|([^:]+)|([^:]+)|([^:]+)|([^:]+)")
 
     return {
-      buf_id = tonumber(buf_id),
       path = path,
+      buf_id = tonumber(buf_id),
       row = tonumber(row),
       col = tonumber(col),
       fzf_display_string = fzf_display_string
@@ -102,19 +92,12 @@ end
 local M = {}
 
 M.files = function(query)
-  -- Call `get_bufs` before calling `fzf_exec`.
-  -- This ensures that we preserve the current/alternate buffers before `fzf_exec` creates an unlisted buffer.
-  local bufs = require('bufs').get_bufs()
   local files = get_files()
-
-  for i = 1, #files do
-      table.insert(bufs, files[i])
-  end
 
   require("fzf-lua").fzf_exec(
     function(cb)
-      for _, buf in ipairs(bufs) do
-        cb(buf)
+      for _, file in ipairs(files) do
+        cb(file)
       end
       cb()
     end,
@@ -128,9 +111,9 @@ M.files = function(query)
             return
           end
 
-          local buffer = selected[1]  -- TOOD: rename this since this contains both buffers and files.
-          if buffer then
-            local t = parse_entry(buffer)
+          local path = selected[1]
+          if path then
+            local t = parse_entry(path)
             if t.buf_id then
               -- If the buffer exists, switch to it
               vim.api.nvim_set_current_buf(t.buf_id)
@@ -139,41 +122,6 @@ M.files = function(query)
               vim.cmd('edit ' .. vim.fn.fnameescape(t.path))
             end
           end
-        end,
-        ["ctrl-x"] = function(selected)
-          if selected[1] ~= nil then
-            local buffer = selected[1]
-            local t = parse_entry(buffer)
-            if t.buf_id then
-              vim.api.nvim_buf_delete(t.buf_id, { force = false })
-            end
-          end
-          M.buffers()
-        end,
-        ["ctrl-g"] = function()
-          local alt_bufnr = vim.fn.bufnr('#')
-
-          if alt_bufnr ~= -1 then
-            vim.api.nvim_set_current_buf(alt_bufnr)
-          end
-        end,
-        ["ctrl-o"] = function(selected)
-          if selected[1] ~= nil then
-            local buffer = selected[1]
-            local t = parse_entry(buffer)
-
-            -- get list of buffers
-            local buffers = get_bufs()
-
-            for _, buf in ipairs(buffers) do
-              local parsed_buf = parse_entry(buf)
-              if t.buf_id ~= parsed_buf.buf_id then
-                vim.api.nvim_buf_delete(parsed_buf.buf_id, { force = false })
-              end
-            end
-          end
-
-          M.buffers()
         end,
         ["ctrl-l"] = function(_, opts)
             local query = opts.query or ""
