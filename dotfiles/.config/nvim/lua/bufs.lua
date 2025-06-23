@@ -279,7 +279,7 @@ M.buffers = function()
             end
           end
         end,
-        ["ctrl-f"] = function(_, opts)
+        ["ctrl-l"] = function(_, opts)
             local query = opts.query or ""
             require('fzf-lua').files({
               query = query

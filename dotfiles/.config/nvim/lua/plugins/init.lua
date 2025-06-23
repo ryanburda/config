@@ -91,7 +91,7 @@ return {
         },
         files = {
           actions = {
-            ["ctrl-f"] = function(_, opts)
+            ["ctrl-l"] = function(_, opts)
               local query = opts.query or ""
               require('bufs').buffers()  -- TODO: make this take the current query.
             end
