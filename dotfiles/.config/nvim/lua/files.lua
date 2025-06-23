@@ -106,7 +106,7 @@ M.files = function(query)
       cb()
     end,
     {
-      prompt = "files>",
+      prompt = "  > ",
       previewer = get_previewer(),
       query = query or "",
       actions = {

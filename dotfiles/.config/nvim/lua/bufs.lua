@@ -232,7 +232,7 @@ M.buffers = function(query)
       cb()
     end,
     {
-      prompt = "buffs>",
+      prompt = "  > ",
       previewer = M.get_previewer(),
       query = query or "",
       actions = {
