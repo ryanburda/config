@@ -80,10 +80,10 @@ local keymap_header = function(key, purpose)
 end
 
 local function get_header()
-  local ctrl_f = keymap_header("ctrl-f", "file selector")
+  local ctrl_l = keymap_header("ctrl-l", "file selector")
   local ctrl_x = keymap_header("ctrl-x", "close buffer")
   local ctrl_o = keymap_header("ctrl-o", "close all but selected buffer")
-  local header = string.format("  %s | %s | %s", ctrl_f, ctrl_x, ctrl_o)
+  local header = string.format("  %s | %s | %s", ctrl_l, ctrl_x, ctrl_o)
 
   return header
 end
@@ -269,7 +269,7 @@ M.buffers = function(query)
             local t = M.parse_entry(buffer)
 
             -- get list of buffers
-            local buffers = get_bufs()
+            local buffers = M.get_bufs()
 
             for _, buf in ipairs(buffers) do
               local parsed_buf = M.parse_entry(buf)
