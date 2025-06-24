@@ -64,17 +64,6 @@ M.get_previewer = function()
   return previewer
 end
 
-M.pad_string = function(input_string, num_characters)
-  local length = #input_string
-
-  while length < num_characters do
-    input_string = input_string .. " "
-    length = length + 1
-  end
-
-  return input_string
-end
-
 local keymap_header = function(key, purpose)
   return string.format("<%s> to %s", fzf_utils.ansi_codes.yellow(key), fzf_utils.ansi_codes.red(purpose))
 end
@@ -83,7 +72,7 @@ local function get_header()
   local ctrl_l = keymap_header("ctrl-l", "file selector")
   local ctrl_x = keymap_header("ctrl-x", "close buffer")
   local ctrl_o = keymap_header("ctrl-o", "close all but selected buffer")
-  local header = string.format("  %s | %s | %s", ctrl_l, ctrl_x, ctrl_o)
+  local header = string.format("%s | %s | %s", ctrl_l, ctrl_x, ctrl_o)
 
   return header
 end
@@ -165,7 +154,7 @@ M.get_bufs = function()
       t.cursor_row = cursor_pos[1]
       t.cursor_col = cursor_pos[2]
       t.cursor_row_colored = fzf_utils.ansi_codes.yellow(tostring(t.cursor_row))
-      t.cursor_col_colored = fzf_utils.ansi_codes.cyan(tostring(t.cursor_col))
+      t.cursor_col_colored = fzf_utils.ansi_codes.green(tostring(t.cursor_col))
 
       -- dirty
       local is_modified = vim.api.nvim_buf_get_option(buf_id, 'modified')
@@ -193,12 +182,11 @@ M.get_bufs = function()
 
   for _, buf in ipairs(bufs) do
     local fzf_display_string = string.format(
-      "%s %s %s %s %s:%s:%s [%s]",
+      "%s %s %s %s:%s:%s [%s]",
       buf.icon,
       buf.buf_indicator,
-      M.pad_string(buf.path_leaf, max_file_name_length),
       buf.is_modified_str,
-      buf.relative_path,
+      fzf_utils.ansi_codes.cyan(buf.relative_path),
       buf.cursor_row_colored,
       buf.cursor_col_colored,
       tostring(buf.buf_id)

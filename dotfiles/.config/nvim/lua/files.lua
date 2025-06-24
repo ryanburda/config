@@ -33,7 +33,7 @@ local function get_files()
     for _, buffer in ipairs(buffers) do
       if vim.fn.fnamemodify(buffer.path, ':.') == path then
         local cursor_row_colored = fzf_utils.ansi_codes.yellow(tostring(buffer.row))
-        local cursor_col_colored = fzf_utils.ansi_codes.cyan(tostring(buffer.col))
+        local cursor_col_colored = fzf_utils.ansi_codes.green(tostring(buffer.col))
         local path_colored = fzf_utils.ansi_codes.cyan(path)
         display_path = string.format("%s:%s:%s [%s]", path_colored, cursor_row_colored, cursor_col_colored, buffer.buf_id)
 
@@ -93,6 +93,17 @@ local function get_previewer()
   return previewer
 end
 
+local keymap_header = function(key, purpose)
+  return string.format("<%s> to %s", fzf_utils.ansi_codes.yellow(key), fzf_utils.ansi_codes.red(purpose))
+end
+
+local function get_header()
+  local ctrl_l = keymap_header("ctrl-l", "buffer selector")
+  local header = string.format("%s", ctrl_l)
+
+  return header
+end
+
 local M = {}
 
 M.files = function(query)
@@ -135,6 +146,7 @@ M.files = function(query)
       fzf_opts = {
         ["--delimiter"] = "|",
         ["--with-nth"] = "5",
+        ["--header"] = get_header(),
       },
     }
   )
