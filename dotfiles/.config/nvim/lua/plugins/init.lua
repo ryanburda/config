@@ -93,7 +93,15 @@ return {
           actions = {
             ["ctrl-l"] = function(_, opts)
               local query = opts.query or ""
-              require('bufs').buffers()  -- TODO: make this take the current query.
+              require('fzf-lua').buffers({query=query})
+            end
+          },
+        },
+        buffers = {
+          actions = {
+            ["ctrl-l"] = function(_, opts)
+              local query = opts.query or ""
+              require('fzf-lua').files({query=query})
             end
           },
         },

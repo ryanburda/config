@@ -31,7 +31,7 @@ local function get_files()
         local row_colored = fzf_utils.ansi_codes.yellow(tostring(buffer.row))
         local col_colored = fzf_utils.ansi_codes.green(tostring(buffer.col))
         local path_colored = fzf_utils.ansi_codes.cyan(path)
-        display_path = string.format("%s:%s:%s [%s]", path_colored, row_colored, col_colored, buffer.buf_id)
+        display_path = string.format("%s:%s:%s [%s] %s", path_colored, row_colored, col_colored, buffer.buf_id, buffer.is_modified_str)
 
         buf_id = buffer.buf_id
         row = buffer.row
