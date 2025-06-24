@@ -259,7 +259,7 @@ return {
       })
 
       -- custom buffer
-      require('bufs').setup()
+      -- require('bufs').setup()
 
     end,
   },

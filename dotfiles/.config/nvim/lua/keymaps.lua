@@ -665,14 +665,25 @@ vim.keymap.set(
   'n',
   '<C-f>',
   function()
+    local buffer_ids = vim.api.nvim_list_bufs()
+    local listed_and_loaded_buffers = {}
+
+    for _, buf_id in ipairs(buffer_ids) do
+      local is_listed = vim.api.nvim_buf_get_option(buf_id, "buflisted")
+      local is_loaded = vim.api.nvim_buf_is_loaded(buf_id)
+      if is_listed and is_loaded then
+        table.insert(listed_and_loaded_buffers, buf_id)
+      end
+    end
+
     -- Open buffers picker if you have a couple open. Otherwise open the files picker.
-    if #require('bufs').get_bufs() > 1 then
-      require('bufs').buffers()
+    if #listed_and_loaded_buffers > 1 then
+      require('fzf-lua').buffers()
     else
-      require('files').files()
+      require('fzf-lua').files()
     end
   end,
-  { desc = 'Find: buffers' }
+  { desc = 'Find: opens files or buffers picker depending on if there are any buffers open.' }
 )
 
 vim.keymap.set(
