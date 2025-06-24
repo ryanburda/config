@@ -113,7 +113,7 @@ M.setup = function()
 
 end
 
-M.get_bufs = function()
+M.get_bufs_table = function()
   local bufs = {}
 
   -- Get the list of buffer IDs
@@ -133,14 +133,7 @@ M.get_bufs = function()
 
       t.buf_id = buf_id
       t.path = path
-
-      -- path
       t.relative_path = vim.fn.fnamemodify(path, ':.')
-      t.path_leaf = fzf_utils.ansi_codes.cyan(path:match("([^/\\]+)$"))
-
-      if #t.path_leaf > max_file_name_length then
-        max_file_name_length = #t.path_leaf
-      end
 
       t.buf_indicator = " "
       if t.buf_id == vim.fn.bufnr('%') then
@@ -151,10 +144,8 @@ M.get_bufs = function()
 
       -- cursor position
       local cursor_pos = M.get_last_cursor_position(t.buf_id)
-      t.cursor_row = cursor_pos[1]
-      t.cursor_col = cursor_pos[2]
-      t.cursor_row_colored = fzf_utils.ansi_codes.yellow(tostring(t.cursor_row))
-      t.cursor_col_colored = fzf_utils.ansi_codes.green(tostring(t.cursor_col))
+      t.row = cursor_pos[1]
+      t.col = cursor_pos[2]
 
       -- dirty
       local is_modified = vim.api.nvim_buf_get_option(buf_id, 'modified')
@@ -171,8 +162,13 @@ M.get_bufs = function()
     end
   end
 
-  -- Sort alphabetically by file name.
-  -- table.sort(bufs, function(a, b) return a.path_leaf < b.path_leaf end)
+  return bufs
+end
+
+M.get_bufs = function()
+
+  local bufs = M.get_bufs_table()
+
   -- Sort by bufnr (order buffers were opened)
   -- table.sort(bufs, function(a, b) return a.buf_id < b.buf_id end)
   -- Sort by last used
@@ -187,8 +183,8 @@ M.get_bufs = function()
       buf.buf_indicator,
       buf.is_modified_str,
       fzf_utils.ansi_codes.cyan(buf.relative_path),
-      buf.cursor_row_colored,
-      buf.cursor_col_colored,
+      fzf_utils.ansi_codes.yellow(tostring(buf.row)),
+      fzf_utils.ansi_codes.green(tostring(buf.col)),
       tostring(buf.buf_id)
     )
 

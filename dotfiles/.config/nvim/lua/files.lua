@@ -14,11 +14,7 @@ local function get_files()
       table.insert(files, filename)
   end
 
-  local buffer_strs = require('bufs').get_bufs()
-  local buffers = {}
-  for _, buf_str in ipairs(buffer_strs) do
-    table.insert(buffers, require('bufs').parse_entry(buf_str))
-  end
+  local buffers = require('bufs').get_bufs_table()
 
   local picker_strs = {}
   for _, path in ipairs(files) do
@@ -32,13 +28,13 @@ local function get_files()
 
     for _, buffer in ipairs(buffers) do
       if vim.fn.fnamemodify(buffer.path, ':.') == path then
-        local cursor_row_colored = fzf_utils.ansi_codes.yellow(tostring(buffer.row))
-        local cursor_col_colored = fzf_utils.ansi_codes.green(tostring(buffer.col))
+        local row_colored = fzf_utils.ansi_codes.yellow(tostring(buffer.row))
+        local col_colored = fzf_utils.ansi_codes.green(tostring(buffer.col))
         local path_colored = fzf_utils.ansi_codes.cyan(path)
-        display_path = string.format("%s:%s:%s [%s]", path_colored, cursor_row_colored, cursor_col_colored, buffer.buf_id)
+        display_path = string.format("%s:%s:%s [%s]", path_colored, row_colored, col_colored, buffer.buf_id)
 
-        buf_id = buffer.idx
-        row = buffer.line
+        buf_id = buffer.buf_id
+        row = buffer.row
         col = buffer.col
 
         break
