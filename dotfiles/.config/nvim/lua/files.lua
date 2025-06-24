@@ -41,7 +41,7 @@ local function get_files()
       end
     end
 
-    local fzf_display_string = string.format("%s %s", icon_colored, display_path)
+    local fzf_display_string = string.format("%s   %s", icon_colored, display_path)
     local fzf_full_string = string.format("%s|%s|%s|%s|%s", path, buf_id, row, col, fzf_display_string)
 
     table.insert(picker_strs, fzf_full_string)
@@ -113,7 +113,7 @@ M.files = function(query)
       cb()
     end,
     {
-      prompt = "  > ",
+      prompt = " > ",
       previewer = get_previewer(),
       query = query or "",
       actions = {

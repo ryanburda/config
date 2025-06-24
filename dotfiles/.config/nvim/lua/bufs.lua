@@ -218,7 +218,7 @@ M.buffers = function(query)
       cb()
     end,
     {
-      prompt = "  > ",
+      prompt = " > ",
       previewer = M.get_previewer(),
       query = query or "",
       actions = {
