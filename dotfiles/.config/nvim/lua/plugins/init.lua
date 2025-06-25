@@ -21,6 +21,8 @@ return {
     config = function ()
       ---@diagnostic disable-next-line: missing-fields
       require('nvim-treesitter.configs').setup({
+        max_lines = 2,
+        multiline_threshold = 2,
         auto_install = true,
         highlight = {
           enable = true,
