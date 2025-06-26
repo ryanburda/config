@@ -115,3 +115,10 @@ require('keymaps')
 
 -- colorscheme
 require("colorscheme").setup()
+
+-- external integrations.
+-- the `integrations` directory is in the gitignore.
+-- project specific lua files should be symlinked to this directory so they can be executed when nvim starts.
+for _, f in pairs(vim.api.nvim_get_runtime_file("lua/plugins/integrations/*.lua", true)) do
+  dofile(f)
+end

@@ -5,7 +5,7 @@
 dotfiles/.config/ghostty/config
 
 # nvim
-nvim/plugin/*
+dotfiles/.config/nvim/lua/plugins/integrations/*.lua
 *en.utf-8.add.spl
 .luarc.json
 lazy-lock.json
