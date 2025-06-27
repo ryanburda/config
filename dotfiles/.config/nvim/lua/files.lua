@@ -95,7 +95,8 @@ end
 
 local function get_header()
   local ctrl_l = keymap_header("ctrl-l", "buffer selector")
-  local header = string.format("%s", ctrl_l)
+  local ctrl_s = keymap_header("ctrl-s", "recent files")
+  local header = string.format("%s | %s", ctrl_l, ctrl_s)
 
   return header
 end
@@ -137,6 +138,9 @@ M.files = function(query)
         ["ctrl-l"] = function(_, opts)
             local query = opts.query or ""
             require('bufs').buffers(query)
+        end,
+        ["ctrl-s"] = function(_, opts)
+            require('fzf-lua').oldfiles()
         end,
       },
       fzf_opts = {

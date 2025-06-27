@@ -99,6 +99,10 @@ return {
             ["ctrl-l"] = function(_, opts)
               local query = opts.query or ""
               require('fzf-lua').buffers({query=query})
+            end,
+            ["ctrl-s"] = function(_, opts)
+              local query = opts.query or ""
+              require('fzf-lua').oldfiles({query=query})
             end
           },
         },
@@ -107,6 +111,20 @@ return {
             ["ctrl-l"] = function(_, opts)
               local query = opts.query or ""
               require('fzf-lua').files({query=query})
+            end
+          },
+        },
+        oldfiles = {
+          prompt = "Recent files > ",
+          fzf_opts = {
+            ["--header"] = string.format("<%s> to %s",
+                                         require("fzf-lua.utils").ansi_codes.yellow("ctrl-s"),
+                                         require("fzf-lua.utils").ansi_codes.red("files selector"))
+          },
+          actions = {
+            ["ctrl-s"] = function(_, opts)
+              local query = opts.query or ""
+              require('files').files({query=query})
             end
           },
         },
