@@ -73,7 +73,6 @@ brew install --cask font-terminess-ttf-nerd-font
 brew install --cask 1password
 brew install --cask alfred
 brew install --cask blackhole-2ch
-brew install --cask boom
 brew install --cask ghostty
 brew install --cask google-chrome
 brew install --cask karabiner-elements
