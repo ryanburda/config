@@ -15,6 +15,24 @@ return {
   "rose-pine/neovim",
   "vague2k/vague.nvim",
 
+  {
+    'nvim-lualine/lualine.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    config = function()
+      require('lualine').setup({
+        options = {
+          icons_enabled = true,
+          theme = 'auto',
+          component_separators = { left = '', right = ''},
+          section_separators = { left = '', right = ''},
+        },
+        sections = {
+          lualine_z = { require('trail_marker.extensions.info').info, 'location', 'progress', },
+        },
+      })
+    end
+  },
+
   -- Treesitter
   {
     'nvim-treesitter/nvim-treesitter',
