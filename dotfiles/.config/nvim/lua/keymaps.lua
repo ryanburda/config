@@ -848,7 +848,7 @@ vim.keymap.set(
 
 vim.keymap.set(
   'n',
-  "<leader>fe",
+  "<leader>ff",
   require('oil').toggle_float,
   {desc = "File management"}
 )
