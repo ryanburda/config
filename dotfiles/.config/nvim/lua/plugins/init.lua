@@ -27,10 +27,10 @@ return {
           section_separators = { left = '', right = ''},
         },
         sections = {
-          lualine_c = {
-            {'filename', path = 1},
-          },
-          lualine_z = { require('trail_marker.extensions.info').info, 'location', 'progress', },
+          lualine_a = {},
+          lualine_c = { {'filename', path = 1}, },
+          lualine_x = {},
+          lualine_z = { require('trail_marker.extensions.info').info, 'location', },
         },
       })
     end
