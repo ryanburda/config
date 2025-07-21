@@ -336,7 +336,12 @@ return {
         file_panel = {
           win_config = {
             position = "bottom",
-            height = 16,
+            height = 12,
+          },
+        },
+        view = {
+          merge_tool = {
+            layout = "diff3_mixed",
           },
         },
         keymaps = {
