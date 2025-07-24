@@ -4,7 +4,7 @@
 # NOTE: must also uncomment last line.
 # zmodload zsh/zprof
 
-PROMPT="%B%F{cyan%}$(whoami) %B%F{green}%~"$'\n'"%F{cyan}󰅂 %b"
+PROMPT="%B%F{cyan%}$(whoami) %B%F{green}%~"$'\n%B%F{yellow}%D{%H:%M:%S} '"%F{cyan}󰅂 %b"
 
 export XDG_CONFIG_HOME=$HOME/.config
 
