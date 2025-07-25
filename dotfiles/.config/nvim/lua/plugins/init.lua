@@ -14,6 +14,7 @@ return {
   "EdenEast/nightfox.nvim",
   "rose-pine/neovim",
   "vague2k/vague.nvim",
+  "fcancelinha/nordern.nvim",
 
   {
     'nvim-lualine/lualine.nvim',
