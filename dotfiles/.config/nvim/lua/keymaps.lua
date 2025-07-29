@@ -525,7 +525,7 @@ vim.keymap.set(
   {"n", "v", "x"},
   '<leader>Rh',
   function()
-    require('tmux_nvim_nav').resize('h', 1)
+    require('tmux_nvim_nav').resize('h', 3)
   end,
   {desc = "Splits: resize left"}
 )
@@ -552,7 +552,7 @@ vim.keymap.set(
   {"n", "v", "x"},
   '<leader>Rl',
   function()
-    require('tmux_nvim_nav').resize('l', 1)
+    require('tmux_nvim_nav').resize('l', 3)
   end,
   {desc = "Splits: resize right"}
 )
