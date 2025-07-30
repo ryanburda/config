@@ -50,6 +50,13 @@ return {
           additional_vim_regex_highlighting = false,
         },
       })
+
+      -- Use json parser for avro files.
+      vim.filetype.add({
+        extension = {
+          avsc = "json",
+        },
+      })
     end
   },
   {
