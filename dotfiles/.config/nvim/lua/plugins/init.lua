@@ -105,9 +105,16 @@ return {
         show_hidden = true,
       },
       float = {
-        max_width = .8,
-        max_height = .8,
+        max_width = .9,
+        max_height = .9,
         preview_split = "below",
+      },
+      preview_win = {
+        preview_method = "load",
+      },
+      keymaps = {
+        ["<C-d>"] = "actions.preview_scroll_down",
+        ["<C-u>"] = "actions.preview_scroll_up",
       },
     },
     dependencies = { { "nvim-tree/nvim-web-devicons", opts = {} } },
