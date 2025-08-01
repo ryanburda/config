@@ -105,8 +105,8 @@ return {
         show_hidden = true,
       },
       float = {
-        max_width = 100,
-        max_height = 32,
+        max_width = .8,
+        max_height = .8,
         preview_split = "below",
       },
     },
