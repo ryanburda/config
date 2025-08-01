@@ -105,8 +105,8 @@ return {
         show_hidden = true,
       },
       float = {
-        max_width = .9,
-        max_height = .9,
+        max_width = .85,
+        max_height = .85,
         preview_split = "below",
       },
       preview_win = {
@@ -294,6 +294,8 @@ return {
         },
         winopts = {
           fullscreen = false,
+          width = 0.85,
+          height = 0.85,
           border = "rounded",
           backdrop = 100,
           preview = {
