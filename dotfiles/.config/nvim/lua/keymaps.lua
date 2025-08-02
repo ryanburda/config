@@ -479,6 +479,13 @@ vim.keymap.set(
   { desc = "Help: vim highlight groups" }
 )
 
+vim.keymap.set(
+  'n',
+  '<leader>i',
+  ':IBLToggle<cr>',
+  { desc = "Help: toggle line indentation guides" }
+)
+
 ------------------------------------------------------------------------------------------------------------------------
 -- Tmux
 ------------------------------------------------------------------------------------------------------------------------
@@ -767,7 +774,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     vim.keymap.set(
       'n',
-      '<leader>fS',
+      '<leader>fs',
       require('fzf-lua').lsp_document_symbols,
       {desc = 'Find: symbols in current document', buffer = event.buf}
     )
