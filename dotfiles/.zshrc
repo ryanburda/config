@@ -137,7 +137,7 @@ export PATH="$HOME/.rd/bin:$PATH"
 alias l="lsd -lah"
 alias s="tmux_session_select"
 alias cal="cal -A 1 -B 1"
-alias ai="aichat -s"
+alias ai="claude"
 alias rg="rg --hidden"
 
 # zshrc Extensions
