@@ -54,6 +54,16 @@ vim.opt.signcolumn = "yes"
 vim.opt.list = true
 ---@diagnostic disable-next-line: missing-fields
 vim.opt.listchars = { tab = '│ '}
+-- Thicker separator lines
+vim.opt.fillchars = {
+  horiz     = '━',
+  horizup   = '┻',
+  horizdown = '┳',
+  vert      = '┃',
+  vertleft  = '┫',
+  vertright = '┣',
+  verthoriz = '╋',
+}
 vim.opt.autoread = true
 vim.opt.winbar = '%t %m'
 --vim.opt.statusline = [[%<%f %h%m%r%=%=  %{luaeval("require('trail_marker.extensions.info').info()")}  %l,%c%V]]
