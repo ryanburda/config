@@ -65,7 +65,7 @@ vim.opt.fillchars = {
   verthoriz = '╋',
 }
 vim.opt.autoread = true
-vim.opt.winbar = '%t %m'
+vim.opt.winbar = '%=%m %t'
 --vim.opt.statusline = [[%<%f %h%m%r%=%=  %{luaeval("require('trail_marker.extensions.info').info()")}  %l,%c%V]]
 
 vim.cmd('set noshowmode')
