@@ -20,6 +20,7 @@ set_colorscheme() {
     #       - other scripts exist for handling colorscheme changes to other CLIs such as aichat and lazygit.
     typeset -A themes=(
         ['Dark - Everforest']="everforest,dark,Everforest Dark (Gogh)"
+        ['Dark - Darkearth']="darkearth,dark,Gruvbox Material (Gogh)"
         ['Dark - Gruvbox']="gruvbox-material,dark,Gruvbox Material (Gogh)"
         ['Dark - Nightfox-dusk']="duskfox,dark,duskfox"
         ['Dark - Nightfox-night']="nightfox,dark,nightfox"

@@ -15,6 +15,7 @@ return {
   "rose-pine/neovim",
   "vague2k/vague.nvim",
   "fcancelinha/nordern.nvim",
+  "ptdewey/darkearth-nvim",
 
   {
     'nvim-lualine/lualine.nvim',
