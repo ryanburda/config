@@ -96,7 +96,6 @@ function zvm_after_init() {
 }
 
 # FZF
-export FZF_DEFAULT_OPTS="--color=$(envget nvim_background)"
 export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
 export FZF_CTRL_T_OPTS="
   --preview 'bat -n --color=always {}' \
