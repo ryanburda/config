@@ -69,7 +69,7 @@ local keymap_header = function(key, purpose)
 end
 
 local function get_header()
-  local ctrl_l = keymap_header("ctrl-l", "file selector")
+  local ctrl_l = keymap_header("ctrl-f", "file selector")
   local ctrl_x = keymap_header("ctrl-x", "close buffer")
   local ctrl_o = keymap_header("ctrl-o", "close all but selected buffer")
   local header = string.format("%s | %s | %s", ctrl_l, ctrl_x, ctrl_o)
@@ -265,7 +265,7 @@ M.buffers = function(query)
             end
           end
         end,
-        ["ctrl-l"] = function(_, opts)
+        ["ctrl-f"] = function(_, opts)
             local query = opts.query or ""
             require('files').files(query)
         end,

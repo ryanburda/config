@@ -94,7 +94,7 @@ local keymap_header = function(key, purpose)
 end
 
 local function get_header()
-  local ctrl_l = keymap_header("ctrl-l", "buffer selector")
+  local ctrl_l = keymap_header("ctrl-f", "buffer selector")
   local ctrl_s = keymap_header("ctrl-s", "recent files")
   local header = string.format("%s | %s", ctrl_l, ctrl_s)
 
@@ -135,7 +135,7 @@ M.files = function(query)
             end
           end
         end,
-        ["ctrl-l"] = function(_, opts)
+        ["ctrl-f"] = function(_, opts)
             local query = opts.query or ""
             require('bufs').buffers(query)
         end,
