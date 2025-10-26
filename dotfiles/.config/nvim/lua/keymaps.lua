@@ -658,24 +658,6 @@ vim.keymap.set(
 
 vim.keymap.set(
   'n',
-  '<leader>fg',
-  function()
-    require('fzf-lua').live_grep({ rg_opts = "--hidden --column --line-number --no-heading --color=always --smart-case --no-ignore" })
-  end,
-  { desc = 'Grep --no-ignore' }
-)
-
-vim.keymap.set(
-  'n',
-  '<leader>ff',
-  function()
-    require('fzf-lua').files({ cmd = 'rg --files --no-ignore' })
-  end,
-  { desc = 'Find --no-ignore' }
-)
-
-vim.keymap.set(
-  'n',
   '<C-f>',
   function()
     -- Open buffers picker if you have a couple open. Otherwise open the files picker.
