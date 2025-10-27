@@ -144,6 +144,10 @@ return {
       keymaps = {
         ["<C-d>"] = "actions.preview_scroll_down",
         ["<C-u>"] = "actions.preview_scroll_up",
+        ["<C-h>"] = false,
+        ["<C-j>"] = false,
+        ["<C-k>"] = false,
+        ["<C-l>"] = false,
       },
     },
     dependencies = { { "nvim-tree/nvim-web-devicons", opts = {} } },
