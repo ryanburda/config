@@ -128,6 +128,15 @@ vim.keymap.set(
   {desc = "Navigation: Open notes file"}
 )
 
+vim.keymap.set(
+  'n',
+  '<leader>*',
+  function()
+    require('illuminate').toggle()
+  end,
+  {desc = "Highlighting: Toggle current word highlight"}
+)
+
 ------------------------------------------------------------------------------------------------------------------------
 -- Clipboard
 ------------------------------------------------------------------------------------------------------------------------

@@ -101,13 +101,7 @@ return {
   'ojroques/nvim-bufdel',
 
   -- Highlight word under cursor.
-  {
-    'nvim-mini/mini.cursorword',
-    version = false,
-    config = function()
-      require('mini.cursorword').setup()
-    end
-  },
+  'RRethy/vim-illuminate',
 
   -- autoformat on save
   {
