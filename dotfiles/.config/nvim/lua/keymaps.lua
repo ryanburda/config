@@ -25,7 +25,7 @@ vim.keymap.set(
 
 vim.keymap.set(
   'n',
-  '<leader>T',
+  '<leader>t',
   ':tabnew<cr>',
   {desc = 'Window Management: New Tab'}
 )
@@ -39,14 +39,14 @@ vim.keymap.set(
 
 vim.keymap.set(
   'n',
-  '<leader><S-Tab>',
+  '<leader>i',
   ':tabprevious<cr>',
   {desc = 'Window Management: Previous Tab'}
 )
 
 vim.keymap.set(
   'n',
-  '<leader><Tab>',
+  '<leader>o',
   ':tabnext<cr>',
   {desc = 'Window Management: Next Tab'}
 )
@@ -481,13 +481,6 @@ vim.keymap.set(
 
 vim.keymap.set(
   'n',
-  '<leader>i',
-  ':IBLToggle<cr>',
-  { desc = "Help: toggle line indentation guides" }
-)
-
-vim.keymap.set(
-  'n',
   '<leader>sl',
   '<cmd>AerialToggle!<CR>'
 )
@@ -724,7 +717,7 @@ vim.keymap.set(
 
 vim.keymap.set(
   'n',
-  '<leader>o',
+  '<leader>b',
   ':b#<cr>',
   { desc = 'Alternate buffer' }
 )
@@ -872,7 +865,7 @@ vim.keymap.set(
 ------------------------------------------------------------------------------------------------------------------------
 vim.keymap.set(
   'n',
-  '<leader>t',
+  '<leader>m',
   require("trail_marker.extensions.fzf-lua").trail_map,
   { desc = "Trail Marker: List markers on current trail" }
 )

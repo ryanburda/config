@@ -67,6 +67,7 @@ vim.opt.fillchars = {
 vim.opt.autoread = true
 vim.opt.winbar = '%=%m %t'
 --vim.opt.statusline = [[%<%f %h%m%r%=%=  %{luaeval("require('trail_marker.extensions.info').info()")}  %l,%c%V]]
+vim.opt.showtabline = 2
 
 vim.cmd('set noshowmode')
 vim.cmd('set noswapfile')
