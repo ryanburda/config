@@ -100,6 +100,15 @@ return {
   -- Delete buffers without changing window layout.
   'ojroques/nvim-bufdel',
 
+  -- Highlight word under cursor.
+  {
+    'nvim-mini/mini.cursorword',
+    version = false,
+    config = function()
+      require('mini.cursorword').setup()
+    end
+  },
+
   -- autoformat on save
   {
     'stevearc/conform.nvim',
