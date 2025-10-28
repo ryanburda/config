@@ -101,7 +101,12 @@ return {
   'ojroques/nvim-bufdel',
 
   -- Highlight word under cursor.
-  'RRethy/vim-illuminate',
+  {
+    "RRethy/vim-illuminate",
+    config = function()
+      require("illuminate").pause()
+    end
+  },
 
   -- autoformat on save
   {
