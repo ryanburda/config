@@ -73,20 +73,13 @@ vim.opt.showtabline = 2
 function _G.my_tabline()
   local s = ''
   for i = 1, vim.fn.tabpagenr('$') do
-    local winnr = vim.fn.tabpagewinnr(i)
-    local buflist = vim.fn.tabpagebuflist(i)
-    local bufnr = buflist[winnr]
-    local file = vim.fn.bufname(bufnr)
-    
     if i == vim.fn.tabpagenr() then
       s = s .. '%#TabLineSel#'
     else
       s = s .. '%#TabLine#'
     end
-    
     s = s .. ' ' .. i .. ' '
   end
-  
   s = s .. '%#TabLineFill#%T'
   return s
 end

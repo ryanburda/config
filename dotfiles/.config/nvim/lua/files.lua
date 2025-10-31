@@ -24,7 +24,7 @@ local function get_files()
 
     for _, buffer in ipairs(buffers) do
       if vim.fn.fnamemodify(buffer.path, ':.') == path then
-        display_path = fzf_utils.ansi_codes.cyan(path)
+        display_path = fzf_utils.ansi_codes.green(path)
         buf_id = buffer.buf_id
         row = buffer.row
         col = buffer.col
