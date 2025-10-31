@@ -28,15 +28,10 @@ local function get_files()
 
     for _, buffer in ipairs(buffers) do
       if vim.fn.fnamemodify(buffer.path, ':.') == path then
-        local row_colored = fzf_utils.ansi_codes.yellow(tostring(buffer.row))
-        local col_colored = fzf_utils.ansi_codes.green(tostring(buffer.col))
-        local path_colored = fzf_utils.ansi_codes.cyan(path)
-        display_path = string.format("%s:%s:%s [%s] %s", path_colored, row_colored, col_colored, buffer.buf_id, buffer.is_modified_str)
-
+        display_path = fzf_utils.ansi_codes.cyan(path)
         buf_id = buffer.buf_id
         row = buffer.row
         col = buffer.col
-
         break
       end
     end
