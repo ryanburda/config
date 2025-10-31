@@ -18,30 +18,21 @@ local function get_files()
 
   local picker_strs = {}
   for _, path in ipairs(files) do
-    -- icon
-    local icon, hl = devicons.get_icon_color(path, nil, {default = true})
-    local icon_colored = fzf_utils.ansi_from_rgb(hl, icon)
-
     -- add buffer information if the file is currently open.
     local buf_id, col, row = nil, nil, nil
     local display_path = path
 
     for _, buffer in ipairs(buffers) do
       if vim.fn.fnamemodify(buffer.path, ':.') == path then
-        local row_colored = fzf_utils.ansi_codes.yellow(tostring(buffer.row))
-        local col_colored = fzf_utils.ansi_codes.green(tostring(buffer.col))
-        local path_colored = fzf_utils.ansi_codes.cyan(path)
-        display_path = string.format("%s:%s:%s [%s] %s", path_colored, row_colored, col_colored, buffer.buf_id, buffer.is_modified_str)
-
+        display_path = fzf_utils.ansi_codes.green(path)
         buf_id = buffer.buf_id
         row = buffer.row
         col = buffer.col
-
         break
       end
     end
 
-    local fzf_display_string = string.format("%s   %s", icon_colored, display_path)
+    local fzf_display_string = display_path
     local fzf_full_string = string.format("%s|%s|%s|%s|%s", path, buf_id, row, col, fzf_display_string)
 
     table.insert(picker_strs, fzf_full_string)

@@ -14,7 +14,6 @@
 -- )
 -- ```
 local fzf_utils = require("fzf-lua.utils")
-local devicons = require("nvim-web-devicons")
 
 local M = {}
 
@@ -119,8 +118,6 @@ M.get_bufs_table = function()
   -- Get the list of buffer IDs
   local buffer_ids = vim.api.nvim_list_bufs()
 
-  local max_file_name_length = 0
-
   -- Loop through each buffer ID to get additional information.
   for _, buf_id in ipairs(buffer_ids) do
     local path = vim.api.nvim_buf_get_name(buf_id)
@@ -135,28 +132,10 @@ M.get_bufs_table = function()
       t.path = path
       t.relative_path = vim.fn.fnamemodify(path, ':.')
 
-      t.buf_indicator = " "
-      if t.buf_id == vim.fn.bufnr('%') then
-        t.buf_indicator = fzf_utils.ansi_codes.red('%')
-      elseif t.buf_id == vim.fn.bufnr('#') then
-        t.buf_indicator = fzf_utils.ansi_codes.yellow('#')
-      end
-
       -- cursor position
       local cursor_pos = M.get_last_cursor_position(t.buf_id)
       t.row = cursor_pos[1]
       t.col = cursor_pos[2]
-
-      -- dirty
-      local is_modified = vim.api.nvim_buf_get_option(buf_id, 'modified')
-      t.is_modified_str = " "
-      if is_modified then
-        t.is_modified_str = "+"
-      end
-
-      -- icon
-      local icon, hl = devicons.get_icon_color(path, nil, {default = true})
-      t.icon = fzf_utils.ansi_from_rgb(hl, icon)
 
       table.insert(bufs, t)
     end
@@ -172,30 +151,21 @@ M.get_bufs = function()
   -- Sort by file name
   -- table.sort(bufs, function(a, b) return a.relative_path < b.relative_path end)
   -- Sort by bufnr (order buffers were opened)
-  -- table.sort(bufs, function(a, b) return a.buf_id < b.buf_id end)
+  table.sort(bufs, function(a, b) return a.buf_id < b.buf_id end)
   -- Sort by last used
-  table.sort(bufs, function(a, b) return vim.b[a.buf_id].last_entered_ts > vim.b[b.buf_id].last_entered_ts end)
+  -- table.sort(bufs, function(a, b) return vim.b[a.buf_id].last_entered_ts > vim.b[b.buf_id].last_entered_ts end)
 
   local picker_strs = {}
 
   for _, buf in ipairs(bufs) do
-    local fzf_display_string = string.format(
-      "%s %s %s:%s:%s [%s] %s",
-      buf.icon,
-      buf.buf_indicator,
-      fzf_utils.ansi_codes.cyan(buf.relative_path),
-      fzf_utils.ansi_codes.yellow(tostring(buf.row)),
-      fzf_utils.ansi_codes.green(tostring(buf.col)),
-      tostring(buf.buf_id),
-      buf.is_modified_str
-    )
+    local fzf_display_string = fzf_utils.ansi_codes.green(buf.relative_path)
 
     local fzf_full_string = string.format(
       "%s|%s|%s|%s|%s",
       tostring(buf.buf_id),
       buf.path,
-      buf.cursor_row,
-      buf.cursor_col,
+      buf.row,
+      buf.col,
       fzf_display_string
     )
 
