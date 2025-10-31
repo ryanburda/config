@@ -158,7 +158,7 @@ M.get_bufs = function()
   local picker_strs = {}
 
   for _, buf in ipairs(bufs) do
-    local fzf_display_string = fzf_utils.ansi_codes.cyan(buf.relative_path)
+    local fzf_display_string = fzf_utils.ansi_codes.green(buf.relative_path)
 
     local fzf_full_string = string.format(
       "%s|%s|%s|%s|%s",
