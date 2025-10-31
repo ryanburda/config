@@ -18,10 +18,6 @@ local function get_files()
 
   local picker_strs = {}
   for _, path in ipairs(files) do
-    -- icon
-    local icon, hl = devicons.get_icon_color(path, nil, {default = true})
-    local icon_colored = fzf_utils.ansi_from_rgb(hl, icon)
-
     -- add buffer information if the file is currently open.
     local buf_id, col, row = nil, nil, nil
     local display_path = path
@@ -36,7 +32,7 @@ local function get_files()
       end
     end
 
-    local fzf_display_string = string.format("%s   %s", icon_colored, display_path)
+    local fzf_display_string = display_path
     local fzf_full_string = string.format("%s|%s|%s|%s|%s", path, buf_id, row, col, fzf_display_string)
 
     table.insert(picker_strs, fzf_full_string)
