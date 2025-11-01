@@ -169,6 +169,7 @@ return {
       require('fzf-lua').setup({
         fzf_opts = {
           ['--cycle'] = true,
+          ['--color'] = 'hl:red,hl+:bright-red'
         },
         files = {
           actions = {

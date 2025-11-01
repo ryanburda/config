@@ -64,7 +64,7 @@ M.get_previewer = function()
 end
 
 local keymap_header = function(key, purpose)
-  return string.format("<%s> to %s", fzf_utils.ansi_codes.yellow(key), fzf_utils.ansi_codes.red(purpose))
+  return string.format("<%s> to %s", fzf_utils.ansi_codes.yellow(key), fzf_utils.ansi_codes.blue(purpose))
 end
 
 local function get_header()
