@@ -164,8 +164,8 @@ M.get_bufs = function()
       "%s|%s|%s|%s|%s",
       tostring(buf.buf_id),
       buf.path,
-      buf.cursor_row,
-      buf.cursor_col,
+      buf.row,
+      buf.col,
       fzf_display_string
     )
 
