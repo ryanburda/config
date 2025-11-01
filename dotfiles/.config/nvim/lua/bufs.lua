@@ -17,6 +17,9 @@ local fzf_utils = require("fzf-lua.utils")
 
 local M = {}
 
+-- Store custom buffer order (list of buf_ids)
+M.custom_order = nil
+
 M.get_last_cursor_position = function(bufnr)
   if vim.b[bufnr] and vim.b[bufnr].last_cursor_position then
     return vim.b[bufnr].last_cursor_position
@@ -64,14 +67,15 @@ M.get_previewer = function()
 end
 
 local keymap_header = function(key, purpose)
-  return string.format("<%s> to %s", fzf_utils.ansi_codes.yellow(key), fzf_utils.ansi_codes.blue(purpose))
+  return string.format("<%s> %s", fzf_utils.ansi_codes.yellow(key), fzf_utils.ansi_codes.blue(purpose))
 end
 
 local function get_header()
-  local ctrl_l = keymap_header("ctrl-f", "file selector")
-  local ctrl_x = keymap_header("ctrl-x", "close buffer")
-  local ctrl_o = keymap_header("ctrl-o", "close all but selected buffer")
-  local header = string.format("%s | %s | %s", ctrl_l, ctrl_x, ctrl_o)
+  local ctrl_f = keymap_header("ctrl-f", "files")
+  local ctrl_x = keymap_header("ctrl-x", "close")
+  local ctrl_o = keymap_header("ctrl-i", "reorder up")
+  local ctrl_i = keymap_header("ctrl-o", "reorder down")
+  local header = string.format("%s | %s | %s | %s", ctrl_f, ctrl_x, ctrl_o, ctrl_i)
 
   return header
 end
@@ -148,12 +152,48 @@ M.get_bufs = function()
 
   local bufs = M.get_bufs_table()
 
-  -- Sort by file name
-  -- table.sort(bufs, function(a, b) return a.relative_path < b.relative_path end)
-  -- Sort by bufnr (order buffers were opened)
-  table.sort(bufs, function(a, b) return a.buf_id < b.buf_id end)
-  -- Sort by last used
-  -- table.sort(bufs, function(a, b) return vim.b[a.buf_id].last_entered_ts > vim.b[b.buf_id].last_entered_ts end)
+  -- Initialize custom order if not set or if buffers have changed
+  if M.custom_order == nil then
+    M.custom_order = {}
+    for _, buf in ipairs(bufs) do
+      table.insert(M.custom_order, buf.buf_id)
+    end
+    -- Sort initial order by buf_id (order buffers were opened)
+    table.sort(M.custom_order)
+  else
+    -- Remove buf_ids that no longer exist and add new ones
+    local valid_buf_ids = {}
+    for _, buf in ipairs(bufs) do
+      valid_buf_ids[buf.buf_id] = true
+    end
+
+    -- Filter out closed buffers
+    local new_order = {}
+    for _, buf_id in ipairs(M.custom_order) do
+      if valid_buf_ids[buf_id] then
+        table.insert(new_order, buf_id)
+        valid_buf_ids[buf_id] = nil
+      end
+    end
+
+    -- Add new buffers at the end
+    for buf_id, _ in pairs(valid_buf_ids) do
+      table.insert(new_order, buf_id)
+    end
+
+    M.custom_order = new_order
+  end
+
+  -- Create a position map for sorting
+  local position_map = {}
+  for i, buf_id in ipairs(M.custom_order) do
+    position_map[buf_id] = i
+  end
+
+  -- Sort by custom order
+  table.sort(bufs, function(a, b)
+    return (position_map[a.buf_id] or math.huge) < (position_map[b.buf_id] or math.huge)
+  end)
 
   local picker_strs = {}
 
@@ -219,20 +259,42 @@ M.buffers = function(query)
           end
           M.buffers()
         end,
-        ["ctrl-o"] = function(selected)
+        ["ctrl-i"] = function(selected, opts)
+          -- Move buffer up in the list
           if selected[1] ~= nil then
             local buffer = selected[1]
             local t = M.parse_entry(buffer)
 
-            -- get list of buffers
-            local buffers = M.get_bufs()
-
-            for _, buf in ipairs(buffers) do
-              local parsed_buf = M.parse_entry(buf)
-              if t.buf_id ~= parsed_buf.buf_id then
-                vim.api.nvim_buf_delete(parsed_buf.buf_id, { force = false })
+            -- Find the position in custom_order
+            for i, buf_id in ipairs(M.custom_order) do
+              if buf_id == t.buf_id and i > 1 then
+                -- Swap with previous buffer
+                M.custom_order[i], M.custom_order[i-1] = M.custom_order[i-1], M.custom_order[i]
+                break
               end
             end
+
+            local query = opts.query or ""
+            M.buffers(query)
+          end
+        end,
+        ["ctrl-o"] = function(selected, opts)
+          -- Move buffer down in the list
+          if selected[1] ~= nil then
+            local buffer = selected[1]
+            local t = M.parse_entry(buffer)
+
+            -- Find the position in custom_order
+            for i, buf_id in ipairs(M.custom_order) do
+              if buf_id == t.buf_id and i < #M.custom_order then
+                -- Swap with next buffer
+                M.custom_order[i], M.custom_order[i+1] = M.custom_order[i+1], M.custom_order[i]
+                break
+              end
+            end
+
+            local query = opts.query or ""
+            M.buffers(query)
           end
         end,
         ["ctrl-f"] = function(_, opts)

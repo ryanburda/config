@@ -81,11 +81,11 @@ local function get_previewer()
 end
 
 local keymap_header = function(key, purpose)
-  return string.format("<%s> to %s", fzf_utils.ansi_codes.yellow(key), fzf_utils.ansi_codes.blue(purpose))
+  return string.format("<%s> %s", fzf_utils.ansi_codes.yellow(key), fzf_utils.ansi_codes.blue(purpose))
 end
 
 local function get_header()
-  local ctrl_l = keymap_header("ctrl-f", "buffer selector")
+  local ctrl_l = keymap_header("ctrl-f", "buffers")
   local ctrl_s = keymap_header("ctrl-s", "recent files")
   local header = string.format("%s | %s", ctrl_l, ctrl_s)
 
