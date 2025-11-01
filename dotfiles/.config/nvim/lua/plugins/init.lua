@@ -14,7 +14,7 @@ return {
   "EdenEast/nightfox.nvim",
   "rose-pine/neovim",
   "vague2k/vague.nvim",
-  "fcancelinha/nordern.nvim",
+  "shaunsingh/nord.nvim",
   "ptdewey/darkearth-nvim",
 
   {
