@@ -2,6 +2,11 @@
 local fzf_utils = require("fzf-lua.utils")
 local devicons = require("nvim-web-devicons")
 
+local M = {}
+
+-- Sort mode: "default" or "access_time"
+M.sort_mode = "default"
+
 local function get_files()
   local command = os.getenv("FZF_DEFAULT_COMMAND")
   local handle = io.popen(command)
@@ -12,6 +17,25 @@ local function get_files()
 
   for filename in string.gmatch(result, "[^\n]+") do
       table.insert(files, filename)
+  end
+
+  -- Sort by last access time if needed
+  if M.sort_mode == "access_time" then
+    table.sort(files, function(a, b)
+      local stat_a = vim.loop.fs_stat(a)
+      local stat_b = vim.loop.fs_stat(b)
+
+      if stat_a and stat_b then
+        -- Sort by access time (most recent first)
+        return stat_a.atime.sec > stat_b.atime.sec
+      elseif stat_a then
+        return true
+      elseif stat_b then
+        return false
+      else
+        return a < b
+      end
+    end)
   end
 
   local buffers = require('bufs').get_bufs_table()
@@ -85,16 +109,17 @@ local keymap_header = function(key, purpose)
 end
 
 local function get_header()
-  local ctrl_l = keymap_header("ctrl-f", "buffer selector")
-  local ctrl_s = keymap_header("ctrl-s", "recent files")
-  local header = string.format("%s | %s", ctrl_l, ctrl_s)
+  local ctrl_f = keymap_header("ctrl-f", "buffers")
+  local ctrl_s = keymap_header("ctrl-s", "sort")
+  local header = string.format("%s | %s", ctrl_f, ctrl_s)
 
   return header
 end
 
-local M = {}
+M.files = function(query, sort_mode)
+  -- Default to "default" mode if not specified
+  M.sort_mode = sort_mode or "default"
 
-M.files = function(query)
   local files = get_files()
 
   require("fzf-lua").fzf_exec(
@@ -131,7 +156,11 @@ M.files = function(query)
             require('bufs').buffers(query)
         end,
         ["ctrl-s"] = function(_, opts)
-            require('fzf-lua').oldfiles()
+            -- Toggle sort mode
+            local new_mode = M.sort_mode == "default" and "access_time" or "default"
+
+            local query = opts.query or ""
+            M.files(query, new_mode)
         end,
       },
       fzf_opts = {
