@@ -85,18 +85,6 @@ return {
       },
     },
   },
-  {
-    "stevearc/aerial.nvim",
-    config = function()
-      require("aerial").setup({
-        layout = {
-          min_width = 10,
-          resize_to_content = true,
-        },
-        filter_kind = false,
-      })
-    end,
-  },
   -- Delete buffers without changing window layout.
   'ojroques/nvim-bufdel',
 
