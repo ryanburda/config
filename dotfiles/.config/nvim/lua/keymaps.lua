@@ -868,7 +868,7 @@ vim.keymap.set(
 ------------------------------------------------------------------------------------------------------------------------
 vim.keymap.set(
   'n',
-  '<leader>m',
+  '<leader>M',
   require("trail_marker.extensions.fzf-lua").trail_map,
   { desc = "Trail Marker: List markers on current trail" }
 )
