@@ -720,7 +720,7 @@ vim.keymap.set(
 
 vim.keymap.set(
   'n',
-  '<leader>b',
+  "''",
   ':b#<cr>',
   { desc = 'Alternate buffer' }
 )
