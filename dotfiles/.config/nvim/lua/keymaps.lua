@@ -872,6 +872,44 @@ vim.keymap.set(
 ------------------------------------------------------------------------------------------------------------------------
 -- Local Plugins
 ------------------------------------------------------------------------------------------------------------------------
+-- Buf Marker
+vim.keymap.set(
+  'n',
+  '<leader>Fj',
+  function()
+    require("buf_marker").set_mark('j')
+  end,
+  { desc = "Buf Marker: Set mark" }
+)
+
+vim.keymap.set(
+  'n',
+  '<leader>fj',
+  function()
+    require("buf_marker").goto_mark('j')
+  end,
+  { desc = "Buf Marker: Goto mark" }
+)
+
+vim.keymap.set(
+  'n',
+  '<leader>Fk',
+  function()
+    require("buf_marker").set_mark('k')
+  end,
+  { desc = "Buf Marker: Set mark" }
+)
+
+vim.keymap.set(
+  'n',
+  '<leader>fk',
+  function()
+    require("buf_marker").goto_mark('k')
+  end,
+  { desc = "Buf Marker: Goto mark" }
+)
+
+-- Trail Marker
 vim.keymap.set(
   'n',
   '<leader>m',

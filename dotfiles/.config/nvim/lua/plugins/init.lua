@@ -511,6 +511,13 @@ return {
 
   -- Local plugins
   {
+    dir = "~/Developer/buf_marker.nvim",
+    config = function()
+      require("buf_marker").setup()
+    end
+  },
+
+  {
     dir = "~/Developer/trail_marker.nvim",
     dependencies = { 'nvim-tree/nvim-web-devicons', 'ibhagwan/fzf-lua', },
   },
