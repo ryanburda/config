@@ -501,7 +501,9 @@ return {
   {
     dir = "~/Developer/buf_marker.nvim",
     config = function()
-      require("buf_marker").setup()
+      require("buf_marker").setup({
+        swap_native_mark_keymaps = true,
+      })
     end
   },
 
