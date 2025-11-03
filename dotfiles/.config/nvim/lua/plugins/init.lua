@@ -499,9 +499,9 @@ return {
 
   -- Local plugins
   {
-    dir = "~/Developer/buf_marker.nvim",
+    dir = "~/Developer/buf-mark",
     config = function()
-      require("buf_marker").setup({
+      require("buf-mark").setup({
         swap_native_mark_keymaps = true,
         persist = true,
       })
