@@ -503,6 +503,7 @@ return {
     config = function()
       require("buf_marker").setup({
         swap_native_mark_keymaps = true,
+        persist = true,
       })
     end
   },
