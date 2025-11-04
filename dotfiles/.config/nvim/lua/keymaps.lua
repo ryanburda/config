@@ -718,13 +718,6 @@ vim.keymap.set(
   { desc = 'Find: last opened files' }
 )
 
-vim.keymap.set(
-  'n',
-  "''",
-  ':b#<cr>',
-  { desc = 'Alternate buffer' }
-)
-
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', { clear = true }),
   callback = function(event)
@@ -866,51 +859,61 @@ vim.keymap.set(
 ------------------------------------------------------------------------------------------------------------------------
 -- Local Plugins
 ------------------------------------------------------------------------------------------------------------------------
+-- buf-mark
+--
+-- Remap native marks to use <leader>m and <leader>'
 vim.keymap.set(
   'n',
-  '<leader>M',
-  require("trail_marker.extensions.fzf-lua").trail_map,
-  { desc = "Trail Marker: List markers on current trail" }
+  '<leader>m',
+  function()
+    local char = vim.fn.getcharstr()
+    local ok, err = pcall(vim.cmd, 'normal! m' .. char)
+    if not ok then
+      local vim_err = err:match("Vim%([^)]+%):(.*)") or err
+      vim.api.nvim_echo({{vim_err, "ErrorMsg"}}, true, {})
+    end
+  end,
+  { desc = 'Set native vim mark' }
 )
 
 vim.keymap.set(
   'n',
-  '<leader>a',
-  require("trail_marker").place_marker,
-  { desc = "Trail Marker: Add marker to current trail" }
+  "<leader>'",
+  function()
+    local char = vim.fn.getcharstr()
+    local ok, err = pcall(vim.cmd, "normal! '" .. char)
+    if not ok then
+      local vim_err = err:match("Vim%([^)]+%):(.*)") or err
+      vim.api.nvim_echo({{vim_err, "ErrorMsg"}}, true, {})
+    end
+  end,
+  { desc = 'Go to native vim mark' }
+)
+
+-- Use m and ' for buffer marks
+vim.keymap.set(
+  'n',
+  'm',
+  function()
+    local char = vim.fn.getcharstr()
+    require('buf-mark').set_mark(char)
+  end,
+  { desc = 'Set buffer mark' }
 )
 
 vim.keymap.set(
   'n',
-  '<leader>r',
-  require("trail_marker").remove_marker,
-  { desc = "Trail Marker: Remove marker from current trail" }
+  "'",
+  function()
+    local char = vim.fn.getcharstr()
+    require('buf-mark').goto_mark(char)
+  end,
+  { desc = 'Go to buffer mark' }
 )
 
 vim.keymap.set(
   'n',
-  '<C-n>',
-  require("trail_marker").next_marker,
-  { desc = "Trail Marker: Go to next marker" }
-)
-
-vim.keymap.set(
-  'n',
-  '<C-p>',
-  require("trail_marker").prev_marker,
-  { desc = "Trail Marker: Go to previous marker" }
-)
-
-vim.keymap.set(
-  'n',
-  '<C-t>',
-  require("trail_marker").current_marker,
-  { desc = "Trail Marker: Go to current marker" }
-)
-
-vim.keymap.set(
-  'n',
-  '<C-s>',
-  require("trail_marker.extensions.fzf-lua").change_trail,
-  { desc = "TrailMarker: Switch trails" }
+  "''",
+  ':b#<cr>',
+  { desc = 'Alternate buffer' }
 )
