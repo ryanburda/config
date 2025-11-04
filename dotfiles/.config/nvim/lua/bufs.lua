@@ -147,6 +147,11 @@ M.get_bufs = function()
 
   local bufs = M.get_bufs_table()
 
+  -- Sort buffers by relative path
+  table.sort(bufs, function(a, b)
+    return a.relative_path < b.relative_path
+  end)
+
   local picker_strs = {}
 
   for _, buf in ipairs(bufs) do
