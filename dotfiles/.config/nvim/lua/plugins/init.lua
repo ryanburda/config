@@ -31,7 +31,6 @@ return {
         sections = {
           lualine_a = {},
           lualine_c = { {'filename', path = 1}, },
-          lualine_x = { require('trail_marker.extensions.info').info },
         },
       })
     end
@@ -413,11 +412,9 @@ return {
     opts = {
       keymap = {
         preset = 'default',
-        ['<C-l>'] = { 'select_and_accept' },
+        ['<C-y>'] = { 'select_and_accept' },
         ['<C-u>'] = { 'scroll_documentation_up', 'fallback' },
         ['<C-d>'] = { 'scroll_documentation_down', 'fallback' },
-        ['<C-j>'] = { 'snippet_backward', 'fallback' },
-        ['<C-k>'] = { 'snippet_forward', 'fallback' },
         ['<C-h>'] = { 'show_signature', 'hide_signature', 'fallback' },
       },
       completion = {
@@ -502,15 +499,10 @@ return {
     dir = "~/Developer/buf-mark",
     config = function()
       require("buf-mark").setup({
-        swap_native_mark_keymaps = true,
+        keymaps = false,
         persist = true,
       })
     end
-  },
-
-  {
-    dir = "~/Developer/trail_marker.nvim",
-    dependencies = { 'nvim-tree/nvim-web-devicons', 'ibhagwan/fzf-lua', },
   },
 
 }

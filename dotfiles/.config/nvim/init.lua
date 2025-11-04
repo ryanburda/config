@@ -67,7 +67,7 @@ vim.opt.fillchars = {
 vim.opt.autoread = true
 --vim.opt.winbar = '%=%m %t'
 vim.opt.winbar = '%t %m'
---vim.opt.statusline = [[%<%f %h%m%r%=%=  %{luaeval("require('trail_marker.extensions.info').info()")}  %l,%c%V]]
+--vim.opt.statusline = [[%<%f %h%m%r%=%= %l,%c%V]]
 vim.opt.showtabline = 2
 
 -- Custom tabline to show only tab numbers
