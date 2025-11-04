@@ -655,14 +655,7 @@ vim.keymap.set(
 vim.keymap.set(
   'n',
   '<C-f>',
-  function()
-    -- Open buffers picker if you have a couple open. Otherwise open the files picker.
-    if #require('bufs').get_bufs() > 1 then
-      require('bufs').buffers()
-    else
-      require('files').files()
-    end
-  end,
+  require('files').files,
   { desc = 'Find: buffers' }
 )
 
