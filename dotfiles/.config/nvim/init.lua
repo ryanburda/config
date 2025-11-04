@@ -70,22 +70,20 @@ vim.opt.winbar = '%t %m'
 --vim.opt.statusline = [[%<%f %h%m%r%=%= %l,%c%V]]
 vim.opt.showtabline = 2
 
--- Custom tabline to show only tab numbers
-function _G.my_tabline()
+-- Custom tabline to show tab numbers and marked buffers
+function _G.tabline()
   local s = ''
-  for i = 1, vim.fn.tabpagenr('$') do
-    if i == vim.fn.tabpagenr() then
-      s = s .. '%#TabLineSel#'
-    else
-      s = s .. '%#TabLine#'
-    end
-    s = s .. ' ' .. i .. ' '
-  end
-  s = s .. '%#TabLineFill#%T'
+
+  -- Add buf-marks content
+  s = s .. require('buf_marks_tabline').get_tabline_content()
+
+  -- Add numbered tabs content
+  s = s .. require('numbered_tabs_tabline').get_tabline_content()
+
   return s
 end
 
-vim.opt.tabline = '%!v:lua.my_tabline()'
+vim.opt.tabline = '%!v:lua.tabline()'
 
 vim.cmd('set noshowmode')
 vim.cmd('set noswapfile')

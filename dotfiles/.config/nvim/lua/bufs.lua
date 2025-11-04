@@ -120,7 +120,7 @@ M.get_bufs_table = function()
   -- Loop through each buffer ID to get additional information.
   for _, buf_id in ipairs(buffer_ids) do
     local path = vim.api.nvim_buf_get_name(buf_id)
-    local is_listed = vim.api.nvim_buf_get_option(buf_id, "buflisted")
+    local is_listed = vim.bo[buf_id].buflisted
     local is_loaded = vim.api.nvim_buf_is_loaded(buf_id)
 
     -- Check if the buffer is loaded and has a file path

@@ -910,3 +910,10 @@ vim.keymap.set(
   ':b#<cr>',
   { desc = 'Alternate buffer' }
 )
+
+vim.keymap.set(
+  'n',
+  "'\"",
+  require('buf-mark').list_marks,
+  { desc = 'List buf-marks' }
+)
