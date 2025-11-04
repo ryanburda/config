@@ -64,14 +64,13 @@ M.get_previewer = function()
 end
 
 local keymap_header = function(key, purpose)
-  return string.format("<%s> to %s", fzf_utils.ansi_codes.yellow(key), fzf_utils.ansi_codes.blue(purpose))
+  return string.format("<%s> %s", fzf_utils.ansi_codes.yellow(key), fzf_utils.ansi_codes.blue(purpose))
 end
 
 local function get_header()
-  local ctrl_l = keymap_header("ctrl-f", "file selector")
+  local ctrl_f = keymap_header("ctrl-f", "files")
   local ctrl_x = keymap_header("ctrl-x", "close buffer")
-  local ctrl_o = keymap_header("ctrl-o", "close all but selected buffer")
-  local header = string.format("%s | %s | %s", ctrl_l, ctrl_x, ctrl_o)
+  local header = string.format("%s | %s", ctrl_f, ctrl_x)
 
   return header
 end
