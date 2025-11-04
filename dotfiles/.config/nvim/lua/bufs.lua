@@ -72,10 +72,8 @@ end
 
 local function get_header()
   local ctrl_f = keymap_header("ctrl-f", "files")
-  local ctrl_x = keymap_header("ctrl-x", "close")
-  local ctrl_o = keymap_header("ctrl-i", "reorder up")
-  local ctrl_i = keymap_header("ctrl-o", "reorder down")
-  local header = string.format("%s | %s | %s | %s", ctrl_f, ctrl_x, ctrl_o, ctrl_i)
+  local ctrl_x = keymap_header("ctrl-x", "close buffer")
+  local header = string.format("%s | %s", ctrl_f, ctrl_x)
 
   return header
 end
