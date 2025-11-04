@@ -1,4 +1,4 @@
--- `:FzfLua buffers` but shows leaf of path first 
+-- Used in combination with `files` to show buffers in a different color.
 --
 -- Example usage
 -- ```lua
@@ -16,9 +16,6 @@
 local fzf_utils = require("fzf-lua.utils")
 
 local M = {}
-
--- Store custom buffer order (list of buf_ids)
-M.custom_order = nil
 
 M.get_last_cursor_position = function(bufnr)
   if vim.b[bufnr] and vim.b[bufnr].last_cursor_position then
@@ -150,49 +147,6 @@ M.get_bufs = function()
 
   local bufs = M.get_bufs_table()
 
-  -- Initialize custom order if not set or if buffers have changed
-  if M.custom_order == nil then
-    M.custom_order = {}
-    for _, buf in ipairs(bufs) do
-      table.insert(M.custom_order, buf.buf_id)
-    end
-    -- Sort initial order by buf_id (order buffers were opened)
-    table.sort(M.custom_order)
-  else
-    -- Remove buf_ids that no longer exist and add new ones
-    local valid_buf_ids = {}
-    for _, buf in ipairs(bufs) do
-      valid_buf_ids[buf.buf_id] = true
-    end
-
-    -- Filter out closed buffers
-    local new_order = {}
-    for _, buf_id in ipairs(M.custom_order) do
-      if valid_buf_ids[buf_id] then
-        table.insert(new_order, buf_id)
-        valid_buf_ids[buf_id] = nil
-      end
-    end
-
-    -- Add new buffers at the end
-    for buf_id, _ in pairs(valid_buf_ids) do
-      table.insert(new_order, buf_id)
-    end
-
-    M.custom_order = new_order
-  end
-
-  -- Create a position map for sorting
-  local position_map = {}
-  for i, buf_id in ipairs(M.custom_order) do
-    position_map[buf_id] = i
-  end
-
-  -- Sort by custom order
-  table.sort(bufs, function(a, b)
-    return (position_map[a.buf_id] or math.huge) < (position_map[b.buf_id] or math.huge)
-  end)
-
   local picker_strs = {}
 
   for _, buf in ipairs(bufs) do
@@ -214,13 +168,9 @@ M.get_bufs = function()
 end
 
 M.buffers = function(query)
-  -- Call `get_bufs` before calling `fzf_exec`.
-  -- This ensures that we preserve the current/alternate buffers before `fzf_exec` creates an unlisted buffer.
-  local bufs = M.get_bufs()
-
   require("fzf-lua").fzf_exec(
     function(cb)
-      for _, buf in ipairs(bufs) do
+      for _, buf in ipairs(M.get_bufs()) do
         cb(buf)
       end
       cb()
@@ -256,44 +206,6 @@ M.buffers = function(query)
             end
           end
           M.buffers()
-        end,
-        ["ctrl-i"] = function(selected, opts)
-          -- Move buffer up in the list
-          if selected[1] ~= nil then
-            local buffer = selected[1]
-            local t = M.parse_entry(buffer)
-
-            -- Find the position in custom_order
-            for i, buf_id in ipairs(M.custom_order) do
-              if buf_id == t.buf_id and i > 1 then
-                -- Swap with previous buffer
-                M.custom_order[i], M.custom_order[i-1] = M.custom_order[i-1], M.custom_order[i]
-                break
-              end
-            end
-
-            local query = opts.query or ""
-            M.buffers(query)
-          end
-        end,
-        ["ctrl-o"] = function(selected, opts)
-          -- Move buffer down in the list
-          if selected[1] ~= nil then
-            local buffer = selected[1]
-            local t = M.parse_entry(buffer)
-
-            -- Find the position in custom_order
-            for i, buf_id in ipairs(M.custom_order) do
-              if buf_id == t.buf_id and i < #M.custom_order then
-                -- Swap with next buffer
-                M.custom_order[i], M.custom_order[i+1] = M.custom_order[i+1], M.custom_order[i]
-                break
-              end
-            end
-
-            local query = opts.query or ""
-            M.buffers(query)
-          end
         end,
         ["ctrl-f"] = function(_, opts)
             local query = opts.query or ""
