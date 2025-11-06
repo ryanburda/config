@@ -899,7 +899,7 @@ vim.keymap.set(
   'M',
   function()
     local char = vim.fn.getcharstr()
-    require('buf-mark').delete_mark(char)
+    require('buf-mark').delete(char)
   end,
   { desc = 'Delete buffer mark' }
 )
