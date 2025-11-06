@@ -889,7 +889,7 @@ vim.keymap.set(
   'm',
   function()
     local char = vim.fn.getcharstr()
-    require('buf-mark').set_mark(char)
+    require('buf-mark').set(char)
   end,
   { desc = 'Set buffer mark' }
 )
@@ -909,7 +909,7 @@ vim.keymap.set(
   "'",
   function()
     local char = vim.fn.getcharstr()
-    require('buf-mark').goto_mark(char)
+    require('buf-mark').goto(char)
   end,
   { desc = 'Go to buffer mark' }
 )
@@ -924,6 +924,6 @@ vim.keymap.set(
 vim.keymap.set(
   'n',
   "'\"",
-  require('buf-mark').list_marks,
+  require('buf-mark').list,
   { desc = 'List buf-marks' }
 )
