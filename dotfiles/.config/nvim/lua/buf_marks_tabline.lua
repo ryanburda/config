@@ -99,4 +99,19 @@ function M.get_tabline_content()
   return s
 end
 
+function M.setup()
+  vim.api.nvim_create_autocmd('User', {
+    pattern = 'BufMarkChanged',
+    callback = function()
+      _G.buf_mark_tabline = M.get_tabline_content()
+    end,
+  })
+
+  vim.api.nvim_create_autocmd('BufEnter', {
+    callback = function()
+      _G.buf_mark_tabline = M.get_tabline_content()
+    end,
+  })
+end
+
 return M
