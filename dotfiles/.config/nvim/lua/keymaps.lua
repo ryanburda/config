@@ -896,6 +896,16 @@ vim.keymap.set(
 
 vim.keymap.set(
   'n',
+  'M',
+  function()
+    local char = vim.fn.getcharstr()
+    require('buf-mark').delete_mark(char)
+  end,
+  { desc = 'Delete buffer mark' }
+)
+
+vim.keymap.set(
+  'n',
   "'",
   function()
     local char = vim.fn.getcharstr()
