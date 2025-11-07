@@ -67,7 +67,6 @@ vim.opt.fillchars = {
 vim.opt.autoread = true
 --vim.opt.winbar = '%=%m %t'
 vim.opt.winbar = '%t %m'
---vim.opt.statusline = [[%<%f %h%m%r%=%= %l,%c%V]]
 
 -- tabline
 vim.opt.showtabline = 1  -- only show tabline when there are more than 1 tab
@@ -143,6 +142,7 @@ require('keymaps')
 require("colorscheme").setup()
 
 vim.opt.tabline = '%!v:lua.tabline()'
+--vim.o.statusline = '%f %m %=%{%v:lua.require("buf-mark.extras.info").get()%}'
 
 -- external integrations.
 -- the `integrations` directory is in the gitignore.
