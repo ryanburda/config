@@ -30,7 +30,10 @@ return {
         },
         sections = {
           lualine_a = {},
+          lualine_b = {require('buf_marks_info').get_buf_marks_info},
           lualine_c = { {'filename', path = 1}, },
+          lualine_x = {'diagnostics', 'diff'},
+          lualine_y = {'branch'}
         },
       })
     end

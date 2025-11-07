@@ -68,7 +68,12 @@ vim.opt.autoread = true
 --vim.opt.winbar = '%=%m %t'
 vim.opt.winbar = '%t %m'
 --vim.opt.statusline = [[%<%f %h%m%r%=%= %l,%c%V]]
-vim.opt.showtabline = 2
+vim.opt.showtabline = 1  -- only show tabline when there are more than 1 tab
+
+-- tabline
+function _G.tabline()
+  return require('numbered_tabs_tabline').get_tabline_content()
+end
 
 vim.cmd('set noshowmode')
 vim.cmd('set noswapfile')
@@ -127,20 +132,6 @@ require('keymaps')
 
 -- colorscheme
 require("colorscheme").setup()
-
--- tabline
-require('buf_marks_tabline').setup()
-function _G.tabline()
-  local s = ''
-
-  -- Add buf-marks content
-  s = s .. _G.buf_mark_tabline
-
-  -- Add numbered tabs content
-  s = s .. require('numbered_tabs_tabline').get_tabline_content()
-
-  return s
-end
 
 vim.opt.tabline = '%!v:lua.tabline()'
 
