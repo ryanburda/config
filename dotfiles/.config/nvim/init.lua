@@ -142,7 +142,7 @@ require('keymaps')
 require("colorscheme").setup()
 
 vim.opt.tabline = '%!v:lua.tabline()'
---vim.o.statusline = '%f %m %=%{%v:lua.require("buf-mark.status").get()%}'
+-- vim.o.statusline = '%{%v:lua.require("buf-mark.status").get()%} %f %m'
 
 -- external integrations.
 -- the `integrations` directory is in the gitignore.
