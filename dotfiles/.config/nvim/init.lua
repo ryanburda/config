@@ -68,12 +68,21 @@ vim.opt.autoread = true
 --vim.opt.winbar = '%=%m %t'
 vim.opt.winbar = '%t %m'
 --vim.opt.statusline = [[%<%f %h%m%r%=%= %l,%c%V]]
-vim.opt.showtabline = 1  -- only show tabline when there are more than 1 tab
 
 -- tabline
+vim.opt.showtabline = 1  -- only show tabline when there are more than 1 tab
 function _G.tabline()
   return require('numbered_tabs_tabline').get_tabline_content()
 end
+
+-- buf-mark info in tabline
+-- vim.opt.showtabline = 2  -- always show tabline
+-- function _G.tabline()
+--   local s = ''
+--   s = s .. require('buf-mark.extras.info').get()
+--   s = s .. require('numbered_tabs_tabline').get_tabline_content()
+--   return s
+-- end
 
 vim.cmd('set noshowmode')
 vim.cmd('set noswapfile')

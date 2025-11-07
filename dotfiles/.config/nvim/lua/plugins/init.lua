@@ -30,7 +30,7 @@ return {
         },
         sections = {
           lualine_a = {},
-          lualine_b = {require('buf_marks_info').get_buf_marks_info},
+          lualine_b = {require('buf-mark.extras.info').get},
           lualine_c = { {'filename', path = 1}, },
           lualine_x = {'diagnostics', 'diff'},
           lualine_y = {'branch'}
@@ -501,7 +501,7 @@ return {
   {
     dir = "~/Developer/buf-mark",
     config = function()
-      require("buf-mark").setup({
+      require('buf-mark').setup({
         keymaps = false,
         persist = true,
       })
