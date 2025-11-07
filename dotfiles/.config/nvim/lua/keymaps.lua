@@ -924,6 +924,6 @@ vim.keymap.set(
 vim.keymap.set(
   'n',
   "'\"",
-  require('buf-mark').list,
+  require('buf-mark').list_pretty,
   { desc = 'List buf-marks' }
 )
