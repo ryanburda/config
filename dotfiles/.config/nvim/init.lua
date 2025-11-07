@@ -69,7 +69,7 @@ vim.opt.autoread = true
 vim.opt.winbar = '%t %m'
 
 -- tabline
-vim.opt.showtabline = 1  -- only show tabline when there are more than 1 tab
+vim.opt.showtabline = 0  -- shown in lualine
 function _G.tabline()
   return require('numbered_tabs_tabline').get_tabline_content()
 end
@@ -141,7 +141,7 @@ require('keymaps')
 -- colorscheme
 require("colorscheme").setup()
 
-vim.opt.tabline = '%!v:lua.tabline()'
+-- vim.opt.tabline = '%!v:lua.tabline()'
 -- vim.o.statusline = '%{%v:lua.require("buf-mark.status").get()%} %f %m'
 
 -- external integrations.
