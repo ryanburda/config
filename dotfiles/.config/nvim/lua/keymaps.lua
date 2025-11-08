@@ -931,3 +931,34 @@ vim.keymap.set(
   require('buf-mark').list_pretty,
   { desc = 'List buf-marks' }
 )
+
+-- set these just in case you need local marks
+vim.keymap.set(
+  'n',
+  '<leader>m',
+  function()
+    local char = vim.fn.getcharstr()
+    -- set mark
+    local ok, err = pcall(vim.cmd, 'normal! m' .. char)
+    if not ok then
+      local vim_err = err:match("Vim%([^)]+%):(.*)") or err
+      vim.api.nvim_echo({{vim_err, "ErrorMsg"}}, true, {})
+    end
+  end,
+  { desc = 'Set mark' }
+)
+
+vim.keymap.set(
+  'n',
+  "<leader>'",
+  function()
+    local char = vim.fn.getcharstr()
+    -- set mark
+    local ok, err = pcall(vim.cmd, "normal! '" .. char)
+    if not ok then
+      local vim_err = err:match("Vim%([^)]+%):(.*)") or err
+      vim.api.nvim_echo({{vim_err, "ErrorMsg"}}, true, {})
+    end
+  end,
+  { desc = 'Set mark' }
+)
