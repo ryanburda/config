@@ -849,59 +849,33 @@ vim.keymap.set(
   { desc = "CSV toggle alignment" }
 )
 
-------------------------------------------------------------------------------------------------------------------------
--- Local Plugins
-------------------------------------------------------------------------------------------------------------------------
--- buf-mark
+-- Marks
 --
--- Remap native marks to use <leader>m and <leader>'
-vim.keymap.set(
-  'n',
-  '<leader>m',
-  function()
-    local char = vim.fn.getcharstr()
-    local ok, err = pcall(vim.cmd, 'normal! m' .. char)
-    if not ok then
-      local vim_err = err:match("Vim%([^)]+%):(.*)") or err
-      vim.api.nvim_echo({{vim_err, "ErrorMsg"}}, true, {})
-    end
-  end,
-  { desc = 'Set native vim mark' }
-)
-
-vim.keymap.set(
-  'n',
-  "<leader>'",
-  function()
-    local char = vim.fn.getcharstr()
-    local ok, err = pcall(vim.cmd, "normal! '" .. char)
-    if not ok then
-      local vim_err = err:match("Vim%([^)]+%):(.*)") or err
-      vim.api.nvim_echo({{vim_err, "ErrorMsg"}}, true, {})
-    end
-  end,
-  { desc = 'Go to native vim mark' }
-)
-
--- Use m and ' for buffer marks
+-- I’ve never marked enough locations in a single nvim session that the distinction between local and global
+-- became handy. I usually only mark two or three locations before closing nvim and losing those marks.
+-- As a result I’ve generally preferred global marks since they represent a location in the code base that
+-- can be jumped to no matter what the current file is.
+--
+-- This means `m{uppercase_char}` can still set global marks
+--        and `m{all_other_char}` can set buf-marks
 vim.keymap.set(
   'n',
   'm',
   function()
     local char = vim.fn.getcharstr()
-    require('buf-mark').set(char)
+    if char:match("%u") then
+      -- set a global mark
+      local ok, err = pcall(vim.cmd, 'normal! m' .. char)
+      if not ok then
+        local vim_err = err:match("Vim%([^)]+%):(.*)") or err
+        vim.api.nvim_echo({{vim_err, "ErrorMsg"}}, true, {})
+      end
+    else
+      -- set a buf-mark
+      require('buf-mark').set(char)
+    end
   end,
-  { desc = 'Set buffer mark' }
-)
-
-vim.keymap.set(
-  'n',
-  'M',
-  function()
-    local char = vim.fn.getcharstr()
-    require('buf-mark').delete(char)
-  end,
-  { desc = 'Delete buffer mark' }
+  { desc = 'Set buf-mark/global mark' }
 )
 
 vim.keymap.set(
@@ -909,9 +883,39 @@ vim.keymap.set(
   "'",
   function()
     local char = vim.fn.getcharstr()
-    require('buf-mark').goto(char)
+    if char:match("%u") then
+      -- goto a global mark
+      local ok, err = pcall(vim.cmd, "normal! '" .. char)
+      if not ok then
+        local vim_err = err:match("Vim%([^)]+%):(.*)") or err
+        vim.api.nvim_echo({{vim_err, "ErrorMsg"}}, true, {})
+      end
+    else
+      -- goto a buf-mark
+      require('buf-mark').goto(char)
+    end
   end,
-  { desc = 'Go to buffer mark' }
+  { desc = 'Delete buffer mark' }
+)
+
+vim.keymap.set(
+  'n',
+  'M',
+  function()
+    local char = vim.fn.getcharstr()
+    if char:match("%u") then
+      -- delete a global mark
+      local ok, err = pcall(vim.cmd, 'delmarks ' .. char)
+      if not ok then
+        local vim_err = err:match("Vim%([^)]+%):(.*)") or err
+        vim.api.nvim_echo({{vim_err, "ErrorMsg"}}, true, {})
+      end
+    else
+      -- delete a buf-mark
+      require('buf-mark').delete(char)
+    end
+  end,
+  { desc = 'Delete buffer mark' }
 )
 
 vim.keymap.set(
