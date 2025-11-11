@@ -706,6 +706,13 @@ vim.keymap.set(
 
 vim.keymap.set(
   'n',
+  '<leader>fm',
+  require('fzf-lua').marks,
+  { desc = 'Find: Marks' }
+)
+
+vim.keymap.set(
+  'n',
   '<leader>fo',
   require('fzf-lua').oldfiles,
   { desc = 'Find: last opened files' }
