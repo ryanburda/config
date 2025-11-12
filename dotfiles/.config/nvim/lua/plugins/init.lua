@@ -29,19 +29,13 @@ return {
           section_separators = { left = '', right = ''},
         },
         sections = {
-          lualine_a = {{'location'} },
+          lualine_a = {require('buf-mark.status').get},
           lualine_b = {{'filename', path = 1}},
           lualine_c = {'diagnostics'},
           lualine_x = {'diff'},
           lualine_y = {'branch'},
-          lualine_z = {},
-        },
-        tabline = {
-          lualine_a = {require('buf-mark.status').get},
-          lualine_x = {},
-          lualine_y = {},
           lualine_z = {{'tabs', show_modified_status = false}},
-        }
+        },
       })
     end
   },
