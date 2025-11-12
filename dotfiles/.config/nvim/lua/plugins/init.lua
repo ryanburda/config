@@ -500,7 +500,8 @@ return {
 
   -- Local plugins
   {
-    dir = "~/Developer/buf-mark",
+    'ryanburda/buf-mark',
+    -- dir = "~/Developer/buf-mark",
     config = function()
       require('buf-mark').setup({
         keymaps = false,
@@ -508,5 +509,13 @@ return {
       })
     end
   },
+  {
+    'ryanburda/nvim-tmux-navigator',
+    -- dir = "~/Developer/nvim-tmux-navigator",
+    config = function()
+      require('nvim-tmux-navigator').setup()
+    end
+  },
+
 
 }
