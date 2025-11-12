@@ -628,12 +628,12 @@ vim.keymap.set(
 ------------------------------------------------------------------------------------------------------------------------
 -- Database
 ------------------------------------------------------------------------------------------------------------------------
-vim.keymap.set(
-  'n',
-  '<leader>sc',
-  ':SqlsSwitchConnection<cr>',
-  {desc = 'Database: Switch connection'}
-)
+--vim.keymap.set(
+--  'n',
+--  '<leader>sc',
+--  ':SqlsSwitchConnection<cr>',
+--  {desc = 'Database: Switch connection'}
+--)
 
 ------------------------------------------------------------------------------------------------------------------------
 -- Find
@@ -799,11 +799,31 @@ vim.api.nvim_create_autocmd('LspAttach', {
 ------------------------------------------------------------------------------------------------------------------------
 vim.keymap.set(
   'n',
-  '<leader>cn',
-  ':s/ *, */\\r/g<cr>',
-  {desc = 'Macro: Split comma separated value into new lines'}
+  '<leader>s,',
+  ':s/\\s*,\\s*/\\r/g<cr>:noh<cr>',
+  {desc = 'Macro: Split comma separated value into lines'}
 )
 
+vim.keymap.set(
+  'n',
+  '<leader>sc',
+  ':s/./&\\r/g<cr>:noh<cr>',
+  {desc = 'Macro: Split characters into lines'}
+)
+
+vim.keymap.set(
+  'n',
+  '<leader>sw',
+  ':s/\\s*\\(\\<\\w\\+\\>\\)/\\1\\r/g<cr>:noh<cr>',
+  {desc = 'Macro: Split words into lines'}
+)
+
+vim.keymap.set(
+  'n',
+  '<leader>sW',
+  ':s/\\s*\\(\\S\\+\\)/\\1\\r/g<cr>:noh<cr>',
+  {desc = 'Macro: Split Words (non-whitespace) into lines'}
+)
 ------------------------------------------------------------------------------------------------------------------------
 -- Execute
 ------------------------------------------------------------------------------------------------------------------------
