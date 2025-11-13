@@ -9,13 +9,13 @@
 return {
 
   -- Color Schemes
-  "sainnhe/everforest",
-  "sainnhe/gruvbox-material",
-  "EdenEast/nightfox.nvim",
-  "rose-pine/neovim",
-  "vague2k/vague.nvim",
-  "shaunsingh/nord.nvim",
-  "ptdewey/darkearth-nvim",
+  'sainnhe/everforest',
+  'sainnhe/gruvbox-material',
+  'EdenEast/nightfox.nvim',
+  'rose-pine/neovim',
+  'vague2k/vague.nvim',
+  'ptdewey/darkearth-nvim',
+  'cocopon/iceberg.vim',
 
   {
     'nvim-lualine/lualine.nvim',

@@ -18,7 +18,7 @@ local function watch_file_for_changes(filepath, callback)
   end))
 end
 
-T.COLORSCHEME_DEFAULT = 'bamboo'
+T.COLORSCHEME_DEFAULT = 'everforest'
 T.COLORSCHEME_FILE = os.getenv('HOME') .. '/.config/.env/nvim_colorscheme'
 T.BACKGROUND_DEFAULT = 'dark'
 T.BACKGROUND_FILE = os.getenv('HOME') .. '/.config/.env/nvim_background'
