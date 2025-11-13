@@ -510,8 +510,8 @@ return {
     end
   },
   {
-    'ryanburda/nvim-tmux-navigator',
-    -- dir = "~/Developer/nvim-tmux-navigator",
+    --'ryanburda/nvim-tmux-navigator',
+    dir = "~/Developer/nvim-tmux-navigator",
     config = function()
       require('nvim-tmux-navigator').setup()
     end
