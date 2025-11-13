@@ -532,7 +532,7 @@ vim.keymap.set(
 -- These keymaps need to match up with the corresponding keymaps in the tmux.conf.
 vim.keymap.set(
   {"n", "v", "x"},
-  '<leader>Rh',
+  '<M-h>',
   function()
     require('nvim-tmux-navigator').resize('h', 3)
   end,
@@ -541,7 +541,7 @@ vim.keymap.set(
 
 vim.keymap.set(
   {"n", "v", "x"},
-  '<leader>Rj',
+  '<M-j>',
   function()
     require('nvim-tmux-navigator').resize('j', 1)
   end,
@@ -550,7 +550,7 @@ vim.keymap.set(
 
 vim.keymap.set(
   {"n", "v", "x"},
-  '<leader>Rk',
+  '<M-k>',
   function()
     require('nvim-tmux-navigator').resize('k', 1)
   end,
@@ -559,7 +559,7 @@ vim.keymap.set(
 
 vim.keymap.set(
   {"n", "v", "x"},
-  '<leader>Rl',
+  '<M-l>',
   function()
     require('nvim-tmux-navigator').resize('l', 3)
   end,
@@ -583,26 +583,26 @@ vim.keymap.set(
   {desc = 'Debug: Set breakpoint'}
 )
 
-vim.keymap.set(
-  'n',
-  '<M-j>',
-  require('dap').step_into,
-  {desc = 'Debug: Step into'}
-)
-
-vim.keymap.set(
-  'n',
-  '<M-k>',
-  require('dap').step_over,
-  {desc = 'Debug: Step over'}
-)
-
-vim.keymap.set(
-  'n',
-  '<M-l>',
-  require('dap').continue,
-  {desc = 'Debug: Continue to next breakpoint (Proceed)'}
-)
+-- vim.keymap.set(
+--   'n',
+--   '<M-j>',
+--   require('dap').step_into,
+--   {desc = 'Debug: Step into'}
+-- )
+-- 
+-- vim.keymap.set(
+--   'n',
+--   '<M-k>',
+--   require('dap').step_over,
+--   {desc = 'Debug: Step over'}
+-- )
+-- 
+-- vim.keymap.set(
+--   'n',
+--   '<M-l>',
+--   require('dap').continue,
+--   {desc = 'Debug: Continue to next breakpoint (Proceed)'}
+-- )
 
 vim.keymap.set(
   'n',
