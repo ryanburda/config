@@ -8,6 +8,25 @@
 
 return {
 
+  -- Local plugins
+  {
+    'ryanburda/buf-mark',
+    -- dir = "~/Developer/buf-mark",
+    config = function()
+      require('buf-mark').setup({
+        keymaps = false,
+        persist = true,
+      })
+    end
+  },
+  {
+    'ryanburda/nvim-tmux-wm',
+    -- dir = "~/Developer/nvim-tmux-wm",
+    config = function()
+      require('nvim-tmux-wm').setup()
+    end
+  },
+
   -- Color Schemes
   'sainnhe/everforest',
   'sainnhe/gruvbox-material',
@@ -497,25 +516,5 @@ return {
     'hat0uma/csvview.nvim',
     config = function() require('csvview').setup() end,
   },
-
-  -- Local plugins
-  {
-    'ryanburda/buf-mark',
-    -- dir = "~/Developer/buf-mark",
-    config = function()
-      require('buf-mark').setup({
-        keymaps = false,
-        persist = true,
-      })
-    end
-  },
-  {
-    'ryanburda/nvim-tmux-navigator',
-    -- dir = "~/Developer/nvim-tmux-navigator",
-    config = function()
-      require('nvim-tmux-navigator').setup()
-    end
-  },
-
 
 }
