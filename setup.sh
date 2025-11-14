@@ -20,14 +20,17 @@ brew install coreutils
 brew install curl
 brew install deno #n
 brew install fd
+brew install ffmpeg
 brew install fzf
 $(brew --prefix)/opt/fzf/install #n
 brew install fzy
 brew install gettext #n
 brew install gh
 brew install git-delta
+brew install gifsicle
 brew install go
 brew install jq
+brew install --cask keycastr
 brew install k9s
 brew install kubectl
 brew install kubectx
