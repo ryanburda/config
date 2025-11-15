@@ -883,23 +883,25 @@ vim.keymap.set(
 -- As a result I’ve generally preferred global marks since they represent a location in the code base that
 -- can be jumped to no matter what the current file is.
 --
--- This means `m{uppercase_char}` can still set global marks
---        and `m{all_other_char}` can set buf-marks
+-- Therefore I think I can put the keymaps associated with local marks to better use by using them for buf-marks instead.
+--
+-- This means `m{lower_case_char}` will set a buf-mark
+--        and `m{all_other_char}` will function as normal marks
 vim.keymap.set(
   'n',
   'm',
   function()
     local char = vim.fn.getcharstr()
-    if char:match("%u") then
+    if char:match("%l") then
+      -- set a buf-mark
+      require('buf-mark').set(char)
+    else
       -- set a global mark
       local ok, err = pcall(vim.cmd, 'normal! m' .. char)
       if not ok then
         local vim_err = err:match("Vim%([^)]+%):(.*)") or err
         vim.api.nvim_echo({{vim_err, "ErrorMsg"}}, true, {})
       end
-    else
-      -- set a buf-mark
-      require('buf-mark').set(char)
     end
   end,
   { desc = 'Set buf-mark/global mark' }
@@ -910,16 +912,16 @@ vim.keymap.set(
   "'",
   function()
     local char = vim.fn.getcharstr()
-    if char:match("%u") then
+    if char:match("%l") then
+      -- goto a buf-mark
+      require('buf-mark').goto(char)
+    else
       -- goto a global mark
       local ok, err = pcall(vim.cmd, "normal! '" .. char)
       if not ok then
         local vim_err = err:match("Vim%([^)]+%):(.*)") or err
         vim.api.nvim_echo({{vim_err, "ErrorMsg"}}, true, {})
       end
-    else
-      -- goto a buf-mark
-      require('buf-mark').goto(char)
     end
   end,
   { desc = 'Delete buffer mark' }
@@ -945,16 +947,18 @@ vim.keymap.set(
   { desc = 'Delete buffer mark' }
 )
 
+-- `/` and `?` are in the same area of the keyboard as some
+-- of the other vim-maintained marks so this feels right.
 vim.keymap.set(
   'n',
-  "''",
+  "'/",
   ':b#<cr>',
   { desc = 'Alternate buffer' }
 )
 
 vim.keymap.set(
   'n',
-  "'\"",
+  "'?",
   require('buf-mark').list_pretty,
   { desc = 'List buf-marks' }
 )
