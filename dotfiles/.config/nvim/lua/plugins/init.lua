@@ -20,8 +20,8 @@ return {
     end
   },
   {
-    'ryanburda/nvim-tmux-wm',
-    -- dir = "~/Developer/nvim-tmux-wm",
+    --'ryanburda/nvim-tmux-wm',
+    dir = "~/Developer/nvim-tmux-wm",
     config = function()
       require('nvim-tmux-wm').setup()
     end
