@@ -10,8 +10,8 @@ return {
 
   -- Local plugins
   {
-    'ryanburda/buf-mark',
-    -- dir = "~/Developer/buf-mark",
+    --'ryanburda/buf-mark',
+    dir = "~/Developer/buf-mark",
     config = function()
       require('buf-mark').setup({
         keymaps = false,
