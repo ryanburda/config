@@ -932,16 +932,16 @@ vim.keymap.set(
   'M',
   function()
     local char = vim.fn.getcharstr()
-    if char:match("%u") then
+    if char:match("%l") then
+      -- delete a buf-mark
+      require('buf-mark').delete(char)
+    else
       -- delete a global mark
       local ok, err = pcall(vim.cmd, 'delmarks ' .. char)
       if not ok then
         local vim_err = err:match("Vim%([^)]+%):(.*)") or err
         vim.api.nvim_echo({{vim_err, "ErrorMsg"}}, true, {})
       end
-    else
-      -- delete a buf-mark
-      require('buf-mark').delete(char)
     end
   end,
   { desc = 'Delete buffer mark' }
