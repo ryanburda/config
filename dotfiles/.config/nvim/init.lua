@@ -25,6 +25,7 @@ vim.wo.wrap = false
 vim.opt.termguicolors = true
 vim.opt.number = true
 vim.opt.relativenumber = true
+vim.opt.numberwidth = 5
 vim.opt.cursorline = true
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
@@ -66,7 +67,7 @@ vim.opt.fillchars = {
 }
 vim.opt.autoread = true
 --vim.opt.winbar = '%=%m %t'
-vim.opt.winbar = '%#StatusLineNC# %4l:%-3c %t %m'
+vim.opt.winbar = '%#StatusLineNC#       %t %m'
 
 -- tabline
 vim.opt.showtabline = 0  -- shown in lualine
