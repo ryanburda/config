@@ -67,7 +67,7 @@ vim.opt.fillchars = {
 }
 vim.opt.autoread = true
 --vim.opt.winbar = '%=%m %t'
-vim.opt.winbar = '%#StatusLineNC#       %t %m'
+vim.opt.winbar = '%#StatusLineNC#%=%t %m%='
 
 -- tabline
 vim.opt.showtabline = 0  -- shown in lualine
