@@ -46,9 +46,9 @@ brew install neovim
 brew install ninja #n
 brew install node #n
 brew install npm
-npm install -g @anthropic-ai/claude-code
+brew install --cask claude-code
 brew install octave
-brew install owenthereal/upterm/upterm  # See https://github.com/owenthereal/upterm/issues/135 if you are having issues with `upterm host`
+brew install --cask owenthereal/upterm/upterm  # See https://github.com/owenthereal/upterm/issues/135 if you are having issues with `upterm host`
 brew install php #n
 brew install pkg-config #n
 brew install pspg
@@ -58,7 +58,6 @@ brew install poetry
 brew install ripgrep
 brew install rlwrap
 brew install stow
-brew intsall tldr
 brew install tmux
 brew install tmuxinator
 brew install wget
