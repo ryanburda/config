@@ -52,6 +52,7 @@ vim.opt.timeoutlen = 1000
 vim.opt.updatetime = 250
 vim.opt.laststatus = 3
 vim.opt.signcolumn = "yes:2"
+--vim.opt.signcolumn = "auto:3"
 vim.opt.list = true
 ---@diagnostic disable-next-line: missing-fields
 vim.opt.listchars = { tab = '│ '}
