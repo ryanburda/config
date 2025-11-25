@@ -25,7 +25,7 @@ vim.wo.wrap = false
 vim.opt.termguicolors = true
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.numberwidth = 5
+-- vim.opt.numberwidth = 3
 vim.opt.cursorline = true
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
@@ -51,7 +51,7 @@ vim.opt.whichwrap = '<,>,h,l,[,]'
 vim.opt.timeoutlen = 1000
 vim.opt.updatetime = 250
 vim.opt.laststatus = 3
-vim.opt.signcolumn = "yes"
+vim.opt.signcolumn = "yes:2"
 vim.opt.list = true
 ---@diagnostic disable-next-line: missing-fields
 vim.opt.listchars = { tab = '│ '}
