@@ -1,4 +1,5 @@
 local T = {}
+local env = require('env')
 
 local function watch_file_for_changes(filepath, callback)
   local uv = vim.loop
@@ -18,73 +19,9 @@ local function watch_file_for_changes(filepath, callback)
   end))
 end
 
-T.COLORSCHEME_DEFAULT = 'everforest'
-T.COLORSCHEME_FILE = os.getenv('HOME') .. '/.config/.env/nvim_colorscheme'
-T.BACKGROUND_DEFAULT = 'dark'
-T.BACKGROUND_FILE = os.getenv('HOME') .. '/.config/.env/nvim_background'
-
-function T.set_colorscheme(is_setup)
-  is_setup = is_setup or false
-
-  -- create the colorscheme file if it doesn't already exist
-  if io.open(T.COLORSCHEME_FILE, "r") == nil then
-    local colorscheme_file = io.open(T.COLORSCHEME_FILE, "w+")
-    if colorscheme_file ~= nil then
-      colorscheme_file:write(T.COLORSCHEME_DEFAULT)
-      colorscheme_file:close()
-    else
-      print("Error: Could not open colorscheme file for writing.")
-    end
-  end
-
-  -- create the background file if it doesn't already exist
-  if io.open(T.BACKGROUND_FILE, "r") == nil then
-    local background_file = io.open(T.BACKGROUND_FILE, "w+")
-    if background_file ~= nil then
-      background_file:write(T.BACKGROUND_DEFAULT)
-      background_file:close()
-    else
-      print("Error: Could not open colorscheme file for writing.")
-    end
-  end
-
-  -- read the colorscheme from the colorscheme file
-  local colorscheme_file = io.open(T.COLORSCHEME_FILE, "r")
-  if colorscheme_file ~= nil then
-    local colorscheme = colorscheme_file:read("*a")
-    vim.cmd('colorscheme ' .. colorscheme)
-    colorscheme_file:close()
-  else
-    print("Error: Could not read colorscheme file.")
-  end
-
-  -- read the background from the background file
-  local background_file = io.open(T.BACKGROUND_FILE, "r")
-  if background_file ~= nil then
-    local background = background_file:read("*a")
-    vim.cmd('set background=' .. background)
-    background_file:close()
-  else
-    print("Error: Could not read background file.")
-  end
-
-end
-
-local function get_var_from_file(file_path, default)
-  -- Reads value from `file_path`, returns `default` if file does not exist.
-  local file, _ = io.open(file_path, "r")
-  if not file then
-    -- Could not open file
-    return default
-  end
-
-  local content = file:read("*a")
-
-  -- Remove trailing new lines
-  content = content:gsub("%s*$", "")
-
-  file:close()
-  return content
+function T.set_colorscheme()
+  vim.cmd('colorscheme ' .. env.envget('nvim_colorscheme', 'everforest'))
+  vim.cmd('set background=' .. env.getenv('background', 'dark'))
 end
 
 function T.set_transparent_background()
@@ -118,29 +55,24 @@ function T.set_transparent_background()
   -- end
 end
 
-function T.set_transparent_background_conditional()
-  -- Read the .background file
-  local background = get_var_from_file(os.getenv("HOME") .. "/.config/wezterm/.background", "NONE")
-
-  if background ~= "NONE" then
-    T.set_transparent_background()
-  end
-end
-
 function T.setup()
   -- Autocommand to make specific highlight groups transparent when an background image is being shown.
   -- This will run automatically whenever the colorscheme changes.
   vim.api.nvim_create_autocmd("ColorScheme", {
     pattern = "*",
-    callback = T.set_transparent_background_conditional
+    callback = function()
+      if env.envget('wezterm_background', 'NONE') ~= "NONE" then
+        T.set_transparent_background()
+      end
+    end
   })
 
-  T.set_colorscheme(true)
+  T.set_colorscheme()
 
   -- update the colorscheme when the colorscheme file changes.
-  watch_file_for_changes(T.COLORSCHEME_FILE, function()
+  watch_file_for_changes(env.envpath('nvim_colorscheme'), function()
     -- Callback function triggered on file change
-    T.set_colorscheme(true)
+    T.set_colorscheme()
   end)
 
 end
