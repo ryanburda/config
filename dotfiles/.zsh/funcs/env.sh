@@ -49,6 +49,13 @@ function envrm {
     fi
 }
 
+# Get the path to an environment file.
+## Arguments:
+#   $1 - The name of the environment variable to get the path of.
+function envpath {
+    echo "${ENV_DIR}/$1"
+}
+
 # List all environment variables.
 # Arguments:
 #   None
