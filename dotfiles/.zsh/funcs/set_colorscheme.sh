@@ -52,7 +52,6 @@ set_colorscheme() {
 
             # Regenerate templated configs.
             touch $XDG_CONFIG_HOME/wezterm/wezterm.lua
-            regenerate_aichat_config
             regenerate_git_config
             regenerate_lazygit_config
             regenerate_ghostty_config

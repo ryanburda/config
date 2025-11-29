@@ -9,7 +9,6 @@ else
 fi
 
 brew install 1password-cli
-brew install aichat
 brew install automake #n
 brew install bat
 brew install bottom
