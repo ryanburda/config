@@ -951,7 +951,7 @@ vim.keymap.set(
 -- of the other vim-maintained marks so this feels right.
 vim.keymap.set(
   'n',
-  "'/",
+  "'<Tab>",
   ':b#<cr>',
   { desc = 'Alternate buffer' }
 )
