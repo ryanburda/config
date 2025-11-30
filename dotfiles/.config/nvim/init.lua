@@ -140,8 +140,8 @@ vim.lsp.enable(lsp_configs)
 -- keymaps
 require('keymaps')
 
--- colorscheme
-require("colorscheme").setup()
+-- set colorscheme
+require("colorscheme")
 
 -- vim.opt.tabline = '%!v:lua.tabline()'
 -- vim.o.statusline = '%{%v:lua.require("buf-mark.status").get()%} %f %m'
