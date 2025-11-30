@@ -57,15 +57,15 @@ vim.opt.list = true
 ---@diagnostic disable-next-line: missing-fields
 vim.opt.listchars = { tab = '│ '}
 -- Thicker separator lines
-vim.opt.fillchars = {
-  horiz     = '━',
-  horizup   = '┻',
-  horizdown = '┳',
-  vert      = '┃',
-  vertleft  = '┫',
-  vertright = '┣',
-  verthoriz = '╋',
-}
+-- vim.opt.fillchars = {
+--   horiz     = '━',
+--   horizup   = '┻',
+--   horizdown = '┳',
+--   vert      = '┃',
+--   vertleft  = '┫',
+--   vertright = '┣',
+--   verthoriz = '╋',
+-- }
 vim.opt.autoread = true
 --vim.opt.winbar = '%=%m %t'
 vim.opt.winbar = '%#StatusLineNC#%=%t %m%='
