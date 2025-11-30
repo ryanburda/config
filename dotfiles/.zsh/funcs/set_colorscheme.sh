@@ -63,7 +63,6 @@ set_colorscheme() {
             touch $XDG_CONFIG_HOME/wezterm/wezterm.lua
             regenerate_git_config
             regenerate_lazygit_config
-            regenerate_ghostty_config
             ~/.zsh/funcs/dark_mode $(if [[ $(envget nvim_background) == 'light' ]]; then echo '-l'; fi)
         fi
     }

@@ -1,9 +1,6 @@
 # macos
 .DS_Store
 
-# templated configs
-dotfiles/.config/ghostty/config
-
 # nvim
 dotfiles/.config/nvim/lua/plugins/integrations/*.lua
 *en.utf-8.add.spl

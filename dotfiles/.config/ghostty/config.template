@@ -1,7 +1,0 @@
-font-family = ${FONT_FAMILY}
-font-size = ${FONT_SIZE}
-theme = ${THEME}
-custom-shader = ${SHADER}
-window-decoration = none
-quit-after-last-window-closed = true
-confirm-close-surface = false

@@ -35,6 +35,5 @@ set_font() {
 
         # reload terminal configs
         touch $XDG_CONFIG_HOME/wezterm/wezterm.lua
-        regenerate_ghostty_config
     fi
 }
