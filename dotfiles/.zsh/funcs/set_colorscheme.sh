@@ -55,7 +55,8 @@ set_colorscheme() {
             # Try both macOS pattern (nvim.*/*/nvim.*.0) and Linux pattern (nvim.*/0)
             for socket in "$nvim_runtime_dir"/nvim.*/*/nvim.*.0 "$nvim_runtime_dir"/nvim.*/0; do
                 if [[ -S "$socket" ]]; then
-                    nvim --server "$socket" --remote-send "<Cmd>luafile ${XDG_CONFIG_HOME}/nvim/lua/colorscheme.lua<CR>"
+                    # redirect stderr to /dev/null since stale socket files can remain even after Neovim instances have closed.
+                    nvim --server "$socket" --remote-send "<Cmd>luafile ${XDG_CONFIG_HOME}/nvim/lua/colorscheme.lua<CR>" 2>/dev/null
                 fi
             done
 
