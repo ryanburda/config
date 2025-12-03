@@ -947,8 +947,6 @@ vim.keymap.set(
   { desc = 'Delete buffer mark' }
 )
 
--- `/` and `?` are in the same area of the keyboard as some
--- of the other vim-maintained marks so this feels right.
 vim.keymap.set(
   'n',
   "'<Tab>",
@@ -963,7 +961,7 @@ vim.keymap.set(
   { desc = 'List buf-marks' }
 )
 
--- set these just in case you need local marks
+-- Keep keymaps around for local marks just in case.
 vim.keymap.set(
   'n',
   '<leader>m',
