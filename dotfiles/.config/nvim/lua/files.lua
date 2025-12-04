@@ -1,6 +1,5 @@
 -- Personal take on `FzfLua files` that shows buffers in a different color.
 local fzf_utils = require("fzf-lua.utils")
-local devicons = require("nvim-web-devicons")
 
 local M = {}
 
