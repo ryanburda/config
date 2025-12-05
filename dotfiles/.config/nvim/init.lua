@@ -67,12 +67,15 @@ vim.opt.listchars = { tab = '│ '}
 --   verthoriz = '╋',
 -- }
 vim.opt.autoread = true
-vim.opt.winbar = '%=%t %m%='
+vim.opt.winbar = '   %4l:%c %=%f %m%='
 
 -- tabline
-vim.opt.showtabline = 0  -- shown in lualine
--- Show only numbers in tabline
 --
+-- never show tabline
+vim.opt.showtabline = 0
+--
+-- Show only numbers in tabline
+-- vim.opt.showtabline = 2  -- always show tabline
 -- function _G.tabline()
 --   return require('numbered_tabs_tabline').get_tabline_content()
 -- end
@@ -81,8 +84,8 @@ vim.opt.showtabline = 0  -- shown in lualine
 -- vim.opt.showtabline = 2  -- always show tabline
 -- function _G.tabline()
 --   local s = ''
---   s = s .. require('buf-mark.extras.info').get()
---   s = s .. require('numbered_tabs_tabline').get_tabline_content()
+--   s = s .. require('buf-mark.status').get()
+--   --s = s .. require('numbered_tabs_tabline').get_tabline_content()
 --   return s
 -- end
 
