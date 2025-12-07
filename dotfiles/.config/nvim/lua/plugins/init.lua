@@ -16,6 +16,10 @@ return {
       require('buf-mark').setup({
         keymaps = false,
         persist = true,
+        status = {
+          hl_current = 'lualine_z_tabs_active',
+          hl_non_current = 'lualine_z_tabs_inactive',
+        }
       })
     end
   },
