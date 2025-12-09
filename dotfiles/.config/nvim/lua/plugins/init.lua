@@ -39,6 +39,7 @@ return {
   'vague2k/vague.nvim',
   'ptdewey/darkearth-nvim',
   'cocopon/iceberg.vim',
+  'catppuccin/nvim',
 
   {
     'norcalli/nvim-colorizer.lua',

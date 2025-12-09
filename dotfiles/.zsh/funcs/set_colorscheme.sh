@@ -19,6 +19,7 @@ set_colorscheme() {
     #       - wezterm is updated by touching $XDG_CONFIG_HOME/wezterm/wezterm.lua
     #       - other scripts exist for handling colorscheme changes to other CLIs such as aichat and lazygit.
     typeset -A themes=(
+        ['Dark - Catppuccin']="catppuccin,dark,Catppuccin Mocha"
         ['Dark - Everforest']="everforest,dark,Everforest Dark (Gogh)"
         ['Dark - Darkearth']="darkearth,dark,Gruvbox Material (Gogh)"
         ['Dark - Gruvbox']="gruvbox-material,dark,Gruvbox Material (Gogh)"
@@ -28,6 +29,7 @@ set_colorscheme() {
         ['Dark - Nightfox-tera']="terafox,dark,terafox"
         ['Dark - Rose-pine']="rose-pine-moon,dark,rose-pine-moon"
         ['Dark - Vague']="vague,dark,Vacuous 2 (terminal.sexy)"
+        ['Light - Catppuccin']="catppuccin,light,Catppuccin Latte"
         ['Light - Everforest']="everforest,light,Everforest Light (Gogh)"
         ['Light - Gruvbox']="gruvbox-material,light,GruvboxLight"
         ['Light - Nightfox-dawn']="dawnfox,light,dawnfox"

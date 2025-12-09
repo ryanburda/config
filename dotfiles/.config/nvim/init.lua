@@ -67,7 +67,7 @@ vim.opt.listchars = { tab = '│ '}
 --   verthoriz = '╋',
 -- }
 vim.opt.autoread = true
-vim.opt.winbar = '   %4l:%c %=%f %m%='
+vim.opt.winbar = '   %4l:%c %=%f %m%= %p%%'
 
 -- tabline
 --
