@@ -20,49 +20,49 @@ vim.keymap.set(
   'n',
   '<leader>q',
   ':BufDel<cr>',
-  {desc = 'close current buffer'}
+  {desc = 'close current buffer', silent = true}
 )
 
 vim.keymap.set(
   'n',
   '<leader>t',
   ':tabnew<cr>',
-  {desc = 'Window Management: New Tab'}
+  {desc = 'Window Management: New Tab', silent = true}
 )
 
 vim.keymap.set(
   'n',
   '<leader>x',
   ':tabclose<cr>',
-  {desc = 'Window Management: Close Tab'}
+  {desc = 'Window Management: Close Tab', silent = true}
 )
 
 vim.keymap.set(
   'n',
   '<leader>i',
   ':tabprevious<cr>',
-  {desc = 'Window Management: Previous Tab'}
+  {desc = 'Window Management: Previous Tab', silent = true}
 )
 
 vim.keymap.set(
   'n',
   '<leader>o',
   ':tabnext<cr>',
-  {desc = 'Window Management: Next Tab'}
+  {desc = 'Window Management: Next Tab', silent = true}
 )
 
 vim.keymap.set(
   'n',
   '<leader>j',
   ':split<cr><C-w>j',
-  {desc = 'Window Management: Horizontal split'}
+  {desc = 'Window Management: Horizontal split', silent = true}
 )
 
 vim.keymap.set(
   'n',
   '<leader>l',
   ':vsplit<cr><C-w>l',
-  {desc = 'Window Management: Vertical split'}
+  {desc = 'Window Management: Vertical split', silent = true}
 )
 
 ------------------------------------------------------------------------------------------------------------------------
@@ -158,21 +158,21 @@ vim.keymap.set(
   'n',
   '<leader>fp',
   ':let @+ = expand("%")<CR>',
-  {desc = 'Clipboard: Copy relative file path to clipboard'}
+  {desc = 'Clipboard: Copy relative file path to clipboard', silent = true}
 )
 
 vim.keymap.set(
   'n',
   '<leader>fP',
   ':let @+ = expand("%:p")<CR>',
-  {desc = 'Clipboard: Copy absolute file path to clipboard'}
+  {desc = 'Clipboard: Copy absolute file path to clipboard', silent = true}
 )
 
 vim.keymap.set(
   'n',
   '<leader>fn',
   ':let @+ = expand("%:t")<CR>',
-  {desc = 'Clipboard: Copy file name to clipboard'}
+  {desc = 'Clipboard: Copy file name to clipboard', silent = true}
 )
 
 ------------------------------------------------------------------------------------------------------------------------
@@ -281,7 +281,7 @@ vim.keymap.set(
   'n',
   '<leader>dd',
   ':DiffviewOpen<cr>',
-  {desc = "Diff: Open diff viewer" }
+  {desc = "Diff: Open diff viewer", silent = true}
 )
 
 vim.keymap.set(
@@ -976,7 +976,7 @@ vim.keymap.set(
   'n',
   "'<Tab>",
   ':b#<cr>',
-  { desc = 'Alternate buffer' }
+  { desc = 'Alternate buffer', silent = true }
 )
 
 vim.keymap.set(
