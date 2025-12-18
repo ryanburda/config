@@ -56,38 +56,10 @@ vim.opt.signcolumn = "yes:2"
 vim.opt.list = true
 ---@diagnostic disable-next-line: missing-fields
 vim.opt.listchars = { tab = '│ '}
--- Thicker separator lines
--- vim.opt.fillchars = {
---   horiz     = '━',
---   horizup   = '┻',
---   horizdown = '┳',
---   vert      = '┃',
---   vertleft  = '┫',
---   vertright = '┣',
---   verthoriz = '╋',
--- }
 vim.opt.autoread = true
 vim.opt.winbar = '   %4l:%c %=%f %m%= %p%%'
-
--- tabline
---
--- never show tabline
+-- never show tabline (shown in lualine instead)
 vim.opt.showtabline = 0
---
--- Show only numbers in tabline
--- vim.opt.showtabline = 2  -- always show tabline
--- function _G.tabline()
---   return require('numbered_tabs_tabline').get_tabline_content()
--- end
---
--- buf-mark info in tabline
--- vim.opt.showtabline = 2  -- always show tabline
--- function _G.tabline()
---   local s = ''
---   s = s .. require('buf-mark.status').get()
---   --s = s .. require('numbered_tabs_tabline').get_tabline_content()
---   return s
--- end
 
 vim.cmd('set noshowmode')
 vim.cmd('set noswapfile')
