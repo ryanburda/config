@@ -147,6 +147,10 @@ for file in ~/.zsh/zshrc_extensions/*; do
   fi
 done
 
+# tmuxinator specific (can only be installed via gem)
+export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
+export PATH="$PATH:$GEM_HOME/bin"
+
 # Uncomment to profile zsh startup.
 # NOTE: must also uncomment first line.
 # zprof
