@@ -5,10 +5,13 @@ pacman -S --noconfirm gnome
 sudo systemctl enable gdm.service
 
 pacman -S --noconfirm 1password-cli
-pacman -S --noconfirm aichat
 pacman -S --noconfirm bat
 pacman -S --noconfirm bottom
 pacman -S --noconfirm cloud-sql-proxy
+# claude
+pacman -S --noconfirm nodejs
+pacman -S --noconfirm npm
+curl -fsSL https://claude.ai/install.sh | bash
 pacman -S --noconfirm coreutils
 pacman -S --noconfirm curl
 pacman -S --noconfirm docker
@@ -69,8 +72,6 @@ pacman -Qg font-terminess-ttf-nerd-font
 # pacman -S --cask spotify
 # pacman -S --cask wezterm@nightly
 
-
-
 # Symlink config files
 stow dotfiles
 
@@ -87,7 +88,6 @@ yay -S aur/1password
 gpg --receive-keys 3FEF9748469ADBE15DA7CA80AC2D62742012EA22
 yay -S 1password-cli
 yay -S ttf-recursive-nerd
-yay -S npm
 yay -S python-poetry
 
 # Create environment variables directory.

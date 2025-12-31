@@ -151,6 +151,9 @@ done
 export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
 export PATH="$PATH:$GEM_HOME/bin"
 
+# claude specific
+export PATH="$HOME/.local/bin:$PATH"
+
 # Uncomment to profile zsh startup.
 # NOTE: must also uncomment first line.
 # zprof
