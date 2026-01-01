@@ -12,6 +12,7 @@ pacman -S --noconfirm cloud-sql-proxy
 pacman -S --noconfirm nodejs
 pacman -S --noconfirm npm
 curl -fsSL https://claude.ai/install.sh | bash
+# end claude
 pacman -S --noconfirm coreutils
 pacman -S --noconfirm curl
 pacman -S --noconfirm docker
@@ -21,6 +22,10 @@ pacman -S --noconfirm git
 pacman -S --noconfirm github-cli
 pacman -S --noconfirm git-delta
 pacman -S --noconfirm go
+# hyprland
+pacman -S --noconfirm kitty
+pacman -S --noconfirm hyprland
+# end hyprland
 pacman -S --noconfirm jq
 pacman -S --noconfirm k9s
 pacman -S --noconfirm kubectl
