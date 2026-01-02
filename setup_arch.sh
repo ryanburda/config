@@ -36,6 +36,7 @@ pacman -S --noconfirm lazygit
 pacman -S --noconfirm lsd
 pacman -S --noconfirm lua
 pacman -S --noconfirm neovim
+pacman -S --noconfirm obsidian
 pacman -S --noconfirm owenthereal/upterm/upterm  # See https://github.com/owenthereal/upterm/issues/135 if you are having issues with `upterm host`
 pacman -S --noconfirm pspg
 pacman -S --noconfirm pyenv
@@ -45,7 +46,7 @@ pacman -S ruby base-devel
 gem install tmuxinator
 gem install erb
 mkdir -p "${XDG_CONFIG_HOME}/tmuxinator"
-
+# end tmuxinator
 pacman -S --noconfirm steam
 pacman -S --noconfirm stow
 pacman -S --noconfirm tldr
