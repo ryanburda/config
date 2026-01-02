@@ -53,16 +53,8 @@ pacman -S --noconfirm tldr
 pacman -S --noconfirm tmux
 pacman -S --noconfirm wget
 # Fonts
-pacman -Qg font-caskaydia-mono-nerd-font
-pacman -Qg font-departure-mono-nerd-font
-pacman -Qg font-fira-mono-nerd-font
-pacman -Qg font-gohufont-nerd-font
-pacman -Qg font-hack-nerd-font
-pacman -Qg font-inconsolata-go-nerd-font
-pacman -Qg font-jetbrains-mono-nerd-font
-pacman -Qg font-martian-mono-nerd-font
-pacman -Qg font-recursive-mono-nerd-font
-pacman -Qg font-terminess-ttf-nerd-font
+sudo pacman -S $(pacman -Sgq nerd-fonts)
+pacman -Qg nerd-fonts
 # Applications
 # pacman -S --cask 1password
 # pacman -S --cask alfred
