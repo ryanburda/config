@@ -25,6 +25,9 @@ pacman -S --noconfirm go
 # hyprland
 pacman -S --noconfirm kitty
 pacman -S --noconfirm hyprland
+pacman -S --noconfirm hyprpaper
+pacman -S --noconfirm waybar
+pacman -S --noconfirm wofi
 # end hyprland
 pacman -S --noconfirm jq
 pacman -S --noconfirm k9s
