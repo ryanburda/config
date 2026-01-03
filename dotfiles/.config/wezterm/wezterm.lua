@@ -20,7 +20,8 @@ config.window_close_confirmation = 'NeverPrompt'
 config.initial_rows = 40
 config.initial_cols = 140
 config.window_padding = { left = 0, right = 0, top = 20, bottom = 0 }
-config.warn_about_missing_glyphs=false
+config.warn_about_missing_glyphs = false
+config.enable_wayland = false
 
 -- BACKGROUND
 --

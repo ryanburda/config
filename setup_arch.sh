@@ -72,6 +72,7 @@ pacman -Qg nerd-fonts
 # pacman -S --cask shifty
 # pacman -S --cask spotify
 # pacman -S --cask wezterm@nightly
+pacman -S --needed base-devel git
 
 # Symlink config files
 stow dotfiles
@@ -90,6 +91,7 @@ gpg --receive-keys 3FEF9748469ADBE15DA7CA80AC2D62742012EA22
 yay -S 1password-cli
 yay -S ttf-recursive-nerd
 yay -S python-poetry
+yay -S google-chrome
 
 # Create environment variables directory.
 mkdir -p $ENV_DIR
