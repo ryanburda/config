@@ -481,6 +481,10 @@ return {
             auto_show = true
           },
         },
+        keymap = {
+          ['<Left>'] = { },
+          ['<Right>'] = { },
+        },
       },
     },
   },
