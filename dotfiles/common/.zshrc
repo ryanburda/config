@@ -85,7 +85,8 @@ ulimit -u 2048
 # zsh-vi-mode will overwrite keybindings unless they are added to `zvm_after_init_commands`.
 # https://github.com/jeffreytse/zsh-vi-mode?tab=readme-ov-file#execute-extra-commands
 zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
-zvm_after_init_commands+=('[ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh')
+# Arch specific
+[[ -f /etc/arch-release ]] && zvm_after_init_commands+=('[ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh')
 
 function zvm_after_init() {
   bindkey '^p' history-search-backward
@@ -139,7 +140,6 @@ alias s="tmux_session_select"
 alias cal="cal -3"
 alias ai="claude"
 alias rg="rg --hidden"
-alias settings="tmuxinator start settings"
 
 # zshrc Extensions
 # Looks for executable files in directory.
@@ -149,12 +149,15 @@ for file in ~/.zsh/zshrc_extensions/*; do
   fi
 done
 
-# tmuxinator specific (can only be installed via gem)
-export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
-export PATH="$PATH:$GEM_HOME/bin"
+# Arch specific
+if [[ -f /etc/arch-release ]]; then
+  # tmuxinator specific (can only be installed via gem)
+  export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
+  export PATH="$PATH:$GEM_HOME/bin"
+  # claude specific
+  export PATH="$HOME/.local/bin:$PATH"
+fi
 
-# claude specific
-export PATH="$HOME/.local/bin:$PATH"
 
 # Uncomment to profile zsh startup.
 # NOTE: must also uncomment first line.
