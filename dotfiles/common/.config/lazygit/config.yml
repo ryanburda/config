@@ -1,0 +1,48 @@
+gui:
+  theme:
+    selectedLineBgColor:
+      - black
+    selectedRangeBgColor:
+      - black
+  enlargedSideViewLocation: 'top'
+  showCommandLog: false
+  showIcons: true
+  scrollPastBottom: false
+  branchColors:
+    'main': '#1b7532'
+    'master': '#1b7532'
+    'develop': '#1b7275'
+    'ryanburda': '#349beb'
+    'rburda': '#349beb'
+  authorColors:
+    'Ryan Burda': '#349beb'
+git:
+  pagers:
+    - colorArg: always
+      pager: delta --dark --paging=never --line-numbers
+promptToReturnFromSubprocess: false
+customCommands:
+  - key: 'o'
+    command: "nvim {{.SelectedFile.Name}}"
+    context: 'files'
+    description: 'Open file in Neovim'
+    output: terminal
+  - key: 'D'
+    command: "nvim -c 'DiffviewOpen {{.SelectedLocalBranch.Name}}'"
+    context: 'localBranches'
+    description: 'Open diff of current branch to selected branch'
+    output: terminal
+  - key: 'D'
+    command: "nvim -c 'DiffviewOpen {{.SelectedRemoteBranch.Name}}'"
+    context: 'remoteBranches'
+    description: 'Open diff of current branch to selected branch'
+    output: terminal
+  - key: 'D'
+    command: "nvim -c 'DiffviewOpen {{.SelectedLocalCommit.Sha}}'"
+    context: 'commits'
+    description: 'Open diff of current branch to selected commit'
+    output: terminal
+  - key: 'S'
+    command: "git fetch -p"
+    context: 'remoteBranches'
+    description: 'Prune local branches that are no longer in remote (Sync)'

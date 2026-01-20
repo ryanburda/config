@@ -11,8 +11,8 @@ dotfiles/.config/nvim/lua/plugins/integrations/*.lua
 lazy-lock.json
 
 # ssh
-dotfiles/.ssh/*
-!dotfiles/.ssh/config
+dotfiles/common/.ssh/*
+!dotfiles/common/.ssh/config
 
 # upterm
 tmux-client-*.log

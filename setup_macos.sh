@@ -93,7 +93,7 @@ cargo install --git https://github.com/asciinema/agg
 go install github.com/cirocosta/asciinema-edit@latest
 
 # Symlink config files
-stow dotfiles
+stow -d dotfiles -t ~ common # macos
 
 # Source zshrc to get access to environment variables.
 source ~/.zshrc
@@ -107,7 +107,7 @@ SCRIPT_DIR=${0:a:h}
 # karabiner.json needs to be copied.
 # https://karabiner-elements.pqrs.org/docs/manual/misc/configuration-file-path/
 mkdir -p "${HOME}/.config/karabiner"
-cp "${SCRIPT_DIR}/dotfiles/.config/karabiner.json" "${HOME}/.config/karabiner/karabiner.json"
+cp "${SCRIPT_DIR}/dotfiles/macos/.config/karabiner.json" "${HOME}/.config/karabiner/karabiner.json"
 
 # MacOS specific settings
 ./scripts/macos.sh

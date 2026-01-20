@@ -103,7 +103,7 @@ sudo pacman -S pipewire pipewire-pulse wireplumber pipewire-alsa lib32-pipewire 
 # End Gaming
 
 # Symlink config files
-stow dotfiles
+stow -d dotfiles -t ~ common arch
 
 # Source zshrc to get access to environment variables.
 chsh -s /bin/zsh  # Move this to arch installation
