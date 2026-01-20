@@ -165,7 +165,7 @@ return {
       float = {
         max_width = .85,
         max_height = .85,
-        preview_split = "below",
+        preview_split = "right",
         border = "rounded",
       },
       preview_win = {

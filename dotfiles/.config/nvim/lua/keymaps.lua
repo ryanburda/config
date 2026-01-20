@@ -852,14 +852,8 @@ vim.keymap.set(
 
 vim.keymap.set(
   'n',
-  "<leader>ff",
-  function()
-    if vim.bo.filetype == 'oil' then
-      require('oil').close()
-    else
-      require('oil').open(nil, {preview = {true}})
-    end
-  end,
+  "-",
+  "<cmd>Oil --float --preview<cr>",
   {desc = "File management"}
 )
 
