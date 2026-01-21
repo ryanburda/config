@@ -6,7 +6,7 @@
 # to remain consistent across all active shells.
 
 # Directory to store environment variables
-export ENV_DIR="${XDG_CONFIG_HOME}/.env"
+export ENV_DIR="${HOME}/.config/.env"
 
 # Set an environment variable.
 # Arguments:
@@ -61,4 +61,9 @@ function envpath {
 #   None
 function envls {
     \ls "$ENV_DIR"
+}
+
+# Create the directory where environment variables will be stored.
+function envsetup {
+    mkdir -p $ENV_DIR
 }
