@@ -1,5 +1,16 @@
 #!/bin/bash
 
+# Arch Linux setup script for a fresh install.
+#
+# This script:
+#   - Symlinks dotfiles to ~ using stow (common + arch)
+#   - Copies root config files (bluetooth, pacman, vconsole)
+#   - Installs yay (AUR helper)
+#   - Installs packages via pacman/yay
+#   - Sets zsh as the default shell
+#
+# NOTE: Must be bash since it runs on a fresh install before zsh is available.
+
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Move files in repo to their proper location.
