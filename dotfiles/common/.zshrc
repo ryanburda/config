@@ -134,6 +134,15 @@ fi
 # Rancher
 export PATH="$HOME/.rd/bin:$PATH"
 
+# Arch specific
+if [[ -f /etc/arch-release ]]; then
+  # tmuxinator specific (can only be installed via gem)
+  export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
+  export PATH="$PATH:$GEM_HOME/bin"
+  # claude specific
+  export PATH="$HOME/.local/bin:$PATH"
+fi
+
 # Alias
 alias l="lsd -lah"
 alias s="tmux_session_select"
@@ -148,16 +157,6 @@ for file in ~/.zsh/zshrc_extensions/*; do
     source "$file"
   fi
 done
-
-# Arch specific
-if [[ -f /etc/arch-release ]]; then
-  # tmuxinator specific (can only be installed via gem)
-  export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
-  export PATH="$PATH:$GEM_HOME/bin"
-  # claude specific
-  export PATH="$HOME/.local/bin:$PATH"
-fi
-
 
 # Uncomment to profile zsh startup.
 # NOTE: must also uncomment first line.
