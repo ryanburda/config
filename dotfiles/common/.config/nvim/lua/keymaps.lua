@@ -857,6 +857,13 @@ vim.keymap.set(
   {desc = "File management"}
 )
 
+vim.keymap.set(
+  'n',
+  "+",
+  "<cmd>NvimTreeFindFileToggle<cr>",
+  {desc = "File tree"}
+)
+
 -- Set up EasyAlign in visual mode
 vim.api.nvim_set_keymap('x', 'ga', '<Plug>(EasyAlign)', {})
 

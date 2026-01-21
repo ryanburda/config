@@ -182,6 +182,22 @@ return {
     dependencies = { { "nvim-tree/nvim-web-devicons", opts = {} } },
   },
 
+  {
+    "nvim-tree/nvim-tree.lua",
+    version = "*",
+    lazy = false,
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+    },
+    config = function()
+      require("nvim-tree").setup {
+        update_focused_file = {
+          enable = true,
+        },
+      }
+    end,
+  },
+
   -- Fuzzy Finder
   {
     "ibhagwan/fzf-lua",
