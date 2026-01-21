@@ -1,6 +1,6 @@
 # config
 
-Terminal configuration and dotfiles.
+Configuration and dotfiles.
 
 ```
 # Clone in home directory

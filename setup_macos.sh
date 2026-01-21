@@ -110,20 +110,3 @@ SCRIPT_DIR=${0:a:h}
 # https://karabiner-elements.pqrs.org/docs/manual/misc/configuration-file-path/
 mkdir -p "${HOME}/.config/karabiner"
 cp "${SCRIPT_DIR}/dotfiles/macos/.config/karabiner.json" "${HOME}/.config/karabiner/karabiner.json"
-
-# MacOS specific settings
-./scripts/macos.sh
-
-# Generate SSH keys
-while true; do
-    read -r "yn?Do you want to generate a new ssh key? (y/n): "
-
-    if [[ $yn == "y" ]]; then
-        ./scripts/ssh_keygen.sh
-        break
-    elif [[ $yn == "n" ]]; then
-        break
-    else
-        echo "Invalid response. Please enter 'y' or 'n'."
-    fi
-done

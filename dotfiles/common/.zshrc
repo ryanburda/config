@@ -73,6 +73,7 @@ autoload -Uz psqlp
 autoload -Uz tmux_session_select
 autoload -Uz tmuxinator_session_select
 autoload -Uz find_file
+autoload -Uz ssh_keygen
 
 for file in ~/.zsh/funcs/**.sh; do
     [ -r "$file" ] && source "$file"
