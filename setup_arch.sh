@@ -11,8 +11,6 @@ sudo mkdir -p /etc/bluetooth
 sudo cp $REPO_ROOT/dotfiles/arch_root/etc/bluetooth/input.conf /etc/bluetooth/input.conf
 sudo cp $REPO_ROOT/dotfiles/arch_root/etc/pacman.conf /etc/pacman.conf
 sudo cp $REPO_ROOT/dotfiles/arch_root/etc/vconsole.conf /etc/vconsole.conf
-# Create the .env directory
-mkdir -p "${HOME}/.config/.env"
 
 # yay
 sudo pacman -S --needed --noconfirm base-devel git

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 # Use directory of files as a simple key value store.
 #
@@ -63,7 +63,5 @@ function envls {
     \ls "$ENV_DIR"
 }
 
-# Create the directory where environment variables will be stored.
-function envsetup {
-    mkdir -p $ENV_DIR
-}
+# Create the directory where environment variables will be stored when this file is sourced.
+mkdir -p $ENV_DIR
