@@ -6,7 +6,6 @@ local config = wezterm.config_builder()
 -- NOTE: `os.getenv("XDG_CONFIG_HOME")` returns nil. Using "HOME" as an alternative for now.
 local background_image_dir = os.getenv("HOME") .. "/.config/.assets/backgrounds/"
 
-config.term = 'wezterm'
 config.color_scheme = helpers.envget('wezterm_colorscheme', 'Catppuccin Mocha')
 config.font = wezterm.font(helpers.envget('font_family', 'JetBrains Mono'))
 config.font_size = tonumber(helpers.envget('font_size', '12'))
