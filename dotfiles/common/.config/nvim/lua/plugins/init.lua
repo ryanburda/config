@@ -77,7 +77,7 @@ return {
     build = ':TSUpdate',
     config = function ()
       ---@diagnostic disable-next-line: missing-fields
-      require('nvim-treesitter.config').setup({
+      require('nvim-treesitter').setup({
         auto_install = true,
         highlight = {
           enable = true,
