@@ -11,6 +11,7 @@
   spc
   lmet
   rmet
+  caps
 )
 
 (defalias
@@ -20,12 +21,16 @@
   ;; Super keys: output meta AND toggle meta layer for capslock remap
   lm (multi lmet (layer-toggle meta))
   rm (multi rmet (layer-toggle meta))
+
+  ;; Caps Lock: tap for escape, hold for control
+  esc-ctl (tap-hold-release $tap-time $hold-time esc lctl)
 )
 
 (deflayer default
   @nav
   @lm
   @rm
+  @esc-ctl
 )
 
 ;; Vim-style navigation on nav layer
