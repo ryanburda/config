@@ -1,112 +1,102 @@
 #!/bin/zsh
 
 # Install Homebrew
-which -s brew
-if [[ $? != 0 ]] ; then
+if ! command -v brew &>/dev/null; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 else
     brew update
 fi
 
-brew install 1password-cli
-brew install automake #n
-brew install bat
-brew install bottom
-brew install cmake #n
-brew install cloud-sql-proxy
-brew install composer #n
-brew install coreutils
-brew install curl
-brew install deno #n
-brew install fd
-brew install ffmpeg
-brew install fzf
-$(brew --prefix)/opt/fzf/install #n
-brew install fzy
-brew install gettext #n
-brew install gh
-brew install git-delta
-brew install gifsicle
-brew install go
-brew install jq
-brew install --cask keycastr
-brew install k9s
-brew install kubectl
-brew install kubectx
-brew install kubetui
-brew install lazydocker
-brew install lazygit
-brew install libpq #n
-brew link --force libpq #n
-brew install libtool #n
-brew install lsd
-brew install lua
-brew install neovim
-brew install ninja #n
-brew install node #n
-brew install npm
-brew install --cask claude-code
-brew install octave
-brew install --cask owenthereal/upterm/upterm  # See https://github.com/owenthereal/upterm/issues/135 if you are having issues with `upterm host`
-brew install php #n
-brew install pkg-config #n
-brew install pspg
-brew install pyenv
-brew install pyenv-virtualenv
-brew install poetry
-brew install ripgrep
-brew install rlwrap
-brew install stow
-brew install tmux
-brew install tmuxinator
-brew install wget
+brew install \
+    1password-cli \
+    automake \
+    bat \
+    bottom \
+    cloud-sql-proxy \
+    cmake \
+    composer \
+    coreutils \
+    curl \
+    deno \
+    fd \
+    ffmpeg \
+    fzf \
+    fzy \
+    gettext \
+    gh \
+    gifsicle \
+    git-delta \
+    go \
+    jq \
+    k9s \
+    kubectl \
+    kubectx \
+    kubetui \
+    lazydocker \
+    lazygit \
+    libpq \
+    libtool \
+    lsd \
+    lua \
+    neovim \
+    ninja \
+    node \
+    npm \
+    php \
+    pkg-config \
+    poetry \
+    pspg \
+    pyenv \
+    pyenv-virtualenv \
+    ripgrep \
+    rlwrap \
+    stow \
+    tmux \
+    tmuxinator \
+    wget
+
+brew link --force libpq
+$(brew --prefix)/opt/fzf/install --all
+
 # Fonts
-brew install --cask font-caskaydia-mono-nerd-font
-brew install --cask font-departure-mono-nerd-font
-brew install --cask font-fira-mono-nerd-font
-brew install --cask font-gohufont-nerd-font
-brew install --cask font-hack-nerd-font
-brew install --cask font-inconsolata-go-nerd-font
-brew install --cask font-jetbrains-mono-nerd-font
-brew install --cask font-martian-mono-nerd-font
-brew install --cask font-recursive-mono-nerd-font
-brew install --cask font-terminess-ttf-nerd-font
+brew install --cask \
+    font-caskaydia-mono-nerd-font \
+    font-departure-mono-nerd-font \
+    font-fira-mono-nerd-font \
+    font-gohufont-nerd-font \
+    font-hack-nerd-font \
+    font-inconsolata-go-nerd-font \
+    font-jetbrains-mono-nerd-font \
+    font-martian-mono-nerd-font \
+    font-recursive-mono-nerd-font \
+    font-terminess-ttf-nerd-font
+
 # Applications
-brew install --cask 1password
-brew install --cask alfred
-brew install --cask blackhole-2ch
-brew install --cask google-chrome
-brew install --cask karabiner-elements
-brew install --cask obsidian
-brew install --cask rancher
-brew install --cask rectangle
-brew install --cask shifty
-brew install --cask spotify
-brew install --cask wezterm@nightly
+brew install --cask \
+    1password \
+    alfred \
+    blackhole-2ch \
+    claude-code \
+    google-chrome \
+    karabiner-elements \
+    keycastr \
+    obsidian \
+    rancher \
+    rectangle \
+    shifty \
+    spotify \
+    wezterm@nightly
 
 # Rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-
-# terminal gif recorder
-cargo install --locked --git https://github.com/asciinema/asciinema
-cargo install --git https://github.com/asciinema/agg
-go install github.com/cirocosta/asciinema-edit@latest
 
 # Symlink config files
 stow -d dotfiles -t ~ common
 # NOTE: there aren't any files that need symlinking in dotfiles/macos as of now.
 # stow -d dotfiles -t ~ macos
 
-# Source zshrc to get access to environment variables.
-source ~/.zshrc
-
-# Create environment variables directory.
-mkdir -p $ENV_DIR
-
-# If config repo is in normal location then this is `SCRIPT_DIR=$HOME/Developer/config`
-# The following can be used when testing manually:  `SCRIPT_DIR=$(pwd)`
-SCRIPT_DIR=${0:a:h}
-# karabiner.json needs to be copied.
+# karabiner.json needs to be copied, not symlinked
 # https://karabiner-elements.pqrs.org/docs/manual/misc/configuration-file-path/
 mkdir -p "${HOME}/.config/karabiner"
+SCRIPT_DIR=${0:a:h}
 cp "${SCRIPT_DIR}/dotfiles/macos/.config/karabiner.json" "${HOME}/.config/karabiner/karabiner.json"
