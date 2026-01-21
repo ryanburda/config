@@ -1,0 +1,87 @@
+#!/bin/zsh
+print_help() {
+    echo "Switches OS theme."
+    echo "Options:"
+    echo "  -h    Show this help message"
+    echo "  -l    Switch to light appearance"
+}
+
+tf="true"
+
+while getopts ":lh" opt; do
+    case $opt in
+        h)
+            print_help
+            return
+            ;;
+        l)
+            tf="false"
+            ;;
+        \?)
+            echo "Invalid option: -$OPTARG" >&2
+            print_help
+            return 1
+            ;;
+    esac
+done
+
+if [[ $OSTYPE == darwin* ]]; then
+    osascript -e "tell app \"System Events\" to tell appearance preferences to set dark mode to ${tf}"
+else
+    # linux
+    if [[ "$tf" == "true" ]]; then
+        # Dark mode
+        gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+        gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
+
+        # Update GTK config files for apps like Chrome
+        mkdir -p ~/.config/gtk-3.0 ~/.config/gtk-4.0
+
+        cat > ~/.config/gtk-3.0/settings.ini << 'EOF'
+[Settings]
+gtk-application-prefer-dark-theme=1
+gtk-theme-name=Adwaita-dark
+EOF
+
+        cat > ~/.config/gtk-4.0/settings.ini << 'EOF'
+[Settings]
+gtk-application-prefer-dark-theme=1
+EOF
+
+        # Set color-scheme via desktop portal (required for Chrome/Chromium on Wayland)
+        dbus-send --session --type=method_call \
+            --dest=org.freedesktop.portal.Desktop \
+            /org/freedesktop/portal/desktop \
+            org.freedesktop.portal.Settings.WriteSetting \
+            string:'org.freedesktop.appearance' \
+            string:'color-scheme' \
+            "variant:<uint32 1>" 2>/dev/null || true
+    else
+        # Light mode
+        gsettings set org.gnome.desktop.interface color-scheme 'prefer-light'
+        gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita'
+
+        # Update GTK config files for apps like Chrome
+        mkdir -p ~/.config/gtk-3.0 ~/.config/gtk-4.0
+
+        cat > ~/.config/gtk-3.0/settings.ini << 'EOF'
+[Settings]
+gtk-application-prefer-dark-theme=0
+gtk-theme-name=Adwaita
+EOF
+
+        cat > ~/.config/gtk-4.0/settings.ini << 'EOF'
+[Settings]
+gtk-application-prefer-dark-theme=0
+EOF
+
+        # Set color-scheme via desktop portal (required for Chrome/Chromium on Wayland)
+        dbus-send --session --type=method_call \
+            --dest=org.freedesktop.portal.Desktop \
+            /org/freedesktop/portal/desktop \
+            org.freedesktop.portal.Settings.WriteSetting \
+            string:'org.freedesktop.appearance' \
+            string:'color-scheme' \
+            "variant:<uint32 2>" 2>/dev/null || true
+    fi
+fi

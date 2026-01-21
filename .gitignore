@@ -1,15 +1,22 @@
 # macos
 .DS_Store
 
+# templated configs
+dotfiles/common/.config/lazygit/config.yml
+
 # nvim
-dotfiles/.config/nvim/lua/plugins/integrations/*.lua
+dotfiles/common/.config/nvim/lua/plugins/integrations/*.lua
 *en.utf-8.add.spl
 .luarc.json
 lazy-lock.json
+
+# ssh
+dotfiles/common/.ssh/*
+!dotfiles/common/.ssh/config
 
 # upterm
 tmux-client-*.log
 
 # zsh extensions
-dotfiles/.zsh/zshrc_extensions/*
-!dotfiles/.zsh/zshrc_extensions/README.md
+dotfiles/common/.zsh/zshrc_extensions/*
+!dotfiles/common/.zsh/zshrc_extensions/README.md

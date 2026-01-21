@@ -1,0 +1,42 @@
+(defcfg
+  process-unmapped-keys yes
+)
+
+(defvar
+  tap-time 200
+  hold-time 200
+)
+
+(defsrc
+  spc
+  lmet
+  rmet
+)
+
+(defalias
+  ;; Space: tap for space, hold for nav layer (tap-hold-release mimics ZMK balanced)
+  nav (tap-hold-release $tap-time $hold-time spc (layer-toggle nav))
+
+  ;; Super keys: output meta AND toggle meta layer for capslock remap
+  lm (multi lmet (layer-toggle meta))
+  rm (multi rmet (layer-toggle meta))
+)
+
+(deflayer default
+  @nav
+  @lm
+  @rm
+)
+
+;; Vim-style navigation on nav layer
+(deflayermap (nav)
+  h left
+  j down
+  k up
+  l right
+)
+
+;; Super+A = capslock (other Super combos work normally since lmet is held)
+(deflayermap (meta)
+  a caps
+)
