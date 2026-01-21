@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+REPO_ROOT="${0:A:h}"
+
 # OS
 sudo pacman -S --noconfirm fuzzel
 sudo pacman -S --noconfirm niri
@@ -111,15 +113,15 @@ source ~/.zshrc
 
 # Link these non-user files to their correct location
 sudo mkdir -p /etc/bluetooth
-sudo cp $HOME/config/arch/etc/bluetooth/input.conf /etc/bluetooth/input.conf
-sudo cp $HOME/config/arch/etc/pacman.conf /etc/pacman.conf
-sudo cp $HOME/config/arch/etc/vconsole.conf /etc/vconsole.conf
+sudo cp $REPO_ROOT/dotfiles/arch_root/etc/bluetooth/input.conf /etc/bluetooth/input.conf
+sudo cp $REPO_ROOT/dotfiles/arch_root/etc/pacman.conf /etc/pacman.conf
+sudo cp $REPO_ROOT/dotfiles/arch_root/etc/vconsole.conf /etc/vconsole.conf
 
 # Kanata (Key remaps)
 yay -S kanata
 sudo mkdir -p /etc/kanata
-sudo cp $HOME/config/arch/etc/kanata/kanata.kbd /etc/kanata/kanata.kbd
-sudo cp $HOME/config/arch/etc/systemd/system/kanata.service /etc/systemd/system/kanata.service
+sudo cp $REPO_ROOT/dotfiles/arch_root/etc/kanata/kanata.kbd /etc/kanata/kanata.kbd
+sudo cp $REPO_ROOT/dotfiles/arch_root/etc/systemd/system/kanata.service /etc/systemd/system/kanata.service
 sudo systemctl daemon-reload
 sudo systemctl enable --now kanata
 
