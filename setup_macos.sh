@@ -93,7 +93,9 @@ cargo install --git https://github.com/asciinema/agg
 go install github.com/cirocosta/asciinema-edit@latest
 
 # Symlink config files
-stow -d dotfiles -t ~ common # macos
+stow -d dotfiles -t ~ common
+# NOTE: there aren't any files that need symlinking in dotfiles/macos as of now.
+# stow -d dotfiles -t ~ macos
 
 # Source zshrc to get access to environment variables.
 source ~/.zshrc

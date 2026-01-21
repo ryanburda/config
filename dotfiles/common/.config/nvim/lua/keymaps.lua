@@ -181,7 +181,7 @@ vim.keymap.set(
 vim.keymap.set(
   'n',
   '<leader>O',
-  ':!open -a "Google Chrome" %<cr><cr>',
+  ':!open -a "Google Chrome" %<cr><cr>',  -- TODO: fix this on arch
   {desc = 'Browser: Open current file in browser'}
 )
 
