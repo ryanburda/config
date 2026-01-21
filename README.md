@@ -2,13 +2,28 @@
 
 Configuration and dotfiles.
 
-```
-# Clone in home directory
-git clone https://github.com/ryanburda/config.git
-cd config
-./setup_arch.sh
-# ./setup_macos.sh
+### Setup Steps
 
-# Setup all other repos
-./setup_repos.sh
+1) Clone repo in home directory
+``` zsh
+git clone https://github.com/ryanburda/config.git
+```
+
+2) Run setup script
+``` zsh
+./config/setup_arch.sh
+# OR
+# ./config/setup_macos.sh
+```
+
+3) Restart
+
+4) Generate SSH keys
+``` zsh
+ssh_keygen
+```
+
+5) Setup all other repos
+``` zsh
+./config/setup_repos.sh
 ```
