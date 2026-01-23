@@ -1,0 +1,108 @@
+#!/bin/bash
+
+CONFIG_DIR="$HOME/.config/tsm"
+mkdir -p $CONFIG_DIR
+
+usage() {
+  echo "Tmux Session Manager"
+  echo ""
+  echo "Usage: tsm [OPTIONS] <session-name>"
+  echo ""
+  echo "Options:"
+  echo "  -l, --list    List available sessions"
+  echo "  -s, --stop    Stop session and run stop.sh if it exists"
+  echo "  -h, --help    Show this help message"
+  echo ""
+  echo "Examples:"
+  echo "  tsm myproject        Start or attach to session"
+  echo "  tsm -s myproject     Stop session"
+  echo "  tsm -l               List available sessions"
+}
+
+list_sessions() {
+  if [ ! -d "$CONFIG_DIR" ]; then
+    echo "No sessions configured. Create directories in $CONFIG_DIR"
+    exit 1
+  fi
+
+  for dir in "$CONFIG_DIR"/*/; do
+    [ -d "$dir" ] && echo "$(basename "$dir")"
+  done
+}
+
+start_session() {
+  local session="$1"
+  local session_dir="$CONFIG_DIR/$session"
+
+  if [ ! -d "$session_dir" ]; then
+    echo "Error: Session '$session' not found in $CONFIG_DIR"
+    exit 1
+  fi
+
+  if [ ! -f "$session_dir/start.sh" ]; then
+    echo "Error: No start.sh found for session '$session'"
+    exit 1
+  fi
+
+  # Check if session already exists
+  if tmux has-session -t "$session" 2>/dev/null; then
+    echo "Session '$session' already running, switching..."
+    if [ -n "$TMUX" ]; then
+      tmux switch-client -t "$session"
+    else
+      tmux attach-session -t "$session"
+    fi
+  else
+    echo "Starting session '$session'..."
+    bash "$session_dir/start.sh"
+  fi
+}
+
+stop_session() {
+  local session="$1"
+  local session_dir="$CONFIG_DIR/$session"
+
+  if ! tmux has-session -t "$session" 2>/dev/null; then
+    echo "Error: Session '$session' is not running"
+    exit 1
+  fi
+
+  # Run stop.sh if it exists
+  if [ -f "$session_dir/stop.sh" ]; then
+    echo "Running stop script for '$session'..."
+    bash "$session_dir/stop.sh"
+  fi
+
+  echo "Killing session '$session'..."
+  tmux kill-session -t "$session"
+}
+
+# Parse arguments
+if [ $# -eq 0 ]; then
+  usage
+  return 0
+fi
+
+case "$1" in
+  -l|--list)
+    list_sessions
+    ;;
+  -s|--stop)
+    if [ -z "$2" ]; then
+      echo "Error: Session name required for --stop"
+      exit 1
+    fi
+    stop_session "$2"
+    ;;
+  -h|--help)
+    usage
+    ;;
+  -*)
+    echo "Error: Unknown option '$1'"
+    usage
+    exit 1
+    ;;
+  *)
+    start_session "$1"
+    ;;
+esac
