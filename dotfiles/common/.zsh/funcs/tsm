@@ -97,35 +97,24 @@ stop_session() {
   tmux kill-session -t "$session"
 }
 
-fzf_session() {
-  # Get configured sessions
+format_sessions() {
   local configured_sessions
   configured_sessions=$(list_sessions 2>/dev/null)
 
-  # Get active tmux sessions
   local active_sessions
   active_sessions=$(tmux ls 2>/dev/null | awk -F: '{print $1}')
   local current_session=$(tmux display-message -p '#S' 2>/dev/null)
   local previous_session=$(tmux display-message -p '#{client_last_session}' 2>/dev/null)
 
-  # Combine configured and active sessions (unique)
   local all_sessions
   all_sessions=$(printf "%s\n%s" "$configured_sessions" "$active_sessions" | sort -u | grep -v '^$')
 
-  if [ -z "$all_sessions" ]; then
-    echo "No sessions available"
-    return 1
-  fi
-
-  # Colors
   local RED=$'\033[31m'
   local GREEN=$'\033[32m'
   local YELLOW=$'\033[33m'
   local RESET=$'\033[0m'
 
-  # Format sessions for fzf with colors for active sessions
-  local formatted
-  formatted=$(echo "$all_sessions" | while read -r session; do
+  echo "$all_sessions" | while read -r session; do
     [ -z "$session" ] && continue
     if echo "$active_sessions" | grep -q "^${session}$"; then
       local indicator="  "
@@ -138,10 +127,32 @@ fzf_session() {
     else
       printf '%s|  %s\n' "$session" "$session"
     fi
-  done)
+  done
+}
+
+fzf_session() {
+  local formatted
+  formatted=$(format_sessions)
+
+  if [ -z "$formatted" ]; then
+    echo "No sessions available"
+    return 1
+  fi
+
+  local header
+  header=$(printf "%s\n%s" "tab:    previous session" "ctrl-x: kill session")
 
   local selected
-  selected=$(echo "$formatted" | fzf --ansi --with-nth 2 --delimiter '|' --prompt="Select session: ")
+  selected=$(echo "$formatted" | fzf \
+    --cycle \
+    --layout reverse \
+    --prompt "  > " \
+    --ansi \
+    --with-nth 2 \
+    --delimiter '|' \
+    --header "$header" \
+    --bind "tab:execute(tmux switch-client -l)+abort" \
+    --bind "ctrl-x:execute(tmux kill-session -t {1})+clear-query+reload($(declare -f list_sessions format_sessions); format_sessions)")
 
   if [ -z "$selected" ]; then
     echo "No session selected"
@@ -179,10 +190,10 @@ dir_session() {
   # Use fzf to select a directory
   local selected
   if [ "$search_all" = "true" ]; then
-    selected=$(find "$search_dir" -type d 2>/dev/null | fzf --prompt="Select directory: ")
+    selected=$(find "$search_dir" -type d 2>/dev/null | fzf)
   else
     # Stop descending into directories with .git
-    selected=$(find "$search_dir" -type d \( -exec test -d '{}/.git' \; -print -prune \) -o -type d -print 2>/dev/null | fzf --prompt="Select directory: ")
+    selected=$(find "$search_dir" -type d \( -exec test -d '{}/.git' \; -print -prune \) -o -type d -print 2>/dev/null | fzf)
   fi
 
   if [ -z "$selected" ]; then
