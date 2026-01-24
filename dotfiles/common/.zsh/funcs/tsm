@@ -9,20 +9,40 @@ usage() {
   echo "Usage: tsm [OPTIONS] <session-name>"
   echo ""
   echo "Options:"
-  echo "  -l, --list    List available sessions"
-  echo "  -s, --stop    Stop session and run stop.sh if it exists"
-  echo "  -h, --help    Show this help message"
+  echo "  -l, --list         List available sessions"
+  echo "  -s, --stop         Stop session and run stop.sh if it exists"
+  echo "  -f, --fzf          Use fzf to select from configured sessions"
+  echo "  -d, --dir [path]   Use fzf to select a directory (default: \$HOME)"
+  echo "      -a, --all      Search all subdirectories (don't stop at .git)"
+  echo "  -h, --help         Show this help message"
   echo ""
   echo "Examples:"
-  echo "  tsm myproject        Start or attach to session"
-  echo "  tsm -s myproject     Stop session"
-  echo "  tsm -l               List available sessions"
+  echo "  tsm myproject      Start or attach to session"
+  echo "  tsm -s myproject   Stop session"
+  echo "  tsm -l             List available sessions"
+  echo "  tsm -f             Select from configured sessions"
+  echo "  tsm -d             Browse directories from \$HOME"
+  echo "  tsm -d ~/projects  Browse directories from ~/projects"
+  echo "  tsm -da            Browse all directories (include .git subdirs)"
+  echo ""
+  echo "Configuration:"
+  echo "  Sessions are configured in \$HOME/.config/tsm/<session-name>/"
+  echo ""
+  echo "  start.sh  Required script that runs when starting a session."
+  echo "            Use this to create tmux windows, panes, and run commands."
+  echo ""
+  echo "  stop.sh   Optional script that runs before killing a session."
+  echo "            Use this for cleanup tasks like stopping services."
+  echo ""
+  echo "  path      Optional file containing the project directory path."
+  echo "            Supports environment variables (e.g., \$HOME/projects/foo)."
+  echo "            Used by --dir to match directories to configured sessions."
 }
 
 list_sessions() {
   if [ ! -d "$CONFIG_DIR" ]; then
     echo "No sessions configured. Create directories in $CONFIG_DIR"
-    exit 1
+    return 1
   fi
 
   for dir in "$CONFIG_DIR"/*/; do
@@ -36,12 +56,12 @@ start_session() {
 
   if [ ! -d "$session_dir" ]; then
     echo "Error: Session '$session' not found in $CONFIG_DIR"
-    exit 1
+    return 1
   fi
 
   if [ ! -f "$session_dir/start.sh" ]; then
     echo "Error: No start.sh found for session '$session'"
-    exit 1
+    return 1
   fi
 
   # Check if session already exists
@@ -64,7 +84,7 @@ stop_session() {
 
   if ! tmux has-session -t "$session" 2>/dev/null; then
     echo "Error: Session '$session' is not running"
-    exit 1
+    return 1
   fi
 
   # Run stop.sh if it exists
@@ -75,6 +95,102 @@ stop_session() {
 
   echo "Killing session '$session'..."
   tmux kill-session -t "$session"
+}
+
+fzf_session() {
+  local sessions
+  sessions=$(list_sessions)
+
+  if [ -z "$sessions" ]; then
+    echo "No sessions configured in $CONFIG_DIR"
+    return 1
+  fi
+
+  local selected
+  selected=$(echo "$sessions" | fzf --prompt="Select session: ")
+
+  if [ -z "$selected" ]; then
+    echo "No session selected"
+    return 0
+  fi
+
+  start_session "$selected"
+}
+
+dir_session() {
+  local search_dir="${1:-$HOME}"
+  local search_all="${2:-false}"
+
+  # Expand tilde if present
+  search_dir="${search_dir/#\~/$HOME}"
+
+  if [ ! -d "$search_dir" ]; then
+    echo "Error: Directory '$search_dir' does not exist"
+    return 1
+  fi
+
+  # Use fzf to select a directory
+  local selected
+  if [ "$search_all" = "true" ]; then
+    selected=$(find "$search_dir" -type d 2>/dev/null | fzf --prompt="Select directory: ")
+  else
+    # Stop descending into directories with .git
+    selected=$(find "$search_dir" -type d \( -exec test -d '{}/.git' \; -print -prune \) -o -type d -print 2>/dev/null | fzf --prompt="Select directory: ")
+  fi
+
+  if [ -z "$selected" ]; then
+    echo "No directory selected"
+    return 0
+  fi
+
+  # Resolve to absolute path
+  selected=$(cd "$selected" && pwd -P)
+
+  # Check if any configured session has this path
+  local config_session=""
+  for dir in "$CONFIG_DIR"/*/; do
+    [ ! -d "$dir" ] && continue
+    local path_file="$dir/path"
+    if [ -f "$path_file" ]; then
+      local configured_path
+      configured_path=$(cat "$path_file")
+      # Expand environment variables and tilde in configured path
+      configured_path=$(eval echo "$configured_path")
+      # Remove trailing slashes for comparison
+      configured_path="${configured_path%/}"
+      if [ "$configured_path" = "${selected%/}" ]; then
+        config_session=$(basename "$dir")
+        break
+      fi
+    fi
+  done
+
+  if [ -n "$config_session" ]; then
+    # Use the configured session
+    start_session "$config_session"
+  else
+    # Create a new session with the directory basename as name
+    local session_name
+    session_name=$(basename "$selected")
+
+    # Check if session already exists
+    if tmux has-session -t "$session_name" 2>/dev/null; then
+      echo "Session '$session_name' already running, switching..."
+      if [ -n "$TMUX" ]; then
+        tmux switch-client -t "$session_name"
+      else
+        tmux attach-session -t "$session_name"
+      fi
+    else
+      echo "Starting new session '$session_name' in $selected..."
+      if [ -n "$TMUX" ]; then
+        tmux new-session -d -s "$session_name" -c "$selected"
+        tmux switch-client -t "$session_name"
+      else
+        tmux new-session -s "$session_name" -c "$selected"
+      fi
+    fi
+  fi
 }
 
 # Parse arguments
@@ -90,9 +206,33 @@ case "$1" in
   -s|--stop)
     if [ -z "$2" ]; then
       echo "Error: Session name required for --stop"
-      exit 1
+      return 1
     fi
     stop_session "$2"
+    ;;
+  -f|--fzf)
+    fzf_session
+    ;;
+  -d|--dir|-da)
+    local search_all="false"
+    local search_path="$HOME"
+    # Handle combined -da flag
+    if [ "$1" = "-da" ]; then
+      search_all="true"
+    fi
+    shift
+    while [ $# -gt 0 ]; do
+      case "$1" in
+        -a|--all)
+          search_all="true"
+          ;;
+        *)
+          search_path="$1"
+          ;;
+      esac
+      shift
+    done
+    dir_session "$search_path" "$search_all"
     ;;
   -h|--help)
     usage
@@ -100,7 +240,7 @@ case "$1" in
   -*)
     echo "Error: Unknown option '$1'"
     usage
-    exit 1
+    return 1
     ;;
   *)
     start_session "$1"
