@@ -11,6 +11,7 @@ usage() {
   echo "Usage: tsm [OPTIONS] <session-name>"
   echo ""
   echo "Options:"
+  echo "  -h, --help         Show this help message"
   echo "  -l, --list         List available sessions"
   echo "  -s, --stop         Stop session and run stop.sh if it exists"
   echo "  -f, --fzf          Use fzf to select from configured sessions"
@@ -18,7 +19,6 @@ usage() {
   echo "  -d, --dir [path]   Use fzf to select a directory (default: \$HOME)"
   echo "      -a, --all      Search all subdirectories (don't stop at .git)"
   echo "                     This mimics the tmux sessionizer workflow"
-  echo "  -h, --help         Show this help message"
   echo ""
   echo "Examples:"
   echo "  tsm myproject      Start or attach to session"
@@ -139,20 +139,13 @@ fzf_session() {
     return 1
   fi
 
-  local header
-  header=$(printf "%s\n%s" "tab:    previous session" "ctrl-x: kill session")
-
   local selected
   selected=$(echo "$formatted" | fzf \
     --cycle \
-    --layout reverse \
     --prompt "  > " \
     --ansi \
     --with-nth 2 \
-    --delimiter '|' \
-    --header "$header" \
-    --bind "tab:execute(tmux switch-client -l)+abort" \
-    --bind "ctrl-x:execute(tmux kill-session -t {1})+clear-query+reload($(declare -f list_sessions format_sessions); format_sessions)")
+    --delimiter '|')
 
   if [ -z "$selected" ]; then
     echo "No session selected"
