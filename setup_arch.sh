@@ -125,11 +125,6 @@ sudo cp $REPO_ROOT/dotfiles/arch_root/etc/systemd/system/kanata.service /etc/sys
 sudo systemctl daemon-reload
 sudo systemctl enable --now kanata
 
-# tmuxinator
-sudo pacman -S --noconfirm ruby
-gem install tmuxinator
-gem install erb
-
 # xbox controller
 yay -S --noconfirm xpadneo-dkms-git
 sudo modprobe hid_xpadneo || true

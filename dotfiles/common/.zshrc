@@ -70,8 +70,6 @@ fpath=(
 )
 autoload -Uz dark_mode
 autoload -Uz psqlp
-autoload -Uz tmux_session_select
-autoload -Uz tmuxinator_session_select
 autoload -Uz find_file
 autoload -Uz ssh_keygen
 autoload -Uz tsm
@@ -138,9 +136,6 @@ export PATH="$HOME/.rd/bin:$PATH"
 
 # Arch specific
 if [[ -f /etc/arch-release ]]; then
-  # tmuxinator specific (can only be installed via gem)
-  export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
-  export PATH="$PATH:$GEM_HOME/bin"
   # claude specific
   export PATH="$HOME/.local/bin:$PATH"
 fi
