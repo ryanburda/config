@@ -98,23 +98,70 @@ stop_session() {
 }
 
 fzf_session() {
-  local sessions
-  sessions=$(list_sessions)
+  # Get configured sessions
+  local configured_sessions
+  configured_sessions=$(list_sessions 2>/dev/null)
 
-  if [ -z "$sessions" ]; then
-    echo "No sessions configured in $CONFIG_DIR"
+  # Get active tmux sessions
+  local active_sessions
+  active_sessions=$(tmux ls 2>/dev/null | awk -F: '{print $1}')
+  local current_session=$(tmux display-message -p '#S' 2>/dev/null)
+  local previous_session=$(tmux display-message -p '#{client_last_session}' 2>/dev/null)
+
+  # Combine configured and active sessions (unique)
+  local all_sessions
+  all_sessions=$(printf "%s\n%s" "$configured_sessions" "$active_sessions" | sort -u | grep -v '^$')
+
+  if [ -z "$all_sessions" ]; then
+    echo "No sessions available"
     return 1
   fi
 
+  # Colors
+  local RED=$'\033[31m'
+  local GREEN=$'\033[32m'
+  local YELLOW=$'\033[33m'
+  local RESET=$'\033[0m'
+
+  # Format sessions for fzf with colors for active sessions
+  local formatted
+  formatted=$(echo "$all_sessions" | while read -r session; do
+    [ -z "$session" ] && continue
+    if echo "$active_sessions" | grep -q "^${session}$"; then
+      local indicator="  "
+      if [ "$session" = "$current_session" ]; then
+        indicator="${RED}% ${RESET}"
+      elif [ "$session" = "$previous_session" ]; then
+        indicator="${YELLOW}# ${RESET}"
+      fi
+      printf '%s|%s%s%s%s\n' "$session" "$indicator" "$GREEN" "$session" "$RESET"
+    else
+      printf '%s|  %s\n' "$session" "$session"
+    fi
+  done)
+
   local selected
-  selected=$(echo "$sessions" | fzf --prompt="Select session: ")
+  selected=$(echo "$formatted" | fzf --ansi --with-nth 2 --delimiter '|' --prompt="Select session: ")
 
   if [ -z "$selected" ]; then
     echo "No session selected"
     return 0
   fi
 
-  start_session "$selected"
+  # Extract session name from delimiter format
+  selected=$(echo "$selected" | awk -F'|' '{print $1}')
+
+  # Check if it's a configured session
+  if [ -d "$CONFIG_DIR/$selected" ]; then
+    start_session "$selected"
+  else
+    # It's an active but unconfigured session, just switch to it
+    if [ -n "$TMUX" ]; then
+      tmux switch-client -t "$selected"
+    else
+      tmux attach-session -t "$selected"
+    fi
+  fi
 }
 
 dir_session() {
