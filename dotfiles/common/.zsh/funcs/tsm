@@ -6,14 +6,18 @@ mkdir -p $CONFIG_DIR
 usage() {
   echo "Tmux Session Manager"
   echo ""
+  echo "A combination of tmuxinator and tmux sessionizer"
+  echo ""
   echo "Usage: tsm [OPTIONS] <session-name>"
   echo ""
   echo "Options:"
   echo "  -l, --list         List available sessions"
   echo "  -s, --stop         Stop session and run stop.sh if it exists"
   echo "  -f, --fzf          Use fzf to select from configured sessions"
+  echo "                     This mimics the tmuxinator workflow"
   echo "  -d, --dir [path]   Use fzf to select a directory (default: \$HOME)"
   echo "      -a, --all      Search all subdirectories (don't stop at .git)"
+  echo "                     This mimics the tmux sessionizer workflow"
   echo "  -h, --help         Show this help message"
   echo ""
   echo "Examples:"
@@ -33,10 +37,6 @@ usage() {
   echo ""
   echo "  stop.sh   Optional script that runs before killing a session."
   echo "            Use this for cleanup tasks like stopping services."
-  echo ""
-  echo "  path      Optional file containing the project directory path."
-  echo "            Supports environment variables (e.g., \$HOME/projects/foo)."
-  echo "            Used by --dir to match directories to configured sessions."
 }
 
 list_sessions() {
@@ -204,49 +204,24 @@ dir_session() {
   # Resolve to absolute path
   selected=$(cd "$selected" && pwd -P)
 
-  # Check if any configured session has this path
-  local config_session=""
-  for dir in "$CONFIG_DIR"/*/; do
-    [ ! -d "$dir" ] && continue
-    local path_file="$dir/path"
-    if [ -f "$path_file" ]; then
-      local configured_path
-      configured_path=$(cat "$path_file")
-      # Expand environment variables and tilde in configured path
-      configured_path=$(eval echo "$configured_path")
-      # Remove trailing slashes for comparison
-      configured_path="${configured_path%/}"
-      if [ "$configured_path" = "${selected%/}" ]; then
-        config_session=$(basename "$dir")
-        break
-      fi
-    fi
-  done
+  local session_name
+  session_name=$(basename "$selected")
 
-  if [ -n "$config_session" ]; then
-    # Use the configured session
-    start_session "$config_session"
-  else
-    # Create a new session with the directory basename as name
-    local session_name
-    session_name=$(basename "$selected")
-
-    # Check if session already exists
-    if tmux has-session -t "$session_name" 2>/dev/null; then
-      echo "Session '$session_name' already running, switching..."
-      if [ -n "$TMUX" ]; then
-        tmux switch-client -t "$session_name"
-      else
-        tmux attach-session -t "$session_name"
-      fi
+  # Check if session already exists
+  if tmux has-session -t "$session_name" 2>/dev/null; then
+    echo "Session '$session_name' already running, switching..."
+    if [ -n "$TMUX" ]; then
+      tmux switch-client -t "$session_name"
     else
-      echo "Starting new session '$session_name' in $selected..."
-      if [ -n "$TMUX" ]; then
-        tmux new-session -d -s "$session_name" -c "$selected"
-        tmux switch-client -t "$session_name"
-      else
-        tmux new-session -s "$session_name" -c "$selected"
-      fi
+      tmux attach-session -t "$session_name"
+    fi
+  else
+    echo "Starting new session '$session_name' in $selected..."
+    if [ -n "$TMUX" ]; then
+      tmux new-session -d -s "$session_name" -c "$selected"
+      tmux switch-client -t "$session_name"
+    else
+      tmux new-session -s "$session_name" -c "$selected"
     fi
   fi
 }

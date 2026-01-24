@@ -147,7 +147,8 @@ fi
 
 # Alias
 alias l="lsd -lah"
-alias s="tmux_session_select"
+alias s="tsm -f"
+alias S="tsm -d $HOME/Developer/"
 alias cal="cal -3"
 alias ai="claude"
 alias rg="rg --hidden"
