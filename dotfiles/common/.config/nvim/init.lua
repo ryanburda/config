@@ -1,3 +1,6 @@
+-- Add shared lua directory to package path
+package.path = package.path .. ';' .. os.getenv('HOME') .. '/.config/lua/?.lua'
+
 -- Setup lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then

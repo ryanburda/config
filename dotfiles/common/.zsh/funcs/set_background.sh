@@ -6,7 +6,7 @@ set_background() {
     #
     # DESCRIPTION
     #   Terminal background image picker.
-    current_background=$(envget wezterm_background)
+    current_background=$(envy get wezterm_background)
     backgrounds=$(\ls "${XDG_CONFIG_HOME}/.assets/backgrounds")
     backgrounds+=("\nTRANSPARENT")
     backgrounds+=("\nNONE")
@@ -16,7 +16,7 @@ set_background() {
     if [[ -n "${selection}" ]]; then
         if [[ ! -z $selection ]]; then
             # Persist the selection to a file.
-            envset wezterm_background $selection
+            envy set wezterm_background $selection
             # Touch the wezterm config to reload wezterm
             touch $XDG_CONFIG_HOME/wezterm/wezterm.lua
 

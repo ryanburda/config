@@ -22,16 +22,16 @@ set_font() {
         "Terminess Nerd Font Mono,13"
     )
 
-    current_font_family=$(envget font_family $DEFAULT_FONT_FAMILY)
-    current_font_size=$(envget font_size $DEFAULT_FONT_SIZE)
+    current_font_family=$(envy get font_family $DEFAULT_FONT_FAMILY)
+    current_font_size=$(envy get font_size $DEFAULT_FONT_SIZE)
 
     selection=$(printf "%s\n" "${fonts[@]}" | sort | fzf --layout reverse --cycle --header "${current_font_family},${current_font_size}")
     if [[ -n "${selection}" ]]; then
         font_family=$(print $selection | awk -F ',' '{print $1}')
         font_size=$(print $selection | awk -F ',' '{print $2}')
 
-        envset font_family $font_family
-        envset font_size $font_size
+        envy set font_family $font_family
+        envy set font_size $font_size
 
         # reload terminal configs
         touch $XDG_CONFIG_HOME/wezterm/wezterm.lua

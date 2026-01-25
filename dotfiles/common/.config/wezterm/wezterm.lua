@@ -1,4 +1,7 @@
-local helpers = require("helpers")
+-- Add shared lua directory to package path
+package.path = package.path .. ';' .. os.getenv('HOME') .. '/.config/lua/?.lua'
+
+local envy = require("envy")
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
@@ -6,9 +9,9 @@ local config = wezterm.config_builder()
 -- NOTE: `os.getenv("XDG_CONFIG_HOME")` returns nil. Using "HOME" as an alternative for now.
 local background_image_dir = os.getenv("HOME") .. "/.config/.assets/backgrounds/"
 
-config.color_scheme = helpers.envget('wezterm_colorscheme', 'Catppuccin Mocha')
-config.font = wezterm.font(helpers.envget('font_family', 'JetBrains Mono'))
-config.font_size = tonumber(helpers.envget('font_size', '12'))
+config.color_scheme = envy.get('wezterm_colorscheme', 'Catppuccin Mocha')
+config.font = wezterm.font(envy.get('font_family', 'JetBrains Mono'))
+config.font_size = tonumber(envy.get('font_size', '12'))
 config.window_decorations = "RESIZE"
 config.hide_tab_bar_if_only_one_tab = true
 config.tab_bar_at_bottom = false
@@ -31,7 +34,7 @@ config.warn_about_missing_glyphs = false
 --       semi transparent to allow the image to show through.
 
 -- background image
-local current_background = helpers.envget("wezterm_background", "NONE")
+local current_background = envy.get("wezterm_background", "NONE")
 local background_image_path = nil
 if current_background ~= "NONE" then
   background_image_path =  background_image_dir .. current_background
@@ -45,7 +48,7 @@ if current_background ~= "NONE" then
 end
 
 -- background opacity
-local is_nvim_background_dark = (helpers.envget('nvim_background', 'dark')) == 'dark'
+local is_nvim_background_dark = (envy.get('nvim_background', 'dark')) == 'dark'
 local opacity
 
 if is_nvim_background_dark then

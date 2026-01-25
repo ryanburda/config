@@ -1,13 +1,13 @@
 local M = {}
 
-M.ENV_DIR = (os.getenv('XDG_CONFIG_HOME') or os.getenv('HOME') .. '/.config') .. '/.env'
+M.DIR = (os.getenv('XDG_CONFIG_HOME') or os.getenv('HOME') .. '/.config') .. '/.envy'
 
-function M.envpath(name)
-  return M.ENV_DIR .. '/' .. name
+function M.path(name)
+  return M.DIR .. '/' .. name
 end
 
-function M.envget(name, default)
-  local file = io.open(M.envpath(name), 'r')
+function M.get(name, default)
+  local file = io.open(M.path(name), 'r')
   if not file then
     return default or ''
   end
@@ -16,20 +16,20 @@ function M.envget(name, default)
   return content
 end
 
-function M.envset(name, value)
-  local file = io.open(M.envpath(name), 'w')
+function M.set(name, value)
+  local file = io.open(M.path(name), 'w')
   if file then
     file:write(value)
     file:close()
   end
 end
 
-function M.envrm(name)
-  os.remove(M.envpath(name))
+function M.rm(name)
+  os.remove(M.path(name))
 end
 
-function M.envls()
-  local handle = io.popen('ls "' .. M.ENV_DIR .. '"')
+function M.ls()
+  local handle = io.popen('ls "' .. M.DIR .. '"')
   if not handle then
     return {}
   end

@@ -47,10 +47,10 @@ set_colorscheme() {
             nvim_background=$(print $values | awk -F ',' '{print $2}')
             wezterm_colorscheme=$(print $values | awk -F ',' '{print $3}')
 
-            envset colorscheme_key $theme_key
-            envset nvim_colorscheme $nvim_colorscheme
-            envset nvim_background $nvim_background
-            envset wezterm_colorscheme $wezterm_colorscheme
+            envy set colorscheme_key $theme_key
+            envy set nvim_colorscheme $nvim_colorscheme
+            envy set nvim_background $nvim_background
+            envy set wezterm_colorscheme $wezterm_colorscheme
 
             # Update all running nvim instances
             # On Linux, use XDG_RUNTIME_DIR; on macOS, use TMPDIR or /tmp
@@ -67,11 +67,11 @@ set_colorscheme() {
             touch $XDG_CONFIG_HOME/wezterm/wezterm.lua
             regenerate_git_config
             regenerate_lazygit_config
-            ~/.zsh/funcs/dark_mode $(if [[ $(envget nvim_background) == 'light' ]]; then echo '-l'; fi)
+            ~/.zsh/funcs/dark_mode $(if [[ $(envy get nvim_background) == 'light' ]]; then echo '-l'; fi)
         fi
     }
 
-    theme_key=$(printf "%s\n" "${(k)themes[@]}" | sort | fzf --layout reverse --cycle --header "$(envget colorscheme_key)")
+    theme_key=$(printf "%s\n" "${(k)themes[@]}" | sort | fzf --layout reverse --cycle --header "$(envy get colorscheme_key)")
 
     if [[ ! -z $theme_key ]]; then
         set_theme $theme_key

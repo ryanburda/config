@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 regenerate_git_config() {
-    export LIGHT_OR_DARK=$(envget nvim_background 'dark')
+    export LIGHT_OR_DARK=$(envy get nvim_background 'dark')
 
     FILE_PATH="${HOME}/.gitconfig"
 

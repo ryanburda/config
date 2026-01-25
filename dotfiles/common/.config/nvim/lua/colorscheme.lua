@@ -3,10 +3,10 @@
 Sets the colorscheme based on environment variables
 
 --]]
-local env = require('env')
+local envy = require('envy')
 
-local colorscheme = env.envget('nvim_colorscheme', 'everforest')
-local background = env.envget('nvim_background', 'dark')
+local colorscheme = envy.get('nvim_colorscheme', 'everforest')
+local background = envy.get('nvim_background', 'dark')
 
 vim.cmd('colorscheme ' .. colorscheme)
 vim.cmd('set background=' .. background)
@@ -31,7 +31,7 @@ vim.cmd('set background=' .. background)
 -- end
 
 -- Transparency
-if env.envget('wezterm_background', 'NONE') ~= "NONE" then
+if envy.get('wezterm_background', 'NONE') ~= "NONE" then
   -- These highlight groups should be made transparent when displaying a background.
   vim.cmd("highlight Normal guibg=none ctermbg=none")
   vim.cmd("highlight NormalNC guibg=none ctermbg=none")
