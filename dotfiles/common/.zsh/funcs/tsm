@@ -8,24 +8,23 @@ usage() {
   echo ""
   echo "A combination of tmuxinator and tmux sessionizer"
   echo ""
-  echo "Usage: tsm [OPTIONS] <session-name>"
+  echo "Usage: tsm [session-name]"
   echo ""
   echo "Options:"
   echo "  -h, --help         Show this help message"
   echo "  -l, --list         List available sessions"
-  echo "  -s, --stop         Stop session and run stop.sh if it exists"
-  echo "  -f, --fzf          Use fzf to select from configured sessions"
-  echo "                     This mimics the tmuxinator workflow"
+  echo "  -k, --kill [name]  Kill session and run kill.sh if it exists"
   echo "  -d, --dir [path]   Use fzf to select a directory"
   echo "                     Runs \$TSM_DIRS_CMD if set, otherwise shows \$HOME + git repos"
   echo ""
   echo "Examples:"
+  echo "  tsm                Select from configured/active sessions"
   echo "  tsm myproject      Start or attach to session"
-  echo "  tsm -s myproject   Stop session"
-  echo "  tsm -l             List available sessions"
-  echo "  tsm -f             Select from configured sessions"
+  echo "  tsm -k             Select session to kill"
+  echo "  tsm -k myproject   Kill session"
   echo "  tsm -d             Browse directories (\$HOME + git repos)"
   echo "  tsm -d ~/projects  Browse directories from ~/projects"
+  echo "  tsm -l             List available sessions"
   echo ""
   echo "Configuration:"
   echo "  Sessions are configured in \$HOME/.config/tsm/<session-name>/"
@@ -33,7 +32,7 @@ usage() {
   echo "  start.sh  Required script that runs when starting a session."
   echo "            Use this to create tmux windows, panes, and run commands."
   echo ""
-  echo "  stop.sh   Optional script that runs before killing a session."
+  echo "  kill.sh   Optional script that runs before killing a session."
   echo "            Use this for cleanup tasks like stopping services."
   echo ""
   echo "Environment Variables:"
@@ -84,6 +83,25 @@ start_session() {
 
 stop_session() {
   local session="$1"
+
+  # If no session provided, use fzf to select from active sessions
+  if [ -z "$session" ]; then
+    local active_sessions
+    active_sessions=$(tmux ls 2>/dev/null | awk -F: '{print $1}')
+
+    if [ -z "$active_sessions" ]; then
+      echo "No active sessions to kill"
+      return 1
+    fi
+
+    session=$(echo "$active_sessions" | fzf --prompt "> " --header "Kill session")
+
+    if [ -z "$session" ]; then
+      echo "No session selected"
+      return 0
+    fi
+  fi
+
   local session_dir="$CONFIG_DIR/$session"
 
   if ! tmux has-session -t "$session" 2>/dev/null; then
@@ -91,10 +109,10 @@ stop_session() {
     return 1
   fi
 
-  # Run stop.sh if it exists
-  if [ -f "$session_dir/stop.sh" ]; then
+  # Run kill.sh if it exists
+  if [ -f "$session_dir/kill.sh" ]; then
     echo "Running stop script for '$session'..."
-    bash "$session_dir/stop.sh"
+    bash "$session_dir/kill.sh"
   fi
 
   echo "Killing session '$session'..."
@@ -107,29 +125,19 @@ format_sessions() {
 
   local active_sessions
   active_sessions=$(tmux ls 2>/dev/null | awk -F: '{print $1}')
-  local current_session=$(tmux display-message -p '#S' 2>/dev/null)
-  local previous_session=$(tmux display-message -p '#{client_last_session}' 2>/dev/null)
 
   local all_sessions
   all_sessions=$(printf "%s\n%s" "$configured_sessions" "$active_sessions" | sort -u | grep -v '^$')
 
-  local RED=$'\033[31m'
-  local GREEN=$'\033[32m'
-  local YELLOW=$'\033[33m'
+  local BLUE=$'\033[34m'
   local RESET=$'\033[0m'
 
   echo "$all_sessions" | while read -r session; do
     [ -z "$session" ] && continue
     if echo "$active_sessions" | grep -q "^${session}$"; then
-      local indicator="  "
-      if [ "$session" = "$current_session" ]; then
-        indicator="${RED}% ${RESET}"
-      elif [ "$session" = "$previous_session" ]; then
-        indicator="${YELLOW}# ${RESET}"
-      fi
-      printf '%s|%s%s%s%s\n' "$session" "$indicator" "$GREEN" "$session" "$RESET"
+      printf '%s|%s%s%s\n' "$session" "$BLUE" "$session" "$RESET"
     else
-      printf '%s|  %s\n' "$session" "$session"
+      printf '%s|%s\n' "$session" "$session"
     fi
   done
 }
@@ -146,7 +154,8 @@ fzf_session() {
   local selected
   selected=$(echo "$formatted" | fzf \
     --cycle \
-    --prompt "  > " \
+    --prompt "> " \
+    --header "Select session" \
     --ansi \
     --with-nth 2 \
     --delimiter '|')
@@ -181,10 +190,10 @@ dir_session() {
   # If no search dir provided, check TSM_DIRS_CMD first
   if [ -z "$search_dir" ]; then
     if [ -n "$TSM_DIRS_CMD" ]; then
-      selected=$(eval "$TSM_DIRS_CMD" | fzf)
+      selected=$(eval "$TSM_DIRS_CMD" | fzf --prompt "> " --header "Select directory")
     else
       # Default: HOME + git repos within 3 levels
-      selected=$({ echo "$HOME"; find "$HOME" -maxdepth 3 -type d -exec test -d '{}/.git' \; -print -prune 2>/dev/null; } | fzf)
+      selected=$({ echo "$HOME"; find "$HOME" -maxdepth 3 -type d -exec test -d '{}/.git' \; -print -prune 2>/dev/null; } | fzf --prompt "> " --header "Select directory")
     fi
   fi
 
@@ -198,7 +207,7 @@ dir_session() {
       return 1
     fi
 
-    selected=$(find "$search_dir" -type d 2>/dev/null | fzf)
+    selected=$(find "$search_dir" -type d 2>/dev/null | fzf --prompt "> " --header "Select directory")
   fi
 
   if [ -z "$selected" ]; then
@@ -233,7 +242,7 @@ dir_session() {
 
 # Parse arguments
 if [ $# -eq 0 ]; then
-  usage
+  fzf_session
   return 0
 fi
 
@@ -241,15 +250,8 @@ case "$1" in
   -l|--list)
     list_sessions
     ;;
-  -s|--stop)
-    if [ -z "$2" ]; then
-      echo "Error: Session name required for --stop"
-      return 1
-    fi
+  -k|--kill)
     stop_session "$2"
-    ;;
-  -f|--fzf)
-    fzf_session
     ;;
   -d|--dir)
     dir_session "$2"
