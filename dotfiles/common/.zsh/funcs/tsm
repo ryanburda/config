@@ -16,18 +16,16 @@ usage() {
   echo "  -s, --stop         Stop session and run stop.sh if it exists"
   echo "  -f, --fzf          Use fzf to select from configured sessions"
   echo "                     This mimics the tmuxinator workflow"
-  echo "  -d, --dir [path]   Use fzf to select a directory (default: \$HOME)"
-  echo "      -a, --all      Search all subdirectories (don't stop at .git)"
-  echo "                     This mimics the tmux sessionizer workflow"
+  echo "  -d, --dir [path]   Use fzf to select a directory"
+  echo "                     Runs \$TSM_DIRS_CMD if set, otherwise shows \$HOME + git repos"
   echo ""
   echo "Examples:"
   echo "  tsm myproject      Start or attach to session"
   echo "  tsm -s myproject   Stop session"
   echo "  tsm -l             List available sessions"
   echo "  tsm -f             Select from configured sessions"
-  echo "  tsm -d             Browse directories from \$HOME"
+  echo "  tsm -d             Browse directories (\$HOME + git repos)"
   echo "  tsm -d ~/projects  Browse directories from ~/projects"
-  echo "  tsm -da            Browse all directories (include .git subdirs)"
   echo ""
   echo "Configuration:"
   echo "  Sessions are configured in \$HOME/.config/tsm/<session-name>/"
@@ -37,6 +35,12 @@ usage() {
   echo ""
   echo "  stop.sh   Optional script that runs before killing a session."
   echo "            Use this for cleanup tasks like stopping services."
+  echo ""
+  echo "Environment Variables:"
+  echo "  TSM_DIRS_CMD  Command to generate directories for 'tsm -d'."
+  echo "                The command is evaluated at runtime and piped to fzf."
+  echo ""
+  echo "                Default (when unset): \$HOME + git repos within 3 levels"
 }
 
 list_sessions() {
@@ -169,24 +173,32 @@ fzf_session() {
 }
 
 dir_session() {
-  local search_dir="${1:-$HOME}"
-  local search_all="${2:-false}"
-
-  # Expand tilde if present
-  search_dir="${search_dir/#\~/$HOME}"
-
-  if [ ! -d "$search_dir" ]; then
-    echo "Error: Directory '$search_dir' does not exist"
-    return 1
-  fi
+  local search_dir="$1"
 
   # Use fzf to select a directory
   local selected
-  if [ "$search_all" = "true" ]; then
+
+  # If no search dir provided, check TSM_DIRS_CMD first
+  if [ -z "$search_dir" ]; then
+    if [ -n "$TSM_DIRS_CMD" ]; then
+      selected=$(eval "$TSM_DIRS_CMD" | fzf)
+    else
+      # Default: HOME + git repos within 3 levels
+      selected=$({ echo "$HOME"; find "$HOME" -maxdepth 3 -type d -exec test -d '{}/.git' \; -print -prune 2>/dev/null; } | fzf)
+    fi
+  fi
+
+  # If no selection yet, use find
+  if [ -z "$selected" ]; then
+    # Expand tilde if present
+    search_dir="${search_dir/#\~/$HOME}"
+
+    if [ ! -d "$search_dir" ]; then
+      echo "Error: Directory '$search_dir' does not exist"
+      return 1
+    fi
+
     selected=$(find "$search_dir" -type d 2>/dev/null | fzf)
-  else
-    # Stop descending into directories with .git
-    selected=$(find "$search_dir" -type d \( -exec test -d '{}/.git' \; -print -prune \) -o -type d -print 2>/dev/null | fzf)
   fi
 
   if [ -z "$selected" ]; then
@@ -239,26 +251,8 @@ case "$1" in
   -f|--fzf)
     fzf_session
     ;;
-  -d|--dir|-da)
-    local search_all="false"
-    local search_path="$HOME"
-    # Handle combined -da flag
-    if [ "$1" = "-da" ]; then
-      search_all="true"
-    fi
-    shift
-    while [ $# -gt 0 ]; do
-      case "$1" in
-        -a|--all)
-          search_all="true"
-          ;;
-        *)
-          search_path="$1"
-          ;;
-      esac
-      shift
-    done
-    dir_session "$search_path" "$search_all"
+  -d|--dir)
+    dir_session "$2"
     ;;
   -h|--help)
     usage
