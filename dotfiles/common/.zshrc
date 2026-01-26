@@ -63,22 +63,6 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 export EDITOR='nvim'
 export MANPAGER='nvim +Man!'
 
-# Add to PATH
-fpath=(
-  ~/.zsh/funcs
-  "${fpath[@]}"
-)
-autoload -Uz dark_mode
-autoload -Uz psqlp
-autoload -Uz find_file
-autoload -Uz ssh_keygen
-
-source ~/Developer/tmux-session-manager/tmux-session-manager.sh
-
-for file in ~/.zsh/funcs/**.sh; do
-    [ -r "$file" ] && source "$file"
-done
-
 # Raise max files and max procs
 ulimit -n 200000
 ulimit -u 2048
@@ -147,6 +131,7 @@ alias cal="cal -3"
 alias ai="claude"
 alias rg="rg --hidden"
 
+# TODO: get rid of this and put everything in ~/.local/bin/
 # zshrc Extensions
 # Looks for executable files in directory.
 for file in ~/.zsh/zshrc_extensions/*; do
