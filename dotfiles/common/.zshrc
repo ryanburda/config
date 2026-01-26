@@ -72,7 +72,8 @@ autoload -Uz dark_mode
 autoload -Uz psqlp
 autoload -Uz find_file
 autoload -Uz ssh_keygen
-autoload -Uz tsm
+
+source ~/Developer/tmux-session-manager/tmux-session-manager.sh
 
 for file in ~/.zsh/funcs/**.sh; do
     [ -r "$file" ] && source "$file"
