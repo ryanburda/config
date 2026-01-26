@@ -14,7 +14,7 @@ mkdir -p $ENVY_DIR
 
 function envy {
     local action="$1"
-    shift
+    [[ $# -gt 0 ]] && shift
 
     case "$action" in
         set)
@@ -55,6 +55,9 @@ function envy {
             echo "  path <name>          - Get the path to an environment file"
             echo "  ls                   - List all environment variables"
             echo "  help                 - Show this help message"
+            ;;
+        "")
+            envy help
             ;;
         *)
             echo "Unknown action: $action (try 'envy help')"
