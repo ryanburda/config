@@ -23,7 +23,8 @@ set_background() {
             # Update all running nvim instances (removes transparency)
             local nvim_runtime_dir="${TMPDIR:-/tmp}"
             # Try both macOS pattern (nvim.*/*/nvim.*.0) and Linux pattern (nvim.*/0)
-            for socket in "$nvim_runtime_dir"/nvim.*/*/nvim.*.0 "$nvim_runtime_dir"/nvim.*/0; do
+            # (N) qualifier prevents zsh error when pattern doesn't match
+            for socket in "$nvim_runtime_dir"/nvim.*/*/nvim.*.0(N) "$nvim_runtime_dir"/nvim.*/0(N); do
                 if [[ -S "$socket" ]]; then
                     # redirect stderr to /dev/null since stale socket files can remain even after Neovim instances have closed.
                     nvim --server "$socket" --remote-send "<Cmd>luafile ${XDG_CONFIG_HOME}/nvim/lua/colorscheme.lua<CR>" 2>/dev/null
