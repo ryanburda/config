@@ -108,13 +108,7 @@ eval "$(pyenv init - zsh)"
 # https://github.com/pyenv/pyenv-virtualenv/issues/259
 # eval "$(pyenv virtualenv-init -)"
 
-# ChatGPT
-OPENAI_API_KEY_FILE=$HOME/.openai_api_key
-if [ -f $OPENAI_API_KEY_FILE ]; then
-  export OPENAI_API_KEY=$(cat $OPENAI_API_KEY_FILE)
-else
-  export OPENAI_API_KEY=""
-fi
+eval "$(zoxide init zsh)"
 
 # Rancher
 export PATH="$HOME/.rd/bin:$PATH"

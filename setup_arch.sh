@@ -101,6 +101,7 @@ sudo pacman -S --noconfirm \
     xdg-desktop-portal-gtk \
     xorg-xwayland \
     xwayland-satellite \
+    zoxide \
     zsh
 
 sudo systemctl enable --now power-profiles-daemon.service
