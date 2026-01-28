@@ -130,6 +130,7 @@ alias l="lsd -lah"
 alias cal="cal -3"
 alias ai="claude"
 alias rg="rg --hidden"
+alias s="tsm -c"
 
 # TODO: get rid of this and put everything in ~/.local/bin/
 # zshrc Extensions
