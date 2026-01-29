@@ -13,7 +13,7 @@ backgrounds=$(\ls "${XDG_CONFIG_HOME}/.assets/backgrounds")
 backgrounds+=("\nTRANSPARENT")
 backgrounds+=("\nNONE")
 
-selection=$(print $backgrounds | sort | fzf --layout reverse --cycle --header "${current_background}")
+selection=$(print $backgrounds | sort | fzf --cycle --header "${current_background}")
 
 if [[ -n "${selection}" ]]; then
     if [[ ! -z $selection ]]; then

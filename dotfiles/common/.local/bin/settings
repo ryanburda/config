@@ -1,0 +1,9 @@
+#!/bin/bash
+
+choice=$(printf 'colorscheme\nfont\nbackground' | fzf --cycle)
+
+case "$choice" in
+    colorscheme) set_colorscheme ;;
+    font) set_font ;;
+    background) set_background ;;
+esac

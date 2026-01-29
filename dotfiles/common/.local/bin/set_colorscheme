@@ -74,7 +74,7 @@ set_theme(){
     fi
 }
 
-theme_key=$(printf "%s\n" "${(k)themes[@]}" | sort | fzf --layout reverse --cycle --header "$(envy get colorscheme_key)")
+theme_key=$(printf "%s\n" "${(k)themes[@]}" | sort | fzf --cycle --header "$(envy get colorscheme_key)")
 
 if [[ ! -z $theme_key ]]; then
     set_theme $theme_key
