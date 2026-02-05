@@ -53,14 +53,14 @@ vim.keymap.set(
 
 vim.keymap.set(
   'n',
-  '<leader><C-j>',
+  '<leader>;',
   ':split<cr><C-w>j',
   {desc = 'Window Management: Horizontal split', silent = true}
 )
 
 vim.keymap.set(
   'n',
-  '<leader><C-l>',
+  "<leader>'",
   ':vsplit<cr><C-w>l',
   {desc = 'Window Management: Vertical split', silent = true}
 )
@@ -841,14 +841,14 @@ vim.keymap.set(
   {desc = 'Execute: Execute visual select in lua'}
 )
 
-vim.keymap.set(
-  'n',
-  '<leader>;',
-  function()
-    vim.cmd('source %')
-  end,
-  {desc = "Execute: Source current file" }
-)
+-- vim.keymap.set(
+--   'n',
+--   '<leader>;',
+--   function()
+--     vim.cmd('source %')
+--   end,
+--   {desc = "Execute: Source current file" }
+-- )
 
 vim.keymap.set(
   'n',
@@ -1003,17 +1003,17 @@ vim.keymap.set(
   { desc = 'Set mark' }
 )
 
-vim.keymap.set(
-  'n',
-  "<leader>'",
-  function()
-    local char = vim.fn.getcharstr()
-    -- set mark
-    local ok, err = pcall(vim.cmd, "normal! '" .. char)
-    if not ok then
-      local vim_err = err:match("Vim%([^)]+%):(.*)") or err
-      vim.api.nvim_echo({{vim_err, "ErrorMsg"}}, true, {})
-    end
-  end,
-  { desc = 'Set mark' }
-)
+-- vim.keymap.set(
+--   'n',
+--   "<leader>'",
+--   function()
+--     local char = vim.fn.getcharstr()
+--     -- set mark
+--     local ok, err = pcall(vim.cmd, "normal! '" .. char)
+--     if not ok then
+--       local vim_err = err:match("Vim%([^)]+%):(.*)") or err
+--       vim.api.nvim_echo({{vim_err, "ErrorMsg"}}, true, {})
+--     end
+--   end,
+--   { desc = 'Set mark' }
+-- )
