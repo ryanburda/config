@@ -18,6 +18,7 @@ brew install \
     coreutils \
     curl \
     deno \
+    direnv \
     fd \
     ffmpeg \
     fzf \

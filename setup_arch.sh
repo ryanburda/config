@@ -44,6 +44,7 @@ sudo pacman -S --noconfirm \
     coreutils \
     curl \
     dkms \
+    direnv \
     docker \
     fd \
     fuzzel \
