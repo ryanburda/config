@@ -13,6 +13,14 @@
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# Create any directories you'll need.
+# NOTE: This is important since stow will "fold" directories if they don't already exist.
+mkdir -p $HOME/.config
+mkdir -p $HOME/.local/bin
+mkdir -p $HOME/Developer
+mkdir -p $HOME/Documents
+mkdir -p $HOME/Downloads
+
 # Move files in repo to their proper location.
 # Symlink config files
 sudo pacman -S --noconfirm stow
