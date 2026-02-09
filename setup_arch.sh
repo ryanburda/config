@@ -79,6 +79,8 @@ sudo pacman -S --needed --noconfirm \
     bluetui \
     impala
 
+sudo systemctl enable --now bluetooth.service
+
 # Networking
 sudo pacman -S --needed --noconfirm \
     networkmanager
@@ -129,6 +131,8 @@ sudo pacman -S --needed --noconfirm \
     kubectx \
     lazydocker \
     lazygit
+
+sudo systemctl enable docker.service
 
 sudo systemctl enable --now power-profiles-daemon.service
 
