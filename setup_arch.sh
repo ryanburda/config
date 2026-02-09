@@ -135,6 +135,7 @@ sudo pacman -S --needed --noconfirm \
 sudo pacman -S --needed --noconfirm \
     cloud-sql-proxy \
     docker \
+    docker-compose \
     k9s \
     kubectl \
     kubectx \
