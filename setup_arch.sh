@@ -70,7 +70,8 @@ sudo pacman -S --needed --noconfirm \
     pipewire \
     pipewire-alsa \
     pipewire-pulse \
-    wireplumber
+    wireplumber \
+    wiremix
 
 # Bluetooth
 sudo pacman -S --needed --noconfirm \
