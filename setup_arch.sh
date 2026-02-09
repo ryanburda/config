@@ -22,6 +22,8 @@ sudo mkdir -p /etc/bluetooth
 sudo cp $REPO_ROOT/dotfiles/arch_root/etc/bluetooth/input.conf /etc/bluetooth/input.conf
 sudo cp $REPO_ROOT/dotfiles/arch_root/etc/pacman.conf /etc/pacman.conf
 sudo cp $REPO_ROOT/dotfiles/arch_root/etc/vconsole.conf /etc/vconsole.conf
+# Sync package databases after copying pacman.conf (which may enable new repos like multilib).
+sudo pacman -Sy
 
 # yay
 sudo pacman -S --needed --noconfirm base-devel git
@@ -32,78 +34,101 @@ cd "$HOME/yay"
 makepkg -si --noconfirm
 cd "$REPO_ROOT"
 
-sudo pacman -S --noconfirm \
+# Fonts
+sudo pacman -S --needed --noconfirm \
     $(pacman -Sgq nerd-fonts) \
+    terminus-font
+
+# Core tools
+sudo pacman -S --needed --noconfirm \
     bat \
-    bluetui \
-    bluez \
-    bluez-utils \
     bottom \
-    cliphist \
-    cloud-sql-proxy \
     coreutils \
     curl \
-    dkms \
     direnv \
-    docker \
     fd \
-    fuzzel \
     fzf \
     git \
     git-delta \
     github-cli \
     go \
-    impala \
     jq \
+    less \
+    lsd \
+    lua \
+    neovim \
+    pyenv \
+    ripgrep \
+    tldr \
+    tmux \
+    wget \
+    zoxide \
+    zsh
+
+# Audio
+sudo pacman -S --needed --noconfirm \
+    pipewire \
+    pipewire-alsa \
+    pipewire-pulse \
+    wireplumber
+
+# Bluetooth
+sudo pacman -S --needed --noconfirm \
+    bluez \
+    bluez-utils \
+    bluetui \
+    impala
+
+# Networking
+sudo pacman -S --needed --noconfirm \
+    networkmanager
+
+# Desktop / Wayland (install portal provider before niri)
+sudo pacman -S --needed --noconfirm \
+    xdg-desktop-portal-gnome
+sudo pacman -S --needed --noconfirm \
+    cliphist \
+    fuzzel \
+    niri \
+    obsidian \
+    polkit-gnome \
+    power-profiles-daemon \
+    swaybg \
+    swaylock \
+    wezterm \
+    wl-clipboard \
+    xorg-xwayland \
+    xwayland-satellite
+
+# Gaming / Graphics (install providers before steam/lutris)
+sudo pacman -S --needed --noconfirm \
+    lib32-mesa \
+    lib32-vulkan-radeon \
+    mesa \
+    vulkan-radeon
+sudo pacman -S --needed --noconfirm \
+    dkms \
+    lib32-alsa-plugins \
+    lib32-pipewire \
+    libva-mesa-driver \
+    libva-utils \
+    linux-headers \
+    lutris \
+    mesa-utils \
+    spotify-launcher \
+    steam \
+    vulkan-tools \
+    wine
+
+# Containers / Kubernetes
+sudo pacman -S --needed --noconfirm \
+    cloud-sql-proxy \
+    docker \
     k9s \
     kubectl \
     kubectx \
     lazydocker \
-    lazygit \
-    less \
-    lib32-alsa-plugins \
-    lib32-mesa \
-    lib32-pipewire \
-    lib32-vulkan-radeon \
-    libva-mesa-driver \
-    libva-utils \
-    linux-headers \
-    lsd \
-    lua \
-    lutris \
-    mesa \
-    mesa-utils \
-    neovim \
-    networkmanager \
-    niri \
-    obsidian \
-    pipewire \
-    pipewire-alsa \
-    pipewire-pulse \
-    polkit-gnome \
-    power-profiles-daemon \
-    pyenv \
-    ripgrep \
-    spotify-launcher \
-    steam \
-    swaybg \
-    swaylock \
-    terminus-font \
-    tldr \
-    tmux \
-    vulkan-radeon \
-    vulkan-tools \
-    wezterm \
-    wget \
-    wine \
-    wireplumber \
-    wl-clipboard \
-    xdg-desktop-portal-gnome \
-    xdg-desktop-portal-gtk \
-    xorg-xwayland \
-    xwayland-satellite \
-    zoxide \
-    zsh
+    lazygit
 
 sudo systemctl enable --now power-profiles-daemon.service
 
