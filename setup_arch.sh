@@ -142,6 +142,7 @@ sudo pacman -S --needed --noconfirm \
     lazygit
 
 sudo systemctl enable docker.service
+sudo usermod -aG docker $USER
 
 sudo systemctl enable --now power-profiles-daemon.service
 
