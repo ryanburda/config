@@ -107,6 +107,7 @@ sudo pacman -S --needed --noconfirm \
     swaybg \
     swaylock \
     wezterm \
+    wdisplays \
     wl-clipboard \
     xorg-xwayland \
     xwayland-satellite
