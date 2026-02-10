@@ -1,0 +1,4 @@
+[Desktop Entry]
+Name=Power Menu
+Exec=/home/ryanburda/.config/scripts/power-menu.sh
+Type=Application

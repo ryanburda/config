@@ -1,0 +1,4 @@
+[Desktop Entry]
+Name=Power Profiles
+Exec=/home/ryanburda/.config/scripts/power-profiles.sh
+Type=Application

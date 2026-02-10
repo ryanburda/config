@@ -1,0 +1,4 @@
+[Desktop Entry]
+Name=Settings Menu
+Exec=/home/ryanburda/.config/scripts/settings-menu.sh
+Type=Application
