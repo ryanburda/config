@@ -315,19 +315,94 @@ ShellRoot {
                 anchors.fill: parent
                 color: "transparent"
 
-                // Niri workspaces on the left
+                // Power and settings on the left
                 Rectangle {
-                    id: workspacesContainer
+                    id: leftMenuContainer
                     color: root.colBg
                     radius: root.radiusContainer
                     anchors.left: parent.left
                     anchors.leftMargin: 12
                     anchors.verticalCenter: parent.verticalCenter
                     height: parent.height
-                    implicitWidth: workspaceRow.implicitWidth
+                    implicitWidth: leftMenuRow.implicitWidth
 
                     RowLayout {
-                        id: workspaceRow
+                        id: leftMenuRow
+                        anchors.fill: parent
+                        spacing: 0
+
+                        Item { width: root.spacing }
+
+                        Rectangle {
+                            color: powerMouseArea.containsMouse ? Qt.lighter(root.colBg, 1.2) : "transparent"
+                            radius: root.radiusElement
+                            Layout.preferredWidth: powerText.implicitWidth + 16
+                            Layout.preferredHeight: parent.height
+
+                            Text {
+                                id: powerText
+                                anchors.centerIn: parent
+                                text: "⏻ "
+                                color: root.colFg
+                                font.pixelSize: root.fontSize
+                                font.family: root.fontFamily
+                                font.bold: true
+                            }
+
+                            MouseArea {
+                                id: powerMouseArea
+                                anchors.fill: parent
+                                hoverEnabled: true
+                                cursorShape: Qt.PointingHandCursor
+                                onClicked: {
+                                    powerProc.running = true
+                                }
+                            }
+                        }
+
+                        Rectangle {
+                            color: settingsMouseArea.containsMouse ? Qt.lighter(root.colBg, 1.2) : "transparent"
+                            radius: root.radiusElement
+                            Layout.preferredWidth: settingsText.implicitWidth + 16
+                            Layout.preferredHeight: parent.height
+
+                            Text {
+                                id: settingsText
+                                anchors.centerIn: parent
+                                text: "  "
+                                color: root.colFg
+                                font.pixelSize: root.fontSize
+                                font.family: root.fontFamily
+                                font.bold: true
+                            }
+
+                            MouseArea {
+                                id: settingsMouseArea
+                                anchors.fill: parent
+                                hoverEnabled: true
+                                cursorShape: Qt.PointingHandCursor
+                                onClicked: {
+                                    settingsProc.running = true
+                                }
+                            }
+                        }
+
+                        Item { width: root.spacing }
+                    }
+                }
+
+                // Workspaces and column indicators in the center
+                Rectangle {
+                    id: centerContainer
+                    color: root.colBg
+                    radius: root.radiusContainer
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.verticalCenter: parent.verticalCenter
+                    height: parent.height
+                    implicitWidth: centerRow.implicitWidth
+
+                    RowLayout {
+                        id: centerRow
                         anchors.fill: parent
                         spacing: 4
 
@@ -370,7 +445,6 @@ ShellRoot {
                                     hoverEnabled: true
                                     cursorShape: Qt.PointingHandCursor
                                     onClicked: {
-                                        // Switch to workspace
                                         var switchProc = Qt.createQmlObject(
                                             'import Quickshell.Io; Process { command: ["niri", "msg", "action", "focus-workspace", "' + wsIdx + '"]; running: true }',
                                             root
@@ -381,28 +455,6 @@ ShellRoot {
                         }
 
                         Item { width: root.spacing }
-                    }
-                }
-
-                // Niri column indicators in the center
-                Rectangle {
-                    id: columnContainer
-                    color: root.colBg
-                    radius: root.radiusContainer
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.verticalCenter: parent.verticalCenter
-                    height: parent.height
-                    implicitWidth: columnRow.implicitWidth
-
-                    RowLayout {
-                        id: columnRow
-                        anchors.fill: parent
-                        spacing: root.spacing
-
-                        Item {
-                            id: leftPadding
-                            width: root.spacing
-                        }
 
                         Repeater {
                             id: columnRepeater
@@ -471,66 +523,13 @@ ShellRoot {
                             font.family: root.fontFamily
                             font.bold: true
                             Layout.rightMargin: root.spacing
+                            Layout.leftMargin: root.spacing
 
                             Timer {
                                 interval: 1000
                                 running: true
                                 repeat: true
-                                onTriggered: clockText.text = "  " + Qt.formatDateTime(new Date(), root.dateFormat)
-                            }
-                        }
-
-                        Rectangle {
-                            color: settingsMouseArea.containsMouse ? Qt.lighter(root.colBg, 1.2) : "transparent"
-                            radius: root.radiusElement
-                            Layout.preferredWidth: settingsText.implicitWidth + 16
-                            Layout.preferredHeight: parent.height
-
-                            Text {
-                                id: settingsText
-                                anchors.centerIn: parent
-                                text: "    "
-                                color: root.colFg
-                                font.pixelSize: root.fontSize
-                                font.family: root.fontFamily
-                                font.bold: true
-                            }
-
-                            MouseArea {
-                                id: settingsMouseArea
-                                anchors.fill: parent
-                                hoverEnabled: true
-                                cursorShape: Qt.PointingHandCursor
-                                onClicked: {
-                                    settingsProc.running = true
-                                }
-                            }
-                        }
-
-                        Rectangle {
-                            color: powerMouseArea.containsMouse ? Qt.lighter(root.colBg, 1.2) : "transparent"
-                            radius: root.radiusElement
-                            Layout.preferredWidth: powerText.implicitWidth + 16
-                            Layout.preferredHeight: parent.height
-
-                            Text {
-                                id: powerText
-                                anchors.centerIn: parent
-                                text: "  ⏻  "
-                                color: root.colFg
-                                font.pixelSize: root.fontSize
-                                font.family: root.fontFamily
-                                font.bold: true
-                            }
-
-                            MouseArea {
-                                id: powerMouseArea
-                                anchors.fill: parent
-                                hoverEnabled: true
-                                cursorShape: Qt.PointingHandCursor
-                                onClicked: {
-                                    powerProc.running = true
-                                }
+                                onTriggered: clockText.text = " " + Qt.formatDateTime(new Date(), root.dateFormat)
                             }
                         }
 
