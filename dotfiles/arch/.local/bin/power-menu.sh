@@ -1,18 +1,18 @@
 #!/bin/sh
 
-option=$(printf "lock\nshutdown\nrestart\nlogout" | fuzzel --dmenu --prompt "")
+option=$(printf "Shutdown\nRestart\nLock\nLogout" | fuzzel --dmenu --prompt "")
 
 case "$option" in
-    lock)
-        swaylock
-        ;;
-    shutdown)
+    Shutdown)
         systemctl poweroff
         ;;
-    restart)
+    Restart)
         systemctl reboot
         ;;
-    logout)
+    Lock)
+        swaylock
+        ;;
+    Logout)
         loginctl terminate-user "$USER"
         ;;
 esac

@@ -1,4 +1,4 @@
 [Desktop Entry]
-Name=Power Menu
+Name=Power On/Off
 Exec=/home/ryanburda/.local/bin/power-menu.sh
 Type=Application

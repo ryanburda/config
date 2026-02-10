@@ -1,15 +1,15 @@
 #!/bin/sh
 
-option=$(printf "sound\nwifi\nbluetooth" | fuzzel --dmenu --prompt "")
+option=$(printf "Sound\nWiFi\nBluetooth" | fuzzel --dmenu --prompt "")
 
 case "$option" in
-    sound)
+    Sound)
         wezterm start -- wiremix -v output
         ;;
-    wifi)
+    WiFi)
         wezterm start -- impala
         ;;
-    bluetooth)
+    Bluetooth)
         wezterm start -- bluetui
         ;;
 esac
