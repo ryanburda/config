@@ -205,13 +205,13 @@ ShellRoot {
     // Power menu process
     Process {
         id: powerProc
-        command: ["sh", "-c", "~/.config/scripts/power-menu.sh"]
+        command: ["sh", "-c", "~/.local/bin/power-menu.sh"]
     }
 
     // Settings menu process
     Process {
         id: settingsProc
-        command: ["sh", "-c", "~/.config/scripts/settings-menu.sh"]
+        command: ["sh", "-c", "~/.local/bin/settings-menu.sh"]
     }
 
     // Get niri workspaces

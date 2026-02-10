@@ -397,7 +397,6 @@ binds {
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Super+T hotkey-overlay-title="Open a Terminal" { spawn "wezterm"; }
     Super+Space hotkey-overlay-title="Run an Application" { spawn-sh "fuzzel"; }
-    Super+Alt+K hotkey-overlay-title="Clipboard" { spawn-sh "~/.config/scripts/clipboard.sh"; }
 
     // Example volume keys mappings for PipeWire & WirePlumber.
     // The allow-when-locked=true property makes them work even when the session is locked.

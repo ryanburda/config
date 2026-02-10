@@ -1,4 +1,4 @@
 [Desktop Entry]
 Name=Clipboard
-Exec=/home/ryanburda/.config/scripts/clipboard.sh
+Exec=/home/ryanburda/.local/bin/clipboard.sh
 Type=Application
