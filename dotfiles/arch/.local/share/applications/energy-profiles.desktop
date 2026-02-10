@@ -1,0 +1,4 @@
+[Desktop Entry]
+Name=Energy Profiles
+Exec=/home/ryanburda/.local/bin/energy-profiles.sh
+Type=Application
