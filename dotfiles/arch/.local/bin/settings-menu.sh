@@ -1,6 +1,6 @@
 #!/bin/sh
 
-option=$(printf "sound\nwifi\nbluetooth\nmonitor" | fuzzel --dmenu --prompt "")
+option=$(printf "sound\nwifi\nbluetooth" | fuzzel --dmenu --prompt "")
 
 case "$option" in
     sound)
@@ -11,8 +11,5 @@ case "$option" in
         ;;
     bluetooth)
         wezterm start -- bluetui
-        ;;
-    monitor)
-        wezterm start -- btm --rate 5s
         ;;
 esac

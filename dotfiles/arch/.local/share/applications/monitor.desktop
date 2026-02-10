@@ -1,0 +1,4 @@
+[Desktop Entry]
+Name=Monitor
+Exec=wezterm start -- btm --rate 5s
+Type=Application
