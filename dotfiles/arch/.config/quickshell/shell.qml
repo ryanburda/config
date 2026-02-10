@@ -465,11 +465,28 @@ ShellRoot {
                                 property real colWidth: modelData.width
                                 property int columnNum: modelData.column
 
-                                color: isFocused ? root.colActive : root.colInactive
+                                color: columnMouseArea.containsMouse ? Qt.lighter(isFocused ? root.colActive : root.colInactive, 1.3) : (isFocused ? root.colActive : root.colInactive)
                                 radius: root.radiusElement
                                 Layout.preferredWidth: Math.max(root.columnBarMinWidth, colWidth * root.columnBarMaxWidth)
                                 Layout.preferredHeight: parent.height - (root.spacing * 2)
                                 Layout.alignment: Qt.AlignVCenter
+
+                                MouseArea {
+                                    id: columnMouseArea
+                                    anchors.fill: parent
+                                    hoverEnabled: true
+                                    cursorShape: Qt.PointingHandCursor
+                                    onClicked: {
+                                        var cmd = 'niri msg action focus-column-first'
+                                        for (var i = 0; i < index; i++) {
+                                            cmd += ' && niri msg action focus-column-right'
+                                        }
+                                        var focusProc = Qt.createQmlObject(
+                                            'import Quickshell.Io; Process { command: ["sh", "-c", "' + cmd + '"]; running: true }',
+                                            root
+                                        )
+                                    }
+                                }
                             }
                         }
 
