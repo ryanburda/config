@@ -396,7 +396,7 @@ binds {
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Super+T hotkey-overlay-title="Open a Terminal" { spawn "wezterm"; }
-    Super+Space hotkey-overlay-title="Run an Application" { spawn-sh "fuzzel"; }
+    Super+Space hotkey-overlay-title="Run an Application" { spawn-sh "~/.config/scripts/launcher.sh"; }
     Super+Alt+L hotkey-overlay-title="Power Menu" { spawn-sh "~/.config/scripts/power-menu.sh"; }
     Super+Alt+S hotkey-overlay-title="Settings Menu" { spawn-sh "~/.config/scripts/settings-menu.sh"; }
     Super+Alt+K hotkey-overlay-title="Clipboard" { spawn-sh "~/.config/scripts/clipboard.sh"; }
