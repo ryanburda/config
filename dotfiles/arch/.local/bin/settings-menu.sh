@@ -1,6 +1,6 @@
 #!/bin/sh
 
-option=$(printf "Sound\nWiFi\nBluetooth\nDisplays\nBackground" | fuzzel --dmenu --prompt "")
+option=$(printf "Sound\nWiFi\nBluetooth\nDisplays\nBackground" | sort | fuzzel --dmenu --prompt "")
 
 case "$option" in
     Sound)
