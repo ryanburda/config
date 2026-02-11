@@ -53,6 +53,7 @@ sudo pacman -S --needed --noconfirm \
     bottom \
     coreutils \
     curl \
+    chafa \
     direnv \
     fd \
     fzf \

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-option=$(printf "Sound\nWiFi\nBluetooth\nDisplays" | fuzzel --dmenu --prompt "")
+option=$(printf "Sound\nWiFi\nBluetooth\nDisplays\nBackground" | fuzzel --dmenu --prompt "")
 
 case "$option" in
     Sound)
@@ -14,5 +14,8 @@ case "$option" in
         ;;
     Displays)
         wezterm start -- wdisplays
+        ;;
+    Background)
+        wezterm start -- background-selector.sh
         ;;
 esac

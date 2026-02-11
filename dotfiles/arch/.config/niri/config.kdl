@@ -293,7 +293,7 @@ workspace "2"
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
 spawn-at-startup "qs"
-spawn-sh-at-startup "swaybg -i ~/Developer/assets/assets/backgrounds/snowy_mountain.jpg -m fill"
+spawn-sh-at-startup "swaybg -i $(envy get background ~/Developer/assets/assets/backgrounds/snowy_mountain.jpg) -m fill"
 spawn-sh-at-startup "wl-paste --watch cliphist store"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
