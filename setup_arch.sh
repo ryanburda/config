@@ -55,6 +55,7 @@ sudo pacman -S --needed --noconfirm \
     curl \
     chafa \
     direnv \
+    eva \
     fd \
     fzf \
     git \

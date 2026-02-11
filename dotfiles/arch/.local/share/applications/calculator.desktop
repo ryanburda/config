@@ -1,0 +1,4 @@
+[Desktop Entry]
+Name=Calculator
+Exec=wezterm start -- eva
+Type=Application
