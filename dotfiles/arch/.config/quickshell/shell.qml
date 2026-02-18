@@ -27,6 +27,9 @@ ShellRoot {
     // System info properties
     property int volumeLevel: 0
     property bool volumeVisible: false
+    property int brightnessLevel: 0
+    property bool brightnessVisible: false
+    property bool brightnessInitialized: false
     property int batteryPercentage: 0
     property bool hasBattery: false
 
@@ -132,10 +135,24 @@ ShellRoot {
         Component.onCompleted: running = true
     }
 
-    // Show volume when it changes
+    // Show volume when it changes (hide brightness)
     onVolumeLevelChanged: {
+        brightnessVisible = false
+        brightnessHideTimer.stop()
         volumeVisible = true
         volumeHideTimer.restart()
+    }
+
+    // Show brightness when it changes (hide volume)
+    onBrightnessLevelChanged: {
+        if (!brightnessInitialized) {
+            brightnessInitialized = true
+            return
+        }
+        volumeVisible = false
+        volumeHideTimer.stop()
+        brightnessVisible = true
+        brightnessHideTimer.restart()
     }
 
     // Reprocess columns when workspace changes
@@ -150,6 +167,44 @@ ShellRoot {
         running: false
         repeat: false
         onTriggered: volumeVisible = false
+    }
+
+    // Timer to hide brightness after 3 seconds
+    Timer {
+        id: brightnessHideTimer
+        interval: 3000
+        running: false
+        repeat: false
+        onTriggered: brightnessVisible = false
+    }
+
+    // Read brightness level
+    Process {
+        id: brightnessProc
+        command: ["brightnessctl", "-m"]
+        stdout: SplitParser {
+            onRead: data => {
+                if (!data) return
+                var parts = data.split(",")
+                if (parts.length >= 4) {
+                    brightnessLevel = parseInt(parts[3])
+                }
+            }
+        }
+        Component.onCompleted: running = true
+    }
+
+    // Watch for brightness changes
+    Process {
+        id: brightnessEventProc
+        command: ["sh", "-c", "inotifywait -m -e modify /sys/class/backlight/*/brightness 2>/dev/null"]
+        stdout: SplitParser {
+            onRead: data => {
+                if (!data) return
+                brightnessProc.running = true
+            }
+        }
+        Component.onCompleted: running = true
     }
 
     // Check if battery exists
@@ -368,7 +423,7 @@ ShellRoot {
                             }
                         }
 
-                        Item { width: root.spacing; visible: root.volumeVisible }
+                        Item { width: root.spacing; visible: root.volumeVisible || root.brightnessVisible }
 
                         // Volume bar
                         Rectangle {
@@ -393,6 +448,36 @@ ShellRoot {
                         Text {
                             visible: root.volumeVisible
                             text: "   " + root.volumeLevel + "% "
+                            color: root.colFg
+                            font.pixelSize: root.fontSize
+                            font.family: root.fontFamily
+                            font.bold: true
+                        }
+
+
+                        // Brightness bar
+                        Rectangle {
+                            visible: root.brightnessVisible
+                            color: root.colInactive
+                            radius: root.radiusElement
+                            Layout.preferredWidth: 80
+                            Layout.preferredHeight: parent.height - (root.spacing * 2)
+                            Layout.alignment: Qt.AlignVCenter
+                            clip: true
+
+                            Rectangle {
+                                anchors.top: parent.top
+                                anchors.bottom: parent.bottom
+                                anchors.left: parent.left
+                                width: parent.width * Math.min(root.brightnessLevel / 100.0, 1.0)
+                                color: root.colActive
+                                radius: root.radiusElement
+                            }
+                        }
+
+                        Text {
+                            visible: root.brightnessVisible
+                            text: " 󰃜  " + root.brightnessLevel + "% "
                             color: root.colFg
                             font.pixelSize: root.fontSize
                             font.family: root.fontFamily

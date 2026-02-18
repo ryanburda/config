@@ -92,6 +92,11 @@ sudo pacman -S --needed --noconfirm \
 
 sudo systemctl enable --now bluetooth.service
 
+# Displays
+sudo pacman -S --needed --noconfirm \
+    brightnessctl \
+    wdisplays
+
 # Networking
 sudo pacman -S --needed --noconfirm \
     networkmanager
@@ -109,7 +114,6 @@ sudo pacman -S --needed --noconfirm \
     swaybg \
     swaylock \
     wezterm \
-    wdisplays \
     wl-clipboard \
     xorg-xwayland \
     xwayland-satellite
