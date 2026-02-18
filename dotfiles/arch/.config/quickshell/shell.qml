@@ -7,9 +7,9 @@ ShellRoot {
     id: root
 
     // Theme colors
-    property color colBg: "#EB1a1b26"
+    property color colBg: "#EB111111"
     property color colFg: "#a9b1d6"
-    property color colActive: "#777777"
+    property color colActive: "#555555"
     property color colInactive: "#333333"
 
     // Font
@@ -315,7 +315,7 @@ ShellRoot {
                         Item { width: root.spacing }
 
                         Rectangle {
-                            color: powerMouseArea.containsMouse ? Qt.lighter(root.colBg, 1.2) : "transparent"
+                            color: powerMouseArea.containsMouse ? root.colInactive : "transparent"
                             radius: root.radiusElement
                             Layout.preferredWidth: powerText.implicitWidth + 16
                             Layout.preferredHeight: parent.height
@@ -342,7 +342,7 @@ ShellRoot {
                         }
 
                         Rectangle {
-                            color: settingsMouseArea.containsMouse ? Qt.lighter(root.colBg, 1.2) : "transparent"
+                            color: settingsMouseArea.containsMouse ? root.colInactive : "transparent"
                             radius: root.radiusElement
                             Layout.preferredWidth: settingsText.implicitWidth + 16
                             Layout.preferredHeight: parent.height
@@ -366,6 +366,37 @@ ShellRoot {
                                     settingsProc.running = true
                                 }
                             }
+                        }
+
+                        Item { width: root.spacing; visible: root.volumeVisible }
+
+                        // Volume bar
+                        Rectangle {
+                            visible: root.volumeVisible
+                            color: root.colInactive
+                            radius: root.radiusElement
+                            Layout.preferredWidth: 80
+                            Layout.preferredHeight: parent.height - (root.spacing * 2)
+                            Layout.alignment: Qt.AlignVCenter
+                            clip: true
+
+                            Rectangle {
+                                anchors.top: parent.top
+                                anchors.bottom: parent.bottom
+                                anchors.left: parent.left
+                                width: parent.width * Math.min(root.volumeLevel / 100.0, 1.0)
+                                color: root.colActive
+                                radius: root.radiusElement
+                            }
+                        }
+
+                        Text {
+                            visible: root.volumeVisible
+                            text: "   " + root.volumeLevel + "% "
+                            color: root.colFg
+                            font.pixelSize: root.fontSize
+                            font.family: root.fontFamily
+                            font.bold: true
                         }
 
                         Item { width: root.spacing }
@@ -432,17 +463,6 @@ ShellRoot {
                         id: widgetRow
                         anchors.fill: parent
                         spacing: 0
-
-                        Text {
-                            text: "   " + volumeLevel + "%"
-                            color: root.colFg
-                            font.pixelSize: root.fontSize
-                            font.family: root.fontFamily
-                            font.bold: true
-                            Layout.rightMargin: root.spacing
-                            Layout.leftMargin: root.spacing
-                            visible: root.volumeVisible
-                        }
 
                         Text {
                             text: "   " + batteryPercentage + "%"
