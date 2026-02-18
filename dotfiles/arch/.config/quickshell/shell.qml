@@ -36,6 +36,7 @@ ShellRoot {
     // Workspace properties
     property var workspaces: []
     property int focusedWorkspaceId: -1
+    property int focusedWorkspaceIdx: 1
 
     // Window/column properties
     property var windows: []
@@ -230,6 +231,7 @@ ShellRoot {
                     for (var i = 0; i < ws.length; i++) {
                         if (ws[i].is_focused) {
                             root.focusedWorkspaceId = ws[i].id
+                            root.focusedWorkspaceIdx = ws[i].idx
                             break
                         }
                     }
@@ -408,50 +410,12 @@ ShellRoot {
 
                         Item { width: root.spacing }
 
-                        Repeater {
-                            model: root.workspaces
-                            delegate: Rectangle {
-                                property bool isFocused: modelData.is_focused
-                                property bool isActive: modelData.is_active
-                                property int wsIdx: modelData.idx
-
-                                color: {
-                                    if (workspaceMouseArea.containsMouse)
-                                        return Qt.lighter(root.colBg, 1.3)
-                                    if (isFocused)
-                                        return root.colActive
-                                    if (isActive)
-                                        return root.colMuted
-                                    return "transparent"
-                                }
-                                radius: root.radiusElement
-                                Layout.preferredWidth: workspaceText.implicitWidth + 12
-                                Layout.preferredHeight: parent.height - root.spacing
-                                Layout.alignment: Qt.AlignVCenter
-
-                                Text {
-                                    id: workspaceText
-                                    anchors.centerIn: parent
-                                    text: wsIdx
-                                    color: isFocused ? root.colBg : root.colFg
-                                    font.pixelSize: root.fontSize
-                                    font.family: root.fontFamily
-                                    font.bold: isFocused
-                                }
-
-                                MouseArea {
-                                    id: workspaceMouseArea
-                                    anchors.fill: parent
-                                    hoverEnabled: true
-                                    cursorShape: Qt.PointingHandCursor
-                                    onClicked: {
-                                        var switchProc = Qt.createQmlObject(
-                                            'import Quickshell.Io; Process { command: ["niri", "msg", "action", "focus-workspace", "' + wsIdx + '"]; running: true }',
-                                            root
-                                        )
-                                    }
-                                }
-                            }
+                        Text {
+                            text: root.focusedWorkspaceIdx
+                            color: root.colFg
+                            font.pixelSize: root.fontSize
+                            font.family: root.fontFamily
+                            font.bold: true
                         }
 
                         Item { width: root.spacing }
