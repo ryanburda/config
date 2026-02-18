@@ -1,5 +1,4 @@
 import Quickshell
-import Quickshell.Wayland
 import Quickshell.Io
 import QtQuick
 import QtQuick.Layouts
@@ -10,7 +9,6 @@ ShellRoot {
     // Theme colors
     property color colBg: "#EB1a1b26"
     property color colFg: "#a9b1d6"
-    property color colMuted: "#444b6a"
     property color colActive: "#777777"
     property color colInactive: "#333333"
 
@@ -27,20 +25,18 @@ ShellRoot {
     property string dateFormat: "ddd, MMM dd - h:mm ap"
 
     // System info properties
-    property string kernelVersion: "Linux"
     property int volumeLevel: 0
     property bool volumeVisible: false
     property int batteryPercentage: 0
     property bool hasBattery: false
 
     // Workspace properties
-    property var workspaces: []
     property int focusedWorkspaceId: -1
     property int focusedWorkspaceIdx: 1
 
     // Window/column properties
     property var windows: []
-    property var columns: []  // Array of {column: num, width: num, isFocused: bool}
+    property var columns: []  // Array of {width: num, isFocused: bool}
 
     // Function to process windows into column data
     function processColumns() {
@@ -50,7 +46,7 @@ ShellRoot {
         })
 
         if (workspaceWindows.length === 0) {
-            columns = [{column: 1, width: 1.0, isFocused: true}]
+            columns = [{width: 1.0, isFocused: true}]
             return
         }
 
@@ -91,7 +87,6 @@ ShellRoot {
         for (var i = 0; i < colNumbers.length; i++) {
             var colNum = colNumbers[i]
             cols.push({
-                column: colNum,
                 width: columnMap[colNum] / maxWidth,  // Normalize to 0-1
                 isFocused: colNum === focusedCol
             })
@@ -99,22 +94,10 @@ ShellRoot {
 
         // If only one column, make it a single indicator
         if (cols.length === 1) {
-            cols = [{column: 1, width: 1.0, isFocused: true}]
+            cols = [{width: 1.0, isFocused: true}]
         }
 
         columns = cols
-    }
-
-    // Kernel version
-    Process {
-        id: kernelProc
-        command: ["uname", "-r"]
-        stdout: SplitParser {
-            onRead: data => {
-                if (data) kernelVersion = data.trim()
-            }
-        }
-        Component.onCompleted: running = true
     }
 
     // Volume level (wpctl for PipeWire)
@@ -224,9 +207,6 @@ ShellRoot {
                 if (!data) return
                 try {
                     var ws = JSON.parse(data)
-                    // Sort workspaces by index
-                    ws.sort(function(a, b) { return a.idx - b.idx })
-                    root.workspaces = ws
                     // Find focused workspace
                     for (var i = 0; i < ws.length; i++) {
                         if (ws[i].is_focused) {
@@ -288,7 +268,6 @@ ShellRoot {
         }
         Component.onCompleted: running = true
     }
-
 
     Variants {
         model: Quickshell.screens
@@ -421,13 +400,10 @@ ShellRoot {
                         Item { width: root.spacing }
 
                         Repeater {
-                            id: columnRepeater
                             model: root.columns
                             delegate: Rectangle {
-                                id: columnBar
                                 property bool isFocused: modelData.isFocused
                                 property real colWidth: modelData.width
-                                property int columnNum: modelData.column
 
                                 color: isFocused ? root.colActive : root.colInactive
                                 radius: root.radiusElement
