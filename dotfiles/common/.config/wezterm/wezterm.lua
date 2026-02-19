@@ -52,9 +52,9 @@ local is_nvim_background_dark = (envy.get('nvim_background', 'dark')) == 'dark'
 local opacity
 
 if is_nvim_background_dark then
-  opacity = 0.92
+  opacity = 0.95
 else
-  opacity = 0.87
+  opacity = 0.92
 end
 
 -- background config
