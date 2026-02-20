@@ -17,8 +17,8 @@ return {
         keymaps = false,
         persist = true,
         status = {
-          hl_current = 'lualine_z_tabs_active',
-          hl_non_current = 'lualine_z_tabs_inactive',
+          hl_current = 'StatusLine',
+          hl_non_current = 'StatusLineNC',
         }
       })
     end
@@ -60,8 +60,8 @@ return {
           section_separators = { left = '', right = ''},
         },
         sections = {
-          lualine_a = {require('buf-mark.status').get},
-          lualine_b = {'branch'},
+          lualine_a = {},
+          lualine_b = {require('buf-mark.status').get},
           lualine_c = {
             {
               'diff',
@@ -79,9 +79,9 @@ return {
               end,
             },
           },
-          lualine_x = {},
-          lualine_y = {'diagnostics'},
-          lualine_z = {{'tabs', show_modified_status = false}},
+          lualine_x = {'diagnostics'},
+          lualine_y = {{'tabs', show_modified_status = false}},
+          lualine_z = {},
         },
       })
     end
