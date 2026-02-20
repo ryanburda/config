@@ -17,8 +17,8 @@ return {
         keymaps = false,
         persist = true,
         status = {
-          hl_current = 'StatusLine',
-          hl_non_current = 'StatusLineNC',
+          hl_current = 'CursorLineNr',
+          hl_non_current = 'LineNr',
         }
       })
     end
@@ -45,45 +45,6 @@ return {
     'norcalli/nvim-colorizer.lua',
     config = function()
       require'colorizer'.setup()
-    end
-  },
-
-  {
-    'nvim-lualine/lualine.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
-    config = function()
-      require('lualine').setup({
-        options = {
-          icons_enabled = true,
-          theme = 'auto',
-          component_separators = { left = '', right = ''},
-          section_separators = { left = '', right = ''},
-        },
-        sections = {
-          lualine_a = {},
-          lualine_b = {require('buf-mark.status').get},
-          lualine_c = {
-            {
-              'diff',
-              source = function()
-                local stats = { added = 0, modified = 0, removed = 0 }
-                local handle = io.popen('git diff --numstat HEAD 2>/dev/null')
-                if not handle then return stats end
-                local result = handle:read('*a')
-                handle:close()
-                for added, removed in result:gmatch('(%d+)%s+(%d+)%s+[^\n]+') do
-                  stats.added = stats.added + tonumber(added)
-                  stats.removed = stats.removed + tonumber(removed)
-                end
-                return stats
-              end,
-            },
-          },
-          lualine_x = {'diagnostics'},
-          lualine_y = {{'tabs', show_modified_status = false}},
-          lualine_z = {},
-        },
-      })
     end
   },
 

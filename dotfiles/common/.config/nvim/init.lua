@@ -61,7 +61,7 @@ vim.opt.list = true
 vim.opt.listchars = { tab = '│ '}
 vim.opt.autoread = true
 vim.opt.winbar = '   %4l:%c %=%f %m%= %p%%'
--- never show tabline (shown in lualine instead)
+-- never show tabline (shown in statusline instead)
 vim.opt.showtabline = 0
 
 vim.cmd('set noshowmode')
@@ -122,8 +122,8 @@ require('keymaps')
 -- set colorscheme
 require("colorscheme")
 
--- vim.opt.tabline = '%!v:lua.tabline()'
--- vim.o.statusline = '%{%v:lua.require("buf-mark.status").get()%} %f %m'
+-- statusline
+require('statusline')
 
 -- external integrations.
 -- the `integrations` directory is in the gitignore.
