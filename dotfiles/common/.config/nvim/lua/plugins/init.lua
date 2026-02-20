@@ -61,10 +61,10 @@ return {
         },
         sections = {
           lualine_a = {require('buf-mark.status').get},
-          lualine_b = {{'filename', path = 1}},
+          lualine_b = {'branch', 'diff'},
           lualine_c = {'diagnostics'},
-          lualine_x = {'diff'},
-          lualine_y = {'branch'},
+          lualine_x = {},
+          lualine_y = {},
           lualine_z = {{'tabs', show_modified_status = false}},
         },
       })
@@ -180,22 +180,6 @@ return {
       },
     },
     dependencies = { { "nvim-tree/nvim-web-devicons", opts = {} } },
-  },
-
-  {
-    "nvim-tree/nvim-tree.lua",
-    version = "*",
-    lazy = false,
-    dependencies = {
-      "nvim-tree/nvim-web-devicons",
-    },
-    config = function()
-      require("nvim-tree").setup {
-        update_focused_file = {
-          enable = true,
-        },
-      }
-    end,
   },
 
   -- Fuzzy Finder
