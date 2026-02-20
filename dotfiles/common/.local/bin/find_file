@@ -6,4 +6,4 @@ fzf --cycle \
     --bind=ctrl-d:preview-half-page-down \
     --bind=ctrl-u:preview-half-page-up \
     --bind=ctrl-i:previous-history \
-    --bind=ctrl-o:next-history | tr -d '\n' | pbcopy
+    --bind=ctrl-o:next-history | tr -d '\n' | if [[ "$(uname)" == "Darwin" ]]; then pbcopy; else wl-copy; fi
