@@ -61,10 +61,26 @@ return {
         },
         sections = {
           lualine_a = {require('buf-mark.status').get},
-          lualine_b = {'branch', 'diff'},
-          lualine_c = {'diagnostics'},
+          lualine_b = {'branch'},
+          lualine_c = {
+            {
+              'diff',
+              source = function()
+                local stats = { added = 0, modified = 0, removed = 0 }
+                local handle = io.popen('git diff --numstat HEAD 2>/dev/null')
+                if not handle then return stats end
+                local result = handle:read('*a')
+                handle:close()
+                for added, removed in result:gmatch('(%d+)%s+(%d+)%s+[^\n]+') do
+                  stats.added = stats.added + tonumber(added)
+                  stats.removed = stats.removed + tonumber(removed)
+                end
+                return stats
+              end,
+            },
+          },
           lualine_x = {},
-          lualine_y = {},
+          lualine_y = {'diagnostics'},
           lualine_z = {{'tabs', show_modified_status = false}},
         },
       })

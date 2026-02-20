@@ -892,20 +892,6 @@ vim.keymap.set(
 --     - `'?` - List all buf-marks
 --     - `<leader>m{char}` - Set a native local mark (fallback for local marks if needed)
 --     - `<leader>'{char}` - Jump to a native local mark (fallback for local marks if needed)
---
---
--- I've never marked enough locations in a single nvim session that the distinction between local and global
--- became handy. I usually only mark two or three locations before closing nvim and losing those marks.
--- As a result I've generally preferred global marks since they represent a location in the code base that
--- can be jumped to no matter what the current file is.
---
--- Similarly, I don't find Vim's automatic marks 1-9 useful since they require remembering the order files
--- were exited. Mark 0 (last exit location) is still useful and remains accessible.
---
--- Therefore I've repurposed the keymaps for local marks and marks 1-9 to use buf-marks instead.
---
--- This means `m{lower_case_char or 1-9}` will set a buf-mark
---        and `m{all_other_char}` will function as normal marks (including mark 0)
 vim.keymap.set(
   'n',
   'm',
