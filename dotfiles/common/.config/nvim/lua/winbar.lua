@@ -11,15 +11,19 @@ local cache = {
 }
 
 function Winbar()
-  local is_active = vim.g.statusline_winid == vim.api.nvim_get_current_win()
+  local winid = vim.g.statusline_winid or 0
+  local is_active = winid == vim.api.nvim_get_current_win()
   local file_hl = is_active and '%#CursorLineNr#' or '%#LineNr#'
 
+  local info = vim.fn.getwininfo(winid)[1]
+  local lnum_width = math.max(1, info and (info.textoff - 1) or 4)
+
   return table.concat({
-    '%-24.24(   %#LineNr#%5l:%-4c%p%%%*%)',
+    '%-24.24(%#LineNr#%', tostring(lnum_width), 'l:%-5c%p%%%*%)',
     '%=',
     file_hl, '%f',
     '%=',
-    '%24.24( ', cache.diagnostics[vim.api.nvim_win_get_buf(vim.g.statusline_winid or 0)] or '', ' %#LineNr#%m%* %)',
+    '%24.24( ', cache.diagnostics[vim.api.nvim_win_get_buf(winid)] or '', ' %#LineNr#%m%* %)',
   })
 end
 
