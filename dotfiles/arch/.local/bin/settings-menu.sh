@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/bin/zsh
 
-option=$(printf "Sound\nWiFi\nBluetooth\nDisplays\nBackground" | sort | fuzzel --dmenu --prompt "")
+option=$(printf "Sound\nWiFi\nBluetooth\nDisplays\nBackground\nEnergy Profile" | sort | fuzzel --dmenu --prompt "")
 
 case "$option" in
     Sound)
@@ -17,5 +17,8 @@ case "$option" in
         ;;
     Background)
         wezterm start -- background-selector.sh
+        ;;
+    Energy\ Profile)
+        energy-profiles.sh
         ;;
 esac
