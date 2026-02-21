@@ -25,7 +25,6 @@ typeset -A themes=(
     ['Dark - Everforest']="everforest,dark,Everforest Dark (Gogh)"
     ['Dark - Darkearth']="darkearth,dark,Gruvbox Material (Gogh)"
     ['Dark - Gruvbox']="gruvbox-material,dark,Gruvbox Material (Gogh)"
-    ['Dark - Iceberg']="iceberg,dark,iceberg-dark"
     ['Dark - Nightfox-dusk']="duskfox,dark,duskfox"
     ['Dark - Nightfox-night']="nightfox,dark,nightfox"
     ['Dark - Nightfox-tera']="terafox,dark,terafox"

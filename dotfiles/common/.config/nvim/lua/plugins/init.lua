@@ -38,7 +38,6 @@ return {
   'rose-pine/neovim',
   'vague2k/vague.nvim',
   'ptdewey/darkearth-nvim',
-  'cocopon/iceberg.vim',
   'catppuccin/nvim',
 
   {
