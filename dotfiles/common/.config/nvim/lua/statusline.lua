@@ -23,12 +23,11 @@ function Statusline()
   -- Git diff on left, buf-marks in center, diagnostics and tabs on right
   -- `+12 -6              a b c              E:1 W:2  1 2 3`
   return table.concat({
-    ' ', cache.git_diff,
+    '%-24.24( ', cache.git_diff, '%)',
     '%=',
     cache.buf_mark,
     '%=',
-    cache.diagnostics,
-    cache.tabs, ' ',
+    '%24.24(', cache.diagnostics, ' ', cache.tabs, ' %)',
   })
 end
 
@@ -72,11 +71,12 @@ local function update_git_diff()
   end
 
   local parts = {}
-  if added > 0 then table.insert(parts, string.format('%%#diffAdded#+%d%%*', added)) end
-  if removed > 0 then table.insert(parts, string.format('%%#diffRemoved#-%d%%*', removed)) end
-  if untracked > 0 then table.insert(parts, string.format('%%#diffChanged#?%d%%*', untracked)) end
+  if added > 0 then table.insert(parts, string.format('+%d', added)) end
+  if removed > 0 then table.insert(parts, string.format('-%d', removed)) end
+  if untracked > 0 then table.insert(parts, string.format('?%d', untracked)) end
 
-  update_cache('git_diff', table.concat(parts, ' '))
+  local result = '%#LineNr#' .. table.concat(parts, ' ') .. '%*'
+  update_cache('git_diff', result)
 end
 
 update_git_diff()
@@ -119,18 +119,18 @@ local severity = vim.diagnostic.severity
 local function update_diagnostics()
   local counts = vim.diagnostic.count(nil)
   local parts = {}
-  if (counts[severity.ERROR] or 0) > 0 then table.insert(parts, string.format('%%#DiagnosticError#E:%d%%*', counts[severity.ERROR])) end
-  if (counts[severity.WARN] or 0) > 0 then table.insert(parts, string.format('%%#DiagnosticWarn#W:%d%%*', counts[severity.WARN])) end
-  if (counts[severity.INFO] or 0) > 0 then table.insert(parts, string.format('%%#DiagnosticInfo#I:%d%%*', counts[severity.INFO])) end
-  if (counts[severity.HINT] or 0) > 0 then table.insert(parts, string.format('%%#DiagnosticHint#H:%d%%*', counts[severity.HINT])) end
-  local result = table.concat(parts, ' ')
-  if result ~= '' then result = result .. ' ' end
+  if (counts[severity.ERROR] or 0) > 0 then table.insert(parts, string.format('E:%d', counts[severity.ERROR])) end
+  if (counts[severity.WARN] or 0) > 0 then table.insert(parts, string.format('W:%d', counts[severity.WARN])) end
+  if (counts[severity.INFO] or 0) > 0 then table.insert(parts, string.format('I:%d', counts[severity.INFO])) end
+  if (counts[severity.HINT] or 0) > 0 then table.insert(parts, string.format('H:%d', counts[severity.HINT])) end
+
+  local result = '%#LineNr#' .. table.concat(parts, ' ') .. '%*'
   update_cache('diagnostics', result)
 end
 
 update_diagnostics()
 
-vim.api.nvim_create_autocmd({'DiagnosticChanged', 'BufEnter'}, {
+vim.api.nvim_create_autocmd({'BufWritePost'}, {
   callback = update_diagnostics,
 })
 

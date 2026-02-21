@@ -17,21 +17,14 @@ end
 
 function Winbar()
   local is_active = vim.g.statusline_winid == vim.api.nvim_get_current_win()
-
-  -- Show the modified bit or whitespace so that the file name doesn't move when the file is modified
-  local winid = vim.g.statusline_winid or vim.api.nvim_get_current_win()
-  local bufnr = vim.api.nvim_win_get_buf(winid)
-  local modified = vim.bo[bufnr].modified and '[+]' or '   '
-
   local file_hl = is_active and '%#CursorLineNr#' or '%#LineNr#'
 
   return table.concat({
-    '   %#LineNr#%4l:%-3c%*',
+    '%-24.24(   %#LineNr#%4l:%-4c%m%*%)',
     '%=',
-    file_hl, '%f ', modified, '%*',
+    file_hl, '%f',
     '%=',
-    ' ', is_active and cache.diagnostics or '',
-    '%#LineNr#%3p%%%* ',
+    '%24.24( ', is_active and cache.diagnostics or '', ' %#LineNr#%3p%%%* %)',
   })
 end
 
@@ -57,17 +50,18 @@ local severity = vim.diagnostic.severity
 local function update_diagnostics()
   local counts = vim.diagnostic.count(0)
   local parts = {}
-  if (counts[severity.ERROR] or 0) > 0 then table.insert(parts, string.format('%%#DiagnosticError#E:%d%%*', counts[severity.ERROR])) end
-  if (counts[severity.WARN] or 0) > 0 then table.insert(parts, string.format('%%#DiagnosticWarn#W:%d%%*', counts[severity.WARN])) end
-  if (counts[severity.INFO] or 0) > 0 then table.insert(parts, string.format('%%#DiagnosticInfo#I:%d%%*', counts[severity.INFO])) end
-  if (counts[severity.HINT] or 0) > 0 then table.insert(parts, string.format('%%#DiagnosticHint#H:%d%%*', counts[severity.HINT])) end
-  local result = table.concat(parts, ' ')
-  if result ~= '' then result = result .. ' ' end
+
+  if (counts[severity.ERROR] or 0) > 0 then table.insert(parts, string.format('E:%d', counts[severity.ERROR])) end
+  if (counts[severity.WARN] or 0) > 0 then table.insert(parts, string.format('W:%d', counts[severity.WARN])) end
+  if (counts[severity.INFO] or 0) > 0 then table.insert(parts, string.format('I:%d', counts[severity.INFO])) end
+  if (counts[severity.HINT] or 0) > 0 then table.insert(parts, string.format('H:%d', counts[severity.HINT])) end
+
+  local result = '%#LineNr#' .. table.concat(parts, ' ') .. '%*'
   update_cache('diagnostics', result)
 end
 
 update_diagnostics()
 
-vim.api.nvim_create_autocmd({'DiagnosticChanged', 'BufEnter'}, {
+vim.api.nvim_create_autocmd({'BufWritePost'}, {
   callback = update_diagnostics,
 })
