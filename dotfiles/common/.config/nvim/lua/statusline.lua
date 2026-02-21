@@ -117,7 +117,7 @@ vim.api.nvim_create_autocmd('User', {
 local severity = vim.diagnostic.severity
 
 local function update_diagnostics()
-  local counts = vim.diagnostic.count(0)
+  local counts = vim.diagnostic.count(nil)
   local parts = {}
   if (counts[severity.ERROR] or 0) > 0 then table.insert(parts, string.format('%%#DiagnosticError#E:%d%%*', counts[severity.ERROR])) end
   if (counts[severity.WARN] or 0) > 0 then table.insert(parts, string.format('%%#DiagnosticWarn#W:%d%%*', counts[severity.WARN])) end
