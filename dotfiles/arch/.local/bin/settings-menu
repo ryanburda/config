@@ -16,9 +16,9 @@ case "$option" in
         wezterm start -- wdisplays
         ;;
     Background)
-        wezterm start -- background-selector.sh
+        wezterm start -- background-selector
         ;;
     Energy\ Profile)
-        energy-profiles.sh
+        energy-profiles
         ;;
 esac

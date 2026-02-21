@@ -1,2 +1,2 @@
-#!/bin/sh
+#!/bin/zsh
 cliphist list | fuzzel --dmenu --prompt "" | cliphist decode | wl-copy

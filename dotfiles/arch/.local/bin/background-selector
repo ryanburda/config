@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 BACKGROUNDS_DIR="$HOME/Developer/assets/assets/backgrounds"
 ENVY_KEY="background"
