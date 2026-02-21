@@ -2,4 +2,5 @@
 
 # TODO: display the current profile
 option=$(printf "power-saver\nbalanced\nperformance" | fuzzel --dmenu --prompt "")
-powerprofilesctl set $option
+[ -z "$option" ] && exit 0
+powerprofilesctl set "$option"
