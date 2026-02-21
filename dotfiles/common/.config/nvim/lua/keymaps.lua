@@ -969,7 +969,7 @@ vim.keymap.set(
 vim.keymap.set(
   'n',
   "'?",
-  require('buf-mark').list_pretty,
+  require("buf-mark.fzf_lua").pick,
   { desc = 'List buf-marks' }
 )
 
