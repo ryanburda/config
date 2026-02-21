@@ -15,7 +15,7 @@ function Winbar()
   local file_hl = is_active and '%#CursorLineNr#' or '%#LineNr#'
 
   return table.concat({
-    '%-24.24(   %#LineNr#%4l:%-4c%p%%%*%)',
+    '%-24.24(   %#LineNr#%5l:%-4c%p%%%*%)',
     '%=',
     file_hl, '%f',
     '%=',
@@ -61,7 +61,7 @@ for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
   end
 end
 
-vim.api.nvim_create_autocmd('BufWritePost', {
+vim.api.nvim_create_autocmd({'DiagnosticChanged', }, {
   callback = function(args) update_diagnostics(args.buf) end,
 })
 

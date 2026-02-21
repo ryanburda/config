@@ -438,7 +438,7 @@ vim.keymap.set(
 
 vim.keymap.set(
   'n',
-  '<leader>eF',
+  '<leader>ew',
   require('fzf-lua').diagnostics_workspace,
   { desc = "Diagnostic: Show errors" }
 )
