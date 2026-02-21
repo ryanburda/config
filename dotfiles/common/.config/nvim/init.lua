@@ -60,7 +60,6 @@ vim.opt.list = true
 ---@diagnostic disable-next-line: missing-fields
 vim.opt.listchars = { tab = '│ '}
 vim.opt.autoread = true
-vim.opt.winbar = '   %4l:%c %=%f %m%= %p%%'
 -- never show tabline (shown in statusline instead)
 vim.opt.showtabline = 0
 
@@ -124,6 +123,9 @@ require("colorscheme")
 
 -- statusline
 require('statusline')
+
+-- winbar
+require('winbar')
 
 -- external integrations.
 -- the `integrations` directory is in the gitignore.
