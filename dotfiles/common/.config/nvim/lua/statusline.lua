@@ -10,22 +10,24 @@ local cache = {
   git_diff = '',
   tabs = '',
   buf_mark = '',
+  diagnostics = '',
 }
 
-function update_cache(key, value)
+local function update_cache(key, value)
   -- redraw the status line after each cache update
   cache[key] = value
   vim.cmd('redrawstatus')
 end
 
 function Statusline()
-  -- Git diff on left, buf-marks in center, tabs on right
-  -- `+12 -6              a b c              1 2 3`
+  -- Git diff on left, buf-marks in center, diagnostics and tabs on right
+  -- `+12 -6              a b c              E:1 W:2  1 2 3`
   return table.concat({
     ' ', cache.git_diff,
     '%=',
     cache.buf_mark,
     '%=',
+    cache.diagnostics,
     cache.tabs, ' ',
   })
 end
@@ -105,6 +107,31 @@ vim.api.nvim_create_autocmd('BufDelete', {
 vim.api.nvim_create_autocmd('User', {
   pattern = 'BufMarkChanged',
   callback = update_buf_mark,
+})
+
+---------------------------
+-- Diagnostics component --
+---------------------------
+-- Shows LSP diagnostic counts for the current buffer (e.g. "E:2 W:1")
+-- using the built-in Diagnostic highlight groups.
+local severity = vim.diagnostic.severity
+
+local function update_diagnostics()
+  local counts = vim.diagnostic.count(0)
+  local parts = {}
+  if (counts[severity.ERROR] or 0) > 0 then table.insert(parts, string.format('%%#DiagnosticError#E:%d%%*', counts[severity.ERROR])) end
+  if (counts[severity.WARN] or 0) > 0 then table.insert(parts, string.format('%%#DiagnosticWarn#W:%d%%*', counts[severity.WARN])) end
+  if (counts[severity.INFO] or 0) > 0 then table.insert(parts, string.format('%%#DiagnosticInfo#I:%d%%*', counts[severity.INFO])) end
+  if (counts[severity.HINT] or 0) > 0 then table.insert(parts, string.format('%%#DiagnosticHint#H:%d%%*', counts[severity.HINT])) end
+  local result = table.concat(parts, ' ')
+  if result ~= '' then result = result .. ' ' end
+  update_cache('diagnostics', result)
+end
+
+update_diagnostics()
+
+vim.api.nvim_create_autocmd({'DiagnosticChanged', 'BufEnter'}, {
+  callback = update_diagnostics,
 })
 
 --------------------
