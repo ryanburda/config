@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-# TODO: display the current profile
-option=$(printf "power-saver\nbalanced\nperformance" | fuzzel --dmenu --prompt "")
+current=$(powerprofilesctl get)
+option=$(printf "power-saver\nbalanced\nperformance" | fuzzel --dmenu --prompt "" --mesg "Current: $current")
 [ -z "$option" ] && exit 0
 powerprofilesctl set "$option"
