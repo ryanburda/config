@@ -509,6 +509,31 @@ return {
   },
 
   {
+    'nvim-telescope/telescope.nvim',
+    branch = 'master',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-tree/nvim-web-devicons',
+    },
+    config = function()
+      require('telescope').setup({
+        defaults = {
+          layout_strategy = 'vertical',
+          layout_config = {
+            width = 0.85,
+            height = 0.85,
+            preview_cutoff = 20,
+          },
+          border = true,
+          sorting_strategy = 'ascending',
+          prompt_prefix = '> ',
+          selection_caret = '  ',
+        },
+      })
+    end,
+  },
+
+  {
     'chentoast/marks.nvim',
     config = function()
       require('marks').setup({
