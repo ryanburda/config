@@ -19,11 +19,11 @@ function Winbar()
   local lnum_width = math.max(1, info and (info.textoff - 1) or 4)
 
   return table.concat({
-    '%-24.24(%#LineNr#%', tostring(lnum_width), 'l:%-5c%p%%%*%)',
+    '%-28.28(%#LineNr#%', tostring(lnum_width), 'l:%-5c%3p%%  %m%*%)',
     '%=',
     file_hl, '%f',
     '%=',
-    '%24.24( ', cache.diagnostics[vim.api.nvim_win_get_buf(winid)] or '', ' %#LineNr#%m%* %)',
+    '%28.28( ', cache.diagnostics[vim.api.nvim_win_get_buf(winid)] or '', ' %)',
   })
 end
 
