@@ -181,7 +181,15 @@ vim.keymap.set(
 vim.keymap.set(
   'n',
   '<leader>O',
-  ':!open -a "Google Chrome" %<cr><cr>',  -- TODO: fix this on arch
+  function()
+    -- TODO: make this use the default browser. Also see if zen-browser has a markdown plugin
+    local file = vim.fn.shellescape(vim.fn.expand('%:p'))
+    if vim.fn.has('mac') == 1 then
+      vim.cmd('silent !open -a "Google Chrome" ' .. file)
+    else
+      vim.cmd('silent !google-chrome-stable ' .. file)
+    end
+  end,
   {desc = 'Browser: Open current file in browser'}
 )
 

@@ -170,6 +170,9 @@ yay -S --noconfirm quickshell-git
 yay -S --noconfirm ttf-recursive-nerd
 yay -S --noconfirm zen-browser-bin
 
+# Default browser
+xdg-settings set default-web-browser zen-browser.desktop
+
 # claude
 curl -fsSL https://claude.ai/install.sh | bash
 
