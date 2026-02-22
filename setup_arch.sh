@@ -97,6 +97,13 @@ sudo pacman -S --needed --noconfirm \
     brightnessctl \
     wdisplays
 
+# Printing
+sudo pacman -S --needed --noconfirm \
+    cups \
+    cups-filters
+
+sudo systemctl enable --now cups.service
+
 # Networking
 sudo pacman -S --needed --noconfirm \
     networkmanager

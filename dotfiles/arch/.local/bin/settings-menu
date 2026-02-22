@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-option=$(printf "Sound\nWiFi\nBluetooth\nDisplays\nBackground\nEnergy Profile" | sort | fuzzel --dmenu --prompt "")
+option=$(printf "Sound\nWiFi\nBluetooth\nDisplays\nPrinters\nBackground\nEnergy Profile" | sort | fuzzel --dmenu --prompt "")
 
 case "$option" in
     Sound)
@@ -20,5 +20,8 @@ case "$option" in
         ;;
     Energy\ Profile)
         energy-profiles
+        ;;
+    Printers)
+        xdg-open http://localhost:631
         ;;
 esac
