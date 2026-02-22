@@ -7,9 +7,9 @@
 -- cached values without doing any work itself.
 
 local cache = {
-  git_diff = '',
   tabs = '',
   buf_mark = '',
+  git_diff = '',
 }
 
 local function update_cache(key, value)
@@ -22,11 +22,11 @@ function Statusline()
   -- Git diff on left, buf-marks in center, tabs on right
   -- `+12 -6              a b c             1 2 3`
   return table.concat({
-    '%-24.24( ', cache.git_diff, '%)',
+    '%-24.24(', cache.tabs, ' %)',
     '%=',
     cache.buf_mark,
     '%=',
-    '%24.24(', cache.tabs, ' %)',
+    '%24.24( ', cache.git_diff, '%)',
   })
 end
 
@@ -116,8 +116,13 @@ vim.api.nvim_create_autocmd('User', {
 local function update_tabs()
   local current = vim.fn.tabpagenr()
   local total = vim.fn.tabpagenr('$')
-  local parts = {}
 
+  if total == 1 then
+    update_cache('tabs', '')
+    return
+  end
+
+  local parts = {}
   for i = 1, total do
     if i == current then
       table.insert(parts, string.format('%%#CursorLineNr# %d %%*', i))
