@@ -26,14 +26,21 @@ fi
 source "${ZINIT_HOME}/zinit.zsh"
 
 # Add in zsh plugins
-zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
-zinit light zsh-users/zsh-autosuggestions
-zinit ice depth=1; zinit light jeffreytse/zsh-vi-mode
-zinit light Aloxaf/fzf-tab
+
+zinit ice wait"0" lucid depth=1; zinit light jeffreytse/zsh-vi-mode
+zinit ice wait"0" lucid; zinit light zsh-users/zsh-syntax-highlighting
+zinit ice wait"0" lucid; zinit light zsh-users/zsh-autosuggestions
+zinit ice wait"0" lucid; zinit light Aloxaf/fzf-tab
 
 # Load completions
-autoload -Uz compinit && compinit
+autoload -Uz compinit
+local zcompdump="${ZDOTDIR:-$HOME}/.zcompdump"
+if [[ -f "$zcompdump" && $(find "$zcompdump" -mtime -1 2>/dev/null) ]]; then
+  compinit -C -u
+else
+  compinit -u
+fi
 
 zinit cdreplay -q
 
