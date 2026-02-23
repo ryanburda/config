@@ -117,6 +117,9 @@ if [[ -f /etc/arch-release ]]; then
   export PATH="$HOME/.local/bin:$PATH"
 fi
 
+# Direnv
+eval "$(direnv hook zsh)"
+
 # Alias
 alias l="lsd -lah"
 alias cal="cal -3"

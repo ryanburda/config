@@ -51,6 +51,7 @@ brew install \
     rlwrap \
     stow \
     tmux \
+    uv \
     wget
 
 brew link --force libpq

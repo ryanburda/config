@@ -70,6 +70,7 @@ sudo pacman -S --needed --noconfirm \
     ripgrep \
     tldr \
     tmux \
+    uv \
     wget \
     zoxide \
     zsh
