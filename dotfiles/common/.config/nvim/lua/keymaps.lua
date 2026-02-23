@@ -670,7 +670,7 @@ vim.keymap.set(
 vim.keymap.set(
   'n',
   '<C-f>',
-  require('files').files,
+  require('fzf-lua').files,
   { desc = 'Find: buffers' }
 )
 

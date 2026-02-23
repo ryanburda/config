@@ -169,36 +169,19 @@ return {
           ['--color'] = 'hl:red,hl+:bright-red'
         },
         files = {
+          hidden = true,
           actions = {
-            ["ctrl-l"] = function(_, opts)
+            ["ctrl-f"] = function(_, opts)
               local query = opts.query or ""
               require('fzf-lua').buffers({query=query})
             end,
-            ["ctrl-s"] = function(_, opts)
-              local query = opts.query or ""
-              require('fzf-lua').oldfiles({query=query})
-            end
           },
         },
         buffers = {
           actions = {
-            ["ctrl-l"] = function(_, opts)
+            ["ctrl-f"] = function(_, opts)
               local query = opts.query or ""
               require('fzf-lua').files({query=query})
-            end
-          },
-        },
-        oldfiles = {
-          prompt = "Recent files > ",
-          fzf_opts = {
-            ["--header"] = string.format("<%s> to %s",
-                                         require("fzf-lua.utils").ansi_codes.yellow("ctrl-s"),
-                                         require("fzf-lua.utils").ansi_codes.red("files selector"))
-          },
-          actions = {
-            ["ctrl-s"] = function(_, opts)
-              local query = opts.query or ""
-              require('files').files({query=query})
             end
           },
         },
@@ -356,10 +339,6 @@ return {
           },
         },
       })
-
-      -- custom buffer
-      require('bufs').setup()
-
     end,
   },
 
