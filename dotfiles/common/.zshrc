@@ -108,15 +108,6 @@ export FZF_CTRL_R_OPTS="
   --header 'Press CTRL-Y to copy command into clipboard'"
 export FZF_HISTORY_DIR=1
 
-# Python
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init - zsh)"
-# https://github.com/pyenv/pyenv-virtualenv/issues/259
-# eval "$(pyenv virtualenv-init -)"
-
-eval "$(zoxide init zsh)"
-
 # Rancher
 export PATH="$HOME/.rd/bin:$PATH"
 

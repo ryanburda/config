@@ -47,8 +47,6 @@ brew install \
     pkg-config \
     poetry \
     pspg \
-    pyenv \
-    pyenv-virtualenv \
     ripgrep \
     rlwrap \
     stow \

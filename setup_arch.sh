@@ -67,7 +67,6 @@ sudo pacman -S --needed --noconfirm \
     lsd \
     lua \
     neovim \
-    pyenv \
     ripgrep \
     tldr \
     tmux \
