@@ -94,15 +94,6 @@ end
 
 update_buf_mark()
 
-vim.api.nvim_create_autocmd({'BufAdd', 'BufEnter'}, {
-  callback = update_buf_mark,
-})
-
--- buffer close (deferred so buffer is actually gone)
-vim.api.nvim_create_autocmd('BufDelete', {
-  callback = function() vim.schedule(update_buf_mark) end,
-})
-
 vim.api.nvim_create_autocmd('User', {
   pattern = 'BufMarkChanged',
   callback = update_buf_mark,
