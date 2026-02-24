@@ -166,7 +166,8 @@ return {
       require('fzf-lua').setup({
         fzf_opts = {
           ['--cycle'] = true,
-          ['--color'] = 'hl:red,hl+:bright-red'
+          ['--color'] = 'hl:red,hl+:bright-red',
+          ['--layout'] = 'default',
         },
         files = {
           hidden = true,
@@ -323,7 +324,7 @@ return {
           preview = {
             border = "rounded",
             layout = "vertical",
-            vertical = "down:50%",
+            vertical = "up:50%",
           },
         },
         keymap = {
