@@ -316,15 +316,10 @@ return {
           },
         },
         winopts = {
-          fullscreen = false,
-          width = 0.85,
-          height = 0.85,
-          border = "rounded",
-          backdrop = 100,
           preview = {
             border = "rounded",
             layout = "vertical",
-            vertical = "up:50%",
+            vertical = "up:60%",
           },
         },
         keymap = {
