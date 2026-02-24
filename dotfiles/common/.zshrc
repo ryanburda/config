@@ -91,6 +91,11 @@ function zvm_after_init() {
 }
 
 # FZF
+if [[ "$(uname)" == "Darwin" ]]; then
+  FZF_COPY_CMD="pbcopy"
+else
+  FZF_COPY_CMD="wl-copy"
+fi
 export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
 export FZF_CTRL_T_OPTS="
   --preview 'bat -n --color=always {}' \
@@ -98,13 +103,13 @@ export FZF_CTRL_T_OPTS="
   --bind=ctrl-u:preview-half-page-up
   --bind=ctrl-i:previous-history
   --bind=ctrl-o:next-history
-  --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+  --bind 'ctrl-y:execute-silent(echo -n {} | $FZF_COPY_CMD)+abort'
   --color header:italic
   --header 'Press CTRL-Y to copy path into clipboard'"
 export FZF_CTRL_R_OPTS="
   --bind=ctrl-i:previous-history
   --bind=ctrl-o:next-history
-  --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+  --bind 'ctrl-y:execute-silent(echo -n {2..} | $FZF_COPY_CMD)+abort'
   --color header:italic
   --header 'Press CTRL-Y to copy command into clipboard'"
 export FZF_HISTORY_DIR=1
