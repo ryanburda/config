@@ -28,6 +28,7 @@ source "${ZINIT_HOME}/zinit.zsh"
 # Add in zsh plugins
 zinit light zsh-users/zsh-completions
 
+ZVM_INIT_MODE=sourcing
 zinit ice wait"0" lucid depth=1; zinit light jeffreytse/zsh-vi-mode
 zinit ice wait"0" lucid; zinit light zsh-users/zsh-syntax-highlighting
 zinit ice wait"0" lucid; zinit light zsh-users/zsh-autosuggestions
