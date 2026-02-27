@@ -546,39 +546,59 @@ vim.keymap.set(
 -- Instead Tmux is responsible for resizing splits.
 -- These keymaps need to match up with the corresponding keymaps in the tmux.conf.
 vim.keymap.set(
-  {"n", "v", "x"},
-  '<M-h>',
-  function()
-    require('nvim-tmux-wm').resize('h', 3)
-  end,
-  {desc = "Splits: resize left"}
+  'n',
+  '<A-h>',
+  '<cmd>NvimTmuxResizeLeftBorderLeft 3<cr>',
+  {desc = "Splits: Move left border left"}
 )
 
 vim.keymap.set(
-  {"n", "v", "x"},
-  '<M-j>',
-  function()
-    require('nvim-tmux-wm').resize('j', 1)
-  end,
-  {desc = "Splits: resize down"}
+  'n',
+  '<A-H>',
+  '<cmd>NvimTmuxResizeRightBorderLeft 3<cr>',
+  {desc = "Splits: Move right border left"}
 )
 
 vim.keymap.set(
-  {"n", "v", "x"},
-  '<M-k>',
-  function()
-    require('nvim-tmux-wm').resize('k', 1)
-  end,
-  {desc = "Splits: resize up"}
+  'n',
+  '<A-j>',
+  '<cmd>NvimTmuxResizeBottomBorderDown 1<cr>',
+  {desc = "Splits: Move bottom border down"}
 )
 
 vim.keymap.set(
-  {"n", "v", "x"},
-  '<M-l>',
-  function()
-    require('nvim-tmux-wm').resize('l', 3)
-  end,
-  {desc = "Splits: resize right"}
+  'n',
+  '<A-J>',
+  '<cmd>NvimTmuxResizeTopBorderDown 1<cr>',
+  {desc = "Splits: Move top border down"}
+)
+
+vim.keymap.set(
+  'n',
+  '<A-k>',
+  '<cmd>NvimTmuxResizeTopBorderUp 1<cr>',
+  {desc = "Splits: Move top border up"}
+)
+
+vim.keymap.set(
+  'n',
+  '<A-K>',
+  '<cmd>NvimTmuxResizeBottomBorderUp 1<cr>',
+  {desc = "Splits: Move bottom border up"}
+)
+
+vim.keymap.set(
+  'n',
+  '<A-l>',
+  '<cmd>NvimTmuxResizeRightBorderRight 3<cr>',
+  {desc = "Splits: Move right border right"}
+)
+
+vim.keymap.set(
+  'n',
+  '<A-L>',
+  '<cmd>NvimTmuxResizeLeftBorderRight 3<cr>',
+  {desc = "Splits: Move left border right"}
 )
 
 ------------------------------------------------------------------------------------------------------------------------
