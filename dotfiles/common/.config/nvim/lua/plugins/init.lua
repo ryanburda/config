@@ -217,6 +217,9 @@ return {
                 -- Trim leading and trailing whitespace and split by spaces
                 local branch_split = vim.split(target_branch:match("^%s*(.-)%s*$"), "%s+")
                 local selected_branch = branch_split[1]
+                if selected_branch == "+" or selected_branch == "*" then
+                  selected_branch = branch_split[2]
+                end
 
                 -- Run git diff to get the list of files changed between branches
                 local diff_files_cmd = string.format("git diff --name-only %s..%s", current_branch, selected_branch)
@@ -279,6 +282,9 @@ return {
                 -- Trim leading and trailing whitespace and split by spaces
                 local branch_split = vim.split(target_branch:match("^%s*(.-)%s*$"), "%s+")
                 local selected_branch = branch_split[1]
+                if selected_branch == "+" or selected_branch == "*" then
+                  selected_branch = branch_split[2]
+                end
 
                 -- Run git diff to get the list of files changed between branches
                 local diff_files_cmd = string.format("git diff --name-only %s..%s", current_branch, selected_branch)
