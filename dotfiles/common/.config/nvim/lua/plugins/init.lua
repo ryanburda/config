@@ -11,6 +11,7 @@ return {
   -- Local plugins
   {
     --'ryanburda/buf-mark',
+    name = "buf-mark",
     dir = "~/code/buf-mark/main",
     config = function()
       require('buf-mark').setup({
@@ -25,6 +26,7 @@ return {
   },
   {
     --'ryanburda/nvim-tmux-wm',
+    name = "nvim-tmux-wm",
     dir = "~/code/nvim-tmux-wm/main",
   },
 
