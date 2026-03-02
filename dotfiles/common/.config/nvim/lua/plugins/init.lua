@@ -11,7 +11,7 @@ return {
   -- Local plugins
   {
     --'ryanburda/buf-mark',
-    dir = "~/Developer/buf-mark",
+    dir = "~/code/buf-mark/main",
     config = function()
       require('buf-mark').setup({
         keymaps = false,
@@ -25,7 +25,7 @@ return {
   },
   {
     --'ryanburda/nvim-tmux-wm',
-    dir = "~/Developer/nvim-tmux-wm",
+    dir = "~/code/nvim-tmux-wm/main",
   },
 
   -- Color Schemes
