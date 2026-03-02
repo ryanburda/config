@@ -19,14 +19,15 @@ local function update_cache(key, value)
 end
 
 function Statusline()
-  -- Git diff on left, buf-marks in center, tabs on right
-  -- `+12 -6              a b c             1 2 3`
+  local winid = vim.g.statusline_winid or 0
+  local info = vim.fn.getwininfo(winid)[1]
+  local lnum_width = math.max(1, info and (info.textoff - 1) or 4)
+
+  -- row:column and buf-makrs on left, tabs on right
+  -- `5:20   a b c                            1 2 3`
   return table.concat({
-    '%-24.24(', cache.tabs, ' %)',
-    '%=',
-    cache.buf_mark,
-    '%=',
-    '%24.24( ', cache.git_diff, '%)',
+    string.rep(' ', lnum_width + 1), cache.buf_mark,
+    '%=', cache.tabs
   })
 end
 

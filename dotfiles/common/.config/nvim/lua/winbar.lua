@@ -18,12 +18,12 @@ function Winbar()
   local info = vim.fn.getwininfo(winid)[1]
   local lnum_width = math.max(1, info and (info.textoff - 1) or 4)
 
+  --  file progress percentage and file name with modified bit on left, diagnostics on right
+  --  `24%  init.lua                                                                W:1 E:2`
   return table.concat({
-    '%-28.28(%#LineNr#%', tostring(lnum_width), 'l:%-5c%3p%%  %m%*%)',
-    '%=',
-    file_hl, '%f',
-    '%=',
-    '%28.28( ', cache.diagnostics[vim.api.nvim_win_get_buf(winid)] or '', ' %)',
+    '%#LineNr#%', tostring(lnum_width), 'l:%-4c %3p%%   ',
+    file_hl, '%f %m',
+    '%=', cache.diagnostics[vim.api.nvim_win_get_buf(winid)],
   })
 end
 
