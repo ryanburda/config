@@ -697,7 +697,7 @@ vim.keymap.set(
   '<leader>sg',
   function()
     require('fzf-lua').live_grep({
-      cwd="~/Developer/snippets/",
+      cwd="~/code/main/snippets/",
       prompt="Grep Snippets",
     })
   end,
@@ -709,7 +709,7 @@ vim.keymap.set(
   '<leader>sf',
   function()
     require('fzf-lua').files({
-      cwd="~/Developer/snippets/",
+      cwd="~/code/main/snippets/",
       prompt="Find Snippets",
     })
   end,

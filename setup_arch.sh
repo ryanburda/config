@@ -17,7 +17,6 @@ REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # NOTE: This is important since stow will "fold" directories if they don't already exist.
 mkdir -p $HOME/.config
 mkdir -p $HOME/.local/bin
-mkdir -p $HOME/Developer
 mkdir -p $HOME/Documents
 mkdir -p $HOME/Downloads
 

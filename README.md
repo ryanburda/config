@@ -24,6 +24,5 @@ ssh_keygen
 ```
 
 5) Setup all other repos
-``` zsh
-./config/setup_repos.sh
+- https://github.com/ryanburda/repos
 ```
