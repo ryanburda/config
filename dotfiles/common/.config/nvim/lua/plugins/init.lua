@@ -12,7 +12,7 @@ return {
   {
     --'ryanburda/buf-mark',
     name = "buf-mark",
-    dir = "~/code/buf-mark/main",
+    dir = "~/code/buf-mark/base",
     config = function()
       require('buf-mark').setup({
         keymaps = false,
@@ -27,7 +27,7 @@ return {
   {
     --'ryanburda/nvim-tmux-wm',
     name = "nvim-tmux-wm",
-    dir = "~/code/nvim-tmux-wm/main",
+    dir = "~/code/nvim-tmux-wm/base",
   },
 
   -- Color Schemes
