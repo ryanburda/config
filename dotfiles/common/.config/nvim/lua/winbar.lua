@@ -22,7 +22,7 @@ function Winbar()
   --  `24%  init.lua                                                                W:1 E:2`
   return table.concat({
     '%#LineNr#%', tostring(lnum_width), 'l:%-4c %3p%%   ',
-    file_hl, '%f %m',
+    file_hl, '%t %m',
     '%=', cache.diagnostics[vim.api.nvim_win_get_buf(winid)],
   })
 end

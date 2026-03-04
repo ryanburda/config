@@ -26,7 +26,7 @@ function Statusline()
   -- row:column and buf-makrs on left, tabs on right
   -- `5:20   a b c                            1 2 3`
   return table.concat({
-    string.rep(' ', lnum_width + 1), cache.buf_mark,
+    string.rep(' ', lnum_width + 1), '%f    ', cache.buf_mark,
     '%=', cache.tabs
   })
 end
