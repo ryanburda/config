@@ -23,10 +23,10 @@ function Statusline()
   local info = vim.fn.getwininfo(winid)[1]
   local lnum_width = math.max(1, info and (info.textoff - 1) or 4)
 
-  -- row:column and buf-makrs on left, tabs on right
-  -- `5:20   a b c                            1 2 3`
+  -- file name and buf-mark status on left, tabs on right
+  -- `init.lua    a b c                     1 2 3`
   return table.concat({
-    string.rep(' ', lnum_width + 1), '%f    ', cache.buf_mark,
+    '%f  ', cache.buf_mark,
     '%=', cache.tabs
   })
 end

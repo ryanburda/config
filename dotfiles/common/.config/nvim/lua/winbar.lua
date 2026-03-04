@@ -18,12 +18,12 @@ function Winbar()
   local info = vim.fn.getwininfo(winid)[1]
   local lnum_width = math.max(1, info and (info.textoff - 1) or 4)
 
-  --  file progress percentage and file name with modified bit on left, diagnostics on right
-  --  `24%  init.lua                                                                W:1 E:2`
+  --  row/column position and file name with modified bit on left, diagnostics and file progress percentage on right
+  --  `5:16  init.lua                                                           W:1 E:2  24%`
   return table.concat({
-    '%#LineNr#%', tostring(lnum_width), 'l:%-4c %3p%%   ',
-    file_hl, '%t %m',
-    '%=', cache.diagnostics[vim.api.nvim_win_get_buf(winid)],
+    '%#LineNr#%', tostring(lnum_width), 'l:%-3c',
+    file_hl, ' %t %m',
+    '%=%#LineNr#', cache.diagnostics[vim.api.nvim_win_get_buf(winid)] or '', ' %3p%% '
   })
 end
 
@@ -54,7 +54,7 @@ local function update_diagnostics(bufnr)
   if (counts[severity.INFO] or 0) > 0 then table.insert(parts, string.format('I:%d', counts[severity.INFO])) end
   if (counts[severity.HINT] or 0) > 0 then table.insert(parts, string.format('H:%d', counts[severity.HINT])) end
 
-  local result = '%#LineNr#' .. table.concat(parts, ' ') .. '%*'
+  local result = '%#LineNr#' .. table.concat(parts, ' ')
   cache.diagnostics[bufnr] = result
   vim.cmd('redrawstatus')
 end
