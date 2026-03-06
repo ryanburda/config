@@ -193,5 +193,3 @@ sudo chsh -s /bin/zsh $USER
 
 echo ""
 echo "Setup complete!"
-echo "Reboot to finish setup."
-echo "`sudo reboot`"
