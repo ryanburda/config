@@ -193,7 +193,7 @@ vim.keymap.set(
     if vim.fn.has('mac') == 1 then
       vim.cmd('silent !open -a "Google Chrome" ' .. file)
     else
-      vim.cmd('silent !google-chrome-stable ' .. file)
+      vim.cmd('silent !google-chrome-stable ' .. file .. ' &>/dev/null &')
     end
   end,
   {desc = 'Browser: Open current file in browser'}
