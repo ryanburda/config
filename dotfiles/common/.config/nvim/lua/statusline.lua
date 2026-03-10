@@ -26,7 +26,7 @@ function Statusline()
   -- file name and buf-mark status on left, tabs on right
   -- `init.lua    a b c                     1 2 3`
   return table.concat({
-    '%f  ', cache.buf_mark,
+    cache.buf_mark, '  %f',
     '%=', cache.tabs
   })
 end
