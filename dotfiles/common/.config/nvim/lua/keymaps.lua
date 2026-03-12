@@ -71,8 +71,6 @@ vim.keymap.set(
 -- Helpful when text wraps.
 vim.keymap.set('n', 'k', 'gk', {desc = 'Navigation: Up one display line'})
 vim.keymap.set('n', 'j', 'gj', {desc = 'Navigation: Down one display line'})
-vim.keymap.set('n', '0', 'g0', {desc = 'Navigation: Beginning of display line'})
-vim.keymap.set('n', '$', 'g$', {desc = 'Navigation: End of display line'})
 
 vim.keymap.set(
   'n',
