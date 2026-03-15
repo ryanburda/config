@@ -6,6 +6,7 @@ Configuration and dotfiles.
 
 1) Clone repo and run setup
 ```sh
+mkdir "{$HOME}/code"
 BARE="${HOME}/code/config/.git"
 WT="${HOME}/code/config/config"
 
