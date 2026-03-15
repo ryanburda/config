@@ -76,6 +76,8 @@ sudo pacman -S --needed --noconfirm \
 
 # Audio
 sudo pacman -S --needed --noconfirm \
+    easyeffects \
+    lsp-plugins-lv2 \
     pipewire \
     pipewire-alsa \
     pipewire-pulse \

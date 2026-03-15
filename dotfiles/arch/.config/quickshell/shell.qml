@@ -439,7 +439,7 @@ ShellRoot {
                                 anchors.top: parent.top
                                 anchors.bottom: parent.bottom
                                 anchors.left: parent.left
-                                width: parent.width * Math.min(root.volumeLevel / 100.0, 1.0)
+                                width: parent.width * Math.min(root.volumeLevel / 120.0, 1.0)
                                 color: root.colActive
                                 radius: root.radiusElement
                             }
