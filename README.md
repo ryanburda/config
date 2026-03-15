@@ -6,16 +6,17 @@ Configuration and dotfiles.
 
 1) Clone repo and run setup
 ```sh
-PROJECT_DIR="${HOME}/code/config/config"
+BARE="${HOME}/code/config/.git"
+WT="${HOME}/code/config/config"
 
-if [[ ! -d "${PROJECT_DIR}/.git" ]]; then
-    git clone git@github.com:ryanburda/config.git $PROJECT_DIR
-fi
+git clone --bare git@github.com:ryanburda/config.git "$BARE"
+git -C "$BARE" worktree add "$WT" main
+git -C "$BARE" worktree lock "$WT"
 
 if [[ "$(uname)" == "Darwin" ]]; then
-    "$PROJECT_DIR/setup_macos.sh"
+    "$WT/setup_macos.sh"
 else
-    "$PROJECT_DIR/setup_arch.sh"
+    "$WT/setup_arch.sh"
 fi
 ```
 
