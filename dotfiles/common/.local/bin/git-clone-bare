@@ -1,0 +1,39 @@
+#!/bin/zsh
+# Clone a repo as a bare repo and create a locked worktree.
+#
+# Usage: git clone-bare <repo_url> <root_path> <worktree_name>
+#
+# Structure created:
+#   $root_path/.git/              <- bare repo
+#   $root_path/$worktree_name     <- worktree (default branch)
+
+set -e
+
+if [[ $# -ne 3 ]]; then
+    echo "Usage: $0 <repo_url> <root_path> <worktree_name>"
+    echo "Example: $0 git@github.com:user/my-project.git \$HOME/code/my-project my-project"
+    exit 1
+fi
+
+REPO_URL=$1
+ROOT_PATH=$2
+WORKTREE_NAME=$3
+
+BARE_DIR="${ROOT_PATH}/.git"
+
+if [[ -d "$BARE_DIR" ]]; then
+    echo "Bare repo already exists at ${BARE_DIR}, skipping clone."
+else
+    mkdir -p "${ROOT_PATH}"
+    git clone --bare "$REPO_URL" "$BARE_DIR"
+fi
+
+WORKTREE_PATH="${ROOT_PATH}/${WORKTREE_NAME}"
+
+if [[ -d "$WORKTREE_PATH" ]]; then
+    echo "Worktree already exists at ${WORKTREE_PATH}, skipping."
+else
+    DEFAULT_BRANCH=$(git -C "$BARE_DIR" symbolic-ref --short HEAD)
+    git -C "$BARE_DIR" worktree-add "$WORKTREE_NAME" "$DEFAULT_BRANCH"
+    git -C "$BARE_DIR" worktree lock "$WORKTREE_PATH"
+fi
