@@ -1,11 +1,16 @@
 #!/bin/zsh
 # Clone a repo as a bare repo and create a locked worktree.
 #
-# Usage: git clone-bare <repo_url> <root_path> <worktree_name>
+# Works with `git worktree-add` to enforce a repo folder structure
+# that accommodates worktrees:
 #
-# Structure created:
-#   $root_path/.git/              <- bare repo
-#   $root_path/$worktree_name     <- worktree (default branch)
+#   $root_path/
+#   ├── .git/              <- bare repo
+#   ├── $worktree_name/    <- worktree (default branch, created by clone-bare)
+#   ├── feature-a/         <- worktree (created later via worktree-add)
+#   └── feature-b/         <- worktree (created later via worktree-add)
+#
+# Usage: git clone-bare <repo_url> <root_path> <worktree_name>
 
 set -e
 

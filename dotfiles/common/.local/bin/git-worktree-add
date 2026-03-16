@@ -1,9 +1,17 @@
 #!/bin/zsh
 # Add a worktree and run project-specific setup.
-# Invoked as: git worktree-add <worktree_name> <branch> [<new_branch>]
+#
+# Works with `git clone-bare` to enforce a repo folder structure
+# that accommodates worktrees:
+#
+#   $root_path/
+#   ├── .git/              <- bare repo (created by clone-bare)
+#   ├── main/              <- worktree (created by clone-bare)
+#   ├── feature-a/         <- worktree (created by worktree-add)
+#   └── feature-b/         <- worktree (created by worktree-add)
 #
 # The worktree is created at ../<worktree_name> relative to the current
-# directory, enforcing the sibling layout established by git-clone-bare.
+# directory, enforcing the sibling layout above.
 #
 # If a .worktree/setup script exists in the project root, it is executed
 # from within the new worktree after creation.
