@@ -31,6 +31,9 @@ if [[ -d "$BARE_DIR" ]]; then
 else
     mkdir -p "${ROOT_PATH}"
     git clone --bare "$REPO_URL" "$BARE_DIR"
+    # bare clone copies the remote HEAD ref as refs/heads/HEAD, creating
+    # a branch literally named "HEAD" that makes the refname ambiguous.
+    git -C "$BARE_DIR" branch -D HEAD 2>/dev/null || true
 fi
 
 WORKTREE_PATH="${ROOT_PATH}/${WORKTREE_NAME}"
