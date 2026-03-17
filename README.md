@@ -6,11 +6,16 @@ Configuration and dotfiles.
 
 1) Clone repo and run setup
 ```sh
-mkdir "{$HOME}/code"
+mkdir "${HOME}/code"
 BARE="${HOME}/code/config/.git"
 WT="${HOME}/code/config/config"
 
 git clone --bare git@github.com:ryanburda/config.git "$BARE"
+git -C "$BARE" config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
+git -C "$BARE" for-each-ref --format='%(refname:short)' refs/heads/ \
+    | grep -v '^main$' \
+    | xargs git -C "$BARE" branch -D 2>/dev/null
+git -C "$BARE" fetch origin
 git -C "$BARE" worktree add "$WT" main
 git -C "$BARE" worktree lock "$WT"
 

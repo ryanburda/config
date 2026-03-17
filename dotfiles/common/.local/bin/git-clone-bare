@@ -35,8 +35,9 @@ else
     # branches directly to local refs instead of refs/remotes/origin/*.
     # Fix this so that remote tracking branches work normally.
     git -C "$BARE_DIR" config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
-    # The old refspec created local branches for every remote branch.
-    # Remove all local branches, then re-fetch into refs/remotes/origin/*.
+    # bare clone creates local branches for every remote branch.
+    # Remove all local branches except the default, then re-fetch into
+    # refs/remotes/origin/* using the corrected refspec.
     DEFAULT_BRANCH=$(git -C "$BARE_DIR" symbolic-ref --short HEAD)
     git -C "$BARE_DIR" for-each-ref --format='%(refname:short)' refs/heads/ \
         | grep -v "^${DEFAULT_BRANCH}$" \
