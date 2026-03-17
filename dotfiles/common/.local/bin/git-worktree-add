@@ -6,7 +6,6 @@
 #
 #   $root_path/
 #   ├── .git/              <- bare repo (created by clone-bare)
-#   ├── main/              <- worktree (created by clone-bare)
 #   ├── feature-a/         <- worktree (created by worktree-add)
 #   └── feature-b/         <- worktree (created by worktree-add)
 #
@@ -17,23 +16,36 @@
 # from within the new worktree after creation.
 #
 # Usage:
-#   git worktree-add wt1 main          # checkout main in ../wt1
-#   git worktree-add wt1 main feature  # create branch "feature" off main in ../wt1
+#   git worktree-add main                    # checkout main in ../main
+#   git worktree-add main feature            # create branch "feature" off main in ../feature
+#   git worktree-add -l main                 # checkout main in ../main and lock
+#   git worktree-add -l main feature         # create branch "feature" off main in ../feature and lock
 
 set -e
 
-if [[ $# -lt 2 || $# -gt 3 ]]; then
-    echo "Usage: git worktree-add <worktree_name> <branch> [<new_branch>]"
+LOCK=false
+if [[ "$1" == "-l" ]]; then
+    LOCK=true
+    shift
+fi
+
+if [[ $# -lt 1 || $# -gt 2 ]]; then
+    echo "Usage: git worktree-add [-l] <branch> [<new_branch>]"
     exit 1
 fi
 
-WORKTREE_NAME=$1
-BRANCH=$2
-NEW_BRANCH=$3
+BRANCH=$1
+NEW_BRANCH=$2
 
 if ! git rev-parse --git-dir > /dev/null 2>&1; then
     echo "Error: not inside a git repository"
     exit 1
+fi
+
+if [[ -n "$NEW_BRANCH" ]]; then
+    WORKTREE_NAME=$NEW_BRANCH
+else
+    WORKTREE_NAME=$BRANCH
 fi
 
 WORKTREE_PATH="../${WORKTREE_NAME}"
@@ -47,6 +59,10 @@ if [[ -n "$NEW_BRANCH" ]]; then
     git worktree add -b "$NEW_BRANCH" "$WORKTREE_PATH" "$BRANCH"
 else
     git worktree add "$WORKTREE_PATH" "$BRANCH"
+fi
+
+if [[ "$LOCK" == true ]]; then
+    git worktree lock "$WORKTREE_PATH"
 fi
 
 BARE_DIR=$(cd "$(git rev-parse --git-common-dir)" && pwd)

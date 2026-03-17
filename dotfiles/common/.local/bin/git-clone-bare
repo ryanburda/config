@@ -1,28 +1,26 @@
 #!/bin/zsh
-# Clone a repo as a bare repo and create a locked worktree.
+# Clone a repo as a bare repo.
 #
 # Works with `git worktree-add` to enforce a repo folder structure
 # that accommodates worktrees:
 #
 #   $root_path/
-#   ├── .git/              <- bare repo
-#   ├── $worktree_name/    <- worktree (default branch, created by clone-bare)
-#   ├── feature-a/         <- worktree (created later via worktree-add)
-#   └── feature-b/         <- worktree (created later via worktree-add)
+#   ├── .git/              <- bare repo (created by clone-bare)
+#   ├── feature-a/         <- worktree (created by worktree-add)
+#   └── feature-b/         <- worktree (created by worktree-add)
 #
-# Usage: git clone-bare <repo_url> <root_path> <worktree_name>
+# Usage: git clone-bare <repo_url> <root_path>
 
 set -e
 
-if [[ $# -ne 3 ]]; then
-    echo "Usage: $0 <repo_url> <root_path> <worktree_name>"
-    echo "Example: $0 git@github.com:user/my-project.git \$HOME/code/my-project my-project"
+if [[ $# -ne 2 ]]; then
+    echo "Usage: $0 <repo_url> <root_path>"
+    echo "Example: $0 git@github.com:user/my-project.git \$HOME/code/my-project"
     exit 1
 fi
 
 REPO_URL=$1
 ROOT_PATH=$2
-WORKTREE_NAME=$3
 
 BARE_DIR="${ROOT_PATH}/.git"
 
@@ -53,14 +51,4 @@ else
         | grep -v "^${DEFAULT_BRANCH}$" \
         | xargs -r git -C "$BARE_DIR" branch -D 2>/dev/null || true
     git -C "$BARE_DIR" fetch origin
-fi
-
-WORKTREE_PATH="${ROOT_PATH}/${WORKTREE_NAME}"
-
-if [[ -d "$WORKTREE_PATH" ]]; then
-    echo "Worktree already exists at ${WORKTREE_PATH}, skipping."
-else
-    DEFAULT_BRANCH=$(git -C "$BARE_DIR" symbolic-ref --short HEAD)
-    git -C "$BARE_DIR" worktree-add "$WORKTREE_NAME" "$DEFAULT_BRANCH"
-    git -C "$BARE_DIR" worktree lock "$WORKTREE_PATH"
 fi
