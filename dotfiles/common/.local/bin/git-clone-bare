@@ -31,10 +31,20 @@ if [[ -d "$BARE_DIR" ]]; then
 else
     mkdir -p "${ROOT_PATH}"
     git clone --bare "$REPO_URL" "$BARE_DIR"
-    # bare clone sets fetch = +refs/heads/*:refs/heads/*, which maps remote
-    # branches directly to local refs instead of refs/remotes/origin/*.
-    # Fix this so that remote tracking branches work normally.
+    # In a normal clone, git separates refs into:
+    #   - refs/heads/* (local branches)
+    #   - refs/remotes/origin/* (remote tracking branches)
+    #
+    # A bare repo was designed to be a server-side mirror - the central repo that
+    # people push to and pull from. There's no local/remote distinction because every
+    # branch *is* the authoritative copy. So `git clone --bare` maps everything
+    # into refs/heads/* with fetch = +refs/heads/*:refs/heads/*.
+    #
+    # The worktree-based workflow repurposes bare repos for local development,
+    # so we need the local/remote separation back. Fix the fetch refspec to
+    # use the standard refs/remotes/origin/* namespace.
     git -C "$BARE_DIR" config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
+
     # bare clone creates local branches for every remote branch.
     # Remove all local branches except the default, then re-fetch into
     # refs/remotes/origin/* using the corrected refspec.
