@@ -55,15 +55,15 @@ if [[ -d "$WORKTREE_PATH" ]]; then
 fi
 
 if [[ -n "$NEW_BRANCH" ]]; then
-    git worktree add -b "$NEW_BRANCH" "$WORKTREE_PATH" "$BRANCH"
+    git worktree add -b "$NEW_BRANCH" "$WORKTREE_PATH" "$BRANCH" >&2
 else
-    git worktree add "$WORKTREE_PATH" "$BRANCH"
+    git worktree add "$WORKTREE_PATH" "$BRANCH" >&2
 fi
 
 SETUP_SCRIPT="${PROJECT_ROOT}/.worktree/setup"
 
 if [[ -f "$SETUP_SCRIPT" ]]; then
-    (cd "$WORKTREE_PATH" && exec "$SETUP_SCRIPT")
+    (cd "$WORKTREE_PATH" && exec "$SETUP_SCRIPT") >&2
 fi
 
 echo "$WORKTREE_PATH"
