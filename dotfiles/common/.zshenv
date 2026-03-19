@@ -8,4 +8,4 @@ export TSM_DIRS_CMD='{
   find "$HOME/code" -name ".*" -prune -o -type d \( -exec test -f "{}/.git" \; -print -prune -o -print \);
 }'
 
-export TSM_GIT_DIRS_CMD='find "$HOME/code" -maxdepth 4 -name ".git" 2>/dev/null | sed "s|/\.git$||"'
+export TSM_GIT_DIRS_CMD='find "$HOME/code" -maxdepth 4 -name ".git" 2>/dev/null | while read g; do [ ! -d "$g" ] || ! git -C "$g" rev-parse --is-bare-repository 2>/dev/null | grep -q true && echo "${g%/.git}"; done'
