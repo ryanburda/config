@@ -8,7 +8,7 @@ Configuration and dotfiles.
 ```sh
 mkdir "${HOME}/code"
 BARE="${HOME}/code/config/.git"
-WT="${HOME}/code/config/config"
+WT="${HOME}/code/config/base"
 
 git clone --bare git@github.com:ryanburda/config.git "$BARE"
 git -C "$BARE" config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
