@@ -55,8 +55,8 @@ else
     # Remove all local branches except the default, then re-fetch into
     # refs/remotes/origin/* using the corrected refspec.
     DEFAULT_BRANCH=$(git -C "$BARE_DIR" symbolic-ref --short HEAD)
-    git -C "$BARE_DIR" for-each-ref --format='%(refname:short)' refs/heads/ \
-        | grep -v "^${DEFAULT_BRANCH}$" \
-        | while read -r branch; do git -C "$BARE_DIR" branch -D "$branch"; done
+    git -C "$BARE_DIR" for-each-ref --format='%(refname)' refs/heads/ \
+        | grep -v "^refs/heads/${DEFAULT_BRANCH}$" \
+        | while read -r ref; do git -C "$BARE_DIR" update-ref -d "$ref"; done
     git -C "$BARE_DIR" fetch origin
 fi
