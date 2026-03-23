@@ -9,7 +9,7 @@
 #   ├── feature-a/         <- worktree (created by worktree-add)
 #   └── feature-b/         <- worktree (created by worktree-add)
 #
-# Usage: git clone-bare <repo_url> <root_path>
+# Usage: git clone-bare <repo_url> [<root_path>]
 #
 # Using `git clone-bare` and `git worktree-add` together:
 # ``` sh
@@ -21,14 +21,22 @@
 
 set -e
 
-if [[ $# -ne 2 ]]; then
-    echo "Usage: $0 <repo_url> <root_path>"
-    echo "Example: $0 git@github.com:user/my-project.git \$HOME/code/my-project"
+if [[ $# -lt 1 || $# -gt 2 ]]; then
+    echo "Usage: $0 <repo_url> [<root_path>]"
+    echo "Example: $0 git@github.com:user/my-project.git [\$HOME/code/my-project]"
     exit 1
 fi
 
 REPO_URL=$1
-ROOT_PATH=$2
+
+if [[ -n "$2" ]]; then
+    ROOT_PATH=$2
+else
+    # Derive project name from URL, matching git clone behavior:
+    # strip trailing slashes, .git suffix, and take the basename.
+    PROJECT_NAME=$(basename "${REPO_URL}" .git)
+    ROOT_PATH="$(pwd)/${PROJECT_NAME}"
+fi
 
 BARE_DIR="${ROOT_PATH}/.git"
 
