@@ -60,6 +60,15 @@ else
     git worktree add "$WORKTREE_PATH" "$BRANCH" >&2
 fi
 
+# Set upstream tracking branch if not already set.
+WT_BRANCH=$(git -C "$WORKTREE_PATH" branch --show-current)
+if [[ -n "$WT_BRANCH" ]] && ! git -C "$WORKTREE_PATH" config "branch.${WT_BRANCH}.remote" > /dev/null 2>&1; then
+    REMOTE_REF="refs/remotes/origin/${WT_BRANCH}"
+    if git -C "$WORKTREE_PATH" show-ref --verify --quiet "$REMOTE_REF"; then
+        git -C "$WORKTREE_PATH" branch --set-upstream-to="origin/${WT_BRANCH}" >&2
+    fi
+fi
+
 SETUP_SCRIPT="${PROJECT_ROOT}/.worktree/setup"
 
 if [[ -f "$SETUP_SCRIPT" ]]; then
