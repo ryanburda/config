@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-BACKGROUNDS_DIR="$HOME/code/assets/assets/assets/backgrounds"
+BACKGROUNDS_DIR="$HOME/code/assets/base/assets/backgrounds"
 ENVY_KEY="background"
 
 selected=$(ls "$BACKGROUNDS_DIR" | fzf --cycle --preview "chafa --size=\${FZF_PREVIEW_COLUMNS}x\${FZF_PREVIEW_LINES} $BACKGROUNDS_DIR/{}" --preview-window=up,80%)
