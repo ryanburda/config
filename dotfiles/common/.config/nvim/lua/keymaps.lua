@@ -996,6 +996,13 @@ vim.keymap.set(
   { desc = 'List buf-marks' }
 )
 
+vim.keymap.set(
+  'n',
+  "'/",
+  require("buf-mark.fzf_lua").worktree_picker,
+  { desc = 'Load buf-marks from worktree' }
+)
+
 -- Keep keymaps around for local marks just in case.
 vim.keymap.set(
   'n',
