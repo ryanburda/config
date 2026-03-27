@@ -348,8 +348,6 @@ return {
     config = function() require('scrollEOF').setup() end,
   },
 
-  'justinmk/vim-sneak',
-
   -- Git
   {
     'lewis6991/gitsigns.nvim',

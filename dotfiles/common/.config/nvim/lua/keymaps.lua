@@ -900,143 +900,97 @@ vim.keymap.set(
   { desc = "CSV toggle alignment" }
 )
 
--- Marks
+---------------
+-- Buf-marks --
+---------------
+-- `S{char}` - Set buf-mark
+-- `s{char}` - Goto buf-mark
+-- `s?` - List all buf-marks
+-- `s[` - Previous buf-mark
+-- `s]` - Next buf-mark
+-- `s/` - Load buf-marks from another worktree
+-- `s'` - Load buf-marks from another project
+-- `s;` - Jump to alternate buffer
 --
--- In typical Neovim usage, I rarely find myself using local marks. Most of the time I only mark a few locations per
--- session and want to be able to jump to those marks from any buffer. This is why I generally prefer global marks.
--- 
--- Similarly, I don't find Vim's automatic marks 1-9 useful since they require remembering the order files
--- were exited. Mark 0 (last exit location) however is useful.
--- 
--- This keymap configuration repurposes the local mark and automatic mark 1-9 keybindings for buf-marks instead,
--- making buffer navigation more ergonomic.
---
--- Keymaps
---     - `m{lowercase}` - Set a buf-mark
---     - `m{other}` - Set a native, non-local, mark (normal behavior)
---     - `'{lowercase}` - Jump to a buf-mark
---     - `'{other}` - Jump to a native, non-local, mark (normal behavior)
---     - `M{lowercase}` - Delete a buf-mark
---     - `M{other}` - Delete a native, non-local, mark
---     - `'<Tab>` - Jump to alternate buffer
---     - `'?` - List all buf-marks
---     - `<leader>m{char}` - Set a native local mark (fallback for local marks if needed)
---     - `<leader>'{char}` - Jump to a native local mark (fallback for local marks if needed)
+-- Characters reserved for dedicated s{char} keymaps below.
+-- The s mapping ignores these so the dedicated keymaps can fire.
+local reserved = { ['?'] = true, ['/'] = true, [';'] = true, ["'"] = true, ['['] = true, [']'] = true }
+
+-- S{char} to set buf-mark
 vim.keymap.set(
   'n',
-  'm',
+  'S',
   function()
     local char = vim.fn.getcharstr()
-    if char:match("[%l1-9]") then
-      -- set a buf-mark
-      require('buf-mark').set(char)
-    else
-      -- set a global mark
-      local ok, err = pcall(vim.cmd, 'normal! m' .. char)
-      if not ok then
-        local vim_err = err:match("Vim%([^)]+%):(.*)") or err
-        vim.api.nvim_echo({{vim_err, "ErrorMsg"}}, true, {})
-      end
-    end
+    require('buf-mark').set(char)
   end,
-  { desc = 'Set buf-mark/global mark' }
+  { desc = 'Set buf-mark' }
 )
 
+-- s{char} to goto buf-mark
 vim.keymap.set(
   'n',
-  "'",
+  's',
   function()
     local char = vim.fn.getcharstr()
-    if char:match("[%l1-9]") then
-      -- goto a buf-mark
-      require('buf-mark').goto(char)
-    else
-      -- goto a global mark
-      local ok, err = pcall(vim.cmd, "normal! '" .. char)
-      if not ok then
-        local vim_err = err:match("Vim%([^)]+%):(.*)") or err
-        vim.api.nvim_echo({{vim_err, "ErrorMsg"}}, true, {})
-      end
+    if reserved[char] then
+      -- Feed back as s{char} so the dedicated keymap fires
+      vim.api.nvim_feedkeys('s' .. char, 'm', false)
+      return
     end
+    require('buf-mark').goto(char)
   end,
-  { desc = 'Delete buffer mark' }
+  { desc = 'Goto buf-mark' }
 )
 
+-- s? to list buf-marks
 vim.keymap.set(
   'n',
-  'M',
-  function()
-    local char = vim.fn.getcharstr()
-    if char:match("[%l1-9]") then
-      -- delete a buf-mark
-      require('buf-mark').delete(char)
-    else
-      -- delete a global mark
-      local ok, err = pcall(vim.cmd, 'delmarks ' .. char)
-      if not ok then
-        local vim_err = err:match("Vim%([^)]+%):(.*)") or err
-        vim.api.nvim_echo({{vim_err, "ErrorMsg"}}, true, {})
-      end
-    end
-  end,
-  { desc = 'Delete buffer mark' }
-)
-
-vim.keymap.set(
-  'n',
-  "'<Tab>",
-  ':b#<cr>',
-  { desc = 'Alternate buffer', silent = true }
-)
-
-vim.keymap.set(
-  'n',
-  "'?",
+  's?',
   require("buf-mark.fzf_lua").picker,
+  -- require("buf-mark.telescope").picker,
+  -- require('buf-mark').list_pretty,
   { desc = 'List buf-marks' }
 )
 
+-- s[ to go to previous buf-mark
 vim.keymap.set(
   'n',
-  "'/",
+  's[',
+  require('buf-mark').prev,
+  { desc = 'Previous buf-mark' }
+)
+
+-- s] to go to next buf-mark
+vim.keymap.set(
+  'n',
+  's]',
+  require('buf-mark').next,
+  { desc = 'Next buf-mark' }
+)
+
+-- s/ to load buf-marks from another worktree
+vim.keymap.set(
+  'n',
+  's/',
   require("buf-mark.fzf_lua").worktree_picker,
+  -- require("buf-mark.telescope").worktree_picker,
   { desc = 'Load buf-marks from worktree' }
 )
 
+-- s' to load buf-marks from another project
 vim.keymap.set(
   'n',
-  "';",
+  "s'",
   require("buf-mark.fzf_lua").project_picker,
+  -- require("buf-mark.telescope").project_picker,
   { desc = 'Load buf-marks from project' }
 )
 
--- Keep keymaps around for local marks just in case.
+-- s; to jump to alternate buffer
 vim.keymap.set(
   'n',
-  '<leader>m',
-  function()
-    local char = vim.fn.getcharstr()
-    -- set mark
-    local ok, err = pcall(vim.cmd, 'normal! m' .. char)
-    if not ok then
-      local vim_err = err:match("Vim%([^)]+%):(.*)") or err
-      vim.api.nvim_echo({{vim_err, "ErrorMsg"}}, true, {})
-    end
-  end,
-  { desc = 'Set mark' }
+  's;',
+  ':b#<cr>',
+  { desc = 'Alternate buffer' }
 )
-
--- vim.keymap.set(
---   'n',
---   "<leader>'",
---   function()
---     local char = vim.fn.getcharstr()
---     -- set mark
---     local ok, err = pcall(vim.cmd, "normal! '" .. char)
---     if not ok then
---       local vim_err = err:match("Vim%([^)]+%):(.*)") or err
---       vim.api.nvim_echo({{vim_err, "ErrorMsg"}}, true, {})
---     end
---   end,
---   { desc = 'Set mark' }
--- )
