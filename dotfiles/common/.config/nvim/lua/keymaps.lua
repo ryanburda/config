@@ -53,14 +53,14 @@ vim.keymap.set(
 
 vim.keymap.set(
   'n',
-  '<leader>;',
+  '<leader><C-j>',
   ':split<cr><C-w>j',
   {desc = 'Window Management: Horizontal split', silent = true}
 )
 
 vim.keymap.set(
   'n',
-  "<leader>'",
+  "<leader><C-l>",
   ':vsplit<cr><C-w>l',
   {desc = 'Window Management: Vertical split', silent = true}
 )
