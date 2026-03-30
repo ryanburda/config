@@ -929,8 +929,12 @@ vim.keymap.set('n', 's', function()
 end, { desc = 'Goto buf-mark' })
 
 vim.keymap.set('n', 's;', ':b#<cr>', { desc = 'Alternate buffer' })
-vim.keymap.set('n', 's[', buf_mark.prev, { desc = 'Previous buf-mark' })
-vim.keymap.set('n', 's]', buf_mark.next, { desc = 'Next buf-mark' })
+
+-- vim.keymap.set('n', 's[', buf_mark.prev, { desc = 'Previous buf-mark' })
+vim.keymap.set('n', 's[', require('buf-mark.status').prev, { desc = 'Previous open buf-mark' })
+
+-- vim.keymap.set('n', 's]', buf_mark.next, { desc = 'Next buf-mark' })
+vim.keymap.set('n', 's]', require('buf-mark.status').next, { desc = 'Next open buf-mark' })
 
 vim.keymap.set('n', 's?', require('buf-mark.fzf_lua').list, { desc = 'Fuzzy find buf-marks' })
 -- vim.keymap.set('n', 's?', require('buf-mark.telescope').list, { desc = 'Fuzzy find buf-marks' })
