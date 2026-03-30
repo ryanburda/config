@@ -911,86 +911,33 @@ vim.keymap.set(
 -- `s/` - Load buf-marks from another worktree
 -- `s'` - Load buf-marks from another project
 -- `s;` - Jump to alternate buffer
---
--- Characters reserved for dedicated s{char} keymaps below.
--- The s mapping ignores these so the dedicated keymaps can fire.
-local reserved = { ['?'] = true, ['/'] = true, [';'] = true, ["'"] = true, ['['] = true, [']'] = true }
 
--- S{char} to set buf-mark
-vim.keymap.set(
-  'n',
-  'S',
-  function()
-    local char = vim.fn.getcharstr()
-    require('buf-mark').set(char)
-  end,
-  { desc = 'Set buf-mark' }
-)
+local buf_mark = require('buf-mark')
+local reserved = { [';'] = true, ['['] = true, [']'] = true, ['?'] = true, ['/'] = true, ["'"] = true }
 
--- s{char} to goto buf-mark
-vim.keymap.set(
-  'n',
-  's',
-  function()
-    local char = vim.fn.getcharstr()
-    if reserved[char] then
-      -- Feed back as s{char} so the dedicated keymap fires
-      vim.api.nvim_feedkeys('s' .. char, 'm', false)
-      return
-    end
-    require('buf-mark').goto(char)
-  end,
-  { desc = 'Goto buf-mark' }
-)
+vim.keymap.set('n', 'S', function()
+  buf_mark.set(vim.fn.getcharstr())
+end, { desc = 'Set buf-mark' })
 
--- s? to list buf-marks
-vim.keymap.set(
-  'n',
-  's?',
-  require("buf-mark.fzf_lua").picker,
-  -- require("buf-mark.telescope").picker,
-  -- require('buf-mark').list_pretty,
-  { desc = 'List buf-marks' }
-)
+vim.keymap.set('n', 's', function()
+  local char = vim.fn.getcharstr()
+  if reserved[char] then
+    vim.api.nvim_feedkeys('s' .. char, 'm', false)
+    return
+  end
+  buf_mark.goto(char)
+end, { desc = 'Goto buf-mark' })
 
--- s[ to go to previous buf-mark
-vim.keymap.set(
-  'n',
-  's[',
-  require('buf-mark').prev,
-  { desc = 'Previous buf-mark' }
-)
+vim.keymap.set('n', 's;', ':b#<cr>', { desc = 'Alternate buffer' })
+vim.keymap.set('n', 's[', buf_mark.prev, { desc = 'Previous buf-mark' })
+vim.keymap.set('n', 's]', buf_mark.next, { desc = 'Next buf-mark' })
 
--- s] to go to next buf-mark
-vim.keymap.set(
-  'n',
-  's]',
-  require('buf-mark').next,
-  { desc = 'Next buf-mark' }
-)
+vim.keymap.set('n', 's?', require('buf-mark.fzf_lua').list, { desc = 'Fuzzy find buf-marks' })
+-- vim.keymap.set('n', 's?', require('buf-mark.telescope').list, { desc = 'Fuzzy find buf-marks' })
+-- vim.keymap.set('n', 's?', buf_mark.list_pretty, { desc = 'List buf-marks' })
 
--- s/ to load buf-marks from another worktree
-vim.keymap.set(
-  'n',
-  's/',
-  require("buf-mark.fzf_lua").worktree_picker,
-  -- require("buf-mark.telescope").worktree_picker,
-  { desc = 'Load buf-marks from worktree' }
-)
+vim.keymap.set('n', 's/', require('buf-mark.fzf_lua').worktrees, { desc = 'Fuzzy find worktrees' })
+-- vim.keymap.set('n', 's/', require('buf-mark.telescope').worktrees, { desc = 'Fuzzy find worktrees' })
 
--- s' to load buf-marks from another project
-vim.keymap.set(
-  'n',
-  "s'",
-  require("buf-mark.fzf_lua").project_picker,
-  -- require("buf-mark.telescope").project_picker,
-  { desc = 'Load buf-marks from project' }
-)
-
--- s; to jump to alternate buffer
-vim.keymap.set(
-  'n',
-  's;',
-  ':b#<cr>',
-  { desc = 'Alternate buffer' }
-)
+vim.keymap.set('n', "s'", require('buf-mark.fzf_lua').projects, { desc = 'Fuzzy find projects' })
+-- vim.keymap.set('n', "s'", require('buf-mark.telescope').projects, { desc = 'Fuzzy find projects' })
