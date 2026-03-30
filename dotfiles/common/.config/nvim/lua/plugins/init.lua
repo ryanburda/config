@@ -39,13 +39,6 @@ return {
   'ptdewey/darkearth-nvim',
   'catppuccin/nvim',
 
-  {
-    'catgoose/nvim-colorizer.lua',
-    config = function()
-      require'colorizer'.setup()
-    end
-  },
-
   -- Treesitter
   {
     'nvim-treesitter/nvim-treesitter',
