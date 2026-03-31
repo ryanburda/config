@@ -61,6 +61,9 @@ setopt hist_find_no_dups
 setopt +o nomatch
 setopt EXTENDED_GLOB
 
+# Disable terminal flow control (C-s/C-q) so C-s can be used for custom mappings
+stty -ixon
+
 # Completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
