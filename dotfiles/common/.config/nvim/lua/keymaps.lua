@@ -935,7 +935,7 @@ vim.keymap.set('n', 's', function()
   buf_mark.goto(char)
 end, { desc = 'Goto buf-mark' })
 
-vim.keymap.set('n', 's;', ':b#<cr>', { desc = 'Alternate buffer' })
+vim.keymap.set('n', 's;', ':b#<cr>', { desc = 'Alternate buffer', silent = true })
 
 -- vim.keymap.set('n', 's[', buf_mark.prev, { desc = 'Previous buf-mark' })
 vim.keymap.set('n', 's,', require('buf-mark.status').prev, { desc = 'Previous open buf-mark' })
