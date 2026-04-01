@@ -686,6 +686,13 @@ vim.keymap.set(
   'n',
   '<C-f>',
   require('fzf-lua').files,
+  { desc = 'Find: files' }
+)
+
+vim.keymap.set(
+  'n',
+  '<C-b>',
+  require('fzf-lua').buffers,
   { desc = 'Find: buffers' }
 )
 

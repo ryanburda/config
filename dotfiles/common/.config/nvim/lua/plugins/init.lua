@@ -160,7 +160,7 @@ return {
         files = {
           hidden = true,
           actions = {
-            ["ctrl-f"] = function(_, opts)
+            ["ctrl-b"] = function(_, opts)
               local query = opts.query or ""
               require('fzf-lua').buffers({query=query})
             end,
