@@ -943,7 +943,7 @@ vim.keymap.set('n', 's,', require('buf-mark.status').prev, { desc = 'Previous op
 -- vim.keymap.set('n', 's]', buf_mark.next, { desc = 'Next buf-mark' })
 vim.keymap.set('n', 's.', require('buf-mark.status').next, { desc = 'Next open buf-mark' })
 
-vim.keymap.set('n', '<C-s>', require('buf-mark.fzf_lua').list, { desc = 'Fuzzy find buf-marks' })
+vim.keymap.set('n', 's?', require('buf-mark.fzf_lua').list, { desc = 'Fuzzy find buf-marks' })
 -- vim.keymap.set('n', 's?', require('buf-mark.telescope').list, { desc = 'Fuzzy find buf-marks' })
 -- vim.keymap.set('n', 's?', buf_mark.list_pretty, { desc = 'List buf-marks' })
 
