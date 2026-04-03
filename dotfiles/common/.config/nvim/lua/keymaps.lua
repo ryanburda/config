@@ -831,33 +831,49 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
+vim.keymap.set({ 'n', 'x', 'o' }, '<leader>s', '<Plug>(leap)')
+
+do
+  local clever = require('leap.user').with_traversal_keys
+  vim.keymap.set({ 'n', 'x', 'o' }, ';', function()
+    require('leap').leap {
+      ['repeat'] = true, opts = clever(';', ','),
+    }
+  end)
+  vim.keymap.set({ 'n', 'x', 'o' }, ',', function()
+    require('leap').leap {
+      ['repeat'] = true, opts = clever(',', ';'), backward = true,
+    }
+  end)
+end
+
 ------------------------------------------------------------------------------------------------------------------------
 -- Macros
 ------------------------------------------------------------------------------------------------------------------------
 vim.keymap.set(
   'n',
-  '<leader>s,',
+  '<leader>S,',
   ':s/\\s*,\\s*/\\r/g<cr>:noh<cr>',
   {desc = 'Macro: Split comma separated value into lines'}
 )
 
 vim.keymap.set(
   'n',
-  '<leader>sc',
+  '<leader>Sc',
   ':s/./&\\r/g<cr>:noh<cr>',
   {desc = 'Macro: Split characters into lines'}
 )
 
 vim.keymap.set(
   'n',
-  '<leader>sw',
+  '<leader>Sw',
   ':s/\\s*\\(\\<\\w\\+\\>\\)/\\1\\r/g<cr>:noh<cr>',
   {desc = 'Macro: Split words into lines'}
 )
 
 vim.keymap.set(
   'n',
-  '<leader>sW',
+  '<leader>SW',
   ':s/\\s*\\(\\S\\+\\)/\\1\\r/g<cr>:noh<cr>',
   {desc = 'Macro: Split Words (non-whitespace) into lines'}
 )

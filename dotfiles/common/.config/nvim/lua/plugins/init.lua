@@ -501,6 +501,10 @@ return {
   },
 
   {
+    url = 'https://codeberg.org/andyg/leap.nvim',
+  },
+
+  {
     'chentoast/marks.nvim',
     config = function()
       require('marks').setup({
