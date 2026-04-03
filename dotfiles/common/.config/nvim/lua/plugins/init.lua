@@ -501,7 +501,10 @@ return {
   },
 
   {
-    url = 'https://codeberg.org/andyg/leap.nvim',
+    'justinmk/vim-sneak',
+    init = function()
+      vim.g['sneak#no_default_mappings'] = 1
+    end,
   },
 
   {

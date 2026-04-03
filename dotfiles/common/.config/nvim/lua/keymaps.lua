@@ -831,21 +831,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
-vim.keymap.set({ 'n', 'x', 'o' }, '<leader>s', '<Plug>(leap)')
-
-do
-  local clever = require('leap.user').with_traversal_keys
-  vim.keymap.set({ 'n', 'x', 'o' }, ';', function()
-    require('leap').leap {
-      ['repeat'] = true, opts = clever(';', ','),
-    }
-  end)
-  vim.keymap.set({ 'n', 'x', 'o' }, ',', function()
-    require('leap').leap {
-      ['repeat'] = true, opts = clever(',', ';'), backward = true,
-    }
-  end)
-end
+vim.keymap.set({ 'n', 'x', 'o' }, '<leader>s', '<Plug>Sneak_s')
+vim.keymap.set({ 'n', 'x', 'o' }, ';', '<Plug>Sneak_;')
+vim.keymap.set({ 'n', 'x', 'o' }, ',', '<Plug>Sneak_,')
 
 ------------------------------------------------------------------------------------------------------------------------
 -- Macros
