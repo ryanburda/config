@@ -9,7 +9,19 @@ local config = wezterm.config_builder()
 -- NOTE: `os.getenv("XDG_CONFIG_HOME")` returns nil. Using "HOME" as an alternative for now.
 local background_image_dir = os.getenv("HOME") .. "/code/assets/base/assets/backgrounds/"
 
-config.color_scheme = envy.get('wezterm_colorscheme', 'Catppuccin Mocha')
+local color_scheme = envy.get('wezterm_colorscheme', 'Catppuccin Mocha')
+
+local light_schemes = { dayfox = true, dawnfox = true }
+
+if light_schemes[color_scheme] then
+  local scheme = wezterm.color.get_builtin_schemes()[color_scheme]
+  scheme.ansi[1] = '#bbbbbb'
+  local custom_name = color_scheme .. '-custom'
+  config.color_schemes = { [custom_name] = scheme }
+  config.color_scheme = custom_name
+else
+  config.color_scheme = color_scheme
+end
 config.font = wezterm.font(envy.get('font_family', 'JetBrains Mono'))
 config.font_size = tonumber(envy.get('font_size', '12'))
 config.window_decorations = "RESIZE"
@@ -44,7 +56,7 @@ end
 local background_color = nil
 
 if current_background ~= "NONE" then
-  background_color = wezterm.get_builtin_color_schemes()[config.color_scheme].background
+  background_color = wezterm.get_builtin_color_schemes()[color_scheme].background
 end
 
 -- background opacity
