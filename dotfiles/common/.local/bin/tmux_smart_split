@@ -1,0 +1,37 @@
+#!/bin/bash
+# Smart tmux split that adjusts split percentage based on current pane size relative to the full window.
+#
+# Usage: tmux_smart_split <-h|-v> <threshold> <small_pct> [extra split-window args...]
+#
+#   -h|-v      Split direction (horizontal or vertical)
+#   threshold  If the relevant dimension of the current pane exceeds this percentage
+#              of the full window, use small_pct. Otherwise, split evenly.
+#   small_pct  The split percentage to use when the pane is larger than the threshold.
+#   Extra arguments are forwarded to tmux split-window (e.g. -c '#{pane_current_path}').
+
+direction="$1"
+threshold="$2"
+small_pct="$3"
+shift 3
+
+if [ -z "$direction" ] || [ -z "$threshold" ] || [ -z "$small_pct" ]; then
+    echo "Usage: tmux_smart_split <-h|-v> <threshold> <small_pct> [extra args...]" >&2
+    exit 1
+fi
+
+pane_width="$(tmux display-message -p '#{pane_width}')"
+pane_height="$(tmux display-message -p '#{pane_height}')"
+window_width="$(tmux display-message -p '#{window_width}')"
+window_height="$(tmux display-message -p '#{window_height}')"
+
+if [ "$direction" = "-h" ]; then
+    pane_pct=$(( pane_width * 100 / window_width ))
+else
+    pane_pct=$(( pane_height * 100 / window_height ))
+fi
+
+if [ "$pane_pct" -gt "$threshold" ]; then
+    tmux split-window "$direction" -p "$small_pct" "$@"
+else
+    tmux split-window "$direction" "$@"
+fi
