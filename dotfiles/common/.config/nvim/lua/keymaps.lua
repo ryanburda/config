@@ -916,7 +916,7 @@ vim.keymap.set(
 ---------------
 -- `S{char}` - Set buf-mark
 -- `s{char}` - Goto buf-mark
--- `s?` - List all buf-marks
+-- `s ` - List all buf-marks
 -- `s[` - Previous buf-mark
 -- `s]` - Next buf-mark
 -- `s/` - Load buf-marks from another worktree
@@ -924,7 +924,7 @@ vim.keymap.set(
 -- `s;` - Jump to alternate buffer
 
 local buf_mark = require('buf-mark')
-local reserved = { [';'] = true, [','] = true, ['.'] = true, ['?'] = true, ['/'] = true, ["'"] = true, ['"'] = true }
+local reserved = { [';'] = true, [','] = true, ['.'] = true, [' '] = true, ['/'] = true, ["'"] = true, ['"'] = true }
 
 vim.keymap.set('n', 'S', function()
   buf_mark.set(vim.fn.getcharstr())
@@ -947,9 +947,9 @@ vim.keymap.set('n', 's,', require('buf-mark.status').prev, { desc = 'Previous op
 -- vim.keymap.set('n', 's]', buf_mark.next, { desc = 'Next buf-mark' })
 vim.keymap.set('n', 's.', require('buf-mark.status').next, { desc = 'Next open buf-mark' })
 
-vim.keymap.set('n', "s?", require('buf-mark.fzf_lua').list, { desc = 'List buf-marks' })
--- vim.keymap.set('n', "s?", require('buf-mark.telescope').list, { desc = 'List buf-marks' })
--- vim.keymap.set('n', "s?", buf_mark.list_pretty, { desc = 'List buf-marks' })
+vim.keymap.set('n', "s ", require('buf-mark.fzf_lua').list, { desc = 'List buf-marks' })
+-- vim.keymap.set('n', "s ", require('buf-mark.telescope').list, { desc = 'List buf-marks' })
+-- vim.keymap.set('n', "s ", buf_mark.list_pretty, { desc = 'List buf-marks' })
 
 vim.keymap.set('n', 's/', require('buf-mark.fzf_lua').load_worktree, { desc = 'Load buf-marks of another git worktree' })
 -- vim.keymap.set('n', 's/', require('buf-mark.telescope').load_worktree, { desc = 'Load buf-marks of another git worktree' })
