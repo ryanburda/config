@@ -8,6 +8,32 @@
 #              of the full window, use small_pct. Otherwise, split evenly.
 #   small_pct  The split percentage to use when the pane is larger than the threshold.
 #   Extra arguments are forwarded to tmux split-window (e.g. -c '#{pane_current_path}').
+#
+# ---
+#
+# I built this script to work well with how I usually split my window.
+# When starting with a single pane I usually:
+#   - Create a horizontal split for an AI agent
+#   - Create a vertical split for executing commands
+#
+#   ┌─────────────────────────────────┬──────────────────┐
+#   │                                 │                  │
+#   │            Editor               │    AI Agent      │
+#   │           (65% w)               │    (35% w)       │
+#   │           (78% h)               │    (100% h)      │
+#   │                                 │                  │
+#   ├─────────────────────────────────┤                  │
+#   │     Terminal  (~22% h)          │                  │
+#   └─────────────────────────────────┴──────────────────┘
+#
+# This is done using these two tmux keybinds:
+# ```
+# bind-key l run-shell 'tmux_smart_split -h 65 35 -c "#{pane_current_path}"'
+# bind-key j run-shell 'tmux_smart_split -v 78 22 -c "#{pane_current_path}"'
+# ```
+#
+# Splitting any of these individual panes further results in a new pane that is very small.
+# In these cases I almost always prefer an even split which is where the threshold comes in handy.
 
 direction="$1"
 threshold="$2"
