@@ -914,20 +914,54 @@ vim.keymap.set(
 ---------------
 -- Buf-marks --
 ---------------
--- `S{char}` - Set buf-mark
--- `s{char}` - Goto buf-mark
+-- `s;` - Jump to alternate buffer
 -- `s ` - List all buf-marks
--- `s[` - Previous buf-mark
--- `s]` - Next buf-mark
+-- `s,` - Previous buf-mark
+-- `s.` - Next buf-mark
 -- `s/` - Load buf-marks from another worktree
 -- `s'` - Load buf-marks from another project
--- `s;` - Jump to alternate buffer
+-- `s"` - Unload buf-marks from another project
+-- `S{char}` - Set buf-mark
+-- `s{char}` - Goto buf-mark
 
 local buf_mark = require('buf-mark')
-local reserved = { [';'] = true, [','] = true, ['.'] = true, [' '] = true, ['/'] = true, ["'"] = true, ['"'] = true }
+local reserved = {}
+
+reserved[';'] = true
+vim.keymap.set('n', 's;', ':b#<cr>', { desc = 'Alternate buffer' })
+
+reserved[' '] = true
+vim.keymap.set('n', 's ', require('buf-mark.fzf_lua').list, { desc = 'List buf-marks' })
+-- vim.keymap.set('n', 's ', require('buf-mark.telescope').list, { desc = 'List buf-marks' })
+-- vim.keymap.set('n', 's ', buf_mark.list_pretty, { desc = 'List buf-marks' })
+
+reserved[','] = true
+vim.keymap.set('n', 's,', require('buf-mark.status').prev, { desc = 'Previous open buf-mark' })
+-- vim.keymap.set('n', 's,', buf_mark.prev, { desc = 'Previous buf-mark' })
+
+reserved['.'] = true
+vim.keymap.set('n', 's.', require('buf-mark.status').next, { desc = 'Next open buf-mark' })
+-- vim.keymap.set('n', 's.', buf_mark.next, { desc = 'Next buf-mark' })
+
+reserved['/'] = true
+vim.keymap.set('n', 's/', require('buf-mark.fzf_lua').load_worktree, { desc = 'Load buf-marks of another git worktree' })
+-- vim.keymap.set('n', 's/', require('buf-mark.telescope').load_worktree, { desc = 'Load buf-marks of another git worktree' })
+
+reserved["'"] = true
+vim.keymap.set('n', "s'", require('buf-mark.fzf_lua').load_project, { desc = 'Load buf-marks of another project' })
+-- vim.keymap.set('n', "s'", require('buf-mark.telescope').load_project, { desc = 'Load buf-marks of another project' })
+
+reserved['"'] = true
+vim.keymap.set('n', 's"', require('buf-mark.fzf_lua').unload_project, { desc = 'Unload buf-marks of another project' })
+-- vim.keymap.set('n', 's"', require('buf-mark.telescope').unload_project, { desc = 'Unload buf-marks of another project' })
 
 vim.keymap.set('n', 'S', function()
-  buf_mark.set(vim.fn.getcharstr())
+  local char = vim.fn.getcharstr()
+  if reserved[char] then
+    vim.api.nvim_echo({ { 'buf-mark: ' .. char .. ' is reserved', 'WarningMsg' } }, true, {})
+    return
+  end
+  buf_mark.set(char)
 end, { desc = 'Set buf-mark' })
 
 vim.keymap.set('n', 's', function()
@@ -938,24 +972,3 @@ vim.keymap.set('n', 's', function()
   end
   buf_mark.goto(char)
 end, { desc = 'Goto buf-mark' })
-
-vim.keymap.set('n', 's;', ':b#<cr>', { desc = 'Alternate buffer', silent = true })
-
--- vim.keymap.set('n', 's[', buf_mark.prev, { desc = 'Previous buf-mark' })
-vim.keymap.set('n', 's,', require('buf-mark.status').prev, { desc = 'Previous open buf-mark' })
-
--- vim.keymap.set('n', 's]', buf_mark.next, { desc = 'Next buf-mark' })
-vim.keymap.set('n', 's.', require('buf-mark.status').next, { desc = 'Next open buf-mark' })
-
-vim.keymap.set('n', "s ", require('buf-mark.fzf_lua').list, { desc = 'List buf-marks' })
--- vim.keymap.set('n', "s ", require('buf-mark.telescope').list, { desc = 'List buf-marks' })
--- vim.keymap.set('n', "s ", buf_mark.list_pretty, { desc = 'List buf-marks' })
-
-vim.keymap.set('n', 's/', require('buf-mark.fzf_lua').load_worktree, { desc = 'Load buf-marks of another git worktree' })
--- vim.keymap.set('n', 's/', require('buf-mark.telescope').load_worktree, { desc = 'Load buf-marks of another git worktree' })
-
-vim.keymap.set('n', "s'", require('buf-mark.fzf_lua').load_project, { desc = 'Load buf-marks of another project' })
--- vim.keymap.set('n', "s'", require('buf-mark.telescope').load_project, { desc = 'Load buf-marks of another project' })
-
-vim.keymap.set('n', 's"', require('buf-mark.fzf_lua').unload_project, { desc = 'Unload buf-marks of another project' })
--- vim.keymap.set('n', 's"', require('buf-mark.telescope').unload_project, { desc = 'Unload buf-marks of another project' })

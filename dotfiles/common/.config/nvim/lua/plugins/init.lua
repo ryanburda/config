@@ -15,7 +15,7 @@ return {
     dir = "~/code/buf-mark/base",
     config = function()
       require('buf-mark').setup({
-        keymaps = false,
+        keymaps = true,
         persist = true,
         status = {
           hl_current = 'CursorLineNr',
