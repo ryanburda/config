@@ -91,6 +91,8 @@ sudo pacman -S --needed --noconfirm \
     bluetui \
     impala
 
+sudo usermod -aG input $USER
+
 sudo systemctl enable --now bluetooth.service
 
 # Displays
