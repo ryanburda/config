@@ -176,6 +176,10 @@ yay -S --noconfirm zen-browser-bin
 # Default browser
 xdg-settings set default-web-browser zen-browser.desktop
 
+# Rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+cargo install tree-sitter-cli
+
 # claude
 curl -fsSL https://claude.ai/install.sh | bash
 

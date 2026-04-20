@@ -49,6 +49,13 @@ return {
         auto_install = true,
       })
 
+      -- Enable treesitter-based syntax highlighting.
+      vim.api.nvim_create_autocmd("FileType", {
+        callback = function(args)
+          pcall(vim.treesitter.start, args.buf)
+        end,
+      })
+
       -- Use json parser for avro files.
       vim.filetype.add({
         extension = {
