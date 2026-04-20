@@ -118,6 +118,9 @@ export FZF_CTRL_R_OPTS="
   --header 'Press CTRL-Y to copy command into clipboard'"
 export FZF_HISTORY_DIR=1
 
+# Cargo
+export PATH="$HOME/.cargo/bin:$PATH"
+
 # Rancher
 export PATH="$HOME/.rd/bin:$PATH"
 
