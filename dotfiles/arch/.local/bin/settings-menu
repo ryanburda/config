@@ -16,7 +16,7 @@ case "$option" in
         wezterm start -- wdisplays
         ;;
     Background)
-        wezterm start -- background-selector
+        waypaper
         ;;
     Energy\ Profile)
         energy-profiles

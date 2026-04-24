@@ -172,6 +172,7 @@ yay -S --noconfirm google-chrome
 yay -S --noconfirm python-poetry
 yay -S --noconfirm quickshell-git
 yay -S --noconfirm ttf-recursive-nerd
+yay -S --noconfirm waypaper
 yay -S --noconfirm zen-browser-bin
 
 # Default browser
