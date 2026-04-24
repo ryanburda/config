@@ -50,9 +50,10 @@ sudo pacman -S --needed --noconfirm \
 sudo pacman -S --needed --noconfirm \
     bat \
     bottom \
+    clang \
     coreutils \
-    curl \
     chafa \
+    curl \
     direnv \
     eva \
     fd \
