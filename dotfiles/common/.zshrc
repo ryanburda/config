@@ -139,6 +139,7 @@ alias cal="cal -3"
 alias ai="claude"
 alias rg="rg --hidden"
 alias s="tsm -c"
+alias scramble="cargo run --manifest-path /Users/ryanburda/code/scramble/base/Cargo.toml"
 
 # TODO: get rid of this and put everything in ~/.local/bin/
 # zshrc Extensions
