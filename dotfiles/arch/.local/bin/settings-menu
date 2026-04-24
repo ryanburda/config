@@ -16,7 +16,7 @@ case "$option" in
         wezterm start -- wdisplays
         ;;
     Background)
-        waypaper
+        waypaper --folder ~/code/assets/base/assets/backgrounds
         ;;
     Energy\ Profile)
         energy-profiles

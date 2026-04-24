@@ -1,4 +1,4 @@
 [Desktop Entry]
 Name=Background
-Exec=waypaper
+Exec=waypaper --folder /home/ryanburda/code/assets/base/assets/backgrounds
 Type=Application
