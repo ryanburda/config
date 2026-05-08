@@ -116,14 +116,10 @@ sudo pacman -S --needed --noconfirm \
 sudo pacman -S --needed --noconfirm \
     xdg-desktop-portal-gnome
 sudo pacman -S --needed --noconfirm \
-    cliphist \
-    fuzzel \
     niri \
     obsidian \
     polkit-gnome \
     power-profiles-daemon \
-    swaybg \
-    swaylock \
     wezterm \
     wl-clipboard \
     xorg-xwayland \
@@ -169,10 +165,9 @@ yay -S --noconfirm aur/1password
 gpg --receive-keys 3FEF9748469ADBE15DA7CA80AC2D62742012EA22
 yay -S --noconfirm 1password-cli
 yay -S --noconfirm google-chrome
+yay -S --noconfirm noctalia-shell
 yay -S --noconfirm python-poetry
-yay -S --noconfirm quickshell-git
 yay -S --noconfirm ttf-recursive-nerd
-yay -S --noconfirm waypaper
 yay -S --noconfirm zen-browser-bin
 
 # Default browser
