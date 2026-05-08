@@ -125,6 +125,14 @@ sudo pacman -S --needed --noconfirm \
     xorg-xwayland \
     xwayland-satellite
 
+# Login manager (greetd + tuigreet, launches niri-session on vt1)
+sudo pacman -S --needed --noconfirm \
+    greetd \
+    greetd-tuigreet
+sudo mkdir -p /etc/greetd
+sudo cp $REPO_ROOT/dotfiles/arch_root/etc/greetd/config.toml /etc/greetd/config.toml
+sudo systemctl enable greetd.service
+
 # Gaming / Graphics (install providers before steam/lutris)
 sudo pacman -S --needed --noconfirm \
     lib32-mesa \
