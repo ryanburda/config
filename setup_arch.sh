@@ -133,6 +133,13 @@ sudo mkdir -p /etc/greetd
 sudo cp $REPO_ROOT/dotfiles/arch_root/etc/greetd/config.toml /etc/greetd/config.toml
 sudo systemctl enable greetd.service
 
+# Quiet the boot console so kernel/udev messages don't clutter the greeter.
+# Patches systemd-boot loader entries in place; idempotent on re-run.
+if ls /boot/loader/entries/*.conf >/dev/null 2>&1; then
+    sudo sed -i -e '/^options/{/ quiet /!s| root=| quiet loglevel=3 rd.udev.log_level=3 vt.global_cursor_default=0 root=|}' \
+        /boot/loader/entries/*.conf
+fi
+
 # Gaming / Graphics (install providers before steam/lutris)
 sudo pacman -S --needed --noconfirm \
     lib32-mesa \
