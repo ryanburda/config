@@ -282,9 +282,8 @@ layout {
 }
 
 
-// Configure workspaces to always have 3 available by default
+// Configure workspaces to always have 2 available by default
 workspace "1"
-workspace "2"
 
 // Add lines like this to spawn processes at startup.
 // Note that running niri as a session supports xdg-desktop-autostart,
