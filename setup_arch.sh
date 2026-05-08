@@ -55,7 +55,6 @@ sudo pacman -S --needed --noconfirm \
     chafa \
     curl \
     direnv \
-    eva \
     fd \
     fzf \
     git \
@@ -82,15 +81,12 @@ sudo pacman -S --needed --noconfirm \
     pipewire \
     pipewire-alsa \
     pipewire-pulse \
-    wireplumber \
-    wiremix
+    wireplumber
 
 # Bluetooth
 sudo pacman -S --needed --noconfirm \
     bluez \
-    bluez-utils \
-    bluetui \
-    impala
+    bluez-utils
 
 sudo usermod -aG input $USER
 
@@ -98,8 +94,7 @@ sudo systemctl enable --now bluetooth.service
 
 # Displays
 sudo pacman -S --needed --noconfirm \
-    brightnessctl \
-    wdisplays
+    brightnessctl
 
 # Printing
 sudo pacman -S --needed --noconfirm \
