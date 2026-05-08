@@ -112,6 +112,14 @@ sudo systemctl enable --now cups.service
 sudo pacman -S --needed --noconfirm \
     networkmanager
 
+# Use iwd as NetworkManager's wifi backend (iwd installed by archinstall).
+sudo mkdir -p /etc/NetworkManager/conf.d
+sudo cp $REPO_ROOT/dotfiles/arch_root/etc/NetworkManager/conf.d/wifi_backend.conf /etc/NetworkManager/conf.d/wifi_backend.conf
+
+# Hand networking from systemd-networkd/systemd-resolved over to NetworkManager.
+sudo systemctl disable --now systemd-networkd.service systemd-networkd.socket systemd-resolved.service 2>/dev/null || true
+sudo systemctl enable --now NetworkManager.service
+
 # Desktop / Wayland (install portal provider before niri)
 sudo pacman -S --needed --noconfirm \
     xdg-desktop-portal-gnome

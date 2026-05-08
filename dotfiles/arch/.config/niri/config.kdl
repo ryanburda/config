@@ -292,7 +292,10 @@ workspace "2"
 // See the binds section below for more spawn examples.
 
 // Start the Noctalia desktop shell (bar, launcher, lock, OSDs, wallpapers).
-spawn-at-startup "qs" "-c" "noctalia-shell"
+// Brief delay lets system D-Bus services (PowerProfilesDaemon, etc.) finish
+// coming up before Noctalia connects; otherwise the first call hangs for
+// 25s on the default D-Bus timeout.
+spawn-sh-at-startup "sleep 2 && qs -c noctalia-shell"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
