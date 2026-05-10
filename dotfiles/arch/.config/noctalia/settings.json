@@ -302,14 +302,14 @@
         "overviewEnabled": true
     },
     "dock": {
-        "animationSpeed": 1,
+        "animationSpeed": 2,
         "backgroundOpacity": 1,
-        "colorizeIcons": false,
-        "deadOpacity": 0.6,
+        "colorizeIcons": true,
+        "deadOpacity": 0.5,
         "displayMode": "auto_hide",
         "dockType": "floating",
         "enabled": true,
-        "floatingRatio": 1,
+        "floatingRatio": 0.5,
         "groupApps": false,
         "groupClickAction": "cycle",
         "groupContextMenuMode": "extended",
@@ -317,7 +317,7 @@
         "inactiveIndicators": false,
         "indicatorColor": "primary",
         "indicatorOpacity": 0.6,
-        "indicatorThickness": 3,
+        "indicatorThickness": 6,
         "launcherIcon": "",
         "launcherIconColor": "none",
         "launcherPosition": "end",
@@ -326,13 +326,15 @@
         ],
         "onlySameOutput": true,
         "pinnedApps": [
+            "zen",
+            "org.wezfurlong.wezterm"
         ],
         "pinnedStatic": false,
         "position": "bottom",
-        "showDockIndicator": false,
+        "showDockIndicator": true,
         "showLauncherIcon": false,
         "sitOnFrame": false,
-        "size": 1
+        "size": 1.25
     },
     "general": {
         "allowPanelsOnScreenWithoutBar": true,
