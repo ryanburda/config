@@ -137,20 +137,17 @@
                 },
                 {
                     "iconColor": "none",
-                    "id": "WallpaperSelector"
-                },
-                {
-                    "iconColor": "none",
-                    "id": "KeepAwake",
-                    "textColor": "none"
-                },
-                {
-                    "iconColor": "none",
-                    "id": "PowerProfile"
-                },
-                {
-                    "iconColor": "none",
                     "id": "Settings"
+                },
+                {
+                    "colorizeDistroLogo": false,
+                    "colorizeSystemIcon": "none",
+                    "colorizeSystemText": "none",
+                    "customIconPath": "",
+                    "enableColorization": false,
+                    "icon": "noctalia",
+                    "id": "ControlCenter",
+                    "useDistroLogo": false
                 },
                 {
                     "clockColor": "none",
@@ -243,24 +240,33 @@
         "shortcuts": {
             "left": [
                 {
-                    "id": "Network"
-                },
-                {
-                    "id": "Bluetooth"
-                },
-                {
                     "id": "WallpaperSelector"
-                }
-            ],
-            "right": [
+                },
                 {
                     "id": "Notifications"
                 },
                 {
-                    "id": "PowerProfile"
+                    "id": "DarkMode"
+                }
+            ],
+            "right": [
+                {
+                    "defaultSettings": {
+                        "autoMount": false,
+                        "fileBrowser": "yazi",
+                        "hideWhenEmpty": false,
+                        "iconColor": "none",
+                        "showBadge": false,
+                        "showNotifications": true,
+                        "terminalCommand": "kitty"
+                    },
+                    "id": "plugin:usb-drive-manager"
                 },
                 {
                     "id": "KeepAwake"
+                },
+                {
+                    "id": "PowerProfile"
                 }
             ]
         }
