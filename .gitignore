@@ -14,9 +14,6 @@ lazy-lock.json
 dotfiles/common/.ssh/*
 !dotfiles/common/.ssh/config
 
-# upterm
-tmux-client-*.log
-
 # zsh extensions
 dotfiles/common/.zsh/zshrc_extensions/*
 !dotfiles/common/.zsh/zshrc_extensions/README.md
