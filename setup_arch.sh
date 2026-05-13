@@ -151,7 +151,6 @@ sudo pacman -S --needed --noconfirm \
     mesa \
     vulkan-radeon
 sudo pacman -S --needed --noconfirm \
-    dkms \
     lib32-alsa-plugins \
     lib32-pipewire \
     libva-mesa-driver \
@@ -206,11 +205,6 @@ sudo cp $REPO_ROOT/dotfiles/arch_root/etc/kanata/kanata.kbd /etc/kanata/kanata.k
 sudo cp $REPO_ROOT/dotfiles/arch_root/etc/systemd/system/kanata.service /etc/systemd/system/kanata.service
 sudo systemctl daemon-reload
 sudo systemctl enable --now kanata
-
-# xbox controller
-yay -S --noconfirm xpadneo-dkms-git
-sudo modprobe hid_xpadneo || true
-echo hid_xpadneo | sudo tee -a /etc/modules-load.d/xpadneo.conf
 
 # Change default shell to zsh
 sudo chsh -s /bin/zsh $USER
