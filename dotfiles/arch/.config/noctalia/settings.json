@@ -64,7 +64,7 @@
         "mouseWheelAction": "none",
         "mouseWheelWrap": true,
         "outerCorners": false,
-        "position": "top",
+        "position": "left",
         "reverseScroll": false,
         "rightClickAction": "controlCenter",
         "rightClickCommand": "",
@@ -101,6 +101,19 @@
                 }
             ],
             "left": [
+                {
+                    "colorizeIcons": false,
+                    "hideMode": "hidden",
+                    "iconScale": 0.8,
+                    "id": "Taskbar",
+                    "maxTaskbarWidth": 40,
+                    "onlyActiveWorkspaces": true,
+                    "onlySameOutput": true,
+                    "showPinnedApps": true,
+                    "showTitle": false,
+                    "smartWidth": true,
+                    "titleWidth": 120
+                }
             ],
             "right": [
                 {
@@ -295,7 +308,7 @@
         "deadOpacity": 0.5,
         "displayMode": "auto_hide",
         "dockType": "floating",
-        "enabled": true,
+        "enabled": false,
         "floatingRatio": 0.5,
         "groupApps": false,
         "groupClickAction": "cycle",
@@ -313,8 +326,6 @@
         ],
         "onlySameOutput": true,
         "pinnedApps": [
-            "zen",
-            "org.wezfurlong.wezterm"
         ],
         "pinnedStatic": false,
         "position": "bottom",
