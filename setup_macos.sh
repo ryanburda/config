@@ -45,7 +45,6 @@ brew install \
     npm \
     php \
     pkg-config \
-    poetry \
     pspg \
     ripgrep \
     rlwrap \

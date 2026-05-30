@@ -184,7 +184,6 @@ gpg --receive-keys 3FEF9748469ADBE15DA7CA80AC2D62742012EA22
 yay -S --noconfirm 1password-cli
 yay -S --noconfirm google-chrome
 yay -S --noconfirm noctalia-shell
-yay -S --noconfirm python-poetry
 yay -S --noconfirm ttf-recursive-nerd
 yay -S --noconfirm zen-browser-bin
 
