@@ -645,9 +645,9 @@
         "setWallpaperOnAllMonitors": true,
         "showHiddenFiles": false,
         "skipStartupTransition": false,
-        "solidColor": "#1a1a2e",
+        "solidColor": "#1a375a",
         "sortOrder": "name",
-        "transitionDuration": 1500,
+        "transitionDuration": 1000,
         "transitionEdgeSmoothness": 0.05,
         "transitionType": [
             "fade",
