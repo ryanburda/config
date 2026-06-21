@@ -291,9 +291,6 @@ workspace "1"
 // See the binds section below for more spawn examples.
 
 // Start the Noctalia desktop shell (bar, launcher, lock, OSDs, wallpapers).
-// v4 (Quickshell) — uncomment to switch back; reads ~/.config/noctalia/*.json
-/-spawn-at-startup "qs" "-c" "noctalia-shell"
-// v5 (native) — reads ~/.config/noctalia/*.toml
 spawn-at-startup "noctalia"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:

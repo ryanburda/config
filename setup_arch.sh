@@ -184,8 +184,7 @@ yay -S --noconfirm aur/1password
 gpg --receive-keys 3FEF9748469ADBE15DA7CA80AC2D62742012EA22
 yay -S --noconfirm 1password-cli
 yay -S --noconfirm google-chrome
-yay -S --noconfirm noctalia-shell  # v4 (Quickshell), reads ~/.config/noctalia/*.json
-yay -S --noconfirm noctalia-git    # v5 (native), reads ~/.config/noctalia/*.toml
+yay -S --noconfirm noctalia-git
 yay -S --noconfirm ttf-recursive-nerd
 yay -S --noconfirm zen-browser-bin
 

@@ -70,13 +70,13 @@ source = "wallpaper"
 directory = "/home/ryanburda/code/assets/base/assets/backgrounds"
 
     [wallpaper.default]
-    path = "/home/ryanburda/code/assets/base/assets/backgrounds/evergreen_mountain.jpg"
+    path = "/home/ryanburda/code/assets/base/assets/backgrounds/central-park.jpg"
 
     [wallpaper.last]
-    path = "/home/ryanburda/code/assets/base/assets/backgrounds/evergreen_mountain.jpg"
+    path = "/home/ryanburda/code/assets/base/assets/backgrounds/central-park.jpg"
 
     [wallpaper.monitors.DP-1]
-    path = "/home/ryanburda/code/assets/base/assets/backgrounds/evergreen_mountain.jpg"
+    path = "/home/ryanburda/code/assets/base/assets/backgrounds/central-park.jpg"
 
 [widget.date]
 format = "{:%d %b}"
