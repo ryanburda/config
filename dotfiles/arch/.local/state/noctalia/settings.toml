@@ -2,7 +2,10 @@
 background_opacity = 0.4999999888241291
 center = [ "launcher" ]
 end = [ "clock", "date", "battery", "control-center", "session" ]
+margin_edge = 4
 margin_ends = 8
+padding = 16
+radius = 50
 start = [ "taskbar" ]
 widget_spacing = 12
 
@@ -67,13 +70,13 @@ source = "wallpaper"
 directory = "/home/ryanburda/code/assets/base/assets/backgrounds"
 
     [wallpaper.default]
-    path = "/home/ryanburda/code/assets/base/assets/backgrounds/warm-cafe.jpg"
+    path = "/home/ryanburda/code/assets/base/assets/backgrounds/evergreen_mountain.jpg"
 
     [wallpaper.last]
-    path = "/home/ryanburda/code/assets/base/assets/backgrounds/warm-cafe.jpg"
+    path = "/home/ryanburda/code/assets/base/assets/backgrounds/evergreen_mountain.jpg"
 
     [wallpaper.monitors.DP-1]
-    path = "/home/ryanburda/code/assets/base/assets/backgrounds/warm-cafe.jpg"
+    path = "/home/ryanburda/code/assets/base/assets/backgrounds/evergreen_mountain.jpg"
 
 [widget.date]
 format = "{:%d %b}"
