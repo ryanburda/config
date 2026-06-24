@@ -107,6 +107,7 @@ show_label = false
 group_by_workspace = true
 inactive_opacity = 0.69999999999999996
 scale = 1.1500000000000001
+show_workspace_label = false
 
 [widget.volume]
 show_label = false
