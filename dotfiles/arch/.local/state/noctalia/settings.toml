@@ -1,7 +1,7 @@
 [bar.default]
 background_opacity = 0.4999999888241291
-center = [ "launcher", "wallpaper" ]
-end = [ "volume", "clock", "date", "battery", "control-center", "session" ]
+center = [ "launcher" ]
+end = [ "battery", "date", "clock", "control-center" ]
 margin_edge = 4
 margin_ends = 8
 padding = 16
@@ -60,6 +60,7 @@ widget_order = [ "lockscreen-login-box@DP-1" ]
         show_login_button = true
 
 [shell.animation]
+enabled = false
 speed = 2.500000037252903
 
 [shell.panel]
@@ -76,19 +77,24 @@ wallpaper_scheme = "m3-content"
 
 [wallpaper]
 directory = "/home/ryanburda/code/assets/base/assets/backgrounds"
+transition = [ "disc", "fade", "wipe" ]
+transition_duration = 400
 transition_on_startup = true
 
     [wallpaper.default]
-    path = "/home/ryanburda/code/assets/base/assets/backgrounds/cabin-night-sky.jpg"
+    path = "/home/ryanburda/code/assets/base/assets/backgrounds/evergreen_mountain.jpg"
 
     [wallpaper.last]
-    path = "/home/ryanburda/code/assets/base/assets/backgrounds/cabin-night-sky.jpg"
+    path = "/home/ryanburda/code/assets/base/assets/backgrounds/evergreen_mountain.jpg"
 
     [wallpaper.monitors.DP-1]
-    path = "/home/ryanburda/code/assets/base/assets/backgrounds/cabin-night-sky.jpg"
+    path = "/home/ryanburda/code/assets/base/assets/backgrounds/evergreen_mountain.jpg"
+
+[widget.clock]
+format = "{:-%I:%M}"
 
 [widget.date]
-format = "{:%d %b}"
+format = "{:%-m/%d}"
 
 [widget.network]
 show_label = false
