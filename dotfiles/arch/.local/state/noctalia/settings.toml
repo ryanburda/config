@@ -5,6 +5,7 @@ end = [ "date", "battery", "control-center" ]
 margin_edge = 4
 margin_ends = 8
 padding = 16
+position = "bottom"
 radius = 50
 start = [ "taskbar" ]
 widget_spacing = 12
@@ -82,13 +83,13 @@ transition_duration = 400
 transition_on_startup = true
 
     [wallpaper.default]
-    path = "/home/ryanburda/code/assets/base/assets/backgrounds/evergreen_mountain.jpg"
+    path = "/home/ryanburda/code/assets/base/assets/backgrounds/cabin-night-sky.jpg"
 
     [wallpaper.last]
-    path = "/home/ryanburda/code/assets/base/assets/backgrounds/evergreen_mountain.jpg"
+    path = "/home/ryanburda/code/assets/base/assets/backgrounds/cabin-night-sky.jpg"
 
     [wallpaper.monitors.DP-1]
-    path = "/home/ryanburda/code/assets/base/assets/backgrounds/evergreen_mountain.jpg"
+    path = "/home/ryanburda/code/assets/base/assets/backgrounds/cabin-night-sky.jpg"
 
 [widget.battery]
 show_label = false
