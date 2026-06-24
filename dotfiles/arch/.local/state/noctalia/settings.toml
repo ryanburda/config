@@ -10,6 +10,14 @@ radius = 50
 start = [ "taskbar" ]
 widget_spacing = 12
 
+[calendar]
+enabled = true
+
+    [calendar.account.personal_google]
+    color = "primary"
+    name = "Personal Calendar"
+    type = "google"
+
 [[control_center.shortcuts]]
 type = "bluetooth"
 
@@ -28,10 +36,43 @@ type = "power_profile"
 [[control_center.shortcuts]]
 type = "caffeine"
 
+[desktop_widgets]
+schema_version = 2
+widget_order = []
+
+    [desktop_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [desktop_widgets.widget]
+
 [dock]
 auto_hide = true
 reserve_space = false
 show_dots = true
+
+[idle]
+behavior_order = [ "lock", "screen-off", "lock-and-suspend" ]
+pre_action_fade_seconds = 4
+
+    [idle.behavior.lock]
+    action = "lock"
+    enabled = true
+    timeout = 600
+
+    [idle.behavior.lock-and-suspend]
+    action = "lock_and_suspend"
+    enabled = false
+    timeout = 900
+
+    [idle.behavior.screen-off]
+    action = "screen_off"
+    enabled = false
+    timeout = 660
+
+[location]
+auto_locate = true
 
 [lockscreen_widgets]
 enabled = false
@@ -60,16 +101,19 @@ widget_order = [ "lockscreen-login-box@DP-1" ]
         input_radius = 6.0
         show_login_button = true
 
-[shell.animation]
-enabled = false
-speed = 2.500000037252903
+[shell]
+screen_time_enabled = true
 
-[shell.panel]
-launcher_categories = false
-launcher_compact = true
-launcher_placement = "attached"
-launcher_session_search = true
-open_near_click_control_center = true
+    [shell.animation]
+    enabled = false
+    speed = 2.500000037252903
+
+    [shell.panel]
+    launcher_categories = false
+    launcher_compact = true
+    launcher_placement = "attached"
+    launcher_session_search = true
+    open_near_click_control_center = true
 
 [theme]
 mode = "dark"
@@ -86,13 +130,17 @@ transition_duration = 400
 transition_on_startup = true
 
     [wallpaper.default]
-    path = "/home/ryanburda/code/assets/base/assets/backgrounds/warm-cafe.jpg"
+    path = "/home/ryanburda/code/assets/base/assets/backgrounds/moon-landscape.jpg"
 
     [wallpaper.last]
-    path = "/home/ryanburda/code/assets/base/assets/backgrounds/warm-cafe.jpg"
+    path = "/home/ryanburda/code/assets/base/assets/backgrounds/moon-landscape.jpg"
 
     [wallpaper.monitors.DP-1]
-    path = "/home/ryanburda/code/assets/base/assets/backgrounds/warm-cafe.jpg"
+    path = "/home/ryanburda/code/assets/base/assets/backgrounds/moon-landscape.jpg"
+
+[weather]
+refresh_minutes = 20
+unit = "imperial"
 
 [widget.battery]
 show_label = false
@@ -101,7 +149,7 @@ show_label = false
 format = "{:-%I:%M}"
 
 [widget.date]
-format = "{:%-m/%d %-I:%M}"
+format = "{:%-m/%d  %-I:%M}"
 
 [widget.network]
 show_label = false
