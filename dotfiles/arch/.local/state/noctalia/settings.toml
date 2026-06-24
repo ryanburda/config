@@ -76,6 +76,9 @@ mode = "dark"
 source = "wallpaper"
 wallpaper_scheme = "m3-content"
 
+    [theme.templates]
+    builtin_ids = [ "niri" ]
+
 [wallpaper]
 directory = "/home/ryanburda/code/assets/base/assets/backgrounds"
 transition = [ "disc", "fade", "wipe" ]
@@ -83,13 +86,13 @@ transition_duration = 400
 transition_on_startup = true
 
     [wallpaper.default]
-    path = "/home/ryanburda/code/assets/base/assets/backgrounds/cabin-night-sky.jpg"
+    path = "/home/ryanburda/code/assets/base/assets/backgrounds/warm-cafe.jpg"
 
     [wallpaper.last]
-    path = "/home/ryanburda/code/assets/base/assets/backgrounds/cabin-night-sky.jpg"
+    path = "/home/ryanburda/code/assets/base/assets/backgrounds/warm-cafe.jpg"
 
     [wallpaper.monitors.DP-1]
-    path = "/home/ryanburda/code/assets/base/assets/backgrounds/cabin-night-sky.jpg"
+    path = "/home/ryanburda/code/assets/base/assets/backgrounds/warm-cafe.jpg"
 
 [widget.battery]
 show_label = false
