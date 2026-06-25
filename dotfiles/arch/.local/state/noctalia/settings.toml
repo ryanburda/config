@@ -1,5 +1,5 @@
 [bar.default]
-background_opacity = 0.19999999552965164
+background_opacity = 0.39999999105930328
 center = [ "launcher" ]
 end = [ "date", "battery", "control-center" ]
 margin_edge = 4
