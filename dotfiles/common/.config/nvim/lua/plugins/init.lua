@@ -188,8 +188,8 @@ return {
           branches = {
             actions = {
               ["default"] = function(selected)
-                local selected_branch = selected[1]:match("[^%s]+")
-                if selected_branch then
+                local selected_branch = selected[1]:gsub("^[%s%*%+→>]+", ""):gsub("%s+$", "")
+                if selected_branch ~= "" then
                   -- Open DiffView with the selected branch
                   vim.cmd("DiffviewOpen " .. selected_branch)
                 else
