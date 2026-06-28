@@ -50,6 +50,7 @@ sudo pacman -S --needed --noconfirm \
 
 # Core tools
 sudo pacman -S --needed --noconfirm \
+    alacritty \
     bat \
     bottom \
     clang \
