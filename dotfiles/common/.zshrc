@@ -150,6 +150,8 @@ for file in ~/.zsh/zshrc_extensions/*; do
   fi
 done
 
+export PATH="$PATH:/opt/homebrew/share/google-cloud-sdk/bin"
+
 # Uncomment to profile zsh startup.
 # NOTE: must also uncomment first line.
 # zprof
