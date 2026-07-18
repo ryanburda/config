@@ -1,3 +1,5 @@
+config_version = 2
+
 [bar.default]
 background_opacity = 0.39999999105930328
 center = [ "launcher" ]
@@ -108,6 +110,12 @@ screen_time_enabled = true
     [shell.animation]
     enabled = false
     speed = 2.500000037252903
+
+    [shell.launcher.providers.session]
+    global = true
+
+    [shell.launcher.providers.wallpaper]
+    global = false
 
     [shell.panel]
     launcher_categories = false
