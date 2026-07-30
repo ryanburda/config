@@ -167,7 +167,6 @@ sudo pacman -S --needed --noconfirm \
 
 # Containers / Kubernetes
 sudo pacman -S --needed --noconfirm \
-    cloud-sql-proxy \
     docker \
     docker-compose \
     k9s \
@@ -175,6 +174,7 @@ sudo pacman -S --needed --noconfirm \
     kubectx \
     lazydocker \
     lazygit
+    # cloud-sql-proxy
 
 sudo systemctl enable docker.service
 sudo usermod -aG docker $USER
