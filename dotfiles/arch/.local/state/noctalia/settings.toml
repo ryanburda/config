@@ -172,16 +172,16 @@ transition_duration = 400
 transition_on_startup = true
 
     [wallpaper.default]
-    path = "/home/ryanburda/code/assets/base/assets/backgrounds/desk_green.jpg"
+    path = "/home/ryanburda/code/assets/base/assets/backgrounds/moon-landscape.jpg"
 
     [wallpaper.last]
-    path = "/home/ryanburda/code/assets/base/assets/backgrounds/desk_green.jpg"
+    path = "/home/ryanburda/code/assets/base/assets/backgrounds/moon-landscape.jpg"
 
     [wallpaper.monitors.DP-1]
     path = "/home/ryanburda/code/assets/base/assets/backgrounds/moon-landscape.jpg"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/ryanburda/code/assets/base/assets/backgrounds/desk_green.jpg"
+    path = "/home/ryanburda/code/assets/base/assets/backgrounds/moon-landscape.jpg"
 
 [weather]
 refresh_minutes = 20
