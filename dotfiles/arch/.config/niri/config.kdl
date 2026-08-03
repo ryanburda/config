@@ -26,6 +26,8 @@ input {
             // If this section is empty, niri will fetch xkb settings
             // from org.freedesktop.locale1. You can control these using
             // localectl set-x11-keymap.
+
+            options "altwin:swap_alt_win"
         }
 
         // Enable numlock on startup, omitting this setting disables it.
@@ -453,6 +455,7 @@ binds {
 
     // Alternatively, there are commands to move just a single window:
     // Mod+Shift+Ctrl+Left  { move-window-to-monitor-left; }
+    // Mod+Shift+Ctrl+Right { move-window-to-monitor-right; }
     // ...
 
     // And you can also move a whole workspace to another monitor:
