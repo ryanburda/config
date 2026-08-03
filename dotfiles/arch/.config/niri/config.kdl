@@ -48,6 +48,12 @@ input {
         // drag false
         // drag-lock
         natural-scroll
+        // "clickfinger" instead of libinput's default "button-areas": a physical
+        // click is a left click no matter where on the pad it lands, two fingers
+        // down makes it a right click, three a middle click. Kills the
+        // bottom-middle zone that turned stray clicks into primary-selection
+        // pastes.
+        click-method "clickfinger"
         // accel-speed 0.2
         // accel-profile "flat"
         // scroll-method "two-finger"
