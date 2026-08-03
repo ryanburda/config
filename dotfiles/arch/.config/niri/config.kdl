@@ -13,7 +13,10 @@ input {
     keyboard {
 
         repeat-rate 35
-        repeat-delay 200
+        // 400ms (not the tighter 200ms) so that kanata's tap-hold buffering on
+        // space — which can delay a key release by ~100ms — cannot push a normal
+        // keystroke past the auto-repeat threshold and produce doubled letters.
+        repeat-delay 400
 
         xkb {
             // You can set rules, model, layout, variant and options.
