@@ -200,12 +200,15 @@ cargo install tree-sitter-cli
 curl -fsSL https://claude.ai/install.sh | bash
 
 # kanata
+# Runs as a *user* service so the config can be a stow symlink into this repo
+# (a system service starts before login, when ~ may not be available yet).
+# Needs read on /dev/input/* (the input group) and write on /dev/uinput, which
+# logind grants the logged-in user via ACL. Trade-off: no remapping at the
+# greeter, only once logged in.
 yay -S --noconfirm kanata
-sudo mkdir -p /etc/kanata
-sudo cp $REPO_ROOT/dotfiles/arch_root/etc/kanata/kanata.kbd /etc/kanata/kanata.kbd
-sudo cp $REPO_ROOT/dotfiles/arch_root/etc/systemd/system/kanata.service /etc/systemd/system/kanata.service
-sudo systemctl daemon-reload
-sudo systemctl enable --now kanata
+sudo usermod -aG input $USER
+systemctl --user daemon-reload
+systemctl --user enable --now kanata
 
 # Change default shell to zsh
 sudo chsh -s /bin/zsh $USER
