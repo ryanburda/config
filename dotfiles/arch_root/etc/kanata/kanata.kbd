@@ -15,15 +15,25 @@
 )
 
 (defalias
-  ;; Space: tap for space, hold for nav layer (tap-hold-release mimics ZMK balanced)
-  nav (tap-hold-release $tap-time $hold-time spc (layer-toggle nav))
+  ;; Space: tap for space, hold for nav layer.
+  ;; (require-prior-idle 150) is what makes a tap-hold viable on space at all:
+  ;; if any other key was pressed within 150ms before space, space resolves
+  ;; instantly as a plain space and never enters the waiting state. That kills
+  ;; both problems the tap-hold on space used to cause -- no deferred release to
+  ;; trip the compositor's auto-repeat, and Ctrl+Space works because the space is
+  ;; emitted immediately while Ctrl is still held. The nav layer is reached by
+  ;; pausing briefly, then holding space.
+  nav (tap-hold-release $tap-time $hold-time spc (layer-toggle nav) (require-prior-idle 150))
 
   ;; Super keys: output meta AND toggle meta layer for capslock remap
   lm (multi lmet (layer-toggle meta))
   rm (multi rmet (layer-toggle meta))
 
-  ;; Caps Lock: tap for escape, hold for control
-  esc-ctl (tap-hold-release $tap-time $hold-time esc lctl)
+  ;; Caps Lock: tap for escape, hold for control.
+  ;; -press so Ctrl engages the instant another key is pressed. Deliberately no
+  ;; require-prior-idle here: chords like Ctrl+S typed straight after a word must
+  ;; still reach Ctrl rather than collapsing to Escape.
+  esc-ctl (tap-hold-press $tap-time $hold-time esc lctl)
 )
 
 (deflayer default
