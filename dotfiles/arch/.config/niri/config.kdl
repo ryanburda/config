@@ -95,7 +95,8 @@ output "eDP-1" {
 // Home Desk Monitor
 output "DP-1" {
     mode "3840x2160@143.999"
-    scale 1.1
+    scale 1.2
+    position x=3490 y=-600
     hot-corners {
         off
     }
