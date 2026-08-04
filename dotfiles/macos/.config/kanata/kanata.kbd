@@ -39,9 +39,13 @@
   shift-caps (tap-dance $tap-time (lsft caps))
 )
 
+;; Right Cmd -> Alt. Output lalt, not ralt: WezTerm's defaults treat right
+;; Option as "compose special characters" (like AltGr) but left Option as a
+;; plain Alt modifier with no composition, so ralt here would make Option+
+;; letter chords produce accented/symbol characters instead of acting as Alt.
 (deflayer default
   @nav
-  ralt
+  lalt
   @esc-ctl
   @shift-caps
 )
