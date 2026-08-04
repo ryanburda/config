@@ -52,4 +52,5 @@
   j down
   k up
   l right
+  bspc del
 )
