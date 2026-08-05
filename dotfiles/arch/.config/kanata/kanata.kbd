@@ -5,6 +5,7 @@
 (defvar
   tap-time 200
   hold-time 200
+  dbl-tap-time 200
 )
 
 (defsrc
@@ -12,6 +13,8 @@
   lmet
   rmet
   caps
+  lsft
+  rsft
 )
 
 (defalias
@@ -34,6 +37,17 @@
   ;; require-prior-idle here: chords like Ctrl+S typed straight after a word must
   ;; still reach Ctrl rather than collapsing to Escape.
   esc-ctl (tap-hold-press $tap-time $hold-time esc lctl)
+
+  ;; Shift: normal shift, but double-tapping one toggles caps lock.
+  ;; tap-dance-eager emits the shift immediately on first press and keeps it held
+  ;; for as long as the key is held, so Shift+key is completely unaffected --
+  ;; nothing is deferred waiting for a second tap. Pressing any other real key
+  ;; cancels the dance, so capitalising two words in a row ("A B") with the same
+  ;; shift never toggles caps. The second tap emits caps alone (no shift), which
+  ;; toggles caps lock on; double-tapping again turns it back off.
+  ;; The two taps must be the same physical key -- lsft then rsft won't trigger.
+  lsft-caps (tap-dance-eager $dbl-tap-time (lsft caps))
+  rsft-caps (tap-dance-eager $dbl-tap-time (rsft caps))
 )
 
 (deflayer default
@@ -41,6 +55,8 @@
   @lm
   @rm
   @esc-ctl
+  @lsft-caps
+  @rsft-caps
 )
 
 ;; Vim-style navigation on nav layer
@@ -49,6 +65,7 @@
   j down
   k up
   l right
+  bspc del
 )
 
 ;; Super+A = capslock (other Super combos work normally since lmet is held)
