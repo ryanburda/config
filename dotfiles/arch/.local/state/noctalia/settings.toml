@@ -137,6 +137,9 @@ widget_order = [ "lockscreen-login-box@eDP-1", "lockscreen-login-box@DP-1" ]
         show_unlock_hint = true
         show_weather = true
 
+[osd.kinds]
+lock_keys = false
+
 [shell]
 screen_time_enabled = true
 
