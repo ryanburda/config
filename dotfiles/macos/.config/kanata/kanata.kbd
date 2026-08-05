@@ -5,13 +5,15 @@
 (defvar
   tap-time 200
   hold-time 200
+  dbl-tap-time 200
 )
 
 (defsrc
   spc
-  rmet
   caps
   lsft
+  rsft
+  rmet
 )
 
 (defalias
@@ -31,23 +33,28 @@
   ;; still reach Ctrl rather than collapsing to Escape.
   esc-ctl (tap-hold-press $tap-time $hold-time esc lctl)
 
-  ;; Double-tap left shift to toggle real Caps Lock; a single tap is just shift.
-  ;; A lone tap still has to wait out $tap-time before it's emitted, since
-  ;; kanata can't know it's not the first half of a double-tap until either the
-  ;; timeout elapses or another key interrupts it (which is exactly why a
-  ;; Shift+Letter chord isn't delayed -- the letter press resolves it early).
-  shift-caps (tap-dance $tap-time (lsft caps))
+  ;; Shift: normal shift, but double-tapping one toggles caps lock.
+  ;; tap-dance-eager emits the shift immediately on first press and keeps it held
+  ;; for as long as the key is held, so Shift+key is completely unaffected --
+  ;; nothing is deferred waiting for a second tap. Pressing any other real key
+  ;; cancels the dance, so capitalising two words in a row ("A B") with the same
+  ;; shift never toggles caps. The second tap emits caps alone (no shift), which
+  ;; toggles caps lock on; double-tapping again turns it back off.
+  ;; The two taps must be the same physical key -- lsft then rsft won't trigger.
+  lsft-caps (tap-dance-eager $dbl-tap-time (lsft caps))
+  rsft-caps (tap-dance-eager $dbl-tap-time (rsft caps))
 )
 
-;; Right Cmd -> Alt. Output lalt, not ralt: WezTerm's defaults treat right
-;; Option as "compose special characters" (like AltGr) but left Option as a
-;; plain Alt modifier with no composition, so ralt here would make Option+
-;; letter chords produce accented/symbol characters instead of acting as Alt.
 (deflayer default
   @nav
-  lalt
   @esc-ctl
-  @shift-caps
+  @lsft-caps
+  @rsft-caps
+  ;; Right Cmd -> Alt. Output lalt, not ralt: WezTerm's defaults treat right
+  ;; Option as "compose special characters" (like AltGr) but left Option as a
+  ;; plain Alt modifier with no composition, so ralt here would make Option+
+  ;; letter chords produce accented/symbol characters instead of acting as Alt.
+  lalt
 )
 
 ;; Vim-style navigation on nav layer
