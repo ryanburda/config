@@ -30,7 +30,11 @@ input {
             // from org.freedesktop.locale1. You can control these using
             // localectl set-x11-keymap.
 
-            options "altwin:swap_alt_win"
+            // swap_alt_win is just swap_lalt_lwin + swap_ralt_rwin. Taking only
+            // the left half swaps Alt/Super next to the space bar while leaving
+            // the right pair alone, so right Alt stays a real Alt (and right
+            // Super stays a real Super).
+            options "altwin:swap_lalt_lwin"
         }
 
         // Enable numlock on startup, omitting this setting disables it.
