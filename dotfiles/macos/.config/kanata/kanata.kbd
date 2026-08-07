@@ -1,10 +1,5 @@
 (defcfg
-  ;; Exclude the function row: macOS's brightness/volume/media special
-  ;; behavior only works if these keys pass through untouched from the
-  ;; hardware. Once kanata processes and re-emits them (virtual HID device),
-  ;; macOS just sees literal F1-F12 instead of the special action.
-  ;; https://github.com/jtroo/kanata/issues/1141
-  process-unmapped-keys (all-except f1 f2 f3 f4 f5 f6 f7 f8 f9 f10 f11 f12)
+  process-unmapped-keys yes
 )
 
 (defvar
@@ -19,6 +14,18 @@
   lsft
   rsft
   rmet
+  f1
+  f2
+  f3
+  f4
+  f5
+  f6
+  f7
+  f8
+  f9
+  f10
+  f11
+  f12
 )
 
 (defalias
@@ -60,6 +67,22 @@
   ;; plain Alt modifier with no composition, so ralt here would make Option+
   ;; letter chords produce accented/symbol characters instead of acting as Alt.
   lalt
+  ;; The function row's special-key HID events get swallowed by kanata's
+  ;; macOS backend even when excluded via process-unmapped-keys
+  ;; (jtroo/kanata#1141), so emit each action directly instead of relying
+  ;; on pass-through. Mirrors the standard MacBook F-row layout.
+  brdn
+  brup
+  mctl
+  lpad
+  bldn
+  blup
+  prev
+  pp
+  next
+  mute
+  vold
+  volu
 )
 
 ;; Vim-style navigation on nav layer
