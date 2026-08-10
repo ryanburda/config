@@ -21,11 +21,15 @@ mkdir -p $HOME/.local/state/noctalia
 mkdir -p $HOME/.local/bin
 mkdir -p $HOME/Documents
 mkdir -p $HOME/Downloads
+# ~/.ssh must be a real directory, not a folded symlink into this repo --
+# ssh_keygen writes a private key into it.
+mkdir -p $HOME/.ssh
+chmod 700 $HOME/.ssh
 
 # Move files in repo to their proper location.
 # Symlink config files
 sudo pacman -S --noconfirm stow
-stow -d dotfiles -t ~ common arch
+stow -d "$REPO_ROOT/dotfiles" -t ~ common arch
 # Copy these root files
 sudo mkdir -p /etc/bluetooth
 sudo cp $REPO_ROOT/dotfiles/arch_root/etc/bluetooth/input.conf /etc/bluetooth/input.conf

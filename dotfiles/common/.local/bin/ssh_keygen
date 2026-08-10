@@ -1,36 +1,75 @@
 #!/bin/zsh
+# Generate an SSH key and register it with GitHub.
+#
+# Run once per machine, after the platform setup script has installed gh.
+# Safe to re-run: an existing key is reused rather than overwritten.
+
+set -e
 
 echo "########################################"
 echo "#          SSH Key Generation          #"
 echo "########################################"
 echo
 
+KEY="${HOME}/.ssh/id_ed25519"
+
+mkdir -p "${HOME}/.ssh"
+chmod 700 "${HOME}/.ssh"
+
 is_valid_email() {
     regex='^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
     [[ $1 =~ $regex ]]
 }
 
-# Prompt the user for email address.
-while true; do
-    read -r "email?Enter email address: "
-
-    if is_valid_email "$email"; then
-        break
-    else
-        echo "Invalid email address. Please try again."
-    fi
-done
-
-# Generate ssh key.
-ssh-keygen -t ed25519 -C $email
-# Start the ssh-agent.
-eval "$(ssh-agent -s)"
-
-# Add SSH private key to the ssh-agent.
-if [[ $OSTYPE == darwin* ]]; then
-    ssh-add --apple-use-keychain ~/.ssh/id_ed25519
+if [[ -f "$KEY" ]]; then
+    echo "${KEY} already exists, skipping keygen."
 else
-    ssh-add ~/.ssh/id_ed25519
+    # Prompt the user for email address.
+    while true; do
+        read -r "email?Enter email address: "
+
+        if is_valid_email "$email"; then
+            break
+        else
+            echo "Invalid email address. Please try again."
+        fi
+    done
+
+    ssh-keygen -t ed25519 -C "$email" -f "$KEY"
 fi
 
-gh auth login
+# ~/.ssh/config sets AddKeysToAgent, so this is only about caching a
+# passphrase up front -- and on Linux only if an agent is actually running.
+if [[ $OSTYPE == darwin* ]]; then
+    ssh-add --apple-use-keychain "$KEY"
+elif [[ -n "$SSH_AUTH_SOCK" ]]; then
+    ssh-add "$KEY"
+fi
+
+HOSTNAME=$(uname -n)
+
+if command -v gh > /dev/null 2>&1; then
+    # admin:public_key is what `gh ssh-key add` needs.
+    if ! gh auth status > /dev/null 2>&1; then
+        gh auth login --git-protocol ssh --scopes admin:public_key
+    fi
+
+    if gh ssh-key list 2>/dev/null | grep -qF "$(cut -d' ' -f2 < "${KEY}.pub")"; then
+        echo "Public key already registered with GitHub."
+    elif ! gh ssh-key add "${KEY}.pub" --title "$HOSTNAME"; then
+        echo "Could not upload the key. Grant the scope and retry:"
+        echo "  gh auth refresh -s admin:public_key && gh ssh-key add ${KEY}.pub --title ${HOSTNAME}"
+        exit 1
+    fi
+else
+    # Nothing has been installed yet on a fresh macOS box -- gh arrives with
+    # Homebrew, which the setup script installs after this repo is cloned.
+    echo "gh is not installed. Add this key at https://github.com/settings/ssh/new"
+    echo
+    cat "${KEY}.pub"
+    echo
+    read -r "?Press enter once the key has been added: "
+fi
+
+# Verify. `ssh -T` against GitHub exits non-zero even on success.
+ssh -o StrictHostKeyChecking=accept-new -T git@github.com || true

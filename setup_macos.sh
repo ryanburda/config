@@ -1,5 +1,16 @@
 #!/bin/zsh
 
+REPO_ROOT="${0:A:h}"
+
+# Create any directories you'll need.
+# NOTE: This is important since stow will "fold" directories if they don't already exist.
+mkdir -p $HOME/.config
+mkdir -p $HOME/.local/bin
+# ~/.ssh must be a real directory, not a folded symlink into this repo --
+# ssh_keygen writes a private key into it.
+mkdir -p $HOME/.ssh
+chmod 700 $HOME/.ssh
+
 # Install Homebrew
 if ! command -v brew &>/dev/null; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -108,7 +119,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 cargo install tree-sitter-cli
 
 # Symlink config files
-stow -d dotfiles -t ~ common macos
+stow -d "$REPO_ROOT/dotfiles" -t ~ common macos
 
 # kanata needs two TCC permissions that can't be granted non-interactively:
 # System Settings > Privacy & Security > Input Monitoring, and > Accessibility.

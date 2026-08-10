@@ -2,36 +2,44 @@
 
 Configuration and dotfiles.
 
-### Setup Steps
+## First time setup
 
-1) Clone repo and run setup
+### 1) Clone over HTTPS
+
+No SSH key exists yet so we'll clone it without one for now.
+The remote gets switched to SSH in step 5.
+
 ```sh
-mkdir "${HOME}/code"
-BARE="${HOME}/code/config/.git"
-WT="${HOME}/code/config/base"
-
-git clone --bare git@github.com:ryanburda/config.git "$BARE"
-git -C "$BARE" config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
-git -C "$BARE" for-each-ref --format='%(refname:short)' refs/heads/ \
-    | grep -v '^main$' \
-    | xargs git -C "$BARE" branch -D 2>/dev/null
-git -C "$BARE" fetch origin
-git -C "$BARE" worktree add "$WT" main
-git -C "$BARE" worktree lock "$WT"
-
-if [[ "$(uname)" == "Darwin" ]]; then
-    "$WT/setup_macos.sh"
-else
-    "$WT/setup_arch.sh"
-fi
+git clone https://github.com/ryanburda/config.git ~/code/config
 ```
 
-2) Restart
+### 2) Run setup
 
-3) Generate SSH keys
-``` zsh
+```sh
+cd ~/code/config
+./setup.sh
+```
+
+### 3) Start a new shell
+
+```sh
+exec zsh -l
+```
+
+### 4) Switch to SSH remote
+
+```zsh
 ssh_keygen
+git -C ~/code/config remote set-url origin git@github.com:ryanburda/config.git
 ```
 
-4) Setup all other repos
-- https://github.com/ryanburda/repos
+### 5) Set up all other repos (PRIVATE)
+
+I keep a separate private repository for project setup.
+
+```zsh
+git clone git@github.com:ryanburda/repos.git ~/code/repos
+cd ~/code/repos/setup.sh
+```
+
+### 6) Reboot
