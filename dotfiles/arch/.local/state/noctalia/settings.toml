@@ -2,12 +2,11 @@ config_version = 8
 
 [bar.default]
 background_opacity = 0.39999999105930328
-center = [ "launcher" ]
-end = [ "date", "battery", "control-center" ]
+center = [ "launcher", "control-center" ]
+end = [ "battery", "date" ]
 margin_edge = 4
 margin_ends = 8
 padding = 16
-position = "bottom"
 radius = 50
 shadow = false
 start = [ "taskbar" ]

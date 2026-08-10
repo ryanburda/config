@@ -20,11 +20,7 @@ cd ~/code/config
 ./setup.sh
 ```
 
-### 3) Start a new shell
-
-```sh
-exec zsh -l
-```
+### 3) Reboot
 
 ### 4) Switch to SSH remote
 
@@ -41,5 +37,3 @@ I keep a separate private repository for project setup.
 git clone git@github.com:ryanburda/repos.git ~/code/repos
 cd ~/code/repos/setup.sh
 ```
-
-### 6) Reboot
