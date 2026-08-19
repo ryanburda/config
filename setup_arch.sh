@@ -82,13 +82,34 @@ sudo pacman -S --needed --noconfirm \
     zsh
 
 # Audio
+# lsp-plugins-lv2 supplies the equalizer/compressor/limiter the EasyEffects
+# presets are built from; kconfig supplies kwriteconfig6, used just below.
 sudo pacman -S --needed --noconfirm \
     easyeffects \
+    kconfig \
     lsp-plugins-lv2 \
     pipewire \
     pipewire-alsa \
     pipewire-pulse \
     wireplumber
+
+# EasyEffects speaker EQ.
+#
+# The presets and their per-route autoload bindings are stowed from the repo
+# (~/.local/share/easyeffects/{output,autoload/output}), but this setting lives
+# in EasyEffects' own db, which the app rewrites on every exit to record window
+# size and preset-use counters. Stowing that file would mean constant churn in
+# the repo, so it gets set here instead.
+#
+# Without the fallback, EasyEffects keeps the *last loaded* preset when a device
+# has no autoload binding, which leaks the speaker EQ onto HDMI/USB/Bluetooth
+# outputs. With it, only the built-in "Speakers" route gets the EQ and every
+# other output gets the empty "neutral" preset.
+mkdir -p ~/.config/easyeffects/db
+kwriteconfig6 --file ~/.config/easyeffects/db/easyeffectsrc \
+    --group Window --key outputAutoloadingUsesFallback true
+kwriteconfig6 --file ~/.config/easyeffects/db/easyeffectsrc \
+    --group Window --key outputAutoloadingFallbackPreset neutral
 
 # Bluetooth
 sudo pacman -S --needed --noconfirm \
