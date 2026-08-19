@@ -286,6 +286,15 @@ workspace "1"
 // Start the Noctalia desktop shell (bar, launcher, lock, OSDs, wallpapers).
 spawn-at-startup "noctalia"
 
+// EasyEffects speaker EQ. Spawned here rather than as a systemd user unit
+// because even in service mode it builds a Qt GUI app and aborts without a
+// display — and niri is not started via niri.service here, so the systemd user
+// manager never learns WAYLAND_DISPLAY. Spawning from the compositor inherits it.
+// Which preset it applies is chosen per output route by the files in
+// ~/.local/share/easyeffects/autoload/output (speakers get the EQ, headphones
+// get "neutral").
+spawn-at-startup "easyeffects" "--service-mode" "--hide-window"
+
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
 
