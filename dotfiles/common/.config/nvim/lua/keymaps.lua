@@ -831,10 +831,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
-vim.keymap.set({ 'n', 'x', 'o' }, '<leader>s', '<Plug>Sneak_s')
-vim.keymap.set({ 'n', 'x', 'o' }, ';', '<Plug>Sneak_;')
-vim.keymap.set({ 'n', 'x', 'o' }, ',', '<Plug>Sneak_,')
-
 ------------------------------------------------------------------------------------------------------------------------
 -- Macros
 ------------------------------------------------------------------------------------------------------------------------
@@ -915,14 +911,15 @@ vim.keymap.set(
 -- Buf-marks --
 ---------------
 -- `s;` - Jump to alternate buffer
--- `s ` - List all buf-marks
+-- `s<space>` - List all buf-marks
 -- `s,` - Previous buf-mark
 -- `s.` - Next buf-mark
 -- `s/` - Load buf-marks from another worktree
 -- `s'` - Load buf-marks from another project
 -- `s"` - Unload buf-marks from another project
--- `S{char}` - Set buf-mark
+-- `<leader>s{char}` - Set buf-mark
 -- `s{char}` - Goto buf-mark
+-- `S{char}` - Remove buf-mark
 
 local buf_mark = require('buf-mark')
 local reserved = {}
@@ -955,7 +952,7 @@ reserved['"'] = true
 vim.keymap.set('n', 's"', require('buf-mark.fzf_lua').unload_project, { desc = 'Unload buf-marks of another project' })
 -- vim.keymap.set('n', 's"', require('buf-mark.telescope').unload_project, { desc = 'Unload buf-marks of another project' })
 
-vim.keymap.set('n', 'S', function()
+vim.keymap.set('n', '<leader>s', function()
   local char = vim.fn.getcharstr()
   if reserved[char] then
     vim.api.nvim_echo({ { 'buf-mark: ' .. char .. ' is reserved', 'WarningMsg' } }, true, {})
@@ -963,6 +960,15 @@ vim.keymap.set('n', 'S', function()
   end
   buf_mark.set(char)
 end, { desc = 'Set buf-mark' })
+
+vim.keymap.set('n', 'S', function()
+  local char = vim.fn.getcharstr()
+  if reserved[char] then
+    vim.api.nvim_echo({ { 'buf-mark: ' .. char .. ' is reserved', 'WarningMsg' } }, true, {})
+    return
+  end
+  buf_mark.delete(char)
+end, { desc = 'Remove buf-mark' })
 
 vim.keymap.set('n', 's', function()
   local char = vim.fn.getcharstr()

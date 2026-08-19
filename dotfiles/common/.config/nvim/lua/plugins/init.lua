@@ -508,13 +508,6 @@ return {
   },
 
   {
-    'justinmk/vim-sneak',
-    init = function()
-      vim.g['sneak#no_default_mappings'] = 1
-    end,
-  },
-
-  {
     'chentoast/marks.nvim',
     config = function()
       require('marks').setup({
