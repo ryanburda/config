@@ -236,6 +236,14 @@ sudo usermod -aG input $USER
 systemctl --user daemon-reload
 systemctl --user enable --now kanata
 
+# Supernote
+# Android / sideloading
+sudo pacman -S --needed --noconfirm \
+    android-tools \
+    android-udev
+
+sudo usermod -aG adbusers $USER
+
 # Change default shell to zsh
 sudo chsh -s /bin/zsh $USER
 
