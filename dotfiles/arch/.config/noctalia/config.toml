@@ -111,9 +111,6 @@ transition = [ "disc", "fade", "wipe" ]
 transition_duration = 400
 transition_on_startup = true
 
-    [wallpaper.default]
-    path = "/home/ryanburda/code/assets/base/assets/backgrounds/desk_green.jpg"
-
 [weather]
 refresh_minutes = 20
 unit = "imperial"

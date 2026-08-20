@@ -40,6 +40,7 @@ IGNORED_PREFIXES = (
     "config_version",
     "desktop_widgets",
     "lockscreen_widgets",
+    "wallpaper.default",
     "wallpaper.last",
     "wallpaper.monitors",
 )
