@@ -1,0 +1,180 @@
+#!/usr/bin/env python3
+
+# NAME
+#   noctalia_shadowed
+#
+# DESCRIPTION
+#   Reports noctalia settings that live in the daemon-owned state file instead
+#   of the tracked config.toml.
+#
+#   Noctalia reads two layers, and the state layer WINS:
+#
+#     ~/.config/noctalia/config.toml         <- tracked in git, hand-edited
+#     ~/.local/state/noctalia/settings.toml  <- written by the Settings GUI
+#
+#   So any setting changed in the GUI silently overrides the tracked value and
+#   never reaches version control. This reports two kinds of drift:
+#
+#     SHADOWED   key in both layers  -> the config.toml value is inert
+#     UNTRACKED  key only in state   -> a GUI change with no tracked counterpart
+#
+#   Exit status is 0 when clean and 1 when drift is found, so it works as a
+#   test: shell prompt, pre-commit hook, or CI.
+#
+# USAGE
+#   noctalia_shadowed [--all] [--quiet] [--json]
+#
+#     --all     also report runtime/editor state normally ignored
+#     --quiet   print nothing; use the exit status only
+#     --json    machine-readable output
+
+import json
+import os
+import sys
+import tomllib
+from pathlib import Path
+
+# Keys noctalia owns as runtime/editor state rather than user preference.
+# These are expected to live only in the state file, so they are not drift.
+IGNORED_PREFIXES = (
+    "config_version",
+    "desktop_widgets",
+    "lockscreen_widgets",
+    "wallpaper.last",
+    "wallpaper.monitors",
+)
+
+
+def config_home() -> Path:
+    if env := os.environ.get("NOCTALIA_CONFIG_HOME"):
+        return Path(env)
+    base = os.environ.get("XDG_CONFIG_HOME", str(Path.home() / ".config"))
+    return Path(base) / "noctalia"
+
+
+def state_home() -> Path:
+    if env := os.environ.get("NOCTALIA_STATE_HOME"):
+        return Path(env)
+    base = os.environ.get("XDG_STATE_HOME", str(Path.home() / ".local/state"))
+    return Path(base) / "noctalia"
+
+
+def load(path: Path) -> dict:
+    if not path.is_file():
+        return {}
+    try:
+        with path.open("rb") as fh:
+            return tomllib.load(fh)
+    except tomllib.TOMLDecodeError as exc:
+        sys.exit(f"noctalia_shadowed: cannot parse {path}: {exc}")
+
+
+def flatten(node, prefix=""):
+    """Walk nested tables into dotted key paths. Arrays of tables are leaves."""
+    out = {}
+    for key, value in node.items():
+        path = f"{prefix}.{key}" if prefix else key
+        if isinstance(value, dict):
+            out.update(flatten(value, path))
+        else:
+            out[path] = value
+    return out
+
+
+def ignored(key: str) -> bool:
+    return any(key == p or key.startswith(p + ".") for p in IGNORED_PREFIXES)
+
+
+def fmt(value) -> str:
+    return json.dumps(value, default=str)
+
+
+def main() -> int:
+    args = set(sys.argv[1:])
+    if args - {"--all", "--quiet", "--json"}:
+        sys.exit(__doc__ or "usage: noctalia_shadowed [--all] [--quiet] [--json]")
+
+    show_all, quiet, as_json = "--all" in args, "--quiet" in args, "--json" in args
+
+    config_path = config_home() / "config.toml"
+    state_path = state_home() / "settings.toml"
+
+    config = flatten(load(config_path))
+    state = flatten(load(state_path))
+
+    shadowed, untracked = [], []
+    for key, state_value in sorted(state.items()):
+        if not show_all and ignored(key):
+            continue
+        if key in config:
+            shadowed.append(
+                {
+                    "key": key,
+                    "config": config[key],
+                    "state": state_value,
+                    "differs": config[key] != state_value,
+                }
+            )
+        else:
+            untracked.append({"key": key, "state": state_value})
+
+    drift = bool(shadowed or untracked)
+
+    if as_json:
+        print(
+            json.dumps(
+                {
+                    "config_path": str(config_path),
+                    "state_path": str(state_path),
+                    "shadowed": shadowed,
+                    "untracked": untracked,
+                    "clean": not drift,
+                },
+                indent=2,
+                default=str,
+            )
+        )
+        return 1 if drift else 0
+
+    if quiet:
+        return 1 if drift else 0
+
+    tty = sys.stdout.isatty()
+    red = "\033[31m" if tty else ""
+    yellow = "\033[33m" if tty else ""
+    green = "\033[32m" if tty else ""
+    dim = "\033[2m" if tty else ""
+    off = "\033[0m" if tty else ""
+
+    if not config_path.is_file():
+        print(f"{yellow}warning{off}: no tracked config at {config_path}")
+
+    if not drift:
+        print(f"{green}✓{off} no shadowed or untracked noctalia settings")
+        return 0
+
+    if shadowed:
+        width = max(len(e["key"]) for e in shadowed)
+        print(f"{red}SHADOWED{off} {dim}state file overrides your tracked config.toml{off}")
+        for e in shadowed:
+            note = "state wins" if e["differs"] else "same value"
+            print(
+                f"  {e['key']:<{width}}  config={fmt(e['config'])}"
+                f"  state={fmt(e['state'])}  {dim}<- {note}{off}"
+            )
+        print()
+
+    if untracked:
+        width = max(len(e["key"]) for e in untracked)
+        print(f"{yellow}UNTRACKED{off} {dim}set via the GUI, absent from config.toml{off}")
+        for e in untracked:
+            print(f"  {e['key']:<{width}}  state={fmt(e['state'])}")
+        print()
+
+    print(f"{dim}promote these into {config_path}, then clear them from{off}")
+    print(f"{dim}{state_path} so the tracked value takes effect.{off}")
+    return 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())
