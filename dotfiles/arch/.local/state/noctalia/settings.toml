@@ -139,6 +139,7 @@ widget_order = [ "lockscreen-login-box@eDP-1", "lockscreen-login-box@DP-1" ]
 
 [osd.kinds]
 lock_keys = false
+media = false
 
 [shell]
 screen_time_enabled = true
