@@ -1,0 +1,140 @@
+# Noctalia user configuration.
+#
+# This file is user-owned and hot-reloaded; noctalia never writes to it, so it
+# is safe to `git checkout --` while the shell is running.
+#
+# Runtime/editor state (widget positions, last wallpaper) lives in
+# ~/.local/state/noctalia/settings.toml and is deliberately NOT tracked.
+#
+# NOTE: the state file takes precedence over this one. Changing a setting via
+# the Settings GUI writes it to the state file, where it will silently shadow
+# the value here. Edit this file by hand instead.
+
+[bar.default]
+background_opacity = 0.4
+center = [ "launcher", "control-center" ]
+concave_edge_corners = false
+end = [ "battery", "date" ]
+margin_edge = 1
+margin_ends = 8
+padding = 16
+radius = 50
+shadow = false
+start = [ "taskbar" ]
+widget_spacing = 12
+
+[calendar]
+enabled = true
+
+    [calendar.account.personal_google]
+    color = "primary"
+    name = "Personal Calendar"
+    type = "google"
+
+[[control_center.shortcuts]]
+type = "bluetooth"
+
+[[control_center.shortcuts]]
+type = "wifi"
+
+[[control_center.shortcuts]]
+type = "dark_mode"
+
+[[control_center.shortcuts]]
+type = "nightlight"
+
+[[control_center.shortcuts]]
+type = "power_profile"
+
+[[control_center.shortcuts]]
+type = "caffeine"
+
+[dock]
+auto_hide = true
+reserve_space = false
+show_dots = true
+
+[idle]
+behavior_order = [ "lock", "screen-off", "lock-and-suspend" ]
+pre_action_fade_seconds = 4
+
+    [idle.behavior.lock]
+    action = "lock"
+    enabled = true
+    timeout = 600
+
+    [idle.behavior.lock-and-suspend]
+    action = "lock_and_suspend"
+    enabled = false
+    timeout = 900
+
+    [idle.behavior.screen-off]
+    action = "screen_off"
+    enabled = false
+    timeout = 660
+
+[location]
+auto_locate = true
+
+[osd.kinds]
+lock_keys = false
+media = false
+
+[shell]
+screen_time_enabled = true
+
+    [shell.animation]
+    enabled = false
+    speed = 2.5
+
+    [shell.launcher.providers.session]
+    global = true
+
+    [shell.launcher.providers.wallpaper]
+    global = false
+
+    [shell.panel]
+    launcher_placement = "attached"
+    open_near_click_control_center = true
+
+[theme]
+mode = "dark"
+source = "wallpaper"
+wallpaper_scheme = "m3-content"
+
+    [theme.templates]
+    builtin_ids = [ "niri" ]
+
+[wallpaper]
+directory = "/home/ryanburda/code/assets/base/assets/backgrounds"
+transition = [ "disc", "fade", "wipe" ]
+transition_duration = 400
+transition_on_startup = true
+
+    [wallpaper.default]
+    path = "/home/ryanburda/code/assets/base/assets/backgrounds/desk_green.jpg"
+
+[weather]
+refresh_minutes = 20
+unit = "imperial"
+
+[widget.battery]
+show_label = false
+
+[widget.clock]
+format = "{:-%I:%M}"
+
+[widget.date]
+format = "{:%-m/%d  %-I:%M}"
+
+[widget.network]
+show_label = false
+
+[widget.taskbar]
+group_by_workspace = true
+inactive_opacity = 0.7
+scale = 1.15
+show_workspace_label = false
+
+[widget.volume]
+show_label = false
