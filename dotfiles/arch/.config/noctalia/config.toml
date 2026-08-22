@@ -11,17 +11,18 @@
 # the value here. Edit this file by hand instead.
 
 [bar.default]
-background_opacity = 0.4
-center = [ "launcher", "control-center" ]
+background_opacity = 0.5
+center = [ "launcher", "taskbar" ]
 concave_edge_corners = false
 end = [ "battery", "date" ]
-margin_edge = 1
-margin_ends = 8
+margin_edge = 0
+margin_ends = 0
 padding = 16
-radius = 50
+position = "bottom"
+radius = 0
 shadow = false
-start = [ "taskbar" ]
-widget_spacing = 12
+start = [ "control-center" ]
+widget_spacing = 16
 
 [calendar]
 enabled = true
