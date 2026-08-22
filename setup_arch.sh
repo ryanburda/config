@@ -64,6 +64,7 @@ sudo pacman -S --needed --noconfirm \
     curl \
     direnv \
     fd \
+    firefox \
     fzf \
     git \
     git-delta \
