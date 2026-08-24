@@ -7,13 +7,16 @@ REPO_ROOT="${0:A:h}"
 mkdir -p $HOME/.config
 mkdir -p $HOME/.local/bin
 # ~/.ssh must be a real directory, not a folded symlink into this repo --
-# ssh_keygen writes a private key into it.
+# the bootstrap repo's github_ssh.sh writes a private key into it.
 mkdir -p $HOME/.ssh
 chmod 700 $HOME/.ssh
 
 # Install Homebrew
 if ! command -v brew &>/dev/null; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    # A fresh install only adds brew to PATH via shell profile, which doesn't
+    # affect this already-running script -- so load it into this session too.
+    eval "$(/opt/homebrew/bin/brew shellenv 2>/dev/null || /usr/local/bin/brew shellenv)"
 else
     brew update
 fi

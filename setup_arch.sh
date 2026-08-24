@@ -23,7 +23,7 @@ mkdir -p $HOME/.local/bin
 mkdir -p $HOME/Documents
 mkdir -p $HOME/Downloads
 # ~/.ssh must be a real directory, not a folded symlink into this repo --
-# ssh_keygen writes a private key into it.
+# the bootstrap repo's github_ssh.sh writes a private key into it.
 mkdir -p $HOME/.ssh
 chmod 700 $HOME/.ssh
 
