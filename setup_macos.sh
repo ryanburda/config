@@ -68,6 +68,7 @@ brew install \
     rlwrap \
     stow \
     tmux \
+    tree-sitter \
     uv \
     wget
 
@@ -120,10 +121,6 @@ brew install --cask \
     shifty \
     spotify \
     wezterm@nightly
-
-# Rust
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-cargo install tree-sitter-cli
 
 # Symlink config files
 stow -d "$REPO_ROOT/dotfiles" -t ~ common macos
