@@ -112,9 +112,11 @@ sudo pacman -S --needed --noconfirm \
     less \
     lsd \
     lua \
+    man-db \
     neovim \
     nodejs \
     npm \
+    postgresql-libs \
     ripgrep \
     tldr \
     tmux \
@@ -239,6 +241,7 @@ yay -S --noconfirm aur/1password
 yay -S --noconfirm 1password-cli
 yay -S --noconfirm google-chrome
 yay -S --noconfirm noctalia-git
+yay -S --noconfirm pspg
 yay -S --noconfirm zen-browser-bin  # Run `xdg-settings set default-web-browser zen.desktop` to make it the default browser.
 
 # claude
