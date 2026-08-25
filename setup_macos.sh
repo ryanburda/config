@@ -1,5 +1,13 @@
 #!/bin/zsh
 
+# Stop at the first failed command. Without this, any failure partway through
+# like an unavailable package, a stow conflict, a failed build just scrolls past
+# and the script still prints "Setup complete!" at the end, leaving a machine
+# that looks set up but isn't. Steps that are expected to fail on a fresh
+# install are tolerated explicitly below.
+set -e
+trap 'echo >&2; echo "setup_macos.sh: FAILED at line ${LINENO}" >&2' ZERR
+
 REPO_ROOT="${0:A:h}"
 
 # Create any directories you'll need.

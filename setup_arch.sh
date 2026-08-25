@@ -11,6 +11,14 @@
 #
 # NOTE: Must be bash since it runs on a fresh install before zsh is available.
 
+# Stop at the first failed command. Without this, any failure partway through
+# like an unavailable package, a stow conflict, a failed build just scrolls past
+# and the script still prints "Setup complete!" at the end, leaving a machine
+# that looks set up but isn't. Steps that are expected to fail on a fresh
+# install are tolerated explicitly below.
+set -eo pipefail
+trap 'echo >&2; echo "setup_arch.sh: FAILED at line ${LINENO}: ${BASH_COMMAND}" >&2' ERR
+
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Create any directories you'll need.
@@ -209,10 +217,7 @@ yay -S --noconfirm 1password-cli
 yay -S --noconfirm google-chrome
 yay -S --noconfirm noctalia-git
 yay -S --noconfirm ttf-recursive-nerd
-yay -S --noconfirm zen-browser-bin
-
-# Default browser
-xdg-settings set default-web-browser zen-browser.desktop
+yay -S --noconfirm zen-browser-bin  # Run `xdg-settings set default-web-browser zen.desktop` to make it the default browser.
 
 # claude
 curl -fsSL https://claude.ai/install.sh | bash
@@ -225,16 +230,12 @@ curl -fsSL https://claude.ai/install.sh | bash
 # greeter, only once logged in.
 yay -S --noconfirm kanata
 sudo usermod -aG input $USER
-systemctl --user daemon-reload
-systemctl --user enable --now kanata
-
-# Supernote
-# Android / sideloading
-sudo pacman -S --needed --noconfirm \
-    android-tools \
-    android-udev
-
-sudo usermod -aG adbusers $USER
+# Non-fatal: the unit cannot actually start until the `input` group membership
+# added just above is live, which takes a fresh login. `enable` still sticks, so
+# kanata comes up on its own the next time you log in.
+if ! systemctl --user daemon-reload || ! systemctl --user enable --now kanata; then
+    echo "WARNING: kanata is enabled but could not start yet -- it needs the 'input' group, which applies after you log in again." >&2
+fi
 
 # Change default shell to zsh
 sudo chsh -s /bin/zsh $USER
