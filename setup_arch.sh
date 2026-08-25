@@ -28,6 +28,7 @@ mkdir -p $HOME/.config/noctalia
 mkdir -p $HOME/.config/niri
 mkdir -p $HOME/.local/state/noctalia
 mkdir -p $HOME/.local/bin
+mkdir -p $HOME/.local/share
 mkdir -p $HOME/Documents
 mkdir -p $HOME/Downloads
 # ~/.claude must be a real directory, not a folded symlink into this repo --
@@ -97,6 +98,8 @@ sudo pacman -S --needed --noconfirm \
     lsd \
     lua \
     neovim \
+    nodejs \
+    npm \
     ripgrep \
     tldr \
     tmux \

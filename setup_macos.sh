@@ -14,6 +14,7 @@ REPO_ROOT="${0:A:h}"
 # NOTE: This is important since stow will "fold" directories if they don't already exist.
 mkdir -p $HOME/.config
 mkdir -p $HOME/.local/bin
+mkdir -p $HOME/.local/share
 # ~/.claude must be a real directory, not a folded symlink into this repo --
 # Claude Code writes credentials, session history, and project state into it,
 # and only settings.json belongs under version control.
