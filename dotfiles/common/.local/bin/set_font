@@ -13,7 +13,6 @@ DEFAULT_FONT_SIZE="12"
 
 fonts=(
     "CaskaydiaMono Nerd Font Mono,12"
-    "DepartureMono Nerd Font Mono,12"
     "FiraMono Nerd Font Mono,11"
     "GohuFont 14 Nerd Font Mono,11"
     "Hack Nerd Font Mono,11"

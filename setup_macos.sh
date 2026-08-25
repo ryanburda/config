@@ -104,7 +104,6 @@ brew install --HEAD kanata
 # Fonts
 brew install --cask \
     font-caskaydia-mono-nerd-font \
-    font-departure-mono-nerd-font \
     font-fira-mono-nerd-font \
     font-gohufont-nerd-font \
     font-hack-nerd-font \

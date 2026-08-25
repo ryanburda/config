@@ -55,7 +55,6 @@ stow -d "$REPO_ROOT/dotfiles" -t ~ common arch
 sudo mkdir -p /etc/bluetooth
 sudo cp $REPO_ROOT/dotfiles/arch_root/etc/bluetooth/input.conf /etc/bluetooth/input.conf
 sudo cp $REPO_ROOT/dotfiles/arch_root/etc/pacman.conf /etc/pacman.conf
-sudo cp $REPO_ROOT/dotfiles/arch_root/etc/vconsole.conf /etc/vconsole.conf
 # Sync package databases after copying pacman.conf (which may enable new repos
 # like multilib). -Syu rather than -Sy: syncing without also upgrading leaves
 # the system in a partial-upgrade state, where everything installed below links
@@ -64,17 +63,33 @@ sudo pacman -Syu --noconfirm
 
 # yay
 sudo pacman -S --needed --noconfirm base-devel git
-if [[ ! -d "$HOME/yay" ]]; then
-    git clone https://aur.archlinux.org/yay.git "$HOME/yay"
+if ! command -v yay > /dev/null 2>&1; then
+    # yay-bin ships a precompiled binary, so a fresh machine doesn't have to
+    # build a Go program first. Built in a temp dir that gets cleaned up rather
+    # than a permanent ~/yay, which went stale on every re-run.
+    yay_build=$(mktemp -d)
+    git clone https://aur.archlinux.org/yay-bin.git "$yay_build"
+    (cd "$yay_build" && makepkg -si --noconfirm)
+    rm -rf "$yay_build"
 fi
-cd "$HOME/yay"
-makepkg -si --noconfirm
-cd "$REPO_ROOT"
 
 # Fonts
 sudo pacman -S --needed --noconfirm \
-    $(pacman -Sgq nerd-fonts) \
-    terminus-font
+    otf-firamono-nerd \
+    terminus-font \
+    ttf-cascadia-mono-nerd \
+    ttf-gohu-nerd \
+    ttf-hack-nerd \
+    ttf-inconsolata-go-nerd \
+    ttf-jetbrains-mono-nerd \
+    ttf-martian-mono-nerd \
+    ttf-recursive-nerd \
+    ttf-terminus-nerd
+
+# vconsole.conf sets FONT=ter-132b, so it's copied only now that terminus-font
+# is installed -- otherwise an initramfs rebuild in between would warn about a
+# missing console font.
+sudo cp $REPO_ROOT/dotfiles/arch_root/etc/vconsole.conf /etc/vconsole.conf
 
 # Core tools
 sudo pacman -S --needed --noconfirm \
@@ -143,8 +158,6 @@ kwriteconfig6 --file ~/.config/easyeffects/db/easyeffectsrc \
 sudo pacman -S --needed --noconfirm \
     bluez \
     bluez-utils
-
-sudo usermod -aG input $USER
 
 sudo systemctl enable --now bluetooth.service
 
@@ -226,7 +239,6 @@ yay -S --noconfirm aur/1password
 yay -S --noconfirm 1password-cli
 yay -S --noconfirm google-chrome
 yay -S --noconfirm noctalia-git
-yay -S --noconfirm ttf-recursive-nerd
 yay -S --noconfirm zen-browser-bin  # Run `xdg-settings set default-web-browser zen.desktop` to make it the default browser.
 
 # claude
@@ -252,3 +264,5 @@ sudo chsh -s /bin/zsh $USER
 
 echo ""
 echo "Setup complete!"
+echo "Reboot to finish"
+echo ""
