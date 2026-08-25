@@ -39,6 +39,13 @@ mkdir -p $HOME/.claude
 mkdir -p $HOME/.ssh
 chmod 700 $HOME/.ssh
 
+# ~/.gitconfig must exist, even empty. The static config is stowed to
+# ~/.config/git/config, which git reads as a second global file -- but when
+# ~/.gitconfig is absent, `git config --global` and `gh auth setup-git` fall
+# back to writing ~/.config/git/config instead, which is a symlink into this
+# repo. An empty file here keeps every tool write in $HOME.
+touch $HOME/.gitconfig
+
 # Move files in repo to their proper location.
 # Symlink config files
 sudo pacman -S --noconfirm stow

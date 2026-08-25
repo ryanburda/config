@@ -1,0 +1,41 @@
+# Static half of the global git config, read by git as $XDG_CONFIG_HOME/git/config.
+#
+# It lives here rather than at ~/.gitconfig because other tools write to that
+# file -- `gh auth setup-git` puts a credential helper there, and every
+# `git config --global ...` lands there. Keeping them separate means this file
+# can be a stow symlink into the repo without tool writes ending up in version
+# control. Git reads both and ~/.gitconfig wins on conflicts.
+#
+# Nothing here is templated. delta's light/dark setting used to be, but it now
+# lives in ~/.gitconfig as delta.light/delta.dark, written by set_colorscheme --
+# machine-local theme state rather than something to version. (delta can detect
+# the background itself, but the OSC 11 query it uses doesn't survive tmux.)
+
+[user]
+    email = ryanburda@gmail.com
+    name = Ryan Burda
+[pull]
+    ff = only
+[core]
+    editor = nvim
+    pager = delta --line-numbers
+[init]
+    defaultBranch = main
+[color]
+    ui = true
+[color "diff-highlight"]
+    oldNormal = red bold
+    oldHighlight = red bold 52
+    newNormal = green bold
+    newHighlight = green bold 22
+[interactive]
+    diffFilter = delta --color-only
+[merge]
+    conflictstyle = diff3
+[diff]
+    colorMoved = default
+[delta]
+    navigate = true    # use n and N to move between diff sections
+
+[includeIf "gitdir:~/code/sqsp/**/"]
+    path = ~/code/sqsp/.gitconfig_include
