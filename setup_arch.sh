@@ -205,7 +205,6 @@ sudo usermod -aG docker $USER
 sudo systemctl enable --now power-profiles-daemon.service
 
 yay -S --noconfirm aur/1password
-gpg --receive-keys 3FEF9748469ADBE15DA7CA80AC2D62742012EA22
 yay -S --noconfirm 1password-cli
 yay -S --noconfirm google-chrome
 yay -S --noconfirm noctalia-git
