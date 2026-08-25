@@ -22,6 +22,10 @@ mkdir -p $HOME/.local/state/noctalia
 mkdir -p $HOME/.local/bin
 mkdir -p $HOME/Documents
 mkdir -p $HOME/Downloads
+# ~/.claude must be a real directory, not a folded symlink into this repo --
+# Claude Code writes credentials, session history, and project state into it,
+# and only settings.json belongs under version control.
+mkdir -p $HOME/.claude
 # ~/.ssh must be a real directory, not a folded symlink into this repo --
 # the bootstrap repo's github_ssh.sh writes a private key into it.
 mkdir -p $HOME/.ssh

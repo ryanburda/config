@@ -6,6 +6,10 @@ REPO_ROOT="${0:A:h}"
 # NOTE: This is important since stow will "fold" directories if they don't already exist.
 mkdir -p $HOME/.config
 mkdir -p $HOME/.local/bin
+# ~/.claude must be a real directory, not a folded symlink into this repo --
+# Claude Code writes credentials, session history, and project state into it,
+# and only settings.json belongs under version control.
+mkdir -p $HOME/.claude
 # ~/.ssh must be a real directory, not a folded symlink into this repo --
 # the bootstrap repo's github_ssh.sh writes a private key into it.
 mkdir -p $HOME/.ssh
