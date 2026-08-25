@@ -40,8 +40,11 @@ sudo mkdir -p /etc/bluetooth
 sudo cp $REPO_ROOT/dotfiles/arch_root/etc/bluetooth/input.conf /etc/bluetooth/input.conf
 sudo cp $REPO_ROOT/dotfiles/arch_root/etc/pacman.conf /etc/pacman.conf
 sudo cp $REPO_ROOT/dotfiles/arch_root/etc/vconsole.conf /etc/vconsole.conf
-# Sync package databases after copying pacman.conf (which may enable new repos like multilib).
-sudo pacman -Sy
+# Sync package databases after copying pacman.conf (which may enable new repos
+# like multilib). -Syu rather than -Sy: syncing without also upgrading leaves
+# the system in a partial-upgrade state, where everything installed below links
+# against libraries the machine doesn't have yet.
+sudo pacman -Syu --noconfirm
 
 # yay
 sudo pacman -S --needed --noconfirm base-devel git
