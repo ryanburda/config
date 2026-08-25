@@ -150,6 +150,13 @@ sudo pacman -S --needed --noconfirm \
 # has no autoload binding, which leaks the speaker EQ onto HDMI/USB/Bluetooth
 # outputs. With it, only the built-in "Speakers" route gets the EQ and every
 # other output gets the empty "neutral" preset.
+#
+# NOTE: the autoload bindings are named after this machine's sink --
+# alsa_output.pci-0000_00_1f.3.analog-stereo:{Speakers,Headphones}.json. On
+# different hardware, or if the audio device enumerates at another PCI address,
+# nothing matches and every output silently falls back to "neutral" -- audible
+# as the EQ simply not applying. Check `pactl list short sinks` and rename the
+# files in dotfiles/arch/.local/share/easyeffects/autoload/output/ to match.
 mkdir -p ~/.config/easyeffects/db
 kwriteconfig6 --file ~/.config/easyeffects/db/easyeffectsrc \
     --group Window --key outputAutoloadingUsesFallback true
