@@ -24,7 +24,11 @@ else
 end
 config.font = wezterm.font(envy.get('font_family', 'JetBrains Mono'))
 config.font_size = tonumber(envy.get('font_size', '12'))
-config.window_decorations = "RESIZE"
+-- NONE, not RESIZE: niri sets `prefer-no-csd` and draws its own border/focus
+-- ring, but wezterm draws a client-side titlebar + border anyway and sizes its
+-- buffer *outside* the compositor's allocated geometry, so the bottom rows get
+-- clipped off screen. Regressed in the 20260716 (r869) Wayland backend rewrite.
+config.window_decorations = "NONE"
 config.hide_tab_bar_if_only_one_tab = true
 config.tab_bar_at_bottom = false
 config.use_fancy_tab_bar = false
@@ -48,8 +52,8 @@ config.warn_about_missing_glyphs = false
 -- background image
 local current_background = envy.get("wezterm_background", "NONE")
 local background_image_path = nil
-if current_background ~= "NONE" then
-  background_image_path =  background_image_dir .. current_background
+if current_background ~= "NONE" and current_background ~= "TRANSPARENT" then
+  background_image_path = background_image_dir .. current_background
 end
 
 -- background color
