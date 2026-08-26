@@ -29,6 +29,9 @@ config.font_size = tonumber(envy.get('font_size', '12'))
 -- buffer *outside* the compositor's allocated geometry, so the bottom rows get
 -- clipped off screen. Regressed in the 20260716 (r869) Wayland backend rewrite.
 config.window_decorations = "NONE"
+if wezterm.target_triple:find("apple-darwin", 1, true) then
+  config.window_decorations = "RESIZE"
+end
 config.hide_tab_bar_if_only_one_tab = true
 config.tab_bar_at_bottom = false
 config.use_fancy_tab_bar = false
