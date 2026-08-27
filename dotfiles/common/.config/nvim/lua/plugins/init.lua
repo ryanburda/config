@@ -40,6 +40,17 @@ return {
   'catppuccin/nvim',
   'T-b-t-nchos/Aquavium.nvim',
 
+  -- greeter
+  {
+    "goolord/alpha-nvim",
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    config = function()
+      require("alpha").setup(
+        require("dashboard").config
+      )
+    end,
+  },
+
   -- Treesitter
   {
     'nvim-treesitter/nvim-treesitter',
