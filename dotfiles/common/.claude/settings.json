@@ -1,6 +1,4 @@
 {
-  "theme": "dark",
-  "tui": "fullscreen",
   "env": {
     "DISABLE_AUTOUPDATER": "1"
   },
@@ -55,5 +53,7 @@
         ]
       }
     ]
-  }
+  },
+  "tui": "fullscreen",
+  "theme": "dark"
 }
