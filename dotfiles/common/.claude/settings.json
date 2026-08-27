@@ -8,7 +8,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "$HOME/.local/bin/tsm --agent-state idle"
+            "command": "$HOME/.local/bin/tsm agent-state idle"
           }
         ]
       }
@@ -18,7 +18,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "$HOME/.local/bin/tsm --agent-state working"
+            "command": "$HOME/.local/bin/tsm agent-state working"
           }
         ]
       }
@@ -28,7 +28,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "$HOME/.local/bin/tsm --agent-state notification"
+            "command": "$HOME/.local/bin/tsm agent-state notification"
           }
         ]
       }
@@ -38,7 +38,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "$HOME/.local/bin/tsm --agent-state done"
+            "command": "$HOME/.local/bin/tsm agent-state done"
           }
         ]
       }
@@ -48,7 +48,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "$HOME/.local/bin/tsm --agent-state clear"
+            "command": "$HOME/.local/bin/tsm agent-state clear"
           }
         ]
       }
