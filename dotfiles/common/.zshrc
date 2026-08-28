@@ -142,7 +142,7 @@ alias l="lsd -lah"
 alias cal="cal -3"
 alias ai="claude"
 alias rg="rg --hidden"
-alias s="tsm git --hide-brief --no-fetch --start-default --use-default-name"
+alias s="tsm git"
 
 # TODO: get rid of this and put everything in ~/.local/bin/
 # zshrc Extensions
