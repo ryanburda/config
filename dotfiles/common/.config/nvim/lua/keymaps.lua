@@ -656,16 +656,6 @@ vim.keymap.set(
 )
 
 ------------------------------------------------------------------------------------------------------------------------
--- Database
-------------------------------------------------------------------------------------------------------------------------
---vim.keymap.set(
---  'n',
---  '<leader>sc',
---  ':SqlsSwitchConnection<cr>',
---  {desc = 'Database: Switch connection'}
---)
-
-------------------------------------------------------------------------------------------------------------------------
 -- Find
 ------------------------------------------------------------------------------------------------------------------------
 vim.keymap.set(
@@ -705,26 +695,26 @@ vim.keymap.set(
 
 vim.keymap.set(
   'n',
-  '<leader>sg',
+  '<leader>ng',
   function()
     require('fzf-lua').live_grep({
-      cwd="~/code/snippets/base",
-      prompt="Grep Snippets",
+      cwd="~/Documents/notes/",
+      prompt="Grep Obsidian: ",
     })
   end,
-  { desc = 'Grep snippets folder' }
+  { desc = 'Grep Obsidian' }
 )
 
 vim.keymap.set(
   'n',
-  '<leader>sf',
+  '<leader>nf',
   function()
     require('fzf-lua').files({
-      cwd="~/code/snippets/base",
-      prompt="Find Snippets",
+      cwd="~/Documents/notes/",
+      prompt="Obsidian notes: ",
     })
   end,
-  { desc = 'Find snippets' }
+  { desc = 'Find notes in Obsidian' }
 )
 
 vim.keymap.set(
