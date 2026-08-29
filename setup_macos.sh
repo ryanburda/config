@@ -43,6 +43,7 @@ fi
 
 brew install \
     1password-cli \
+    alacritty \
     automake \
     bat \
     bottom \
