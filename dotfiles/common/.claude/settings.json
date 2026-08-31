@@ -2,58 +2,6 @@
   "env": {
     "DISABLE_AUTOUPDATER": "1"
   },
-  "hooks": {
-    "SessionStart": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$HOME/.local/bin/tsm agent-state idle"
-          }
-        ]
-      }
-    ],
-    "UserPromptSubmit": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$HOME/.local/bin/tsm agent-state working"
-          }
-        ]
-      }
-    ],
-    "Notification": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$HOME/.local/bin/tsm agent-state notification"
-          }
-        ]
-      }
-    ],
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$HOME/.local/bin/tsm agent-state done"
-          }
-        ]
-      }
-    ],
-    "SessionEnd": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$HOME/.local/bin/tsm agent-state clear"
-          }
-        ]
-      }
-    ]
-  },
   "tui": "fullscreen",
   "theme": "dark"
 }
