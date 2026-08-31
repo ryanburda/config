@@ -82,6 +82,10 @@ lock_keys = false
 media = false
 
 [shell]
+# Register Noctalia as the session's polkit authentication agent. Without one,
+# any polkit action that needs auth_self/auth_admin -- fprintd enrollment, for
+# instance -- fails outright with "Not Authorized" instead of prompting.
+polkit_agent = true
 screen_time_enabled = true
 
     [shell.animation]

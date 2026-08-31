@@ -1,0 +1,22 @@
+#%PAM-1.0
+
+# Fingerprint auth for sudo (Goodix 27c6:609c, the Framework 13 power button).
+#
+# This is the stock sudo(1) PAM stack with pam_fprintd.so added on top. Because
+# it is `sufficient`, a successful touch short-circuits the rest of the auth
+# stack and a failed/absent one falls through to the password prompt -- so this
+# file is still safe on a machine with no reader or no enrolled finger.
+#
+# It must stay in sync with the sudo package's own /etc/pam.d/sudo. Since the
+# file is package-owned, an upgrade that changes it writes /etc/pam.d/sudo.pacnew
+# instead of overwriting; diff that against this copy when one shows up.
+#
+# Enrolling is a manual, per-machine step -- prints live in /var/lib/fprint and
+# cannot be checked in:
+#     fprintd-enroll -f right-index-finger
+#     fprintd-verify
+auth		sufficient	pam_fprintd.so
+auth		include		system-auth
+account		include		system-auth
+session		include		system-auth
+session		optional	pam_systemd.so class=none

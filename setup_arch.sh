@@ -4,7 +4,7 @@
 #
 # This script:
 #   - Symlinks dotfiles to ~ using stow (common + arch)
-#   - Copies root config files (bluetooth, pacman, vconsole)
+#   - Copies root config files (bluetooth, pacman, vconsole, greetd, pam)
 #   - Installs yay (AUR helper)
 #   - Installs packages via pacman/yay
 #   - Sets zsh as the default shell
@@ -209,6 +209,22 @@ if ls /boot/loader/entries/*.conf >/dev/null 2>&1; then
     sudo sed -i -e '/^options/{/ quiet /!s| root=| quiet loglevel=3 rd.udev.log_level=3 vt.global_cursor_default=0 root=|}' \
         /boot/loader/entries/*.conf
 fi
+
+# Fingerprint reader (Framework 13 -- Goodix 27c6:609c, which is the power
+# button). Supported by stock libfprint's goodixmoc driver, so no AUR driver is
+# needed. fprintd itself is D-Bus activated; there is no service to enable.
+#
+# The pam.d/sudo copy adds `auth sufficient pam_fprintd.so` above the stock
+# stack, so a touch authenticates sudo and anything else falls through to the
+# password prompt. Copied only after fprintd is installed, so the module the
+# file references actually exists.
+#
+# Enrollment cannot be scripted from the repo -- prints live in /var/lib/fprint.
+# Run this once per machine, per finger:
+#     fprintd-enroll -f right-index-finger && fprintd-verify
+sudo pacman -S --needed --noconfirm \
+    fprintd
+sudo cp $REPO_ROOT/dotfiles/arch_root/etc/pam.d/sudo /etc/pam.d/sudo
 
 # Gaming / Graphics (install providers before steam/lutris)
 sudo pacman -S --needed --noconfirm \
