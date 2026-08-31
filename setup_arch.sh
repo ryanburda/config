@@ -270,6 +270,9 @@ if ! systemctl --user daemon-reload || ! systemctl --user enable --now kanata; t
     echo "WARNING: kanata is enabled but could not start yet -- it needs the 'input' group, which applies after you log in again." >&2
 fi
 
+# Tmux agent radar
+git clone https://github.com/vieitesss/agent-radar.git ~/.git/vieitesss/agent-radar
+
 # Change default shell to zsh
 sudo chsh -s /bin/zsh $USER
 
