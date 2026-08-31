@@ -113,6 +113,7 @@ sudo pacman -S --needed --noconfirm \
     lsd \
     lua \
     man-db \
+    man-pages \
     neovim \
     nodejs \
     npm \
