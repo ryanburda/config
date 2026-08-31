@@ -138,6 +138,9 @@ brew install --cask \
     spotify \
     wezterm@nightly
 
+# Tmux agent radar
+git clone https://github.com/vieitesss/agent-radar.git ~/.git/vieitesss/agent-radar
+
 # Symlink config files
 stow -d "$REPO_ROOT/dotfiles" -t ~ common macos
 
