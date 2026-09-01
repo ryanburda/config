@@ -142,6 +142,7 @@ alias l="lsd -lah"
 alias cal="cal -3"
 alias ai="claude"
 alias rg="rg --hidden"
+alias s="tsm bookmark-list -f"
 alias f="tsm git"
 
 # TODO: get rid of this and put everything in ~/.local/bin/
