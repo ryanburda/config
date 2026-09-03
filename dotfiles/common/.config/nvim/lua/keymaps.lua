@@ -868,15 +868,6 @@ vim.keymap.set(
   {desc = 'Execute: Execute visual select in lua'}
 )
 
--- vim.keymap.set(
---   'n',
---   '<leader>;',
---   function()
---     vim.cmd('source %')
---   end,
---   {desc = "Execute: Source current file" }
--- )
-
 vim.keymap.set(
   'n',
   "-",
@@ -900,7 +891,7 @@ vim.keymap.set(
 ---------------
 -- Buf-marks --
 ---------------
--- `s;` - Jump to alternate buffer
+-- `<leader>;` - Jump to alternate buffer
 -- `s<space>` - List all buf-marks
 -- `s,` - Previous buf-mark
 -- `s.` - Next buf-mark
@@ -912,59 +903,67 @@ vim.keymap.set(
 -- `S{char}` - Remove buf-mark
 
 local buf_mark = require('buf-mark')
-local reserved = {}
 
-reserved[';'] = true
-vim.keymap.set('n', 's;', ':b#<cr>', { desc = 'Alternate buffer' })
+vim.keymap.set(
+  'n',
+  '<leader> ',
+  function()
+    local char = vim.fn.getcharstr()
+    buf_mark.goto(char)
+  end,
+  { desc = 'Goto buf-mark' }
+)
 
-reserved[' '] = true
-vim.keymap.set('n', 's ', require('buf-mark.fzf_lua').list, { desc = 'List buf-marks' })
--- vim.keymap.set('n', 's ', require('buf-mark.telescope').list, { desc = 'List buf-marks' })
--- vim.keymap.set('n', 's ', buf_mark.list_pretty, { desc = 'List buf-marks' })
+vim.keymap.set(
+  'n',
+  '<leader>m',
+  function()
+    local char = vim.fn.getcharstr()
+    buf_mark.set(char)
+  end,
+  { desc = 'Set buf-mark' }
+)
 
-reserved[','] = true
-vim.keymap.set('n', 's,', require('buf-mark.status').prev, { desc = 'Previous open buf-mark' })
--- vim.keymap.set('n', 's,', buf_mark.prev, { desc = 'Previous buf-mark' })
+vim.keymap.set(
+  'n',
+  '<leader>M',
+  function()
+    local char = vim.fn.getcharstr()
+    buf_mark.delete(char)
+  end, { desc = 'Remove buf-mark' }
+)
 
-reserved['.'] = true
-vim.keymap.set('n', 's.', require('buf-mark.status').next, { desc = 'Next open buf-mark' })
--- vim.keymap.set('n', 's.', buf_mark.next, { desc = 'Next buf-mark' })
+vim.keymap.set(
+  'n',
+  '<leader>;',
+  ':b#<cr>',
+  { desc = 'Alternate buffer' }
+)
 
-reserved['/'] = true
-vim.keymap.set('n', 's/', require('buf-mark.fzf_lua').load_worktree, { desc = 'Load buf-marks of another git worktree' })
--- vim.keymap.set('n', 's/', require('buf-mark.telescope').load_worktree, { desc = 'Load buf-marks of another git worktree' })
+vim.keymap.set(
+  'n',
+  '<leader>b',
+  require('buf-mark.fzf_lua').list,
+  { desc = 'List buf-marks' }
+)
 
-reserved["'"] = true
-vim.keymap.set('n', "s'", require('buf-mark.fzf_lua').load_project, { desc = 'Load buf-marks of another project' })
--- vim.keymap.set('n', "s'", require('buf-mark.telescope').load_project, { desc = 'Load buf-marks of another project' })
+vim.keymap.set(
+  'n',
+  '<leader>,',
+  require('buf-mark.status').prev,
+  { desc = 'Previous open buf-mark' }
+)
 
-reserved['"'] = true
-vim.keymap.set('n', 's"', require('buf-mark.fzf_lua').unload_project, { desc = 'Unload buf-marks of another project' })
--- vim.keymap.set('n', 's"', require('buf-mark.telescope').unload_project, { desc = 'Unload buf-marks of another project' })
+vim.keymap.set(
+  'n',
+  '<leader>.',
+  require('buf-mark.status').next,
+  { desc = 'Next open buf-mark' }
+)
 
-vim.keymap.set('n', '<leader>s', function()
-  local char = vim.fn.getcharstr()
-  if reserved[char] then
-    vim.api.nvim_echo({ { 'buf-mark: ' .. char .. ' is reserved', 'WarningMsg' } }, true, {})
-    return
-  end
-  buf_mark.set(char)
-end, { desc = 'Set buf-mark' })
-
-vim.keymap.set('n', 'S', function()
-  local char = vim.fn.getcharstr()
-  if reserved[char] then
-    vim.api.nvim_echo({ { 'buf-mark: ' .. char .. ' is reserved', 'WarningMsg' } }, true, {})
-    return
-  end
-  buf_mark.delete(char)
-end, { desc = 'Remove buf-mark' })
-
-vim.keymap.set('n', 's', function()
-  local char = vim.fn.getcharstr()
-  if reserved[char] then
-    vim.api.nvim_feedkeys('s' .. char, 'm', false)
-    return
-  end
-  buf_mark.goto(char)
-end, { desc = 'Goto buf-mark' })
+vim.keymap.set(
+  'n',
+  '<leader>w',
+  require('buf-mark.fzf_lua').load_worktree,
+  { desc = 'Load buf-marks of another git worktree' }
+)
