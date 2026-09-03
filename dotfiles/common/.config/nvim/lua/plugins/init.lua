@@ -528,4 +528,6 @@ return {
     end
   },
 
+  'justinmk/vim-sneak',
+
 }

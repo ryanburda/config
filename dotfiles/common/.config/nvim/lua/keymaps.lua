@@ -142,6 +142,12 @@ vim.keymap.set(
 )
 
 ------------------------------------------------------------------------------------------------------------------------
+-- Sneak
+------------------------------------------------------------------------------------------------------------------------
+vim.keymap.set({'n', 'x', 'o'}, 's', '<Plug>Sneak_s', {desc = 'Sneak: search forward'})
+vim.keymap.set({'n', 'x', 'o'}, 'S', '<Plug>Sneak_S', {desc = 'Sneak: search backward'})
+
+------------------------------------------------------------------------------------------------------------------------
 -- Clipboard
 ------------------------------------------------------------------------------------------------------------------------
 vim.keymap.set(
@@ -892,15 +898,13 @@ vim.keymap.set(
 -- Buf-marks --
 ---------------
 -- `<leader>;` - Jump to alternate buffer
--- `s<space>` - List all buf-marks
--- `s,` - Previous buf-mark
--- `s.` - Next buf-mark
--- `s/` - Load buf-marks from another worktree
--- `s'` - Load buf-marks from another project
--- `s"` - Unload buf-marks from another project
--- `<leader>s{char}` - Set buf-mark
--- `s{char}` - Goto buf-mark
--- `S{char}` - Remove buf-mark
+-- `<leader> {char}` - Goto buf-mark
+-- `<leader>m{char}` - Set buf-mark
+-- `<leader>M{char}` - Remove buf-mark
+-- `<leader>b` - List buf-marks
+-- `<leader>,` - Previous buf-mark
+-- `<leader>.` - Next buf-mark
+-- `<leader>w` - Load buf-marks from another worktree
 
 local buf_mark = require('buf-mark')
 
