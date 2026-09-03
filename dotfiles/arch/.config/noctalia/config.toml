@@ -11,14 +11,14 @@
 # the value here. Edit this file by hand instead.
 
 [bar.default]
-background_opacity = 0.5
+background_opacity = 0.95
 center = [ "launcher", "taskbar" ]
 concave_edge_corners = false
 end = [ "battery", "date" ]
 margin_edge = 0
 margin_ends = 0
 padding = 16
-position = "bottom"
+position = "top"
 radius = 0
 shadow = false
 start = [ "control-center" ]
@@ -119,6 +119,9 @@ transition_on_startup = true
 [weather]
 refresh_minutes = 20
 unit = "imperial"
+
+[widget.control-center]
+glyph = "triangle"
 
 [widget.battery]
 show_label = false
