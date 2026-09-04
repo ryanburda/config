@@ -37,8 +37,8 @@ config.tab_bar_at_bottom = false
 config.use_fancy_tab_bar = false
 config.tab_and_split_indices_are_zero_based = false
 config.window_close_confirmation = 'NeverPrompt'
-config.initial_rows = 60
-config.initial_cols = 180
+config.initial_rows = 40
+config.initial_cols = 120
 config.window_padding = { left = 0, right = 0, top = 20, bottom = 0 }
 config.warn_about_missing_glyphs = false
 
