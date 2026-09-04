@@ -416,12 +416,14 @@ return {
       completion = {
         menu = {
           border = "rounded",
+          max_height = 8,
         },
         documentation = {
           auto_show = true,
           auto_show_delay_ms = 0,
           window = {
             border = "rounded",
+            max_height = 8,
           },
         },
       },
@@ -448,6 +450,81 @@ return {
         },
       },
     },
+    config = function(_, opts)
+      require('blink.cmp').setup(opts)
+
+      -- Pin the completion menu to the bottom left of the editor, with the
+      -- documentation window directly to its right, instead of letting either
+      -- follow the cursor and cover the code being edited.
+      --
+      -- blink.cmp exposes no options for this, so both `update_position`
+      -- functions are replaced. Every caller looks them up on the module table
+      -- at call time, so overriding here covers all of them. Cmdline
+      -- completion keeps the default (cursor anchored) behavior.
+      --
+      -- Note that a float's `row`/`col` address its outer corner: the border is
+      -- drawn inside them, and `get_height()`/`get_width()` count it.
+      local menu = require('blink.cmp.completion.windows.menu')
+      local docs = require('blink.cmp.completion.windows.documentation')
+      local default_menu_position = menu.update_position
+      local default_docs_position = docs.update_position
+
+      -- one past the last screen row a float may use, i.e. the top of the
+      -- statusline / cmdline
+      local function floor()
+        return vim.o.lines - vim.o.cmdheight - (vim.o.laststatus > 0 and 1 or 0)
+      end
+
+      menu.update_position = function()
+        if vim.api.nvim_get_mode().mode == 'c' then return default_menu_position() end
+
+        local win = menu.win
+        if not win:is_open() then return end
+
+        -- size from the content alone, not from the space around the cursor
+        win:update_size()
+
+        local row = math.max(floor() - win:get_height(), 0)
+
+        -- editing near the bottom of the screen would leave the cursor behind
+        -- the menu, which is the thing this is meant to avoid, so flip to the
+        -- top. screenpos() reports 0 when it cannot resolve the position, so
+        -- fall back to the window's own origin.
+        local cursor = vim.fn.screenpos(0, vim.fn.line('.'), vim.fn.col('.')).row
+        if cursor == 0 then cursor = vim.fn.win_screenpos(0)[1] + vim.fn.winline() - 1 end
+        if cursor - 1 >= row then row = 0 end
+
+        win:set_win_config({ relative = 'editor', row = row, col = 0 })
+
+        -- repositions the documentation window against the menu
+        menu.position_update_emitter:emit()
+      end
+
+      docs.update_position = function()
+        if vim.api.nvim_get_mode().mode == 'c' then return default_docs_position() end
+
+        local win = docs.win
+        if not win:is_open() or not menu.win:is_open() then return end
+
+        win:update_size()
+
+        local menu_config = vim.api.nvim_win_get_config(menu.win:get_win())
+        local border = win:get_border_size()
+        local col = menu_config.col + menu.win:get_width()
+
+        -- rather than render a sliver, give up if the menu leaves no room
+        local width_left = vim.o.columns - col
+        if width_left <= border.horizontal + 1 then return win:close() end
+        if win:get_width() > width_left then win:set_width(width_left - border.horizontal) end
+        if win:get_height() > floor() then win:set_height(floor() - border.vertical) end
+
+        -- share the menu's bottom edge, or its top edge when the menu flipped up
+        local row = menu_config.row == 0 and 0
+          or math.max(menu_config.row + menu.win:get_height() - win:get_height(), 0)
+
+        win:set_win_config({ relative = 'editor', row = row, col = col })
+      end
+    end,
   },
 
   -- Debug
