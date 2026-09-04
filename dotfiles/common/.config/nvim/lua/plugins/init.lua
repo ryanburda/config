@@ -469,11 +469,19 @@ return {
       local default_menu_position = menu.update_position
       local default_docs_position = docs.update_position
 
+      -- both windows are held at this height no matter how much they hold, so
+      -- they never resize under you as results come in. `max_height` is only
+      -- still read by the cmdline path below, which keeps blink's own sizing.
+      local HEIGHT = opts.completion.menu.max_height
+
       -- one past the last screen row a float may use, i.e. the top of the
       -- statusline / cmdline
       local function floor()
         return vim.o.lines - vim.o.cmdheight - (vim.o.laststatus > 0 and 1 or 0)
       end
+
+      -- the menu takes the left half of the screen, the docs window the right
+      local function menu_box_width() return math.floor(vim.o.columns / 2) end
 
       menu.update_position = function()
         if vim.api.nvim_get_mode().mode == 'c' then return default_menu_position() end
@@ -481,8 +489,11 @@ return {
         local win = menu.win
         if not win:is_open() then return end
 
-        -- size from the content alone, not from the space around the cursor
-        win:update_size()
+        -- fixed size, rather than blink's fit-to-content and fit-to-the-space-
+        -- around-the-cursor sizing
+        local border = win:get_border_size()
+        win:set_width(math.max(menu_box_width() - border.horizontal, 1))
+        win:set_height(HEIGHT)
 
         local row = math.max(floor() - win:get_height(), 0)
 
@@ -506,8 +517,6 @@ return {
         local win = docs.win
         if not win:is_open() or not menu.win:is_open() then return end
 
-        win:update_size()
-
         local menu_config = vim.api.nvim_win_get_config(menu.win:get_win())
         local border = win:get_border_size()
         local col = menu_config.col + menu.win:get_width()
@@ -515,8 +524,9 @@ return {
         -- rather than render a sliver, give up if the menu leaves no room
         local width_left = vim.o.columns - col
         if width_left <= border.horizontal + 1 then return win:close() end
-        if win:get_width() > width_left then win:set_width(width_left - border.horizontal) end
-        if win:get_height() > floor() then win:set_height(floor() - border.vertical) end
+
+        win:set_width(width_left - border.horizontal)
+        win:set_height(HEIGHT)
 
         -- share the menu's bottom edge, or its top edge when the menu flipped up
         local row = menu_config.row == 0 and 0
