@@ -121,7 +121,7 @@ refresh_minutes = 20
 unit = "imperial"
 
 [widget.control-center]
-glyph = "triangle"
+glyph = "ease-in-out"
 
 [widget.battery]
 show_label = false
