@@ -159,6 +159,8 @@ done
 
 export PATH="$PATH:/opt/homebrew/share/google-cloud-sdk/bin"
 
+eval "$(zoxide init zsh)"
+
 # Uncomment to profile zsh startup.
 # NOTE: must also uncomment first line.
 # zprof
