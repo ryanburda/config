@@ -143,10 +143,10 @@ alias cal="cal -3"
 alias ai="claude"
 alias rg="rg --hidden"
 alias s="tsm active"
-alias d="tsm dir"
-alias f="tsm git"
-alias G="tsm git -bf"
-alias b="tsm bookmark-list -f"
+alias d="tsm create-or-switch dir"
+alias f="tsm create-or-switch git"
+alias G="tsm create-or-switch git-brief"
+alias b="tsm create-or-switch bookmark"
 
 # TODO: get rid of this and put everything in ~/.local/bin/
 # zshrc Extensions
