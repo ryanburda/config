@@ -898,7 +898,7 @@ vim.keymap.set(
 -- Buf-marks --
 ---------------
 -- `<leader>;` - Jump to alternate buffer
--- `<leader> {char}` - Goto buf-mark
+-- `<leader>'{char}` - Goto buf-mark
 -- `<leader>m{char}` - Set buf-mark
 -- `<leader>M{char}` - Remove buf-mark
 -- `<leader>b` - List buf-marks
@@ -910,7 +910,7 @@ local buf_mark = require('buf-mark')
 
 vim.keymap.set(
   'n',
-  '<leader> ',
+  "<leader>'",
   function()
     local char = vim.fn.getcharstr()
     buf_mark.goto(char)
