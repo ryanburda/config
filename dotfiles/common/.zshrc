@@ -138,15 +138,15 @@ fi
 eval "$(direnv hook zsh)"
 
 # Alias
-alias l="lsd -lah"
-alias cal="cal -3"
-alias ai="claude"
-alias rg="rg --hidden"
-alias s="tsm active"
-alias d="tsm at $(fzf-dir)"
-alias f="tsm at $(fzf-git)"
-alias G="tsm at $(fzf-git-brief)"
-alias b="tsm at $(dir-mark pick)"
+alias l='lsd -lah'
+alias cal='cal -3'
+alias ai='claude'
+alias rg='rg --hidden'
+alias s='tsm active'
+alias d='tsm at $(fzf-dir)'
+alias f='tsm at $(fzf-git)'
+alias G='tsm at $(fzf-git-brief)'
+alias b='tsm at $(dir-mark pick)'
 
 # TODO: get rid of this and put everything in ~/.local/bin/
 # zshrc Extensions
