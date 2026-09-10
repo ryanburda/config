@@ -117,6 +117,7 @@ sudo pacman -S --needed --noconfirm \
     neovim \
     nodejs \
     npm \
+    nushell \
     postgresql-libs \
     ripgrep \
     tldr \
