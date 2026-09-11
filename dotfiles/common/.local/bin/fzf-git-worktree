@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 #
-# A reference `tsm at $(<cmd>)` command
+# A reference `dirsesh at $(<cmd>)` command
 #
 # Add to your path and modify as needed to use:
 # ```
-# cp "<tsm-repo-root>/examples/fzf-worktree" ~/.local/bin/fzf-worktree
-# tsm at "$(fzf-worktree)"
+# cp "<dirsesh-repo-root>/examples/fzf-worktree" ~/.local/bin/fzf-worktree
+# dirsesh at "$(fzf-worktree)"
 # ```
 #
 # fzf-worktree:

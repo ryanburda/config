@@ -9,8 +9,8 @@
 #
 #   bind-key K popup -h 35% -w 40% -E "tmux_kill_session_picker"
 #
-# A session built by a tsm configuration runs that configuration's `kill` on
-# the way out, by way of the session-closed hook `tsm init` installs.
+# A session built by a dirsesh configuration runs that configuration's `kill` on
+# the way out, by way of the session-closed hook `dirsesh init` installs.
 
 notify() {
   # Show a message: tmux display-message inside tmux, stderr otherwise.

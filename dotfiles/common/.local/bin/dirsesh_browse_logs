@@ -1,20 +1,20 @@
 #!/bin/bash
-# Browse the logs a tsm configuration wrote, choosing one with fzf.
+# Browse the logs a dirsesh configuration wrote, choosing one with fzf.
 #
-# Usage: tsm_browse_logs [session]
+# Usage: dirsesh_browse_logs [session]
 #
 #   session  Browse only this session's logs instead of every session's.
 #
 # Meant to be run from a tmux window or popup:
 #
-#   bind-key L run-shell "tmux_toggle_window tsm-logs tsm_browse_logs"
+#   bind-key L run-shell "tmux_toggle_window dirsesh-logs dirsesh_browse_logs"
 #
-# tsm writes a configuration's `start` and `kill` output to
-# $XDG_STATE_HOME/tsm/logs/<session>/tsm.log, and a configuration may write
+# dirsesh writes a configuration's `start` and `kill` output to
+# $XDG_STATE_HOME/dirsesh/logs/<session>/dirsesh.log, and a configuration may write
 # more files of its own beside it. They are ordinary files, so this picks one
 # and tails it; `tail` or an editor does just as well.
 
-LOG_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/tsm/logs"
+LOG_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/dirsesh/logs"
 
 notify() {
   # Show a message: tmux display-message inside tmux, stderr otherwise.

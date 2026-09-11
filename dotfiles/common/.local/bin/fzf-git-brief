@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 #
-# A reference `tsm at $(<cmd>)` command
+# A reference `dirsesh at $(<cmd>)` command
 #
 # Add to your path and modify as needed to use:
 # ```
-# cp "<tsm-repo-root>/examples/fzf-git-brief" ~/.local/bin/fzf-git-brief
-# tsm at "$(fzf-git-brief)"
+# cp "<dirsesh-repo-root>/examples/fzf-git-brief" ~/.local/bin/fzf-git-brief
+# dirsesh at "$(fzf-git-brief)"
 # ```
 #
 # fzf-git-brief:
