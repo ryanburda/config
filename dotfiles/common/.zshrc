@@ -146,7 +146,7 @@ alias s='tmux_active_session_picker'
 alias d='dirsesh at $(fzf-dir)'
 alias f='dirsesh at $(fzf-git)'
 alias G='dirsesh at $(fzf-git-brief)'
-alias b='dirsesh at $(dir-mark pick)'
+alias b='dirsesh at $(markdir pick)'
 
 # TODO: get rid of this and put everything in ~/.local/bin/
 # zshrc Extensions
