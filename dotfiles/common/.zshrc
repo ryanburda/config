@@ -34,8 +34,8 @@ zinit ice wait"0" lucid atload"!_zsh_autosuggest_start"; zinit light zsh-users/z
 zinit ice wait"0" lucid; zinit light zsh-users/zsh-syntax-highlighting
 zinit ice wait"0" lucid; zinit light Aloxaf/fzf-tab
 
-# Completions installed by other repos' setup scripts land here (dirsesh, markdir etc).
-# Added before compinit so they're picked up in the normal pass
+# Completions installed by other repos' setup scripts land here.
+# Added before compinit so they're picked up in the normal pass.
 fpath=("${XDG_DATA_HOME:-$HOME/.local/share}/zsh/site-functions" $fpath)
 
 # Load completions
@@ -146,6 +146,7 @@ alias s='dirsesh-extras session-switcher'
 alias d='dirsesh at "$(dirsesh-extras pick-dir)"'
 alias f='dirsesh at "$(dirsesh-extras pick-repo)"'
 alias G='dirsesh at "$(dirsesh-extras pick-repo-brief)"'
+alias b='dirsesh at "$(dirsesh-extras bookmark pick)"'
 
 # TODO: get rid of this and put everything in ~/.local/bin/
 # zshrc Extensions
