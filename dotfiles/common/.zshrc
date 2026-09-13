@@ -142,11 +142,11 @@ alias l='lsd -lah'
 alias cal='cal -3'
 alias ai='claude'
 alias rg='rg --hidden'
-alias s='tmux_active_session_picker'
-alias d='dirsesh at $(fzf-dir)'
-alias f='dirsesh at $(fzf-git)'
-alias G='dirsesh at $(fzf-git-brief)'
-alias b='dirsesh at $(markdir pick)'
+alias s='dirsesh-extras session-switcher'
+alias d='dirsesh at "$(dirsesh-extras pick-dir)"'
+alias f='dirsesh at "$(dirsesh-extras pick-dir)"'
+alias G='dirsesh at "$(dirsesh-extras pick-dir)"'
+alias b='dirsesh at "$(dirsesh-extras pick-dir)"'
 
 # TODO: get rid of this and put everything in ~/.local/bin/
 # zshrc Extensions
