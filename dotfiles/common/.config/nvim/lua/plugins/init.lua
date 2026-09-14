@@ -30,6 +30,35 @@ return {
     dir = "~/code/nvim-tmux-wm/base",
   },
 
+  -- Status line
+  {
+    'nvim-lualine/lualine.nvim',
+    config = function()
+      require('lualine').setup({
+        options = {
+          component_separators = '',
+          section_separators = '',
+          globalstatus = true,
+        },
+        sections = {
+          lualine_a = {},
+          lualine_b = {'filename'},
+          lualine_c = {require('buf-mark.status').get},
+          lualine_x = {'diagnostics'},
+          lualine_y = {
+            {
+              'tabs',
+              mode = 0,
+              show_modified_status = false,
+              cond = function() return vim.fn.tabpagenr('$') > 1 end,
+            },
+          },
+          lualine_z = {},
+        },
+      })
+    end,
+  },
+
   -- Color Schemes
   'sainnhe/everforest',
   'sainnhe/gruvbox-material',
