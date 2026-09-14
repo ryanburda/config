@@ -145,7 +145,7 @@ alias rg='rg --hidden'
 alias s='dirsesh session-switch'
 alias d='dirsesh at "$(dirsesh pick-dir)"'
 alias f='dirsesh at "$(dirsesh pick-repo)"'
-alias F='dirsesh at "$(dirsesh pick-repo-brief)"'
+alias F='dirsesh at "$(dirsesh pick-repo -brief -fetch -filter)"'
 alias b='dirsesh at "$(dirsesh bookmark-pick)"'
 
 # TODO: get rid of this and put everything in ~/.local/bin/
