@@ -4,14 +4,9 @@
 # NOTE: must also uncomment last line.
 # zmodload zsh/zprof
 
-PROMPT="%B%F{cyan%}$(whoami) %B%F{green}%~"$'\n%B%F{yellow}%D{%H:%M:%S} '"%B%F{cyan}> %b"
+PROMPT="%B%F{green}%K{black} %~ %k%f"$''"%F{blue}%K{black}%(!.\$.>) %k%f %b"
 
 export XDG_CONFIG_HOME=$HOME/.config
-
-if [[ -f "/opt/homebrew/bin/brew" ]] then
-  # If you're using macOS, you'll want this enabled
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
 
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
