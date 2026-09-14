@@ -21,9 +21,10 @@ function Winbar()
   --  row/column position and file name with modified bit on left, diagnostics and file progress percentage on right
   --  `5:16  init.lua                                                           W:1 E:2  24%`
   return table.concat({
-    '%#LineNr#%', tostring(lnum_width), 'l:%-3c',
-    file_hl, ' %t %m',
-    '%=%#LineNr#', cache.diagnostics[vim.api.nvim_win_get_buf(winid)] or '', ' %3p%% '
+    -- left
+    '%#LineNr#%', tostring(lnum_width), 'l:%-3c', ' %3p%% ',
+    -- right
+    '%=%m %t'
   })
 end
 
