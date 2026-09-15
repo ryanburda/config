@@ -78,6 +78,30 @@ return {
     },
   },
 
+  -- Dark - Kanagawa-paper-ink
+  ["kanagawa-paper-ink-dark"] = {
+    foreground = "#dcd7ba",
+    background = "#1f1f28",
+    cursor_bg = "#dcd7ba",
+    cursor_fg = "#1f1f28",
+    cursor_border = "#dcd7ba",
+    selection_bg = "#363646",
+    selection_fg = "#dcd7ba",
+    split = "#8992a7",
+    ansi = { "#2a2a37", "#c4746e", "#699469", "#c4b28a", "#435965", "#a292a3", "#8ea49e", "#c8c093" },
+    brights = { "#363646", "#cc928e", "#72a072", "#d4c196", "#698a9b", "#b4a7b5", "#96ada7", "#d5cd9d" },
+    tab_bar = {
+      background = "#16161d",
+      active_tab = { bg_color = "#1f1f28", fg_color = "#c5c9c5" },
+      -- Exception: TabLine's own fg (#393836) is invisible on #16161d, so the
+      -- inactive label uses Comment instead.
+      inactive_tab = { bg_color = "#16161d", fg_color = "#727169" },
+      inactive_tab_hover = { bg_color = "#2a2a37", fg_color = "#dcd7ba" },
+      new_tab = { bg_color = "#16161d", fg_color = "#727169" },
+      new_tab_hover = { bg_color = "#2a2a37", fg_color = "#dcd7ba" },
+    },
+  },
+
   -- Dark - Nightfox-dusk
   ["duskfox-dark"] = {
     foreground = "#e0def4",
@@ -141,6 +165,31 @@ return {
       inactive_tab_hover = { bg_color = "#254147", fg_color = "#e6eaea" },
       new_tab = { bg_color = "#1d3337", fg_color = "#cbd9d8" },
       new_tab_hover = { bg_color = "#254147", fg_color = "#e6eaea" },
+    },
+  },
+
+  -- Dark - Nordic
+  ["nordic-dark"] = {
+    foreground = "#c0c8d8",
+    background = "#242933",
+    cursor_bg = "#c0c8d8",
+    cursor_fg = "#191d24",
+    cursor_border = "#c0c8d8",
+    -- Exception: nordic's Visual is #1b1f26, darker than Normal's bg and legible
+    -- only because it also sets bold, which a terminal selection can't do. gray2
+    -- is nordic's next surface up and reads as a selection on its own.
+    selection_bg = "#3b4252",
+    selection_fg = "#c0c8d8",
+    split = "#191d24",
+    ansi = { "#1b1f26", "#bf616a", "#a3be8c", "#ebcb8b", "#5e81ac", "#b48ead", "#8fbcbb", "#c0c8d8" },
+    brights = { "#2e3440", "#c5727a", "#b1c89d", "#efd49f", "#88c0d0", "#be9db8", "#9fc6c5", "#d8dee9" },
+    tab_bar = {
+      background = "#191d24",
+      active_tab = { bg_color = "#242933", fg_color = "#d8dee9" },
+      inactive_tab = { bg_color = "#191d24", fg_color = "#c0c8d8" },
+      inactive_tab_hover = { bg_color = "#2e3440", fg_color = "#c0c8d8" },
+      new_tab = { bg_color = "#191d24", fg_color = "#c0c8d8" },
+      new_tab_hover = { bg_color = "#2e3440", fg_color = "#c0c8d8" },
     },
   },
 
@@ -254,6 +303,30 @@ return {
     },
   },
 
+  -- Light - Kanagawa-paper-canvas
+  ["kanagawa-paper-canvas-light"] = {
+    foreground = "#73787d",
+    background = "#e1e1de",
+    cursor_bg = "#73787d",
+    cursor_fg = "#e1e1de",
+    cursor_border = "#73787d",
+    selection_bg = "#d4cdd4",
+    selection_fg = "#73787d",
+    split = "#9ba1bf",
+    ansi = { "#d1cfc5", "#c27672", "#7b958e", "#a7956a", "#809ba7", "#9e7e98", "#7e8faf", "#aeaea6" },
+    brights = { "#d8d8d2", "#c68582", "#84a098", "#b29f71", "#91b0bd", "#a989a3", "#8a9ab8", "#b6b6ae" },
+    tab_bar = {
+      background = "#cbc8bc",
+      active_tab = { bg_color = "#e1e1de", fg_color = "#73787d" },
+      -- Exception: TabLine's own fg (#8e8a80) barely clears its bg here, so the
+      -- inactive label uses Normal's fg; the bg still separates it from active.
+      inactive_tab = { bg_color = "#cbc8bc", fg_color = "#73787d" },
+      inactive_tab_hover = { bg_color = "#d8d8d2", fg_color = "#73787d" },
+      new_tab = { bg_color = "#cbc8bc", fg_color = "#73787d" },
+      new_tab_hover = { bg_color = "#d8d8d2", fg_color = "#73787d" },
+    },
+  },
+
   -- Light - Nightfox-dawn
   ["dawnfox-light"] = {
     foreground = "#575279",
@@ -317,6 +390,30 @@ return {
       inactive_tab_hover = { bg_color = "#f2e9e1", fg_color = "#464261" },
       new_tab = { bg_color = "#fffaf3", fg_color = "#797593" },
       new_tab_hover = { bg_color = "#f2e9e1", fg_color = "#464261" },
+    },
+  },
+
+
+  -- Light - Zenbones
+  ["zenbones-light"] = {
+    foreground = "#2c363c",
+    background = "#f0edec",
+    cursor_bg = "#2c363c",
+    cursor_fg = "#f0edec",
+    cursor_border = "#2c363c",
+    selection_bg = "#cbd9e3",
+    selection_fg = "#2c363c",
+    split = "#a4968f",
+    ansi = { "#ddd6d3", "#a8334c", "#4f6c31", "#944927", "#286486", "#88507d", "#3b8992", "#2c363c" },
+    brights = { "#cabfb9", "#94253e", "#3f5a22", "#803d1c", "#1d5573", "#7b3b70", "#2b747c", "#4f5e68" },
+    tab_bar = {
+      background = "#e1dcd9",
+      -- TabLineSel clears fg/bg, i.e. falls through to Normal.
+      active_tab = { bg_color = "#f0edec", fg_color = "#2c363c" },
+      inactive_tab = { bg_color = "#d6cdc9", fg_color = "#596a76" },
+      inactive_tab_hover = { bg_color = "#e9e4e2", fg_color = "#2c363c" },
+      new_tab = { bg_color = "#d6cdc9", fg_color = "#596a76" },
+      new_tab_hover = { bg_color = "#e9e4e2", fg_color = "#2c363c" },
     },
   },
 

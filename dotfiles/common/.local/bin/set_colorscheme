@@ -27,17 +27,21 @@ typeset -A themes=(
     ['Dark - Catppuccin']="catppuccin,dark"
     ['Dark - Everforest']="everforest,dark"
     ['Dark - Gruvbox']="gruvbox-material,dark"
+    ['Dark - Kanagawa-paper-ink']="kanagawa-paper-ink,dark"
     ['Dark - Nightfox-dusk']="duskfox,dark"
     ['Dark - Nightfox-night']="nightfox,dark"
     ['Dark - Nightfox-tera']="terafox,dark"
+    ['Dark - Nordic']="nordic,dark"
     ['Dark - Rose-pine']="rose-pine-moon,dark"
     ['Dark - Vague']="vague,dark"
     ['Light - Catppuccin']="catppuccin,light"
     ['Light - Everforest']="everforest,light"
     ['Light - Gruvbox']="gruvbox-material,light"
+    ['Light - Kanagawa-paper-canvas']="kanagawa-paper-canvas,light"
     ['Light - Nightfox-dawn']="dawnfox,light"
     ['Light - Nightfox-day']="dayfox,light"
     ['Light - Rose-pine']="rose-pine-dawn,light"
+    ['Light - Zenbones']="zenbones,light"
 )
 
 set_theme(){

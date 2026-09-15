@@ -66,6 +66,9 @@ return {
   'rose-pine/neovim',
   'vague2k/vague.nvim',
   'catppuccin/nvim',
+  'AlexvZyl/nordic.nvim',
+  { 'zenbones-theme/zenbones.nvim', dependencies = { 'rktjmp/lush.nvim' } },
+  'thesimonho/kanagawa-paper.nvim',
 
   -- Treesitter
   {
