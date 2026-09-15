@@ -44,8 +44,8 @@ return {
     selection_bg = "#585b70",
     selection_fg = "#cdd6f4",
     split = "#6c7086",
-    ansi = { "#45475a", "#f38ba8", "#a6e3a1", "#f9e2af", "#89b4fa", "#f5c2e7", "#94e2d5", "#bac2de" },
-    brights = { "#585b70", "#f38ba8", "#a6e3a1", "#f9e2af", "#89b4fa", "#f5c2e7", "#94e2d5", "#a6adc8" },
+    ansi = { "#181825", "#f38ba8", "#a6e3a1", "#f9e2af", "#89b4fa", "#f5c2e7", "#94e2d5", "#bac2de" },
+    brights = { "#2a2b3c", "#f38ba8", "#a6e3a1", "#f9e2af", "#89b4fa", "#f5c2e7", "#94e2d5", "#a6adc8" },
     tab_bar = {
       background = "#11111b",
       active_tab = { bg_color = "#45475a", fg_color = "#cdd6f4" },
@@ -89,7 +89,7 @@ return {
     selection_fg = "#d3c6aa",
     split = "#4f585e",
     ansi = { "#475258", "#e67e80", "#a7c080", "#dbbc7f", "#7fbbb3", "#d699b6", "#83c092", "#d3c6aa" },
-    brights = { "#859289", "#ea9597", "#b7cb97", "#e1c896", "#96c7c1", "#ddabc3", "#99cba6", "#dacfb7" },
+    brights = { "#343f44", "#ea9597", "#b7cb97", "#e1c896", "#96c7c1", "#ddabc3", "#99cba6", "#dacfb7" },
     tab_bar = {
       background = "#343f44",
       active_tab = { bg_color = "#a7c080", fg_color = "#2d353b" },
@@ -110,8 +110,8 @@ return {
     selection_bg = "#45403d",
     selection_fg = "#d4be98",
     split = "#5a524c",
-    ansi = { "#5a524c", "#ea6962", "#a9b665", "#d8a657", "#7daea3", "#d3869b", "#89b482", "#d4be98" },
-    brights = { "#928374", "#ee847e", "#b8c381", "#dfb675", "#94bdb4", "#db9cad", "#9ec298", "#dac8a7" },
+    ansi = { "#32302f", "#ea6962", "#a9b665", "#d8a657", "#7daea3", "#d3869b", "#89b482", "#d4be98" },
+    brights = { "#5a524c", "#ee847e", "#b8c381", "#dfb675", "#94bdb4", "#db9cad", "#9ec298", "#dac8a7" },
     tab_bar = {
       background = "#32302f",
       active_tab = { bg_color = "#a89984", fg_color = "#282828" },

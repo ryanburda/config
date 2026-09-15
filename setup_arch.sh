@@ -108,6 +108,7 @@ sudo pacman -S --needed --noconfirm \
     git-delta \
     github-cli \
     go \
+    hyprpicker \
     jq \
     less \
     lsd \
