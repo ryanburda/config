@@ -1,34 +1,54 @@
-user: 243
-group: 243
+# Only the 16 ANSI slots (0-15) and `reset` are used here, so lsd follows the terminal's theme.
+# `reset` is the terminal's default foreground, i.e. that same theme's `foreground` key.
+#
+# Slots 0, 7, 8 and 15 are deliberately unused. In every palette in
+# colorschemes.lua they are surface colors rather than text colors and never
+# clear 1.7:1 against their own background -- usually 1.1:1, which is invisible.
+# That rules out the usual "dim gray" trick (slot 8), so every role that was a
+# gray here before is now `reset` and reads as plain foreground text.
+#
+# A parse error or an unknown key makes lsd fall back to its built-in 256-color
+# theme silently, with no message -- so check with:
+#   lsd -l --color=always | grep -oE $'\e\\[38;5;[0-9]+m' | sort -u
+# Anything outside 0-15 means this file stopped being read.
+
+user: reset
+group: reset
+
 permission:
-  read: 73
-  write: 73
-  exec: 73
-  exec-sticky: 244
-  no-access: 244
-  octal: 244
-  acl: 244
-  context: 244 
+  read: 6
+  write: 6
+  exec: 6
+  exec-sticky: 5
+  no-access: reset
+  octal: 6
+  acl: 5
+  context: 5
+
 date:
-  hour-old: 70
-  day-old: 71
-  older: 65
+  day-old: 10
+  older: 2
+
 size:
-  none: 245
-  small: 208
-  medium: 130
-  large: 124
+  none: reset
+  small: 11
+  medium: 3
+  large: 1
+
 inode:
   valid: 13
-  invalid: 245
+  invalid: reset
+
 links:
   valid: 13
-  invalid: 245
-tree-edge: 245
+  invalid: reset
+
+tree-edge: reset
+
 git-status:
-  default: 245
-  unmodified: 245
-  ignored: 245
+  default: reset
+  unmodified: reset
+  ignored: reset
   new-in-index: 2
   new-in-workdir: 2
   typechange: 3
