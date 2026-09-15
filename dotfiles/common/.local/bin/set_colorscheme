@@ -10,8 +10,11 @@
 #   containing:
 #       * the neovim colorscheme
 #       * the neovim background
-#       * the wezterm colorscheme
-#   in that order separated by commas.
+#   in that order separated by a comma.
+#
+#   Wezterm has no colorscheme of its own here. It keys off the two values above:
+#   $XDG_CONFIG_HOME/wezterm/colorschemes.lua carries a palette per
+#   "<nvim_colorscheme>-<nvim_background>", derived from the neovim colorscheme itself.
 #
 #   The colorscheme changes happen as a result of either writing to files or from regeneration of config files:
 #       - nvim is updated when a change is detected in $XDG_CONFIG_HOME/nvim/.colorscheme
@@ -21,22 +24,22 @@
 : ${XDG_CONFIG_HOME:=$HOME/.config}
 
 typeset -A themes=(
-    ['Dark - Aquavium']="Aquavium,dark,Ef-Maris-Dark"
-    ['Dark - Catppuccin']="catppuccin,dark,Catppuccin Mocha"
-    ['Dark - Everforest']="everforest,dark,Everforest Dark (Gogh)"
-    ['Dark - Darkearth']="darkearth,dark,Gruvbox Material (Gogh)"
-    ['Dark - Gruvbox']="gruvbox-material,dark,Gruvbox Material (Gogh)"
-    ['Dark - Nightfox-dusk']="duskfox,dark,duskfox"
-    ['Dark - Nightfox-night']="nightfox,dark,nightfox"
-    ['Dark - Nightfox-tera']="terafox,dark,terafox"
-    ['Dark - Rose-pine']="rose-pine-moon,dark,rose-pine-moon"
-    ['Dark - Vague']="vague,dark,Vacuous 2 (terminal.sexy)"
-    ['Light - Catppuccin']="catppuccin,light,Catppuccin Latte"
-    ['Light - Everforest']="everforest,light,Everforest Light (Gogh)"
-    ['Light - Gruvbox']="gruvbox-material,light,GruvboxLight"
-    ['Light - Nightfox-dawn']="dawnfox,light,dawnfox"
-    ['Light - Nightfox-day']="dayfox,light,dayfox"
-    ['Light - Rose-pine']="rose-pine-dawn,light,rose-pine-dawn"
+    ['Dark - Aquavium']="Aquavium,dark"
+    ['Dark - Catppuccin']="catppuccin,dark"
+    ['Dark - Everforest']="everforest,dark"
+    ['Dark - Darkearth']="darkearth,dark"
+    ['Dark - Gruvbox']="gruvbox-material,dark"
+    ['Dark - Nightfox-dusk']="duskfox,dark"
+    ['Dark - Nightfox-night']="nightfox,dark"
+    ['Dark - Nightfox-tera']="terafox,dark"
+    ['Dark - Rose-pine']="rose-pine-moon,dark"
+    ['Dark - Vague']="vague,dark"
+    ['Light - Catppuccin']="catppuccin,light"
+    ['Light - Everforest']="everforest,light"
+    ['Light - Gruvbox']="gruvbox-material,light"
+    ['Light - Nightfox-dawn']="dawnfox,light"
+    ['Light - Nightfox-day']="dayfox,light"
+    ['Light - Rose-pine']="rose-pine-dawn,light"
 )
 
 set_theme(){
@@ -47,12 +50,10 @@ set_theme(){
     if [[ ! -z $values ]]; then
         nvim_colorscheme=$(print $values | awk -F ',' '{print $1}')
         nvim_background=$(print $values | awk -F ',' '{print $2}')
-        wezterm_colorscheme=$(print $values | awk -F ',' '{print $3}')
 
         envy set colorscheme_key $theme_key
         envy set nvim_colorscheme $nvim_colorscheme
         envy set nvim_background $nvim_background
-        envy set wezterm_colorscheme $wezterm_colorscheme
 
         # Update all running nvim instances
         # On Linux, use XDG_RUNTIME_DIR; on macOS, use TMPDIR or /tmp

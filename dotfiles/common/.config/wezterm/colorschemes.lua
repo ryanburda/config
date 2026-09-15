@@ -1,0 +1,367 @@
+--[[
+
+WezTerm color schemes derived from the Neovim colorschemes in
+`set_colorscheme`. One entry per Neovim colorscheme, keyed by
+"<nvim_colorscheme>-<nvim_background>" so WezTerm never needs its own
+theme name -- picking a Neovim colorscheme picks the terminal palette.
+
+Colors come from each colorscheme itself: `terminal_color_0..15` plus the
+Normal/Cursor/Visual/TabLine highlight groups, read out of a headless
+Neovim. The exceptions are noted inline.
+
+--]]
+
+return {
+  -- Dark - Aquavium
+  ["Aquavium-dark"] = {
+    foreground = "#cdd5e5",
+    background = "#000e1e",
+    cursor_bg = "#eeeeee",
+    cursor_fg = "#000e1e",
+    cursor_border = "#eeeeee",
+    selection_bg = "#4f5258",
+    selection_fg = "#cdd5e5",
+    split = "#7b92ae",
+    ansi = { "#00000e", "#da9197", "#73bf5e", "#fdba8a", "#004584", "#938af8", "#699ee0", "#cdd5e5" },
+    brights = { "#7b92ae", "#ffa9a9", "#90f276", "#e8dfad", "#4fbee3", "#eeb6c7", "#63deff", "#e4e9ff" },
+    tab_bar = {
+      background = "#000914",
+      active_tab = { bg_color = "#004584", fg_color = "#e4e9ff" },
+      inactive_tab = { bg_color = "#000914", fg_color = "#7b92ae" },
+      inactive_tab_hover = { bg_color = "#0b1c2e", fg_color = "#cdd5e5" },
+      new_tab = { bg_color = "#000914", fg_color = "#7b92ae" },
+      new_tab_hover = { bg_color = "#0b1c2e", fg_color = "#cdd5e5" },
+    },
+  },
+
+  -- Dark - Catppuccin
+  ["catppuccin-dark"] = {
+    foreground = "#cdd6f4",
+    background = "#1e1e2e",
+    cursor_bg = "#f5e0dc",
+    cursor_fg = "#1e1e2e",
+    cursor_border = "#f5e0dc",
+    selection_bg = "#585b70",
+    selection_fg = "#cdd6f4",
+    split = "#6c7086",
+    ansi = { "#45475a", "#f38ba8", "#a6e3a1", "#f9e2af", "#89b4fa", "#f5c2e7", "#94e2d5", "#bac2de" },
+    brights = { "#585b70", "#f38ba8", "#a6e3a1", "#f9e2af", "#89b4fa", "#f5c2e7", "#94e2d5", "#a6adc8" },
+    tab_bar = {
+      background = "#11111b",
+      active_tab = { bg_color = "#45475a", fg_color = "#cdd6f4" },
+      inactive_tab = { bg_color = "#181825", fg_color = "#a6adc8" },
+      inactive_tab_hover = { bg_color = "#313244", fg_color = "#cdd6f4" },
+      new_tab = { bg_color = "#181825", fg_color = "#a6adc8" },
+      new_tab_hover = { bg_color = "#313244", fg_color = "#cdd6f4" },
+    },
+  },
+
+  -- Dark - Darkearth
+  ["darkearth-dark"] = {
+    foreground = "#d7c484",
+    background = "#24211e",
+    cursor_bg = "#d7c484",
+    cursor_fg = "#212121",
+    cursor_border = "#d7c484",
+    selection_bg = "#3b3330",
+    selection_fg = "#d7c484",
+    split = "#675642",
+    ansi = { "#24211e", "#b3664d", "#5f865f", "#c9a654", "#669977", "#b3854d", "#80744d", "#d7c484" },
+    brights = { "#6e665e", "#b36b42", "#77824a", "#d7c484", "#7a9e89", "#bb7844", "#a0916a", "#e6d9a8" },
+    tab_bar = {
+      background = "#121212",
+      active_tab = { bg_color = "#77824a", fg_color = "#121212" },
+      inactive_tab = { bg_color = "#24211e", fg_color = "#6b6461" },
+      inactive_tab_hover = { bg_color = "#2e2925", fg_color = "#d7c484" },
+      new_tab = { bg_color = "#24211e", fg_color = "#6b6461" },
+      new_tab_hover = { bg_color = "#2e2925", fg_color = "#d7c484" },
+    },
+  },
+
+  -- Dark - Everforest
+  ["everforest-dark"] = {
+    foreground = "#d3c6aa",
+    background = "#2d353b",
+    cursor_bg = "#d3c6aa",
+    cursor_fg = "#2d353b",
+    cursor_border = "#d3c6aa",
+    selection_bg = "#543a48",
+    selection_fg = "#d3c6aa",
+    split = "#4f585e",
+    ansi = { "#475258", "#e67e80", "#a7c080", "#dbbc7f", "#7fbbb3", "#d699b6", "#83c092", "#d3c6aa" },
+    brights = { "#859289", "#ea9597", "#b7cb97", "#e1c896", "#96c7c1", "#ddabc3", "#99cba6", "#dacfb7" },
+    tab_bar = {
+      background = "#343f44",
+      active_tab = { bg_color = "#a7c080", fg_color = "#2d353b" },
+      inactive_tab = { bg_color = "#475258", fg_color = "#9da9a0" },
+      inactive_tab_hover = { bg_color = "#343f44", fg_color = "#d3c6aa" },
+      new_tab = { bg_color = "#475258", fg_color = "#9da9a0" },
+      new_tab_hover = { bg_color = "#343f44", fg_color = "#d3c6aa" },
+    },
+  },
+
+  -- Dark - Gruvbox
+  ["gruvbox-material-dark"] = {
+    foreground = "#d4be98",
+    background = "#282828",
+    cursor_bg = "#d4be98",
+    cursor_fg = "#282828",
+    cursor_border = "#d4be98",
+    selection_bg = "#45403d",
+    selection_fg = "#d4be98",
+    split = "#5a524c",
+    ansi = { "#5a524c", "#ea6962", "#a9b665", "#d8a657", "#7daea3", "#d3869b", "#89b482", "#d4be98" },
+    brights = { "#928374", "#ee847e", "#b8c381", "#dfb675", "#94bdb4", "#db9cad", "#9ec298", "#dac8a7" },
+    tab_bar = {
+      background = "#32302f",
+      active_tab = { bg_color = "#a89984", fg_color = "#282828" },
+      inactive_tab = { bg_color = "#504945", fg_color = "#ddc7a1" },
+      inactive_tab_hover = { bg_color = "#32302f", fg_color = "#d4be98" },
+      new_tab = { bg_color = "#504945", fg_color = "#ddc7a1" },
+      new_tab_hover = { bg_color = "#32302f", fg_color = "#d4be98" },
+    },
+  },
+
+  -- Dark - Nightfox-dusk
+  ["duskfox-dark"] = {
+    foreground = "#e0def4",
+    background = "#232136",
+    cursor_bg = "#e0def4",
+    cursor_fg = "#232136",
+    cursor_border = "#e0def4",
+    selection_bg = "#433c59",
+    selection_fg = "#e0def4",
+    split = "#191726",
+    ansi = { "#393552", "#eb6f92", "#a3be8c", "#f6c177", "#569fba", "#c4a7e7", "#9ccfd8", "#e0def4" },
+    brights = { "#47407d", "#f083a2", "#b1d196", "#f9cb8c", "#65b1cd", "#ccb1ed", "#a6dae3", "#e2e0f7" },
+    tab_bar = {
+      background = "#191726",
+      active_tab = { bg_color = "#6e6a86", fg_color = "#232136" },
+      inactive_tab = { bg_color = "#2d2a45", fg_color = "#cdcbe0" },
+      inactive_tab_hover = { bg_color = "#373354", fg_color = "#e0def4" },
+      new_tab = { bg_color = "#2d2a45", fg_color = "#cdcbe0" },
+      new_tab_hover = { bg_color = "#373354", fg_color = "#e0def4" },
+    },
+  },
+
+  -- Dark - Nightfox-night
+  ["nightfox-dark"] = {
+    foreground = "#cdcecf",
+    background = "#192330",
+    cursor_bg = "#cdcecf",
+    cursor_fg = "#192330",
+    cursor_border = "#cdcecf",
+    selection_bg = "#2b3b51",
+    selection_fg = "#cdcecf",
+    split = "#131a24",
+    ansi = { "#393b44", "#c94f6d", "#81b29a", "#dbc074", "#719cd6", "#9d79d6", "#63cdcf", "#dfdfe0" },
+    brights = { "#575860", "#d16983", "#8ebaa4", "#e0c989", "#86abdc", "#baa1e2", "#7ad5d6", "#e4e4e5" },
+    tab_bar = {
+      background = "#131a24",
+      active_tab = { bg_color = "#71839b", fg_color = "#192330" },
+      inactive_tab = { bg_color = "#212e3f", fg_color = "#aeafb0" },
+      inactive_tab_hover = { bg_color = "#29394f", fg_color = "#cdcecf" },
+      new_tab = { bg_color = "#212e3f", fg_color = "#aeafb0" },
+      new_tab_hover = { bg_color = "#29394f", fg_color = "#cdcecf" },
+    },
+  },
+
+  -- Dark - Nightfox-tera
+  ["terafox-dark"] = {
+    foreground = "#e6eaea",
+    background = "#152528",
+    cursor_bg = "#e6eaea",
+    cursor_fg = "#152528",
+    cursor_border = "#e6eaea",
+    selection_bg = "#293e40",
+    selection_fg = "#e6eaea",
+    split = "#0f1c1e",
+    ansi = { "#2f3239", "#e85c51", "#7aa4a1", "#fda47f", "#5a93aa", "#ad5c7c", "#a1cdd8", "#ebebeb" },
+    brights = { "#4e5157", "#eb746b", "#8eb2af", "#fdb292", "#73a3b7", "#b97490", "#afd4de", "#eeeeee" },
+    tab_bar = {
+      background = "#0f1c1e",
+      active_tab = { bg_color = "#587b7b", fg_color = "#152528" },
+      inactive_tab = { bg_color = "#1d3337", fg_color = "#cbd9d8" },
+      inactive_tab_hover = { bg_color = "#254147", fg_color = "#e6eaea" },
+      new_tab = { bg_color = "#1d3337", fg_color = "#cbd9d8" },
+      new_tab_hover = { bg_color = "#254147", fg_color = "#e6eaea" },
+    },
+  },
+
+  -- Dark - Rose-pine
+  ["rose-pine-moon-dark"] = {
+    foreground = "#e0def4",
+    background = "#232136",
+    cursor_bg = "#56526e",
+    cursor_fg = "#e0def4",
+    cursor_border = "#56526e",
+    selection_bg = "#3b3551",
+    selection_fg = "#e0def4",
+    split = "#6e6a86",
+    ansi = { "#393552", "#eb6f92", "#3e8fb0", "#f6c177", "#9ccfd8", "#c4a7e7", "#ea9a97", "#e0def4" },
+    brights = { "#908caa", "#ef89a6", "#61a3be", "#f8cc8f", "#aed8df", "#cfb7eb", "#eeacaa", "#e5e3f6" },
+    tab_bar = {
+      background = "#2a273f",
+      active_tab = { bg_color = "#393552", fg_color = "#e0def4" },
+      inactive_tab = { bg_color = "#2a273f", fg_color = "#908caa" },
+      inactive_tab_hover = { bg_color = "#393552", fg_color = "#e0def4" },
+      new_tab = { bg_color = "#2a273f", fg_color = "#908caa" },
+      new_tab_hover = { bg_color = "#393552", fg_color = "#e0def4" },
+    },
+  },
+
+  -- Dark - Vague
+  ["vague-dark"] = {
+    foreground = "#cdcdcd",
+    background = "#141415",
+    cursor_bg = "#cdcdcd",
+    cursor_fg = "#141415",
+    cursor_border = "#cdcdcd",
+    selection_bg = "#333738",
+    selection_fg = "#cdcdcd",
+    split = "#878787",
+    ansi = { "#252530", "#d8647e", "#7fa563", "#f3be7c", "#6e94b2", "#bb9dbd", "#aeaed1", "#cdcdcd" },
+    brights = { "#606079", "#e08398", "#99b782", "#f5cb96", "#8ba9c1", "#c9b1ca", "#bebeda", "#d7d7d7" },
+    tab_bar = {
+      background = "#1c1c24",
+      active_tab = { bg_color = "#333738", fg_color = "#cdcdcd" },
+      inactive_tab = { bg_color = "#1c1c24", fg_color = "#606079" },
+      inactive_tab_hover = { bg_color = "#252530", fg_color = "#cdcdcd" },
+      new_tab = { bg_color = "#1c1c24", fg_color = "#606079" },
+      new_tab_hover = { bg_color = "#252530", fg_color = "#cdcdcd" },
+    },
+  },
+
+  -- Light - Catppuccin
+  ["catppuccin-light"] = {
+    foreground = "#4c4f69",
+    background = "#eff1f5",
+    cursor_bg = "#dc8a78",
+    cursor_fg = "#eff1f5",
+    cursor_border = "#dc8a78",
+    selection_bg = "#acb0be",
+    selection_fg = "#4c4f69",
+    split = "#9ca0b0",
+    ansi = { "#5c5f77", "#d20f39", "#40a02b", "#df8e1d", "#1e66f5", "#ea76cb", "#179299", "#acb0be" },
+    brights = { "#6c6f85", "#d20f39", "#40a02b", "#df8e1d", "#1e66f5", "#ea76cb", "#179299", "#bcc0cc" },
+    tab_bar = {
+      background = "#dce0e8",
+      active_tab = { bg_color = "#bcc0cc", fg_color = "#4c4f69" },
+      inactive_tab = { bg_color = "#e6e9ef", fg_color = "#6c6f85" },
+      inactive_tab_hover = { bg_color = "#ccd0da", fg_color = "#4c4f69" },
+      new_tab = { bg_color = "#e6e9ef", fg_color = "#6c6f85" },
+      new_tab_hover = { bg_color = "#ccd0da", fg_color = "#4c4f69" },
+    },
+  },
+
+  -- Light - Everforest
+  ["everforest-light"] = {
+    foreground = "#5c6a72",
+    background = "#fdf6e3",
+    cursor_bg = "#5c6a72",
+    cursor_fg = "#fdf6e3",
+    cursor_border = "#5c6a72",
+    selection_bg = "#eaedc8",
+    selection_fg = "#5c6a72",
+    split = "#e0dcc7",
+    ansi = { "#5c6a72", "#f85552", "#8da101", "#dfa000", "#3a94c5", "#df69ba", "#35a77c", "#e6e2cc" },
+    brights = { "#939f91", "#f85552", "#8da101", "#dfa000", "#3a94c5", "#df69ba", "#35a77c", "#ebe8d6" },
+    tab_bar = {
+      background = "#f4f0d9",
+      active_tab = { bg_color = "#93b259", fg_color = "#fdf6e3" },
+      inactive_tab = { bg_color = "#e6e2cc", fg_color = "#829181" },
+      inactive_tab_hover = { bg_color = "#f4f0d9", fg_color = "#5c6a72" },
+      new_tab = { bg_color = "#e6e2cc", fg_color = "#829181" },
+      new_tab_hover = { bg_color = "#f4f0d9", fg_color = "#5c6a72" },
+    },
+  },
+
+  -- Light - Gruvbox
+  ["gruvbox-material-light"] = {
+    foreground = "#654735",
+    background = "#fbf1c7",
+    cursor_bg = "#654735",
+    cursor_fg = "#fbf1c7",
+    cursor_border = "#654735",
+    selection_bg = "#eee0b7",
+    selection_fg = "#654735",
+    split = "#ddccab",
+    ansi = { "#654735", "#c14a4a", "#6c782e", "#b47109", "#45707a", "#945e80", "#4c7a5d", "#ddccab" },
+    brights = { "#928374", "#c14a4a", "#6c782e", "#b47109", "#45707a", "#945e80", "#4c7a5d", "#e4d6bc" },
+    tab_bar = {
+      background = "#f2e5bc",
+      active_tab = { bg_color = "#7c6f64", fg_color = "#fbf1c7" },
+      inactive_tab = { bg_color = "#e5d5ad", fg_color = "#4f3829" },
+      inactive_tab_hover = { bg_color = "#f4e8be", fg_color = "#654735" },
+      new_tab = { bg_color = "#e5d5ad", fg_color = "#4f3829" },
+      new_tab_hover = { bg_color = "#f4e8be", fg_color = "#654735" },
+    },
+  },
+
+  -- Light - Nightfox-dawn
+  ["dawnfox-light"] = {
+    foreground = "#575279",
+    background = "#faf4ed",
+    cursor_bg = "#575279",
+    cursor_fg = "#faf4ed",
+    cursor_border = "#575279",
+    selection_bg = "#d0d8d8",
+    selection_fg = "#575279",
+    split = "#ebe5df",
+    ansi = { "#bbbbbb", "#b4637a", "#618774", "#ea9d34", "#286983", "#907aa9", "#56949f", "#e5e9f0" },
+    brights = { "#5f5695", "#c26d85", "#629f81", "#eea846", "#2d81a3", "#9a80b9", "#5ca7b4", "#e6ebf3" },
+    tab_bar = {
+      background = "#ebe5df",
+      active_tab = { bg_color = "#a8a3b3", fg_color = "#faf4ed" },
+      inactive_tab = { bg_color = "#ebe0df", fg_color = "#625c87" },
+      inactive_tab_hover = { bg_color = "#ebdfe4", fg_color = "#575279" },
+      new_tab = { bg_color = "#ebe0df", fg_color = "#625c87" },
+      new_tab_hover = { bg_color = "#ebdfe4", fg_color = "#575279" },
+    },
+  },
+
+  -- Light - Nightfox-day
+  ["dayfox-light"] = {
+    foreground = "#3d2b5a",
+    background = "#f6f2ee",
+    cursor_bg = "#3d2b5a",
+    cursor_fg = "#f6f2ee",
+    cursor_border = "#3d2b5a",
+    selection_bg = "#e7d2be",
+    selection_fg = "#3d2b5a",
+    split = "#e4dcd4",
+    ansi = { "#bbbbbb", "#a5222f", "#396847", "#ac5402", "#2848a9", "#6e33ce", "#287980", "#f2e9e1" },
+    brights = { "#534c45", "#b3434e", "#577f63", "#b86e28", "#4863b6", "#8452d5", "#488d93", "#f4ece6" },
+    tab_bar = {
+      background = "#e4dcd4",
+      active_tab = { bg_color = "#824d5b", fg_color = "#f6f2ee" },
+      inactive_tab = { bg_color = "#dbd1dd", fg_color = "#643f61" },
+      inactive_tab_hover = { bg_color = "#d3c7bb", fg_color = "#3d2b5a" },
+      new_tab = { bg_color = "#dbd1dd", fg_color = "#643f61" },
+      new_tab_hover = { bg_color = "#d3c7bb", fg_color = "#3d2b5a" },
+    },
+  },
+
+  -- Light - Rose-pine
+  ["rose-pine-dawn-light"] = {
+    foreground = "#464261",
+    background = "#faf4ed",
+    cursor_bg = "#cecacd",
+    cursor_fg = "#464261",
+    cursor_border = "#cecacd",
+    selection_bg = "#eae2e3",
+    selection_fg = "#464261",
+    split = "#9893a5",
+    ansi = { "#f2e9e1", "#b4637a", "#286983", "#ea9d34", "#56949f", "#907aa9", "#d7827e", "#464261" },
+    brights = { "#797593", "#b4637a", "#286983", "#ea9d34", "#56949f", "#907aa9", "#d7827e", "#38354e" },
+    tab_bar = {
+      background = "#fffaf3",
+      active_tab = { bg_color = "#f2e9e1", fg_color = "#464261" },
+      inactive_tab = { bg_color = "#fffaf3", fg_color = "#797593" },
+      inactive_tab_hover = { bg_color = "#f2e9e1", fg_color = "#464261" },
+      new_tab = { bg_color = "#fffaf3", fg_color = "#797593" },
+      new_tab_hover = { bg_color = "#f2e9e1", fg_color = "#464261" },
+    },
+  },
+
+}

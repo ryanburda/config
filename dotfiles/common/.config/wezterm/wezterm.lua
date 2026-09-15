@@ -3,25 +3,32 @@ package.path = package.path .. ';' .. os.getenv('HOME') .. '/.config/lua/?.lua'
 
 local envy = require("envy")
 local wezterm = require("wezterm")
+local colorschemes = require("colorschemes")
 local config = wezterm.config_builder()
 
 -- important paths
 -- NOTE: `os.getenv("XDG_CONFIG_HOME")` returns nil. Using "HOME" as an alternative for now.
 local background_image_dir = os.getenv("HOME") .. "/code/assets/base/assets/backgrounds/"
 
-local color_scheme = envy.get('wezterm_colorscheme', 'Catppuccin Mocha')
+-- COLORSCHEME
+--
+-- The terminal palette is keyed off the neovim colorscheme rather than carrying
+-- a wezterm theme name of its own: `colorschemes.lua` holds one entry per
+-- neovim colorscheme in `set_colorscheme`, keyed by
+-- "<nvim_colorscheme>-<nvim_background>". Anything not found there falls back
+-- to a wezterm builtin of the same name.
+local nvim_colorscheme = envy.get('nvim_colorscheme', 'everforest')
+local nvim_background = envy.get('nvim_background', 'dark')
+local color_scheme = nvim_colorscheme .. '-' .. nvim_background
 
-local light_schemes = { dayfox = true, dawnfox = true }
-
-if light_schemes[color_scheme] then
-  local scheme = wezterm.color.get_builtin_schemes()[color_scheme]
-  scheme.ansi[1] = '#bbbbbb'
-  local custom_name = color_scheme .. '-custom'
-  config.color_schemes = { [custom_name] = scheme }
-  config.color_scheme = custom_name
+local scheme = colorschemes[color_scheme]
+if scheme ~= nil then
+  config.color_schemes = { [color_scheme] = scheme }
 else
-  config.color_scheme = color_scheme
+  color_scheme = nvim_colorscheme
+  scheme = wezterm.color.get_builtin_schemes()[color_scheme]
 end
+config.color_scheme = color_scheme
 config.font = wezterm.font(envy.get('font_family', 'JetBrains Mono'))
 config.font_size = tonumber(envy.get('font_size', '12'))
 -- NONE, not RESIZE: niri sets `prefer-no-csd` and draws its own border/focus
@@ -63,11 +70,11 @@ end
 local background_color = nil
 
 if current_background ~= "NONE" then
-  background_color = wezterm.get_builtin_color_schemes()[color_scheme].background
+  background_color = scheme.background
 end
 
 -- background opacity
-local is_nvim_background_dark = (envy.get('nvim_background', 'dark')) == 'dark'
+local is_nvim_background_dark = nvim_background == 'dark'
 local opacity
 
 if is_nvim_background_dark then
