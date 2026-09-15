@@ -26,6 +26,7 @@ permission:
   context: 5
 
 date:
+  hour-old: 10
   day-old: 10
   older: 2
 
