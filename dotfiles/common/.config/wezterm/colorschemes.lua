@@ -22,7 +22,7 @@ return {
     selection_bg = "#4f5258",
     selection_fg = "#cdd5e5",
     split = "#7b92ae",
-    ansi = { "#00000e", "#da9197", "#73bf5e", "#fdba8a", "#004584", "#938af8", "#699ee0", "#cdd5e5" },
+    ansi = { "#000e1e", "#da9197", "#73bf5e", "#fdba8a", "#004584", "#938af8", "#699ee0", "#cdd5e5" },
     brights = { "#7b92ae", "#ffa9a9", "#90f276", "#e8dfad", "#4fbee3", "#eeb6c7", "#63deff", "#e4e9ff" },
     tab_bar = {
       background = "#000914",
@@ -264,8 +264,8 @@ return {
     selection_bg = "#eaedc8",
     selection_fg = "#5c6a72",
     split = "#e0dcc7",
-    ansi = { "#5c6a72", "#f85552", "#8da101", "#dfa000", "#3a94c5", "#df69ba", "#35a77c", "#e6e2cc" },
-    brights = { "#939f91", "#f85552", "#8da101", "#dfa000", "#3a94c5", "#df69ba", "#35a77c", "#ebe8d6" },
+    ansi = { "#e0dcc7", "#f85552", "#8da101", "#dfa000", "#3a94c5", "#df69ba", "#35a77c", "#e6e2cc" },
+    brights = { "#cac6ad", "#f85552", "#8da101", "#dfa000", "#3a94c5", "#df69ba", "#35a77c", "#ebe8d6" },
     tab_bar = {
       background = "#f4f0d9",
       active_tab = { bg_color = "#93b259", fg_color = "#fdf6e3" },
