@@ -4,7 +4,7 @@
 # NOTE: must also uncomment last line.
 # zmodload zsh/zprof
 
-PROMPT="%B%F{green}%K{black} %~ %k%f"$''"%F{blue}%K{black}%(!.\$.>) %k%f %b"
+PROMPT="%B%F{green}%K{black}%~ %k%f"$''"%F{blue}%K{black}%(!.\$.>) %k%f %b"
 
 export XDG_CONFIG_HOME=$HOME/.config
 
