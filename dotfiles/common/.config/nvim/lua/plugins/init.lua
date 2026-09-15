@@ -65,9 +65,7 @@ return {
   'EdenEast/nightfox.nvim',
   'rose-pine/neovim',
   'vague2k/vague.nvim',
-  'ptdewey/darkearth-nvim',
   'catppuccin/nvim',
-  'T-b-t-nchos/Aquavium.nvim',
 
   -- Treesitter
   {

@@ -24,10 +24,8 @@
 : ${XDG_CONFIG_HOME:=$HOME/.config}
 
 typeset -A themes=(
-    ['Dark - Aquavium']="Aquavium,dark"
     ['Dark - Catppuccin']="catppuccin,dark"
     ['Dark - Everforest']="everforest,dark"
-    ['Dark - Darkearth']="darkearth,dark"
     ['Dark - Gruvbox']="gruvbox-material,dark"
     ['Dark - Nightfox-dusk']="duskfox,dark"
     ['Dark - Nightfox-night']="nightfox,dark"

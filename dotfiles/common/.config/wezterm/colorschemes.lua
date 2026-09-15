@@ -12,28 +12,6 @@ Neovim. The exceptions are noted inline.
 --]]
 
 return {
-  -- Dark - Aquavium
-  ["Aquavium-dark"] = {
-    foreground = "#cdd5e5",
-    background = "#000e1e",
-    cursor_bg = "#eeeeee",
-    cursor_fg = "#000e1e",
-    cursor_border = "#eeeeee",
-    selection_bg = "#4f5258",
-    selection_fg = "#cdd5e5",
-    split = "#7b92ae",
-    ansi = { "#000e1e", "#da9197", "#73bf5e", "#fdba8a", "#004584", "#938af8", "#699ee0", "#cdd5e5" },
-    brights = { "#7b92ae", "#ffa9a9", "#90f276", "#e8dfad", "#4fbee3", "#eeb6c7", "#63deff", "#e4e9ff" },
-    tab_bar = {
-      background = "#000914",
-      active_tab = { bg_color = "#004584", fg_color = "#e4e9ff" },
-      inactive_tab = { bg_color = "#000914", fg_color = "#7b92ae" },
-      inactive_tab_hover = { bg_color = "#0b1c2e", fg_color = "#cdd5e5" },
-      new_tab = { bg_color = "#000914", fg_color = "#7b92ae" },
-      new_tab_hover = { bg_color = "#0b1c2e", fg_color = "#cdd5e5" },
-    },
-  },
-
   -- Dark - Catppuccin
   ["catppuccin-dark"] = {
     foreground = "#cdd6f4",
@@ -53,28 +31,6 @@ return {
       inactive_tab_hover = { bg_color = "#313244", fg_color = "#cdd6f4" },
       new_tab = { bg_color = "#181825", fg_color = "#a6adc8" },
       new_tab_hover = { bg_color = "#313244", fg_color = "#cdd6f4" },
-    },
-  },
-
-  -- Dark - Darkearth
-  ["darkearth-dark"] = {
-    foreground = "#d7c484",
-    background = "#24211e",
-    cursor_bg = "#d7c484",
-    cursor_fg = "#212121",
-    cursor_border = "#d7c484",
-    selection_bg = "#3b3330",
-    selection_fg = "#d7c484",
-    split = "#675642",
-    ansi = { "#24211e", "#b3664d", "#5f865f", "#c9a654", "#669977", "#b3854d", "#80744d", "#d7c484" },
-    brights = { "#6e665e", "#b36b42", "#77824a", "#d7c484", "#7a9e89", "#bb7844", "#a0916a", "#e6d9a8" },
-    tab_bar = {
-      background = "#121212",
-      active_tab = { bg_color = "#77824a", fg_color = "#121212" },
-      inactive_tab = { bg_color = "#24211e", fg_color = "#6b6461" },
-      inactive_tab_hover = { bg_color = "#2e2925", fg_color = "#d7c484" },
-      new_tab = { bg_color = "#24211e", fg_color = "#6b6461" },
-      new_tab_hover = { bg_color = "#2e2925", fg_color = "#d7c484" },
     },
   },
 
@@ -242,8 +198,8 @@ return {
     selection_bg = "#acb0be",
     selection_fg = "#4c4f69",
     split = "#9ca0b0",
-    ansi = { "#5c5f77", "#d20f39", "#40a02b", "#df8e1d", "#1e66f5", "#ea76cb", "#179299", "#acb0be" },
-    brights = { "#6c6f85", "#d20f39", "#40a02b", "#df8e1d", "#1e66f5", "#ea76cb", "#179299", "#bcc0cc" },
+    ansi = { "#e6e9ef", "#d20f39", "#40a02b", "#df8e1d", "#1e66f5", "#ea76cb", "#179299", "#acb0be" },
+    brights = { "#ccd0da", "#d20f39", "#40a02b", "#df8e1d", "#1e66f5", "#ea76cb", "#179299", "#bcc0cc" },
     tab_bar = {
       background = "#dce0e8",
       active_tab = { bg_color = "#bcc0cc", fg_color = "#4c4f69" },
@@ -264,8 +220,8 @@ return {
     selection_bg = "#eaedc8",
     selection_fg = "#5c6a72",
     split = "#e0dcc7",
-    ansi = { "#e0dcc7", "#f85552", "#8da101", "#dfa000", "#3a94c5", "#df69ba", "#35a77c", "#e6e2cc" },
-    brights = { "#cac6ad", "#f85552", "#8da101", "#dfa000", "#3a94c5", "#df69ba", "#35a77c", "#ebe8d6" },
+    ansi = { "#f4f0d9", "#f85552", "#8da101", "#dfa000", "#3a94c5", "#df69ba", "#35a77c", "#e6e2cc" },
+    brights = { "#e6e2cc", "#f85552", "#8da101", "#dfa000", "#3a94c5", "#df69ba", "#35a77c", "#ebe8d6" },
     tab_bar = {
       background = "#f4f0d9",
       active_tab = { bg_color = "#93b259", fg_color = "#fdf6e3" },
@@ -286,8 +242,8 @@ return {
     selection_bg = "#eee0b7",
     selection_fg = "#654735",
     split = "#ddccab",
-    ansi = { "#654735", "#c14a4a", "#6c782e", "#b47109", "#45707a", "#945e80", "#4c7a5d", "#ddccab" },
-    brights = { "#928374", "#c14a4a", "#6c782e", "#b47109", "#45707a", "#945e80", "#4c7a5d", "#e4d6bc" },
+    ansi = { "#f2e5bc", "#c14a4a", "#6c782e", "#b47109", "#45707a", "#945e80", "#4c7a5d", "#ddccab" },
+    brights = { "#ddccab", "#c14a4a", "#6c782e", "#b47109", "#45707a", "#945e80", "#4c7a5d", "#e4d6bc" },
     tab_bar = {
       background = "#f2e5bc",
       active_tab = { bg_color = "#7c6f64", fg_color = "#fbf1c7" },
@@ -308,8 +264,8 @@ return {
     selection_bg = "#d0d8d8",
     selection_fg = "#575279",
     split = "#ebe5df",
-    ansi = { "#bbbbbb", "#b4637a", "#618774", "#ea9d34", "#286983", "#907aa9", "#56949f", "#e5e9f0" },
-    brights = { "#5f5695", "#c26d85", "#629f81", "#eea846", "#2d81a3", "#9a80b9", "#5ca7b4", "#e6ebf3" },
+    ansi = { "#ebe5df", "#b4637a", "#629f81", "#ea9d34", "#286983", "#907aa9", "#56949f", "#e5e9f0" },
+    brights = { "#b1c0c3", "#c26d85", "#618774", "#eea846", "#2d81a3", "#9a80b9", "#5ca7b4", "#e6ebf3" },
     tab_bar = {
       background = "#ebe5df",
       active_tab = { bg_color = "#a8a3b3", fg_color = "#faf4ed" },
@@ -330,8 +286,8 @@ return {
     selection_bg = "#e7d2be",
     selection_fg = "#3d2b5a",
     split = "#e4dcd4",
-    ansi = { "#bbbbbb", "#a5222f", "#396847", "#ac5402", "#2848a9", "#6e33ce", "#287980", "#f2e9e1" },
-    brights = { "#534c45", "#b3434e", "#577f63", "#b86e28", "#4863b6", "#8452d5", "#488d93", "#f4ece6" },
+    ansi = { "#d3c7bb", "#a5222f", "#396847", "#ac5402", "#2848a9", "#6e33ce", "#287980", "#f2e9e1" },
+    brights = { "#e7d2be", "#b3434e", "#577f63", "#b86e28", "#4863b6", "#8452d5", "#488d93", "#f4ece6" },
     tab_bar = {
       background = "#e4dcd4",
       active_tab = { bg_color = "#824d5b", fg_color = "#f6f2ee" },
@@ -353,7 +309,7 @@ return {
     selection_fg = "#464261",
     split = "#9893a5",
     ansi = { "#f2e9e1", "#b4637a", "#286983", "#ea9d34", "#56949f", "#907aa9", "#d7827e", "#464261" },
-    brights = { "#797593", "#b4637a", "#286983", "#ea9d34", "#56949f", "#907aa9", "#d7827e", "#38354e" },
+    brights = { "#d3c7bb", "#b4637a", "#286983", "#ea9d34", "#56949f", "#907aa9", "#d7827e", "#38354e" },
     tab_bar = {
       background = "#fffaf3",
       active_tab = { bg_color = "#f2e9e1", fg_color = "#464261" },
