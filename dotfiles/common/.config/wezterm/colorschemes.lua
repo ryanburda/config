@@ -220,8 +220,8 @@ return {
     selection_bg = "#333738",
     selection_fg = "#cdcdcd",
     split = "#878787",
-    ansi = { "#252530", "#d8647e", "#7fa563", "#f3be7c", "#6e94b2", "#bb9dbd", "#aeaed1", "#cdcdcd" },
-    brights = { "#606079", "#e08398", "#99b782", "#f5cb96", "#8ba9c1", "#c9b1ca", "#bebeda", "#d7d7d7" },
+    ansi = { "#1e1e27", "#d8647e", "#7fa563", "#f3be7c", "#6e94b2", "#bb9dbd", "#aeaed1", "#cdcdcd" },
+    brights = { "#2a273f", "#e08398", "#99b782", "#f5cb96", "#8ba9c1", "#c9b1ca", "#bebeda", "#d7d7d7" },
     tab_bar = {
       background = "#1c1c24",
       active_tab = { bg_color = "#333738", fg_color = "#cdcdcd" },
