@@ -4,7 +4,7 @@
 #
 # This script:
 #   - Symlinks dotfiles to ~ using stow (common + arch)
-#   - Copies root config files (bluetooth, pacman, vconsole, greetd, pam)
+#   - Copies root config files (bluetooth, pacman, vconsole, greetd, pam, systemd)
 #   - Installs yay (AUR helper)
 #   - Installs packages via pacman/yay
 #   - Sets zsh as the default shell
@@ -205,12 +205,35 @@ sudo mkdir -p /etc/greetd
 sudo cp $REPO_ROOT/dotfiles/arch_root/etc/greetd/config.toml /etc/greetd/config.toml
 sudo systemctl enable greetd.service
 
-# Quiet the boot console so kernel/udev messages don't clutter the greeter.
-# Patches systemd-boot loader entries in place; idempotent on re-run.
-if ls /boot/loader/entries/*.conf >/dev/null 2>&1; then
-    sudo sed -i -e '/^options/{/ quiet /!s| root=| quiet loglevel=3 rd.udev.log_level=3 vt.global_cursor_default=0 root=|}' \
-        /boot/loader/entries/*.conf
-fi
+# Quiet the boot console so kernel/udev messages don't clutter the greeter, and
+# so nothing draws over tuigreet after it has painted vt1.
+#
+# ShowStatus=no is the part that matters for the greeter: greetd comes up as
+# soon as systemd-user-sessions.service is ready, a beat before the tail of
+# graphical.target, so those units' "[ OK ] Started ..." lines would otherwise
+# land on the already-drawn greeter and force it to repaint around them.
+sudo mkdir -p /etc/systemd/system.conf.d
+sudo cp $REPO_ROOT/dotfiles/arch_root/etc/systemd/system.conf.d/show-status.conf \
+    /etc/systemd/system.conf.d/show-status.conf
+
+# The cmdline flags cover what systemd can't: kernel printk and udev, which
+# write to the console directly. Patches systemd-boot loader entries in place;
+# idempotent on re-run.
+#
+# NOTE: both the glob and the guard have to run as root. The ESP is mounted
+# dmask=0077, so expanding /boot/loader/entries/*.conf in this script's own
+# shell fails with EACCES -- the old guard did exactly that and silently
+# no-op'd the whole block, which is why `quiet` never reached the cmdline.
+sudo sh -c '
+    set -e
+    found=0
+    for entry in /boot/loader/entries/*.conf; do
+        [ -e "$entry" ] || continue
+        found=1
+        sed -i -e "/^options/{/ quiet /!s| root=| quiet loglevel=3 rd.udev.log_level=3 vt.global_cursor_default=0 root=|}" "$entry"
+    done
+    [ "$found" = 1 ] || echo "setup_arch.sh: no entries under /boot/loader/entries; skipping cmdline quiet flags" >&2
+'
 
 # Fingerprint reader (Framework 13 -- Goodix 27c6:609c, which is the power
 # button). Supported by stock libfprint's goodixmoc driver, so no AUR driver is
