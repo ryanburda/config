@@ -26,8 +26,8 @@ permission:
   context: 5
 
 date:
-  hour-old: 10
-  day-old: 10
+  hour-old: 2
+  day-old: 2
   older: 2
 
 size:
