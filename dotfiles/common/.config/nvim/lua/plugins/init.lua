@@ -41,7 +41,7 @@ return {
           globalstatus = true,
         },
         sections = {
-          lualine_a = {},
+          --lualine_a = {},
           lualine_b = {'filename'},
           lualine_c = {require('buf-mark.status').get},
           lualine_x = {'diagnostics'},
