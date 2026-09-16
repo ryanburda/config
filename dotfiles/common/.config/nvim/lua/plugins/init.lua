@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-doc-name
 -- Defines all of the plugins that are managed by lazy.nvim.
 --
 -- The convention being followed in this repo is to put all plugins in the table below.
@@ -129,6 +130,25 @@ return {
     config = function()
       require("illuminate").pause()
     end
+  },
+  -- code actions
+  {
+    "rachartier/tiny-code-action.nvim",
+    dependencies = {
+      -- optional picker via telescope
+      {"nvim-telescope/telescope.nvim"},
+      -- optional picker via fzf-lua
+      {"ibhagwan/fzf-lua"},
+      -- .. or via snacks
+      {
+        "folke/snacks.nvim",
+        opts = {
+          terminal = {},
+        }
+      }
+    },
+    event = "LspAttach",
+    opts = {},
   },
 
   -- autoformat on save

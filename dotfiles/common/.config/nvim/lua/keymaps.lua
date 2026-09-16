@@ -806,7 +806,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set(
       {'n', 'v'},
       '<leader>ca',
-      vim.lsp.buf.code_action,
+      function()
+      	require("tiny-code-action").code_action()
+      end,
       {desc = 'Code: Actions', buffer = event.buf}
     )
 
