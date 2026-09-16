@@ -442,9 +442,46 @@ return {
 
   {
     'saghen/blink.cmp',
-    dependencies = 'rafamadriz/friendly-snippets',
+    dependencies = {
+      'rafamadriz/friendly-snippets',
+      { 'mikavilpas/blink-ripgrep.nvim', version = '*' },
+    },
     version = '1.*',
     opts = {
+      sources = {
+        -- 'ripgrep' is appended to blink.cmp's default source list, so words
+        -- found by ripgrep in the project show up alongside lsp/path/snippet/
+        -- buffer results.
+        default = { 'lsp', 'path', 'snippets', 'buffer', 'ripgrep' },
+        providers = {
+          ripgrep = {
+            module = 'blink-ripgrep',
+            name = 'Ripgrep',
+            ---@module 'blink-ripgrep'
+            ---@type blink-ripgrep.Options
+            opts = {
+              prefix_min_len = 3,
+              project_root_marker = '.git',
+              backend = {
+                use = 'ripgrep',
+                ripgrep = {
+                  -- lines of context shown in the documentation window
+                  context_size = 5,
+                  max_filesize = '1M',
+                  additional_rg_options = { '--hidden', '--glob=!.git' },
+                },
+              },
+            },
+            -- distinguish ripgrep results from the other sources in the menu
+            transform_items = function(_, items)
+              for _, item in ipairs(items) do
+                item.labelDetails = { description = '(rg)' }
+              end
+              return items
+            end,
+          },
+        },
+      },
       keymap = {
         preset = 'default',
         ['<C-y>'] = { 'select_and_accept' },
