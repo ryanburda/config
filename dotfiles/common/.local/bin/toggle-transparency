@@ -1,0 +1,34 @@
+#!/bin/zsh
+
+# NAME
+#   toggle-transparency
+#
+# DESCRIPTION
+#   Toggles terminal background transparency on and off.
+#
+#   The state lives in the `wezterm_transparency` envy value ('true' or
+#   'false'). Both wezterm and neovim read it, so both are reloaded here to pick
+#   up the change immediately.
+
+: ${XDG_CONFIG_HOME:=$HOME/.config}
+
+if [[ $(envy get wezterm_transparency false) == 'true' ]]; then
+    envy set wezterm_transparency false
+else
+    envy set wezterm_transparency true
+fi
+
+# Nudge wezterm to re-read its config.
+touch $XDG_CONFIG_HOME/wezterm/wezterm.lua
+
+# Update all running nvim instances
+# On Linux, use XDG_RUNTIME_DIR; on macOS, use TMPDIR or /tmp
+nvim_runtime_dir="${XDG_RUNTIME_DIR:-${TMPDIR:-/tmp}}"
+# Try both macOS pattern (nvim.*/*/nvim.*.0) and Linux pattern (nvim.*.0)
+# (N) qualifier prevents zsh error when pattern doesn't match
+for socket in "$nvim_runtime_dir"/nvim.*/*/nvim.*.0(N) "$nvim_runtime_dir"/nvim.*.0(N); do
+    if [[ -S "$socket" ]]; then
+        # redirect stderr to /dev/null since stale socket files can remain even after Neovim instances have closed.
+        nvim --server "$socket" --remote-send "<Cmd>luafile ${XDG_CONFIG_HOME}/nvim/lua/colorscheme.lua<CR>" 2>/dev/null
+    fi
+done
