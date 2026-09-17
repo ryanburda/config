@@ -27,6 +27,8 @@ gui:
     'main': red
     'master': red
     'develop': green
+  authorColors:
+    '*': blue
 git:
   diffRenderers:
     - colorArg: always
