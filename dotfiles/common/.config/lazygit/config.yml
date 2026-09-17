@@ -1,5 +1,20 @@
+# name for your ranked palette
+#
+# slot 0 = black
+# slot 1 = red
+# slot 2 = green
+# slot 3 = yellow
+# slot 4 = blue
+# slot 5 = magenta
+# slot 6 = cyan
+# slot 7 = white
+
 gui:
   theme:
+    activeBorderColor:
+      - red
+    inactiveBorderColor:
+      - default
     selectedLineBgColor:
       - black
     selectedRangeBgColor:
@@ -9,13 +24,9 @@ gui:
   showIcons: true
   scrollPastBottom: false
   branchColors:
-    'main': '#1b7532'
-    'master': '#1b7532'
-    'develop': '#1b7275'
-    'ryanburda': '#349beb'
-    'rburda': '#349beb'
-  authorColors:
-    'Ryan Burda': '#349beb'
+    'main': red
+    'master': red
+    'develop': green
 git:
   diffRenderers:
     - colorArg: always
