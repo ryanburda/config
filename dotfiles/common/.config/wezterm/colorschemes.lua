@@ -40,9 +40,9 @@ return {
     selection_bg = "#585b70",
     selection_fg = "#cdd6f4",
     split = "#6c7086",
-    -- usage order: 1=white 2=blue 3=magenta 4=green 5=yellow 6=cyan 7=red
-    ansi = { "#181825", "#bac2de", "#89b4fa", "#f5c2e7", "#a6e3a1", "#f9e2af", "#94e2d5", "#f38ba8" },
-    brights = { "#313244", "#a6adc8", "#89b4fa", "#f5c2e7", "#a6e3a1", "#f9e2af", "#94e2d5", "#f38ba8" },
+    -- usage order: 1=blue 2=white 3=magenta 4=green 5=yellow 6=cyan 7=red
+    ansi = { "#181825", "#89b4fa", "#bac2de", "#f5c2e7", "#a6e3a1", "#f9e2af", "#94e2d5", "#f38ba8" },
+    brights = { "#313244", "#89b4fa", "#a6adc8", "#f5c2e7", "#a6e3a1", "#f9e2af", "#94e2d5", "#f38ba8" },
     tab_bar = {
       background = "#11111b",
       active_tab = { bg_color = "#45475a", fg_color = "#cdd6f4" },
@@ -242,29 +242,6 @@ return {
     },
   },
 
-  -- Light - Catppuccin
-  ["catppuccin-light"] = {
-    foreground = "#4c4f69",
-    background = "#eff1f5",
-    cursor_bg = "#dc8a78",
-    cursor_fg = "#eff1f5",
-    cursor_border = "#dc8a78",
-    selection_bg = "#acb0be",
-    selection_fg = "#4c4f69",
-    split = "#9ca0b0",
-    -- usage order: 1=blue 2=magenta 3=green 4=yellow 5=cyan 6=red 7=white
-    ansi = { "#e6e9ef", "#1e66f5", "#ea76cb", "#40a02b", "#df8e1d", "#179299", "#d20f39", "#acb0be" },
-    brights = { "#ccd0da", "#1e66f5", "#ea76cb", "#40a02b", "#df8e1d", "#179299", "#d20f39", "#bcc0cc" },
-    tab_bar = {
-      background = "#dce0e8",
-      active_tab = { bg_color = "#bcc0cc", fg_color = "#4c4f69" },
-      inactive_tab = { bg_color = "#e6e9ef", fg_color = "#6c6f85" },
-      inactive_tab_hover = { bg_color = "#ccd0da", fg_color = "#4c4f69" },
-      new_tab = { bg_color = "#e6e9ef", fg_color = "#6c6f85" },
-      new_tab_hover = { bg_color = "#ccd0da", fg_color = "#4c4f69" },
-    },
-  },
-
   -- Light - Everforest
   ["everforest-light"] = {
     foreground = "#5c6a72",
@@ -275,9 +252,9 @@ return {
     selection_bg = "#eaedc8",
     selection_fg = "#5c6a72",
     split = "#e0dcc7",
-    -- usage order: 1=green 2=red 3=blue 4=cyan 5=yellow 6=magenta 7=white
-    ansi = { "#f4f0d9", "#8da101", "#f85552", "#3a94c5", "#35a77c", "#dfa000", "#df69ba", "#e6e2cc" },
-    brights = { "#e6e2cc", "#8da101", "#f85552", "#3a94c5", "#35a77c", "#dfa000", "#df69ba", "#ebe8d6" },
+    -- usage order: 1=green 2=blue3=red 4=cyan 5=yellow 6=magenta 7=white
+    ansi = { "#f4f0d9", "#8da101", "#3a94c5", "#f85552", "#35a77c", "#dfa000", "#df69ba", "#e6e2cc" },
+    brights = { "#e6e2cc", "#8da101", "#3a94c5", "#f85552", "#35a77c", "#dfa000", "#df69ba", "#ebe8d6" },
     tab_bar = {
       background = "#f4f0d9",
       active_tab = { bg_color = "#93b259", fg_color = "#fdf6e3" },

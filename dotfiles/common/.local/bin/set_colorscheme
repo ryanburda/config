@@ -33,7 +33,6 @@ typeset -A themes=(
     ['Dark - Nightfox-tera']="terafox,dark"
     ['Dark - Nordic']="nordic,dark"
     ['Dark - Vague']="vague,dark"
-    ['Light - Catppuccin']="catppuccin,light"
     ['Light - Everforest']="everforest,light"
     ['Light - Gruvbox']="gruvbox-material,light"
     ['Light - Kanagawa-paper-canvas']="kanagawa-paper-canvas,light"
