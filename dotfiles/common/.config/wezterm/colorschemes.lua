@@ -10,12 +10,11 @@ Normal/Cursor/Visual/TabLine highlight groups, read out of a headless
 Neovim. The exceptions are noted inline.
 
 `ansi`/`brights` are NOT in ANSI order. Slots 1-7 are sorted by how much of
-a screenful of code each color actually paints, so slot 2 is always the
-scheme's dominant color, slot 3 the next, down to slot 7; the least-used
-color wraps around to slot 1. That way `pane-active-border-style "fg=2"` and
-friends follow the colorscheme instead of always landing on red. Slot 0
-stays black, and each scheme's `-- usage order` comment records which color
-went where.
+a screenful of code each color actually paints: slot 1 is always the
+scheme's dominant color, slot 2 the next, down to slot 7 for the least-used.
+That way `pane-active-border-style "fg=1"` and friends follow the
+colorscheme instead of always landing on red. Slot 0 stays black, and each
+scheme's `-- usage order` comment records which color went where.
 
 The ranking comes from the Neovim colorscheme itself: every common token
 role (@string, @function, @keyword, @property, @type, @comment, ...) is
@@ -38,9 +37,9 @@ return {
     selection_bg = "#585b70",
     selection_fg = "#cdd6f4",
     split = "#6c7086",
-    -- usage order: 2=white 3=blue 4=magenta 5=green 6=yellow 7=cyan 1=red
-    ansi = { "#181825", "#f38ba8", "#bac2de", "#89b4fa", "#f5c2e7", "#a6e3a1", "#f9e2af", "#94e2d5" },
-    brights = { "#313244", "#f38ba8", "#a6adc8", "#89b4fa", "#f5c2e7", "#a6e3a1", "#f9e2af", "#94e2d5" },
+    -- usage order: 1=white 2=blue 3=magenta 4=green 5=yellow 6=cyan 7=red
+    ansi = { "#181825", "#bac2de", "#89b4fa", "#f5c2e7", "#a6e3a1", "#f9e2af", "#94e2d5", "#f38ba8" },
+    brights = { "#313244", "#a6adc8", "#89b4fa", "#f5c2e7", "#a6e3a1", "#f9e2af", "#94e2d5", "#f38ba8" },
     tab_bar = {
       background = "#11111b",
       active_tab = { bg_color = "#45475a", fg_color = "#cdd6f4" },
@@ -61,9 +60,9 @@ return {
     selection_bg = "#543a48",
     selection_fg = "#d3c6aa",
     split = "#4f585e",
-    -- usage order: 2=green 3=red 4=blue 5=cyan 6=yellow 7=magenta 1=white
-    ansi = { "#343f44", "#d3c6aa", "#a7c080", "#e67e80", "#7fbbb3", "#83c092", "#dbbc7f", "#d699b6" },
-    brights = { "#3d484d", "#dacfb7", "#b7cb97", "#ea9597", "#96c7c1", "#99cba6", "#e1c896", "#ddabc3" },
+    -- usage order: 1=green 2=red 3=blue 4=cyan 5=yellow 6=magenta 7=white
+    ansi = { "#343f44", "#a7c080", "#e67e80", "#7fbbb3", "#83c092", "#dbbc7f", "#d699b6", "#d3c6aa" },
+    brights = { "#3d484d", "#b7cb97", "#ea9597", "#96c7c1", "#99cba6", "#e1c896", "#ddabc3", "#dacfb7" },
     tab_bar = {
       background = "#343f44",
       active_tab = { bg_color = "#a7c080", fg_color = "#2d353b" },
@@ -84,9 +83,9 @@ return {
     selection_bg = "#45403d",
     selection_fg = "#d4be98",
     split = "#5a524c",
-    -- usage order: 2=green 3=red 4=blue 5=cyan 6=yellow 7=magenta 1=white
-    ansi = { "#32302f", "#d4be98", "#b8c381", "#ea6962", "#7daea3", "#89b482", "#dfb675", "#d3869b" },
-    brights = { "#504945", "#dac8a7", "#a9b665", "#ee847e", "#94bdb4", "#9ec298", "#d8a657", "#db9cad" },
+    -- usage order: 1=green 2=red 3=blue 4=cyan 5=yellow 6=magenta 7=white
+    ansi = { "#32302f", "#b8c381", "#ea6962", "#7daea3", "#89b482", "#dfb675", "#d3869b", "#d4be98" },
+    brights = { "#504945", "#a9b665", "#ee847e", "#94bdb4", "#9ec298", "#d8a657", "#db9cad", "#dac8a7" },
     tab_bar = {
       background = "#32302f",
       active_tab = { bg_color = "#a89984", fg_color = "#282828" },
@@ -107,9 +106,9 @@ return {
     selection_bg = "#363646",
     selection_fg = "#dcd7ba",
     split = "#8992a7",
-    -- usage order: 2=magenta 3=red 4=cyan 5=blue 6=yellow 7=green 1=white
-    ansi = { "#2a2a37", "#c8c093", "#a292a3", "#8ea49e", "#c4746e", "#c4b28a", "#435965", "#699469" },
-    brights = { "#363646", "#d5cd9d", "#b4a7b5", "#96ada7", "#cc928e", "#d4c196", "#698a9b", "#72a072" },
+    -- usage order: 1=magenta 2=red 3=cyan 4=blue 5=yellow 6=green 7=white
+    ansi = { "#2a2a37", "#a292a3", "#8ea49e", "#c4746e", "#c4b28a", "#435965", "#699469", "#c8c093" },
+    brights = { "#363646", "#b4a7b5", "#96ada7", "#cc928e", "#d4c196", "#698a9b", "#72a072", "#d5cd9d" },
     tab_bar = {
       background = "#16161d",
       active_tab = { bg_color = "#1f1f28", fg_color = "#c5c9c5" },
@@ -132,9 +131,9 @@ return {
     selection_bg = "#433c59",
     selection_fg = "#e0def4",
     split = "#191726",
-    -- usage order: 2=blue 3=magenta 4=white 5=green 6=cyan 7=yellow 1=red
-    ansi = { "#191726", "#eb6f92", "#569fba", "#c4a7e7", "#e0def4", "#a3be8c", "#9ccfd8", "#f6c177" },
-    brights = { "#373354", "#f083a2", "#65b1cd", "#ccb1ed", "#e2e0f7", "#b1d196", "#a6dae3", "#f9cb8c" },
+    -- usage order: 1=blue 2=magenta 3=white 4=green 5=cyan 6=yellow 7=red
+    ansi = { "#191726", "#569fba", "#c4a7e7", "#e0def4", "#a3be8c", "#9ccfd8", "#f6c177", "#eb6f92" },
+    brights = { "#373354", "#65b1cd", "#ccb1ed", "#e2e0f7", "#b1d196", "#a6dae3", "#f9cb8c", "#f083a2" },
     tab_bar = {
       background = "#191726",
       active_tab = { bg_color = "#6e6a86", fg_color = "#232136" },
@@ -155,9 +154,9 @@ return {
     selection_bg = "#2b3b51",
     selection_fg = "#cdcecf",
     split = "#131a24",
-    -- usage order: 2=blue 3=magenta 4=white 5=green 6=cyan 7=yellow 1=red
-    ansi = { "#131a24", "#c94f6d", "#719cd6", "#9d79d6", "#dfdfe0", "#81b29a", "#63cdcf", "#dbc074" },
-    brights = { "#29394f", "#d16983", "#86abdc", "#baa1e2", "#e4e4e5", "#8ebaa4", "#7ad5d6", "#e0c989" },
+    -- usage order: 1=blue 2=magenta 3=white 4=green 5=cyan 6=yellow 7=red
+    ansi = { "#131a24", "#719cd6", "#9d79d6", "#dfdfe0", "#81b29a", "#63cdcf", "#dbc074", "#c94f6d" },
+    brights = { "#29394f", "#86abdc", "#baa1e2", "#e4e4e5", "#8ebaa4", "#7ad5d6", "#e0c989", "#d16983" },
     tab_bar = {
       background = "#131a24",
       active_tab = { bg_color = "#71839b", fg_color = "#192330" },
@@ -178,9 +177,9 @@ return {
     selection_bg = "#293e40",
     selection_fg = "#e6eaea",
     split = "#0f1c1e",
-    -- usage order: 2=blue 3=magenta 4=white 5=yellow 6=green 7=cyan 1=red
-    ansi = { "#0f1c1e", "#e85c51", "#5a93aa", "#ad5c7c", "#ebebeb", "#fda47f", "#7aa4a1", "#a1cdd8" },
-    brights = { "#254147", "#eb746b", "#73a3b7", "#b97490", "#eeeeee", "#fdb292", "#8eb2af", "#afd4de" },
+    -- usage order: 1=blue 2=magenta 3=white 4=yellow 5=green 6=cyan 7=red
+    ansi = { "#0f1c1e", "#5a93aa", "#ad5c7c", "#ebebeb", "#fda47f", "#7aa4a1", "#a1cdd8", "#e85c51" },
+    brights = { "#254147", "#73a3b7", "#b97490", "#eeeeee", "#fdb292", "#8eb2af", "#afd4de", "#eb746b" },
     tab_bar = {
       background = "#0f1c1e",
       active_tab = { bg_color = "#587b7b", fg_color = "#152528" },
@@ -204,9 +203,9 @@ return {
     selection_bg = "#3b4252",
     selection_fg = "#c0c8d8",
     split = "#191d24",
-    -- usage order: 2=blue 3=cyan 4=magenta 5=green 6=white 7=yellow 1=red
-    ansi = { "#1a1d23", "#bf616a", "#5e81ac", "#8fbcbb", "#b48ead", "#a3be8c", "#c0c8d8", "#ebcb8b" },
-    brights = { "#2e3440", "#c5727a", "#88c0d0", "#9fc6c5", "#be9db8", "#b1c89d", "#d8dee9", "#efd49f" },
+    -- usage order: 1=blue 2=cyan 3=magenta 4=green 5=white 6=yellow 7=red
+    ansi = { "#1a1d23", "#5e81ac", "#8fbcbb", "#b48ead", "#a3be8c", "#c0c8d8", "#ebcb8b", "#bf616a" },
+    brights = { "#2e3440", "#88c0d0", "#9fc6c5", "#be9db8", "#b1c89d", "#d8dee9", "#efd49f", "#c5727a" },
     tab_bar = {
       background = "#191d24",
       active_tab = { bg_color = "#242933", fg_color = "#d8dee9" },
@@ -227,9 +226,9 @@ return {
     selection_bg = "#3b3551",
     selection_fg = "#e0def4",
     split = "#6e6a86",
-    -- usage order: 2=blue 3=green 4=yellow 5=cyan 6=magenta 7=white 1=red
-    ansi = { "#2a273f", "#eb6f92", "#9ccfd8", "#3e8fb0", "#f6c177", "#ea9a97", "#c4a7e7", "#e0def4" },
-    brights = { "#393552", "#ef89a6", "#aed8df", "#61a3be", "#f8cc8f", "#eeacaa", "#cfb7eb", "#e5e3f6" },
+    -- usage order: 1=blue 2=green 3=yellow 4=cyan 5=magenta 6=white 7=red
+    ansi = { "#2a273f", "#9ccfd8", "#3e8fb0", "#f6c177", "#ea9a97", "#c4a7e7", "#e0def4", "#eb6f92" },
+    brights = { "#393552", "#aed8df", "#61a3be", "#f8cc8f", "#eeacaa", "#cfb7eb", "#e5e3f6", "#ef89a6" },
     tab_bar = {
       background = "#2a273f",
       active_tab = { bg_color = "#393552", fg_color = "#e0def4" },
@@ -250,9 +249,9 @@ return {
     selection_bg = "#333738",
     selection_fg = "#cdcdcd",
     split = "#878787",
-    -- usage order: 2=blue 3=yellow 4=white 5=cyan 6=red 7=magenta 1=green
-    ansi = { "#1e1e27", "#7fa563", "#6e94b2", "#f3be7c", "#cdcdcd", "#aeaed1", "#d8647e", "#bb9dbd" },
-    brights = { "#2a273f", "#99b782", "#8ba9c1", "#f5cb96", "#d7d7d7", "#bebeda", "#e08398", "#c9b1ca" },
+    -- usage order: 1=blue 2=yellow 3=white 4=cyan 5=red 6=magenta 7=green
+    ansi = { "#1e1e27", "#6e94b2", "#f3be7c", "#cdcdcd", "#aeaed1", "#d8647e", "#bb9dbd", "#7fa563" },
+    brights = { "#2a273f", "#8ba9c1", "#f5cb96", "#d7d7d7", "#bebeda", "#e08398", "#c9b1ca", "#99b782" },
     tab_bar = {
       background = "#1c1c24",
       active_tab = { bg_color = "#333738", fg_color = "#cdcdcd" },
@@ -273,9 +272,9 @@ return {
     selection_bg = "#acb0be",
     selection_fg = "#4c4f69",
     split = "#9ca0b0",
-    -- usage order: 2=blue 3=magenta 4=green 5=yellow 6=cyan 7=red 1=white
-    ansi = { "#e6e9ef", "#acb0be", "#1e66f5", "#ea76cb", "#40a02b", "#df8e1d", "#179299", "#d20f39" },
-    brights = { "#ccd0da", "#bcc0cc", "#1e66f5", "#ea76cb", "#40a02b", "#df8e1d", "#179299", "#d20f39" },
+    -- usage order: 1=blue 2=magenta 3=green 4=yellow 5=cyan 6=red 7=white
+    ansi = { "#e6e9ef", "#1e66f5", "#ea76cb", "#40a02b", "#df8e1d", "#179299", "#d20f39", "#acb0be" },
+    brights = { "#ccd0da", "#1e66f5", "#ea76cb", "#40a02b", "#df8e1d", "#179299", "#d20f39", "#bcc0cc" },
     tab_bar = {
       background = "#dce0e8",
       active_tab = { bg_color = "#bcc0cc", fg_color = "#4c4f69" },
@@ -296,9 +295,9 @@ return {
     selection_bg = "#eaedc8",
     selection_fg = "#5c6a72",
     split = "#e0dcc7",
-    -- usage order: 2=green 3=red 4=blue 5=cyan 6=yellow 7=magenta 1=white
-    ansi = { "#f4f0d9", "#e6e2cc", "#8da101", "#f85552", "#3a94c5", "#35a77c", "#dfa000", "#df69ba" },
-    brights = { "#e6e2cc", "#ebe8d6", "#8da101", "#f85552", "#3a94c5", "#35a77c", "#dfa000", "#df69ba" },
+    -- usage order: 1=green 2=red 3=blue 4=cyan 5=yellow 6=magenta 7=white
+    ansi = { "#f4f0d9", "#8da101", "#f85552", "#3a94c5", "#35a77c", "#dfa000", "#df69ba", "#e6e2cc" },
+    brights = { "#e6e2cc", "#8da101", "#f85552", "#3a94c5", "#35a77c", "#dfa000", "#df69ba", "#ebe8d6" },
     tab_bar = {
       background = "#f4f0d9",
       active_tab = { bg_color = "#93b259", fg_color = "#fdf6e3" },
@@ -319,9 +318,9 @@ return {
     selection_bg = "#eee0b7",
     selection_fg = "#654735",
     split = "#ddccab",
-    -- usage order: 2=green 3=red 4=blue 5=cyan 6=yellow 7=magenta 1=white
-    ansi = { "#f2e5bc", "#ddccab", "#6c782e", "#c14a4a", "#45707a", "#4c7a5d", "#b47109", "#945e80" },
-    brights = { "#e5d5ad", "#e4d6bc", "#6c782e", "#c14a4a", "#45707a", "#4c7a5d", "#b47109", "#945e80" },
+    -- usage order: 1=green 2=red 3=blue 4=cyan 5=yellow 6=magenta 7=white
+    ansi = { "#f2e5bc", "#6c782e", "#c14a4a", "#45707a", "#4c7a5d", "#b47109", "#945e80", "#ddccab" },
+    brights = { "#e5d5ad", "#6c782e", "#c14a4a", "#45707a", "#4c7a5d", "#b47109", "#945e80", "#e4d6bc" },
     tab_bar = {
       background = "#f2e5bc",
       active_tab = { bg_color = "#7c6f64", fg_color = "#fbf1c7" },
@@ -342,9 +341,9 @@ return {
     selection_bg = "#d4cdd4",
     selection_fg = "#73787d",
     split = "#9ba1bf",
-    -- usage order: 2=green 3=magenta 4=white 5=cyan 6=red 7=yellow 1=blue
-    ansi = { "#d1cfc5", "#809ba7", "#7b958e", "#9e7e98", "#aeaea6", "#7e8faf", "#c27672", "#a7956a" },
-    brights = { "#d8d8d2", "#91b0bd", "#84a098", "#a989a3", "#b6b6ae", "#8a9ab8", "#c68582", "#b29f71" },
+    -- usage order: 1=green 2=magenta 3=white 4=cyan 5=red 6=yellow 7=blue
+    ansi = { "#d1cfc5", "#7b958e", "#9e7e98", "#aeaea6", "#7e8faf", "#c27672", "#a7956a", "#809ba7" },
+    brights = { "#d8d8d2", "#84a098", "#a989a3", "#b6b6ae", "#8a9ab8", "#c68582", "#b29f71", "#91b0bd" },
     tab_bar = {
       background = "#cbc8bc",
       active_tab = { bg_color = "#e1e1de", fg_color = "#73787d" },
@@ -367,9 +366,9 @@ return {
     selection_bg = "#d0d8d8",
     selection_fg = "#575279",
     split = "#ebe5df",
-    -- usage order: 2=blue 3=magenta 4=green 5=cyan 6=red 7=yellow 1=white
-    ansi = { "#ebe5df", "#e5e9f0", "#286983", "#907aa9", "#629f81", "#56949f", "#b4637a", "#ea9d34" },
-    brights = { "#b1c0c3", "#e6ebf3", "#2d81a3", "#9a80b9", "#618774", "#5ca7b4", "#c26d85", "#eea846" },
+    -- usage order: 1=blue 2=magenta 3=green 4=cyan 5=red 6=yellow 7=white
+    ansi = { "#ebe5df", "#286983", "#907aa9", "#629f81", "#56949f", "#b4637a", "#ea9d34", "#e5e9f0" },
+    brights = { "#b1c0c3", "#2d81a3", "#9a80b9", "#618774", "#5ca7b4", "#c26d85", "#eea846", "#e6ebf3" },
     tab_bar = {
       background = "#ebe5df",
       active_tab = { bg_color = "#a8a3b3", fg_color = "#faf4ed" },
@@ -390,9 +389,9 @@ return {
     selection_bg = "#e7d2be",
     selection_fg = "#3d2b5a",
     split = "#e4dcd4",
-    -- usage order: 2=blue 3=magenta 4=green 5=cyan 6=yellow 7=red 1=white
-    ansi = { "#E3DCD4", "#f2e9e1", "#2848a9", "#6e33ce", "#396847", "#287980", "#ac5402", "#a5222f" },
-    brights = { "#acb0c7", "#f4ece6", "#4863b6", "#8452d5", "#577f63", "#488d93", "#b86e28", "#b3434e" },
+    -- usage order: 1=blue 2=magenta 3=green 4=cyan 5=yellow 6=red 7=white
+    ansi = { "#E3DCD4", "#2848a9", "#6e33ce", "#396847", "#287980", "#ac5402", "#a5222f", "#f2e9e1" },
+    brights = { "#acb0c7", "#4863b6", "#8452d5", "#577f63", "#488d93", "#b86e28", "#b3434e", "#f4ece6" },
     tab_bar = {
       background = "#e4dcd4",
       active_tab = { bg_color = "#824d5b", fg_color = "#f6f2ee" },
@@ -413,9 +412,9 @@ return {
     selection_bg = "#eae2e3",
     selection_fg = "#464261",
     split = "#9893a5",
-    -- usage order: 2=magenta 3=blue 4=green 5=yellow 6=cyan 7=white 1=red
-    ansi = { "#f2e9e1", "#b4637a", "#907aa9", "#56949f", "#286983", "#ea9d34", "#d7827e", "#464261" },
-    brights = { "#d3c7bb", "#b4637a", "#907aa9", "#56949f", "#286983", "#ea9d34", "#d7827e", "#38354e" },
+    -- usage order: 1=magenta 2=blue 3=green 4=yellow 5=cyan 6=white 7=red
+    ansi = { "#f2e9e1", "#907aa9", "#56949f", "#286983", "#ea9d34", "#d7827e", "#464261", "#b4637a" },
+    brights = { "#d3c7bb", "#907aa9", "#56949f", "#286983", "#ea9d34", "#d7827e", "#38354e", "#b4637a" },
     tab_bar = {
       background = "#fffaf3",
       active_tab = { bg_color = "#f2e9e1", fg_color = "#464261" },
@@ -437,9 +436,9 @@ return {
     selection_bg = "#cbd9e3",
     selection_fg = "#2c363c",
     split = "#a4968f",
-    -- usage order: 2=white 3=red 4=yellow 5=blue 6=magenta 7=green 1=cyan
-    ansi = { "#ddd6d3", "#3b8992", "#2c363c", "#a8334c", "#944927", "#286486", "#88507d", "#4f6c31" },
-    brights = { "#cabfb9", "#2b747c", "#4f5e68", "#94253e", "#803d1c", "#1d5573", "#7b3b70", "#3f5a22" },
+    -- usage order: 1=white 2=red 3=yellow 4=blue 5=magenta 6=green 7=cyan
+    ansi = { "#ddd6d3", "#2c363c", "#a8334c", "#944927", "#286486", "#88507d", "#4f6c31", "#3b8992" },
+    brights = { "#cabfb9", "#4f5e68", "#94253e", "#803d1c", "#1d5573", "#7b3b70", "#3f5a22", "#2b747c" },
     tab_bar = {
       background = "#e1dcd9",
       -- TabLineSel clears fg/bg, i.e. falls through to Normal.

@@ -4,7 +4,7 @@
 # NOTE: must also uncomment last line.
 # zmodload zsh/zprof
 
-PROMPT="%B%K{8} %~ %k%f"$''"%F{2}%K{8}%(!.\$.>) %k%f %b"
+PROMPT="%B%K{8} %~ %k%f"$''"%F{1}%K{8}%(!.\$.>) %k%f %b"
 
 export XDG_CONFIG_HOME=$HOME/.config
 
