@@ -26,9 +26,9 @@ permission:
   context: 5
 
 date:
-  hour-old: 2
-  day-old: 2
-  older: 2
+  hour-old: 5
+  day-old: 5
+  older: 5
 
 size:
   none: reset
