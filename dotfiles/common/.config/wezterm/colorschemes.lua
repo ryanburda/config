@@ -24,6 +24,9 @@ red keywords. Roles painted in a color the terminal palette doesn't carry
 (nordic's orange keywords) and plain `@variable` (the default foreground)
 don't vote.
 
+I do sometimes change the color order to taste, usually ranking the palettes
+natural red color lower down the list.
+
 --]]
 
 return {
@@ -61,8 +64,8 @@ return {
     selection_fg = "#d3c6aa",
     split = "#4f585e",
     -- usage order: 1=green 2=red 3=blue 4=cyan 5=yellow 6=magenta 7=white
-    ansi = { "#343f44", "#a7c080", "#e67e80", "#7fbbb3", "#83c092", "#dbbc7f", "#d699b6", "#d3c6aa" },
-    brights = { "#3d484d", "#b7cb97", "#ea9597", "#96c7c1", "#99cba6", "#e1c896", "#ddabc3", "#dacfb7" },
+    ansi = { "#343f44", "#a7c080", "#7fbbb3", "#e67e80", "#83c092", "#dbbc7f", "#d699b6", "#d3c6aa" },
+    brights = { "#3d484d", "#b7cb97", "#96c7c1", "#ea9597", "#99cba6", "#e1c896", "#ddabc3", "#dacfb7" },
     tab_bar = {
       background = "#343f44",
       active_tab = { bg_color = "#a7c080", fg_color = "#2d353b" },
@@ -84,8 +87,8 @@ return {
     selection_fg = "#d4be98",
     split = "#5a524c",
     -- usage order: 1=green 2=red 3=blue 4=cyan 5=yellow 6=magenta 7=white
-    ansi = { "#32302f", "#b8c381", "#ea6962", "#7daea3", "#89b482", "#dfb675", "#d3869b", "#d4be98" },
-    brights = { "#504945", "#a9b665", "#ee847e", "#94bdb4", "#9ec298", "#d8a657", "#db9cad", "#dac8a7" },
+    ansi = { "#32302f", "#b8c381", "#7daea3", "#ea6962", "#89b482", "#dfb675", "#d3869b", "#d4be98" },
+    brights = { "#504945", "#a9b665", "#94bdb4", "#ee847e", "#9ec298", "#d8a657", "#db9cad", "#dac8a7" },
     tab_bar = {
       background = "#32302f",
       active_tab = { bg_color = "#a89984", fg_color = "#282828" },
