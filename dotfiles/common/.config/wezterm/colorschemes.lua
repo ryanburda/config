@@ -219,29 +219,6 @@ return {
     },
   },
 
-  -- Dark - Rose-pine
-  ["rose-pine-moon-dark"] = {
-    foreground = "#e0def4",
-    background = "#232136",
-    cursor_bg = "#56526e",
-    cursor_fg = "#e0def4",
-    cursor_border = "#56526e",
-    selection_bg = "#3b3551",
-    selection_fg = "#e0def4",
-    split = "#6e6a86",
-    -- usage order: 1=blue 2=green 3=yellow 4=cyan 5=magenta 6=white 7=red
-    ansi = { "#2a273f", "#9ccfd8", "#3e8fb0", "#f6c177", "#ea9a97", "#c4a7e7", "#e0def4", "#eb6f92" },
-    brights = { "#393552", "#aed8df", "#61a3be", "#f8cc8f", "#eeacaa", "#cfb7eb", "#e5e3f6", "#ef89a6" },
-    tab_bar = {
-      background = "#2a273f",
-      active_tab = { bg_color = "#393552", fg_color = "#e0def4" },
-      inactive_tab = { bg_color = "#2a273f", fg_color = "#908caa" },
-      inactive_tab_hover = { bg_color = "#393552", fg_color = "#e0def4" },
-      new_tab = { bg_color = "#2a273f", fg_color = "#908caa" },
-      new_tab_hover = { bg_color = "#393552", fg_color = "#e0def4" },
-    },
-  },
-
   -- Dark - Vague
   ["vague-dark"] = {
     foreground = "#cdcdcd",
@@ -404,30 +381,6 @@ return {
       new_tab_hover = { bg_color = "#d3c7bb", fg_color = "#3d2b5a" },
     },
   },
-
-  -- Light - Rose-pine
-  ["rose-pine-dawn-light"] = {
-    foreground = "#464261",
-    background = "#faf4ed",
-    cursor_bg = "#cecacd",
-    cursor_fg = "#464261",
-    cursor_border = "#cecacd",
-    selection_bg = "#eae2e3",
-    selection_fg = "#464261",
-    split = "#9893a5",
-    -- usage order: 1=magenta 2=blue 3=green 4=yellow 5=cyan 6=white 7=red
-    ansi = { "#f2e9e1", "#907aa9", "#56949f", "#286983", "#ea9d34", "#d7827e", "#464261", "#b4637a" },
-    brights = { "#d3c7bb", "#907aa9", "#56949f", "#286983", "#ea9d34", "#d7827e", "#38354e", "#b4637a" },
-    tab_bar = {
-      background = "#fffaf3",
-      active_tab = { bg_color = "#f2e9e1", fg_color = "#464261" },
-      inactive_tab = { bg_color = "#fffaf3", fg_color = "#797593" },
-      inactive_tab_hover = { bg_color = "#f2e9e1", fg_color = "#464261" },
-      new_tab = { bg_color = "#fffaf3", fg_color = "#797593" },
-      new_tab_hover = { bg_color = "#f2e9e1", fg_color = "#464261" },
-    },
-  },
-
 
   -- Light - Zenbones
   ["zenbones-light"] = {

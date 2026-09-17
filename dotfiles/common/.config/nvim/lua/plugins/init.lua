@@ -64,7 +64,6 @@ return {
   'sainnhe/everforest',
   'sainnhe/gruvbox-material',
   'EdenEast/nightfox.nvim',
-  'rose-pine/neovim',
   'vague2k/vague.nvim',
   'catppuccin/nvim',
   'AlexvZyl/nordic.nvim',
