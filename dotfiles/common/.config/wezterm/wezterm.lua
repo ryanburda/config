@@ -21,8 +21,8 @@ local scheme = colorschemes[color_scheme]
 if scheme ~= nil then
   config.color_schemes = { [color_scheme] = scheme }
 else
+  -- Not one of ours; hope for a wezterm builtin of the same name.
   color_scheme = nvim_colorscheme
-  scheme = wezterm.color.get_builtin_schemes()[color_scheme]
 end
 config.color_scheme = color_scheme
 config.font = wezterm.font(envy.get('font_family', 'JetBrains Mono'))
@@ -45,28 +45,12 @@ config.initial_cols = 120
 config.window_padding = { left = 0, right = 0, top = 20, bottom = 0 }
 config.warn_about_missing_glyphs = false
 
--- BACKGROUND
---
--- `wezterm_transparency` is either 'true' or 'false'. When true the current
--- colorscheme's background is rendered semi transparent so that any windows
--- under the terminal show through.
+-- transparency
 if envy.get('wezterm_transparency', 'false') == 'true' then
-  local opacity = 0.96
+  config.window_background_opacity = 0.93
   if nvim_background ~= 'dark' then
-    opacity = 0.92
+    config.window_background_opacity = 0.87
   end
-
-  config.background = {
-    {
-      source = {
-        Color = scheme.background
-      },
-      opacity = opacity,
-      -- height and width needed due to https://github.com/wez/wezterm/issues/2817
-      height = '100%',
-      width = '100%',
-    }
-  }
 end
 
 return config
