@@ -9,12 +9,21 @@ Colors come from each colorscheme itself: `terminal_color_0..15` plus the
 Normal/Cursor/Visual/TabLine highlight groups, read out of a headless
 Neovim. The exceptions are noted inline.
 
-`ansi`/`brights` are NOT in ANSI order. Slots 1-7 are sorted by how much of
-a screenful of code each color actually paints: slot 1 is always the
-scheme's dominant color, slot 2 the next, down to slot 7 for the least-used.
-That way `pane-active-border-style "fg=1"` and friends follow the
-colorscheme instead of always landing on red. Slot 0 stays black, and each
-scheme's `-- usage order` comment records which color went where.
+`ansi`/`brights` are NOT in ANSI order which normally looks like this:
+  0 = black
+  1 = red
+  2 = green
+  3 = yellow
+  4 = blue
+  5 = magenta
+  6 = cyan
+  7 = white
+Slots 1-7 are instead sorted by how much of a screenful of code each color
+actually paints: slot 1 is always the scheme's dominant color, slot 2 the
+next, down to slot 7 for the least-used. That way setting something like
+tmux's `pane-active-border-style "fg=1"` results in using the most dominant
+color in the palette instead of being that colorscheme's version of red.
+Slot 0 always stays black.
 
 The ranking comes from the Neovim colorscheme itself: every common token
 role (@string, @function, @keyword, @property, @type, @comment, ...) is
@@ -40,7 +49,6 @@ return {
     selection_bg = "#585b70",
     selection_fg = "#cdd6f4",
     split = "#6c7086",
-    -- usage order: 1=blue 2=white 3=magenta 4=green 5=yellow 6=cyan 7=red
     ansi = { "#181825", "#89b4fa", "#bac2de", "#f5c2e7", "#a6e3a1", "#f9e2af", "#94e2d5", "#f38ba8" },
     brights = { "#313244", "#89b4fa", "#a6adc8", "#f5c2e7", "#a6e3a1", "#f9e2af", "#94e2d5", "#f38ba8" },
     tab_bar = {
@@ -63,7 +71,6 @@ return {
     selection_bg = "#543a48",
     selection_fg = "#d3c6aa",
     split = "#4f585e",
-    -- usage order: 1=green 2=red 3=blue 4=cyan 5=yellow 6=magenta 7=white
     ansi = { "#343f44", "#a7c080", "#7fbbb3", "#e67e80", "#83c092", "#dbbc7f", "#d699b6", "#d3c6aa" },
     brights = { "#3d484d", "#b7cb97", "#96c7c1", "#ea9597", "#99cba6", "#e1c896", "#ddabc3", "#dacfb7" },
     tab_bar = {
@@ -86,7 +93,6 @@ return {
     selection_bg = "#45403d",
     selection_fg = "#d4be98",
     split = "#5a524c",
-    -- usage order: 1=green 2=red 3=blue 4=cyan 5=yellow 6=magenta 7=white
     ansi = { "#32302f", "#b8c381", "#7daea3", "#ea6962", "#89b482", "#dfb675", "#d3869b", "#d4be98" },
     brights = { "#504945", "#a9b665", "#94bdb4", "#ee847e", "#9ec298", "#d8a657", "#db9cad", "#dac8a7" },
     tab_bar = {
@@ -109,7 +115,6 @@ return {
     selection_bg = "#363646",
     selection_fg = "#dcd7ba",
     split = "#8992a7",
-    -- usage order: 1=magenta 2=red 3=cyan 4=blue 5=yellow 6=green 7=white
     ansi = { "#2a2a37", "#a292a3", "#8ea49e", "#c4746e", "#c4b28a", "#435965", "#699469", "#c8c093" },
     brights = { "#363646", "#b4a7b5", "#96ada7", "#cc928e", "#d4c196", "#698a9b", "#72a072", "#d5cd9d" },
     tab_bar = {
@@ -134,7 +139,6 @@ return {
     selection_bg = "#433c59",
     selection_fg = "#e0def4",
     split = "#191726",
-    -- usage order: 1=blue 2=magenta 3=white 4=green 5=cyan 6=yellow 7=red
     ansi = { "#191726", "#569fba", "#a3be8c", "#c4a7e7", "#9ccfd8", "#e0def4", "#f6c177", "#eb6f92" },
     brights = { "#373354", "#65b1cd", "#b1d196", "#ccb1ed", "#a6dae3", "#e2e0f7", "#f9cb8c", "#f083a2" },
     tab_bar = {
@@ -157,7 +161,6 @@ return {
     selection_bg = "#2b3b51",
     selection_fg = "#cdcecf",
     split = "#131a24",
-    -- usage order: 1=blue 2=magenta 3=white 4=green 5=cyan 6=yellow 7=red
     ansi = { "#131a24", "#719cd6", "#81b29a", "#9d79d6", "#63cdcf", "#dfdfe0", "#dbc074", "#c94f6d" },
     brights = { "#29394f", "#86abdc", "#8ebaa4", "#baa1e2", "#7ad5d6", "#e4e4e5", "#e0c989", "#d16983" },
     tab_bar = {
@@ -183,7 +186,6 @@ return {
     selection_bg = "#3b4252",
     selection_fg = "#c0c8d8",
     split = "#191d24",
-    -- usage order: 1=blue 2=cyan 3=magenta 4=green 5=white 6=yellow 7=red
     ansi = { "#1a1d23", "#5e81ac", "#8fbcbb", "#b48ead", "#a3be8c", "#c0c8d8", "#ebcb8b", "#bf616a" },
     brights = { "#2e3440", "#88c0d0", "#9fc6c5", "#be9db8", "#b1c89d", "#d8dee9", "#efd49f", "#c5727a" },
     tab_bar = {
@@ -206,7 +208,6 @@ return {
     selection_bg = "#333738",
     selection_fg = "#cdcdcd",
     split = "#878787",
-    -- usage order: 1=blue 2=yellow 3=white 4=cyan 5=red 6=magenta 7=green
     ansi = { "#1e1e27", "#6e94b2", "#f3be7c", "#cdcdcd", "#aeaed1", "#d8647e", "#bb9dbd", "#7fa563" },
     brights = { "#2a273f", "#8ba9c1", "#f5cb96", "#d7d7d7", "#bebeda", "#e08398", "#c9b1ca", "#99b782" },
     tab_bar = {
@@ -229,7 +230,6 @@ return {
     selection_bg = "#eaedc8",
     selection_fg = "#5c6a72",
     split = "#e0dcc7",
-    -- usage order: 1=green 2=blue3=red 4=cyan 5=yellow 6=magenta 7=white
     ansi = { "#f4f0d9", "#8da101", "#3a94c5", "#f85552", "#35a77c", "#dfa000", "#df69ba", "#e6e2cc" },
     brights = { "#e6e2cc", "#8da101", "#3a94c5", "#f85552", "#35a77c", "#dfa000", "#df69ba", "#ebe8d6" },
     tab_bar = {
@@ -252,7 +252,6 @@ return {
     selection_bg = "#eee0b7",
     selection_fg = "#654735",
     split = "#ddccab",
-    -- usage order: 1=green 2=blue 3=red 4=cyan 5=yellow 6=magenta 7=white
     ansi = { "#f2e5bc", "#6c782e", "#45707a", "#c14a4a", "#4c7a5d", "#b47109", "#945e80", "#ddccab" },
     brights = { "#e5d5ad", "#6c782e", "#45707a", "#c14a4a", "#4c7a5d", "#b47109", "#945e80", "#e4d6bc" },
     tab_bar = {
@@ -275,7 +274,6 @@ return {
     selection_bg = "#d0d8d8",
     selection_fg = "#575279",
     split = "#ebe5df",
-    -- usage order: 1=blue 2=magenta 3=green 4=cyan 5=red 6=yellow 7=white
     ansi = { "#ebe5df", "#286983", "#907aa9", "#629f81", "#56949f", "#b4637a", "#ea9d34", "#e5e9f0" },
     brights = { "#b1c0c3", "#2d81a3", "#9a80b9", "#618774", "#5ca7b4", "#c26d85", "#eea846", "#e6ebf3" },
     tab_bar = {
@@ -298,7 +296,6 @@ return {
     selection_bg = "#e7d2be",
     selection_fg = "#3d2b5a",
     split = "#e4dcd4",
-    -- usage order: 1=blue 2=magenta 3=green 4=cyan 5=yellow 6=red 7=white
     ansi = { "#E3DCD4", "#2848a9", "#6e33ce", "#396847", "#287980", "#ac5402", "#a5222f", "#f2e9e1" },
     brights = { "#acb0c7", "#4863b6", "#8452d5", "#577f63", "#488d93", "#b86e28", "#b3434e", "#f4ece6" },
     tab_bar = {
@@ -321,7 +318,6 @@ return {
     selection_bg = "#cbd9e3",
     selection_fg = "#2c363c",
     split = "#a4968f",
-    -- usage order: 1=white 2=red 3=yellow 4=blue 5=magenta 6=green 7=cyan
     ansi = { "#ddd6d3", "#2c363c", "#4f6c31", "#944927", "#286486", "#88507d", "#3b8992", "#a8334c" },
     brights = { "#cabfb9", "#4f5e68", "#3f5a22", "#803d1c", "#1d5573", "#7b3b70", "#2b747c", "#94253e" },
     tab_bar = {
