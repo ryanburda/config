@@ -135,8 +135,8 @@ return {
     selection_fg = "#e0def4",
     split = "#191726",
     -- usage order: 1=blue 2=magenta 3=white 4=green 5=cyan 6=yellow 7=red
-    ansi = { "#191726", "#569fba", "#c4a7e7", "#e0def4", "#a3be8c", "#9ccfd8", "#f6c177", "#eb6f92" },
-    brights = { "#373354", "#65b1cd", "#ccb1ed", "#e2e0f7", "#b1d196", "#a6dae3", "#f9cb8c", "#f083a2" },
+    ansi = { "#191726", "#569fba", "#a3be8c", "#c4a7e7", "#9ccfd8", "#e0def4", "#f6c177", "#eb6f92" },
+    brights = { "#373354", "#65b1cd", "#b1d196", "#ccb1ed", "#a6dae3", "#e2e0f7", "#f9cb8c", "#f083a2" },
     tab_bar = {
       background = "#191726",
       active_tab = { bg_color = "#6e6a86", fg_color = "#232136" },
@@ -158,8 +158,8 @@ return {
     selection_fg = "#cdcecf",
     split = "#131a24",
     -- usage order: 1=blue 2=magenta 3=white 4=green 5=cyan 6=yellow 7=red
-    ansi = { "#131a24", "#719cd6", "#9d79d6", "#dfdfe0", "#81b29a", "#63cdcf", "#dbc074", "#c94f6d" },
-    brights = { "#29394f", "#86abdc", "#baa1e2", "#e4e4e5", "#8ebaa4", "#7ad5d6", "#e0c989", "#d16983" },
+    ansi = { "#131a24", "#719cd6", "#81b29a", "#9d79d6", "#63cdcf", "#dfdfe0", "#dbc074", "#c94f6d" },
+    brights = { "#29394f", "#86abdc", "#8ebaa4", "#baa1e2", "#7ad5d6", "#e4e4e5", "#e0c989", "#d16983" },
     tab_bar = {
       background = "#131a24",
       active_tab = { bg_color = "#71839b", fg_color = "#192330" },
@@ -167,29 +167,6 @@ return {
       inactive_tab_hover = { bg_color = "#29394f", fg_color = "#cdcecf" },
       new_tab = { bg_color = "#212e3f", fg_color = "#aeafb0" },
       new_tab_hover = { bg_color = "#29394f", fg_color = "#cdcecf" },
-    },
-  },
-
-  -- Dark - Nightfox-tera
-  ["terafox-dark"] = {
-    foreground = "#e6eaea",
-    background = "#152528",
-    cursor_bg = "#e6eaea",
-    cursor_fg = "#152528",
-    cursor_border = "#e6eaea",
-    selection_bg = "#293e40",
-    selection_fg = "#e6eaea",
-    split = "#0f1c1e",
-    -- usage order: 1=blue 2=magenta 3=white 4=yellow 5=green 6=cyan 7=red
-    ansi = { "#0f1c1e", "#5a93aa", "#ad5c7c", "#ebebeb", "#fda47f", "#7aa4a1", "#a1cdd8", "#e85c51" },
-    brights = { "#254147", "#73a3b7", "#b97490", "#eeeeee", "#fdb292", "#8eb2af", "#afd4de", "#eb746b" },
-    tab_bar = {
-      background = "#0f1c1e",
-      active_tab = { bg_color = "#587b7b", fg_color = "#152528" },
-      inactive_tab = { bg_color = "#1d3337", fg_color = "#cbd9d8" },
-      inactive_tab_hover = { bg_color = "#254147", fg_color = "#e6eaea" },
-      new_tab = { bg_color = "#1d3337", fg_color = "#cbd9d8" },
-      new_tab_hover = { bg_color = "#254147", fg_color = "#e6eaea" },
     },
   },
 
@@ -288,31 +265,6 @@ return {
     },
   },
 
-  -- Light - Kanagawa-paper-canvas
-  ["kanagawa-paper-canvas-light"] = {
-    foreground = "#73787d",
-    background = "#e1e1de",
-    cursor_bg = "#73787d",
-    cursor_fg = "#e1e1de",
-    cursor_border = "#73787d",
-    selection_bg = "#d4cdd4",
-    selection_fg = "#73787d",
-    split = "#9ba1bf",
-    -- usage order: 1=green 2=magenta 3=white 4=cyan 5=red 6=yellow 7=blue
-    ansi = { "#d1cfc5", "#7b958e", "#9e7e98", "#aeaea6", "#7e8faf", "#c27672", "#a7956a", "#809ba7" },
-    brights = { "#d8d8d2", "#84a098", "#a989a3", "#b6b6ae", "#8a9ab8", "#c68582", "#b29f71", "#91b0bd" },
-    tab_bar = {
-      background = "#cbc8bc",
-      active_tab = { bg_color = "#e1e1de", fg_color = "#73787d" },
-      -- Exception: TabLine's own fg (#8e8a80) barely clears its bg here, so the
-      -- inactive label uses Normal's fg; the bg still separates it from active.
-      inactive_tab = { bg_color = "#cbc8bc", fg_color = "#73787d" },
-      inactive_tab_hover = { bg_color = "#d8d8d2", fg_color = "#73787d" },
-      new_tab = { bg_color = "#cbc8bc", fg_color = "#73787d" },
-      new_tab_hover = { bg_color = "#d8d8d2", fg_color = "#73787d" },
-    },
-  },
-
   -- Light - Nightfox-dawn
   ["dawnfox-light"] = {
     foreground = "#575279",
@@ -370,8 +322,8 @@ return {
     selection_fg = "#2c363c",
     split = "#a4968f",
     -- usage order: 1=white 2=red 3=yellow 4=blue 5=magenta 6=green 7=cyan
-    ansi = { "#ddd6d3", "#2c363c", "#a8334c", "#944927", "#286486", "#88507d", "#4f6c31", "#3b8992" },
-    brights = { "#cabfb9", "#4f5e68", "#94253e", "#803d1c", "#1d5573", "#7b3b70", "#3f5a22", "#2b747c" },
+    ansi = { "#ddd6d3", "#2c363c", "#4f6c31", "#944927", "#286486", "#88507d", "#3b8992", "#a8334c" },
+    brights = { "#cabfb9", "#4f5e68", "#3f5a22", "#803d1c", "#1d5573", "#7b3b70", "#2b747c", "#94253e" },
     tab_bar = {
       background = "#e1dcd9",
       -- TabLineSel clears fg/bg, i.e. falls through to Normal.
