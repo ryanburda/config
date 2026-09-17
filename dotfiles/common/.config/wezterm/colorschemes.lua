@@ -392,7 +392,7 @@ return {
     split = "#e4dcd4",
     -- usage order: 2=blue 3=magenta 4=green 5=cyan 6=yellow 7=red 1=white
     ansi = { "#E3DCD4", "#f2e9e1", "#2848a9", "#6e33ce", "#396847", "#287980", "#ac5402", "#a5222f" },
-    brights = { "#d3c7bb", "#f4ece6", "#4863b6", "#8452d5", "#577f63", "#488d93", "#b86e28", "#b3434e" },
+    brights = { "#acb0c7", "#f4ece6", "#4863b6", "#8452d5", "#577f63", "#488d93", "#b86e28", "#b3434e" },
     tab_bar = {
       background = "#e4dcd4",
       active_tab = { bg_color = "#824d5b", fg_color = "#f6f2ee" },
