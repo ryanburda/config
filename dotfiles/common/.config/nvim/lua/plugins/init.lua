@@ -686,11 +686,16 @@ return {
 
       -- The signature window places itself against the menu too, and asserts
       -- the menu is window-relative -- which ours is not, so it has to be
-      -- replaced as well. It follows the same rules as the menu: the same left
-      -- edge, `scrolloff` rows clear of the cursor line, but on whichever side
-      -- of the cursor the menu is not using (above, when the menu is closed).
-      -- Unlike the menu it keeps blink's fit-to-content size, only shrunk to
-      -- what its side has room for.
+      -- replaced as well. It shares the pair's left edge and width limit, but
+      -- keeps blink's fit-to-content size, only shrunk to the room it gets.
+      --
+      -- It stacks onto the edge of the pair that faces the cursor, so it is
+      -- always the nearer of the two to the line being edited: in the
+      -- `scrolloff` gap, against the pair, and never over the cursor line
+      -- itself. When the gap is too shallow to hold it -- a small 'scrolloff'
+      -- -- it goes on the far edge of the pair instead, which is still on
+      -- screen whenever the pair is. With the menu closed it falls back to the
+      -- cursor: above it, or below when there is no room.
       local signature = require('blink.cmp.signature.window')
       local default_signature_position = signature.update_position
 
@@ -709,24 +714,48 @@ return {
         local cursor = vim.fn.winline()
         local gap = gap_for(box, cursor)
         local cursor_row = box.row + cursor - 1
+        local box_last = box.row + box.height - 1
 
-        local at_top = true
-        if menu.win:is_open() then
-          at_top = vim.api.nvim_win_get_config(menu.win:get_win()).row > cursor_row
-        end
-
-        -- rather than render a sliver, give up if that side has no room
-        local room = at_top and cursor - 1 - gap or box.height - cursor - gap
-        if room <= border.vertical then return win:close() end
-
-        win:set_height(math.max(math.min(win:get_height(), room) - border.vertical, 1))
         win:set_width(math.max(math.min(win:get_width(), box_width(box)) - border.horizontal, 1))
 
-        local row = at_top
-          and math.max(cursor_row - gap - win:get_height(), box.row)
-          or math.min(cursor_row + 1 + gap, box.row + box.height - win:get_height())
+        -- The free bands the window may take, in order of preference, as
+        -- inclusive editor rows. `bottom` bands hold the window against their
+        -- last row, so it grows away from whatever it is stacked under.
+        local above_cursor = { first = box.row, last = cursor_row - gap - 1, anchor = 'bottom' }
+        local below_cursor = { first = cursor_row + gap + 1, last = box_last, anchor = 'top' }
+        local bands = { above_cursor, below_cursor }
 
-        win:set_win_config({ relative = 'editor', row = row, col = box.col })
+        if menu.win:is_open() then
+          local menu_config = vim.api.nvim_win_get_config(menu.win:get_win())
+          local pair_first = menu_config.row
+          local pair_last = pair_first + menu.win:get_height() - 1
+
+          -- the gap between the cursor line and the pair, then the far side
+          -- of the pair; whichever way round the menu settled, the window hugs
+          -- the pair rather than the cursor line
+          bands = pair_first > cursor_row
+              and {
+                { first = cursor_row + 1, last = pair_first - 1, anchor = 'bottom' },
+                { first = pair_last + 1, last = box_last, anchor = 'top' },
+              }
+            or {
+              { first = pair_last + 1, last = cursor_row - 1, anchor = 'top' },
+              { first = box.row, last = pair_first - 1, anchor = 'bottom' },
+            }
+        end
+
+        for _, band in ipairs(bands) do
+          local room = band.last - band.first + 1
+          -- anything shallower than this renders as a sliver, so try the next
+          if room > border.vertical then
+            win:set_height(math.max(math.min(win:get_height(), room) - border.vertical, 1))
+            local row = band.anchor == 'bottom' and band.last - win:get_height() + 1 or band.first
+            return win:set_win_config({ relative = 'editor', row = row, col = box.col })
+          end
+        end
+
+        -- nowhere on either side of the pair to put it
+        win:close()
       end
 
       -- Keep the signature help window up for as long as the cursor is inside a
