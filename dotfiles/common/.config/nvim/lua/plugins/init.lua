@@ -528,13 +528,12 @@ return {
     config = function(_, opts)
       require('blink.cmp').setup(opts)
 
-      -- Pin the completion menu to one edge of the *current window*, with the
-      -- documentation window directly to its right, instead of letting either
-      -- follow the cursor and cover the code being edited. The pair sits at
-      -- whichever horizontal edge of the window the cursor is furthest from --
-      -- cursor in the top half puts them along the bottom, cursor in the
-      -- bottom half puts them along the top -- so the line being edited always
-      -- stays visible.
+      -- Hold the completion menu `scrolloff` rows clear of the cursor line,
+      -- with the documentation window directly to its right, and span the two
+      -- across the *current window* rather than letting either size itself to
+      -- its contents. The pair sits below the cursor, and flips above it only
+      -- when it would not fit below -- so the line being edited, and the
+      -- context `scrolloff` keeps on screen around it, stay visible.
       --
       -- blink.cmp exposes no options for this, so both `update_position`
       -- functions are replaced. Every caller looks them up on the module table
@@ -558,14 +557,18 @@ return {
       -- The text area of the window being edited, as an editor-relative
       -- (0-indexed) box. `getwininfo()` is what makes this exact:
       -- `nvim_win_get_height()` counts the winbar as part of the window, so it
-      -- would push everything one row down in any window that has one.
+      -- would push everything one row down in any window that has one, and
+      -- `textoff` is exactly the gutter -- 'foldcolumn', 'signcolumn' and the
+      -- number column -- so starting past it leaves the line numbers visible
+      -- beside the menu. The right edge is unchanged: the box is narrower by
+      -- the same amount it was shifted.
       local function get_pane()
         local info = vim.fn.getwininfo(vim.api.nvim_get_current_win())[1]
         return {
           row = info.winrow - 1 + info.winbar,
-          col = info.wincol - 1,
+          col = info.wincol - 1 + info.textoff,
           height = info.height,
-          width = info.width,
+          width = info.width - info.textoff,
         }
       end
 
@@ -591,20 +594,30 @@ return {
         -- around-the-cursor sizing
         win:set_width(math.max(menu_box_width() - border.horizontal, 1))
 
-        -- Rows free on either side of the cursor line, which the menu is never
-        -- allowed to cover. It goes to the roomier side, so the flip happens as
-        -- the cursor crosses the middle of the window.
+        -- The gap held between the cursor line and the menu. Clamped so the
+        -- roomier side still has a row left for the menu itself, which matters
+        -- with a large 'scrolloff' (999, say, to keep the cursor centered).
         local cursor = vim.fn.winline()
-        local above, below = cursor - 1, pane.height - cursor
-        local at_top = above > below
+        local gap = math.min(
+          vim.wo.scrolloff,
+          math.max(math.max(pane.height - cursor, cursor - 1) - 1, 0)
+        )
 
-        -- shrink rather than overlap the cursor when that side is shallow; a
-        -- window too short for even one row leaves the menu overlapping, as
-        -- there is nowhere else for it to go
+        -- Rows left on either side of the cursor line once the gap is taken
+        -- out. The menu prefers below and flips above only when its full height
+        -- does not fit there; if neither side fits it takes the roomier one and
+        -- shrinks.
+        local above, below = cursor - 1 - gap, pane.height - cursor - gap
+        local at_top = below < HEIGHT + border.vertical and above > below
+
         win:set_height(math.max(math.min(HEIGHT, (at_top and above or below) - border.vertical), 1))
 
-        local row = at_top and pane.row
-          or math.max(pane.row + pane.height - win:get_height(), pane.row)
+        -- `pane.row + cursor - 1` is the cursor's own editor row; the menu is
+        -- offset from it by the gap, then clamped into the pane for the case
+        -- where even the shrunk-to-one-row menu does not fit.
+        local row = at_top
+          and math.max(pane.row + cursor - 1 - gap - win:get_height(), pane.row)
+          or math.min(pane.row + cursor + gap, pane.row + pane.height - win:get_height())
 
         win:set_win_config({ relative = 'editor', row = row, col = pane.col })
 
@@ -629,7 +642,7 @@ return {
         win:set_width(width_left - border.horizontal)
 
         -- matching the menu's height lets it share the menu's row outright,
-        -- whichever edge the menu settled on
+        -- whichever side of the cursor the menu settled on
         win:set_height(math.max(menu.win:get_height() - border.vertical, 1))
 
         win:set_win_config({ relative = 'editor', row = menu_config.row, col = col })
