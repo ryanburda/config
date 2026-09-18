@@ -501,6 +501,12 @@ return {
             max_height = 8,
           },
         },
+        -- preview the selected item inline as you type; the defaults show it
+        -- only while something is selected, which with `list.selection.preselect`
+        -- means the first item from the moment the menu opens
+        ghost_text = {
+          enabled = true,
+        },
       },
       appearance = {
         use_nvim_cmp_as_default = true,
@@ -578,8 +584,36 @@ return {
       -- when the current window is not the one being edited.
       local pane
 
-      -- the menu takes the left half of the pane, the docs window the right
-      local function menu_box_width() return math.floor(pane.width / 2) end
+      -- The menu and the documentation window are shown side by side, and
+      -- together may not grow past 'colorcolumn': the code they sit over is
+      -- written to that column, so a wider pair covers blank space. Only the
+      -- first entry counts, and a `+n` entry is relative to 'textwidth'; an
+      -- unset or unusable value leaves the pane as the only limit.
+      local function max_width()
+        local entry = vim.split(vim.wo.colorcolumn, ',')[1] or ''
+        local offset = entry:match('^[+-]%d+$')
+        local cc = offset
+          and (vim.bo.textwidth > 0 and vim.bo.textwidth + tonumber(offset) or nil)
+          or tonumber(entry)
+        return (cc and cc > 0) and cc or math.huge
+      end
+
+      -- the box the pair shares: the pane, or the cap when the pane is wider
+      local function box_width(box) return math.min(box.width, max_width()) end
+
+      -- the menu takes the left half of that box, the docs window the right
+      local function menu_box_width() return math.floor(box_width(pane) / 2) end
+
+      -- The gap held between the cursor line and a window placed beside it.
+      -- Clamped so the roomier side still has a row left for the window itself,
+      -- which matters with a large 'scrolloff' (999, say, to keep the cursor
+      -- centered).
+      local function gap_for(box, cursor)
+        return math.min(
+          vim.wo.scrolloff,
+          math.max(math.max(box.height - cursor, cursor - 1) - 1, 0)
+        )
+      end
 
       menu.update_position = function()
         if vim.api.nvim_get_mode().mode == 'c' then return default_menu_position() end
@@ -594,14 +628,8 @@ return {
         -- around-the-cursor sizing
         win:set_width(math.max(menu_box_width() - border.horizontal, 1))
 
-        -- The gap held between the cursor line and the menu. Clamped so the
-        -- roomier side still has a row left for the menu itself, which matters
-        -- with a large 'scrolloff' (999, say, to keep the cursor centered).
         local cursor = vim.fn.winline()
-        local gap = math.min(
-          vim.wo.scrolloff,
-          math.max(math.max(pane.height - cursor, cursor - 1) - 1, 0)
-        )
+        local gap = gap_for(pane, cursor)
 
         -- Rows left on either side of the cursor line once the gap is taken
         -- out. The menu prefers below and flips above only when its full height
@@ -636,7 +664,7 @@ return {
         local col = menu_config.col + menu.win:get_width()
 
         -- rather than render a sliver, give up if the menu leaves no room
-        local width_left = pane.col + pane.width - col
+        local width_left = pane.col + box_width(pane) - col
         if width_left <= border.horizontal + 1 then return win:close() end
 
         win:set_width(width_left - border.horizontal)
@@ -646,6 +674,51 @@ return {
         win:set_height(math.max(menu.win:get_height() - border.vertical, 1))
 
         win:set_win_config({ relative = 'editor', row = menu_config.row, col = col })
+      end
+
+      -- The signature window places itself against the menu too, and asserts
+      -- the menu is window-relative -- which ours is not, so it has to be
+      -- replaced as well. It follows the same rules as the menu: the same left
+      -- edge, `scrolloff` rows clear of the cursor line, but on whichever side
+      -- of the cursor the menu is not using (above, when the menu is closed).
+      -- Unlike the menu it keeps blink's fit-to-content size, only shrunk to
+      -- what its side has room for.
+      local signature = require('blink.cmp.signature.window')
+      local default_signature_position = signature.update_position
+
+      signature.update_position = function()
+        if vim.api.nvim_get_mode().mode == 'c' then return default_signature_position() end
+
+        local win = signature.win
+        if not win:is_open() then return end
+
+        win:update_size()
+
+        -- while the menu is open the two must agree on a pane, as they are
+        -- placed against each other
+        local box = (menu.win:is_open() and pane) or get_pane()
+        local border = win:get_border_size()
+        local cursor = vim.fn.winline()
+        local gap = gap_for(box, cursor)
+        local cursor_row = box.row + cursor - 1
+
+        local at_top = true
+        if menu.win:is_open() then
+          at_top = vim.api.nvim_win_get_config(menu.win:get_win()).row > cursor_row
+        end
+
+        -- rather than render a sliver, give up if that side has no room
+        local room = at_top and cursor - 1 - gap or box.height - cursor - gap
+        if room <= border.vertical then return win:close() end
+
+        win:set_height(math.max(math.min(win:get_height(), room) - border.vertical, 1))
+        win:set_width(math.max(math.min(win:get_width(), box_width(box)) - border.horizontal, 1))
+
+        local row = at_top
+          and math.max(cursor_row - gap - win:get_height(), box.row)
+          or math.min(cursor_row + 1 + gap, box.row + box.height - win:get_height())
+
+        win:set_win_config({ relative = 'editor', row = row, col = box.col })
       end
     end,
   },
