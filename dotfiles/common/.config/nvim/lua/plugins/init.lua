@@ -514,6 +514,14 @@ return {
       },
       signature = {
         enabled = true,
+        trigger = {
+          -- blink's defaults only ask the server on '(' and ',', so the window
+          -- never appears when the cursor moves into a call that is already
+          -- written. This covers entering insert mode inside one; the
+          -- CursorMovedI hook below covers everything after that, including
+          -- typing, so `show_on_keyword` would only duplicate its requests.
+          show_on_insert = true,
+        },
         window = {
           border = 'rounded',
         },
@@ -720,6 +728,22 @@ return {
 
         win:set_win_config({ relative = 'editor', row = row, col = box.col })
       end
+
+      -- Keep the signature help window up for as long as the cursor is inside a
+      -- call. blink only re-asks the server while it already holds a signature
+      -- context, and it drops that context whenever a request comes back empty
+      -- (`signature/init.lua`), so one empty answer -- moving past the closing
+      -- paren, say -- leaves the window shut until a trigger character or a
+      -- fresh InsertEnter starts a new context. Asking on every insert-mode
+      -- cursor move makes it recover on its own: blink cancels the in-flight
+      -- request each time, and closes the window whenever the server has
+      -- nothing to say about the position. Insert mode only -- blink hides the
+      -- window on InsertLeave with no way to opt out.
+      local signature_trigger = require('blink.cmp.signature.trigger')
+      vim.api.nvim_create_autocmd('CursorMovedI', {
+        group = vim.api.nvim_create_augroup('blink_signature_follow_cursor', { clear = true }),
+        callback = function() signature_trigger.show() end,
+      })
     end,
   },
 
