@@ -546,14 +546,9 @@ return {
     },
     config = function(_, opts)
       require('blink.cmp').setup(opts)
-
-      -- Lays the completion, documentation and signature windows out against
-      -- the window being edited rather than the cursor, so they never cover the
-      -- line being worked on. The defaults are what this config wants: the pair
-      -- held 'scrolloff' rows clear of the cursor line, capped at
-      -- 'colorcolumn', starting past the number column, with signature help
-      -- stacked against the pair on the side the cursor is on.
-      require('blink-cmp-layout').setup()
+      require('blink-cmp-layout').setup({
+        gap = 10,
+      })
     end,
   },
 
