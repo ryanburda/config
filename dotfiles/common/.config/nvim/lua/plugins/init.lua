@@ -705,18 +705,23 @@ return {
         local win = signature.win
         if not win:is_open() then return end
 
-        win:update_size()
-
         -- while the menu is open the two must agree on a pane, as they are
         -- placed against each other
         local box = (menu.win:is_open() and pane) or get_pane()
         local border = win:get_border_size()
+
+        -- Same cap as the pair, and applied the same way: to the whole window,
+        -- border included. blink's own `signature.window.max_width` is a plain
+        -- number, fixed at setup, so the live value is written into the
+        -- window's config before it sizes itself -- that way the text wraps to
+        -- the cap and the height it settles on accounts for the wrapping.
+        win.config.max_width = math.max(box_width(box) - border.horizontal, 1)
+        win:update_size()
+
         local cursor = vim.fn.winline()
         local gap = gap_for(box, cursor)
         local cursor_row = box.row + cursor - 1
         local box_last = box.row + box.height - 1
-
-        win:set_width(math.max(math.min(win:get_width(), box_width(box)) - border.horizontal, 1))
 
         -- The free bands the window may take, in order of preference, as
         -- inclusive editor rows. `bottom` bands hold the window against their
