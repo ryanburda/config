@@ -30,11 +30,12 @@ input {
             // from org.freedesktop.locale1. You can control these using
             // localectl set-x11-keymap.
 
-            // swap_alt_win is just swap_lalt_lwin + swap_ralt_rwin. Taking only
-            // the left half swaps Alt/Super next to the space bar while leaving
-            // the right pair alone, so right Alt stays a real Alt (and right
-            // Super stays a real Super).
-            options "altwin:swap_lalt_lwin"
+            // No altwin:swap_lalt_lwin here. Everything reaches niri through
+            // kanata's single virtual device, so an xkb-level swap cannot tell
+            // the laptop keyboard from the Corne -- it would also invert the
+            // Corne's thumb keys, whose LGUI/LALT are already correct in
+            // firmware. The swap lives in kanata.kbd instead, which can exclude
+            // the Corne by device name.
         }
 
         // Enable numlock on startup, omitting this setting disables it.

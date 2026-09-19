@@ -1,5 +1,15 @@
 (defcfg
   process-unmapped-keys yes
+
+  ;; The Corne does all of this in its own firmware (esc/ctrl on the home-row
+  ;; mod, a space layer-tap, and real LGUI/LALT thumbs), so grabbing it here
+  ;; only double-applies the tap-holds and would drag it into the lalt/lmet
+  ;; swap below -- which exists to put Super under the laptop's left thumb and
+  ;; has no business touching a keyboard that already has one there. Leave it
+  ;; alone and let ZMK's keymap reach the compositor verbatim.
+  linux-dev-names-exclude (
+    "ZMK Project Corne Keyboard"
+  )
 )
 
 (defvar
@@ -13,6 +23,8 @@
   caps
   lsft
   rsft
+  lalt
+  lmet
 )
 
 (defalias
@@ -49,6 +61,13 @@
   @esc-ctl
   @lsft-caps
   @rsft-caps
+  ;; Swap left Alt and left Super, mirroring the Corne: the key the left thumb
+  ;; falls on is Super (niri's Mod), and Alt moves one position out. Only the
+  ;; left pair -- right Alt stays a real Alt and right Super a real Super.
+  ;; This replaces niri's xkb altwin:swap_lalt_lwin, which applied to every
+  ;; keyboard at once because kanata funnels them all through one device.
+  lmet
+  lalt
 )
 
 ;; Vim-style navigation on nav layer
