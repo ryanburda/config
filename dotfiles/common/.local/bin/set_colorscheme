@@ -30,6 +30,7 @@ typeset -A themes=(
     ['Dark - Kanagawa-paper-ink']="kanagawa-paper-ink,dark"
     ['Dark - Nightfox-dusk']="duskfox,dark"
     ['Dark - Nightfox-night']="nightfox,dark"
+    ['Dark - Nightfox-nord']="nordfox,dark"
     ['Dark - Nordic']="nordic,dark"
     ['Dark - Vague']="vague,dark"
     ['Light - Everforest']="everforest,light"

@@ -173,6 +173,28 @@ return {
     },
   },
 
+  -- Dark - Nightfox-nord
+  ["nordfox-dark"] = {
+    foreground = "#cdcecf",
+    background = "#2e3440",
+    cursor_bg = "#cdcecf",
+    cursor_fg = "#2e3440",
+    cursor_border = "#cdcecf",
+    selection_bg = "#3e4a5b",
+    selection_fg = "#cdcecf",
+    split = "#232831",
+    ansi = { "#232831", "#81a1c1", "#a3be8c", "#b48ead", "#88c0d0", "#e5e9f0", "#ebcb8b", "#bf616a" },
+    brights = { "#3f4c5c", "#8cafd2", "#b1d196", "#c895bf", "#93ccdc", "#e7ecf4", "#f0d399", "#d06f79" },
+    tab_bar = {
+      background = "#232831",
+      active_tab = { bg_color = "#7e8188", fg_color = "#2e3440" },
+      inactive_tab = { bg_color = "#39404f", fg_color = "#abb1bb" },
+      inactive_tab_hover = { bg_color = "#444c5e", fg_color = "#cdcecf" },
+      new_tab = { bg_color = "#39404f", fg_color = "#abb1bb" },
+      new_tab_hover = { bg_color = "#444c5e", fg_color = "#cdcecf" },
+    },
+  },
+
   -- Dark - Nordic
   ["nordic-dark"] = {
     foreground = "#c0c8d8",
