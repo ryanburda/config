@@ -49,8 +49,11 @@ touch $HOME/.gitconfig
 
 # Move files in repo to their proper location.
 # Symlink config files
-sudo pacman -S --noconfirm stow
-stow -d "$REPO_ROOT/dotfiles" -t ~ common arch
+sudo pacman -S --needed --noconfirm stow
+# --restow (unstow, then stow again) rather than a plain stow: it clears links
+# for files that have since been renamed or deleted in the repo, which a plain
+# re-stow would leave behind pointing at nothing.
+stow --restow -d "$REPO_ROOT/dotfiles" -t ~ common arch
 # Copy these root files
 sudo mkdir -p /etc/bluetooth
 sudo cp $REPO_ROOT/dotfiles/arch_root/etc/bluetooth/input.conf /etc/bluetooth/input.conf
@@ -286,12 +289,14 @@ sudo usermod -aG docker $USER
 
 sudo systemctl enable --now power-profiles-daemon.service
 
-yay -S --noconfirm aur/1password
-yay -S --noconfirm 1password-cli
-yay -S --noconfirm google-chrome
-yay -S --noconfirm noctalia-git
-yay -S --noconfirm pspg
-yay -S --noconfirm zen-browser-bin  # Run `xdg-settings set default-web-browser zen.desktop` to make it the default browser.
+# --needed on every one of these: without it a re-run redownloads and rebuilds
+# each AUR package from scratch even though it is already installed.
+yay -S --needed --noconfirm aur/1password
+yay -S --needed --noconfirm 1password-cli
+yay -S --needed --noconfirm google-chrome
+yay -S --needed --noconfirm noctalia-git
+yay -S --needed --noconfirm pspg
+yay -S --needed --noconfirm zen-browser-bin  # Run `xdg-settings set default-web-browser zen.desktop` to make it the default browser.
 
 # claude
 curl -fsSL https://claude.ai/install.sh | bash
@@ -302,7 +307,7 @@ curl -fsSL https://claude.ai/install.sh | bash
 # Needs read on /dev/input/* (the input group) and write on /dev/uinput, which
 # logind grants the logged-in user via ACL. Trade-off: no remapping at the
 # greeter, only once logged in.
-yay -S --noconfirm kanata
+yay -S --needed --noconfirm kanata
 sudo usermod -aG input $USER
 # Non-fatal: the unit cannot actually start until the `input` group membership
 # added just above is live, which takes a fresh login. `enable` still sticks, so
@@ -312,7 +317,14 @@ if ! systemctl --user daemon-reload || ! systemctl --user enable --now kanata; t
 fi
 
 # Tmux agent radar
-git clone https://github.com/vieitesss/agent-radar.git ~/.git/vieitesss/agent-radar
+# git clone errors out if the destination already exists, so on a re-run just
+# fast-forward the checkout instead.
+agent_radar=$HOME/.git/vieitesss/agent-radar
+if [ -d "$agent_radar/.git" ]; then
+    git -C "$agent_radar" pull --ff-only
+else
+    git clone https://github.com/vieitesss/agent-radar.git "$agent_radar"
+fi
 
 # Change default shell to zsh
 sudo chsh -s /bin/zsh $USER

@@ -139,10 +139,20 @@ brew install --cask \
     wezterm@nightly
 
 # Tmux agent radar
-git clone https://github.com/vieitesss/agent-radar.git ~/.git/vieitesss/agent-radar
+# git clone errors out if the destination already exists, so on a re-run just
+# fast-forward the checkout instead.
+agent_radar=$HOME/.git/vieitesss/agent-radar
+if [ -d "$agent_radar/.git" ]; then
+    git -C "$agent_radar" pull --ff-only
+else
+    git clone https://github.com/vieitesss/agent-radar.git "$agent_radar"
+fi
 
 # Symlink config files
-stow -d "$REPO_ROOT/dotfiles" -t ~ common macos
+# --restow (unstow, then stow again) rather than a plain stow: it clears links
+# for files that have since been renamed or deleted in the repo, which a plain
+# re-stow would leave behind pointing at nothing.
+stow --restow -d "$REPO_ROOT/dotfiles" -t ~ common macos
 
 # kanata needs two TCC permissions that can't be granted non-interactively:
 # System Settings > Privacy & Security > Input Monitoring, and > Accessibility.
