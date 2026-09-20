@@ -242,6 +242,38 @@ return {
     },
   },
 
+  -- Dark - Zenbones
+  ["zenbones-dark"] = {
+    foreground = "#b4bdc3",
+    background = "#1c1917",
+    cursor_bg = "#c4cacf",
+    cursor_fg = "#1c1917",
+    cursor_border = "#c4cacf",
+    selection_bg = "#3d4042",
+    selection_fg = "#b4bdc3",
+    split = "#685f5a",
+    -- Exception: slots 2-7 are desaturated well below what the colorscheme ships.
+    -- zenbones paints code almost entirely in fg and gray, so its accents only
+    -- ever show up in terminal output, where full-strength Nord-ish hues look
+    -- pasted on. Hue and relative order are kept; saturation is dropped to a
+    -- tint and lightness flattened to one step per row.
+    ansi = { "#302b29", "#b4bdc3", "#869677", "#988279", "#798b98", "#997a93", "#789497", "#9b7d81" },
+    brights = { "#403833", "#888f94", "#a2b094", "#b2a097", "#97a8b2", "#b499af", "#95aeb1", "#b59b9e" },
+    tab_bar = {
+      background = "#272321",
+      -- TabLineSel clears fg/bg, i.e. falls through to Normal.
+      active_tab = { bg_color = "#1c1917", fg_color = "#b4bdc3" },
+      -- Exception: the light entry dims the inactive label with TabLineFill's fg,
+      -- but on dark that group is brighter than Normal's fg and would make the
+      -- inactive tabs louder than the active one. terminal_color_15 is zenbones'
+      -- dimmed foreground in both backgrounds, so use it here.
+      inactive_tab = { bg_color = "#352f2d", fg_color = "#888f94" },
+      inactive_tab_hover = { bg_color = "#25211f", fg_color = "#b4bdc3" },
+      new_tab = { bg_color = "#352f2d", fg_color = "#888f94" },
+      new_tab_hover = { bg_color = "#25211f", fg_color = "#b4bdc3" },
+    },
+  },
+
   -- Light - Everforest
   ["everforest-light"] = {
     foreground = "#5c6a72",
