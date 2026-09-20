@@ -23,3 +23,10 @@ dotfiles/arch/.config/systemd/user/*.target.wants/
 # machine-local state (credentials, session history, project data)
 dotfiles/common/.claude/*
 !dotfiles/common/.claude/settings.json
+
+# noctalia -- generated at runtime, not user preference.
+# noctalia.kdl is the color scheme noctalia writes for niri (included from
+# config.kdl with optional=true), and .local/state is the daemon-owned settings
+# layer that noctalia_shadowed reports drift against.
+dotfiles/arch/.config/niri/noctalia.kdl
+dotfiles/arch/.local/state/
