@@ -159,3 +159,9 @@ eval "$(zoxide init zsh)"
 # Uncomment to profile zsh startup.
 # NOTE: must also uncomment first line.
 # zprof
+
+if [[ "$(uname)" == "Darwin" ]]; then
+  ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+  export PATH="/Users/$(whoami)/.rd/bin:$PATH"
+  ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+fi
