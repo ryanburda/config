@@ -137,11 +137,12 @@ alias l='lsd -lah'
 alias cal='cal -3'
 alias ai='claude'
 alias rg='rg --hidden'
-alias s='dirsesh session-switch'
-alias d='dirsesh at "$(dirsesh pick-dir)"'
-alias f='dirsesh at "$(dirsesh pick-repo)"'
-alias F='dirsesh at "$(dirsesh pick-repo -brief -fetch -filter)"'
-alias b='dirsesh at "$(dirsesh bookmark-pick)"'
+alias ds='dirsesh'
+alias s='dirsesh switch'
+alias d='dirsesh ls'
+alias f='dirsesh git'
+alias F='dirsesh git -brief -fetch -filter'
+alias b='dirsesh bm'
 
 # TODO: get rid of this and put everything in ~/.local/bin/
 # zshrc Extensions
