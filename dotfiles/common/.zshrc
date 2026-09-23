@@ -18,6 +18,8 @@ if [ ! -d "$ZINIT_HOME" ]; then
 fi
 
 # Source/Load zinit
+# Skip zinit's aliases (zi/zpl/zplg/zini) -- `zi` collides with zoxide.
+typeset -gA ZINIT; ZINIT[NO_ALIASES]=1
 source "${ZINIT_HOME}/zinit.zsh"
 
 # Add in zsh plugins
