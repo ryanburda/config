@@ -1,0 +1,154 @@
+#!/bin/zsh
+
+# NAME
+#   tmux-settings - per tmux session appearance.
+#
+# DESCRIPTION
+#   Colorscheme, font and transparency are machine wide things: wezterm, every
+#   running neovim and, for the colorscheme, the desktop all follow one at a
+#   time. This hangs a preference off each tmux session in an @colorscheme,
+#   @font or @transparency session option and re-applies all of them whenever
+#   the attached session changes, so moving between sessions brings them along.
+#
+#   Nothing here knows what a colorscheme or a font is. Each setter answers -l
+#   with the values it takes, -d with the saved default, and -t applies one
+#   without disturbing that default -- so adding a fourth setting is a line in
+#   the table below and nothing else.
+#
+#   A session with no option of its own gets the default, and the defaults are
+#   what everything goes back to once the tmux server is gone.
+#
+#   The two hooks and the menu's key binding live in
+#   $XDG_CONFIG_HOME/tmux/tmux.conf.
+#
+# SUBCOMMANDS
+#   menu              Pick a setting, then a value for it.
+#   pick <setting>    Pick a value for one setting and hang it off this
+#                     session. Choosing <default> gives the session's value up
+#                     and goes back to following envy.
+#   apply <session>   Apply everything that session asks for, defaults included.
+#                     The client-session-changed hook calls this.
+#   reset             Put every default back.
+#   reset-if-empty    Put every default back, but only once the closed session
+#                     was the last one. The session-closed hook calls this.
+
+# The setting name doubles as the session option, "@" plus the name.
+typeset -A setters=(
+    [colorscheme]=set_colorscheme
+    [font]=set_font
+    [transparency]=set_transparency
+)
+# Spelled out again in order: an associative array has none of its own, and
+# both the menu and `apply` read better in a fixed one.
+names=(colorscheme font transparency)
+
+session_value(){
+    # The value a session asks for, empty when it has no opinion.
+    #
+    # Args:
+    #   $1: setting name
+    #   $2: tmux session name, empty for the current session
+    local name=$1 session=$2
+    local -a target
+
+    if [[ -n $session ]]; then
+        target=(-t "$session")
+    fi
+
+    tmux show-options -qv "${target[@]}" @$name
+}
+
+apply_setting(){
+    # Args:
+    #   $1: setting name
+    #   $2: the value to apply, empty for the saved default
+    local name=$1 value=$2
+    local setter=${setters[$name]}
+
+    if [[ -z $value ]]; then
+        value=$($setter -d)
+    fi
+
+    if [[ -n $value ]]; then
+        # -t: this is a session's choice, not the machine's default.
+        $setter -t "$value"
+    fi
+}
+
+reset_to_defaults(){
+    local name
+    for name in $names; do
+        apply_setting $name ''
+    done
+}
+
+case "$1" in
+    menu)
+        name=$(print -l $names | fzf --cycle)
+        if [[ -z $name ]]; then
+            exit 0
+        fi
+        exec "$0" pick "$name"
+        ;;
+    pick)
+        name=$2
+        if [[ -z ${setters[$name]} ]]; then
+            print -u2 "tmux-settings: unknown setting '$name'"
+            exit 1
+        fi
+        setter=${setters[$name]}
+
+        current=$(session_value $name)
+        if [[ -z $current ]]; then
+            current="$($setter -d) (default)"
+        fi
+
+        value=$({ print '<default>'; $setter -l } | fzf --cycle --header "$name: $current")
+        if [[ -z $value ]]; then
+            exit 0
+        fi
+
+        if [[ $value == '<default>' ]]; then
+            tmux set-option -qu @$name
+            value=''
+        else
+            tmux set-option -q @$name "$value"
+        fi
+
+        apply_setting $name "$value"
+        ;;
+    apply)
+        session=$2
+        for name in $names; do
+            apply_setting $name "$(session_value $name $session)"
+        done
+        ;;
+    reset)
+        reset_to_defaults
+        ;;
+    reset-if-empty)
+        # The session-closed hook.
+        #
+        # Resetting on every close would be wrong, not just wasteful: when the
+        # closed session was the attached one tmux fires client-session-changed
+        # first, so a reset here lands after the new session's settings and
+        # overwrites them -- you end up on the defaults instead of wherever you
+        # just moved to. A close that leaves another session behind has already
+        # been handled by that hook. The one that leaves nothing behind is the
+        # only one with anything owed.
+        if [[ -n $(tmux list-sessions 2>/dev/null) ]]; then
+            exit 0
+        fi
+
+        reset_to_defaults
+
+        # exit-empty is off (see tmux.conf) purely so this hook gets to run,
+        # which leaves a sessionless server behind. Finish what exit-empty
+        # would have done.
+        tmux kill-server 2>/dev/null
+        ;;
+    *)
+        print -u2 "usage: tmux-settings menu|pick <setting>|apply <session>|reset|reset-if-empty"
+        exit 1
+        ;;
+esac

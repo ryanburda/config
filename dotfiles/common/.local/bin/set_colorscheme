@@ -26,12 +26,13 @@
 #       - other scripts exist for handling colorscheme changes to other CLIs such as aichat and lazygit.
 #
 #   envy's colorscheme_key is the saved default: the theme this machine comes
-#   back to. tmux-colorscheme layers shorter lived, per session choices on top
+#   back to. tmux-settings layers shorter lived, per session choices on top
 #   of it with -t.
 #
 # OPTIONS
 #   -l  List the theme keys, one per line, and exit. Lets other pickers share
 #       the table below instead of keeping a copy of it.
+#   -d  Print the saved default key and exit.
 #   -t  Transient. Apply the theme without recording it as the saved default.
 
 : ${XDG_CONFIG_HOME:=$HOME/.config}
@@ -58,6 +59,10 @@ list_themes(){
     printf "%s\n" "${(k)themes[@]}" | sort
 }
 
+default_key(){
+    envy get colorscheme_key
+}
+
 apply_theme(){
     # Accepts a single parameter that is a valid key into the themes dictionary above.
     local theme_key=$1
@@ -81,17 +86,7 @@ apply_theme(){
     envy set nvim_colorscheme $nvim_colorscheme
     envy set nvim_background $nvim_background
 
-    # Update all running nvim instances
-    # On Linux, use XDG_RUNTIME_DIR; on macOS, use TMPDIR or /tmp
-    local nvim_runtime_dir="${XDG_RUNTIME_DIR:-${TMPDIR:-/tmp}}"
-    # Try both macOS pattern (nvim.*/*/nvim.*.0) and Linux pattern (nvim.*.0)
-    # (N) qualifier prevents zsh error when pattern doesn't match
-    for socket in "$nvim_runtime_dir"/nvim.*/*/nvim.*.0(N) "$nvim_runtime_dir"/nvim.*.0(N); do
-        if [[ -S "$socket" ]]; then
-            # redirect stderr to /dev/null since stale socket files can remain even after Neovim instances have closed.
-            nvim --server "$socket" --remote-send "<Cmd>luafile ${XDG_CONFIG_HOME}/nvim/lua/colorscheme.lua<CR>" 2>/dev/null
-        fi
-    done
+    reload_nvim_colors
 
     # Nudge wezterm to re-read its config.
     touch $XDG_CONFIG_HOME/wezterm/wezterm.lua
@@ -114,10 +109,14 @@ apply_theme(){
 
 transient=0
 
-while getopts ":lt" opt; do
+while getopts ":ldt" opt; do
     case $opt in
         l)
             list_themes
+            exit 0
+            ;;
+        d)
+            default_key
             exit 0
             ;;
         t)
@@ -134,7 +133,7 @@ shift $((OPTIND - 1))
 theme_key=$1
 
 if [[ -z $theme_key ]]; then
-    theme_key=$(list_themes | fzf --cycle --header "$(envy get colorscheme_key)")
+    theme_key=$(list_themes | fzf --cycle --header "$(default_key)")
     if [[ -z $theme_key ]]; then
         exit 0
     fi

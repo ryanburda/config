@@ -3,8 +3,25 @@
 # NAME
 #   set_font - changes terminal font.
 #
+# SYNOPSIS
+#   set_font [-l] [-d] [-t] [font_key]
+#
 # DESCRIPTION
-#   Use fzf to select a font.
+#   Apply a font. With no font_key, fzf is used to pick one. A key is one of the
+#   entries in the list below: a family and a size separated by a comma, since
+#   the size that looks right depends on the family.
+#
+#   wezterm reads font_family and font_size out of envy, and is nudged to
+#   re-read its config.
+#
+#   envy's font_key is the saved default: the font this machine comes back to.
+#   tmux-settings layers shorter lived, per session choices on top of it with -t.
+#
+# OPTIONS
+#   -l  List the font keys, one per line, and exit. Lets other pickers share
+#       the list below instead of keeping a copy of it.
+#   -d  Print the saved default key and exit.
+#   -t  Transient. Apply the font without recording it as the saved default.
 
 : ${XDG_CONFIG_HOME:=$HOME/.config}
 
@@ -23,17 +40,86 @@ fonts=(
     "Terminess Nerd Font Mono,12"
 )
 
-current_font_family=$(envy get font_family $DEFAULT_FONT_FAMILY)
-current_font_size=$(envy get font_size $DEFAULT_FONT_SIZE)
+list_fonts(){
+    printf "%s\n" "${fonts[@]}" | sort
+}
 
-selection=$(printf "%s\n" "${fonts[@]}" | sort | fzf --cycle --header "${current_font_family},${current_font_size}")
-if [[ -n "${selection}" ]]; then
-    font_family=$(print $selection | awk -F ',' '{print $1}')
-    font_size=$(print $selection | awk -F ',' '{print $2}')
+default_key(){
+    # font_key only arrived with per session fonts, so seed it from the live
+    # values -- the font this machine was already on -- the first time it is
+    # asked for. It has to be written and not just fallen back to: from here on
+    # the live values are whatever some session last asked for, so reading them
+    # again later would hand back a session's font as the default and there
+    # would be nothing left to go back to.
+    if [[ -z $(envy get font_key) ]]; then
+        envy set font_key "$(envy get font_family $DEFAULT_FONT_FAMILY),$(envy get font_size $DEFAULT_FONT_SIZE)"
+    fi
+    envy get font_key
+}
+
+apply_font(){
+    # Accepts a single parameter that is a valid key into the fonts list above.
+    local font_key=$1
+    local font_family=$(print $font_key | awk -F ',' '{print $1}')
+    local font_size=$(print $font_key | awk -F ',' '{print $2}')
+
+    # Bail out when this is already what's on screen. tmux calls in here on
+    # every session change and a wezterm config reload is not free.
+    if [[ $font_family == $(envy get font_family) && $font_size == $(envy get font_size) ]]; then
+        return 0
+    fi
 
     envy set font_family $font_family
     envy set font_size $font_size
 
-    # reload terminal configs
+    # Nudge wezterm to re-read its config.
     touch $XDG_CONFIG_HOME/wezterm/wezterm.lua
+}
+
+transient=0
+
+while getopts ":ldt" opt; do
+    case $opt in
+        l)
+            list_fonts
+            exit 0
+            ;;
+        d)
+            default_key
+            exit 0
+            ;;
+        t)
+            transient=1
+            ;;
+        \?)
+            print -u2 "set_font: invalid option -$OPTARG"
+            exit 1
+            ;;
+    esac
+done
+shift $((OPTIND - 1))
+
+font_key=$1
+
+if [[ -z $font_key ]]; then
+    font_key=$(list_fonts | fzf --cycle --header "$(default_key)")
+    if [[ -z $font_key ]]; then
+        exit 0
+    fi
+fi
+
+if ! list_fonts | grep -qxF -- "$font_key"; then
+    print -u2 "set_font: unknown font '$font_key'"
+    exit 1
+fi
+
+apply_font $font_key
+
+if (( ! transient )); then
+    envy set font_key $font_key
+    # A per session choice would win back this key on the next session change,
+    # so choosing a new default gives up the one on this session.
+    if [[ -n $TMUX ]]; then
+        tmux set-option -qu @font
+    fi
 fi

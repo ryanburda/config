@@ -1,0 +1,121 @@
+#!/bin/zsh
+
+# NAME
+#   set_transparency - turns terminal background transparency on and off.
+#
+# SYNOPSIS
+#   set_transparency [-l] [-d] [-t] [on|off]
+#
+# DESCRIPTION
+#   Apply a transparency state. With no state, fzf is used to pick one.
+#
+#   The live state is the `wezterm_transparency` envy value ('true' or
+#   'false'). Both wezterm and neovim read it, so both are reloaded here.
+#
+#   envy's transparency_key is the saved default: what this machine comes back
+#   to. tmux-settings layers shorter lived, per session choices on top of it
+#   with -t.
+#
+# OPTIONS
+#   -l  List the states, one per line, and exit. Lets other pickers share this
+#       instead of keeping a copy of it.
+#   -d  Print the saved default state and exit.
+#   -t  Transient. Apply the state without recording it as the saved default.
+
+: ${XDG_CONFIG_HOME:=$HOME/.config}
+
+states=(on off)
+
+list_states(){
+    printf "%s\n" "${states[@]}"
+}
+
+default_key(){
+    # transparency_key only arrived with per session transparency, so seed it
+    # from the live state the first time it is asked for. It has to be written
+    # and not just fallen back to: from here on the live state is whatever some
+    # session last asked for, so reading it again later would hand back a
+    # session's state as the default and there would be nothing to go back to.
+    if [[ -z $(envy get transparency_key) ]]; then
+        envy set transparency_key "$(live_state)"
+    fi
+    envy get transparency_key
+}
+
+live_state(){
+    if [[ $(envy get wezterm_transparency false) == 'true' ]]; then
+        print on
+    else
+        print off
+    fi
+}
+
+apply_transparency(){
+    # Accepts a single parameter, one of the states above.
+    local state=$1
+
+    # Bail out when this is already what's on screen. tmux calls in here on
+    # every session change and a config reload per neovim is not free.
+    if [[ $state == $(live_state) ]]; then
+        return 0
+    fi
+
+    if [[ $state == 'on' ]]; then
+        envy set wezterm_transparency true
+    else
+        envy set wezterm_transparency false
+    fi
+
+    # Nudge wezterm to re-read its config.
+    touch $XDG_CONFIG_HOME/wezterm/wezterm.lua
+
+    reload_nvim_colors
+}
+
+transient=0
+
+while getopts ":ldt" opt; do
+    case $opt in
+        l)
+            list_states
+            exit 0
+            ;;
+        d)
+            default_key
+            exit 0
+            ;;
+        t)
+            transient=1
+            ;;
+        \?)
+            print -u2 "set_transparency: invalid option -$OPTARG"
+            exit 1
+            ;;
+    esac
+done
+shift $((OPTIND - 1))
+
+state=$1
+
+if [[ -z $state ]]; then
+    state=$(list_states | fzf --cycle --header "$(default_key)")
+    if [[ -z $state ]]; then
+        exit 0
+    fi
+fi
+
+if [[ $state != 'on' && $state != 'off' ]]; then
+    print -u2 "set_transparency: unknown state '$state'"
+    exit 1
+fi
+
+apply_transparency $state
+
+if (( ! transient )); then
+    envy set transparency_key $state
+    # A per session choice would win back this key on the next session change,
+    # so choosing a new default gives up the one on this session.
+    if [[ -n $TMUX ]]; then
+        tmux set-option -qu @transparency
+    fi
+fi
