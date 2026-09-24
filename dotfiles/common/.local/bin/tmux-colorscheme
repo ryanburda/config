@@ -1,0 +1,103 @@
+#!/bin/zsh
+
+# NAME
+#   tmux-colorscheme - per tmux session colorschemes.
+#
+# DESCRIPTION
+#   A colorscheme is a machine wide thing (see set_colorscheme): neovim, wezterm,
+#   delta and the desktop all follow one at a time. This hangs a preferred theme
+#   off each tmux session in the @colorscheme session option and re-applies it
+#   whenever the attached session changes, so moving between sessions brings the
+#   colorscheme along.
+#
+#   envy's colorscheme_key stays the default. It's what a session without a
+#   @colorscheme of its own gets, and what everything is put back to once the
+#   tmux server is gone.
+#
+#   The two hooks and the picker's key binding live in
+#   $XDG_CONFIG_HOME/tmux/tmux.conf.
+#
+# SUBCOMMANDS
+#   pick            Pick a theme for the current session with fzf. Choosing
+#                   <default> gives up the session's theme and goes back to
+#                   following envy.
+#   apply [key]     Apply key, or the default when key is empty -- empty being
+#                   the normal case for a session that was never given one.
+#   reset           Go back to the default.
+#   reset-if-empty  Go back to the default, but only once the closed session
+#                   was the last one. The session-closed hook calls this.
+
+default_key(){
+    envy get colorscheme_key
+}
+
+reset_to_default(){
+    local theme_key=$(default_key)
+    if [[ -n $theme_key ]]; then
+        set_colorscheme -t "$theme_key"
+    fi
+}
+
+case "$1" in
+    pick)
+        current=$(tmux show-options -qv @colorscheme)
+        if [[ -z $current ]]; then
+            current="$(default_key) (default)"
+        fi
+
+        theme_key=$({ print '<default>'; set_colorscheme -l } | fzf --cycle --header "$current")
+        if [[ -z $theme_key ]]; then
+            exit 0
+        fi
+
+        if [[ $theme_key == '<default>' ]]; then
+            tmux set-option -qu @colorscheme
+            theme_key=$(default_key)
+        else
+            tmux set-option -q @colorscheme "$theme_key"
+        fi
+
+        # -t: this is the session's theme, not the machine's default.
+        if [[ -n $theme_key ]]; then
+            set_colorscheme -t "$theme_key"
+        fi
+        ;;
+    apply)
+        theme_key=$2
+        if [[ -z $theme_key ]]; then
+            theme_key=$(default_key)
+        fi
+
+        if [[ -n $theme_key ]]; then
+            set_colorscheme -t "$theme_key"
+        fi
+        ;;
+    reset)
+        reset_to_default
+        ;;
+    reset-if-empty)
+        # The session-closed hook.
+        #
+        # Resetting on every close would be wrong, not just wasteful: when the
+        # closed session was the attached one tmux fires client-session-changed
+        # first, so a reset here lands after the new session's colorscheme and
+        # overwrites it -- you end up on the default instead of wherever you
+        # just moved to. A close that leaves another session behind has already
+        # been handled by that hook. The one that leaves nothing behind is the
+        # only one with anything owed.
+        if [[ -n $(tmux list-sessions 2>/dev/null) ]]; then
+            exit 0
+        fi
+
+        reset_to_default
+
+        # exit-empty is off (see tmux.conf) purely so this hook gets to run,
+        # which leaves a sessionless server behind. Finish what exit-empty
+        # would have done.
+        tmux kill-server 2>/dev/null
+        ;;
+    *)
+        print -u2 "usage: tmux-colorscheme pick|apply [theme_key]|reset|reset-if-empty"
+        exit 1
+        ;;
+esac

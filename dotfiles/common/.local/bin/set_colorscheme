@@ -3,8 +3,12 @@
 # NAME
 #   set_colorscheme - synchonizes neovim and terminal colorschemes.
 #
+# SYNOPSIS
+#   set_colorscheme [-l] [-t] [theme_key]
+#
 # DESCRIPTION
-#   Use fzf to select a colorscheme. A colorscheme is applied to both the terminal and neovim.
+#   Apply a colorscheme to both the terminal and neovim. With no theme_key, fzf
+#   is used to pick one.
 #   This script utilizes a hard coded associative list (dictionary) where the keys
 #   are unique theme names that will show up in fzf and the values are strings each
 #   containing:
@@ -20,6 +24,15 @@
 #       - nvim is updated when a change is detected in $XDG_CONFIG_HOME/nvim/.colorscheme
 #       - wezterm is updated by touching $XDG_CONFIG_HOME/wezterm/wezterm.lua
 #       - other scripts exist for handling colorscheme changes to other CLIs such as aichat and lazygit.
+#
+#   envy's colorscheme_key is the saved default: the theme this machine comes
+#   back to. tmux-colorscheme layers shorter lived, per session choices on top
+#   of it with -t.
+#
+# OPTIONS
+#   -l  List the theme keys, one per line, and exit. Lets other pickers share
+#       the table below instead of keeping a copy of it.
+#   -t  Transient. Apply the theme without recording it as the saved default.
 
 : ${XDG_CONFIG_HOME:=$HOME/.config}
 
@@ -41,53 +54,104 @@ typeset -A themes=(
     ['Light - Zenbones']="zenbones,light"
 )
 
-set_theme(){
-    # Accepts a single parameter that is a valid key into the themes dictionary above.
-    theme_key=$1
-    values=${themes[$theme_key]}
-
-    if [[ ! -z $values ]]; then
-        nvim_colorscheme=$(print $values | awk -F ',' '{print $1}')
-        nvim_background=$(print $values | awk -F ',' '{print $2}')
-
-        envy set colorscheme_key $theme_key
-        envy set nvim_colorscheme $nvim_colorscheme
-        envy set nvim_background $nvim_background
-
-        # Update all running nvim instances
-        # On Linux, use XDG_RUNTIME_DIR; on macOS, use TMPDIR or /tmp
-        local nvim_runtime_dir="${XDG_RUNTIME_DIR:-${TMPDIR:-/tmp}}"
-        # Try both macOS pattern (nvim.*/*/nvim.*.0) and Linux pattern (nvim.*.0)
-        # (N) qualifier prevents zsh error when pattern doesn't match
-        for socket in "$nvim_runtime_dir"/nvim.*/*/nvim.*.0(N) "$nvim_runtime_dir"/nvim.*.0(N); do
-            if [[ -S "$socket" ]]; then
-                # redirect stderr to /dev/null since stale socket files can remain even after Neovim instances have closed.
-                nvim --server "$socket" --remote-send "<Cmd>luafile ${XDG_CONFIG_HOME}/nvim/lua/colorscheme.lua<CR>" 2>/dev/null
-            fi
-        done
-
-        # Nudge wezterm to re-read its config.
-        touch $XDG_CONFIG_HOME/wezterm/wezterm.lua
-
-        # Tell delta which background it's on. It can work this out itself by
-        # querying the terminal, but the OSC 11 query doesn't survive tmux, so
-        # set it explicitly. `git config --global` writes these two keys into
-        # ~/.gitconfig without disturbing anything else in there, and lazygit
-        # picks them up too -- delta reads delta.* from git config whoever
-        # invokes it.
-        if [[ $nvim_background == 'light' ]]; then
-            git config --global delta.light true
-            git config --global delta.dark false
-        else
-            git config --global delta.light false
-            git config --global delta.dark true
-        fi
-        dark_mode $(if [[ $(envy get nvim_background) == 'light' ]]; then echo '-l'; fi)
-    fi
+list_themes(){
+    printf "%s\n" "${(k)themes[@]}" | sort
 }
 
-theme_key=$(printf "%s\n" "${(k)themes[@]}" | sort | fzf --cycle --header "$(envy get colorscheme_key)")
+apply_theme(){
+    # Accepts a single parameter that is a valid key into the themes dictionary above.
+    local theme_key=$1
+    local values=${themes[$theme_key]}
 
-if [[ ! -z $theme_key ]]; then
-    set_theme $theme_key
+    if [[ -z $values ]]; then
+        return 1
+    fi
+
+    local nvim_colorscheme=$(print $values | awk -F ',' '{print $1}')
+    local nvim_background=$(print $values | awk -F ',' '{print $2}')
+
+    # Bail out when this is already what's on screen. tmux calls in here on
+    # every session change and everything below is expensive enough -- a config
+    # reload per nvim instance, a wezterm reload, a trip through gsettings --
+    # that it's worth not doing for nothing.
+    if [[ $nvim_colorscheme == $(envy get nvim_colorscheme) && $nvim_background == $(envy get nvim_background) ]]; then
+        return 0
+    fi
+
+    envy set nvim_colorscheme $nvim_colorscheme
+    envy set nvim_background $nvim_background
+
+    # Update all running nvim instances
+    # On Linux, use XDG_RUNTIME_DIR; on macOS, use TMPDIR or /tmp
+    local nvim_runtime_dir="${XDG_RUNTIME_DIR:-${TMPDIR:-/tmp}}"
+    # Try both macOS pattern (nvim.*/*/nvim.*.0) and Linux pattern (nvim.*.0)
+    # (N) qualifier prevents zsh error when pattern doesn't match
+    for socket in "$nvim_runtime_dir"/nvim.*/*/nvim.*.0(N) "$nvim_runtime_dir"/nvim.*.0(N); do
+        if [[ -S "$socket" ]]; then
+            # redirect stderr to /dev/null since stale socket files can remain even after Neovim instances have closed.
+            nvim --server "$socket" --remote-send "<Cmd>luafile ${XDG_CONFIG_HOME}/nvim/lua/colorscheme.lua<CR>" 2>/dev/null
+        fi
+    done
+
+    # Nudge wezterm to re-read its config.
+    touch $XDG_CONFIG_HOME/wezterm/wezterm.lua
+
+    # Tell delta which background it's on. It can work this out itself by
+    # querying the terminal, but the OSC 11 query doesn't survive tmux, so
+    # set it explicitly. `git config --global` writes these two keys into
+    # ~/.gitconfig without disturbing anything else in there, and lazygit
+    # picks them up too -- delta reads delta.* from git config whoever
+    # invokes it.
+    if [[ $nvim_background == 'light' ]]; then
+        git config --global delta.light true
+        git config --global delta.dark false
+    else
+        git config --global delta.light false
+        git config --global delta.dark true
+    fi
+    dark_mode $(if [[ $nvim_background == 'light' ]]; then echo '-l'; fi)
+}
+
+transient=0
+
+while getopts ":lt" opt; do
+    case $opt in
+        l)
+            list_themes
+            exit 0
+            ;;
+        t)
+            transient=1
+            ;;
+        \?)
+            print -u2 "set_colorscheme: invalid option -$OPTARG"
+            exit 1
+            ;;
+    esac
+done
+shift $((OPTIND - 1))
+
+theme_key=$1
+
+if [[ -z $theme_key ]]; then
+    theme_key=$(list_themes | fzf --cycle --header "$(envy get colorscheme_key)")
+    if [[ -z $theme_key ]]; then
+        exit 0
+    fi
+fi
+
+if [[ -z ${themes[$theme_key]} ]]; then
+    print -u2 "set_colorscheme: unknown theme '$theme_key'"
+    exit 1
+fi
+
+apply_theme $theme_key
+
+if (( ! transient )); then
+    envy set colorscheme_key $theme_key
+    # A per session choice would win back this key on the next session change,
+    # so choosing a new default gives up the one on this session.
+    if [[ -n $TMUX ]]; then
+        tmux set-option -qu @colorscheme
+    fi
 fi
