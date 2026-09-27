@@ -79,3 +79,8 @@ customCommands:
           preset: 'refs'
       - type: 'input'
         title: 'New branch name (blank to check out the base branch as-is)'
+  - key: 's'
+    command: 'git wt-setup "{{.SelectedWorktree.Path}}"'
+    context: 'worktrees'
+    description: "Run the project's setup hook against the worktree (wt-setup)"
+    output: none
