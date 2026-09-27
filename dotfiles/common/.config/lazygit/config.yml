@@ -59,3 +59,8 @@ customCommands:
     command: "git fetch -p"
     context: 'remoteBranches'
     description: 'Prune local branches that are no longer in remote (Sync)'
+  - key: 'c'
+    command: 'git wt-clip -k "$(basename "{{.SelectedWorktree.Path}}")"'
+    context: 'worktrees'
+    description: 'Clip the branch off the worktree, keeping the directory (wt-clip -k)'
+    output: popup
