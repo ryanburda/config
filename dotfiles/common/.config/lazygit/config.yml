@@ -19,6 +19,7 @@ gui:
       - black
     selectedRangeBgColor:
       - black
+  filterMode: 'fuzzy'
   enlargedSideViewLocation: 'top'
   showCommandLog: false
   showIcons: true
