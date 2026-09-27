@@ -64,12 +64,12 @@ customCommands:
     command: 'git wt-clip -k "$(basename "{{.SelectedWorktree.Path}}")"'
     context: 'worktrees'
     description: 'Clip the branch off the worktree, keeping the directory (wt-clip -k)'
-    output: popup
+    output: none
   - key: 'b'
     command: 'git wt-bud "{{index .PromptResponses 0}}" "{{index .PromptResponses 1}}"{{if index .PromptResponses 2}} "{{index .PromptResponses 2}}"{{end}}'
     context: 'worktrees'
     description: 'Bud a branch onto a worktree, growing the worktree if needed (wt-bud)'
-    output: popup
+    output: none
     prompts:
       - type: 'input'
         title: 'Worktree name'
