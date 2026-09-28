@@ -61,9 +61,9 @@ customCommands:
     context: 'remoteBranches'
     description: 'Prune local branches that are no longer in remote (Sync)'
   - key: 'c'
-    command: 'git wt-clip -k "$(basename "{{.SelectedWorktree.Path}}")"'
-    context: 'worktrees'
-    description: 'Clip the branch off the worktree, keeping the directory (wt-clip -k)'
+    command: 'git wt-clip "$(basename "{{.SelectedWorktree.Path}}")"'
+    context: 'worktrees, localBranches'
+    description: 'Clip the branch off the worktree'
     output: none
   - key: 'b'
     command: 'git wt-bud "{{index .PromptResponses 0}}" "{{index .PromptResponses 1}}"{{if index .PromptResponses 2}} "{{index .PromptResponses 2}}"{{end}}'
@@ -79,18 +79,8 @@ customCommands:
           preset: 'refs'
       - type: 'input'
         title: 'New branch name (blank to check out the base branch as-is)'
-  - key: 'S'
+  - key: 's'
     command: 'git wt-setup "{{.SelectedWorktree.Path}}"'
     context: 'worktrees'
     description: "Run the project's setup hook against the worktree (wt-setup)"
-    output: popup
-  - key: 's'
-    command: 'git wt-sync "$(basename "{{.SelectedWorktree.Path}}")"'
-    context: 'worktrees'
-    description: 'Bring the parked worktree up to date with the default branch (wt-sync)'
-    output: popup
-  - key: 's'
-    command: 'git wt-sync'
-    context: 'localBranches'
-    description: 'Bring every parked worktree up to date with the default branch (wt-sync)'
     output: popup
