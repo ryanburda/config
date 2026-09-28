@@ -60,15 +60,10 @@ customCommands:
     command: "git fetch -p"
     context: 'remoteBranches'
     description: 'Prune local branches that are no longer in remote (Sync)'
-  - key: 'c'
-    command: 'git wt-clip "$(basename "{{.SelectedWorktree.Path}}")"'
-    context: 'worktrees, localBranches'
-    description: 'Clip the branch off the worktree'
-    output: none
-  - key: 'b'
-    command: 'git wt-bud "{{index .PromptResponses 0}}" "{{index .PromptResponses 1}}"{{if index .PromptResponses 2}} "{{index .PromptResponses 2}}"{{end}}'
+  - key: 'a'
+    command: 'git wt-add "{{index .PromptResponses 0}}" "{{index .PromptResponses 1}}"{{if index .PromptResponses 2}} "{{index .PromptResponses 2}}"{{end}}'
     context: 'worktrees'
-    description: 'Bud a branch onto a worktree, growing the worktree if needed (wt-bud)'
+    description: 'Add a new worktree (git wt-add)'
     output: none
     prompts:
       - type: 'input'
@@ -79,6 +74,11 @@ customCommands:
           preset: 'refs'
       - type: 'input'
         title: 'New branch name (blank to check out the base branch as-is)'
+  - key: 'p'
+    command: 'git wt-park "$(basename "{{.SelectedWorktree.Path}}")"'
+    context: 'worktrees'
+    description: 'Park the worktree'
+    output: none
   - key: 's'
     command: 'git wt-setup "{{.SelectedWorktree.Path}}"'
     context: 'worktrees'
