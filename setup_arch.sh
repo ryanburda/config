@@ -133,9 +133,8 @@ sudo pacman -S --needed --noconfirm \
     zsh
 
 # Audio
-# lsp-plugins-lv2 supplies the equalizer/compressor/limiter the EasyEffects
-# presets are built from; kconfig supplies kwriteconfig6, used just below.
 sudo pacman -S --needed --noconfirm \
+    calf \
     easyeffects \
     kconfig \
     lsp-plugins-lv2 \
