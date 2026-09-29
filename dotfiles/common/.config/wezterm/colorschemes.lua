@@ -71,8 +71,8 @@ return {
     selection_bg = "#543a48",
     selection_fg = "#d3c6aa",
     split = "#4f585e",
-    ansi = { "#343f44", "#a7c080", "#7fbbb3", "#e67e80", "#83c092", "#dbbc7f", "#d699b6", "#d3c6aa" },
-    brights = { "#3d484d", "#b7cb97", "#96c7c1", "#ea9597", "#99cba6", "#e1c896", "#ddabc3", "#dacfb7" },
+    ansi = { "#343f44", "#a7c080", "#7fbbb3", "#83c092", "#dbbc7f", "#e67e80", "#d699b6", "#d3c6aa" },
+    brights = { "#3d484d", "#b7cb97", "#96c7c1", "#99cba6", "#e1c896", "#ea9597", "#ddabc3", "#dacfb7" },
     tab_bar = {
       background = "#343f44",
       active_tab = { bg_color = "#a7c080", fg_color = "#2d353b" },
