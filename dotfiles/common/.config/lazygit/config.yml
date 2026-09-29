@@ -74,6 +74,14 @@ customCommands:
           preset: 'refs'
       - type: 'input'
         title: 'New branch name (blank to check out the base branch as-is)'
+  - key: 'A'
+    command: 'git wt-add -d "{{index .PromptResponses 0}}"'
+    context: 'worktrees'
+    description: 'Add a new worktree in detached HEAD state at the default branch (git wt-add -d)'
+    output: none
+    prompts:
+      - type: 'input'
+        title: 'Worktree name'
   - key: 'p'
     command: 'git wt-park "$(basename "{{.SelectedWorktree.Path}}")"'
     context: 'worktrees'
