@@ -138,6 +138,7 @@ sudo pacman -S --needed --noconfirm \
     easyeffects \
     kconfig \
     lsp-plugins-lv2 \
+    mda.lv2 \
     pipewire \
     pipewire-alsa \
     pipewire-pulse \
