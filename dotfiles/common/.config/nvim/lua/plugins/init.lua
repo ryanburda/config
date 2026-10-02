@@ -510,7 +510,7 @@ return {
         -- only while something is selected, which with `list.selection.preselect`
         -- means the first item from the moment the menu opens
         ghost_text = {
-          enabled = true,
+          enabled = false,
         },
       },
       appearance = {
