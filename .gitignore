@@ -11,6 +11,8 @@ nvim-pack-lock.json
 # ssh
 dotfiles/common/.ssh/*
 !dotfiles/common/.ssh/config
+!dotfiles/common/.ssh/config.d/
+!dotfiles/common/.ssh/config.d/squarespace-devspace.conf
 
 # zsh extensions
 dotfiles/common/.zsh/zshrc_extensions/*
