@@ -19,17 +19,17 @@ gui:
       - black
     selectedRangeBgColor:
       - black
+    authorColors:
+      '*': blue
+    branchColorPatterns:
+      '^main(/|$)': red
+      '^master(/|$)': red
+      '^develop(/|$)': green
   filterMode: 'fuzzy'
   enlargedSideViewLocation: 'top'
   showCommandLog: false
   showIcons: true
   scrollPastBottom: false
-  branchColors:
-    'main': red
-    'master': red
-    'develop': green
-  authorColors:
-    '*': blue
 git:
   diffRenderers:
     - colorArg: always
