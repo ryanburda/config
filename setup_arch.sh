@@ -289,6 +289,34 @@ sudo usermod -aG docker $USER
 
 sudo systemctl enable --now power-profiles-daemon.service
 
+# Local LLM inference (ollama)
+#
+# The -vulkan variant rather than plain `ollama`: plain is CPU-only, and this
+# machine's GPU is the Intel Arc iGPU, so Vulkan is the only acceleration path
+# (-cuda and -rocm are for discrete Nvidia/AMD cards). vulkan-intel is the Mesa
+# ANV driver that backend needs -- without it ollama silently falls back to CPU.
+#
+# If Vulkan misbehaves on this iGPU (Panther Lake Xe3 is new), force CPU with:
+#     sudo systemctl edit ollama
+#     [Service]
+#     Environment=OLLAMA_LLM_LIBRARY=cpu
+# 62 GB of RAM makes CPU-only inference slow but entirely usable.
+#
+# Model weights are not pulled here -- repos/llms/setup.sh does that.
+# This block is only the daemon.
+sudo pacman -S --needed --noconfirm \
+    ollama-vulkan \
+    vulkan-intel
+
+# ollama finds the iGPU and then drops it unless this says otherwise; see the
+# drop-in for why. Copied before the service starts so the first launch already
+# has the GPU available.
+sudo mkdir -p /etc/systemd/system/ollama.service.d
+sudo cp $REPO_ROOT/dotfiles/arch_root/etc/systemd/system/ollama.service.d/igpu.conf \
+    /etc/systemd/system/ollama.service.d/igpu.conf
+
+sudo systemctl enable --now ollama
+
 # --needed on every one of these: without it a re-run redownloads and rebuilds
 # each AUR package from scratch even though it is already installed.
 yay -S --needed --noconfirm aur/1password
