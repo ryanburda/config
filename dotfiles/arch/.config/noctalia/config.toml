@@ -77,6 +77,10 @@ pre_action_fade_seconds = 4
 [location]
 auto_locate = true
 
+[lockscreen]
+transition = [ "fade" ]
+transition_duration = 300
+
 [osd.kinds]
 lock_keys = false
 media = false
