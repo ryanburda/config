@@ -52,6 +52,11 @@ type = "caffeine"
 
 [dock]
 auto_hide = true
+pinned = [
+    "org.wezfurlong.wezterm",
+    "google-chrome",
+    "obsidian",
+]
 reserve_space = false
 show_dots = true
 

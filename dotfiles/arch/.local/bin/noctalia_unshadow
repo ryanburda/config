@@ -1,0 +1,528 @@
+#!/usr/bin/env python3
+
+# NAME
+#   noctalia_unshadow
+#
+# DESCRIPTION
+#   Clears settings from the daemon-owned state file that are already tracked
+#   in config.toml, so the tracked value takes effect. The companion write side
+#   of noctalia_shadowed, which only reports.
+#
+#   Noctalia reads two layers, and the state layer WINS:
+#
+#     ~/.config/noctalia/config.toml         <- tracked in git, hand-edited
+#     ~/.local/state/noctalia/settings.toml  <- written by the Settings GUI
+#
+#   Only SHADOWED keys (present in both layers) are cleared. UNTRACKED keys --
+#   a GUI change with no counterpart in config.toml -- are refused, because
+#   clearing one would throw the value away rather than hand it to config.toml.
+#   Promote those by hand first, then re-run.
+#
+#   The daemon flushes its in-memory settings on exit, which would undo an edit
+#   made while it is running, so the order here is: stop, edit, verify, start.
+#   Runtime/editor state that noctalia_shadowed ignores (widget layouts, last
+#   wallpaper) is never touched.
+#
+#   Edits are line surgery on the state file, so the daemon's own formatting
+#   survives everywhere the removal did not touch. Afterwards the result is
+#   re-parsed and diffed against the intended removal set; any mismatch rolls
+#   back to the .bak file instead of leaving a half-edited state file behind.
+#
+# USAGE
+#   noctalia_unshadow [--dry-run] [--no-restart] [--quiet]
+#
+#     --dry-run     show what would be cleared; change nothing, leave the
+#                   daemon alone
+#     --no-restart  edit the state file without stopping or starting the
+#                   daemon (for testing against a NOCTALIA_STATE_HOME copy;
+#                   unsafe against a live daemon, which will flush over it)
+#     --quiet       print only errors
+#
+# ENVIRONMENT
+#   NOCTALIA_CONFIG_HOME, NOCTALIA_STATE_HOME  override the layer locations,
+#   same as noctalia_shadowed.
+#
+# EXIT STATUS
+#   0  state file already clean, or cleared successfully
+#   1  nothing changed because untracked keys need promoting first
+#   2  the edit was rolled back, or the daemon could not be stopped/started
+
+import json
+import os
+import shutil
+import signal
+import subprocess
+import sys
+import time
+import tomllib
+from datetime import datetime
+from pathlib import Path
+
+# Kept in sync with noctalia_shadowed, which is the source of truth for what
+# counts as drift. Only used for the standalone fallback scan below.
+IGNORED_PREFIXES = (
+    "config_version",
+    "desktop_widgets",
+    "lockscreen_widgets",
+    "wallpaper.default",
+    "wallpaper.last",
+    "wallpaper.monitors",
+)
+
+TERM_TIMEOUT = 10.0  # seconds to wait for SIGTERM before escalating
+START_TIMEOUT = 10.0  # seconds to wait for the relaunched daemon to appear
+
+
+def config_home() -> Path:
+    if env := os.environ.get("NOCTALIA_CONFIG_HOME"):
+        return Path(env)
+    base = os.environ.get("XDG_CONFIG_HOME", str(Path.home() / ".config"))
+    return Path(base) / "noctalia"
+
+
+def state_home() -> Path:
+    if env := os.environ.get("NOCTALIA_STATE_HOME"):
+        return Path(env)
+    base = os.environ.get("XDG_STATE_HOME", str(Path.home() / ".local/state"))
+    return Path(base) / "noctalia"
+
+
+def load(path: Path) -> dict:
+    if not path.is_file():
+        return {}
+    try:
+        with path.open("rb") as fh:
+            return tomllib.load(fh)
+    except tomllib.TOMLDecodeError as exc:
+        sys.exit(f"noctalia_unshadow: cannot parse {path}: {exc}")
+
+
+def flatten(node, prefix=""):
+    """Walk nested tables into dotted key paths. Arrays of tables are leaves."""
+    out = {}
+    for key, value in node.items():
+        path = f"{prefix}.{key}" if prefix else key
+        if isinstance(value, dict):
+            out.update(flatten(value, path))
+        else:
+            out[path] = value
+    return out
+
+
+def ignored(key: str) -> bool:
+    return any(key == p or key.startswith(p + ".") for p in IGNORED_PREFIXES)
+
+
+def scan(config_path: Path, state_path: Path) -> tuple[list, list]:
+    """Ask noctalia_shadowed for the drift, falling back to a local scan.
+
+    Delegating keeps one definition of what drift means. The fallback only
+    matters if the sibling script is missing from PATH.
+    """
+    sibling = Path(__file__).resolve().parent / "noctalia_shadowed"
+    exe = str(sibling) if sibling.is_file() else shutil.which("noctalia_shadowed")
+    if exe:
+        proc = subprocess.run(
+            [sys.executable, exe, "--json"], capture_output=True, text=True
+        )
+        if proc.returncode in (0, 1) and proc.stdout.strip():
+            try:
+                report = json.loads(proc.stdout)
+                return report["shadowed"], report["untracked"]
+            except (json.JSONDecodeError, KeyError):
+                pass  # fall through to the local scan
+
+    config = flatten(load(config_path))
+    state = flatten(load(state_path))
+    shadowed, untracked = [], []
+    for key, value in sorted(state.items()):
+        if ignored(key):
+            continue
+        if key in config:
+            shadowed.append(
+                {
+                    "key": key,
+                    "config": config[key],
+                    "state": value,
+                    "differs": config[key] != value,
+                }
+            )
+        else:
+            untracked.append({"key": key, "state": value})
+    return shadowed, untracked
+
+
+def parse_path(text: str) -> list[str]:
+    """Split a TOML key path into segments, honoring quoted segments.
+
+    'a.b."c-d"' -> ['a', 'b', 'c-d'], matching how flatten() names keys.
+    """
+    segments, i = [], 0
+    while i < len(text):
+        while i < len(text) and text[i] in " \t":
+            i += 1
+        if i >= len(text):
+            break
+        if text[i] in "\"'":
+            quote, i = text[i], i + 1
+            start = i
+            while i < len(text) and text[i] != quote:
+                i += 1
+            segments.append(text[start:i])
+            i += 1
+        else:
+            start = i
+            while i < len(text) and text[i] != ".":
+                i += 1
+            segments.append(text[start:i].strip())
+        while i < len(text) and text[i] in " \t":
+            i += 1
+        if i < len(text) and text[i] == ".":
+            i += 1
+    return segments
+
+
+def header_of(line: str):
+    """Return (path_segments, is_array_table) if the line opens a table."""
+    stripped = line.strip()
+    if not stripped.startswith("["):
+        return None
+    if stripped.startswith("[["):
+        end = stripped.find("]]")
+        if end == -1:
+            return None
+        return parse_path(stripped[2:end]), True
+    end = stripped.find("]")
+    if end == -1:
+        return None
+    return parse_path(stripped[1:end]), False
+
+
+def balanced(text: str) -> bool:
+    """Whether a value has closed every bracket and quote it opened."""
+    depth, i, quote = 0, 0, None
+    while i < len(text):
+        char = text[i]
+        if quote:
+            if char == "\\" and quote in "\"'":
+                i += 2
+                continue
+            if text.startswith(quote, i):
+                i += len(quote)
+                quote = None
+                continue
+        elif char == "#":
+            break
+        elif text.startswith('"""', i) or text.startswith("'''", i):
+            quote = text[i : i + 3]
+            i += 3
+            continue
+        elif char in "\"'":
+            quote = char
+            i += 1
+            continue
+        elif char in "[{":
+            depth += 1
+        elif char in "]}":
+            depth -= 1
+        i += 1
+    return quote is None and depth <= 0
+
+
+def split_blocks(lines: list[str]) -> list[dict]:
+    """Group lines into table blocks, each with its key entries intact.
+
+    An entry is either a key (possibly spanning lines, for a multi-line array
+    or string) or a raw line: a comment or blank that belongs to no key.
+    """
+    blocks = [{"path": [], "array": False, "header": None, "entries": []}]
+    i = 0
+    while i < len(lines):
+        line = lines[i]
+        head = header_of(line)
+        if head is not None:
+            path, is_array = head
+            blocks.append(
+                {"path": path, "array": is_array, "header": line, "entries": []}
+            )
+            i += 1
+            continue
+
+        stripped = line.strip()
+        if not stripped or stripped.startswith("#") or "=" not in stripped:
+            blocks[-1]["entries"].append({"kind": "raw", "lines": [line]})
+            i += 1
+            continue
+
+        name, _, value = stripped.partition("=")
+        chunk = [line]
+        i += 1
+        while not balanced(value) and i < len(lines):
+            value += "\n" + lines[i]
+            chunk.append(lines[i])
+            i += 1
+        blocks[-1]["entries"].append(
+            {
+                "kind": "key",
+                "path": blocks[-1]["path"] + parse_path(name),
+                "lines": chunk,
+            }
+        )
+    return blocks
+
+
+def strip_keys(text: str, removals: set[str]) -> str:
+    """Remove the named dotted keys from a TOML document, line by line."""
+
+    def covered(path: list[str]) -> bool:
+        dotted = ".".join(path)
+        return any(dotted == r or dotted.startswith(r + ".") for r in removals)
+
+    lines = text.splitlines()
+    blocks = split_blocks(lines)
+
+    # A block whose own path is removed goes entirely; otherwise drop the
+    # individual keys that match.
+    for block in blocks:
+        block["dropped"] = bool(block["path"]) and covered(block["path"])
+        if block["dropped"]:
+            continue
+        for entry in block["entries"]:
+            entry["dropped"] = entry["kind"] == "key" and covered(entry["path"])
+
+    # A header left with nothing under it -- no keys of its own, no comments,
+    # no surviving child table -- goes too, but only if we emptied it. Parent
+    # headers that were always bare stay where the daemon put them.
+    for index, block in enumerate(blocks):
+        if block["dropped"] or block["header"] is None:
+            continue
+        entries = block["entries"]
+        touched = any(entry.get("dropped") for entry in entries)
+        keeps_own = any(
+            not entry.get("dropped")
+            and (entry["kind"] == "key" or entry["lines"][0].strip())
+            for entry in entries
+        )
+        prefix = block["path"]
+        keeps_child = any(
+            not other["dropped"] and other["path"][: len(prefix)] == prefix
+            for other in blocks[index + 1 :]
+            if len(other["path"]) > len(prefix)
+        )
+        if touched and not keeps_own and not keeps_child:
+            block["dropped"] = True
+
+    out = []
+    for block in blocks:
+        if block["dropped"]:
+            continue
+        if block["header"] is not None:
+            out.append(block["header"])
+        for entry in block["entries"]:
+            if not entry.get("dropped"):
+                out.extend(entry["lines"])
+
+    # Collapse the blank-line runs that removal leaves behind, and keep a
+    # single trailing newline.
+    tidied = []
+    for line in out:
+        if not line.strip() and (not tidied or not tidied[-1].strip()):
+            continue
+        tidied.append(line)
+    while tidied and not tidied[-1].strip():
+        tidied.pop()
+    return "\n".join(tidied) + "\n" if tidied else ""
+
+
+def pids() -> list[int]:
+    """PIDs of the running daemon, matched on the exact process name.
+
+    Exact-match so `noctalia msg ...` invocations and this script's own name
+    are not mistaken for the daemon.
+    """
+    proc = subprocess.run(["pgrep", "-x", "noctalia"], capture_output=True, text=True)
+    return [int(line) for line in proc.stdout.split() if line.isdigit()]
+
+
+def alive(pid: int) -> bool:
+    try:
+        os.kill(pid, 0)
+    except ProcessLookupError:
+        return False
+    except PermissionError:
+        return True
+    return True
+
+
+def stop_daemon(say) -> bool:
+    targets = pids()
+    if not targets:
+        say("daemon not running; nothing to stop")
+        return True
+
+    say(f"stopping noctalia (pid {', '.join(str(p) for p in targets)})")
+    for pid in targets:
+        try:
+            os.kill(pid, signal.SIGTERM)
+        except ProcessLookupError:
+            pass
+
+    deadline = time.monotonic() + TERM_TIMEOUT
+    while time.monotonic() < deadline:
+        if not any(alive(pid) for pid in targets):
+            return True
+        time.sleep(0.1)
+
+    stubborn = [pid for pid in targets if alive(pid)]
+    say(f"still running after {TERM_TIMEOUT:.0f}s, sending SIGKILL to {stubborn}")
+    for pid in stubborn:
+        try:
+            os.kill(pid, signal.SIGKILL)
+        except ProcessLookupError:
+            pass
+    deadline = time.monotonic() + 5
+    while time.monotonic() < deadline:
+        if not any(alive(pid) for pid in stubborn):
+            return True
+        time.sleep(0.1)
+    return False
+
+
+def start_daemon(say) -> bool:
+    """Relaunch the way niri's spawn-at-startup does, else detach it here."""
+    if os.environ.get("NIRI_SOCKET"):
+        proc = subprocess.run(
+            ["niri", "msg", "action", "spawn", "--", "noctalia"],
+            capture_output=True,
+            text=True,
+        )
+        if proc.returncode != 0:
+            say(f"niri spawn failed ({proc.stderr.strip()}); starting detached")
+            subprocess.Popen(["setsid", "noctalia"], start_new_session=True)
+    else:
+        subprocess.Popen(["setsid", "noctalia"], start_new_session=True)
+
+    deadline = time.monotonic() + START_TIMEOUT
+    while time.monotonic() < deadline:
+        if pids():
+            return True
+        time.sleep(0.2)
+    return False
+
+
+def main() -> int:
+    args = set(sys.argv[1:])
+    if args - {"--dry-run", "--no-restart", "--quiet"}:
+        sys.exit("usage: noctalia_unshadow [--dry-run] [--no-restart] [--quiet]")
+
+    dry_run = "--dry-run" in args
+    no_restart = "--no-restart" in args
+    quiet = "--quiet" in args
+
+    def say(message: str) -> None:
+        if not quiet:
+            print(message)
+
+    config_path = config_home() / "config.toml"
+    state_path = state_home() / "settings.toml"
+
+    if not state_path.is_file():
+        say(f"no state file at {state_path}; nothing to clear")
+        return 0
+    if not config_path.is_file():
+        sys.exit(f"noctalia_unshadow: no tracked config at {config_path}")
+
+    shadowed, untracked = scan(config_path, state_path)
+
+    if untracked:
+        width = max(len(e["key"]) for e in untracked)
+        print("noctalia_unshadow: refusing to clear anything while these are")
+        print(f"untracked -- promote them into {config_path} first:")
+        for entry in untracked:
+            print(f"  {entry['key']:<{width}}  state={json.dumps(entry['state'], default=str)}")
+        return 1
+
+    if not shadowed:
+        say("✓ state file holds nothing that config.toml already tracks")
+        return 0
+
+    removals = {entry["key"] for entry in shadowed}
+    width = max(len(key) for key in removals)
+    say(f"clearing {len(removals)} shadowed key(s) from {state_path}:")
+    for entry in shadowed:
+        note = (
+            f"config={json.dumps(entry['config'], default=str)} takes over"
+            if entry["differs"]
+            else "same value; no behavior change"
+        )
+        say(f"  {entry['key']:<{width}}  state={json.dumps(entry['state'], default=str)}  <- {note}")
+
+    original = state_path.read_text()
+    edited = strip_keys(original, removals)
+
+    if dry_run:
+        say("")
+        say("--dry-run: nothing written. Resulting state file would be:")
+        say("".join(f"  | {line}\n" for line in edited.splitlines()) or "  | (empty)")
+        return 0
+
+    if not no_restart and not stop_daemon(say):
+        sys.exit("noctalia_unshadow: could not stop the daemon; state file untouched")
+
+    stamp = datetime.now().strftime("%Y%m%dT%H%M%S")
+    backup = state_path.with_suffix(f".toml.bak-{stamp}")
+    shutil.copy2(state_path, backup)
+
+    # Write through a temp file in the same directory so a crash mid-write
+    # cannot leave a truncated state file behind.
+    temp = state_path.with_suffix(".toml.new")
+    temp.write_text(edited)
+    os.replace(temp, state_path)
+
+    # Verify: the file must still parse, and must differ from the original by
+    # exactly the keys we meant to remove. Anything else rolls back.
+    before = flatten(load(backup))
+    after = flatten(load(state_path))
+    expected = {k: v for k, v in before.items() if k not in removals}
+    if after != expected:
+        shutil.copy2(backup, state_path)
+        lost = {k for k in expected if k not in after}
+        extra = {k for k in after if k not in expected}
+        changed = {k for k in after if k in expected and after[k] != expected[k]}
+        print(f"noctalia_unshadow: edit did not match intent; rolled back from {backup}")
+        for label, keys in (("lost", lost), ("unexpected", extra), ("changed", changed)):
+            if keys:
+                print(f"  {label}: {', '.join(sorted(keys))}")
+        if not no_restart:
+            start_daemon(say)
+        return 2
+
+    say(f"wrote {state_path} (backup: {backup.name})")
+
+    if no_restart:
+        say("--no-restart: daemon left alone")
+        return 0
+
+    if not start_daemon(say):
+        print(f"noctalia_unshadow: daemon did not come back within {START_TIMEOUT:.0f}s")
+        print("  start it by hand with: noctalia -d")
+        return 2
+    say(f"restarted noctalia (pid {', '.join(str(p) for p in pids())})")
+
+    # The fresh daemon rewrites the state file on startup, so confirm the keys
+    # stayed gone rather than assuming it.
+    time.sleep(1.5)
+    shadowed, untracked = scan(config_path, state_path)
+    if shadowed or untracked:
+        print("noctalia_unshadow: drift came back after restart:")
+        for entry in shadowed:
+            print(f"  SHADOWED  {entry['key']}")
+        for entry in untracked:
+            print(f"  UNTRACKED {entry['key']}")
+        return 2
+    say("✓ config.toml is now authoritative")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
