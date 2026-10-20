@@ -103,6 +103,7 @@ sudo pacman -S --needed --noconfirm \
     coreutils \
     chafa \
     curl \
+    diff-pdf \
     direnv \
     fd \
     firefox \
