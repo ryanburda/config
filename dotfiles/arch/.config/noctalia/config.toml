@@ -51,8 +51,11 @@ type = "power_profile"
 type = "caffeine"
 
 [dock]
+enabled = true
 auto_hide = true
+icon_size = 24
 pinned = [
+    "org.gnome.Nautilus",
     "org.wezfurlong.wezterm",
     "google-chrome",
     "obsidian",
