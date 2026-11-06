@@ -102,11 +102,6 @@ $(brew --prefix)/opt/fzf/install --all
 # IPC socket is root-only.
 brew install --HEAD kanata
 
-# Scrolling window manager
-brew tap karinushka/paneru
-brew install paneru
-paneru install-app
-
 # Fonts
 brew install --cask \
     font-caskaydia-mono-nerd-font \
