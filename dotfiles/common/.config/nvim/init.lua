@@ -122,7 +122,25 @@ require('keymaps')
 require("colorscheme")
 
 -- winbar
-require('winbar')
+-- The winbar function is called on every redraw, so it must be cheap.
+function Winbar()
+  -- Keep the row number in winbar lined up with the row numbers in the left margin.
+  local winid = vim.g.statusline_winid or 0
+  local info = vim.fn.getwininfo(winid)[1]
+  local lnum_width = math.max(1, info and (info.textoff - 1) or 4)
+
+  --  row/column position, file name, and modified bit on left.
+  --  file progress percentage on right.
+  --  `5:16  init.lua [+]                                 24%`
+  return table.concat({
+    -- left
+    '%#LineNr#%', tostring(lnum_width), 'l:%-5c', '%t %m',
+    -- right
+    '%=%3p%%'
+  })
+end
+
+vim.o.winbar = '%!v:lua.Winbar()'
 
 -- external integrations.
 -- the `integrations` directory is in the gitignore.
