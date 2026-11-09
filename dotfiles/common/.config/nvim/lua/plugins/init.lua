@@ -42,9 +42,13 @@ return {
           globalstatus = true,
         },
         sections = {
-          --lualine_a = {},
-          lualine_b = {'filename'},
-          lualine_c = {require('buf-mark.status').get},
+          lualine_a = {},
+          lualine_b = {
+            { 'filename', path = 1, shorting_target = 0 },
+          },
+          lualine_c = {
+            { require('buf-mark.status').get, color = { bg = 'none' } },
+          },
           lualine_x = {'diagnostics'},
           lualine_y = {
             {

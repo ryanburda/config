@@ -943,7 +943,7 @@ vim.keymap.set(
   'n',
   '<leader>;',
   ':b#<cr>',
-  { desc = 'Alternate buffer' }
+  { desc = 'Alternate buffer', silent = true }
 )
 
 vim.keymap.set(
