@@ -121,8 +121,6 @@ require('keymaps')
 -- set colorscheme
 require("colorscheme")
 
--- statusline: see the lualine spec in lua/plugins/init.lua
-
 -- winbar
 require('winbar')
 
